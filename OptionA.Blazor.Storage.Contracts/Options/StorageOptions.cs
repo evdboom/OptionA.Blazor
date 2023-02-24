@@ -3,7 +3,7 @@
     /// <summary>
     /// Options for binding Storage options to configuration items
     /// </summary>
-    public class StorageOptions
+    public record StorageOptions
     {
         /// <summary>
         /// Name of the IndexedDb to use

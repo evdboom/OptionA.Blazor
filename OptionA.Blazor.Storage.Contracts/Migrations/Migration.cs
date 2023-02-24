@@ -1,5 +1,10 @@
-﻿namespace LandaPacs.Storage.Migrations
+﻿using System.Collections.Generic;
+
+namespace OptionA.Blazor.Storage.Migrations
 {
+    /// <summary>
+    /// Base class for migrations, inherit to make a migratiation for one or more stores in a database
+    /// </summary>
     public abstract class Migration
     {
         /// <summary>

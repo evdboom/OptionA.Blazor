@@ -1,7 +1,12 @@
-﻿using LandaPacs.Storage.Migrations;
+﻿using OptionA.Blazor.Storage.Migrations;
+using System;
+using System.Collections.Generic;
 
-namespace LandaPacs.Storage.Interfaces
+namespace OptionA.Blazor.Storage.Interfaces
 {
+    /// <summary>
+    /// Layout for an indexedDb
+    /// </summary>
     public interface IDatabasePlan
     {
         /// <summary>

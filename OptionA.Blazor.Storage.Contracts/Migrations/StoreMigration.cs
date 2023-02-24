@@ -1,24 +1,28 @@
-﻿using LandaPacs.Storage.Enums;
+﻿using OptionA.Blazor.Storage.Enums;
+using System.Collections.Generic;
 
-namespace LandaPacs.Storage.Migrations
+namespace OptionA.Blazor.Storage.Migrations
 {
+    /// <summary>
+    /// Database migration to change database properties for indexedDB
+    /// </summary>
     public record StoreMigration
     {
         /// <summary>
         /// Name of de object store affected
         /// </summary>
-        public string Name { get; init; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Operation mode, add, remove or update
         /// </summary>
-        public MigrationMode Mode { get; init; } = MigrationMode.Add;
+        public MigrationMode Mode { get; set; } = MigrationMode.Add;
         /// <summary>
         /// List of index operations in the migration
         /// </summary>
-        public IEnumerable<IndexMigration>? Indexes { get; init; }
+        public IEnumerable<IndexMigration>? Indexes { get; set; }
         /// <summary>
         /// Options for setting the store
         /// /// </summary>
-        public StoreOptions? Options { get; init; }
+        public StoreOptions? Options { get; set; }
     }
 }

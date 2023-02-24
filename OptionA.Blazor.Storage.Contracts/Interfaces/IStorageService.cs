@@ -1,7 +1,11 @@
-﻿using LandaPacs.Storage.Enums;
+﻿using OptionA.Blazor.Storage.Enums;
+using System.Threading.Tasks;
 
-namespace LandaPacs.Storage.Interfaces
+namespace OptionA.Blazor.Storage.Interfaces
 {
+    /// <summary>
+    /// Interface for accessing the browsers local and session storage.
+    /// </summary>
     public interface IStorageService
     {
         /// <summary>
@@ -39,5 +43,12 @@ namespace LandaPacs.Storage.Interfaces
         /// <param name="value"></param>
         /// <returns></returns>
         Task<bool> SetItemIfEmptyAsync<T>(StorageLocation location, string key, T value);
+
+        /// <summary>
+        /// Cleates the the selected storage
+        /// </summary>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        Task Clear(StorageLocation location);
     }
 }
