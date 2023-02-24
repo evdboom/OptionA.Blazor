@@ -10,7 +10,7 @@
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Storage</PackageProjectUrl>
-	<PackageLicenseUrl>https://licenses.nuget.org/MIT</PackageLicenseUrl>
+	<Licence>https://licenses.nuget.org/MIT</Licence>
 	<Description>Blazor class library with services to access local storage, session storage and indexed db</Description>		
   </PropertyGroup>
 
