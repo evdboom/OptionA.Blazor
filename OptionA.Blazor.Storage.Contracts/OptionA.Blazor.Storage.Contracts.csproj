@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<GenerateAppxPackageOnBuild>true</GenerateAppxPackageOnBuild>
+	<Version>1.0.0</Version>
+	<LangVersion>10</LangVersion>
+	<IsPackable>true</IsPackable>
+	<pack
+  </PropertyGroup>
+
+</Project>
