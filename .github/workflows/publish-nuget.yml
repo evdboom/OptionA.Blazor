@@ -1,9 +1,9 @@
 name: Package and publish nuget packages
 
 on:
-  release:
-    types:
-      - published
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -17,8 +17,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore --configuration Release --output "nuget"
+      run: dotnet build --no-restore --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: publish
-      run: dotnet nuget push ".\nuget\*.nupkg" --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+      run: |
+        foreach($file in (Get-ChildItem -Recurse -Include *.nupkg)) {
+            dotnet nuget push $file --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
+        }             
