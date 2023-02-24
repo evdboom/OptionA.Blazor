@@ -6,12 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  	<Version>1.0.1</Version>
+  	<Version>1.0.2</Version>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Storage</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Description>Blazor class library with services to access local storage, session storage and indexed db</Description>		
+	<Description>Blazor class library with services to access local storage, session storage and indexed db</Description>
+    <PackageReleaseNotes>
+		Split database and fileservice extensions
+	</PackageReleaseNotes>
   </PropertyGroup>
 
 
