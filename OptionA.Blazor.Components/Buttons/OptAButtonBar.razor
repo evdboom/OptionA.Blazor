@@ -1,0 +1,20 @@
+﻿<div class="opta-bar @GetOrientation() @AdditionalClasses" id="@Id">
+    @if (StartButtons is not null)
+    {
+        <div class="opta-group start @GetOrientation()">
+            @StartButtons
+        </div>
+    }
+    @if (CenterButtons is not null)
+    {
+        <div class="opta-group center @GetOrientation()">
+            @CenterButtons
+        </div>
+    }
+    @if (EndButtons is not null)
+    {
+        <div class="opta-group end @GetOrientation()">
+            @EndButtons
+        </div>
+    }
+</div>

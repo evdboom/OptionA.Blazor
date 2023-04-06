@@ -1,0 +1,135 @@
+﻿@page "/buttons"
+@using OptionA.Blazor.Components.Buttons.Enum;
+
+<div class="row">
+    <OptAButton
+        Id="button-one"
+        Name="Click me one"
+        ActionType="ActionType.Add"
+        ButtonType="ButtonTypes.Full"
+        ClickAction="ClickButtonOne"
+        Description="This is my first buttom"
+        DisabledCondition="ButtonOneDisabled" />
+</div>
+<div class="row">
+    <OptAButtonBar
+        Orientation="Orientation.Vertical">
+        <StartButtons>
+            <OptAButton Id="button-one-start"
+                        Name="Click me one"
+                        ActionType="ActionType.Edit"
+                        ButtonType="ButtonTypes.Name"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Search"
+                        ButtonType="ButtonTypes.Icon"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+        </StartButtons>
+        <CenterButtons>
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Edit"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Remove"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me oxxne"
+                        ActionType="ActionType.Cancel"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me twwro"
+                        ActionType="ActionType.Confirm"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+        </CenterButtons>
+        <EndButtons>
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Default"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Refresh"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+        </EndButtons>
+    </OptAButtonBar>
+</div>
+<div class="row">
+    <OptAButtonBar Orientation="Orientation.Horizontal">
+        <StartButtons>
+            <OptAButton Name="Click me one"
+                        ActionType="ActionType.Remove"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Search"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me2 one"
+                        ActionType="ActionType.Other"
+                        OtherButtonClass="btn btn-info"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me4two"
+                        ActionType="ActionType.Other"
+                        OtherIconClass="bi bi-envelope-plus-fill"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+        </StartButtons>
+        <CenterButtons>
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Other"
+                        OtherButtonClass="btn btn-danger"
+                        OtherIconClass="bi bi-patch-plus-fill"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Add"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+        </CenterButtons>
+        <EndButtons>
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Add"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+            <OptAButton Name="Click me two"
+                        ActionType="ActionType.Add"
+                        ButtonType="ButtonTypes.Full"
+                        ClickAction="ClickButtonOne"
+                        Description="This is my first buttom"
+                        DisabledCondition="ButtonOneDisabled" />
+        </EndButtons>
+    </OptAButtonBar>
+</div>
