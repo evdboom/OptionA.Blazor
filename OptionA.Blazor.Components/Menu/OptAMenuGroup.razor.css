@@ -1,0 +1,17 @@
+﻿ul {
+    flex-direction: column;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    user-select: none;
+}
+
+li {
+    user-select: none;
+}
+
+.opta-dropdown {
+    position: relative;
+    left: 0;
+}

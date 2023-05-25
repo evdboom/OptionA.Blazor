@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blazor.Storage.Cont
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blazor.Components", "OptionA.Blazor.Components\OptionA.Blazor.Components.csproj", "{78930F6C-7FC1-4C57-B4F4-1710270C991B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionA.Blazor.Test", "OptionA.Blazor.Test\OptionA.Blazor.Test.csproj", "{CCAE56AB-7B10-432A-99D5-B99B75ACFD6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blazor.Test", "OptionA.Blazor.Test\OptionA.Blazor.Test.csproj", "{CCAE56AB-7B10-432A-99D5-B99B75ACFD6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

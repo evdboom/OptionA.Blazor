@@ -1,0 +1,23 @@
+﻿@page "/menu"
+
+<OptAMenu>
+    <Items>
+        <OptAMenuItem
+            Name="Home"
+            Description="The home button"
+            Href="/"/>
+        <OptAMenuItem Name="Buttons"                      
+            Href="/buttons" />
+        <OptAMenuGroup
+            Name="Group 1"
+            Description="My first group">
+            <Items>
+                <OptAMenuItem
+                    Name="inner 1"/>
+                <OptAMenuDivider/>
+                <OptAMenuItem 
+                    Name="Inner 2" />
+            </Items>
+        </OptAMenuGroup>
+    </Items>
+</OptAMenu>

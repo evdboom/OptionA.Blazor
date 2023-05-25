@@ -1,0 +1,14 @@
+﻿<li title="@Description" class="@Provider.GetMenuItemClass()">
+    <a class="@GetClasses()" @onclick="() => Toggle()">@Name</a>
+    @if (_open)
+    {
+        <div class="opta-dropdown">
+            <ul>
+                @if (Items is not null)
+                {
+                    @Items
+                }
+            </ul>
+        </div>
+    }
+</li>

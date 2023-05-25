@@ -44,7 +44,7 @@ namespace OptionA.Blazor.Components.Buttons
         [Parameter]
         public RenderFragment? EndButtons { get; set; }
         /// <summary>
-        /// Additonal classes to add the the bar
+        /// Additonal classes to add
         /// </summary>
         [Parameter]
         public string? AdditionalClasses { get; set; }
