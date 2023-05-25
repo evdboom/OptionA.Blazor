@@ -1,6 +1,8 @@
-﻿<ul class="opta-menu @GetClasses()">
-    @if (Items is not null)
-    {
-        @Items
-    }
-</ul>
+﻿<nav class="@Provider.GetMenuContainerClass()">
+    <ul class="opta-menu @GetClasses()">
+        @if (Items is not null)
+        {
+            @Items
+        }
+    </ul>
+</nav>

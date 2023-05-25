@@ -8,6 +8,8 @@
         private readonly string _defaultMenuLinkClass;
         private readonly string _defaultMenuGroupClass;
         private readonly string _defaultMenuDividerClass;
+        private readonly string _activeClass;
+        private readonly string _defaultMenuContainerClass;
 
         /// <summary>
         /// Default constructor
@@ -17,13 +19,17 @@
         /// <param name="defaultMenuLinkClass"></param>
         /// <param name="defaultMenuGroupClass"></param>
         /// <param name="defaultMenuDividerClass"></param>
-        public MenuDataProvider(string defaultMenuClass, string defaultMenuItemClass, string defaultMenuLinkClass, string defaultMenuGroupClass, string defaultMenuDividerClass)
+        /// <param name="activeClas"></param>
+        /// <param name="defaultMenuContainerClass"></param>
+        public MenuDataProvider(string defaultMenuClass, string defaultMenuItemClass, string defaultMenuLinkClass, string defaultMenuGroupClass, string defaultMenuDividerClass, string activeClas, string defaultMenuContainerClass)
         {
             _defaultMenuClass = defaultMenuClass;
             _defaultMenuItemClass = defaultMenuItemClass;
             _defaultMenuLinkClass = defaultMenuLinkClass;
             _defaultMenuGroupClass = defaultMenuGroupClass;
             _defaultMenuDividerClass = defaultMenuDividerClass;
+            _activeClass = activeClas;
+            _defaultMenuContainerClass = defaultMenuContainerClass;
         }
 
         /// <inheritdoc/>
@@ -40,6 +46,13 @@
 
         /// <inheritdoc/>
         public string GetMenuItemClass() => _defaultMenuItemClass;
-        
+
+        /// <inheritdoc/>
+        public string GetActiveClass() => _activeClass;
+
+        /// <inheritdoc/>
+        public string GetMenuContainerClass() => _defaultMenuContainerClass;
+
+
     }
 }

@@ -18,6 +18,8 @@ namespace OptionA.Blazor.Components.Menu.Struct
         /// <param name="defaultMenuLinkClass"></param>
         /// <param name="defaultMenuGroupClass"></param>
         /// <param name="defaultMenuDividerClass"></param>
+        /// <param name="activeClass"></param>
+        /// <param name="defaultMenuContainerClass"></param>
         /// <returns></returns>
         public static IServiceCollection AddMenuClasses(
             this IServiceCollection services,            
@@ -25,9 +27,11 @@ namespace OptionA.Blazor.Components.Menu.Struct
             string defaultMenuItemClass,
             string defaultMenuLinkClass,
             string defaultMenuGroupClass,
-            string defaultMenuDividerClass)
+            string defaultMenuDividerClass,
+            string activeClass,
+            string defaultMenuContainerClass)
         {
-            services.AddSingleton<IMenuDataProvider>(provider => new MenuDataProvider(defaultMenuClass, defaultMenuItemClass, defaultMenuLinkClass, defaultMenuGroupClass, defaultMenuDividerClass));
+            services.AddSingleton<IMenuDataProvider>(provider => new MenuDataProvider(defaultMenuClass, defaultMenuItemClass, defaultMenuLinkClass, defaultMenuGroupClass, defaultMenuDividerClass, activeClass, defaultMenuContainerClass));
             return services;
         }
 
@@ -35,10 +39,14 @@ namespace OptionA.Blazor.Components.Menu.Struct
         /// Adds a singleton <see cref="IMenuDataProvider"/> to the service collection for use in the OptAMenu component, prefilled with bootstrap classes
         /// </summary>
         /// <param name="services"></param>
+        /// <param name="darkMode"></param>
         /// <returns></returns>
-        public static IServiceCollection AddBootstrapMenu(this IServiceCollection services)
+        public static IServiceCollection AddBootstrapMenu(this IServiceCollection services, bool darkMode = false)
         {
-            return AddMenuClasses(services, "navbar-nav", "nav-item me-2", "nav-link", "nav-link dropdown-toggle", "dropdown-divider");
+            var mode = darkMode
+                ? "navbar-dark"
+                : "navbar-light";
+            return AddMenuClasses(services, "navbar-nav", "nav-item me-2", "nav-link", "nav-link dropdown-toggle", "dropdown-divider", "active", $"navbar {mode}");
         }
     }
 }

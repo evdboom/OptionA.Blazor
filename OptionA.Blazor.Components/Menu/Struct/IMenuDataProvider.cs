@@ -36,5 +36,15 @@ namespace OptionA.Blazor.Components.Menu.Struct
         /// </summary>
         /// <returns></returns>
         string GetLinkClass();
+        /// <summary>
+        /// Classes added to menu items considered active
+        /// </summary>
+        /// <returns></returns>
+        string GetActiveClass();
+        /// <summary>
+        /// Classes for the toplevel nav element of the menu
+        /// </summary>
+        /// <returns></returns>
+        string GetMenuContainerClass();
     }
 }

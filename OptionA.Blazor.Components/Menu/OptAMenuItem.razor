@@ -1,1 +1,10 @@
-﻿<li title="@Description" class="@GetClasses()"><a href="@Href" class="@Provider.GetLinkClass()">@Name</a></li>
+﻿<li title="@Description" class="@GetClasses()">    
+    @if (!string.IsNullOrEmpty(Name))
+    {
+        <a href="@Href" class="@GetLinkClasses()">@Name</a>
+    }  
+    @if (ChildContent is null)
+    {
+        @ChildContent
+    }
+</li>

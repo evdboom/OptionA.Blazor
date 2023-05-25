@@ -1,28 +1,36 @@
-﻿@page "/menu"
+﻿@page "/menu3/{LinkId}"
 
 <OptAMenu>
     <Items>
         <OptAMenuItem Name="Home"
                       Description="The home button"
-                      Href="/" />
+                      Href="/"/>
         <OptAMenuItem Name="Home2"
                       Description="The menu button"
                       Href="/menu" />
         <OptAMenuItem Name="Home3"
                       Description="The menu button"
                       Href="/menu2" />
-        <OptAMenuItem Name="Buttons"
+        <OptAMenuItem Name="Buttons"                      
                       Href="/buttons" />
         <OptAMenuGroup Name="Group 1"
                        Description="My first group"
                        ActiveRoute="/menu3/">
-            <Items>
+             <Items>
                 <OptAMenuItem Name="inner 1"
-                              Href="/menu3/item1" />
-                <OptAMenuDivider />
-                <OptAMenuItem Name="Inner 2"
-                              Href="/menu3/item2" />
+                              Href="/menu3/item1"/>
+                <OptAMenuDivider/>
+                <OptAMenuItem Name="Inner 2" 
+                              Href="/menu3/item2"/>
             </Items>
         </OptAMenuGroup>
     </Items>
 </OptAMenu>
+
+<br />
+<h2>@LinkId</h2>
+
+@code {
+    [Parameter]
+    public string LinkId { get; set; }
+}
