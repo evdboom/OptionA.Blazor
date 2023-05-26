@@ -4,6 +4,9 @@ using OptionA.Blazor.Components.Menu.Struct;
 
 namespace OptionA.Blazor.Components.Menu
 {
+    /// <summary>
+    /// Menu item
+    /// </summary>
     public partial class OptAMenuItem
     {
         [Inject]

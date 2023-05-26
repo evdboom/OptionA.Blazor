@@ -4,6 +4,9 @@ using OptionA.Blazor.Components.Menu.Struct;
 
 namespace OptionA.Blazor.Components.Menu
 {
+    /// <summary>
+    /// Group of menu items (dropdown)
+    /// </summary>
     public partial class OptAMenuGroup
     {
         private bool _open;
@@ -81,7 +84,7 @@ namespace OptionA.Blazor.Components.Menu
 
         private string GetLinkClasses()
         {
-            return $"{Provider.GetLinkClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
+            return $"{Provider.GetGroupClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
         }
     }
 }

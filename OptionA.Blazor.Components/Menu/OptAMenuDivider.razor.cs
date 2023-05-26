@@ -3,6 +3,9 @@ using OptionA.Blazor.Components.Menu.Struct;
 
 namespace OptionA.Blazor.Components.Menu
 {
+    /// <summary>
+    /// Divider to use inside a menu group
+    /// </summary>
     public partial class OptAMenuDivider
     {
         [Inject]
