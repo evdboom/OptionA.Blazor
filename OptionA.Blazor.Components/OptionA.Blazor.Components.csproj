@@ -6,14 +6,14 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Version>7.0.1</Version>
+	  <Version>7.0.2</Version>
 	  <IsPackable>true</IsPackable>
 	  <Authors>Erik van der Boom</Authors>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <Description>Blazor component library with various component for use inside your Blazor application</Description>
 	  <PackageReleaseNotes>
-		  Initialize package
+		  7.0.2 Fixed small bug for menu with child content not displaying
 	  </PackageReleaseNotes>
   </PropertyGroup>
 

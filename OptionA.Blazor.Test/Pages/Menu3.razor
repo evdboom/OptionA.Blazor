@@ -5,6 +5,11 @@
         <OptAMenuItem Name="Home"
                       Description="The home button"
                       Href="/"/>
+        <OptAMenuItem Href="/">
+            <a href="/">
+                <img src="https://mctsummiteu.blob.core.windows.net/sitecontent/mct_logo_small.png" class="h-100" alt="Home" />
+            </a>
+        </OptAMenuItem>
         <OptAMenuItem Name="Home2"
                       Description="The menu button"
                       Href="/menu" />
@@ -32,5 +37,5 @@
 
 @code {
     [Parameter]
-    public string LinkId { get; set; }
+    public string? LinkId { get; set; }
 }
