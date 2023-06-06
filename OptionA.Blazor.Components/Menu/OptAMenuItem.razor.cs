@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Components.Web;
 using OptionA.Blazor.Components.Menu.Struct;
 
 namespace OptionA.Blazor.Components.Menu
@@ -41,6 +42,11 @@ namespace OptionA.Blazor.Components.Menu
         /// </summary>
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+        /// <summary>
+        /// Triggers when item is clicked
+        /// </summary>
+        [CascadingParameter(Name="OnItemSelected")]
+        public EventCallback OnItemSelected { get; set; }
 
         /// <summary>
         /// Override to map locationchanged
@@ -59,6 +65,14 @@ namespace OptionA.Blazor.Components.Menu
             {
                 var location = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
                 _isActive = $"/{location}".Equals(Href, StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
+        private async Task ItemSelected(MouseEventArgs args)
+        {
+            if (OnItemSelected.HasDelegate)
+            {
+                await OnItemSelected.InvokeAsync();
             }
         }
 

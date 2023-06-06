@@ -1,6 +1,6 @@
 ﻿@page "/menu2"
 
-<OptAMenu>
+<OptAMenu OnItemSelected="ItemClicked">
     <Items>
         <OptAMenuItem Name="Home"
                       Description="The home button"
@@ -31,3 +31,16 @@
         </OptAMenuGroup>
     </Items>
 </OptAMenu>
+
+<div>
+    @Counter
+</div>
+
+@code {
+    private int Counter = 0;
+    private void ItemClicked()
+    {
+        Counter++;
+        StateHasChanged();
+    }
+}

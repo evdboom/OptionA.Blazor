@@ -1,10 +1,12 @@
 ﻿<nav class="opta-menu-container @GetContainerClasses()">
     <ul class="opta-menu @GetClasses()">
         <CascadingValue Name="MenuOrientation" Value="@Orientation">
-        @if (Items is not null)
-        {
-            @Items
-        }
+            <CascadingValue Name="OnItemSelected" Value="@OnItemSelected">
+            @if (Items is not null)
+            {
+                @Items
+            }
+            </CascadingValue>
         </CascadingValue>
     </ul>
 </nav>

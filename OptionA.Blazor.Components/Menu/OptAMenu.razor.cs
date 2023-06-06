@@ -31,6 +31,11 @@ namespace OptionA.Blazor.Components.Menu
         /// </summary>
         [Parameter]
         public Orientation Orientation { get; set; } = Orientation.Horizontal;
+        /// <summary>
+        /// Called when a menu item is clicked
+        /// </summary>
+        [Parameter]
+        public EventCallback OnItemSelected { get; set; }
 
         private string GetClasses() => $"{Provider.GetMenuClass()} {AdditionalClasses} {GetOrientationClass()}".Trim();
         private string GetContainerClasses() => $"{Provider.GetMenuContainerClass()} {AdditionalContainerClasses}".Trim();
