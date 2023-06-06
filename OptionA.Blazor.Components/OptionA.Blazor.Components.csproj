@@ -6,7 +6,7 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Version>7.0.4</Version>
+	  <Version>7.0.5</Version>
 	  <IsPackable>true</IsPackable>
 	  <Authors>Erik van der Boom</Authors>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
@@ -16,6 +16,7 @@
 		  7.0.2 Fixed small bug for menu with child content not displaying
 		  7.0.3 Menugroup link was not loading correct class from provider
 		  7.0.4 Fixed dropdown closing and showing for bootstrap
+		  7.0.5 Added orientation to menu
 	  </PackageReleaseNotes>
   </PropertyGroup>
 

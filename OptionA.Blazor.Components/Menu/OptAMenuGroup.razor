@@ -2,7 +2,7 @@
     <a class="@GetLinkClasses()">@Name</a>
     @if (_open)
     {
-        <div class="opta-dropdown">
+        <div class="opta-dropdown @GetOrientation()">
             <ul>
                 @if (Items is not null)
                 {

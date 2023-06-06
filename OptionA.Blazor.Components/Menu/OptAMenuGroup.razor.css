@@ -14,8 +14,15 @@ li {
 
 .opta-dropdown {
     position: absolute;
-    left: 0;
     z-index: 2000;
+}
+
+.opta-dropdown-horizontal {
+    left: 0;
+}
+
+.opta-dropdown-vertical {
+    right: 0;
 }
 
 .opta-menu-group {

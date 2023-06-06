@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using OptionA.Blazor.Components.Menu.Struct;
+using OptionA.Blazor.Components.Shared.Enum;
 
 namespace OptionA.Blazor.Components.Menu
 {
@@ -41,6 +42,11 @@ namespace OptionA.Blazor.Components.Menu
         /// </summary>
         [Parameter]
         public string? AdditionalClasses { get; set; }
+        /// <summary>
+        /// Currently set orientation on the menu
+        /// </summary>
+        [CascadingParameter(Name="MenuOrientation")]
+        public Orientation MenuOrientation { get; set; }
 
         /// <summary>
         /// Check for active
@@ -77,14 +83,10 @@ namespace OptionA.Blazor.Components.Menu
             _open = !_open;
         }
 
-        private string GetClasses()
-        {
-            return $"{Provider.GetMenuItemClass()} {AdditionalClasses}".Trim();
-        }
-
-        private string GetLinkClasses()
-        {
-            return $"{Provider.GetGroupClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
-        }
+        private string GetClasses() => $"{Provider.GetMenuItemClass()} {AdditionalClasses}".Trim();
+        private string GetLinkClasses() =>$"{Provider.GetGroupClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
+        private string GetOrientation() => MenuOrientation == Orientation.Horizontal
+            ? "opta-dropdown-horizontal"
+            : "opta-dropdown-vertical";
     }
 }

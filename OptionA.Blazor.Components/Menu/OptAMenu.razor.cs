@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using OptionA.Blazor.Components.Menu.Struct;
+using OptionA.Blazor.Components.Shared.Enum;
 
 namespace OptionA.Blazor.Components.Menu
 {
@@ -25,15 +26,16 @@ namespace OptionA.Blazor.Components.Menu
         /// </summary>
         [Parameter]
         public string? AdditionalContainerClasses { get; set; }
+        /// <summary>
+        /// Orientation for menu, default is Horizontal
+        /// </summary>
+        [Parameter]
+        public Orientation Orientation { get; set; } = Orientation.Horizontal;
 
-        private string GetClasses()
-        {
-            return $"{Provider.GetMenuClass()} {AdditionalClasses}".Trim();
-        }
-
-        private string GetContainerClasses()
-        {
-            return $"{Provider.GetMenuContainerClass()} {AdditionalContainerClasses}".Trim();
-        }
+        private string GetClasses() => $"{Provider.GetMenuClass()} {AdditionalClasses} {GetOrientationClass()}".Trim();
+        private string GetContainerClasses() => $"{Provider.GetMenuContainerClass()} {AdditionalContainerClasses}".Trim();
+        private string GetOrientationClass() => Orientation == Orientation.Horizontal
+            ? "opta-menu-horizontal"
+            : "opta-menu-vertical";
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Components.Buttons.Enum
+﻿namespace OptionA.Blazor.Components.Shared.Enum
 {
     /// <summary>
     /// Orientation

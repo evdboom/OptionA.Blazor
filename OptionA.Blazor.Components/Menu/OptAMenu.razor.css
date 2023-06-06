@@ -1,6 +1,13 @@
 ﻿ul {
-    flex-direction: row;
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+.opta-menu-horizontal {
+    flex-direction: row;
+}
+
+.opta-menu-vertical {
+    flex-direction: column;
 }

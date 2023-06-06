@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using OptionA.Blazor.Components.Buttons.Enum;
+using OptionA.Blazor.Components.Shared.Enum;
 
 namespace OptionA.Blazor.Components.Buttons
 {
