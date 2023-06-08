@@ -1,4 +1,4 @@
-﻿<li title="@Description" class="opta-menu-group @GetClasses()" @onclick="() => Toggle()">
+﻿<li title="@Description" class="opta-menu-group @GetClasses()" @onclick="() => Toggle()" open="@_open">
     <a class="@GetLinkClasses()">@Name</a>
     @if (_open)
     {

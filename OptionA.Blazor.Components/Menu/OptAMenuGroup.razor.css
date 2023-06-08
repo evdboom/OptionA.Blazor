@@ -22,7 +22,9 @@ li {
 }
 
 .opta-dropdown-vertical {
-    right: 0;
+    left: 100%;
+    top: 0;
+    margin-top: 1em;
 }
 
 .opta-menu-group {
