@@ -23,6 +23,9 @@
     display: block;
     order: 0;
     margin-left: -100%;
+ }
+
+.opta-carousel-slide.previous:not(.was-next) {    
     transition: margin-left 1s ease-in-out;
 }
 

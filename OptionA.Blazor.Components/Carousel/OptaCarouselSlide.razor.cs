@@ -52,6 +52,10 @@ namespace OptionA.Blazor.Components.Carousel
         /// </summary>
         public bool IsNext { get; set; }
         /// <summary>
+        /// Gets or sets if this was a next slide in the previous iteration, call <see cref="Update"/> after changes to rerender
+        /// </summary>
+        public bool WasNext { get; set; }
+        /// <summary>
         /// Tells the component its state has changes (use after changing the status boolean)
         /// </summary>
         public void Update()
@@ -80,7 +84,9 @@ namespace OptionA.Blazor.Components.Carousel
             }
             else if (IsPrevious)
             {
-                return "previous";
+                return WasNext
+                    ? "previous was-next"
+                    : "previous";                
             }
             else if (IsNext)
             {

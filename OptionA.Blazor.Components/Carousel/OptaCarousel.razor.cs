@@ -241,6 +241,13 @@ namespace OptionA.Blazor.Components.Carousel
                 Flip();
                 return;
             }
+            var oldWasNext = _children
+                .FirstOrDefault(child => child.Child.WasNext)
+                .Child;
+            if (oldWasNext != null)
+            {
+                oldWasNext.WasNext = false;
+            }
 
             var next = _children
                 .FirstOrDefault(child => child.Child.IsNext)
@@ -253,6 +260,7 @@ namespace OptionA.Blazor.Components.Carousel
 
             current.Child.IsCurrent = false;
             next.IsNext = false;
+            next.WasNext = true;
             if (previous != null)
             {
                 previous.IsPrevious = false;
@@ -277,6 +285,10 @@ namespace OptionA.Blazor.Components.Carousel
             {
                 previous.Update();
             }
+            if (oldWasNext != null)
+            {
+                oldWasNext.Update();
+            }
 
             newCurrent.Update();
             newNext.Update();
@@ -294,6 +306,14 @@ namespace OptionA.Blazor.Components.Carousel
             else if (_children.Count == 2)
             {
                 Flip();
+            }
+
+            var oldWasNext = _children
+                .FirstOrDefault(child => child.Child.WasNext)
+                .Child;
+            if (oldWasNext != null)
+            {
+                oldWasNext.WasNext = false;
             }
 
             var current = _children
@@ -340,6 +360,14 @@ namespace OptionA.Blazor.Components.Carousel
                 Flip();
             }
 
+            var oldWasNext = _children
+                .FirstOrDefault(child => child.Child.WasNext)
+                .Child;
+            if (oldWasNext != null)
+            {
+                oldWasNext.WasNext = false;
+            }
+
             var indexedList = _children
                 .OrderByDescending(child => child.Index)
                 .Select((child, index) => (Index: index, child.Child))
@@ -355,6 +383,7 @@ namespace OptionA.Blazor.Components.Carousel
                 ? indexedList[current.Index - 1]
                 : indexedList.Last();
             oldnext.Child.IsNext = false;
+            oldnext.Child.WasNext = true;
 
             var newCurrent = current.Index < indexedList.Count - 1
                 ? indexedList[current.Index + 1]

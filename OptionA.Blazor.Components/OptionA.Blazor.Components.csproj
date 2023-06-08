@@ -6,7 +6,7 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Version>7.1.1</Version>
+	  <Version>7.1.2</Version>
 	  <IsPackable>true</IsPackable>
 	  <Authors>Erik van der Boom</Authors>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
@@ -20,6 +20,7 @@
 		  7.0.6 Added OnItemSelectedCallback to menu
 		  7.1.0 Added Carousel, moved to config setup #breaking change
 		  7.1.1 Fixed a few warning (missing xml)
+		  7.1.2 Carousel dit not render properly for 3 items
 	  </PackageReleaseNotes>
   </PropertyGroup>
 
