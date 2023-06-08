@@ -13,26 +13,12 @@ namespace OptionA.Blazor.Components.Menu.Struct
         /// Adds a singleton <see cref="IMenuDataProvider"/> to the service collection for use in the OptAMenu component
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="defaultMenuClass"></param>
-        /// <param name="defaultMenuItemClass"></param>
-        /// <param name="defaultMenuLinkClass"></param>
-        /// <param name="defaultMenuGroupClass"></param>
-        /// <param name="defaultMenuDividerClass"></param>
-        /// <param name="activeClass"></param>
-        /// <param name="defaultMenuContainerClass"></param>
+        /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddMenuClasses(
-            this IServiceCollection services,            
-            string defaultMenuClass,            
-            string defaultMenuItemClass,
-            string defaultMenuLinkClass,
-            string defaultMenuGroupClass,
-            string defaultMenuDividerClass,
-            string activeClass,
-            string defaultMenuContainerClass)
+        public static IServiceCollection AddMenuClasses(this IServiceCollection services, Action<MenuOptions>? configuration = null)
         {
-            services.AddSingleton<IMenuDataProvider>(provider => new MenuDataProvider(defaultMenuClass, defaultMenuItemClass, defaultMenuLinkClass, defaultMenuGroupClass, defaultMenuDividerClass, activeClass, defaultMenuContainerClass));
-            return services;
+            return services
+                .AddSingleton<IMenuDataProvider>(provider => new MenuDataProvider(configuration));            
         }
 
         /// <summary>
@@ -40,13 +26,28 @@ namespace OptionA.Blazor.Components.Menu.Struct
         /// </summary>
         /// <param name="services"></param>
         /// <param name="darkMode"></param>
+        /// <param name="configuration">Additional configuration to be set after applying bootstrap config</param>
         /// <returns></returns>
-        public static IServiceCollection AddBootstrapMenu(this IServiceCollection services, bool darkMode = false)
+        public static IServiceCollection AddBootstrapMenu(this IServiceCollection services, bool darkMode = false, Action<MenuOptions>? configuration = null)
         {
             var mode = darkMode
                 ? "navbar-dark"
                 : "navbar-light";
-            return AddMenuClasses(services, "navbar-nav", "nav-item me-2", "nav-link", "nav-link dropdown-toggle", "dropdown-divider", "active", $"navbar {mode}");
+
+            var bootstrapConfig = (MenuOptions options) =>
+            {
+                options.DefaultMenuClass = "navbar-nav";
+                options.DefaultMenuItemClass = "nav-item me-2";
+                options.DefaultMenuLinkClass = "nav-link";
+                options.DefaultMenuGroupClass = "nav-link dropdown-toggle";
+                options.DefaultMenuDividerClass = "dropdown-divider";
+                options.ActiveClass = "active";
+                options.DefaultMenuContainerClass = $"navbar {mode}";
+
+                configuration?.Invoke(options);
+            };
+
+            return AddMenuClasses(services, bootstrapConfig);
         }
     }
 }

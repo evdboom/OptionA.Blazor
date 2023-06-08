@@ -12,28 +12,21 @@ namespace OptionA.Blazor.Components.Buttons.Struct
         /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="buttonClasses"></param>
-        /// <param name="defaultButtonClass"></param>
-        /// <param name="iconClasses"></param>
-        /// <param name="defaultIconClass"></param>
+        /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddButtonClasses(
-            this IServiceCollection services,
-            IDictionary<ActionType, string> buttonClasses,
-            string defaultButtonClass,
-            IDictionary<ActionType, string> iconClasses,
-            string defaultIconClass)
+        public static IServiceCollection AddButtonClasses(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
         {
-            services.AddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(buttonClasses, defaultButtonClass, iconClasses, defaultIconClass));
-            return services;
+            return services
+                .AddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration);            
         }
 
         /// <summary>
         /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons, prefilled with bootstrap classes
         /// </summary>
         /// <param name="services"></param>
+        /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
         /// <returns></returns>
-        public static IServiceCollection AddBootstrapButtons(this IServiceCollection services)
+        public static IServiceCollection AddBootstrapButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
         {
             var buttonClasses = new Dictionary<ActionType, string>
             {
@@ -51,7 +44,18 @@ namespace OptionA.Blazor.Components.Buttons.Struct
                 { ActionType.Cancel, "bi bi-x-lg" },
                 { ActionType.Confirm, "bi bi-check-lg" },
             };
-            return AddButtonClasses(services, buttonClasses, "btn btn-primary", iconClasses, "bi bi-circle");
+
+            var bootstrapConfig = (ButtonOptions options) =>
+            {
+                options.DefaultButtonClass = "btn btn-primary";
+                options.DefaultIconClass = "bi bi-circle";
+                options.ButtonClasses = buttonClasses;
+                options.IconClasses = iconClasses;
+
+                configuration?.Invoke(options);
+            };
+
+            return AddButtonClasses(services, bootstrapConfig);
         }
     }
 }

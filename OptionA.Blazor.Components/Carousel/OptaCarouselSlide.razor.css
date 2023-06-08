@@ -1,0 +1,42 @@
+﻿.opta-carousel-slide {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    flex-basis: 100%;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.opta-carousel-slide.next {
+    display: block;
+    order: 2;
+}
+
+.opta-carousel-slide.active {
+    display: block;
+    order: 1;
+    transition: margin-left 1s ease-in-out;
+}
+
+.opta-carousel-slide.previous {
+    display: block;
+    order: 0;
+    margin-left: -100%;
+    transition: margin-left 1s ease-in-out;
+}
+
+.opta-carousel-image {
+    width: 100%;
+    z-index: -1;
+}
+
+.opta-carousel-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+
+}

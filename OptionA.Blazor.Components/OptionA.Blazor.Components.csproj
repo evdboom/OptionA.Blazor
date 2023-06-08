@@ -18,6 +18,7 @@
 		  7.0.4 Fixed dropdown closing and showing for bootstrap
 		  7.0.5 Added orientation to menu
 		  7.0.6 Added OnItemSelectedCallback to menu
+		  7.1.0 Added Carousel, moved to config setup #breaking change
 	  </PackageReleaseNotes>
   </PropertyGroup>
 

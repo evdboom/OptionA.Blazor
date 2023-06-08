@@ -3,55 +3,53 @@
     /// <inheritdoc/>
     public class MenuDataProvider : IMenuDataProvider
     {
-        private readonly string _defaultMenuClass;
-        private readonly string _defaultMenuItemClass;
-        private readonly string _defaultMenuLinkClass;
-        private readonly string _defaultMenuGroupClass;
-        private readonly string _defaultMenuDividerClass;
-        private readonly string _activeClass;
-        private readonly string _defaultMenuContainerClass;
+        private readonly string? _defaultMenuClass;
+        private readonly string? _defaultMenuItemClass;
+        private readonly string? _defaultMenuLinkClass;
+        private readonly string? _defaultMenuGroupClass;
+        private readonly string? _defaultMenuDividerClass;
+        private readonly string? _activeClass;
+        private readonly string? _defaultMenuContainerClass;
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        /// <param name="defaultMenuClass"></param>
-        /// <param name="defaultMenuItemClass"></param>
-        /// <param name="defaultMenuLinkClass"></param>
-        /// <param name="defaultMenuGroupClass"></param>
-        /// <param name="defaultMenuDividerClass"></param>
-        /// <param name="activeClas"></param>
-        /// <param name="defaultMenuContainerClass"></param>
-        public MenuDataProvider(string defaultMenuClass, string defaultMenuItemClass, string defaultMenuLinkClass, string defaultMenuGroupClass, string defaultMenuDividerClass, string activeClas, string defaultMenuContainerClass)
+        /// <param name="configuration"></param>
+
+        public MenuDataProvider(Action<MenuOptions>? configuration = null)
         {
-            _defaultMenuClass = defaultMenuClass;
-            _defaultMenuItemClass = defaultMenuItemClass;
-            _defaultMenuLinkClass = defaultMenuLinkClass;
-            _defaultMenuGroupClass = defaultMenuGroupClass;
-            _defaultMenuDividerClass = defaultMenuDividerClass;
-            _activeClass = activeClas;
-            _defaultMenuContainerClass = defaultMenuContainerClass;
+            var options = new MenuOptions();
+            configuration?.Invoke(options);
+
+            _defaultMenuClass = options.DefaultMenuClass;
+            _defaultMenuItemClass = options.DefaultMenuItemClass;
+            _defaultMenuLinkClass = options.DefaultMenuLinkClass;
+            _defaultMenuGroupClass = options.DefaultMenuGroupClass;
+            _defaultMenuDividerClass = options.DefaultMenuDividerClass;
+            _activeClass = options.ActiveClass;
+            _defaultMenuContainerClass = options.DefaultMenuContainerClass;
         }
 
         /// <inheritdoc/>
-        public string GetDividerClass() => _defaultMenuDividerClass;
+        public string GetDividerClass() => _defaultMenuDividerClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetGroupClass() => _defaultMenuGroupClass;
+        public string GetGroupClass() => _defaultMenuGroupClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetLinkClass() => _defaultMenuLinkClass;
+        public string GetLinkClass() => _defaultMenuLinkClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuClass() => _defaultMenuClass;
+        public string GetMenuClass() => _defaultMenuClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuItemClass() => _defaultMenuItemClass;
+        public string GetMenuItemClass() => _defaultMenuItemClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetActiveClass() => _activeClass;
+        public string GetActiveClass() => _activeClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuContainerClass() => _defaultMenuContainerClass;
+        public string GetMenuContainerClass() => _defaultMenuContainerClass ?? string.Empty;
 
 
     }

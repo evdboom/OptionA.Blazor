@@ -1,0 +1,58 @@
+﻿<div class="opta-carousel @AdditionalClasses" @onmouseenter="() => DisableTimer()" @onmouseleave="() => EnableTimer()">
+<ol>
+    <CascadingValue Name="Parent" Value="this">
+        @Slides
+    </CascadingValue>
+</ol>
+
+@if (ShowItemSelect)
+{
+    <div class="opta-carousel-item-select @ItemSelectClasses @Provider.DefaultItemSelectClasses()">
+        @foreach (var child in _children)
+        {
+            @if (ItemSelectIsIcon)
+            {
+                <button type="button" @attributes="Provider.AdditionalAttributesItemSelect()" @onclick="() => SelectIndex(child.Index)">
+                    <i class="@GetItemClasses(child.Child.IsCurrent)"  />
+                </button>
+            }
+            else
+            {
+                <CascadingValue Name="Slide" Value="child.Child">
+                    <button type="button" class="@GetItemClasses(child.Child.IsCurrent)" @attributes="Provider.AdditionalAttributesItemSelect()"  @onclick="() => SelectIndex(child.Index)">
+                        @ItemSelectContent
+                    </button>             
+                </CascadingValue>
+            }    
+        }
+    </div>
+}
+@if (ShowAutoPlay)
+{
+    <div class="opta-carousel-autoplay @AutoPlayClasses @Provider.DefaultAutoPlayClasses()">
+        <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="AutoPlay" id="@_randomId"/>
+        <label for="@_randomId">@Provider.GetAutoPlayText()</label>
+    </div>
+}
+@if (ShowNextPrevious)
+{
+    @if (NextPreviousIsIcon)
+    {
+        <button class="@PreviousClasses @Provider.DefaultPreviousClasses()" @onclick="() => SelectPrevious(true)">
+            <i class="@PreviousIconClasses @Provider.DefaultPreviousIconClasses()" />
+        </button>
+        <button class="@NextClasses @Provider.DefaultNextClasses()" @onclick="() => SelectNext(true)">
+            <i class="@NextIconClasses @Provider.DefaultNextIconClasses()" />
+        </button>
+    }
+    else
+    {
+        <button class="@PreviousClasses @Provider.DefaultPreviousClasses()" @onclick="() => SelectPrevious(true)">
+            @PreviousContent
+        </button>
+        <button class="@NextClasses @Provider.DefaultNextClasses()" @onclick="() => SelectNext(true)">
+            @NextContent
+        </button>
+    }  
+}
+</div>

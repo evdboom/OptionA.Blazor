@@ -7,24 +7,24 @@ namespace OptionA.Blazor.Components.Buttons.Struct
     /// </summary>
     public class ButtonDataProvider : IButtonDataProvider
     {
-        private readonly IDictionary<ActionType, string> _buttonClasses;
-        private readonly string _defaultButtonClass;
-        private readonly IDictionary<ActionType, string> _iconClasses;
-        private readonly string _defaultIconClass;
+        private readonly Dictionary<ActionType, string>? _buttonClasses;
+        private readonly string? _defaultButtonClass;
+        private readonly Dictionary<ActionType, string>? _iconClasses;
+        private readonly string? _defaultIconClass;
 
         /// <summary>
         /// Constructor, pass classes here
         /// </summary>
-        /// <param name="buttonClasses"></param>
-        /// <param name="defaultButtonClass"></param>
-        /// <param name="iconClasses"></param>
-        /// <param name="defaultIconClass"></param>
-        public ButtonDataProvider(IDictionary<ActionType, string> buttonClasses, string defaultButtonClass, IDictionary<ActionType, string> iconClasses, string defaultIconClass)
-        {
-            _buttonClasses = buttonClasses;
-            _defaultButtonClass = defaultButtonClass;
-            _iconClasses = iconClasses;
-            _defaultIconClass = defaultIconClass;
+        /// <param name="configuration"></param>
+        public ButtonDataProvider(Action<ButtonOptions>? configuration = null)
+        {            
+                var options = new ButtonOptions();
+                configuration?.Invoke(options);
+
+                _buttonClasses = options.ButtonClasses;
+                _defaultButtonClass = options.DefaultButtonClass;
+                _iconClasses = options.IconClasses;
+                _defaultIconClass = options.DefaultIconClass;
         }
 
         /// <inheritdoc/>
@@ -41,12 +41,12 @@ namespace OptionA.Blazor.Components.Buttons.Struct
                 return otherButtonClass;
             }
 
-            if (_buttonClasses.TryGetValue(actionType, out string? buttonClass))
+            if (_buttonClasses?.TryGetValue(actionType, out string? buttonClass) ?? false)
             {
                 return buttonClass;
             }
 
-            return _defaultButtonClass;
+            return _defaultButtonClass ?? string.Empty;
         }
 
         /// <inheritdoc/>
@@ -63,12 +63,12 @@ namespace OptionA.Blazor.Components.Buttons.Struct
                 return otherIconClass;
             }
 
-            if (_iconClasses.TryGetValue(actionType, out string? iconClass))
+            if (_iconClasses?.TryGetValue(actionType, out string? iconClass) ?? false)
             {
                 return iconClass;
             }
 
-            return _defaultIconClass;
+            return _defaultIconClass ?? string.Empty;
         }
     }
 }
