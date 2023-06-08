@@ -3,6 +3,9 @@ using OptionA.Blazor.Components.Carousel.Struct;
 
 namespace OptionA.Blazor.Components.Carousel
 {
+    /// <summary>
+    /// Carousel component
+    /// </summary>
     public partial class OptaCarousel
     {
         private const int DefaultSlideSpeed = 3000;

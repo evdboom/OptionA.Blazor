@@ -2,6 +2,9 @@
 
 namespace OptionA.Blazor.Components.Carousel
 {
+    /// <summary>
+    /// Slide for the carousel component
+    /// </summary>
     public partial class OptaCarouselSlide
     {
         private bool _registered;
@@ -35,8 +38,7 @@ namespace OptionA.Blazor.Components.Carousel
         /// Text to use for image as alt and title attributes
         /// </summary>
         [Parameter]
-        public string ImageText { get; set; }
-
+        public string? ImageText { get; set; }
         /// <summary>
         /// Gets or sets if this is the previous slide, call <see cref="Update"/> after changes to rerender
         /// </summary>
