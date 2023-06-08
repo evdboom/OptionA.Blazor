@@ -7,7 +7,7 @@ namespace OptionA.Blazor.Components.Carousel
         private bool _registered;
 
         /// <summary>
-        /// <see cref="OptaCarousel" as parent/>
+        /// <see cref="OptaCarousel"/> as parent
         /// </summary>
         [CascadingParameter(Name="Parent")]
         public OptaCarousel? Parent { get; set; }

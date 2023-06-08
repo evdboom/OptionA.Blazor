@@ -17,7 +17,7 @@ namespace OptionA.Blazor.Components.Buttons.Struct
         public static IServiceCollection AddButtonClasses(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
         {
             return services
-                .AddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration);            
+                .AddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration));            
         }
 
         /// <summary>

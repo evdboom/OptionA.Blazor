@@ -56,6 +56,6 @@
         /// <inheritdoc/>
         public string DefaultPreviousIconClasses() => _previousIconClasses ?? string.Empty;
         /// <inheritdoc/>
-        public Dictionary<string, object?> AdditionalAttributesItemSelect() => _itemSelectAttributes ?? new();
+        public IDictionary<string, object?> AdditionalAttributesItemSelect() => _itemSelectAttributes ?? new();
     }
 }
