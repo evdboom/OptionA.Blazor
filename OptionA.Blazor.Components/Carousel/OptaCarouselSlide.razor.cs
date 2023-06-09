@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Components.Carousel
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Slide for the carousel component

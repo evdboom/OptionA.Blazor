@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OptionA.Blazor.Components.Menu.Struct
+﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Interface for adding base cvlasses to menu components

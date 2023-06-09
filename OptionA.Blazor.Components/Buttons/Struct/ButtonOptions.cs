@@ -1,6 +1,4 @@
-﻿using OptionA.Blazor.Components.Buttons.Enum;
-
-namespace OptionA.Blazor.Components.Buttons.Struct
+﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Options for ButtonDataProvider

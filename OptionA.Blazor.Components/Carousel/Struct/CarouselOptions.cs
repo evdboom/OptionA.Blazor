@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Components.Carousel.Struct
+﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Options for Carousel data provider

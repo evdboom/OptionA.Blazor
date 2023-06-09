@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OptionA.Blazor.Components.Buttons.Enum;
+using OptionA.Blazor.Components.Buttons.Struct;
 
-namespace OptionA.Blazor.Components.Buttons.Struct
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Add buttons to the service collection
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         /// <summary>
         /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons
@@ -14,19 +14,16 @@ namespace OptionA.Blazor.Components.Buttons.Struct
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddButtonClasses(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
-        {
-            return services
-                .AddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration));            
-        }
+        public static IServiceCollection AddOptionAButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null) => services
+                .AddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration));        
 
         /// <summary>
-        /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons, prefilled with bootstrap classes
+        /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons, prefilled with bootstrap (5.3) classes
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
         /// <returns></returns>
-        public static IServiceCollection AddBootstrapButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
+        public static IServiceCollection AddOptionABootstrapButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
         {
             var buttonClasses = new Dictionary<ActionType, string>
             {
@@ -55,7 +52,7 @@ namespace OptionA.Blazor.Components.Buttons.Struct
                 configuration?.Invoke(options);
             };
 
-            return AddButtonClasses(services, bootstrapConfig);
+            return AddOptionAButtons(services, bootstrapConfig);
         }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using OptionA.Blazor.Components.Buttons.Enum;
-using OptionA.Blazor.Components.Buttons.Struct;
 
-namespace OptionA.Blazor.Components.Buttons
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// A button to be used seperately or inside a button bar
@@ -32,7 +30,7 @@ namespace OptionA.Blazor.Components.Buttons
         /// Action to be performed when clicked
         /// </summary>
         [Parameter]
-        public Func<MouseEventArgs,Task>? ClickAction { get; set; }
+        public Func<MouseEventArgs, Task>? ClickAction { get; set; }
         /// <summary>
         /// If set and when true the button will be disabled
         /// </summary>
@@ -83,7 +81,7 @@ namespace OptionA.Blazor.Components.Buttons
         }
 
         private string GetButtonClass()
-        {            
+        {
             return $"{Provider.GetActionClass(ActionType, OtherButtonClass)} {AdditionalClasses}";
         }
 
@@ -91,14 +89,14 @@ namespace OptionA.Blazor.Components.Buttons
         {
             return ButtonType.HasFlag(ButtonTypes.Name)
                 ? Description ?? string.Empty
-                : $"{Name} - {Description}";            
+                : $"{Name} - {Description}";
         }
 
         private string GetIcon()
         {
             return $"{Provider.GetIconClass(ActionType, OtherIconClass)}";
         }
-        
+
         private string GetButtonType()
         {
             return IsSubmit ? "submit" : "button";

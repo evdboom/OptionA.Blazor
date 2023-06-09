@@ -1,4 +1,6 @@
-﻿<li class="opta-carousel-slide @AdditionalClasses @GetStatusClass()">
+﻿@namespace OptionA.Blazor.Components
+
+<li class="opta-carousel-slide @AdditionalClasses @GetStatusClass()">
     @if (!string.IsNullOrEmpty(ImageUrl))
     {
         <img src="@ImageUrl" alt="@ImageText" title="@ImageText" class="opta-carousel-image" />

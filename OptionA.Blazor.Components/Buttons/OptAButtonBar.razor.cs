@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using OptionA.Blazor.Components.Buttons.Enum;
-using OptionA.Blazor.Components.Shared.Enum;
 
-namespace OptionA.Blazor.Components.Buttons
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Button bar to display multiple buttons
@@ -27,7 +25,7 @@ namespace OptionA.Blazor.Components.Buttons
         /// <summary>
         /// Location of the bar in the parent container
         /// </summary>
-        [Parameter]        
+        [Parameter]
         public Location Location { get; set; }
         /// <summary>
         /// Buttons on the left or top (depending on <see cref="Orientation"/>)

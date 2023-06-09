@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using OptionA.Blazor.Components.Menu.Struct;
-using OptionA.Blazor.Components.Shared.Enum;
 
-namespace OptionA.Blazor.Components.Menu
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Component for placing a menu on the page

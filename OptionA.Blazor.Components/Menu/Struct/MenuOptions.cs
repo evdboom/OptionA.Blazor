@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Components.Menu.Struct
+﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Options to set for menu components

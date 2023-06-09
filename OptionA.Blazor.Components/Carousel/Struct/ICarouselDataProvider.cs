@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Components.Carousel.Struct
+﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Interface for use in carousels to provide the correct classes and icons

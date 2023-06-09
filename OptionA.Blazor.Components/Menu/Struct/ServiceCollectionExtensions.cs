@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OptionA.Blazor.Components.Buttons.Enum;
-using OptionA.Blazor.Components.Buttons.Struct;
+using OptionA.Blazor.Components.Menu.Struct;
 
-namespace OptionA.Blazor.Components.Menu.Struct
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Add menu components to the service collection
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         /// <summary>
         /// Adds a singleton <see cref="IMenuDataProvider"/> to the service collection for use in the OptAMenu component
@@ -15,20 +14,17 @@ namespace OptionA.Blazor.Components.Menu.Struct
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddMenuClasses(this IServiceCollection services, Action<MenuOptions>? configuration = null)
-        {
-            return services
-                .AddSingleton<IMenuDataProvider>(provider => new MenuDataProvider(configuration));            
-        }
+        public static IServiceCollection AddOptionAMenu(this IServiceCollection services, Action<MenuOptions>? configuration = null) => services
+                .AddSingleton<IMenuDataProvider>(provider => new MenuDataProvider(configuration));        
 
         /// <summary>
-        /// Adds a singleton <see cref="IMenuDataProvider"/> to the service collection for use in the OptAMenu component, prefilled with bootstrap classes
+        /// Adds a singleton <see cref="IMenuDataProvider"/> to the service collection for use in the OptAMenu component, prefilled with bootstrap (5.3) classes
         /// </summary>
         /// <param name="services"></param>
         /// <param name="darkMode"></param>
         /// <param name="configuration">Additional configuration to be set after applying bootstrap config</param>
         /// <returns></returns>
-        public static IServiceCollection AddBootstrapMenu(this IServiceCollection services, bool darkMode = false, Action<MenuOptions>? configuration = null)
+        public static IServiceCollection AddOptionABootstrapMenu(this IServiceCollection services, bool darkMode = false, Action<MenuOptions>? configuration = null)
         {
             var mode = darkMode
                 ? "navbar-dark"
@@ -47,7 +43,7 @@ namespace OptionA.Blazor.Components.Menu.Struct
                 configuration?.Invoke(options);
             };
 
-            return AddMenuClasses(services, bootstrapConfig);
+            return AddOptionAMenu(services, bootstrapConfig);
         }
     }
 }

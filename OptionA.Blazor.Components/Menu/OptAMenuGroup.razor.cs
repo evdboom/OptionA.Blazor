@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
-using OptionA.Blazor.Components.Menu.Struct;
-using OptionA.Blazor.Components.Shared.Enum;
 
-namespace OptionA.Blazor.Components.Menu
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Group of menu items (dropdown)
@@ -45,19 +43,19 @@ namespace OptionA.Blazor.Components.Menu
         /// <summary>
         /// Currently set orientation on the menu
         /// </summary>
-        [CascadingParameter(Name="MenuOrientation")]
+        [CascadingParameter(Name = "MenuOrientation")]
         public Orientation MenuOrientation { get; set; }
 
         /// <summary>
         /// Check for active
         /// </summary>
         protected override void OnParametersSet()
-        {            
+        {
             if (!string.IsNullOrEmpty(ActiveRoute))
             {
                 var location = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
                 _isActive = $"/{location}".StartsWith(ActiveRoute, StringComparison.OrdinalIgnoreCase);
-            }                
+            }
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace OptionA.Blazor.Components.Menu
                 var location = NavigationManager.ToBaseRelativePath(e.Location);
                 _isActive = $"/{location}".StartsWith(ActiveRoute, StringComparison.OrdinalIgnoreCase);
                 StateHasChanged();
-            }            
+            }
         }
 
         private void Toggle()
@@ -84,7 +82,7 @@ namespace OptionA.Blazor.Components.Menu
         }
 
         private string GetClasses() => $"{Provider.GetMenuItemClass()} {AdditionalClasses}".Trim();
-        private string GetLinkClasses() =>$"{Provider.GetGroupClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
+        private string GetLinkClasses() => $"{Provider.GetGroupClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
         private string GetOrientation() => MenuOrientation == Orientation.Horizontal
             ? "opta-dropdown-horizontal"
             : "opta-dropdown-vertical";

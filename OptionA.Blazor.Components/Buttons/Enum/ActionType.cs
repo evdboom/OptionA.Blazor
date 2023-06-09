@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Components.Buttons.Enum
+﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Action type for buttons, determines the classes set

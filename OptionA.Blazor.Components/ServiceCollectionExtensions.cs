@@ -1,14 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OptionA.Blazor.Components.Buttons.Struct;
-using OptionA.Blazor.Components.Carousel.Struct;
-using OptionA.Blazor.Components.Menu.Struct;
 
 namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Extensions for adding all components;
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         /// <summary>
         /// Adds all component dataproviders to the service collection
@@ -22,13 +19,13 @@ namespace OptionA.Blazor.Components
             configuration?.Invoke(options);
 
             return services
-                .AddButtonClasses(options.ButtonConfiguration)
-                .AddMenuClasses(options.MenuConfiguration)
-                .AddCarouselClasses(options.CarouselConfiguration);
+                .AddOptionAButtons(options.ButtonConfiguration)
+                .AddOptionAMenu(options.MenuConfiguration)
+                .AddOptionACarousel(options.CarouselConfiguration);
         }
 
         /// <summary>
-        /// Adds all bootstrap filled components to the service collection
+        /// Adds all bootstrap (5.3) filled components to the service collection
         /// </summary>
         /// <param name="services"></param>
         /// <param name="darkMode"></param>
@@ -40,9 +37,9 @@ namespace OptionA.Blazor.Components
             configuration?.Invoke(options);
 
             return services
-                .AddBootstrapButtons(options.ButtonConfiguration)
-                .AddBootstrapMenu(darkMode, options.MenuConfiguration)
-                .AddBootstrapCarousel(options.CarouselConfiguration);
+                .AddOptionABootstrapButtons(options.ButtonConfiguration)
+                .AddOptionABootstrapMenu(darkMode, options.MenuConfiguration)
+                .AddOptionABootstrapCarousel(options.CarouselConfiguration);
         }
 
 

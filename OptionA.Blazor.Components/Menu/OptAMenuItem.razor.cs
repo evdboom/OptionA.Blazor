@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Web;
-using OptionA.Blazor.Components.Menu.Struct;
 
-namespace OptionA.Blazor.Components.Menu
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Menu item
@@ -45,7 +44,7 @@ namespace OptionA.Blazor.Components.Menu
         /// <summary>
         /// Triggers when item is clicked
         /// </summary>
-        [CascadingParameter(Name="OnItemSelected")]
+        [CascadingParameter(Name = "OnItemSelected")]
         public EventCallback OnItemSelected { get; set; }
 
         /// <summary>

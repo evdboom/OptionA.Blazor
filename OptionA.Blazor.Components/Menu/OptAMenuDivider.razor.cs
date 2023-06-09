@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using OptionA.Blazor.Components.Menu.Struct;
 
-namespace OptionA.Blazor.Components.Menu
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Divider to use inside a menu group

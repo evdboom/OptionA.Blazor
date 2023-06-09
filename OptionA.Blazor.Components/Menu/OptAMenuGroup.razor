@@ -1,4 +1,6 @@
-﻿<li title="@Description" class="opta-menu-group @GetClasses()" @onclick="() => Toggle()" open="@_open">
+﻿@namespace OptionA.Blazor.Components
+
+<li title="@Description" class="opta-menu-group @GetClasses()" @onclick="() => Toggle()" open="@_open">
     <a class="@GetLinkClasses()">@Name</a>
     @if (_open)
     {

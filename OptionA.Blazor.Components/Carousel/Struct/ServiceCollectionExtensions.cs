@@ -1,16 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OptionA.Blazor.Components.Carousel.Struct;
 
-namespace OptionA.Blazor.Components.Carousel.Struct
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Extension methods for adding carousel
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static partial class ServiceCollectionExtensions
     {
         /// <summary>
         /// Adds carousels with these default classes to the serviceprovider
@@ -18,19 +14,16 @@ namespace OptionA.Blazor.Components.Carousel.Struct
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddCarouselClasses(this IServiceCollection services, Action<CarouselOptions>? configuration = null)            
-        {
-            return services
-                .AddSingleton<ICarouselDataProvider>(provider => new CarouselDataProvider(configuration));             
-        }
+        public static IServiceCollection AddOptionACarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null) => services
+                .AddSingleton<ICarouselDataProvider>(provider => new CarouselDataProvider(configuration));
 
         /// <summary>
-        /// Adds default bootstrap classes and icon for use of carousel
+        /// Adds default bootstrap (5.3) classes and icon for use of carousel
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
         /// <returns></returns>
-        public static IServiceCollection AddBootstrapCarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null)
+        public static IServiceCollection AddOptionABootstrapCarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null)
         {
             var bootstrapConfig = (CarouselOptions options) =>
             {
@@ -45,10 +38,10 @@ namespace OptionA.Blazor.Components.Carousel.Struct
                 options.PreviousClasses = "carousel-control-prev";
                 options.PreviousIconClasses = "carousel-control-prev-icon";
 
-                configuration?.Invoke(options);                
+                configuration?.Invoke(options);
             };
 
-            return AddCarouselClasses(services, bootstrapConfig);
+            return AddOptionACarousel(services, bootstrapConfig);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿<li title="@Description" class="opta-menu-item @GetClasses()">    
+﻿@namespace OptionA.Blazor.Components
+
+<li title="@Description" class="opta-menu-item @GetClasses()">    
     @if (!string.IsNullOrEmpty(Name))
     {
         <a href="@Href" class="@GetLinkClasses()" @onclick="ItemSelected">@Name</a>

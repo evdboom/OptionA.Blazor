@@ -1,6 +1,4 @@
-﻿using OptionA.Blazor.Components.Buttons.Enum;
-
-namespace OptionA.Blazor.Components.Buttons.Struct
+﻿namespace OptionA.Blazor.Components.Buttons.Struct
 {
     /// <summary>
     /// Default implementation of <see cref="IButtonDataProvider"/>
@@ -17,14 +15,14 @@ namespace OptionA.Blazor.Components.Buttons.Struct
         /// </summary>
         /// <param name="configuration"></param>
         public ButtonDataProvider(Action<ButtonOptions>? configuration = null)
-        {            
-                var options = new ButtonOptions();
-                configuration?.Invoke(options);
+        {
+            var options = new ButtonOptions();
+            configuration?.Invoke(options);
 
-                _buttonClasses = options.ButtonClasses;
-                _defaultButtonClass = options.DefaultButtonClass;
-                _iconClasses = options.IconClasses;
-                _defaultIconClass = options.DefaultIconClass;
+            _buttonClasses = options.ButtonClasses;
+            _defaultButtonClass = options.DefaultButtonClass;
+            _iconClasses = options.IconClasses;
+            _defaultIconClass = options.DefaultIconClass;
         }
 
         /// <inheritdoc/>

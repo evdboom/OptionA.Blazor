@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
-using OptionA.Blazor.Components.Carousel.Struct;
 
-namespace OptionA.Blazor.Components.Carousel
+namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Carousel component
@@ -13,7 +12,7 @@ namespace OptionA.Blazor.Components.Carousel
 
         private List<(int Index, OptaCarouselSlide Child)> _children = new();
         private Timer? _timer;
-        private string _randomId = string.Empty;        
+        private string _randomId = string.Empty;
 
         private bool _autoPlay = true;
         private bool AutoPlay
@@ -24,7 +23,7 @@ namespace OptionA.Blazor.Components.Carousel
                 _autoPlay = value;
                 if (_autoPlay)
                 {
-                    EnableTimer();                    
+                    EnableTimer();
                 }
                 else
                 {
@@ -158,7 +157,7 @@ namespace OptionA.Blazor.Components.Carousel
             {
                 child.IsNext = true;
                 child.Update();
-            }            
+            }
 
             _children = current
                 .OrderBy(child => child.SlideNumber)
@@ -188,7 +187,7 @@ namespace OptionA.Blazor.Components.Carousel
                 var next = random.Next(0, 26);
                 _randomId += AllowedCharacters[next];
             }
-            
+
         }
 
         private string GetItemClasses(bool current)
@@ -265,7 +264,7 @@ namespace OptionA.Blazor.Components.Carousel
             {
                 previous.IsPrevious = false;
             }
-            
+
 
             var newCurrent = _children[index].Child;
             var newNext = index < _children.Count - 1

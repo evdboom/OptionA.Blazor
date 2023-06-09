@@ -1,5 +1,7 @@
-﻿<div class="opta-carousel @AdditionalClasses" @onmouseenter="() => DisableTimer()" @onmouseleave="() => EnableTimer()">
-<ol>
+﻿@namespace OptionA.Blazor.Components
+
+<div class="opta-carousel @AdditionalClasses" @onmouseenter="() => DisableTimer()" @onmouseleave="() => EnableTimer()">
+<ol>    
     <CascadingValue Name="Parent" Value="this">
         @Slides
     </CascadingValue>
