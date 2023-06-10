@@ -40,6 +40,6 @@
         /// <summary>
         /// If set and <see cref="OpenGroupOnMouseOver"/> is true, will wait the set time before closing (for doing animations and stuff)
         /// </summary>
-        public int? CloseGroupAfterMilisecondDelay { get; set; }
+        public int? CloseGroupAfterMillisecondDelay { get; set; }
     }
 }

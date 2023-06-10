@@ -6,7 +6,7 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Version>7.2.2</Version>
+	  <Version>7.2.3</Version>
 	  <IsPackable>true</IsPackable>
 	  <Authors>Erik van der Boom</Authors>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
@@ -24,7 +24,7 @@
 		  7.1.3 Added open attribute to menugroup
 		  7.2.0 Moved to single namespace for components, renamed servicecollection extensions #breaking change
 		  7.2.1 Added responsive, update for group to open on mouseover
-		  7.2.2 typo
+		  7.2.3 typo
 	  </PackageReleaseNotes>
   </PropertyGroup>
 
