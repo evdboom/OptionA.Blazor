@@ -33,5 +33,13 @@
         /// Classes to add to top level container
         /// </summary>
         public string? DefaultMenuContainerClass { get; set; }
+        /// <summary>
+        /// True if the menu group should open on a mouse over instead of a click.
+        /// </summary>
+        public bool? OpenGroupOnMouseOver { get; set; }
+        /// <summary>
+        /// If set and <see cref="OpenGroupOnMouseOver"/> is true, will wait the set time before closing (for doing animations and stuff)
+        /// </summary>
+        public int? CloseGroupAfterMilisecondDelay { get; set; }
     }
 }

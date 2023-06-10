@@ -1,7 +1,7 @@
 ﻿@namespace OptionA.Blazor.Components
 
 <nav class="opta-menu-container @GetContainerClasses()">
-    <ul class="opta-menu @GetClasses()">
+    <ul class="opta-menu @GetClasses()" vertical="@(Orientation == Orientation.Vertical)">
         <CascadingValue Name="MenuOrientation" Value="@Orientation">
             <CascadingValue Name="OnItemSelected" Value="@OnItemSelected">
             @if (Items is not null)

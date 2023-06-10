@@ -21,5 +21,9 @@ namespace OptionA.Blazor.Components
         /// Configuration for carousel components
         /// </summary>
         public Action<CarouselOptions>? CarouselConfiguration { get; set; }
+        /// <summary>
+        /// Configuration for responsive components and service
+        /// </summary>
+        public Action<ResponsiveOptions>? ResponsiveConfiguration { get; set; }
     }
 }

@@ -35,10 +35,7 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public EventCallback OnItemSelected { get; set; }
 
-        private string GetClasses() => $"{Provider.GetMenuClass()} {AdditionalClasses} {GetOrientationClass()}".Trim();
+        private string GetClasses() => $"{Provider.GetMenuClass()} {AdditionalClasses}".Trim();
         private string GetContainerClasses() => $"{Provider.GetMenuContainerClass()} {AdditionalContainerClasses}".Trim();
-        private string GetOrientationClass() => Orientation == Orientation.Horizontal
-            ? "opta-menu-horizontal"
-            : "opta-menu-vertical";
     }
 }

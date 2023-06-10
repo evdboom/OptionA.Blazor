@@ -15,5 +15,10 @@ builder.Services
         {
             carousel.AutoPlayText = "Autoplay";
         };
+        options.MenuConfiguration = (menu) =>
+        {
+            menu.OpenGroupOnMouseOver = true;
+            menu.CloseGroupAfterMilisecondDelay = 1000;
+        };
     });
 await builder.Build().RunAsync();

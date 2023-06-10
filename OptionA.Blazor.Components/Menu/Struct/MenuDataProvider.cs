@@ -3,13 +3,7 @@
     /// <inheritdoc/>
     public class MenuDataProvider : IMenuDataProvider
     {
-        private readonly string? _defaultMenuClass;
-        private readonly string? _defaultMenuItemClass;
-        private readonly string? _defaultMenuLinkClass;
-        private readonly string? _defaultMenuGroupClass;
-        private readonly string? _defaultMenuDividerClass;
-        private readonly string? _activeClass;
-        private readonly string? _defaultMenuContainerClass;
+        private readonly MenuOptions _options;
 
         /// <summary>
         /// Default constructor
@@ -18,38 +12,36 @@
 
         public MenuDataProvider(Action<MenuOptions>? configuration = null)
         {
-            var options = new MenuOptions();
-            configuration?.Invoke(options);
-
-            _defaultMenuClass = options.DefaultMenuClass;
-            _defaultMenuItemClass = options.DefaultMenuItemClass;
-            _defaultMenuLinkClass = options.DefaultMenuLinkClass;
-            _defaultMenuGroupClass = options.DefaultMenuGroupClass;
-            _defaultMenuDividerClass = options.DefaultMenuDividerClass;
-            _activeClass = options.ActiveClass;
-            _defaultMenuContainerClass = options.DefaultMenuContainerClass;
+            _options = new MenuOptions();
+            configuration?.Invoke(_options);
         }
 
         /// <inheritdoc/>
-        public string GetDividerClass() => _defaultMenuDividerClass ?? string.Empty;
+        public string GetDividerClass() => _options.DefaultMenuDividerClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetGroupClass() => _defaultMenuGroupClass ?? string.Empty;
+        public string GetGroupClass() => _options.DefaultMenuGroupClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetLinkClass() => _defaultMenuLinkClass ?? string.Empty;
+        public string GetLinkClass() => _options.DefaultMenuLinkClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuClass() => _defaultMenuClass ?? string.Empty;
+        public string GetMenuClass() => _options.DefaultMenuClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuItemClass() => _defaultMenuItemClass ?? string.Empty;
+        public string GetMenuItemClass() => _options.DefaultMenuItemClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetActiveClass() => _activeClass ?? string.Empty;
+        public string GetActiveClass() => _options.ActiveClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuContainerClass() => _defaultMenuContainerClass ?? string.Empty;
+        public string GetMenuContainerClass() => _options.DefaultMenuContainerClass ?? string.Empty;
+
+        /// <inheritdoc/>
+        public bool OpenGroupOnMouseOver() => _options.OpenGroupOnMouseOver ?? false;
+
+        /// <inheritdoc/>
+        public int CloseGroupAfterMilisecondDelay() => _options.CloseGroupAfterMilisecondDelay ?? 0;
 
 
     }

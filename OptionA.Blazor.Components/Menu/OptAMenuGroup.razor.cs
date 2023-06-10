@@ -76,15 +76,49 @@ namespace OptionA.Blazor.Components
             }
         }
 
+        private void MouseEnter()
+        {
+            if (Provider.OpenGroupOnMouseOver())
+            {
+                _open = true;
+                StateHasChanged();
+            }
+
+        }
+
+        private void MouseLeave()
+        {
+            if (Provider.OpenGroupOnMouseOver())
+            {
+                if (Provider.CloseGroupAfterMilisecondDelay() > 0)
+                {
+                    var timer = new Timer(Elapsed, null, Provider.CloseGroupAfterMilisecondDelay(), Timeout.Infinite);
+                }
+                else
+                {
+                    _open = false;
+                    StateHasChanged();
+                }
+            }
+        }
+
+        private void Elapsed(object? state)
+        {
+            _open = false;
+            StateHasChanged();
+        }
+
         private void Toggle()
         {
+            if (!_open && Provider.OpenGroupOnMouseOver())
+            {
+                return;
+            }
+
             _open = !_open;
         }
 
         private string GetClasses() => $"{Provider.GetMenuItemClass()} {AdditionalClasses}".Trim();
         private string GetLinkClasses() => $"{Provider.GetGroupClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
-        private string GetOrientation() => MenuOrientation == Orientation.Horizontal
-            ? "opta-dropdown-horizontal"
-            : "opta-dropdown-vertical";
     }
 }

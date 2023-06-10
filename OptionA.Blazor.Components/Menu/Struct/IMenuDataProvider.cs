@@ -40,5 +40,15 @@
         /// </summary>
         /// <returns></returns>
         string GetMenuContainerClass();
+        /// <summary>
+        /// True if the menugroup should also open on a mouse over, instead of just on a click
+        /// </summary>
+        /// <returns></returns>
+        bool OpenGroupOnMouseOver();
+        /// <summary>
+        /// If set and <see cref="OpenGroupOnMouseOver"/> returns true, will wait the set time before closing (for doing animations and stuff)
+        /// </summary>
+        /// <returns></returns>
+        int CloseGroupAfterMilisecondDelay();
     }
 }

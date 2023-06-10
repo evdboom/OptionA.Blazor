@@ -21,7 +21,8 @@ namespace OptionA.Blazor.Components
             return services
                 .AddOptionAButtons(options.ButtonConfiguration)
                 .AddOptionAMenu(options.MenuConfiguration)
-                .AddOptionACarousel(options.CarouselConfiguration);
+                .AddOptionACarousel(options.CarouselConfiguration)
+                .AddOptionAResponsive(options.ResponsiveConfiguration);
         }
 
         /// <summary>
@@ -39,7 +40,8 @@ namespace OptionA.Blazor.Components
             return services
                 .AddOptionABootstrapButtons(options.ButtonConfiguration)
                 .AddOptionABootstrapMenu(darkMode, options.MenuConfiguration)
-                .AddOptionABootstrapCarousel(options.CarouselConfiguration);
+                .AddOptionABootstrapCarousel(options.CarouselConfiguration)
+                .AddOptionABootstrapResponsive(options.ResponsiveConfiguration);
         }
 
 
