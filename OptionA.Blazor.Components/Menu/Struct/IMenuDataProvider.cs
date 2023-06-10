@@ -49,6 +49,6 @@
         /// If set and <see cref="OpenGroupOnMouseOver"/> returns true, will wait the set time before closing (for doing animations and stuff)
         /// </summary>
         /// <returns></returns>
-        int CloseGroupAfterMilisecondDelay();
+        int CloseGroupAfterMillisecondDelay();
     }
 }

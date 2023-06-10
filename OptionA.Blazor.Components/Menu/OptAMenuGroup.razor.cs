@@ -90,9 +90,9 @@ namespace OptionA.Blazor.Components
         {
             if (Provider.OpenGroupOnMouseOver())
             {
-                if (Provider.CloseGroupAfterMilisecondDelay() > 0)
+                if (Provider.CloseGroupAfterMillisecondDelay() > 0)
                 {
-                    var timer = new Timer(Elapsed, null, Provider.CloseGroupAfterMilisecondDelay(), Timeout.Infinite);
+                    var timer = new Timer(Elapsed, null, Provider.CloseGroupAfterMillisecondDelay(), Timeout.Infinite);
                 }
                 else
                 {
