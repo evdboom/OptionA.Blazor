@@ -29,5 +29,10 @@
         /// </summary>
         /// <returns></returns>
         Task Initialize();
+        /// <summary>
+        /// Returns all dimensions valid for the current width
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<string> ValidDimensions();
     }
 }

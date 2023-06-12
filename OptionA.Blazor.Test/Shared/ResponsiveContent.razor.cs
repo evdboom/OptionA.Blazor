@@ -10,5 +10,7 @@ namespace OptionA.Blazor.Test.Shared
         public NamedDimension? Dimension { get; set; }
         [CascadingParameter(Name = OptAResponsive.DimensionNameParameterName)]
         public string? DimensionName { get; set; }
+        [CascadingParameter(Name = OptAResponsive.ValidDimensionsParamterName)]
+        public IEnumerable<string>? ValidDimensions { get; set; }
     }
 }

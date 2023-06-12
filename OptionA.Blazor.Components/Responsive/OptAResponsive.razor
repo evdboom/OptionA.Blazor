@@ -3,6 +3,9 @@
                 Value="@_dimension">
     <CascadingValue Name="@DimensionNameParameterName"
                     Value="@_dimensionName">
-        @ChildContent
+        <CascadingValue Name="@ValidDimensionsParamterName"
+                       Value="@_validDimensions">
+            @ChildContent
+        </CascadingValue>
     </CascadingValue>
 </CascadingValue>

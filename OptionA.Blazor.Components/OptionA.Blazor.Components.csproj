@@ -6,7 +6,7 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Version>7.2.6</Version>
+	  <Version>7.2.7</Version>
 	  <IsPackable>true</IsPackable>
 	  <Authors>Erik van der Boom</Authors>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
@@ -27,6 +27,7 @@
 		  7.2.4 typo
 		  7.2.5 change group to css visibility, add support for delay close for animations
 		  7.2.6 change responsive awaiter
+		  7.2.7 added valid dimensions enumerable to responsive
 	  </PackageReleaseNotes>
   </PropertyGroup>
 

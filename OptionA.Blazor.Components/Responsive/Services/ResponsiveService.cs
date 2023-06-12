@@ -35,6 +35,13 @@ namespace OptionA.Blazor.Components.Services
               "import", "./_content/OptionA.Blazor.Components/Responsive/OptAResponsive.razor.js").AsTask());
         }
 
+        public IEnumerable<string> ValidDimensions()
+        {
+            return _sizesByName
+                .Where(size => CurrentWidthEnoughForDimension(size.Key))
+                .Select(size => size.Key);
+        }
+
         /// <inheritdoc/>
         public bool CurrentWidthEnoughForDimension(string targetDimension)
         {

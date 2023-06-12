@@ -3,4 +3,11 @@
     <div>@Dimension?.Name</div>
     <div>@Dimension?.Width</div>
     <div>@Dimension?.Height</div>
+    @if (ValidDimensions != null)
+    {
+        @foreach(var dimension in ValidDimensions)
+        {
+            <div>@dimension</div>
+        }
+    }
 </div>
