@@ -71,8 +71,8 @@ namespace OptionA.Blazor.Components.Services
 
             _initialized = true;
             var objRef = DotNetObjectReference.Create(this);
-            var module = await _moduleTask.Value.ConfigureAwait(false);
-            var dimension = await module.InvokeAsync<Dimension>(GetDimensionFunction).ConfigureAwait(false);
+            var module = await _moduleTask.Value;
+            var dimension = await module.InvokeAsync<Dimension>(GetDimensionFunction);
             var dimensionName = GetDimensionName(dimension.Width);
             _currentDimension = new NamedDimension
             {
@@ -81,7 +81,7 @@ namespace OptionA.Blazor.Components.Services
                 Width = dimension.Width
             };
 
-            await module.InvokeVoidAsync(RegisterHandlerFunction, objRef, nameof(WindowSizeChanged)).ConfigureAwait(false);
+            await module.InvokeVoidAsync(RegisterHandlerFunction, objRef, nameof(WindowSizeChanged));
         }
 
         /// <summary>

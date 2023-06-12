@@ -46,8 +46,7 @@
         /// <returns></returns>
         bool OpenGroupOnMouseOver();
         /// <summary>
-        /// If set and <see cref="OpenGroupOnMouseOver"/> returns true, will wait the set time before opening closing (for doing animations and stuff)
-        /// the group will have the opening and closing attribute during the respective stages
+        /// If set and <see cref="OpenGroupOnMouseOver"/> returns true, will wait the set time before closing (for doing animations and stuff)
         /// </summary>
         /// <returns></returns>
         int GroupCloseTime();
