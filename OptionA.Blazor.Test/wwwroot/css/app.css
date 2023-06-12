@@ -39,15 +39,26 @@ a, .btn-link {
 }
 
 .carousel-image {
-    background-color: rgba(0,0,0,.4);
-    border-radius: 1em;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 15%;
+    text-align: center;
     padding: 1em;
-    margin: 1em;
+    border-radius: 1em;
+    background-color: rgba(255,255,255,.5);
+}
+
+.opta-carousel-slide {
+    background-color: green;
 }
 
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 .content {

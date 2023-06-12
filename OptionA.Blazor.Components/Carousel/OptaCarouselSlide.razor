@@ -1,6 +1,6 @@
 ﻿@namespace OptionA.Blazor.Components
 
-<li class="opta-carousel-slide @AdditionalClasses" active="@IsCurrent" previous="@IsPrevious" next="@IsNext" was-next="@WasNext" >
+<li class="opta-carousel-slide @AdditionalClasses" active="@IsCurrent" previous="@IsPrevious" next="@IsNext" was-next="@WasNext" style="@GetMinimumHeigth()">
     @if (!string.IsNullOrEmpty(ImageUrl))
     {
         <img src="@ImageUrl" alt="@ImageText" title="@ImageText" class="opta-carousel-image" />

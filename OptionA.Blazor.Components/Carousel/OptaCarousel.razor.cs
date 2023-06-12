@@ -136,6 +136,11 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public RenderFragment? PreviousContent { get; set; }
+        /// <summary>
+        /// Minimum heigth (in px) for the carousel for better support on smaller devices
+        /// </summary>
+        [Parameter]
+        public int? MinimumHeight { get; set; }
 
         /// <summary>
         /// Register a child to include in slides

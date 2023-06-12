@@ -31,7 +31,9 @@
 
 .opta-carousel-image {
     width: 100%;
-    z-index: -1;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .opta-carousel-content {

@@ -76,6 +76,13 @@ namespace OptionA.Blazor.Components
             }
         }
 
+        private string? GetMinimumHeigth()
+        {
+            return Parent?.MinimumHeight.HasValue ?? false
+                ? $"min-height:{Parent.MinimumHeight.Value}px;"
+                : null;
+        }
+
         private string GetStatusClass()
         {
             if (IsCurrent)
