@@ -35,6 +35,7 @@ namespace OptionA.Blazor.Components.Services
               "import", "./_content/OptionA.Blazor.Components/Responsive/OptAResponsive.razor.js").AsTask());
         }
 
+        /// <inheritdoc/>
         public IEnumerable<string> ValidDimensions()
         {
             return _sizesByName

@@ -16,6 +16,7 @@ namespace OptionA.Blazor.Components
         private bool _closing;
         private bool _parametersChanged;
         private int _scrollHeight;
+        private bool _openFromMouse;
 
         private ElementReference _dropDown;
         private Lazy<Task<IJSObjectReference>>? _moduleTask;
@@ -113,6 +114,7 @@ namespace OptionA.Blazor.Components
         {
             if (Provider.OpenGroupOnMouseOver())
             {
+                _openFromMouse = true;
                 _open = true;
                 StateHasChanged();
             }
@@ -128,6 +130,7 @@ namespace OptionA.Blazor.Components
                     var timer = new Timer(Elapsed, null, Provider.GroupCloseTime(), Timeout.Infinite);
                 }
 
+                _openFromMouse = false;
                 _open = false;
                 StateHasChanged();
             }
@@ -141,18 +144,13 @@ namespace OptionA.Blazor.Components
 
         private void Toggle()
         {
-            if (!_open && Provider.OpenGroupOnMouseOver())
-            {
-                return;
-            }
-
             if (_open && Provider.GroupCloseTime() > 0)
             {
                 _closing = true;
                 var timer = new Timer(Elapsed, null, Provider.GroupCloseTime(), Timeout.Infinite);
             }
 
-            _open = !_open;
+            _open = _openFromMouse || !_open;
             StateHasChanged();
         }
 

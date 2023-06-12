@@ -34,7 +34,7 @@
         /// </summary>
         public string? DefaultMenuContainerClass { get; set; }
         /// <summary>
-        /// True if the menu group should open on a mouse over instead of a click.
+        /// True if the menu group should open on a mouse over and a click.
         /// </summary>
         public bool? OpenGroupOnMouseOver { get; set; }
         /// <summary>
