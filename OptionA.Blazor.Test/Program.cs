@@ -18,7 +18,7 @@ builder.Services
         options.MenuConfiguration = (menu) =>
         {
             menu.OpenGroupOnMouseOver = true;
-            menu.CloseGroupAfterMillisecondDelay = 1000;
+            menu.GroupCloseTime = 250;
         };
     });
 await builder.Build().RunAsync();

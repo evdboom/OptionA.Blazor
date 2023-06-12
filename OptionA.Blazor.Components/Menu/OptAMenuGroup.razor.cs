@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.JSInterop;
 
 namespace OptionA.Blazor.Components
 {
@@ -8,9 +9,19 @@ namespace OptionA.Blazor.Components
     /// </summary>
     public partial class OptAMenuGroup
     {
+        private const string GetScrollHeigth = "getScrollHeight";
+
         private bool _open;
         private bool _isActive;
+        private bool _closing;
+        private bool _parametersChanged;
+        private int _scrollHeight;
 
+        private ElementReference _dropDown;
+        private Lazy<Task<IJSObjectReference>>? _moduleTask;
+
+        [Inject]
+        private IJSRuntime JsRuntime { get; set; } = null!;
         [Inject]
         private IMenuDataProvider Provider { get; set; } = null!;
         [Inject]
@@ -48,13 +59,32 @@ namespace OptionA.Blazor.Components
 
         /// <summary>
         /// Check for active
+        /// <inheritdoc/>
         /// </summary>
         protected override void OnParametersSet()
         {
+            _parametersChanged = true;
             if (!string.IsNullOrEmpty(ActiveRoute))
             {
                 var location = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
                 _isActive = $"/{location}".StartsWith(ActiveRoute, StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender || _parametersChanged)
+            {
+                _parametersChanged = false;
+                var module = await _moduleTask!.Value;
+                var newScrollHeight = await module.InvokeAsync<int>(GetScrollHeigth, _dropDown);
+
+                if (newScrollHeight != _scrollHeight)
+                {
+                    _scrollHeight = newScrollHeight;
+                    StateHasChanged();
+                }                
             }
         }
 
@@ -64,6 +94,9 @@ namespace OptionA.Blazor.Components
         protected override void OnInitialized()
         {
             NavigationManager.LocationChanged += NavigationManager_LocationChanged;
+            _moduleTask = new(() => JsRuntime.InvokeAsync<IJSObjectReference>(
+                "import",
+                "./_content/OptionA.Blazor.Components/Menu/OptAMenuGroup.razor.js").AsTask());
         }
 
         private void NavigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
@@ -83,28 +116,26 @@ namespace OptionA.Blazor.Components
                 _open = true;
                 StateHasChanged();
             }
-
         }
 
         private void MouseLeave()
         {
             if (Provider.OpenGroupOnMouseOver())
             {
-                if (Provider.CloseGroupAfterMillisecondDelay() > 0)
+                if (Provider.GroupCloseTime() > 0)
                 {
-                    var timer = new Timer(Elapsed, null, Provider.CloseGroupAfterMillisecondDelay(), Timeout.Infinite);
+                    _closing = true;
+                    var timer = new Timer(Elapsed, null, Provider.GroupCloseTime(), Timeout.Infinite);
                 }
-                else
-                {
-                    _open = false;
-                    StateHasChanged();
-                }
+
+                _open = false;
+                StateHasChanged();
             }
         }
 
         private void Elapsed(object? state)
         {
-            _open = false;
+            _closing = false;
             StateHasChanged();
         }
 
@@ -115,7 +146,14 @@ namespace OptionA.Blazor.Components
                 return;
             }
 
+            if (_open && Provider.GroupCloseTime() > 0)
+            {
+                _closing = true;
+                var timer = new Timer(Elapsed, null, Provider.GroupCloseTime(), Timeout.Infinite);
+            }
+
             _open = !_open;
+            StateHasChanged();
         }
 
         private string GetClasses() => $"{Provider.GetMenuItemClass()} {AdditionalClasses}".Trim();

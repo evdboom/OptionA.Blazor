@@ -27,7 +27,15 @@ a, .btn-link {
 }
 
 .opta-dropdown {
+    --opta-menu-dropdown-size: 0px;
     background-color: blue;
+    overflow: hidden;
+    height: 0;
+    transition: height 250ms ease-in-out;
+}
+
+.opta-menu-group[open] .opta-dropdown {
+    height: var(--opta-menu-dropdown-size);
 }
 
 .carousel-image {

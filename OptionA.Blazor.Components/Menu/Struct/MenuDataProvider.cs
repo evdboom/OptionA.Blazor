@@ -41,7 +41,7 @@
         public bool OpenGroupOnMouseOver() => _options.OpenGroupOnMouseOver ?? false;
 
         /// <inheritdoc/>
-        public int CloseGroupAfterMillisecondDelay() => _options.CloseGroupAfterMillisecondDelay ?? 0;
+        public int GroupCloseTime() => _options.GroupCloseTime ?? 0;
 
 
     }
