@@ -6,7 +6,7 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Version>7.2.9</Version>
+	  <Version>7.2.10</Version>
 	  <IsPackable>true</IsPackable>
 	  <Authors>Erik van der Boom</Authors>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
@@ -30,6 +30,7 @@
 		  7.2.7 added valid dimensions enumerable to responsive
 		  7.2.8 keep click even on mouseover (for mobile)
 		  7.2.9 added minheight to carousel for mobile
+		  7.2.10 fix for dropdown on firefox
 	  </PackageReleaseNotes>
   </PropertyGroup>
 
