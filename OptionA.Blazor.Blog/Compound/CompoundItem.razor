@@ -1,0 +1,40 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null)
+{
+    @switch (Content.Type)
+    {
+        case ComponentType.Block:
+            <Block Content="(BlockContent)Content" />
+            break;
+        case ComponentType.Header:
+            <Header Content="(HeaderContent)Content" />
+            break;
+        case ComponentType.Link:
+            <Link Content="(LinkContent)Content" />
+            break;
+        case ComponentType.Date:
+            <Date Content="(DateContent)Content" /> 
+            break;
+        case ComponentType.Code:
+            <Code Content="(CodeContent)Content" />
+            break;
+        case ComponentType.Table:
+            <Table Content="(TableContent)Content" />
+            break;
+        case ComponentType.Image:
+            <Image Content="(ImageContent)Content" />
+            break;
+        case ComponentType.List:
+            <List Content="(ListContent)Content" />
+            break;
+        case ComponentType.Line:
+            <Line Content="(LineContent)Content" />
+            break;
+        case ComponentType.Icon:
+            <Icon Content="(IconContent)Content" />
+            break;
+        case ComponentType.Custom:
+            <Custom Content="(CustomContent)Content" />
+            break;
+    }
+}

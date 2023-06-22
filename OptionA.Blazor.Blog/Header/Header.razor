@@ -1,0 +1,61 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null)
+{
+    @switch (Content.HeaderSize)
+    {
+        case HeaderSize.One:
+            <h1 class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
+                <HeaderContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }
+            </h1>
+            break;
+        case HeaderSize.Two:
+            <h2 class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
+                <HeaderContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }    
+            </h2>
+            break;
+        case HeaderSize.Three:
+            <h3 class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
+                <HeaderContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }               
+            </h3>
+            break;
+        case HeaderSize.Four:
+            <h4 class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
+                <HeaderContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }    
+            </h4>
+            break;
+        case HeaderSize.Five:
+            <h5 class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
+                <HeaderContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }    
+            </h5>
+            break;
+        case HeaderSize.Six:
+            <h6 class="@Content.GetClasses()" @attributes=Content.Attributes @onclick=Click>
+                <HeaderContents Content="Content" />
+                @if (ChildContent is not null)
+                {
+                    @ChildContent
+                }    
+            </h6>
+            break;
+    }
+}
