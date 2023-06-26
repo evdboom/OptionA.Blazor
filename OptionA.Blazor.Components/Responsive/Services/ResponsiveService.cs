@@ -36,6 +36,12 @@ namespace OptionA.Blazor.Components.Services
         }
 
         /// <inheritdoc/>
+        public IEnumerable<(string Name, int Width)> GetAllDimensionBreakPoints()
+        {
+            return _sizes.Select(size => (Name: size.Value, Width: size.Key));                
+        }
+
+        /// <inheritdoc/>
         public IEnumerable<string> ValidDimensions()
         {
             return _sizesByName

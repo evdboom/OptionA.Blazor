@@ -4,8 +4,11 @@
     <CascadingValue Name="@DimensionNameParameterName"
                     Value="@_dimensionName">
         <CascadingValue Name="@ValidDimensionsParameterName"
-                       Value="@_validDimensions">
-            @ChildContent
+                        Value="@_validDimensions">
+            <CascadingValue Name="@AllDimensionBreakPointsParameterName"
+                            Value="@_breakPoints">
+                @ChildContent
+            </CascadingValue>
         </CascadingValue>
     </CascadingValue>
 </CascadingValue>

@@ -10,4 +10,11 @@
             <div>@dimension</div>
         }
     }
+    @if (BreakPoints != null)
+    {
+        @foreach(var breakPoint in BreakPoints)
+        {
+            <div>@breakPoint.Name @breakPoint.Width</div>
+        }
+    }
 </div>

@@ -34,5 +34,10 @@
         /// </summary>
         /// <returns></returns>
         IEnumerable<string> ValidDimensions();
+        /// <summary>
+        /// Returns all dimension break points known for this responsive service
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<(string Name, int Width)> GetAllDimensionBreakPoints();
     }
 }

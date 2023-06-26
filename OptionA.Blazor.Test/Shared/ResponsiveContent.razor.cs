@@ -11,5 +11,7 @@ namespace OptionA.Blazor.Test.Shared
         public string? DimensionName { get; set; }
         [CascadingParameter(Name = OptAResponsive.ValidDimensionsParameterName)]
         public IEnumerable<string>? ValidDimensions { get; set; }
+        [CascadingParameter(Name = OptAResponsive.AllDimensionBreakPointsParameterName)]
+        public IEnumerable<(string Name, int Width)>? BreakPoints { get; set; }
     }
 }

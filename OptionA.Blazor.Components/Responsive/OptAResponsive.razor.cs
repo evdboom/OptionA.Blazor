@@ -16,9 +16,13 @@ namespace OptionA.Blazor.Components
         /// </summary>
         public const string DimensionNameParameterName = "DimensionName";
         /// <summary>
-        /// Name of the cascading parameters for all the valid dimensions
+        /// Name of the cascading parameter for all the valid dimensions
         /// </summary>
         public const string ValidDimensionsParameterName = "ValidDimensions";
+        /// <summary>
+        /// Name of the cascading parameter for all the breakpoints dimensions
+        /// </summary>
+        public const string AllDimensionBreakPointsParameterName = "AllDimensionBreakPoints";
 
         [Inject]
         private IResponsiveService ResponsiveService { get; set; } = null!;
@@ -30,6 +34,7 @@ namespace OptionA.Blazor.Components
 
         private NamedDimension _dimension;
         private string _dimensionName = string.Empty;
+        private IEnumerable<(string Name, int Width)> _breakPoints = Enumerable.Empty<(string, int)>();
         private IEnumerable<string> _validDimensions = Enumerable.Empty<string>();
 
         /// <inheritdoc />
@@ -39,6 +44,9 @@ namespace OptionA.Blazor.Components
             _dimension = ResponsiveService.GetWindowSize();
             _validDimensions = ResponsiveService
                 .ValidDimensions()
+                .ToList();
+            _breakPoints = ResponsiveService
+                .GetAllDimensionBreakPoints()
                 .ToList();
             ResponsiveService.OnWindowSizeChanged += WindowSizeChanged;
             ResponsiveService.OnDimensionChanged += DimensionChanged;
