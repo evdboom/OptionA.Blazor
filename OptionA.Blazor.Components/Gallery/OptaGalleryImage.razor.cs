@@ -43,6 +43,11 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public int ImageNumber { get; set; }
         /// <summary>
+        /// Optional content for display below the image
+        /// </summary>
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+        /// <summary>
         /// Gets or sets if this is the current slide, call <see cref="Update"/> after changes to rerender
         /// </summary>
         public bool IsCurrent { get; set; }
