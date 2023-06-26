@@ -144,32 +144,11 @@ namespace OptionA.Blazor.Components
             _selectedIndex = null;
             var current = _children
                 .FirstOrDefault(child => child.Child.IsCurrent);
-            var next = _children
-                .FirstOrDefault(child => child.Child.IsNext);
-            var previous = _children
-                .FirstOrDefault(child => child.Child.IsPrevious);
-            var wasNext = _children
-                .FirstOrDefault(child => child.Child.WasNext);
 
             if (current.Child != null)
             {
                 current.Child.IsCurrent = false;
                 current.Child.Update();
-            }
-            if (next.Child != null)
-            {
-                next.Child.IsNext = false;
-                next.Child.Update();
-            }
-            if (previous.Child != null)
-            {
-                previous.Child.IsPrevious = false;
-                previous.Child.Update();
-            }
-            if (wasNext.Child != null)
-            {
-                wasNext.Child.WasNext = false;
-                wasNext.Child.Update();
             }
 
             StateHasChanged();
@@ -190,64 +169,15 @@ namespace OptionA.Blazor.Components
                 return;
             }
 
-            if (_children.Count == 2)
-            {
-                Flip();
-                return;
-            }
-            var oldWasNext = _children
-                .FirstOrDefault(child => child.Child.WasNext)
-                .Child;
-            if (oldWasNext != null)
-            {
-                oldWasNext.WasNext = false;
-            }
-
-            var next = _children.Any(child => child.Child.IsNext)
-                ? _children
-                    .FirstOrDefault(child => child.Child.IsNext)
-                    .Child
-                : null;
-            var previous = _children.Any(child => child.Child.IsPrevious)
-                ? _children
-                    .FirstOrDefault(child => child.Child.IsPrevious)
-                    .Child
-                : null;
             if (current.Child != null)
             {
                 current.Child.IsCurrent = false;
             }
-            
-            if (next != null) 
-            {
-                next.IsNext = false;
-                next.WasNext = true;
-            }            
-            if (previous != null)
-            {
-                previous.IsPrevious = false;
-            }
-
-
-            var newCurrent = _children[index].Child;
-            var newNext = index < _children.Count - 1
-                ? _children[index + 1].Child
-                : _children[0].Child;
-            var newPrevious = index > 0
-                ? _children[index - 1].Child
-                : _children.Last().Child;
-
+           
+            var newCurrent = _children[index].Child;            
             newCurrent.IsCurrent = true;
-            newNext.IsNext = true;
-            newPrevious.IsPrevious = true;
-
-            current.Child?.Update();
-            next?.Update();            
-            previous?.Update();            
-            oldWasNext?.Update();            
+            current.Child?.Update();           
             newCurrent.Update();
-            newNext.Update();
-            newPrevious.Update();  
             
             _selectedIndex = index;
             StateHasChanged();
@@ -255,135 +185,33 @@ namespace OptionA.Blazor.Components
 
         private void SelectNext()
         {
-            if (_children.Count < 2)
+            if (!_children.Any(child => child.Child.IsCurrent))
             {
                 return;
-            }
-            else if (_children.Count == 2)
-            {
-                Flip();
-            }
-
-            var oldWasNext = _children
-                .FirstOrDefault(child => child.Child.WasNext)
-                .Child;
-            if (oldWasNext != null)
-            {
-                oldWasNext.WasNext = false;
             }
 
             var current = _children
                 .First(child => child.Child.IsCurrent);
-
-            current.Child.IsPrevious = true;
-            current.Child.IsCurrent = false;
-
-            var oldPrevious = current.Index > 0
-                ? _children[current.Index - 1]
-                : _children.Last();
-            oldPrevious.Child.IsPrevious = false;
-
-            var newCurrent = current.Index < _children.Count - 1
-                ? _children[current.Index + 1]
-                : _children[0];
-            newCurrent.Child.IsCurrent = true;
-            newCurrent.Child.IsNext = false;
-
-            var newNext = newCurrent.Index < _children.Count - 1
-                ? _children[newCurrent.Index + 1]
-                : _children[0];
-            newNext.Child.IsNext = true;
-
-            oldPrevious.Child.Update();
-            current.Child.Update();
-            newCurrent.Child.Update();
-            newNext.Child.Update();
-
-            _selectedIndex = newCurrent.Index;
-            StateHasChanged();
+            var newIndex = current.Index < _children.Count - 1
+                ? current.Index + 1
+                : 0;
+            SelectIndex(newIndex);          
         }
 
         private void SelectPrevious()
         {
-            if (_children.Count < 2)
+            if (!_children.Any(child => child.Child.IsCurrent))
             {
                 return;
             }
-            else if (_children.Count == 2)
-            {
-                Flip();
-            }
 
-            var oldWasNext = _children
-                .FirstOrDefault(child => child.Child.WasNext)
-                .Child;
-            if (oldWasNext != null)
-            {
-                oldWasNext.WasNext = false;
-            }
-
-            var indexedList = _children
-                .OrderByDescending(child => child.Index)
-                .Select((child, index) => (Index: index, child.Child, OriginalIndex: child.Index))
-                .ToList();
-
-            var current = indexedList
+            var current = _children
                 .First(child => child.Child.IsCurrent);
+            var newIndex = current.Index > 0
+                ? current.Index - 1
+                : _children.Max(child => child.Index);
 
-            current.Child.IsNext = true;
-            current.Child.IsCurrent = false;
-
-            var oldnext = current.Index > 0
-                ? indexedList[current.Index - 1]
-                : indexedList.Last();
-            oldnext.Child.IsNext = false;
-            oldnext.Child.WasNext = true;
-
-            var newCurrent = current.Index < indexedList.Count - 1
-                ? indexedList[current.Index + 1]
-                : indexedList[0];
-            newCurrent.Child.IsCurrent = true;
-            newCurrent.Child.IsPrevious = false;
-
-            var newPrevious = newCurrent.Index < indexedList.Count - 1
-                ? indexedList[newCurrent.Index + 1]
-                : indexedList[0];
-            newPrevious.Child.IsPrevious = true;
-
-            oldnext.Child.Update();
-            current.Child.Update();
-            newCurrent.Child.Update();
-            newPrevious.Child.Update();
-
-            _selectedIndex = newCurrent.OriginalIndex;
-            StateHasChanged();
-        }
-
-        private void Flip()
-        {
-            var first = _children.First().Child;
-            var last = _children.Last().Child;
-
-            if (!first.IsCurrent)
-            {
-                first.IsCurrent = true;
-                first.IsNext = false;
-                last.IsCurrent = false;
-                last.IsNext = true;
-                _selectedIndex = 0;
-            }
-            else
-            {
-                first.IsCurrent = false;
-                first.IsNext = true;
-                last.IsCurrent = true;
-                last.IsNext = false;
-                _selectedIndex = 1;
-            }
-
-            first.Update();
-            last.Update();
-            StateHasChanged();
+            SelectIndex(newIndex);
         }
     }
 }

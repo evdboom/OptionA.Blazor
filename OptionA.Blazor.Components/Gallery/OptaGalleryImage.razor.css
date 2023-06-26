@@ -8,25 +8,9 @@
     position: relative;
 }
 
-.opta-gallery-slide[next] {
-    display: block;
-    order: 2;
-}
-
 .opta-gallery-slide[active] {
     display: block;
-    order: 1;
-    transition: margin-left 1s ease-in-out;
-}
-
-.opta-gallery-slide[previous] {
-    display: block;
     order: 0;
-    margin-left: -100%;
-}
-
-.opta-gallery-slide[previous]:not([was-next]) {
-    transition: margin-left 1s ease-in-out;
 }
 
 .opta-gallery-image {

@@ -43,21 +43,9 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public int ImageNumber { get; set; }
         /// <summary>
-        /// Gets or sets if this is the previous slide, call <see cref="Update"/> after changes to rerender
-        /// </summary>
-        public bool IsPrevious { get; set; }
-        /// <summary>
         /// Gets or sets if this is the current slide, call <see cref="Update"/> after changes to rerender
         /// </summary>
         public bool IsCurrent { get; set; }
-        /// <summary>
-        /// Gets or sets if this is the next slide, call <see cref="Update"/> after changes to rerender
-        /// </summary>
-        public bool IsNext { get; set; }
-        /// <summary>
-        /// Gets or sets if this was a next slide in the previous iteration, call <see cref="Update"/> after changes to rerender
-        /// </summary>
-        public bool WasNext { get; set; }
         /// <summary>
         /// Tells the component its state has changes (use after changing the status boolean)
         /// </summary>

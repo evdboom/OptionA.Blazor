@@ -2,6 +2,9 @@
 
 namespace OptionA.Blazor.Components.Gallery
 {
+    /// <summary>
+    /// Wrapper for gallery in modal mode
+    /// </summary>
     public partial class OptaGalleryModal
     {
         [Inject]

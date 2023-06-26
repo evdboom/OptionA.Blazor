@@ -6,7 +6,7 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Version>7.2.13</Version>
+	  <Version>7.2.14</Version>
 	  <IsPackable>true</IsPackable>
 	  <Authors>Erik van der Boom</Authors>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
@@ -34,6 +34,7 @@
 		  7.2.11 Update packages
 		  7.2.12 Added Gallery
 		  7.2.13 fix for switching gallery modes
+		  7.2.14 simplified gallery
 	  </PackageReleaseNotes>
   </PropertyGroup>
 
