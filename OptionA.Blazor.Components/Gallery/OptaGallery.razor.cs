@@ -9,6 +9,7 @@ namespace OptionA.Blazor.Components
     {
         private List<(int Index, OptaGalleryImage Child)> _children = new();
         private int? _selectedIndex;
+        private GalleryMode _oldMode;
                 
         [Inject]
         private IGallerylDataProvider Provider { get; set; } = null!;
@@ -112,13 +113,13 @@ namespace OptionA.Blazor.Components
         /// <summary>
         /// Register a child to include in slides
         /// </summary>
-        /// <param name="child"></param>
-        public void RegisterChild(OptaGalleryImage child)
+        /// <param name="newChild"></param>
+        public void RegisterChild(OptaGalleryImage newChild)
         {
             var current = _children
                 .Select(child => child.Child)
                 .ToList();
-            current.Add(child);
+            current.Add(newChild);
             _children = current
                 .OrderBy(child => child.ImageNumber)
                 .Select((child, index) => (index, child))
@@ -126,6 +127,18 @@ namespace OptionA.Blazor.Components
             StateHasChanged();
         }
 
+        /// <inheritdoc/>
+        protected override void OnParametersSet()
+        {
+            if (Mode != _oldMode)
+            {
+                _children.Clear();
+                _oldMode = Mode;
+                Deselect();
+            }
+        }
+
+        /// <inheritdoc />
         private void Deselect()
         {
             _selectedIndex = null;

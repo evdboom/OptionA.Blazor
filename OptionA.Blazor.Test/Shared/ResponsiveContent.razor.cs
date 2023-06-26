@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 using OptionA.Blazor.Components;
-using System.Xml.Linq;
 
 namespace OptionA.Blazor.Test.Shared
 {
@@ -10,7 +9,7 @@ namespace OptionA.Blazor.Test.Shared
         public NamedDimension? Dimension { get; set; }
         [CascadingParameter(Name = OptAResponsive.DimensionNameParameterName)]
         public string? DimensionName { get; set; }
-        [CascadingParameter(Name = OptAResponsive.ValidDimensionsParamterName)]
+        [CascadingParameter(Name = OptAResponsive.ValidDimensionsParameterName)]
         public IEnumerable<string>? ValidDimensions { get; set; }
     }
 }

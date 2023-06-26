@@ -18,7 +18,7 @@ namespace OptionA.Blazor.Components
         /// <summary>
         /// Name of the cascading parameters for all the valid dimensions
         /// </summary>
-        public const string ValidDimensionsParamterName = "ValidDimensions";
+        public const string ValidDimensionsParameterName = "ValidDimensions";
 
         [Inject]
         private IResponsiveService ResponsiveService { get; set; } = null!;

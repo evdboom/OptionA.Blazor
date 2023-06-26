@@ -1,0 +1,18 @@
+﻿@page "/gallery-switch"
+<button @onclick="() => Switch()">Click me!</button>
+<OptaGallery MaxThumbnailContainerHeight="50vh"
+             ShowTitleOnThumbnail="true"
+             Mode="@_mode"
+             ThumbnailsPerRow="4"
+             ThumbnailsPerRowMargin="10"
+             MaxModalWidth="500px">
+    <Images>
+        @for (int i = 1; i <= 10; i++)
+        {
+            <OptaGalleryImage ImageNumber="@i"
+                              ImageText="@i.ToString()"
+                              ImageThumbnailUrl="@GetUrl(i)"
+                              ImageUrl="@GetUrl(i)" />
+        }
+    </Images>
+</OptaGallery>
