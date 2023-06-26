@@ -26,6 +26,6 @@ jobs:
       run: dotnet test --verbosity normal
     - name: publish
       run: |
-        foreach($file in (Get-ChildItem -Recurse -Include *.nupkg)) {
+        foreach($file in (Get-ChildItem -Recurse -Include *.nupkg | Where { $_.FullName -like '*Release*' })) {
             dotnet nuget push $file --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
         }             

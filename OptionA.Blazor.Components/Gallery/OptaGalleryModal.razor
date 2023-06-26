@@ -1,0 +1,12 @@
+﻿<div class="opta-modal-wrapper @Provider.ModalWrapperClasses()" show="@Show" @onclick="async () => await Close()">
+    <div class="opta-gallery-modal @Provider.ModalClasses()" style="@GetStyle()" @onclick:stopPropagation>
+        <button class="opta-gallery-close @Provider.ModalCloseButtonClasses()" @onclick="async () => await Close()">@Provider.ModalCloseButtonText()</button>
+        @ChildContent
+    </div>
+</div>
+ @if (Show)
+{
+    <div class="opta-gallery-modal-background @Provider.ModalBackgroundClasses()" @onclick="async () => await Close()"></div>
+}
+
+

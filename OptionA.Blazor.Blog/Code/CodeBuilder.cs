@@ -9,7 +9,7 @@ namespace OptionA.Blazor.Blog
     public class CodeBuilder<Parent> : ContentBuilderBase<CodeBuilder<Parent>, Parent, CodeContent>
         where Parent : IParentBuilder
     {
-        private readonly Dictionary<CodeLanguage, IParser> _parsers;
+
 
         /// <summary>
         /// Default constructor
@@ -17,12 +17,6 @@ namespace OptionA.Blazor.Blog
         /// <param name="parent"></param>
         public CodeBuilder(Parent parent) : base(parent)
         {
-            _parsers = new Dictionary<CodeLanguage, IParser>()
-            {
-                { CodeLanguage.CSharp, new CSharpParser() },
-                { CodeLanguage.Html, new HtmlParser() }
-            };
-
             _style = Style.Inherit;
             _textAlignment = PositionType.Left;
             _blockType = BlockType.Paragraph;
@@ -37,11 +31,6 @@ namespace OptionA.Blazor.Blog
         public CodeBuilder<Parent> ForLanguage(CodeLanguage language)
         {
             _content.Language = language;
-
-            if (_parsers.TryGetValue(_content.Language, out IParser? parser))
-            {
-                _content.Parser = parser;
-            }
 
             return this;
         }

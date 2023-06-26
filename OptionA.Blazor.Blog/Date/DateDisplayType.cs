@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Way to display the date
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum DateDisplayType
     {
         /// <summary>

@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Strength for margin, padding etc
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Strength
     {
         /// <summary>

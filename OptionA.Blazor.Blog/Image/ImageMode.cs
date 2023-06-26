@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Enum for the type of image, this determines the source
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ImageMode
     {
         /// <summary>

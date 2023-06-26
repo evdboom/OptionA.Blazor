@@ -1,0 +1,30 @@
+﻿@if (Parent != null)
+{
+    <div class="opta-gallery-images-container @AdditionalClasses @Provider.GetImageContainerClasses(Parent.Mode)">
+        <ol>
+            @Parent.Images
+        </ol>
+        @if (Parent.ShowNextPrevious)
+        {
+            @if (Parent.NextPreviousIsIcon)
+            {
+                <button class="@Parent.PreviousClasses @Provider.DefaultPreviousClasses()" @onclick="async () => await SelectPrevious()">
+                    <i class="@Parent.PreviousIconClasses @Provider.DefaultPreviousIconClasses()" />
+                </button>
+                <button class="@Parent.NextClasses @Provider.DefaultNextClasses()" @onclick="async () => await SelectNext()">
+                    <i class="@Parent.NextIconClasses @Provider.DefaultNextIconClasses()" />
+                </button>
+            }
+            else
+            {
+                <button class="@Parent.PreviousClasses @Provider.DefaultPreviousClasses()" @onclick="async () => await SelectPrevious()">
+                    @Parent.PreviousContent
+                </button>
+                <button class="@Parent.NextClasses @Provider.DefaultNextClasses()" @onclick="async () => await SelectNext()">
+                    @Parent.NextContent
+                </button>
+            }
+
+        }
+    </div>
+}

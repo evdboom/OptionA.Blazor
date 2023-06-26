@@ -1,0 +1,9 @@
+﻿@namespace OptionA.Blazor.Components
+
+<li class="opta-gallery-slide @AdditionalClasses @Provider.GetDefaultImageClasses()" active="@IsCurrent" previous="@IsPrevious" next="@IsNext" was-next="@WasNext">
+    @if (IsNext || IsPrevious || IsCurrent)
+    {
+        <div class="opta-gallery-image-title">@ImageText</div>
+        <img src="@ImageUrl" alt="@ImageText" title="@ImageText" class="opta-gallery-image" />        
+    }
+</li>

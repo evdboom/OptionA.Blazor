@@ -25,5 +25,9 @@ namespace OptionA.Blazor.Components
         /// Configuration for responsive components and service
         /// </summary>
         public Action<ResponsiveOptions>? ResponsiveConfiguration { get; set; }
+        /// <summary>
+        /// Configuration for gallery components.
+        /// </summary>
+        public Action<GalleryOptions>? GalleryConfiguration { get; set; }
     }
 }

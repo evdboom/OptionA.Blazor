@@ -1,10 +1,36 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// Content for the <see cref="List.List"/> component
+    /// Content for the <see cref="List"/> component
     /// </summary>
     public class ListContent : Content
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public ListContent() : base() { }
+        /// <summary>
+        /// Constructor for use in deserialization
+        /// </summary>
+        /// <param name="items"></param>
+        public ListContent(Dictionary<string, JsonElement> items) : base(items)
+        {
+            if (items.TryGetValue(nameof(ListStyle), out var style))
+            {
+                ListStyle = JsonSerializer.Deserialize<ListStyle>(style);
+            }
+            if (items.TryGetValue(nameof(Ordered), out var ordered))
+            {
+                Ordered = JsonSerializer.Deserialize<bool>(ordered);
+            }
+            if (items.TryGetValue(nameof(Start), out var start))
+            {
+                Start = JsonSerializer.Deserialize<int>(start);
+            }
+        }
+
         ///<inheritdoc/>
         public override ComponentType Type => ComponentType.List;
 
@@ -45,6 +71,14 @@
                 }
                 return attributes;
             }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSerialize(Dictionary<string, object> items)
+        {
+            items[nameof(ListStyle)] = ListStyle;
+            items[nameof(Ordered)] = Ordered;
+            items[nameof(Start)] = Start;
         }
     }
 }

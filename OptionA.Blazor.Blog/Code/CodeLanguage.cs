@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Supported code languages
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum CodeLanguage
     {
         /// <summary>

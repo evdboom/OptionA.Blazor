@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Size for the headers
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum HeaderSize
     {
         /// <summary>

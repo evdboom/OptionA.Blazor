@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Determines the type of tag to use for (mainly) <see cref="Block"/> or derived components.
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum BlockType
     {
         /// <summary>

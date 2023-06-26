@@ -76,6 +76,11 @@ namespace OptionA.Blazor.Blog
         /// Method which results in a single space seperated string of all the classes for this component
         /// </summary>
         /// <returns></returns>
-        string GetClasses();        
+        string GetClasses();
+        /// <summary>
+        /// Method to call to serialize this component for storing
+        /// </summary>
+        /// <returns></returns>
+        Dictionary<string,object> GetSerializationData();
     }
 }

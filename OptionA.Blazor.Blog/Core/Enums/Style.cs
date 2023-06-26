@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// The various styles that can be applied to a component, multiple styles can be set
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     [Flags]
     public enum Style
     {

@@ -12,7 +12,7 @@ namespace OptionA.Blazor.Components
         /// <summary>
         /// <see cref="OptaCarousel"/> as parent
         /// </summary>
-        [CascadingParameter(Name="Parent")]
+        [CascadingParameter(Name="CarouselParent")]
         public OptaCarousel? Parent { get; set; }
         /// <summary>
         /// Additional classes to set
@@ -81,28 +81,6 @@ namespace OptionA.Blazor.Components
             return Parent?.MinimumHeight.HasValue ?? false
                 ? $"min-height:{Parent.MinimumHeight.Value}px;"
                 : null;
-        }
-
-        private string GetStatusClass()
-        {
-            if (IsCurrent)
-            {
-                return "active";
-            }
-            else if (IsPrevious)
-            {
-                return WasNext
-                    ? "previous was-next"
-                    : "previous";                
-            }
-            else if (IsNext)
-            {
-                return "next";
-            }
-            else
-            {
-                return string.Empty;
-            }
-        }
+        }        
     }
 }

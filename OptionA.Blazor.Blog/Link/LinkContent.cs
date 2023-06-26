@@ -1,10 +1,32 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// Content for the <see cref="Link.Link"/> component, inherits for <see cref="BlockContent"/>
+    /// Content for the <see cref="Link"/> component, inherits for <see cref="BlockContent"/>
     /// </summary>
     public class LinkContent : BlockContent
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public LinkContent() : base() { }
+        /// <summary>
+        /// Constructor for use in deserialization
+        /// </summary>
+        /// <param name="items"></param>
+        public LinkContent(Dictionary<string, JsonElement> items) : base(items) 
+        {
+            if (items.TryGetValue(nameof(Href), out var href))
+            {
+                Href = JsonSerializer.Deserialize<string>(href) ?? string.Empty;
+            }
+            if (items.TryGetValue(nameof(Mode), out var mode))
+            {
+                Mode = JsonSerializer.Deserialize<LinkMode>(mode);
+            }
+        }
+
         /// <summary>
         /// Href for the link
         /// </summary>
@@ -34,6 +56,15 @@
                 
                 return attributes;
             }
+        }
+
+        /// <inheritdoc />
+        protected override void OnSerialize(Dictionary<string, object> items)
+        {
+            base.OnSerialize(items);
+            items[nameof(Href)] = Href;
+            items[nameof(Mode)] = Mode;
+
         }
     }
 }

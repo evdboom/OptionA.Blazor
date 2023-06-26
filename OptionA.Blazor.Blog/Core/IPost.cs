@@ -1,4 +1,6 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Interface for the resulting post
@@ -43,5 +45,11 @@
         /// </summary>
         /// <returns></returns>
         IEnumerable<(string Value, string Id, int Size)> GetHeaders();
+
+        /// <summary>
+        /// Serialized the post to json for storing
+        /// </summary>
+        /// <returns></returns>
+        string Serialize(JsonSerializerOptions? options = null);
     }
 }

@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// List or bullet style for a list
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum ListStyle
     {
         /// <summary>

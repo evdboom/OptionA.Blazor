@@ -1,10 +1,40 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// Content for the <see cref="Image.Image"/> component
+    /// Content for the <see cref="Image"/> component
     /// </summary>
     public class ImageContent : Content
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public ImageContent() : base() { }
+        /// <summary>
+        /// Constructor for use in deserialization
+        /// </summary>
+        /// <param name="items"></param>
+        public ImageContent(Dictionary<string, JsonElement> items) : base(items)
+        {
+            if (items.TryGetValue(nameof(Source), out var source))
+            {
+                Source = JsonSerializer.Deserialize<string>(source) ?? string.Empty;
+            }
+            if (items.TryGetValue(nameof(Width), out var width))
+            {
+                Width = JsonSerializer.Deserialize<string>(width);
+            }
+            if (items.TryGetValue(nameof(Height), out var height))
+            {
+                Height = JsonSerializer.Deserialize<string>(height);
+            }
+            if (items.TryGetValue(nameof(Mode), out var mode))
+            {
+                Mode = JsonSerializer.Deserialize<ImageMode>(mode);
+            }
+        }
+
         /// <summary>
         /// Source of the image
         /// </summary>
@@ -29,7 +59,7 @@
                 var attributes = base.Attributes;
                 if (!attributes.ContainsKey("title"))
                 {
-                    attributes["title"] = GetSource();
+                    attributes["title"] = Source;
                 }
                 if (!attributes.ContainsKey("alt"))
                 {
@@ -44,7 +74,7 @@
                     attributes["height"] = Height;
                 }
 
-                attributes["src"] = GetSource();
+                attributes["src"] = Source;
 
                 return attributes;
             }
@@ -52,15 +82,19 @@
         /// <inheritdoc/>
         public override ComponentType Type => ComponentType.Image;
 
-        private string GetSource()
+        /// <inheritdoc/>
+        protected override void OnSerialize(Dictionary<string, object> items)
         {
-            return Mode switch
+            items[nameof(Source)] = Source;
+            if (!string.IsNullOrEmpty(Width))
             {
-                ImageMode.LocalPost => $"/images/{Post!.DateId}/{Source}",
-                ImageMode.Local => $"/images/{Source}",
-                ImageMode.External => Source,
-                _ => throw new InvalidOperationException("Unknown ImageMode")
-            };
+                items[nameof(Width)] = Width;
+            }
+            if (!string.IsNullOrEmpty(Height))
+            {
+                items[nameof(Height)] = Height;
+            }
+            items[nameof(Mode)] = Mode;
         }
     }
 }

@@ -6,7 +6,7 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	  <Version>7.2.11</Version>
+	  <Version>7.2.12</Version>
 	  <IsPackable>true</IsPackable>
 	  <Authors>Erik van der Boom</Authors>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
@@ -32,6 +32,7 @@
 		  7.2.9 added minheight to carousel for mobile
 		  7.2.10 fix for dropdown on firefox
 		  7.2.11 Update packages
+		  7.2.12 Added Gallery
 	  </PackageReleaseNotes>
   </PropertyGroup>
 
@@ -41,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.7" />
   </ItemGroup>
 
   <ItemGroup>

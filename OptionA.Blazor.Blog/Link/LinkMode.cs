@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Enum to determine what type of link to use
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum LinkMode
     {
         /// <summary>

@@ -1,14 +1,39 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using OptionA.Blazor.Blog.Parsers;
+using System.Text.Json;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Content for the <see cref="Code.Code"/> component
     /// </summary>
     public class CodeContent : BlockContent
     {
+        private static readonly Dictionary<CodeLanguage, IParser> _parsers = new()
+        {
+            { CodeLanguage.CSharp, new CSharpParser() },
+            { CodeLanguage.Html, new HtmlParser() }
+        };
+
         /// <summary>
-        /// Parser for transforming raw code into more readable code.
+        /// Default constructor
         /// </summary>
-        public IParser? Parser { get; set; }
+        public CodeContent() : base() { }
+        /// <summary>
+        /// Constructor for use in deserialization
+        /// </summary>
+        /// <param name="items"></param>
+        public CodeContent(Dictionary<string, JsonElement> items) : base(items)
+        {
+            if (items.TryGetValue(nameof(Code), out var code))
+            {
+                Code = JsonSerializer.Deserialize<string>(code) ?? string.Empty;
+            }
+            if (items.TryGetValue(nameof(Language), out var language))
+            {
+                Language = JsonSerializer.Deserialize<CodeLanguage>(language);
+            }
+        }
+
         /// <summary>
         /// Code to transform
         /// </summary>
@@ -32,10 +57,19 @@
         /// <returns></returns>
         protected override IEnumerable<string> GetContentClassesList()
         {
-            foreach(var className in DefaultClasses.CodeBlock)
+            foreach (var className in DefaultClasses.CodeBlock)
             {
                 yield return className;
             }
+        }
+
+        /// <inheritdoc />
+        protected override void OnSerialize(Dictionary<string, object> items)
+        {
+            base.OnSerialize(items);
+            items[nameof(Code)] = Code;
+            items[nameof(Language)] = Language;
+
         }
 
         private IEnumerable<IContent> GetChildren()
@@ -49,23 +83,23 @@
                         .WithText(Language.ToDisplayLanguage())
                         .WithTextAlignment(PositionType.Right)
                         .AddClasses(DefaultClasses.CodeHeaderBlock)
-                        .Build();                
+                        .Build();
             }
 
-            if (Parser is null)
+            if (!_parsers.TryGetValue(Language, out var parser))
             {
                 return builder
-                    .AddContent(Code)
-                    .Build();
+                   .AddContent(Code)
+                   .Build();
             }
 
-            foreach (var (part, type, marker) in Parser.GetParts(Code))
+            foreach (var (part, type, marker) in parser.GetParts(Code))
             {
                 if (marker == MarkerType.None && type == CodePart.Text)
-                {                   
+                {
                     builder
-                        .AddContent(part);                    
-                    
+                        .AddContent(part);
+
                 }
                 else
                 {
@@ -79,7 +113,7 @@
                             .AddClass(DefaultClasses.SelectedCode);
                     }
                     content
-                        .Build();                    
+                        .Build();
                 }
             }
 

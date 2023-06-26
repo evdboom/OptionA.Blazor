@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Enum for different code markers
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     [Flags]
     public enum MarkerType
     {

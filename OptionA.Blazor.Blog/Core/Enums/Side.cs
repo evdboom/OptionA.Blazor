@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Sides for margin, border, padding etc.
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     [Flags]
     public enum Side
     {

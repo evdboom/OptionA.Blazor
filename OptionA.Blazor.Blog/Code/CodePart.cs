@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Parts of a code block for display
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum CodePart
     {
         /// <summary>

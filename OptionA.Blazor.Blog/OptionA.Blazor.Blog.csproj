@@ -14,9 +14,10 @@
     <Description>Components and builders for creating a Blog using Blazor.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Blog</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>7.0.0</Version>
+	<Version>7.1.0</Version>
 	<PackageReleaseNotes>
 		7.0.0 Initial release of all components
+		7.1.0 Add serialization support to support blogbuilder and external storing
 	</PackageReleaseNotes>
   </PropertyGroup>
 
@@ -26,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.7" />
   </ItemGroup>
 
 </Project>

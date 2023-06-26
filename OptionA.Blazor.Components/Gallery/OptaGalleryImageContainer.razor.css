@@ -1,0 +1,11 @@
+﻿ol {
+    list-style-type: none;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: hidden;
+    padding: 0;
+}
+
+.opta-gallery-images-container {
+    position: relative;
+}

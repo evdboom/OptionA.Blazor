@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Types of word, depending on format
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     [Flags]
     public enum WordType
     {
