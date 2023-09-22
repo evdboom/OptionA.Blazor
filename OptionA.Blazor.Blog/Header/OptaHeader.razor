@@ -3,22 +3,22 @@
 {
     switch (Content.Size)
     {
-        case Header.HeaderSize.One:
+        case HeaderSize.One:
             <h1 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h1>
             break;
-        case Header.HeaderSize.Two:
+        case HeaderSize.Two:
             <h2 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h2>
             break;
-        case Header.HeaderSize.Three:
+        case HeaderSize.Three:
             <h3 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h3>
             break;
-        case Header.HeaderSize.Four:
+        case HeaderSize.Four:
             <h4 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h4>
             break;
-        case Header.HeaderSize.Five:
+        case HeaderSize.Five:
             <h5 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h5>
             break;
-        case Header.HeaderSize.Six:
+        case HeaderSize.Six:
             <h6 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h6>
             break;
     }

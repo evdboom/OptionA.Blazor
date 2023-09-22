@@ -64,5 +64,30 @@ namespace OptionA.Blazor.Blog
             // currently all attribute match enum names, might change to switch later
             return $"{type}".ToLowerInvariant();
         }
+
+        /// <summary>
+        /// returns a string for the given date in the selected format.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static string ToDateFormat(this DateDisplayType type, DateTime date)
+        {
+            return type switch
+            {
+                DateDisplayType.Date => $"{date:d}",
+                DateDisplayType.DateTime => $"{date:g}",
+                DateDisplayType.Time => $"{date:t}",
+                DateDisplayType.UsableDate => $"{date:yyyyMMdd}",
+                DateDisplayType.UsableDateTime => $"{date:u}",
+                DateDisplayType.LongDate => $"{date:D}",
+                DateDisplayType.LongDateTime => $"{date:f}",
+                DateDisplayType.Month => $"{date:MMMM}",
+                DateDisplayType.Year => $"{date:yyyy}",
+                DateDisplayType.YearMonth => $"{date:Y}",
+                _ => string.Empty
+            };
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Blog.Header
+﻿namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Size for the header (lower is bigger)
