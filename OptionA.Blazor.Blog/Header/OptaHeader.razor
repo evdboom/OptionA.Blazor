@@ -1,0 +1,25 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null)
+{
+    switch (Content.Size)
+    {
+        case Header.HeaderSize.One:
+            <h1 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h1>
+            break;
+        case Header.HeaderSize.Two:
+            <h2 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h2>
+            break;
+        case Header.HeaderSize.Three:
+            <h3 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h3>
+            break;
+        case Header.HeaderSize.Four:
+            <h4 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h4>
+            break;
+        case Header.HeaderSize.Five:
+            <h5 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h5>
+            break;
+        case Header.HeaderSize.Six:
+            <h6 @attributes=Content.GetAttributes(DataProvider)>@Content.Content</h6>
+            break;
+    }
+}

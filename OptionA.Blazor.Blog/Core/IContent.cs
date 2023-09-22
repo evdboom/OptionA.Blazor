@@ -12,7 +12,7 @@ namespace OptionA.Blazor.Blog
         /// </summary>
         List<string> AdditionalClasses { get; }
         /// <summary>
-        /// Classes to remove from the defaults provided by the <see cref="Struct.IBlogDataProvider"/>
+        /// Classes to remove from the defaults provided by the <see cref="IBlogDataProvider"/>
         /// </summary>
         List<string> RemovedClasses { get; }
         /// <summary>

@@ -8,37 +8,37 @@
             break;
         case ContentType.Block:
             <div @attributes=Content.GetAttributes(DataProvider)>
-                <ChildBuilder Content="_content"/>
+                <OptaChildBuilder Content="_content"/>
             </div>
             break;
         case ContentType.Paragraph:
             <p @attributes=Content.GetAttributes(DataProvider)>
-                <ChildBuilder Content="_content" />
+                <OptaChildBuilder Content="_content" />
             </p>
             break;
         case ContentType.Inline:
             <span @attributes=Content.GetAttributes(DataProvider)>
-                <ChildBuilder Content="_content" />
+                <OptaChildBuilder Content="_content" />
             </span>
             break;
         case ContentType.Bold:
             <strong @attributes=Content.GetAttributes(DataProvider)>
-                <ChildBuilder Content="_content" />
+                <OptaChildBuilder Content="_content" />
             </strong>
             break;
         case ContentType.Italic:
             <em @attributes=Content.GetAttributes(DataProvider)>
-                <ChildBuilder Content="_content" />
+                <OptaChildBuilder Content="_content" />
             </em>
             break;
         case ContentType.Quote:
             <blockquote @attributes=Content.GetAttributes(DataProvider)>
-                <ChildBuilder Content="_content" />
+                <OptaChildBuilder Content="_content" />
             </blockquote>
             break;
         case ContentType.Link:
             <a @attributes=Content.GetAttributes(DataProvider)>
-                <ChildBuilder Content="_content" />
+                <OptaChildBuilder Content="_content" />
             </a>
             break;
         case ContentType.LineBreak:

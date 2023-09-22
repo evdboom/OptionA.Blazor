@@ -2,8 +2,14 @@
 
 namespace OptionA.Blazor.Blog
 {
-    public partial class QuotePart
+    /// <summary>
+    /// Quote component
+    /// </summary>
+    public partial class OptaQuote
     {
+        /// <summary>
+        /// Quote to display
+        /// </summary>
         [Parameter]
         public QuotePartContent? Content { get; set; }
 

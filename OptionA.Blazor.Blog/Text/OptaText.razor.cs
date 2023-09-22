@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
-using OptionA.Blazor.Blog.Struct;
 
 namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Component for most text based parts
     /// </summary>
-    public partial class TextPart
+    public partial class OptaText
     {
         /// <summary>
         /// Content for this text block

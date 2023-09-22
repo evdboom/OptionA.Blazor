@@ -12,7 +12,7 @@ namespace OptionA.Blazor.Blog
         /// <inheritdoc/>
         public List<string> RemovedClasses { get; } = new List<string>();
         /// <inheritdoc/>
-        public Dictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
+        public virtual Dictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
         /// <inheritdoc/>
         public abstract ContentType Type { get; }
     }

@@ -72,5 +72,9 @@ namespace OptionA.Blazor.Blog
         /// Quote component, result in multpiple tags
         /// </summary>
         QuotePart,
+        /// <summary>
+        /// Icon resulting in a &lt;i&gt; or &lt;svg&gt; tag
+        /// </summary>
+        Icon
     }
 }

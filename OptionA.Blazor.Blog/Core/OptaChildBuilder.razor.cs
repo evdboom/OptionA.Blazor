@@ -2,7 +2,10 @@
 
 namespace OptionA.Blazor.Blog
 {
-    public partial class ChildBuilder
+    /// <summary>
+    /// Map content to correct components
+    /// </summary>
+    public partial class OptaChildBuilder
     {
         /// <summary>
         /// Content to build chid parts from

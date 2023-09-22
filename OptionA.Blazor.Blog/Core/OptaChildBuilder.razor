@@ -14,10 +14,19 @@
             case ContentType.Link:
             case ContentType.Italic:
             case ContentType.LineBreak:
-                <TextPart Content="(TextContent)child" />
+                <OptaText Content="(TextContent)child" />
                 break;
             case ContentType.QuotePart:
-                <QuotePart Content="(QuotePartContent)child" />
+                <OptaQuote Content="(QuotePartContent)child" />
+                break;
+            case ContentType.Code:
+                <OptaCode Content="(CodeContent)child"/>
+                break;
+            case ContentType.Header:
+                <OptaHeader Content="(HeaderContent)child" />
+                break;
+            case ContentType.Icon:
+                <OptaIcon Content="(IconContent)child" />
                 break;
         }
     }

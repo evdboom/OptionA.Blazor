@@ -1,4 +1,5 @@
-﻿using OptionA.Blazor.Blog.Struct;
+﻿using OptionA.Blazor.Blog.Code.Parsers;
+using OptionA.Blazor.Blog.Struct;
 
 namespace OptionA.Blazor.Blog
 {
@@ -36,6 +37,32 @@ namespace OptionA.Blazor.Blog
             }
 
             return content.Attributes;
+        }
+
+        /// <summary>
+        /// Get the normal name for the given codelanguage
+        /// </summary>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        public static string ToDisplayLanguage(this CodeLanguage language)
+        {
+            return language switch
+            {
+                CodeLanguage.CSharp => "C#",
+                CodeLanguage.Html => "HTML",
+                _ => $"{language}"
+            };
+        }
+
+        /// <summary>
+        /// returns the value for the attribute to set
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static string ToAttribute(this CodeType type)
+        {
+            // currently all attribute match enum names, might change to switch later
+            return $"{type}".ToLowerInvariant();
         }
     }
 }

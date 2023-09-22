@@ -24,6 +24,10 @@
         /// <summary>
         /// Marker to tell there is a linebreak
         /// </summary>
-        Linebreak
+        Linebreak,
+        /// <summary>
+        /// Marker to tell there is an icon, specify icon class inside the tags
+        /// </summary>
+        Icon
     }
 }
