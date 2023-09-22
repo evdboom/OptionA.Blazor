@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using OptionA.Blazor.Blog;
 using OptionA.Blazor.Components;
 using OptionA.Blazor.Test;
 
@@ -21,4 +22,6 @@ builder.Services
             menu.GroupCloseTime = 250;
         };
     });
+builder.Services
+    .AddOptionABlog();
 await builder.Build().RunAsync();

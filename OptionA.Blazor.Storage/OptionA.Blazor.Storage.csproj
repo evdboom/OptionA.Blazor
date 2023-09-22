@@ -16,6 +16,7 @@
 		7.0.0 Follow .net version for main version
 		7.0.1 Update packages
 		7.0.2 Downgrade package for wider support
+		7.0.3 Package update
 	</PackageReleaseNotes>
   </PropertyGroup>
 
@@ -25,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
   </ItemGroup>
 

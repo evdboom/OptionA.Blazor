@@ -1,0 +1,24 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null)
+{
+    @foreach(var child in Content)
+    {
+        switch(child.Type)
+        {
+            case ContentType.Text:
+            case ContentType.Quote:
+            case ContentType.Paragraph:
+            case ContentType.Bold:
+            case ContentType.Block:
+            case ContentType.Inline:
+            case ContentType.Link:
+            case ContentType.Italic:
+            case ContentType.LineBreak:
+                <TextPart Content="(TextContent)child" />
+                break;
+            case ContentType.QuotePart:
+                <QuotePart Content="(QuotePartContent)child" />
+                break;
+        }
+    }
+}
