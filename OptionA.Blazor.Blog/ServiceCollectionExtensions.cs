@@ -12,12 +12,12 @@ namespace OptionA.Blazor.Blog
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds the option A blogparts to the servicecollection
+        /// Adds all blogparts to the servicecollection
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionABlog(this IServiceCollection services, Action<BlogOptions>? configuration = null)
+        public static IServiceCollection AddOptionABlog(this IServiceCollection services, Action<OptaBlogOptions>? configuration = null)
         {
             services
                 .AddSingleton<IBuilderService, BuilderService>()
@@ -35,7 +35,25 @@ namespace OptionA.Blazor.Blog
                 .AddSingleton<IBlogDataProvider>(provider => new BlogDataProvider(configuration));
 
             return services;
+        }
 
+
+        /// <summary>
+        /// Adds all blogparts to the servicecollection, prefilled with bootstrap (5.3) classes
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
+        /// <returns></returns>
+        public static IServiceCollection AddOptionABootstrapBlog(this IServiceCollection services, Action<OptaBlogOptions>? configuration = null)
+        {
+            var bootstrapConfig = (OptaBlogOptions options) =>
+            {
+                
+  
+                configuration?.Invoke(options);
+            };
+
+            return AddOptionABlog(services, bootstrapConfig);
         }
     }
 }

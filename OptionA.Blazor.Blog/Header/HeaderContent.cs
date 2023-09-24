@@ -1,6 +1,4 @@
-﻿using OptionA.Blazor.Blog.Header;
-
-namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Content for header parts

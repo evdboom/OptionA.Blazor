@@ -23,5 +23,5 @@ builder.Services
         };
     });
 builder.Services
-    .AddOptionABlog();
+    .AddOptionABootstrapBlog();
 await builder.Build().RunAsync();

@@ -75,6 +75,6 @@ namespace OptionA.Blazor.Blog
         /// <summary>
         /// Icon resulting in a &lt;i&gt; or &lt;svg&gt; tag
         /// </summary>
-        Icon
+        Icon,
     }
 }

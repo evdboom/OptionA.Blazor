@@ -11,8 +11,8 @@
     <Title>Blazor Blog Components</Title>
     <Authors>Erik van der Boom</Authors>
 	<IsPackable>true</IsPackable>
-    <Description>Components and builders for creating a Blog using Blazor.</Description>
-	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Blog</PackageProjectUrl>
+    <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
+	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Version>7.2.0</Version>
 	<PackageReleaseNotes>

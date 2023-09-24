@@ -28,7 +28,6 @@ namespace OptionA.Blazor.Blog
 
             if (content is LinkContent link)
             {
-
                 content.Attributes["href"] = link.Href;
                 if (!string.IsNullOrEmpty(link.Target))
                 {

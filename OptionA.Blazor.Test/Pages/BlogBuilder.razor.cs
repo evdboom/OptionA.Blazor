@@ -4,20 +4,12 @@ namespace OptionA.Blazor.Test.Pages
 {
     public partial class BlogBuilder
     {
-        private string _value = string.Empty;
-        private string Value
+        private Post? _post;
+
+        private void PostChanged(Post? post) 
         {
-            get => _value;
-            set
-            {
-                _value = value;
-                _paragraphContent = new ParagraphContent
-                {
-                    Content = _value
-                };
-                StateHasChanged();
-            }
+            _post = post;
+            StateHasChanged();
         }
-        private ParagraphContent? _paragraphContent;
     }
 }

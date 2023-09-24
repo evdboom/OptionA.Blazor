@@ -2,7 +2,7 @@
 @if (Post is not null)
 {
     <OptaHeader Content="_title"/>
-    @if (_tags.Any())
+    @if (_tags is not null && _tags.Any())
     {
         <div class="@DataProvider.HeaderTagContainerClass">
             <OptaChildBuilder Content="_tags" />

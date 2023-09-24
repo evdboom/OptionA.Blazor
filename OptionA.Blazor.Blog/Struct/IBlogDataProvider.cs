@@ -14,7 +14,7 @@
         /// <summary>
         /// Header size to use for the title of the post
         /// </summary>
-        HeaderSize? PostHeaderSize { get; }
+        HeaderSize PostHeaderSize { get; }
         /// <summary>
         /// Class to add to tags
         /// </summary>
@@ -26,15 +26,28 @@
         /// <summary>
         /// Way to display post date
         /// </summary>
-        DateDisplayType? PostDateDisplay { get; }
+        DateDisplayType PostDateDisplay { get; }
         /// <summary>
         /// Class to add to header of the post
         /// </summary>
         string? PostTitleClass { get; }
         /// <summary>
+        /// Class to add to the date part of post header
+        /// </summary>
+        string? PostDateClass { get; }
+        /// <summary>
         /// Class to add to the subtitle of the post
         /// </summary>
         string? PostSubtitleClass { get; }
+        /// <summary>
+        /// Base url for when clicking on a tag
+        /// </summary>
+        string? TagOverviewHref { get; }
+        /// <summary>
+        /// True to place a hr tag after the header part of the post
+        /// </summary>
+        bool DisplayLineAfterPostHeader { get; }
+
 
     }
 }

@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+<h1>New post</h1>
+@if (_post is null)
+{
+    <div @attributes="GetContainerAttributes(BuilderType.AddPostButton)">
+        <button type="button" @onclick="CreateNewPost" @attributes=GetButtonAttributes(BuilderType.AddPostButton)>
+            <OptaText Content="@GetContentForButton(BuilderType.AddPostButton, "Create new post")"/>
+        </button>
+    </div>
+}
+else
+{
+    <EditForm EditContext="_context" OnSubmit="SavePost" AdditionalAttributes="GetFormAttributes()">
+        <div @attributes=GetContainerAttributes(BuilderType.Title)>
+            @if (DataProvider.DisplayBuilderFormLabels)
+            {
+                <label @attributes="GetInputLabelAttributes(TitleId)">@GetLabelForType(BuilderType.Title)</label>
+            }
+            <DirectInputText @bind-Value="_post.Title" AdditionalAttributes="GetInputAttributes(TitleId, BuilderType.Title)" />
+        </div>
+        <div @attributes=GetContainerAttributes(BuilderType.TagContainer)>
+            <div @attributes="GetInputLabelAttributes(null)">
+                <span @attributes="GetTagContainerAttributes()">@GetLabelForType(BuilderType.TagContainer)</span>
+                <div @attributes=GetContainerAttributes(BuilderType.AddTagButton)>
+                    <button type="button" @onclick="AddTag" @attributes=GetButtonAttributes(BuilderType.AddTagButton)>
+                        <OptaText Content="@GetContentForButton(BuilderType.AddTagButton, "Add tag")"/>
+                    </button>
+                </div>
+            </div>
+            <div @attributes="GetTagListAttributes()">
+            @foreach (var tag in _post.Tags.Select((t, i) => new { Tag = t, Index = i }))
+            {
+                <div @attributes=GetContainerAttributes(BuilderType.Tag)>
+                    <input value="@tag.Tag" @oninput="@(e => UpdateTag($"{e.Value}", tag.Index))" @attributes="@(GetInputAttributes($"{TagId}-{tag.Index}", BuilderType.Tag))" />
+                </div>
+                <div @attributes=GetContainerAttributes(BuilderType.RemoveTagButton)>
+                    <button type="button" @onclick="() => RemoveTag(tag.Index)" @attributes=GetButtonAttributes(BuilderType.RemoveTagButton)>
+                        <OptaText Content="@GetContentForButton(BuilderType.RemoveTagButton, "Remove")"/>
+                    </button>
+                </div>
+            }
+            </div>
+        </div>
+        <div @attributes=GetContainerAttributes(BuilderType.Date)>
+            @if (DataProvider.DisplayBuilderFormLabels)
+            {
+                <label @attributes="GetInputLabelAttributes(DateId)">@GetLabelForType(BuilderType.Date)</label>
+            }
+            <InputDate @bind-Value="_post.Date" AdditionalAttributes="GetInputAttributes(DateId, BuilderType.Date)" />
+        </div>
+        <div @attributes=GetContainerAttributes(BuilderType.Subtitle)>
+            @if (DataProvider.DisplayBuilderFormLabels)
+            {
+                <label @attributes="GetInputLabelAttributes(SubtitleId)">@GetLabelForType(BuilderType.Subtitle)</label>
+            }
+            <DirectInputTextArea @bind-Value="_post.Subtitle" AdditionalAttributes="GetInputAttributes(SubtitleId, BuilderType.Subtitle)" />
+        </div>
+        <div @attributes=GetContainerAttributes(BuilderType.SavePostButton)>
+            <button type="submit" @attributes=GetButtonAttributes(BuilderType.SavePostButton)>
+                <OptaText Content="@GetContentForButton(BuilderType.SavePostButton, "Save")" />
+            </button>
+        </div>
+    </EditForm>
+}

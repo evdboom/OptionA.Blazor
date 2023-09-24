@@ -1,7 +1,11 @@
 ﻿@page "/blogbuilder"
 @using OptionA.Blazor.Blog;
 
-<textarea @bind="Value" @bind:event="oninput"/>
-
-<OptaText Content="_paragraphContent" />
-    
+<div class="row">
+    <div class="col-6">
+        <OptaPostBuilder OnPostChanged="PostChanged"/>
+    </div>
+    <div class="col-6">
+        <OptaPost Post="_post"/>
+    </div>
+</div>
