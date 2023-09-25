@@ -1,4 +1,6 @@
 @import url('icons/bootstrap-icons.css');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -22,6 +24,18 @@ a, .btn-link {
     height: 3rem;
 }
 
+.opta-tag {
+    background-color: #552055;
+    user-select: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: #F5F5F5;
+}
+
+.opta-header {
+    color: #552055;
+}
+ 
 .opta-menu-group {
     background-color: red;
 }
@@ -32,6 +46,10 @@ a, .btn-link {
     overflow: hidden;
     height: 0;
     transition: height 250ms ease-in-out;
+}
+
+.opta-blog {
+    font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri;
 }
 
 .opta-menu-group[open] .opta-dropdown {

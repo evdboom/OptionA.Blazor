@@ -1,0 +1,12 @@
+﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
+@if (Content is not null)
+{
+    <OptaGenericParts Content="Content"
+                      OnChange="OnChange"
+                      OnRemove="OnRemove"
+                      BuilderType="BuilderType.Header"
+                      Label="Header">
+        <OptaEnumSelect TEnum="HeaderSize" @bind-Value="InternalSize" />
+        <DirectInputText @bind-Value="Content.Content" AdditionalAttributes="@DataProvider.GetAttributes(BuilderType.Header, AttributeTypes.Class | AttributeTypes.Placeholder)" />
+    </OptaGenericParts>
+}

@@ -1,0 +1,17 @@
+﻿@using OptionA.Blazor.Blog.Builder.Parts
+@if (Content is not null)
+{
+    @switch (Content.Type)
+    {
+        case ContentType.Paragraph:
+            <OptaParagraphBuilder Content="(ParagraphContent)Content"
+                                  OnChange="OnChange"
+                                  OnRemove="OnRemove"/>
+            break;
+        case ContentType.Header:
+            <OptaHeaderBuilder Content="(HeaderContent)Content"
+                               OnChange="OnChange"
+                               OnRemove="OnRemove"/>
+            break;
+    }
+}

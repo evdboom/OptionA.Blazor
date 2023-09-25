@@ -25,25 +25,29 @@ namespace OptionA.Blazor.Blog.Builder
         /// </summary>
         Tag,
         /// <summary>
-        /// Container around tags
-        /// </summary>
-        TagContainer,
-        /// <summary>
-        /// Add tag button
-        /// </summary>
-        AddTagButton,
-        /// <summary>
-        /// Remove tag button
-        /// </summary>
-        RemoveTagButton,
-        /// <summary>
         /// Button for adding a post
         /// </summary>
         AddPostButton,
         /// <summary>
         /// Save post button
         /// </summary>
-        SavePostButton
+        SavePostButton,
+        /// <summary>
+        /// Additional classes for a part
+        /// </summary>
+        AdditionalClasses,
+        /// <summary>
+        /// Removed classes for a part
+        /// </summary>
+        RemovedClasses,
+        /// <summary>
+        /// Paragraph part
+        /// </summary>
+        Paragraph,
+        /// <summary>
+        /// Header part
+        /// </summary>
+        Header,
 
     }
 }

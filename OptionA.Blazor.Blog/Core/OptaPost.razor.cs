@@ -58,7 +58,7 @@ namespace OptionA.Blazor.Blog
                 };
                 if (!string.IsNullOrEmpty(DataProvider.PostSubtitleClass))
                 {
-                    _date.AdditionalClasses.Add(DataProvider.PostSubtitleClass);
+                    _subtitle.AdditionalClasses.Add(DataProvider.PostSubtitleClass);
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace OptionA.Blazor.Blog
                     Href = $"{DataProvider.TagOverviewHref}/{tag}".ToLowerInvariant(),
                     Target = "_self"
                 }
-                : new BlockContent
+                : new InlineContent
                 {
                     Content = tag
                 };
