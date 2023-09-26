@@ -27,29 +27,56 @@ namespace OptionA.Blazor.Blog.Builder
             var bootstrapConfig = (OptaBlogBuilderOptions options) =>
             {
                 options.FormClass = "row";
-
-
-
-                options.PostBuilderOptions = new()
-                { 
-                    [BuilderType.Title] = GetDefaultBootstrapInputProperties("Title..."),
-                    [BuilderType.Date] = GetDefaultBootstrapInputProperties(),
-                    [BuilderType.Subtitle] = GetDefaultBootstrapInputProperties("Subtitle..."),
-                    [BuilderType.Tag] = GetDefaultBootstrapInputListProperties("Tag..."),
-                    [BuilderType.Paragraph] = GetDefaultComponentProperties("Paragraph..."),
-                    [BuilderType.Header] = GetDefaultComponentProperties("Header..."),
-                    [BuilderType.AdditionalClasses] = GetDefaultBootstrapSideListProperties("Class..."),
-                    [BuilderType.RemovedClasses] = GetDefaultBootstrapSideListProperties("Class..."),
-                    [BuilderType.SavePostButton] = new BuilderTypeProperties
-                    {
-                        Class = "btn btn-primary"
-                    },
-                    [BuilderType.AddPostButton] = new BuilderTypeProperties
-                    {
-                        Class = "btn btn-primary"
-                    }
-
+                options.CreatePostButton = new BuilderTypeProperties
+                {
+                    Class = "btn btn-primary"
                 };
+                options.SavePostButton = new BuilderTypeProperties
+                {
+                    Class = "btn btn-primary",
+                    ContainerClass = "mt-2"
+                };
+                options.PostBuilderOptions = new()
+                {
+                    [BuilderType.TextInput] = GetDefaultBootstrapInputProperties(),
+                    [BuilderType.DateInput] = GetDefaultBootstrapInputProperties(),
+                    [BuilderType.TextAreaInput] = GetDefaultBootstrapInputProperties(container: "bootstrap"),
+                    [BuilderType.SelectInput] = new BuilderTypeProperties
+                    { 
+                        Class = "form-select"
+                    },
+                    [BuilderType.Label] = new BuilderTypeProperties 
+                    {
+                        Class = "form-label" 
+                    },
+                    [BuilderType.ComponentContent] = new BuilderTypeProperties
+                    {
+                        Class = "border border-secondary rounded-2 p-2 col-10 bg-secondary-subtle"
+                    },
+                    [BuilderType.ComponentTitle] = new BuilderTypeProperties
+                    {
+                        ContainerClass = "col-12"
+                    },
+                    [BuilderType.Component] = new BuilderTypeProperties
+                    {
+                        Class = "row g-1"
+                    },
+                    [BuilderType.RemoveButton] = new BuilderTypeProperties
+                    {
+                        Class="btn btn-danger btn-sm mb-1",
+                        ContainerClass="col-auto d-flex flex-column",
+                        Content = "**🗙**"
+                    },
+                    [BuilderType.MoveUpButton] = new BuilderTypeProperties
+                    {
+                        Class = "btn btn-secondary btn-sm p-1",
+                        ContainerClass = "btn-group-vertical",
+                    },
+                    [BuilderType.MoveDownButton] = new BuilderTypeProperties
+                    {
+                        Class = "btn btn-secondary btn-sm p-1",
+                    }
+            };
 
                 configuration?.Invoke(options);
             };
@@ -57,95 +84,14 @@ namespace OptionA.Blazor.Blog.Builder
             return AddOptionABlogBuilder(services, bootstrapConfig);
         }
 
-        private static BuilderTypeProperties GetDefaultComponentProperties(string? placeholder = null)
-        {
-            return new BuilderTypeProperties
-            {
-                Class = "form-control h-100",
-                LabelClass = "form-label",
-                GroupClass = "col-lg-12 mb-2 border rounded-2 p-2",
-                InnerGroupClass = "row",
-                ContainerClass = "col-lg-8",
-                Placeholder = placeholder,
-                ExtraPropertiesClass = "col-lg-4",
-                AddButton = new ButtonProperties
-                {
-                    ContainerClass = "ms-1 d-inline mb-2",
-                    Class = "btn btn-outline-primary btn-sm py-0",
-                },
-                RemoveButton = new ButtonProperties
-                {
-                    Class = "btn btn-outline-danger btn-sm py-0",
-                    Content = "**🗙**",
-                    ContainerClass = "float-end",
-                    Title = "Remove"
-                }
-            };
-        }
 
-        private static BuilderTypeProperties GetDefaultBootstrapInputProperties(string? placeholder = null)
+        private static BuilderTypeProperties GetDefaultBootstrapInputProperties(string? additional = null, string? container = null)
         {
             return new BuilderTypeProperties
             {
-                Class = "form-control",
-                LabelClass = "form-label",
-                ContainerClass = "col-lg-8 mb-2",
-                Placeholder = placeholder
+                Class = $"form-control {additional}".Trim(),
+                ContainerClass = container
             };
-        }
-
-        private static BuilderTypeProperties GetDefaultBootstrapInputListProperties(string? placeholder = null)
-        {
-            return new BuilderTypeProperties
-            {
-                Class = "form-control",
-                LabelClass = "form-label",
-                GroupClass = "col-lg-8 mb-2",
-                ContainerClass = "col-lg-4",
-                Placeholder = placeholder,
-                InnerGroupClass = "row g-1 border rounded-2 p-2",
-                AddButton = new ButtonProperties
-                {
-                    ContainerClass = "ms-1 d-inline",
-                    Class = "btn btn-success btn-sm py-0",
-                    Content = "**＋**",
-                    Title = "Add"
-                },
-                RemoveButton = new ButtonProperties
-                {
-                    Class = "btn btn-outline-danger btn-sm py-0",
-                    Content = "**🗙**",
-                    ContainerClass = "col-auto me-2 d-flex align-items-center",
-                    Title = "Remove"
-                }
-            };
-        }
-
-        private static BuilderTypeProperties GetDefaultBootstrapSideListProperties(string? placeholder = null)
-        {
-            return new BuilderTypeProperties
-            {
-                Class = "form-control",
-                LabelClass = "form-label",
-                GroupClass = "col-lg-12 mb-2",
-                ContainerClass = "col-lg-9",
-                Placeholder = placeholder,
-                InnerGroupClass = "row g-1 border rounded-2 p-2",
-                AddButton = new ButtonProperties
-                {
-                    ContainerClass = "ms-1 d-inline",
-                    Class = "btn btn-success btn-sm py-0",
-                    Content = "**＋**",
-                    Title = "Add"
-                },
-                RemoveButton = new ButtonProperties
-                {
-                    Class = "btn btn-outline-danger btn-sm py-0",
-                    Content = "**🗙**",
-                    ContainerClass = "col-auto d-flex align-items-center",
-                    Title = "Remove"
-                }
-            };
-        }
+        }      
     }
 }

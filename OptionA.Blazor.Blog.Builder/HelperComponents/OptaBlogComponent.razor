@@ -1,0 +1,24 @@
+﻿<div @attributes="@DataProvider.GetAttributes(BuilderType.Component)">
+    <div @attributes="@DataProvider.GetContainerAttributes(BuilderType.ComponentTitle)">
+        <OptaChild Content="@DataProvider.GetContent(BuilderType.ComponentTitle, Name)"/>    
+    </div>
+    <div @attributes="@DataProvider.GetAttributes(BuilderType.ComponentContent)">
+        @ChildContent
+    </div>
+    @if (!HideButtons)
+    {
+        <div @attributes="@DataProvider.GetContainerAttributes(BuilderType.RemoveButton)">
+            <button type="button" @attributes="@GetRemoveAttributes()" @onclick="async () => await ContentRemoved.InvokeAsync()">
+                <OptaChild Content="@GetRemoveContent()"/>
+            </button>
+            <div @attributes="@GetMoveContainerAttributes()">
+                <button type="button" @attributes="@GetMoveUpAttributes()" @onclick="async () => await MovedUp.InvokeAsync()">
+                    <OptaChild Content="@GetMoveUpContent()"/>
+                </button>
+                <button type="button" @attributes="@GetMoveDownAttributes()" @onclick="async () => await MovedDown.InvokeAsync()">
+                    <OptaChild Content="@GetMoveDownContent()"/>
+                </button>
+            </div>
+        </div>
+    }
+</div>

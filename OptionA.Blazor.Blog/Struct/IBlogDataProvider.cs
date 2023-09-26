@@ -48,6 +48,5 @@
         /// </summary>
         bool DisplayLineAfterPostHeader { get; }
 
-
     }
 }

@@ -9,45 +9,52 @@ namespace OptionA.Blazor.Blog.Builder
     public enum BuilderType
     {
         /// <summary>
-        /// Title of post
+        /// input type text element
         /// </summary>
-        Title,
+        TextInput,
         /// <summary>
-        /// Subtitle of post
+        /// textarea element
         /// </summary>
-        Subtitle,
+        TextAreaInput,
         /// <summary>
-        /// Date of post
+        /// input element type data
         /// </summary>
-        Date,
+        DateInput,
         /// <summary>
-        /// A tag
+        /// select element
         /// </summary>
-        Tag,
+        SelectInput,
         /// <summary>
-        /// Button for adding a post
+        /// Blog component
         /// </summary>
-        AddPostButton,
+        Component,
         /// <summary>
-        /// Save post button
+        /// Extra properties of component
         /// </summary>
-        SavePostButton,
+        ExtraProperties,
         /// <summary>
-        /// Additional classes for a part
+        /// Label of input
         /// </summary>
-        AdditionalClasses,
+        Label,
         /// <summary>
-        /// Removed classes for a part
+        /// Content of component
         /// </summary>
-        RemovedClasses,
+        ComponentContent,
         /// <summary>
-        /// Paragraph part
+        /// Title of component
         /// </summary>
-        Paragraph,
+        ComponentTitle,
         /// <summary>
-        /// Header part
+        /// Remove the item
         /// </summary>
-        Header,
-
+        RemoveButton,
+        /// <summary>
+        /// Move content up in list
+        /// </summary>
+        MoveUpButton,
+        /// <summary>
+        /// Move content down in list
+        /// </summary>
+        MoveDownButton
     }
 }

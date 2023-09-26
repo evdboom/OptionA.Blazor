@@ -7,6 +7,18 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// </summary>
     public partial class OptaHeaderBuilder
     {
+        private const string SizeId = "opta-header-size";
+        private const string HeaderId = "opta-header";
+        /// <summary>
+        /// Index of content in post (for id uniqueness)
+        /// </summary>
+        [Parameter]
+        public int ContentIndex { get; set; }
+        /// <summary>
+        /// Total number of content (for disabling move up, move down)
+        /// </summary>
+        [Parameter]
+        public int TotalContentCount { get; set; }
         /// <summary>
         /// Content to create
         /// </summary>
@@ -16,12 +28,22 @@ namespace OptionA.Blazor.Blog.Builder.Parts
         /// Called when something changes
         /// </summary>
         [Parameter]
-        public EventCallback OnChange { get; set; }
+        public EventCallback ContentChanged { get; set; }
         /// <summary>
         /// Called when content should be removed
         /// </summary>
         [Parameter]
-        public EventCallback<IContent> OnRemove { get; set; }
+        public EventCallback<IContent> ContentRemoved { get; set; }
+        /// <summary>
+        /// Occurs when move up is clicked
+        /// </summary>
+        [Parameter]
+        public EventCallback MovedUp { get; set; }
+        /// <summary>
+        /// Occurs when move down is clicked
+        /// </summary>
+        [Parameter]
+        public EventCallback MovedDown { get; set; }
         [Inject]
         private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
@@ -37,12 +59,43 @@ namespace OptionA.Blazor.Blog.Builder.Parts
                 if (!value.Equals(Content.Size))
                 {
                     Content.Size = value;
-                    if (OnChange.HasDelegate)
+                    if (ContentChanged.HasDelegate)
                     {
-                        OnChange.InvokeAsync();
+                        ContentChanged.InvokeAsync();
                     }
                 }
             }
+        }
+
+        private Dictionary<string, object?> GetHeaderAttributes()
+        {
+            var defaultAttributes = new Dictionary<string, object?>
+            {
+                ["placeholder"] = "Header...",
+                ["id"] = $"{HeaderId}-{ContentIndex}"
+            };
+
+            return DataProvider.GetAttributes(BuilderType.TextInput, defaultAttributes);
+        }
+
+        private Dictionary<string, object?> GetSizeAttributes()
+        {
+            var defaultAttributes = new Dictionary<string, object?>
+            {
+                ["id"] = $"{SizeId}-{ContentIndex}"
+            };
+
+            return DataProvider.GetAttributes(BuilderType.SelectInput, defaultAttributes);
+        }
+
+        private Dictionary<string, object?> GetLabelAttributes(string id)
+        {
+            var defaultAttributes = new Dictionary<string, object?>
+            {
+                ["for"] = $"{id}-{ContentIndex}"
+            };
+
+            return DataProvider.GetAttributes(BuilderType.Label, defaultAttributes);
         }
     }
 }

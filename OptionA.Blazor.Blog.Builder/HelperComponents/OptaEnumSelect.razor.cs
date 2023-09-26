@@ -17,6 +17,11 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// </summary>
         [Parameter]
         public EventCallback<TEnum> ValueChanged { get; set; }
+        /// <summary>
+        /// Additional attributes to add to the class
+        /// </summary>
+        [Parameter]
+        public Dictionary<string, object?>? AdditionalAttributes { get; set; }   
 
         private TEnum InternalValue
         {

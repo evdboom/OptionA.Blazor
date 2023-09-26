@@ -6,7 +6,7 @@ namespace OptionA.Blazor.Test.Pages
     {
         private Post? _post;
 
-        private void PostChanged(Post? post) 
+        private void OnPostChanged(Post? post) 
         {
             _post = post;
             StateHasChanged();

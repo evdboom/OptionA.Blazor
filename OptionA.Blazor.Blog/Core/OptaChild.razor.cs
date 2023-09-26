@@ -5,12 +5,13 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Map content to correct components
     /// </summary>
-    public partial class OptaChildBuilder
+    public partial class OptaChild
     {
         /// <summary>
-        /// Content to build child parts from
+        /// Content to render
         /// </summary>
         [Parameter]
-        public IEnumerable<IContent>? Content { get; set; }
+        public IContent? Content { get; set; }
     }
 }
+

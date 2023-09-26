@@ -1,0 +1,29 @@
+﻿[auto-grow] {
+    display: grid;
+}
+
+[auto-grow]::after {
+    content: attr(opta-text);
+    white-space: pre-wrap;
+    visibility: hidden;
+    overflow: hidden;
+    padding: 2px;
+}
+
+[auto-grow].bootstrap::after {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    width: 100%;
+}
+
+[auto-grow] > textarea {
+    resize: none;
+    overflow: hidden;
+}
+
+[auto-grow] > textarea,
+[auto-grow]::after {
+    grid-area: 1 / 1 / 2 / 2
+}

@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blazor.Blog", "Opti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blazor.Blog.UnitTests", "OptionA.Blazor.Blog.UnitTests\OptionA.Blazor.Blog.UnitTests.csproj", "{73A5BDAE-2F1A-409A-B076-A948E34D5294}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionA.Blazor.Blog.Builder", "OptionA.Blazor.Blog.Builder\OptionA.Blazor.Blog.Builder.csproj", "{1CF6B926-0BF8-48D4-B76E-E5CE7AA2F87D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blazor.Blog.Builder", "OptionA.Blazor.Blog.Builder\OptionA.Blazor.Blog.Builder.csproj", "{1CF6B926-0BF8-48D4-B76E-E5CE7AA2F87D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

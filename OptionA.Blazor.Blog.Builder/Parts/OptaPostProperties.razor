@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using OptionA.Blazor.Blog.Builder.HelperComponents
+@if (Post is not null)
+{
+    <OptaBlogComponent Name="**Post**"
+                       HideButtons="true">
+        <label @attributes="@GetLabelAttributes(TitleId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Title")" />
+        </label>
+        <DirectInputText @bind-Value="Post.Title" AdditionalAttributes="@GetTitleAttributes()"  />
+        <label @attributes="@GetLabelAttributes(DateId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Date")" />
+        </label>
+        <InputDate @bind-Value="Post.Date" AdditionalAttributes="@GetDateAttributes()" />
+        <label @attributes="@GetLabelAttributes(SubtitleId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Subtitle")" />
+        </label>
+        <DirectInputTextArea @bind-Value="Post.Subtitle" AdditionalAttributes="GetSubtitleAttributes()" AutoGrow="true" />
+@*         <OptaListBuilder Items="_post.Tags"
+                         BuilderType="BuilderType.Tag"
+                         Label="Tags"
+                         OnChange="() => OnChange(nameof(_post.Tags))" /> *@
+    </OptaBlogComponent>
+}

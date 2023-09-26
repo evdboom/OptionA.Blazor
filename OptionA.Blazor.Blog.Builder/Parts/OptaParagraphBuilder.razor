@@ -1,11 +1,16 @@
 ﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
 @if (Content is not null)
 {
-    <OptaGenericParts Content="Content"
-                      OnChange="OnChange"
-                      OnRemove="OnRemove"
-                      BuilderType="BuilderType.Paragraph"
-                      Label="Paragraph">
-        <DirectInputTextArea @bind-Value="Content.Content" AdditionalAttributes="@DataProvider.GetAttributes(BuilderType.Paragraph, AttributeTypes.Class | AttributeTypes.Placeholder)" />
-    </OptaGenericParts> 
+    <OptaBlogComponent Name="**Paragraph**"
+                       ContentChanged="ContentChanged"
+                       ContentRemoved="ContentRemoved"
+                       ContentIndex="ContentIndex"
+                       TotalContentCount="TotalContentCount"
+                       MovedUp="MovedUp"
+                       MovedDown="MovedDown">
+        <label @attributes="@GetLabelAttributes(ParagraphId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Value")" />
+        </label>
+        <DirectInputTextArea @bind-Value="Content.Content" AdditionalAttributes="@GetAttributes()" AutoGrow="true" />
+    </OptaBlogComponent>
 }

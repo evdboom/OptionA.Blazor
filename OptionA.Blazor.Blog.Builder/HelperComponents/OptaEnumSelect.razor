@@ -3,7 +3,7 @@
 
 @if (_values is not null)
 {
-    <InputSelect @bind-Value="InternalValue">
+    <InputSelect @bind-Value="InternalValue" AdditionalAttributes="AdditionalAttributes">
         @foreach (var value in _values)
         {
             <option value="@value">@value</option>

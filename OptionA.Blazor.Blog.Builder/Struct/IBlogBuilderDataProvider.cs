@@ -12,6 +12,14 @@ namespace OptionA.Blazor.Blog.Builder
         /// </summary>
         string? FormClass { get; }
         /// <summary>
+        /// Properties for the create post button
+        /// </summary>
+        BuilderTypeProperties? CreatePostButton { get; }
+        /// <summary>
+        /// Propertis for the save post button
+        /// </summary>
+        BuilderTypeProperties? SavePostButton { get; }        
+        /// <summary>
         /// tries to get the properties for the given builder type, if set
         /// </summary>
         /// <param name="type"></param>
@@ -22,18 +30,28 @@ namespace OptionA.Blazor.Blog.Builder
         /// Gets the attributes for the given builder type
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="attributes"></param>
-        /// <param name="id"></param>
-        /// <param name="forId"></param>
+        /// <param name="defaultAttributes"></param>
         /// <returns></returns>
-        Dictionary<string, object?> GetAttributes(BuilderType type, AttributeTypes attributes, string? id = null, string? forId = null);
+        Dictionary<string, object?> GetAttributes(BuilderType type, Dictionary<string, object?>? defaultAttributes = null);
+        /// <summary>
+        /// Gets the container attributes for the given builder type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="defaultAttributes"></param>
+        /// <returns></returns>
+        Dictionary<string, object?> GetContainerAttributes(BuilderType type, Dictionary<string, object?>? defaultAttributes = null);
         /// <summary>
         /// Gets the content for the given builder type
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="attributes"></param>
-        /// <param name="defaultValue"></param>
+        /// <param name="content"></param>
         /// <returns></returns>
-        InlineContent? GetContent(BuilderType type, AttributeTypes attributes, string? defaultValue = null);
+        IContent? GetContent(BuilderType type, string? content);
+        /// <summary>
+        /// Creates a new content for the given content type
+        /// </summary>
+        /// <param name="contentType"></param>
+        /// <returns></returns>
+        IContent CreateContentForType(ContentType contentType);
     }
 }

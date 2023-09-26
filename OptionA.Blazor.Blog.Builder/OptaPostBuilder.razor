@@ -1,49 +1,35 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @using OptionA.Blazor.Blog.Builder.HelperComponents
+@using OptionA.Blazor.Blog.Builder.Parts
+
 <h1>New post</h1>
 @if (_post is null)
 {
-    <div @attributes="DataProvider.GetAttributes(BuilderType.AddPostButton, AttributeTypes.ContainerClass)">
-        <button type="button" @onclick="CreateNewPost" @attributes="DataProvider.GetAttributes(BuilderType.AddPostButton, AttributeTypes.Title | AttributeTypes.Class)">
-            <OptaText Content="@DataProvider.GetContent(BuilderType.AddPostButton, AttributeTypes.Content, "Create new post")" />
+    <div @attributes="@GetCreatePostContainerAttributes()">
+        <button type="button" @onclick="CreateNewPost" @attributes="@GetCreatePostAttributes()">
+            <OptaText Content="@GetCreatePostContent()" />
         </button>
     </div>
 }
 else
 {
     <EditForm EditContext="_context" OnSubmit="SavePost" AdditionalAttributes="GetFormAttributes()">
-        <div @attributes="@DataProvider.GetAttributes(BuilderType.Title, AttributeTypes.ContainerClass)">
-            <label @attributes="@DataProvider.GetAttributes(BuilderType.Title, AttributeTypes.LabelClass, forId: TitleId)">
-                <OptaText Content="@DataProvider.GetContent(BuilderType.Title, AttributeTypes.Label, "Title")" />
-            </label>
-            <DirectInputText @bind-Value="_post.Title" AdditionalAttributes="DataProvider.GetAttributes(BuilderType.Title, AttributeTypes.Class | AttributeTypes.Placeholder, id: TitleId)" />
-        </div>
-        <div @attributes="@DataProvider.GetAttributes(BuilderType.Date, AttributeTypes.ContainerClass)">
-            <label @attributes="@DataProvider.GetAttributes(BuilderType.Date, AttributeTypes.LabelClass, forId: DateId)">
-                <OptaText Content="@DataProvider.GetContent(BuilderType.Date, AttributeTypes.Label, "Date")" />
-                </label>
-            <InputDate @bind-Value="_post.Date" AdditionalAttributes="@DataProvider.GetAttributes(BuilderType.Date, AttributeTypes.Class | AttributeTypes.Placeholder, id: DateId)" />
-        </div>
-        <div @attributes="@DataProvider.GetAttributes(BuilderType.Subtitle, AttributeTypes.ContainerClass)">
-            <label @attributes="@DataProvider.GetAttributes(BuilderType.Subtitle, AttributeTypes.LabelClass, forId: SubtitleId)">
-                <OptaText Content="@DataProvider.GetContent(BuilderType.Subtitle, AttributeTypes.Label, "Subtitle")"/>
-            </label>
-            <DirectInputTextArea @bind-Value="_post.Subtitle" AdditionalAttributes="DataProvider.GetAttributes(BuilderType.Subtitle, AttributeTypes.Class | AttributeTypes.Placeholder, id: SubtitleId)" />
-        </div>
-        <OptaListBuilder Items="_post.Tags"
-                         BuilderType="BuilderType.Tag"
-                         Label="Tags"
-                         OnChange="() => OnChange(nameof(_post.Tags))" />
-        <OptaComponentBar OnAddContent="AddContent" />
-        @foreach(var content in _post.Content)
+        <OptaPostProperties Post="_post"
+                            PropertyChanged="(property) => OnChange(property)"/>
+        <OptaComponentBar ContentAdded="OnContentAdded"/>
+        @foreach(var content in _post.Content.Select((c,i) => new { Content = c, Index = i }))
         {
-            <OptaContentBuilderSelector Content="content"
-                                        OnChange="() => OnChange(nameof(_post.Content))"
-                                        OnRemove="OnRemove"/>
+            <OptaContentBuilderSelector Content="content.Content"
+                                        ContentChanged="() => OnChange(nameof(_post.Content))"
+                                        ContentRemoved="() => OnRemove(content.Content)"
+                                        ContentIndex="content.Index"
+                                        TotalContentCount="_post.Content.Count"
+                                        MovedUp="() => OnMoveUp(content.Content)"
+                                        MovedDown="() => OnMoveDown(content.Content)" />
         }
-        <div @attributes="@DataProvider.GetAttributes(BuilderType.SavePostButton, AttributeTypes.ContainerClass)">
-            <button type="submit" @attributes="@DataProvider.GetAttributes(BuilderType.SavePostButton, AttributeTypes.Class | AttributeTypes.Title)">
-                <OptaText Content="@DataProvider.GetContent(BuilderType.SavePostButton, AttributeTypes.Content, "Save")" />
+        <div @attributes="@GetSavePostContainerAttributes()">
+            <button type="submit" @attributes="@GetSavePostAttributes()">
+                <OptaText Content="@GetSavePostContent()" />
             </button>
         </div>
     </EditForm>

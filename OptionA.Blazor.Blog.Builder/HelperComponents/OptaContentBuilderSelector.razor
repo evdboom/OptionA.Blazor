@@ -5,13 +5,21 @@
     {
         case ContentType.Paragraph:
             <OptaParagraphBuilder Content="(ParagraphContent)Content"
-                                  OnChange="OnChange"
-                                  OnRemove="OnRemove"/>
+                                  ContentChanged="ContentChanged"
+                                  ContentRemoved="ContentRemoved"
+                                  ContentIndex="ContentIndex"
+                                  TotalContentCount="TotalContentCount"
+                                  MovedUp="MovedUp"
+                                  MovedDown="MovedDown"/>
             break;
         case ContentType.Header:
             <OptaHeaderBuilder Content="(HeaderContent)Content"
-                               OnChange="OnChange"
-                               OnRemove="OnRemove"/>
+                               ContentChanged="ContentChanged"
+                               ContentRemoved="ContentRemoved"
+                               ContentIndex="ContentIndex"
+                               TotalContentCount="TotalContentCount"
+                               MovedUp="MovedUp"
+                               MovedDown="MovedDown" />
             break;
     }
 }
