@@ -63,7 +63,7 @@ namespace OptionA.Blazor.Blog.Builder
         /// <inheritdoc/>
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (!firstRender || _post is not null)
+            if (!firstRender)
             {
                 return;
             }
