@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using OptionA.Blazor.Storage.Migrations;
 
-namespace OptionA.Blazor.Storage.Contracts.Extensions
+namespace OptionA.Blazor.Storage
 {
     /// <summary>
     /// Helper class for adding services to the servies collection

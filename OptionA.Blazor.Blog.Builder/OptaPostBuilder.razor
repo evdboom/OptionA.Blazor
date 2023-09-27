@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNetCore.Components.Forms
-@using OptionA.Blazor.Blog.Builder.HelperComponents
+﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
 @using OptionA.Blazor.Blog.Builder.Parts
 
 <h1>New post</h1>
@@ -13,24 +12,7 @@
 }
 else
 {
-    <EditForm EditContext="_context" OnSubmit="SavePost" AdditionalAttributes="GetFormAttributes()">
-        <OptaPostProperties Post="_post"
-                            PropertyChanged="(property) => OnChange(property)"/>
-        <OptaComponentBar ContentAdded="OnContentAdded"/>
-        @foreach(var content in _post.Content.Select((c,i) => new { Content = c, Index = i }))
-        {
-            <OptaContentBuilderSelector Content="content.Content"
-                                        ContentChanged="() => OnChange(nameof(_post.Content))"
-                                        ContentRemoved="() => OnRemove(content.Content)"
-                                        ContentIndex="content.Index"
-                                        TotalContentCount="_post.Content.Count"
-                                        MovedUp="() => OnMoveUp(content.Content)"
-                                        MovedDown="() => OnMoveDown(content.Content)" />
-        }
-        <div @attributes="@GetSavePostContainerAttributes()">
-            <button type="submit" @attributes="@GetSavePostAttributes()">
-                <OptaText Content="@GetSavePostContent()" />
-            </button>
-        </div>
-    </EditForm>
+    <OptaPostForm Post="_post"
+                  PostChanged="OnPostChanged"
+                  PostSubmitted="OnSavePost"/>
 }

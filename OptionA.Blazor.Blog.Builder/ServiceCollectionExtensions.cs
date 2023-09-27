@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using OptionA.Blazor.Storage;
 
 namespace OptionA.Blazor.Blog.Builder
 {
@@ -14,7 +15,8 @@ namespace OptionA.Blazor.Blog.Builder
         /// <param name="configuration"></param>
         /// <returns></returns>
         public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptaBlogBuilderOptions>? configuration = null) => services
-            .AddSingleton<IBlogBuilderDataProvider>(provider => new BlogBuilderDataProvider(configuration));
+            .AddSingleton<IBlogBuilderDataProvider>(provider => new BlogBuilderDataProvider(configuration))
+            .AddStorageService();
 
         /// <summary>
         /// Adds all blogparts to the servicecollection, prefilled with bootstrap (5.3) classes

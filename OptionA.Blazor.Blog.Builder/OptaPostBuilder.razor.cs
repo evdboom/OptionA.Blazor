@@ -1,13 +1,24 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.JSInterop;
+using OptionA.Blazor.Storage;
 
 namespace OptionA.Blazor.Blog.Builder
 {
     /// <summary>
     /// Builder component for posts
     /// </summary>
-    public partial class OptaPostBuilder
+    public partial class OptaPostBuilder : IDisposable
     {
+        private const string RegisterHandlerFunction = "registerHandler";
+        private const string UnRegisterHandlerFunction = "unRegisterHandler";
+        private const string StorageKey = "opta-post-storage";
+
+        /// <summary>
+        /// Post to build or edit
+        /// </summary>
+        [Parameter]
+        public Post? Post { get; set; }
         /// <summary>
         /// Called whenever this post being build is updated;
         /// </summary>
@@ -20,18 +31,73 @@ namespace OptionA.Blazor.Blog.Builder
         public EventCallback<Post> PostSaved { get; set; }
         [Inject]
         private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
+        [Inject]
+        private IStorageService StorageService { get; set; } = null!;
+        [Inject]
+        private NavigationManager Navigation { get; set; } = null!;
+        [Inject]
+        private IJSRuntime JsRuntime { get; set; } = null!;
 
         private Post? _post;
-        private EditContext? _context;
+        private  IJSObjectReference? _module;
 
-        private void OnContentAdded(IContent content)
+        /// <summary>
+        /// Stores current post if not saved
+        /// </summary>
+        [JSInvokable]
+        public async void BuilderUnloaded()
         {
-            if (_post is null)
+            Navigation.LocationChanged -= LocationChanged;
+            if (_post is not null)
+            {
+                await StorageService.SetItemAsync(StorageLocation.Local, StorageKey, _post);
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnInitialized()
+        {
+            Navigation.LocationChanged += LocationChanged;
+        }
+
+        /// <inheritdoc/>
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (!firstRender || _post is not null)
             {
                 return;
             }
 
-            _post.Content.Add(content);
+            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OptionA.Blazor.Blog.Builder/OptaPostBuilder.razor.js");
+            var objRef = DotNetObjectReference.Create(this);
+            await _module.InvokeVoidAsync(RegisterHandlerFunction, objRef, nameof(BuilderUnloaded));
+
+            if (_post is null)
+            {
+                if ((await StorageService.GetItemAsync<Post>(StorageLocation.Local, StorageKey)) is Post post)
+                {
+                    _post = post;
+                    await PostChanged.InvokeAsync(_post);
+                    StateHasChanged();
+                }
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnParametersSet()
+        {
+            if (Post is not null)
+            {
+                _post = Post;
+            }
+        }
+
+        private async void LocationChanged(object? sender, LocationChangedEventArgs e)
+        {
+            if (_post is not null)
+            {
+                await StorageService.SetItemAsync(StorageLocation.Local, StorageKey, _post);
+            }
         }
 
         private async Task CreateNewPost()
@@ -41,19 +107,22 @@ namespace OptionA.Blazor.Blog.Builder
                 Date = DateTime.Today
             };
             await PostChanged.InvokeAsync(_post);
-            _context = new(_post);
-            _context.OnFieldChanged += FieldChanged;
-            StateHasChanged();
         }
 
-        private async void FieldChanged(object? sender, FieldChangedEventArgs e)
+        private async Task OnPostChanged()
         {
+            if (_post is null)
+            {
+                return;
+            }
+
             await PostChanged.InvokeAsync(_post);
         }
 
-        private async Task SavePost()
+
+        private async Task OnSavePost()
         {
-            if (_post is null || _context is null)
+            if (_post is null)
             {
                 return;
             }
@@ -61,9 +130,9 @@ namespace OptionA.Blazor.Blog.Builder
             _post.Tags.RemoveAll(string.IsNullOrWhiteSpace);
 
             await PostSaved.InvokeAsync(_post);
-            _context.OnFieldChanged -= FieldChanged;
-            _context = null;
             _post = null;
+            await PostChanged.InvokeAsync(_post);
+            await StorageService.RemoveItemAsync(StorageLocation.Local, StorageKey);
             StateHasChanged();
         }
 
@@ -79,9 +148,9 @@ namespace OptionA.Blazor.Blog.Builder
                 {
                     result["class"] = DataProvider.CreatePostButton.Class;
                 }
-                if (DataProvider.CreatePostButton.AdditionalAttributes is not null) 
+                if (DataProvider.CreatePostButton.AdditionalAttributes is not null)
                 {
-                    foreach(var attribute in  DataProvider.CreatePostButton.AdditionalAttributes)
+                    foreach (var attribute in DataProvider.CreatePostButton.AdditionalAttributes)
                     {
                         result[attribute.Key] = attribute.Value;
                     }
@@ -116,123 +185,29 @@ namespace OptionA.Blazor.Blog.Builder
             return result;
         }
 
-        private Dictionary<string, object?> GetSavePostAttributes()
+        private bool _disposed;
+        /// <summary>
+        /// Disposes the builder
+        /// </summary>
+        public async void Dispose()
         {
-            var result = new Dictionary<string, object?>()
+            if (!_disposed)
             {
-                ["title"] = "Save the post"
-            };
-            if (DataProvider.SavePostButton is not null)
+                await Dispose(true);
+                _disposed = true;
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        private async Task Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                if (!string.IsNullOrEmpty(DataProvider.SavePostButton.Class))
+                Navigation.LocationChanged -= LocationChanged;
+                if (_module is not null)
                 {
-                    result["class"] = DataProvider.SavePostButton.Class;
-                }
-                if (DataProvider.SavePostButton.AdditionalAttributes is not null)
-                {
-                    foreach (var attribute in DataProvider.SavePostButton.AdditionalAttributes)
-                    {
-                        result[attribute.Key] = attribute.Value;
-                    }
-                }
-            }
-            return result;
-        }
-
-        private InlineContent? GetSavePostContent()
-        {
-            return DataProvider.SavePostButton?.Content is not null
-                ? new InlineContent
-                {
-                    Content = DataProvider.SavePostButton.Content,
-                }
-                : new InlineContent
-                {
-                    Content = "Save",
-                };
-        }
-
-        private Dictionary<string, object?> GetSavePostContainerAttributes()
-        {
-            var result = new Dictionary<string, object?>();
-            if (DataProvider.SavePostButton is not null)
-            {
-                if (!string.IsNullOrEmpty(DataProvider.SavePostButton.ContainerClass))
-                {
-                    result["class"] = DataProvider.SavePostButton.ContainerClass;
-                }
-            }
-            return result;
-        }
-
-        private Dictionary<string, object?> GetFormAttributes()
-        {
-            var result = new Dictionary<string, object?>();
-            if (!string.IsNullOrEmpty(DataProvider.FormClass))
-            {
-                result["class"] = DataProvider.FormClass;
-            }
-            return result;
-        }
-
-        private void OnRemove(IContent content)
-        {
-            if (_post is null || _context is null)
-            {
-                return;
-            }
-
-            _post.Content.Remove(content);
-            var id = _context.Field(nameof(_post.Content));
-            _context.NotifyFieldChanged(id);
-        }
-
-        private void OnChange(string property)
-        {
-            if (_context is null)
-            {
-                return;
-            }
-
-            var id = _context.Field(property);
-            _context.NotifyFieldChanged(id);
-        }
-
-        private void OnMoveUp(IContent content)
-        {
-            if (_post is null || _context is null)
-            {
-                return;
-            }
-
-            var index = _post.Content.IndexOf(content);
-            if (index > 0)
-            {
-                _post.Content.RemoveAt(index);
-                index--;
-                _post.Content.Insert(index, content);
-
-                var id = _context.Field(nameof(_post.Content));
-                _context.NotifyFieldChanged(id);
-            }
-        }
-
-        private void OnMoveDown(IContent content)
-        {
-            if (_post is null || _context is null)
-            {
-                return;
-            }
-
-            var index = _post.Content.IndexOf(content);
-            if (index >= 0 && index < _post.Content.Count - 1)
-            {
-                _post.Content.RemoveAt(index);
-                index++;
-                _post.Content.Insert(index, content);
-
-                var id = _context.Field(nameof(_post.Content));
-                _context.NotifyFieldChanged(id);
+                    await _module.InvokeVoidAsync(UnRegisterHandlerFunction);
+                }                
             }
         }
     }

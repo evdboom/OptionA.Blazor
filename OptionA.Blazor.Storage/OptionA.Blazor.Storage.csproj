@@ -6,17 +6,17 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  	<Version>7.0.2</Version>
+  	<Version>7.0.3</Version>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
-	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Storage</PackageProjectUrl>
+	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Description>Blazor class library with services to access local storage, session storage and indexed db</Description>
     <PackageReleaseNotes>
 		7.0.0 Follow .net version for main version
 		7.0.1 Update packages
 		7.0.2 Downgrade package for wider support
-		7.0.3 Package update
+		7.0.3 Package update and namespace changes
 	</PackageReleaseNotes>
   </PropertyGroup>
 

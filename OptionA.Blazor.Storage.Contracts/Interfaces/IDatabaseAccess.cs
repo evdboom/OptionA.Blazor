@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace OptionA.Blazor.Storage.Interfaces
-{
+namespace OptionA.Blazor.Storage
+{ 
     /// <summary>
     /// Interface for storing the database access for indexedDb
     /// </summary>

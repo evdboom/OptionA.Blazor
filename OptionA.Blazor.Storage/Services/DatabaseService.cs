@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 using OptionA.Blazor.Storage.Extensions;
-using OptionA.Blazor.Storage.Interfaces;
+using OptionA.Blazor.Storage.Migrations;
 using OptionA.Blazor.Storage.Utilities;
 
 namespace OptionA.Blazor.Storage.Services
@@ -37,7 +37,7 @@ namespace OptionA.Blazor.Storage.Services
 
         public Task<IEnumerable<T>> GetAllFromStoreAsync<T>(IDatabaseAccess access, string tableName, string index)
         {
-            return GetAllFromStoreAsync<T,string>(access, tableName, index, null!);
+            return GetAllFromStoreAsync<T, string>(access, tableName, index, null!);
         }
 
         public async Task<IEnumerable<T>> GetAllFromStoreAsync<T, Key>(IDatabaseAccess access, string tableName, string index, Key key)

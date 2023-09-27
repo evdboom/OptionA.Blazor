@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace OptionA.Blazor.Storage.Enums
+namespace OptionA.Blazor.Storage
 {
     /// <summary>
     /// Storage locations of the browser storage

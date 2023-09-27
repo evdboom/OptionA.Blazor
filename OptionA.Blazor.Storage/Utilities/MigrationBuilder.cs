@@ -1,6 +1,6 @@
-﻿using OptionA.Blazor.Storage.Migrations;
+﻿using OptionA.Blazor.Storage.Utilities;
 
-namespace OptionA.Blazor.Storage.Utilities
+namespace OptionA.Blazor.Storage.Migrations
 {
     internal class MigrationBuilder
     {

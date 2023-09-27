@@ -5,13 +5,16 @@
     <Nullable>enable</Nullable>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<Version>7.0.1</Version>
+	<Version>7.0.2</Version>
 	<LangVersion>10</LangVersion>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Storage.Contracts</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Description>Contracts and abstraction to work together with the Blazor.Storage package, without the implementations</Description>		
+	<Description>Contracts and abstraction to work together with the Blazor.Storage package, without the implementations</Description>
+	<PackageReleaseNotes>
+		7.0.2 changed namespaces
+	</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
