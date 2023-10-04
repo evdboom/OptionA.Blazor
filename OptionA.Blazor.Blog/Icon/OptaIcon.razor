@@ -5,10 +5,10 @@
     @switch (Content.Mode)
     {
         case IconMode.Class:
-            <i @attributes=Content.GetAttributes(DataProvider)></i>
+            <i @attributes="@Content.GetAttributes(DataProvider)"></i>
             break;
         case IconMode.Path:
-            <svg @attributes=Content.GetAttributes(DataProvider)>
+            <svg @attributes="@Content.GetAttributes(DataProvider)">
                 @foreach (var path in Content.Paths)
                 {
                     <path d="@path" />

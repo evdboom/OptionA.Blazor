@@ -1,16 +1,18 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.JSInterop;
 
 namespace OptionA.Blazor.Components.Services
 {
     /// <inheritdoc/>
-    public class ResponsiveService : IResponsiveService
+    public class ResponsiveService : IResponsiveService, IDisposable
     {
+        private const string UnregisterHandlerFunction = "unregisterHandler";
         private const string RegisterHandlerFunction = "registerHandler";
         private const string GetDimensionFunction = "getDimension";
 
         private NamedDimension? _currentDimension;
         private bool _initialized;
+        private string? _eventId;
 
         private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
         private readonly Dictionary<int, string> _sizes;
@@ -25,10 +27,10 @@ namespace OptionA.Blazor.Components.Services
         /// Default constructor
         /// </summary>
         /// <param name="jsRuntime"></param>
-        /// <param name="options"></param>
-        public ResponsiveService(IJSRuntime jsRuntime, IOptions<ResponsiveOptions> options)
+        /// <param name="dataProvider"></param>
+        public ResponsiveService(IJSRuntime jsRuntime, IResponsiveDataProvider dataProvider)
         {
-            _sizes = options.Value.Sizes;
+            _sizes = dataProvider.Sizes;
             _sizesByName = _sizes.ToDictionary(size => size.Value, size => size.Key);
 
             _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
@@ -38,7 +40,7 @@ namespace OptionA.Blazor.Components.Services
         /// <inheritdoc/>
         public IEnumerable<(string Name, int Width)> GetAllDimensionBreakPoints()
         {
-            return _sizes.Select(size => (Name: size.Value, Width: size.Key));                
+            return _sizes.Select(size => (Name: size.Value, Width: size.Key));
         }
 
         /// <inheritdoc/>
@@ -95,7 +97,7 @@ namespace OptionA.Blazor.Components.Services
                 Width = dimension.Width
             };
 
-            await module.InvokeVoidAsync(RegisterHandlerFunction, objRef, nameof(WindowSizeChanged));
+            _eventId = await module.InvokeAsync<string>(RegisterHandlerFunction, objRef, nameof(WindowSizeChanged));
         }
 
         /// <summary>
@@ -109,9 +111,9 @@ namespace OptionA.Blazor.Components.Services
             var oldName = _currentDimension!.Value.Name;
             _currentDimension = new NamedDimension
             {
-                Name = dimensionName, 
-                Height = dimension.Height, 
-                Width = dimension.Width 
+                Name = dimensionName,
+                Height = dimension.Height,
+                Width = dimension.Width
             };
             if (!(oldName?.Equals(dimensionName) ?? false))
             {
@@ -127,5 +129,25 @@ namespace OptionA.Blazor.Components.Services
                 .OrderByDescending(size => size.Key)
                 .First(size => size.Key <= width).Value;
         }
+
+
+        private bool _disposed;
+        /// <inheritdoc/>
+        public async void Dispose()
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            _disposed = true;
+            if (!string.IsNullOrEmpty(_eventId))
+            {
+                var module = await _moduleTask.Value;
+                await module.InvokeVoidAsync(UnregisterHandlerFunction, _eventId);
+            }
+            GC.SuppressFinalize(this);
+        }
+
     }
 }

@@ -20,7 +20,7 @@ namespace OptionA.Blazor.Storage
         public static IServiceCollection AddStorageService(this IServiceCollection services)
         {
             services
-                .AddScoped<IStorageService, StorageService>();
+                .TryAddScoped<IStorageService, StorageService>();
 
             return services;
         }

@@ -8,7 +8,7 @@ namespace OptionA.Blazor.Components.Gallery
     public partial class OptaGalleryImageContainer
     {
         [Inject]
-        private IGallerylDataProvider Provider { get; set; } = null!;
+        private IGalleryDataProvider Provider { get; set; } = null!;
         /// <summary>
         /// <see cref="OptaGallery"/> as parent
         /// </summary>

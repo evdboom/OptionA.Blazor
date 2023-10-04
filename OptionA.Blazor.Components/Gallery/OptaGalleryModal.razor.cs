@@ -8,7 +8,7 @@ namespace OptionA.Blazor.Components.Gallery
     public partial class OptaGalleryModal
     {
         [Inject]
-        private IGallerylDataProvider Provider { get; set; } = null!;
+        private IGalleryDataProvider Provider { get; set; } = null!;
         /// <summary>
         /// Set to true to show the modal
         /// </summary>

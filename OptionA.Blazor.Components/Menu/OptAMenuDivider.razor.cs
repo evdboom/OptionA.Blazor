@@ -8,16 +8,16 @@ namespace OptionA.Blazor.Components
     public partial class OptAMenuDivider
     {
         [Inject]
-        private IMenuDataProvider Provider { get; set; } = null!;
-        /// <summary>
-        /// Additonal classes to add
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
+        private IMenuDataProvider DataProvider { get; set; } = null!;
 
-        private string GetClasses()
+        private Dictionary<string, object?> GetAttributes()
         {
-            return $"{Provider.GetDividerClass()} {AdditionalClasses}".Trim();
+            var result = new Dictionary<string, object?>();
+            if (TryGetClasses(DataProvider.GetDividerClass(), out string classes))
+            {
+                result["class"] = classes;
+            }
+            return result;            
         }
     }
 }

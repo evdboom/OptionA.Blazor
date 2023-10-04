@@ -11,9 +11,9 @@ namespace OptionA.Blazor.Blog
         /// Quote to display
         /// </summary>
         [Parameter]
-        public QuotePartContent? Content { get; set; }
+        public QuoteContent? Content { get; set; }
 
-        private QuoteContent? QuoteContent
+        private IContent? QuoteContent
         {
             get
             {
@@ -21,7 +21,7 @@ namespace OptionA.Blazor.Blog
                 {
                     return null;
                 }
-                var result = new QuoteContent
+                var result = new ParagraphContent
                 {
                     Content = Content.Quote
                 };
@@ -35,7 +35,7 @@ namespace OptionA.Blazor.Blog
             }
         }
 
-        private BlockContent? SourceContent
+        private IContent? SourceContent
         {
             get
             {
@@ -43,7 +43,7 @@ namespace OptionA.Blazor.Blog
                 {
                     return null;
                 }
-                var result = new BlockContent
+                var result = new InlineContent
                 {
                     Content = Content.Source
                 };

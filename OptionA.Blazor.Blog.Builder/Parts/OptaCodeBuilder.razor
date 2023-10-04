@@ -1,0 +1,21 @@
+﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
+@if (Content is not null)
+{
+    <OptaBlogComponent Name="**Paragraph**"
+                       ContentChanged="ContentChanged"
+                       ContentRemoved="ContentRemoved"
+                       ContentIndex="ContentIndex"
+                       TotalContentCount="TotalContentCount"
+                       MovedUp="MovedUp"
+                       MovedDown="MovedDown"
+                       Content="Content">
+        <label @attributes="@GetLabelAttributes(CodeLanguageId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Language")" />
+        </label>
+        <OptaEnumSelect TEnum="CodeLanguage" @bind-Value="InternalLanguage" AdditionalAttributes="@GetCodeLanguageAttributes()" />
+        <label @attributes="@GetLabelAttributes(CodeId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Code")" />
+        </label>
+        <DirectInputTextArea @bind-Value="Content.Code" AdditionalAttributes="@GetCodeAttributes()" AutoGrow="true" />
+    </OptaBlogComponent>
+}

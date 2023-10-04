@@ -75,59 +75,10 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         {
             var result = new Dictionary<string, object?>()
             {
-                ["title"] = "Save the _post"
+                ["title"] = "Save the Post"
             };
-            if (DataProvider.SavePostButton is not null)
-            {
-                if (!string.IsNullOrEmpty(DataProvider.SavePostButton.Class))
-                {
-                    result["class"] = DataProvider.SavePostButton.Class;
-                }
-                if (DataProvider.SavePostButton.AdditionalAttributes is not null)
-                {
-                    foreach (var attribute in DataProvider.SavePostButton.AdditionalAttributes)
-                    {
-                        result[attribute.Key] = attribute.Value;
-                    }
-                }
-            }
-            return result;
-        }
 
-        private InlineContent? GetSavePostContent()
-        {
-            return DataProvider.SavePostButton?.Content is not null
-                ? new InlineContent
-                {
-                    Content = DataProvider.SavePostButton.Content,
-                }
-                : new InlineContent
-                {
-                    Content = "Save",
-                };
-        }
-
-        private Dictionary<string, object?> GetSavePostContainerAttributes()
-        {
-            var result = new Dictionary<string, object?>();
-            if (DataProvider.SavePostButton is not null)
-            {
-                if (!string.IsNullOrEmpty(DataProvider.SavePostButton.ContainerClass))
-                {
-                    result["class"] = DataProvider.SavePostButton.ContainerClass;
-                }
-            }
-            return result;
-        }
-
-        private Dictionary<string, object?> GetFormAttributes()
-        {
-            var result = new Dictionary<string, object?>();
-            if (!string.IsNullOrEmpty(DataProvider.FormClass))
-            {
-                result["class"] = DataProvider.FormClass;
-            }
-            return result;
+            return DataProvider.GetAttributes(BuilderType.SavePostButton, result);            
         }
 
         private void OnRemove(IContent content)

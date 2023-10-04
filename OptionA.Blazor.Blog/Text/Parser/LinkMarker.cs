@@ -18,7 +18,7 @@ namespace OptionA.Blazor.Blog.Text.Parser
         /// <inheritdoc/>
         public override bool IsValidForMarker(string input, [NotNullWhen(true)] out string? content)
         {
-            if (string.IsNullOrEmpty(input) || input.Length < 4 || input[0] == '\\')
+            if (string.IsNullOrEmpty(input) || input.Length < 4)
             {
                 content = null;
                 return false;

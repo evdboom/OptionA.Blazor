@@ -1,9 +1,9 @@
 ﻿namespace OptionA.Blazor.Components.Gallery.Struct
 {
     /// <summary>
-    /// Default implementation of the <see cref="IGallerylDataProvider"/>
+    /// Default implementation of the <see cref="IGalleryDataProvider"/>
     /// </summary>
-    public class GalleryDataProvider : IGallerylDataProvider
+    public class GalleryDataProvider : IGalleryDataProvider
     {
         private readonly GalleryOptions _options;       
 

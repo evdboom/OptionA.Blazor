@@ -35,4 +35,8 @@
     <ProjectReference Include="..\OptionA.Blazor.Storage\OptionA.Blazor.Storage.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

@@ -32,11 +32,11 @@
 
             while (!string.IsNullOrEmpty(content))
             {
-                var part = FindNextPart(content, out var definition);
+                var part = FindNextPart(content, out var definition, out var originalLength);
                 if (definition == null)
                 {
                     currentPart += part;
-                    content = RemoveFromStart(content, part);
+                    content = RemoveFromStart(content, originalLength);
                 }
                 else
                 {
@@ -49,7 +49,7 @@
                         currentPart = string.Empty;
                     }
 
-                    content = RemoveFromStart(content, $"{definition.Starter}{part}{definition.Ender}");
+                    content = RemoveFromStart(content, originalLength);
                     yield return definition.CreateContent(part);
                 }
             }
@@ -60,25 +60,25 @@
                 {
                     Content = currentPart
                 };
-                currentPart = string.Empty;
             }
         }
 
-        private string RemoveFromStart(string text, string toRemove)
+        private string RemoveFromStart(string text, int lengthToRemove)
         {
-            if (!text.StartsWith(toRemove))
+            if (lengthToRemove > text.Length)
             {
-                throw new ArgumentException($"{toRemove} is not the start of {text})");
+                throw new ArgumentException($"{lengthToRemove} is higher the length of text");
             }
 
-            return text[toRemove.Length..];
+            return text[lengthToRemove..];
         }
 
-        private string FindNextPart(string text, out IMarkerDefinition? definition)
+        private string FindNextPart(string text, out IMarkerDefinition? definition, out int originalLength)
         {
             if (string.IsNullOrEmpty(text))
             {
                 definition = null;
+                originalLength = 0;
                 return string.Empty;
             }
 
@@ -92,32 +92,45 @@
                     if (marker.IsValidForMarker(text, out var content))
                     {
                         definition = marker;
+                        originalLength = $"{definition.Starter}{content}{definition.Ender}".Length;
                         return content;
                     }
                 }
             }
+            
+            var maybeEscape = firstChar == Escape;
+            part += firstChar;        
 
-            part += firstChar;
-            var isEscape = firstChar == Escape;
             var found = false;
             var counter = 1;
+           
             while (!found && counter < text.Length)
             {
                 var c = text[counter];
-                var isSpecial = !isEscape && _specials.Contains(c);
-                isEscape = c == Escape;
+                var mayBeSpecial = _specials.Contains(c);
+                var isEscape = false;
+                if (maybeEscape && mayBeSpecial)
+                {
+                    // is an escaped special, remove the \
+                    part = part[..^1];
+                    isEscape = true;
+                }
+
+                var isSpecial = !isEscape && mayBeSpecial;
+                maybeEscape = c == Escape;
 
                 if (isSpecial)
                 {
                     found = true;
                 }
-                else
+                else 
                 {
                     part += c;
-                }
-                counter++;
+                    counter++;
+                }                                
             }
 
+            originalLength = counter;
             definition = null;
             return part;
         }

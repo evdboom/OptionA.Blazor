@@ -1,0 +1,16 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (QuoteContent is not null)
+{
+    <figure>
+        <blockquote>
+            <OptaChild Content="QuoteContent" />
+        </blockquote>        
+        @if (SourceContent is not null)
+        {
+            <figcaption>
+                <OptaChild Content="SourceContent" />
+            </figcaption>
+        }
+    </figure>    
+}
+

@@ -20,13 +20,6 @@ namespace OptionA.Blazor.Blog.Builder
         }
 
         /// <inheritdoc/>
-        public string? FormClass => _options.FormClass;
-        /// <inheritdoc/>
-        public BuilderTypeProperties? CreatePostButton => _options.CreatePostButton;
-        /// <inheritdoc/>
-        public BuilderTypeProperties? SavePostButton => _options.SavePostButton;
-
-        /// <inheritdoc/>
         public IContent CreateContentForType(ContentType contentType)
         {
             return contentType switch
@@ -36,6 +29,12 @@ namespace OptionA.Blazor.Blog.Builder
                 {
                     Size = _options.DefaultHeaderSize ?? HeaderSize.Two
                 },
+                ContentType.Code => new CodeContent
+                {
+                    Language = _options.DefaultCodeLanguage ?? CodeLanguage.CSharp
+                },
+                ContentType.Image => new ImageContent(),
+                ContentType.Quote => new QuoteContent(),
                 _ => throw new NotSupportedException($"Contenttype {contentType} is not support as individual blogpart")
             };
         }
@@ -64,35 +63,36 @@ namespace OptionA.Blazor.Blog.Builder
         }
 
         /// <inheritdoc/>
-        public Dictionary<string, object?> GetContainerAttributes(BuilderType type, Dictionary<string, object?>? defaultAttributes = null)
-        {
-            var result = defaultAttributes ?? new();
-
-            if (TryGetProperties(type, out var attributes))
-            {
-                if (attributes.ContainerClass is not null)
-                {
-                    result["class"] = attributes.ContainerClass;
-                }
-            }
-
-            return result;
-        }
-
-        /// <inheritdoc/>
         public IContent? GetContent(BuilderType type, string? defaultContent)
         {
             if (TryGetProperties(type, out var properties))
             {
-                if (properties.Content is not null)
+                IContent result = properties.ContentType switch
                 {
-                    return new InlineContent
-                    {
-                        Content = properties.Content
-                    };
-                }
-            }
+                    ContentType.Inline => new InlineContent(),
+                    ContentType.Block => new BlockContent(),
+                    _ => new InlineContent()
+                };
 
+                if (result is TextContent text)
+                {
+                    if (properties.Content is not null)
+                    {
+                        text.Content = properties.Content;
+                    }
+                    else if (defaultContent is not null)
+                    {
+                        text.Content = defaultContent;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+
+                return result;
+            }
+           
             if (defaultContent is not null)
             {
                 return new InlineContent

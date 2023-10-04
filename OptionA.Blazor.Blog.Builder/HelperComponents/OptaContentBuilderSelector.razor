@@ -21,5 +21,33 @@
                                MovedUp="MovedUp"
                                MovedDown="MovedDown" />
             break;
+        case ContentType.Code:
+            <OptaCodeBuilder Content="(CodeContent)Content"
+                               ContentChanged="ContentChanged"
+                               ContentRemoved="ContentRemoved"
+                               ContentIndex="ContentIndex"
+                               TotalContentCount="TotalContentCount"
+                               MovedUp="MovedUp"
+                               MovedDown="MovedDown" />
+            break;
+        case ContentType.Image:
+            <OptaImageBuilder Content="(ImageContent)Content"
+                             ContentChanged="ContentChanged"
+                             ContentRemoved="ContentRemoved"
+                             ContentIndex="ContentIndex"
+                             TotalContentCount="TotalContentCount"
+                             MovedUp="MovedUp"
+                             MovedDown="MovedDown" />
+            break;
+        case ContentType.Quote:
+            <OptaQuoteBuilder Content="(QuoteContent)Content"
+                              ContentChanged="ContentChanged"
+                              ContentRemoved="ContentRemoved"
+                              ContentIndex="ContentIndex"
+                              TotalContentCount="TotalContentCount"
+                              MovedUp="MovedUp"
+                              MovedDown="MovedDown" />
+            break;
+
     }
 }

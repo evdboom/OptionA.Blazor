@@ -11,5 +11,9 @@
         /// Text to display
         /// </summary>
         public string Content { get; set; } = string.Empty;
+        /// <summary>
+        /// Set to true to skip markdown detection
+        /// </summary>
+        public bool NotMarkdown { get; set; }
     }
 }

@@ -1,0 +1,25 @@
+﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
+@if (Content is not null)
+{
+    <OptaBlogComponent Name="**Image**"
+                       ContentChanged="ContentChanged"
+                       ContentRemoved="ContentRemoved"
+                       ContentIndex="ContentIndex"
+                       TotalContentCount="TotalContentCount"
+                       MovedUp="MovedUp"
+                       MovedDown="MovedDown"
+                       Content="Content">
+        <label @attributes="@GetLabelAttributes(SourceId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
+        </label>
+        <DirectInputText @bind-Value="Content.Source" AdditionalAttributes="@GetAttributes(SourceId, "Source...")" />
+        <label @attributes="@GetLabelAttributes(TitleId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Title")" />
+        </label>
+        <DirectInputText @bind-Value="Content.Title" AdditionalAttributes="@GetAttributes(TitleId, "Title...")" />
+        <label @attributes="@GetLabelAttributes(AlternativeId)">
+            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Alternative")" />
+        </label>
+        <DirectInputText @bind-Value="Content.Alternative" AdditionalAttributes="@GetAttributes(AlternativeId, "Alternative...")" />
+    </OptaBlogComponent>
+}

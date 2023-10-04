@@ -1,4 +1,4 @@
-﻿using OptionA.Blazor.Blog.Text.Parser;
+﻿using System.Security.Cryptography.X509Certificates;
 
 namespace OptionA.Blazor.Blog.Code.Parsers
 {
@@ -15,7 +15,11 @@ namespace OptionA.Blazor.Blog.Code.Parsers
         /// </summary>
         protected readonly Dictionary<string, MarkerType> _markers = new()
         {
-            { "*M*", MarkerType.Selection }
+            { "*S*", MarkerType.Selection },
+            { "*C*", MarkerType.Class },
+            { "*I*", MarkerType.Interface },
+            { "*E*", MarkerType.Enum },
+            { "*T*", MarkerType.Struct },
         };
 
         /// <summary>
@@ -29,10 +33,15 @@ namespace OptionA.Blazor.Blog.Code.Parsers
         protected abstract char[] Specials { get; }
 
         /// <summary>
-        /// list of methofs to determine the correct CodeTypes (other then strings and comments)
+        /// list of methods to determine the correct CodeTypes (other then strings and comments)
         /// </summary>
         protected List<Func<string, string, string, CodeType>> _partCheckers = new();
 
+        /// <summary>
+        /// gets the parts of the given code
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         protected virtual IEnumerable<(string Part, CodeType Type, MarkerType Marker)> GetParts(string code)
         {
             var current = string.Empty;
@@ -107,7 +116,7 @@ namespace OptionA.Blazor.Blog.Code.Parsers
                         var found = false;
                         foreach (var checker in _partCheckers)
                         {
-                            var type = checker(code, word, previous);
+                            var type = checker(previous, word, code);
                             found = type != CodeType.Text;
 
                             if (found)
@@ -226,7 +235,7 @@ namespace OptionA.Blazor.Blog.Code.Parsers
             incomplete = false;
             if (string.IsNullOrEmpty(code))
             {
-                wordType = WordTypeModel.Empty;             
+                wordType = WordTypeModel.Empty;
                 return string.Empty;
             }
 
@@ -304,23 +313,13 @@ namespace OptionA.Blazor.Blog.Code.Parsers
 
         private IContent ToContent((string Part, CodeType Type, MarkerType Marker) part)
         {
-            IContent result;
-            if (part.Type == CodeType.Text)
+            var result = new InlineContent
             {
-                result = new TextContent
-                {
-                    Content = part.Part
-                };
-            }
-            else
-            {
-                result = new InlineContent
-                {
-                    Content = part.Part
-                };
-                result.Attributes["opta-code"] = part.Type.ToAttribute();
-            }
-
+                Content = part.Part,
+                NotMarkdown = true
+            };
+            
+          
             if (part.Marker.HasFlag(MarkerType.Selection))
             {
                 if (result.Attributes.ContainsKey("opta-code-marker"))
@@ -331,6 +330,33 @@ namespace OptionA.Blazor.Blog.Code.Parsers
                 {
                     result.Attributes["opta-code-marker"] = "selected";
                 }
+            }
+            if (part.Type == CodeType.Text)
+            {                
+                if (part.Marker.HasFlag(MarkerType.Class))
+                {
+                    result.Attributes["opta-code"] = MarkerType.Class.ToAttribute();
+                }
+                else if (part.Marker.HasFlag(MarkerType.Interface))
+                {
+                    result.Attributes["opta-code"] = MarkerType.Interface.ToAttribute();
+                }
+                else if (part.Marker.HasFlag(MarkerType.Enum))
+                {
+                    result.Attributes["opta-code"] = MarkerType.Enum.ToAttribute();
+                }
+                else if (part.Marker.HasFlag(MarkerType.Struct))
+                {
+                    result.Attributes["opta-code"] = MarkerType.Struct.ToAttribute();
+                }
+                else
+                {
+                    result.Attributes["opta-code"] = part.Type.ToAttribute();
+                }
+            }
+            else
+            {
+                result.Attributes["opta-code"] = part.Type.ToAttribute();
             }
 
             return result;

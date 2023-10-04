@@ -46,8 +46,8 @@
         /// </summary>
         Directive,
         /// <summary>
-        /// Language special, could be rendered as text but for escaping
+        /// Word is a class
         /// </summary>
-        Special
+        Class
     }
 }

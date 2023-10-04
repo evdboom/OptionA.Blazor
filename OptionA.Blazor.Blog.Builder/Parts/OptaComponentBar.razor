@@ -8,4 +8,18 @@
         Add paragraph
     </button>
 </div>
-
+<div>
+    <button type="button" @onclick="async () => await AddContent(ContentType.Code)">
+        Add code
+    </button>
+</div>
+<div>
+    <button type="button" @onclick="async () => await AddContent(ContentType.Image)">
+        Add Image
+    </button>
+</div>
+<div>
+    <button type="button" @onclick="async () => await AddContent(ContentType.Quote)">
+        Add Quote
+    </button>
+</div>

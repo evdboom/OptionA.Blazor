@@ -17,7 +17,7 @@ namespace OptionA.Blazor.Components.Gallery
         [Inject]
         private IJSRuntime JsRuntime { get; set; } = null!;
         [Inject]
-        private IGallerylDataProvider Provider { get; set; } = null!;
+        private IGalleryDataProvider Provider { get; set; } = null!;
         /// <summary>
         /// Mode for the gallery, in <see cref="GalleryMode.SideBySide"/> flex direction will be column, otherwise row
         /// </summary>

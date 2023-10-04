@@ -4,7 +4,7 @@
 {
     <EditForm EditContext="_context" 
               OnSubmit="SavePost" 
-              AdditionalAttributes="GetFormAttributes()">
+              AdditionalAttributes="@DataProvider.GetAttributes(BuilderType.Form)">
         <OptaPostProperties Post="_post"
                             PropertyChanged="(property) => OnChange(property)"/>
         <OptaComponentBar ContentAdded="OnContentAdded"/>
@@ -18,9 +18,9 @@
                                         MovedUp="() => OnMoveUp(content.Content)"
                                         MovedDown="() => OnMoveDown(content.Content)" />
         }
-        <div @attributes="@GetSavePostContainerAttributes()">
+        <div @attributes="@DataProvider.GetAttributes(BuilderType.SavePostButtonContainer)">
             <button type="submit" @attributes="@GetSavePostAttributes()">
-                <OptaText Content="@GetSavePostContent()" />
+                <OptaChild Content="@DataProvider.GetContent(BuilderType.SavePostButton, "Save")" />
             </button>
         </div>
     </EditForm>

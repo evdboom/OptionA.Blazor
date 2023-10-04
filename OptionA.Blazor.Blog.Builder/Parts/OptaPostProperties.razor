@@ -16,9 +16,10 @@
             <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Subtitle")" />
         </label>
         <DirectInputTextArea @bind-Value="Post.Subtitle" AdditionalAttributes="GetSubtitleAttributes()" AutoGrow="true" />
-@*         <OptaListBuilder Items="_post.Tags"
-                         BuilderType="BuilderType.Tag"
+        <OptaListBuilder Items="Post.Tags"
                          Label="Tags"
-                         OnChange="() => OnChange(nameof(_post.Tags))" /> *@
+                         ItemPlaceholder="Tag..."
+                         ItemTitle="Add a tag to the post"
+                         ContentChanged="async () => await PropertyChanged.InvokeAsync(nameof(Post.Tags))" />
     </OptaBlogComponent>
 }

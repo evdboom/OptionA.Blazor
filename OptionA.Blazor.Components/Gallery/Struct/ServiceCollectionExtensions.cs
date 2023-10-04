@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using OptionA.Blazor.Components.Gallery.Struct;
 
 namespace OptionA.Blazor.Components
@@ -9,13 +10,18 @@ namespace OptionA.Blazor.Components
     public static partial class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Adds carousels with these default classes to the serviceprovider
+        /// Adds gallery with these default classes to the serviceprovider
         /// </summary>
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionAGallery(this IServiceCollection services, Action<GalleryOptions>? configuration = null) => services
-                .AddSingleton<IGallerylDataProvider>(provider => new GalleryDataProvider(configuration));
+        public static IServiceCollection AddOptionAGallery(this IServiceCollection services, Action<GalleryOptions>? configuration = null)
+        {
+            services
+                .TryAddSingleton<IGalleryDataProvider>(provider => new GalleryDataProvider(configuration));
+
+            return services;
+        }
 
         /// <summary>
         /// Adds default bootstrap (5.3) classes and icon for use of gallery

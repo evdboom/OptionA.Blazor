@@ -17,7 +17,7 @@ namespace OptionA.Blazor.Blog
         /// <summary>
         /// Paths to render
         /// </summary>
-        public List<string> Paths { get; } = new();
+        public List<string> Paths { get; set; } = new();
         /// <summary>
         /// Width when in Pathing mode
         /// </summary>
@@ -29,7 +29,7 @@ namespace OptionA.Blazor.Blog
         /// <summary>
         /// Viewbox for when path is set
         /// </summary>
-        public int[] ViewBoxValues { get; } = new int[4];
+        public int[] ViewBoxValues { get; set; } = new int[4];
         /// <summary>
         /// Gets the mode to render
         /// </summary>
@@ -39,21 +39,25 @@ namespace OptionA.Blazor.Blog
         {
             get
             {
-                var attributes = base.Attributes;
+                var result = new Dictionary<string, object?>();
                 if (Mode == IconMode.Path)
                 {
                     if (!string.IsNullOrEmpty(Width))
                     {
-                        attributes["width"] = Width;
+                        result["width"] = Width;
                     }
                     if (!string.IsNullOrEmpty(Height))
                     {
-                        attributes["height"] = Height;
+                        result["height"] = Height;
                     }
-                    attributes["fill"] = "currentColor";
-                    attributes["viewBox"] = string.Join(" ", ViewBoxValues);
+                    result["fill"] = "currentColor";
+                    result["viewBox"] = string.Join(" ", ViewBoxValues);
                 }
-                return attributes;
+                foreach(var attribute in base.Attributes)
+                {
+                    result[attribute.Key] = attribute.Value;
+                }
+                return result;
             }
         }
     }

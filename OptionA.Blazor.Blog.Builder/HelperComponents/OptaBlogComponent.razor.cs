@@ -1,7 +1,12 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Blog.Builder.HelperComponents
 {
+    /// <summary>
+    /// Generic setup for blog components
+    /// </summary>
     public partial class OptaBlogComponent
     {
         /// <summary>
@@ -25,10 +30,20 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
         /// <summary>
+        /// Additional properties to display
+        /// </summary>
+        [Parameter]
+        public RenderFragment? AdditionalProperties { get; set; }
+        /// <summary>
         /// Name of the component
         /// </summary>
         [Parameter]
         public string? Name { get; set; }
+        /// <summary>
+        /// Content for this component
+        /// </summary>
+        [Parameter]
+        public IContent? Content { get; set; }
         /// <summary>
         /// Called whenever the content is changed
         /// </summary>
@@ -38,7 +53,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// Called whenever the content should be removed
         /// </summary>
         [Parameter]
-        public EventCallback<IContent> ContentRemoved { get; set; }
+        public EventCallback ContentRemoved { get; set; }
         /// <summary>
         /// Occurs when move up is clicked
         /// </summary>
@@ -52,28 +67,16 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         [Inject]
         private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
-        private Dictionary<string, object?> GetMoveContainerAttributes()
+        private OptaModal? _editModal;
+
+        private async Task EditProperties(MouseEventArgs args)
         {
-            var result = new Dictionary<string, object?>();
-
-            var fromUp = DataProvider.TryGetProperties(BuilderType.MoveUpButton, out var up)
-                ? up
-                : null;
-            var fromDown = DataProvider.TryGetProperties(BuilderType.MoveDownButton, out var down)
-                ? down
-                : null;
-
-
-            if (fromUp?.ContainerClass is not null)
+            if (_editModal is null)
             {
-                result["class"] = fromUp.ContainerClass;
-            }
-            else if (fromDown?.ContainerClass is not null)
-            {
-                result["class"] = fromDown.ContainerClass;
+                return;
             }
 
-            return result;
+            await _editModal.ShowOnMouse(args);
         }
 
         private Dictionary<string, object?> GetMoveUpAttributes()
@@ -88,22 +91,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
                 result["disabled"] = true;
             }
 
-            if (DataProvider.TryGetProperties(BuilderType.MoveUpButton, out var properties))
-            {
-                if (properties.Class is not null)
-                {
-                    result["class"] = properties.Class;
-                }
-                if (properties.AdditionalAttributes is not null)
-                {
-                    foreach(var attribute in properties.AdditionalAttributes) 
-                    {
-                        result[attribute.Key] = attribute.Value;
-                    }
-                }
-            }
-
-            return result;
+            return DataProvider.GetAttributes(BuilderType.MoveUpButton, result);
         }
 
         private Dictionary<string, object?> GetMoveDownAttributes()
@@ -118,48 +106,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
                 result["disabled"] = true;
             }
 
-            if (DataProvider.TryGetProperties(BuilderType.MoveDownButton, out var properties))
-            {
-                if (properties.Class is not null)
-                {
-                    result["class"] = properties.Class;
-                }
-                if (properties.AdditionalAttributes is not null)
-                {
-                    foreach (var attribute in properties.AdditionalAttributes)
-                    {
-                        result[attribute.Key] = attribute.Value;
-                    }
-                }
-            }
-
-            return result;
-        }
-
-        private InlineContent? GetMoveUpContent()
-        {
-            return DataProvider.TryGetProperties(BuilderType.MoveUpButton, out var properties) && properties.Content is not null
-                ? new InlineContent
-                {
-                    Content = properties.Content,
-                }
-                : new InlineContent
-                {
-                    Content = "Up",
-                };
-        }
-
-        private InlineContent? GetMoveDownContent()
-        {
-            return DataProvider.TryGetProperties(BuilderType.MoveDownButton, out var properties) && properties.Content is not null
-                ? new InlineContent
-                {
-                    Content = properties.Content,
-                }
-                : new InlineContent
-                {
-                    Content = "Down",
-                };
+            return DataProvider.GetAttributes(BuilderType.MoveDownButton, result);
         }
 
         private Dictionary<string, object?> GetRemoveAttributes()
@@ -169,35 +116,17 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
                 ["title"] = "Remove the item"
             };
 
-            if (DataProvider.TryGetProperties(BuilderType.RemoveButton, out var properties))
-            {
-                if (properties.Class is not null)
-                {
-                    result["class"] = properties.Class;
-                }
-                if (properties.AdditionalAttributes is not null)
-                {
-                    foreach (var attribute in properties.AdditionalAttributes)
-                    {
-                        result[attribute.Key] = attribute.Value;
-                    }
-                }
-            }
-
-            return result;
+            return DataProvider.GetAttributes(BuilderType.RemoveButton, result);
         }
 
-        private InlineContent? GetRemoveContent()
+        private Dictionary<string, object?> GetPropertiesAttributes()
         {
-            return DataProvider.TryGetProperties(BuilderType.RemoveButton, out var properties) && properties.Content is not null
-                ? new InlineContent
-                {
-                    Content = properties.Content,
-                }
-                : new InlineContent
-                {
-                    Content = "Remove",
-                };
+            var result = new Dictionary<string, object?>
+            {
+                ["title"] = "Change the properties"
+            };
+
+            return DataProvider.GetAttributes(BuilderType.PropertiesButton, result);
         }
     }
 }

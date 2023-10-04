@@ -14,28 +14,28 @@ namespace OptionA.Blazor.Blog
         /// <param name="content"></param>
         /// <param name="dataProvider"></param>
         /// <returns></returns>
-        public static Dictionary<string, object?>? GetAttributes(this IContent content, IBlogDataProvider dataProvider)
+        public static Dictionary<string, object?> GetAttributes(this IContent content, IBlogDataProvider dataProvider)
         {
+            var result = new Dictionary<string, object?>();
+
+
             var defaultClasses = dataProvider.DefaultClassesForType(content.Type);
             if (content.AdditionalClasses.Any() || defaultClasses.Any() || content.RemovedClasses.Any())
             {
                 var classes = content.AdditionalClasses
                     .Concat(defaultClasses)
                     .Except(content.RemovedClasses)
-                    .Distinct();
-                content.Attributes["class"] = string.Join(' ', classes);
+                    .Distinct()
+                    .ToList();
+                result["class"] = string.Join(' ', classes);
             }
 
-            if (content is LinkContent link)
+            foreach (var attribute in content.Attributes)
             {
-                content.Attributes["href"] = link.Href;
-                if (!string.IsNullOrEmpty(link.Target))
-                {
-                    content.Attributes["target"] = link.Target;
-                }
+                result[attribute.Key] = attribute.Value;
             }
 
-            return content.Attributes;
+            return result;
         }
 
         /// <summary>
@@ -59,6 +59,17 @@ namespace OptionA.Blazor.Blog
         /// <param name="type"></param>
         /// <returns></returns>
         public static string ToAttribute(this CodeType type)
+        {
+            // currently all attribute match enum names, might change to switch later
+            return $"{type}".ToLowerInvariant();
+        }
+
+        /// <summary>
+        /// returns the value for the attribute to set
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static string ToAttribute(this MarkerType type)
         {
             // currently all attribute match enum names, might change to switch later
             return $"{type}".ToLowerInvariant();

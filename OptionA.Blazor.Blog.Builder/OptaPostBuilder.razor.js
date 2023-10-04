@@ -1,12 +1,32 @@
-﻿const handlers = [];
+﻿let handlers = [];
 
 export const registerHandler = (dotNetHelper, handlerName) => {
-    handlers.push({ helper: dotNetHelper, name: handlerName });
-    
+    if (handlers.length === 0) {
+        window.addEventListener("unload", handleUnload);
+    }
+    const id = generateId(6);
+    handlers.push({ helper: dotNetHelper, name: handlerName, id: id });
+    return id;
 }
 
-export const unRegisterHandler = () => {
-    window.removeEventListener("unload", handleUnload);
+export const unRegisterHandler = (id) => {
+    handlers = handlers.filter(handler => handler.id !== id);
+
+    if (handlers.length === 0) {
+        window.removeEventListener("unload", handleUnload);
+    }    
+}
+
+const generateId = function makeid(length) {
+    let result = '';
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+        result += characters.charAt(Math.random() * charactersLength);
+        counter++;
+    }
+    return result;
 }
 
 const handleUnload = async () => {
@@ -19,4 +39,3 @@ const handleUnload = async () => {
     }
 }
 
-window.addEventListener("unload", handleUnload);

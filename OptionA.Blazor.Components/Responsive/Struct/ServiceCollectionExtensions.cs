@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using OptionA.Blazor.Components.Responsive.Struct;
 using OptionA.Blazor.Components.Services;
 
 namespace OptionA.Blazor.Components
@@ -14,9 +16,12 @@ namespace OptionA.Blazor.Components
         /// <returns></returns>
         public static IServiceCollection AddOptionAResponsive(this IServiceCollection services, Action<ResponsiveOptions>? configuration = null)
         {
-            return services
-                .Configure<ResponsiveOptions>(options => configuration?.Invoke(options))
-                .AddSingleton<IResponsiveService, ResponsiveService>();
+            services
+                .TryAddScoped<IResponsiveDataProvider>(provider => new ResponsiveDataProvider(configuration));
+            services               
+                .TryAddSingleton<IResponsiveService, ResponsiveService>();
+
+            return services;
 
         }
 

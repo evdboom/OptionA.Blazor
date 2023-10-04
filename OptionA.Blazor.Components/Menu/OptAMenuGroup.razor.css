@@ -12,31 +12,31 @@ li {
     user-select: none;
 }
 
-.opta-dropdown {
+[opta-dropdown] {
     position: absolute;
     z-index: 2000;
     left: 0;
     visibility: collapse;
 }
 
-.opta-menu-group[open] .opta-dropdown {
+[opta-menu-group][open] [opta-dropdown] {
     visibility: visible;
 }
 
-.opta-menu-group[closing] .opta-dropdown {
+[opta-menu-group][closing] [opta-dropdown] {
     visibility: visible;
 }
 
-.opta-dropdown[vertical] {
+[opta-dropdown][vertical] {
     left: 100%;
     top: 0;
 }
 
-.opta-menu-group {
+[opta-menu-group] {
     position: relative;
 }
 
-.opta-menu-group-background {
+[opta-menu-group-background]s {
     position: fixed;
     left: 0;
     top: 0;

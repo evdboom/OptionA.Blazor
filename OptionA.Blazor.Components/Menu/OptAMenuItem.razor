@@ -1,9 +1,10 @@
 ﻿@namespace OptionA.Blazor.Components
+@inherits OptaComponent
 
-<li title="@Description" class="opta-menu-item @GetClasses()">    
+<li @attributes="@GetAttributes()">    
     @if (!string.IsNullOrEmpty(Name))
     {
-        <a href="@Href" class="@GetLinkClasses()" @onclick="ItemSelected">@Name</a>
+        <a @attributes="@GetLinkAttributes()" @onclick="ItemSelected">@Name</a>
     }  
     @if (ChildContent is not null)
     {

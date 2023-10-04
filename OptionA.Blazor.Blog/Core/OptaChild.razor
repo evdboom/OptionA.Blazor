@@ -4,7 +4,6 @@
     switch (Content.Type)
     {
         case ContentType.Text:
-        case ContentType.Quote:
         case ContentType.Paragraph:
         case ContentType.Bold:
         case ContentType.Block:
@@ -14,8 +13,8 @@
         case ContentType.LineBreak:
             <OptaText Content="(TextContent)Content" />
             break;
-        case ContentType.QuotePart:
-            <OptaQuote Content="(QuotePartContent)Content" />
+        case ContentType.Quote:
+            <OptaQuote Content="(QuoteContent)Content" />
             break;
         case ContentType.Code:
             <OptaCode Content="(CodeContent)Content" />
@@ -25,6 +24,9 @@
             break;
         case ContentType.Icon:
             <OptaIcon Content="(IconContent)Content" />
+            break;
+        case ContentType.Image:
+            <OptaImage Content="(ImageContent)Content" />
             break;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using OptionA.Blazor.Components.Buttons.Struct;
 using OptionA.Blazor.Components.Carousel.Struct;
 using OptionA.Blazor.Components.Menu.Struct;
+using OptionA.Blazor.Components.Modal.Struct;
 
 namespace OptionA.Blazor.Components
 {
@@ -29,5 +30,9 @@ namespace OptionA.Blazor.Components
         /// Configuration for gallery components.
         /// </summary>
         public Action<GalleryOptions>? GalleryConfiguration { get; set; }
+        /// <summary>
+        /// Configuration for modal components
+        /// </summary>
+        public Action<ModalOptions>? ModalConfiguration { get; set; }
     }
 }

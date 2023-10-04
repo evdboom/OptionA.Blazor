@@ -10,7 +10,7 @@ namespace OptionA.Blazor.Components
         private bool _registered;
 
         [Inject]
-        private IGallerylDataProvider Provider { get; set; } = null!;
+        private IGalleryDataProvider Provider { get; set; } = null!;
 
         /// <summary>
         /// <see cref="OptaGallery"/> as parent

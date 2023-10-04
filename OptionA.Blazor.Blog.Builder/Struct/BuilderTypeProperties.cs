@@ -10,13 +10,13 @@
         /// </summary>
         public string? Class { get; set; }
         /// <summary>
-        /// Class for container (div element) around builder item
-        /// </summary>
-        public string? ContainerClass { get; set; }
-        /// <summary>
         /// Content for the element to override the default
         /// </summary>
         public string? Content { get; set; }
+        /// <summary>
+        /// ContentType for the create content
+        /// </summary>
+        public ContentType? ContentType { get; set; }
         /// <summary>
         /// Additional attributes to set to override the default
         /// </summary>

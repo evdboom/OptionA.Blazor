@@ -12,7 +12,7 @@ namespace OptionA.Blazor.Components
         private GalleryMode _oldMode;
                 
         [Inject]
-        private IGallerylDataProvider Provider { get; set; } = null!;
+        private IGalleryDataProvider Provider { get; set; } = null!;
 
         /// <summary>
         /// Slides to show should be of type <see cref="OptaGalleryImage"/>

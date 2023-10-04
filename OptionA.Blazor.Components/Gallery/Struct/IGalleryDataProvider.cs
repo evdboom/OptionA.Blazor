@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface for use in galleries to provide the correct classes and icons
     /// </summary>
-    public interface IGallerylDataProvider
+    public interface IGalleryDataProvider
     {
         /// <summary>
         /// Default classes to apply to next button

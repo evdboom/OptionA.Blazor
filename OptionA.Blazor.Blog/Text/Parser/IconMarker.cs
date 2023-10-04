@@ -18,7 +18,7 @@ namespace OptionA.Blazor.Blog.Text.Parser
         /// <inheritdoc/>
         public override bool IsValidForMarker(string input, [NotNullWhen(true)] out string? content)
         {
-            if (string.IsNullOrEmpty(input) || input.Length < 7 || input[0] == '\\')
+            if (string.IsNullOrEmpty(input) || input.Length < 7)
             {
                 content = null;
                 return false;
@@ -30,7 +30,7 @@ namespace OptionA.Blazor.Blog.Text.Parser
                 {
                     var endIndex = end + Starter.Length;
                     if (input[endIndex - 1] != '\\')
-                    {
+                    {                        
                         content = input[Starter.Length..endIndex];
                         return true;
                     }
@@ -44,7 +44,10 @@ namespace OptionA.Blazor.Blog.Text.Parser
         /// <inheritdoc/>
         public override IContent CreateContent(string content)
         {
-            var result = new IconContent();
+            var result = new IconContent
+            {
+                Mode = IconMode.Class
+            };
             result.AdditionalClasses.AddRange(content.Split(" "));
 
             return result;

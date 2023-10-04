@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using OptionA.Blazor.Components.Carousel.Struct;
 
 namespace OptionA.Blazor.Components
@@ -14,8 +15,13 @@ namespace OptionA.Blazor.Components
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionACarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null) => services
-                .AddSingleton<ICarouselDataProvider>(provider => new CarouselDataProvider(configuration));
+        public static IServiceCollection AddOptionACarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null)
+        {
+            services
+                .TryAddSingleton<ICarouselDataProvider>(provider => new CarouselDataProvider(configuration));
+
+            return services;
+        }
 
         /// <summary>
         /// Adds default bootstrap (5.3) classes and icon for use of carousel

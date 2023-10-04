@@ -1,0 +1,35 @@
+﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
+@if (Content is not null)
+{
+    <OptaBlogComponent Name="**Quote**"
+                       ContentChanged="ContentChanged"
+                       ContentRemoved="ContentRemoved"
+                       ContentIndex="ContentIndex"
+                       TotalContentCount="TotalContentCount"
+                       MovedUp="MovedUp"
+                       MovedDown="MovedDown"
+                       Content="Content">
+        <ChildContent>
+            <label @attributes="@GetLabelAttributes(QuoteId)">
+                <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Quote")" />
+            </label>
+            <DirectInputTextArea @bind-Value="Content.Quote" AdditionalAttributes="@GetAttributes(QuoteId, "Quote...")" AutoGrow="true" />
+            <label @attributes="@GetLabelAttributes(SourceId)">
+                <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
+            </label>
+            <DirectInputText @bind-Value="Content.Source" AdditionalAttributes="@GetAttributes(SourceId, "Source...")" />
+        </ChildContent>
+        <AdditionalProperties>
+            <OptaListBuilder ContentChanged="ContentChanged"
+                             ItemPlaceholder="Source class.."
+                             ItemTitle="Add additional classes to source"
+                             Label="Additional source classes"
+                             Items="Content.AdditionalSourceClasses" />
+            <OptaListBuilder ContentChanged="ContentChanged"
+                             ItemPlaceholder="Class to exclude for source.."
+                             ItemTitle="Default classes to remove for source"
+                             Label="Removed default source classes"
+                             Items="Content.RemovedSourceClasses" />
+        </AdditionalProperties>
+    </OptaBlogComponent>
+}

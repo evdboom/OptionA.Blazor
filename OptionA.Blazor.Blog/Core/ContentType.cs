@@ -33,7 +33,7 @@ namespace OptionA.Blazor.Blog
         /// </summary>
         Line,
         /// <summary>
-        /// A quote, resulting in a &lt;blockquote&gt; tag 
+        /// A quote, resulting in a &lt;blockquote&gt; tag encapsulated in a &lt;figure&gt; tag
         /// </summary>
         Quote,
         /// <summary>
@@ -68,10 +68,6 @@ namespace OptionA.Blazor.Blog
         /// Linebreak resulting in a &lt;br /&gt; tag
         /// </summary>
         LineBreak,
-        /// <summary>
-        /// Quote component, result in multpiple tags
-        /// </summary>
-        QuotePart,
         /// <summary>
         /// Icon resulting in a &lt;i&gt; or &lt;svg&gt; tag
         /// </summary>

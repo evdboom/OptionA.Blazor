@@ -1,8 +1,11 @@
-﻿namespace OptionA.Blazor.Blog
+﻿using System.Text.Json.Serialization;
+
+namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Way to display icon
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum IconMode
     {
         /// <summary>

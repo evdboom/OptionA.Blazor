@@ -13,9 +13,10 @@
         /// </summary>
         public CSharpParser() : base()
         {
-            _partCheckers.Add((code, word, current) => IsKeyword(word));
-            _partCheckers.Add((code, word, current) => IsControlKeyword(word));
-            _partCheckers.Add((code, word, current) => IsMethodStart(current, code));
+            _partCheckers.Add((_, word, _) => IsKeyword(word));
+            _partCheckers.Add((_, word, _) => IsControlKeyword(word));
+            _partCheckers.Add((previous, word, next) => IsMethodStart(previous, next));
+            _partCheckers.Add(IsAttribute);
         }
 
         private readonly List<string> _controlKeywords = new()
@@ -160,6 +161,8 @@
             ';',
             ',',
             '|',
+            '[',
+            ']'
         };
 
         /// <inheritdoc/>
@@ -175,7 +178,7 @@
             { "/*", new(WordType.Comment, "/*", 0, "*/") },
         };
 
-         private static CodeType IsMethodStart(string current, string code)
+        private static CodeType IsMethodStart(string current, string code)
         {
             var nextChar = code.FirstOrDefault();
             return nextChar == '(' &&
@@ -184,6 +187,19 @@
                 || current.EndsWith('.'))
                 ? CodeType.Method
                 : CodeType.Text;
+        }
+
+        private static CodeType IsAttribute(string previous, string current, string next)
+        {
+            var validStart =
+                previous.EndsWith(" [") ||
+                previous.EndsWith("([");
+            var validEnd =
+                next.StartsWith(']') ||
+                next.StartsWith('(');
+            return validStart && validEnd
+                ? CodeType.Class
+                : CodeType.Text;            
         }
 
         private CodeType IsKeyword(string word)

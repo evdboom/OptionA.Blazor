@@ -35,15 +35,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
                 ["auto-grow"] = true
             };
 
-            if (DataProvider.TryGetProperties(BuilderType.TextAreaInput, out var properties))
-            {
-                if (properties.ContainerClass is not null)
-                {
-                    result["class"] = properties.ContainerClass;
-                }
-            }
-
-            return result;
+            return DataProvider.GetAttributes(BuilderType.TextAreaAutoGrow, result);            
         }
     }
 }

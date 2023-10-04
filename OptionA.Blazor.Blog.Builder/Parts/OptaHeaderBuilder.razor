@@ -7,7 +7,8 @@
                        ContentIndex="ContentIndex"
                        TotalContentCount="TotalContentCount"
                        MovedUp="MovedUp"
-                       MovedDown="MovedDown">
+                       MovedDown="MovedDown"
+                       Content="Content">
         <label @attributes="@GetLabelAttributes(SizeId)">
             <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Size")"/>
         </label>

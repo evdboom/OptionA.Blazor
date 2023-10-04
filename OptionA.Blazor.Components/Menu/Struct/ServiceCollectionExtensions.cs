@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using OptionA.Blazor.Components.Menu.Struct;
 
 namespace OptionA.Blazor.Components
@@ -14,8 +15,12 @@ namespace OptionA.Blazor.Components
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionAMenu(this IServiceCollection services, Action<MenuOptions>? configuration = null) => services
-                .AddSingleton<IMenuDataProvider>(provider => new MenuDataProvider(configuration));        
+        public static IServiceCollection AddOptionAMenu(this IServiceCollection services, Action<MenuOptions>? configuration = null)
+        {
+            services
+                .TryAddSingleton<IMenuDataProvider>(provider => new MenuDataProvider(configuration));
+            return services;
+        }
 
         /// <summary>
         /// Adds a singleton <see cref="IMenuDataProvider"/> to the service collection for use in the OptAMenu component, prefilled with bootstrap (5.3) classes

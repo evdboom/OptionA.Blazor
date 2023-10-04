@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using OptionA.Blazor.Blog.Services;
+using OptionA.Blazor.Components;
 using OptionA.Blazor.Storage;
 
 namespace OptionA.Blazor.Blog.Builder
@@ -14,9 +17,18 @@ namespace OptionA.Blazor.Blog.Builder
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptaBlogBuilderOptions>? configuration = null) => services
-            .AddSingleton<IBlogBuilderDataProvider>(provider => new BlogBuilderDataProvider(configuration))
-            .AddStorageService();
+        public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptaBlogBuilderOptions>? configuration = null)
+        {
+            services
+                .AddStorageService();
+            services
+                .TryAddSingleton<IBuilderService, BuilderService>();
+            services
+                .TryAddSingleton<IBlogBuilderDataProvider>(provider => new BlogBuilderDataProvider(configuration));
+
+            return services;
+        }
+        
 
         /// <summary>
         /// Adds all blogparts to the servicecollection, prefilled with bootstrap (5.3) classes
@@ -28,28 +40,38 @@ namespace OptionA.Blazor.Blog.Builder
         {
             var bootstrapConfig = (OptaBlogBuilderOptions options) =>
             {
-                options.FormClass = "row";
-                options.CreatePostButton = new BuilderTypeProperties
-                {
-                    Class = "btn btn-primary"
-                };
-                options.SavePostButton = new BuilderTypeProperties
-                {
-                    Class = "btn btn-primary",
-                    ContainerClass = "mt-2"
-                };
                 options.PostBuilderOptions = new()
                 {
+                    [BuilderType.Form] = new BuilderTypeProperties
+                    {
+                        Class = "row"
+                    },
+                    [BuilderType.CreatePostButton] = new BuilderTypeProperties
+                    {
+                        Class = "btn btn-primary"
+                    },
+                    [BuilderType.SavePostButton] = new BuilderTypeProperties
+                    {
+                        Class = "btn btn-primary"
+                    },
+                    [BuilderType.SavePostButtonContainer] = new BuilderTypeProperties
+                    {
+                        Class = "mt-2"
+                    },
                     [BuilderType.TextInput] = GetDefaultBootstrapInputProperties(),
                     [BuilderType.DateInput] = GetDefaultBootstrapInputProperties(),
-                    [BuilderType.TextAreaInput] = GetDefaultBootstrapInputProperties(container: "bootstrap"),
+                    [BuilderType.TextAreaInput] = GetDefaultBootstrapInputProperties(),
+                    [BuilderType.TextAreaAutoGrow] = new BuilderTypeProperties
+                    {
+                        Class = "bootstrap"
+                    },
                     [BuilderType.SelectInput] = new BuilderTypeProperties
-                    { 
+                    {
                         Class = "form-select"
                     },
-                    [BuilderType.Label] = new BuilderTypeProperties 
+                    [BuilderType.Label] = new BuilderTypeProperties
                     {
-                        Class = "form-label" 
+                        Class = "form-label"
                     },
                     [BuilderType.ComponentContent] = new BuilderTypeProperties
                     {
@@ -57,28 +79,61 @@ namespace OptionA.Blazor.Blog.Builder
                     },
                     [BuilderType.ComponentTitle] = new BuilderTypeProperties
                     {
-                        ContainerClass = "col-12"
+                        Class = "col-12",
+                        ContentType = ContentType.Block
                     },
                     [BuilderType.Component] = new BuilderTypeProperties
                     {
                         Class = "row g-1"
                     },
+                    [BuilderType.ButtonContainer] = new BuilderTypeProperties
+                    {
+                        Class = "col-auto d-flex flex-column",
+                    },
                     [BuilderType.RemoveButton] = new BuilderTypeProperties
                     {
-                        Class="btn btn-danger btn-sm mb-1",
-                        ContainerClass="col-auto d-flex flex-column",
+                        Class = "btn btn-danger btn-sm mb-1 p-1",
                         Content = "**🗙**"
+                    },
+                    [BuilderType.MoveButtonContainer] = new BuilderTypeProperties
+                    {
+                        Class = "btn-group-vertical",
                     },
                     [BuilderType.MoveUpButton] = new BuilderTypeProperties
                     {
                         Class = "btn btn-secondary btn-sm p-1",
-                        ContainerClass = "btn-group-vertical",
                     },
                     [BuilderType.MoveDownButton] = new BuilderTypeProperties
                     {
                         Class = "btn btn-secondary btn-sm p-1",
+                    },
+                    [BuilderType.PropertiesButton] = new BuilderTypeProperties
+                    {
+                        Class = "btn btn-primary btn-sm p-1 mb-1"
+                    },
+                    [BuilderType.ListRemoveButton] = new BuilderTypeProperties
+                    {
+                        Class = "btn-close",
+                        Content = string.Empty,
+                    },
+                    [BuilderType.ListRemoveButtonContainer] = new BuilderTypeProperties
+                    {
+                        Class = "col-auto",
+                    },
+                    [BuilderType.ListItemInput] = GetDefaultBootstrapInputProperties(),
+                    [BuilderType.ListItemInputContainer] = new BuilderTypeProperties
+                    {
+                        Class = "col"
+                    },
+                    [BuilderType.ListItemContainer] = new BuilderTypeProperties
+                    {
+                        Class = "col-md-6 row g-1 mb-1"
+                    },
+                    [BuilderType.ListItemsContainer] = new BuilderTypeProperties
+                    {
+                        Class = "row g-1"
                     }
-            };
+                };
 
                 configuration?.Invoke(options);
             };
@@ -87,12 +142,11 @@ namespace OptionA.Blazor.Blog.Builder
         }
 
 
-        private static BuilderTypeProperties GetDefaultBootstrapInputProperties(string? additional = null, string? container = null)
+        private static BuilderTypeProperties GetDefaultBootstrapInputProperties()
         {
             return new BuilderTypeProperties
             {
-                Class = $"form-control {additional}".Trim(),
-                ContainerClass = container
+                Class = $"form-control"
             };
         }      
     }

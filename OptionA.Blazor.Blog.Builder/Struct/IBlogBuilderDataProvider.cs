@@ -8,18 +8,6 @@ namespace OptionA.Blazor.Blog.Builder
     public interface IBlogBuilderDataProvider
     {
         /// <summary>
-        /// Class for the form the post is build in
-        /// </summary>
-        string? FormClass { get; }
-        /// <summary>
-        /// Properties for the create post button
-        /// </summary>
-        BuilderTypeProperties? CreatePostButton { get; }
-        /// <summary>
-        /// Propertis for the save post button
-        /// </summary>
-        BuilderTypeProperties? SavePostButton { get; }        
-        /// <summary>
         /// tries to get the properties for the given builder type, if set
         /// </summary>
         /// <param name="type"></param>
@@ -33,13 +21,6 @@ namespace OptionA.Blazor.Blog.Builder
         /// <param name="defaultAttributes"></param>
         /// <returns></returns>
         Dictionary<string, object?> GetAttributes(BuilderType type, Dictionary<string, object?>? defaultAttributes = null);
-        /// <summary>
-        /// Gets the container attributes for the given builder type
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="defaultAttributes"></param>
-        /// <returns></returns>
-        Dictionary<string, object?> GetContainerAttributes(BuilderType type, Dictionary<string, object?>? defaultAttributes = null);
         /// <summary>
         /// Gets the content for the given builder type
         /// </summary>

@@ -7,6 +7,11 @@ namespace OptionA.Blazor.Blog.Text.Parser
     /// </summary>
     public abstract class MarkerDefinition : IMarkerDefinition
     {
+        /// <summary>
+        /// Escape character
+        /// </summary>
+        protected const char Escape = '\\';
+
         /// <inheritdoc/>
         public abstract int Priority { get; }
         /// <inheritdoc/>

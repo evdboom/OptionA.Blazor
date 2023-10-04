@@ -31,7 +31,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// Called whenever content should be removed
         /// </summary>
         [Parameter]
-        public EventCallback<IContent> ContentRemoved { get; set; }
+        public EventCallback ContentRemoved { get; set; }
         /// <summary>
         /// Occurs when move up is clicked
         /// </summary>

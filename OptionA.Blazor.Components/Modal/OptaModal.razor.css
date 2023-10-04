@@ -1,0 +1,29 @@
+﻿[draggable] {
+    user-select: none;
+    cursor: move;
+}
+
+[draggable-modal] {
+    visibility: hidden;
+}
+
+[draggable-dialog] {
+    visibility: visible;
+}
+
+[dropdown] {
+    overflow: visible;
+}
+
+[scrollable] {
+    max-height: 90vh;
+}
+
+[scrollable-body] {
+    overflow-y: scroll;
+}
+
+[on-mouse] {
+    margin: 0;
+    display: block;
+}
