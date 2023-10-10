@@ -5,15 +5,15 @@
     <div @attributes="@GetContainerAttributes()">
         @foreach(var image in Images)
         {
-            <div @attributes="@GetThumbnailAttributes(image.Index)" @onclick="async () => await SelectImage(image.Index)">
+            <figure @attributes="@GetThumbnailAttributes(image.Index)" @onclick="async () => await SelectImage(image.Index)">
                 @if (ShowTitleOnThumbnail)
                 {
-                    <div class="opta-thumbnail-title">
+                    <figcaption opta-thumbnail-title>
                         @image.Image.ImageText
-                    </div>
+                    </figcaption>
                 }
                 <img @attributes="@GetImageAttributes(image.Image)"/>
-            </div>
+            </figure>
         }
     </div>
 }

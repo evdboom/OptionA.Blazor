@@ -1,21 +1,22 @@
 ﻿@namespace OptionA.Blazor.Components
+@inherits OptaComponent
 
-<div class="opta-bar @GetOrientation() @AdditionalClasses" id="@Id">
+<div @attributes="@GetBarAttributes()">
     @if (StartButtons is not null)
     {
-        <div class="opta-group start @GetOrientation()">
+        <div @attributes="@GetGroupAttributes("start")">
             @StartButtons
         </div>
     }
     @if (CenterButtons is not null)
     {
-        <div class="opta-group center @GetOrientation()">
+        <div @attributes="@GetGroupAttributes("center")">
             @CenterButtons
         </div>
     }
     @if (EndButtons is not null)
     {
-        <div class="opta-group end @GetOrientation()">
+        <div @attributes="@GetGroupAttributes("end")">
             @EndButtons
         </div>
     }

@@ -2,7 +2,7 @@
 @inherits OptaComponent
 
 <nav @attributes="@GetContainerAttributes()">
-    <ul @attributes="@GetMenuAttributes()">
+    <menu @attributes="@GetMenuAttributes()">
         <CascadingValue Name="MenuOrientation" Value="@Orientation">
             <CascadingValue Name="OnItemSelected" Value="@OnItemSelected">
             @if (Items is not null)
@@ -11,5 +11,5 @@
             }
             </CascadingValue>
         </CascadingValue>
-    </ul>
+    </menu>
 </nav>

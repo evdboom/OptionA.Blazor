@@ -1,11 +1,7 @@
 ﻿@namespace OptionA.Blazor.Components
+@inherits OptaComponent
 
-<button id="@Id"
-        title="@GetToolTip()"
-        type="@GetButtonType()"
-        class="@GetButtonClass()"
-        disabled="@IsDisabled()"
-        @onclick="Click">
+<button @attributes="@GetButtonAttributes()" @onclick="Click">
     @if (ButtonType.HasFlag(ButtonTypes.Icon))
     {
         <i class="@GetIcon()"></i>

@@ -7,12 +7,12 @@
     @onmouseleave="() => MouseLeave()">
     <a @attributes="@GetLinkAttributes()">@Name</a>
     <div @attributes="@GetDropdownAttributes()" @ref="_dropDown">
-        <ul>
+        <menu>
             @if (Items is not null)
             {
                 @Items
             }
-        </ul>
+        </menu>
     </div> 
 </li>
 

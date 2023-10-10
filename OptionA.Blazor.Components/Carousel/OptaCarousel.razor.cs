@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using System.Diagnostics;
 
 namespace OptionA.Blazor.Components
 {
@@ -116,11 +117,6 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public bool NextPreviousIsIcon { get; set; } = true;
         /// <summary>
-        /// Additional classes to add to top level list
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
-        /// <summary>
         /// Content to load for item select items, should be set if not rendered as icon,
         /// <see cref="OptaCarouselSlide"/> is passed as cascading parameter named Slide
         /// </summary>
@@ -195,14 +191,159 @@ namespace OptionA.Blazor.Components
 
         }
 
+        private Dictionary<string, object?> GetCarouselAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-carousel"] = true
+            };
+
+            if (TryGetClasses(string.Empty, out var classes))
+            {
+                result["class"] = classes;
+            }
+
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetItemSelectAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-carousel-item-select"] = true
+            };
+
+            var classes = ParseClasses(Provider.DefaultItemSelectClasses(), ItemSelectClasses);
+            if (classes.Any())
+            {
+                result["class"] = string.Join(' ', classes);
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetItemSelectButtonAttributes(bool isCurrent)
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["type"] = "button"
+            };
+
+            foreach(var attribute in Provider.AdditionalAttributesItemSelect())
+            {
+                result[attribute.Key] = attribute.Value;
+            }
+
+            if (!ItemSelectIsIcon)
+            {
+                var classes = GetItemClasses(isCurrent);
+                if (!string.IsNullOrEmpty(classes))
+                {
+                    result["class"] = classes;
+                }
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetItemSelectIconAttributes(bool isCurrent)
+        {
+            var result = new Dictionary<string, object?>();
+
+            var classes = GetItemClasses(isCurrent);
+            if (!string.IsNullOrEmpty(classes))
+            {
+                result["class"] = classes;
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetAutoPlayAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-carousel-autoplay"] = true
+            };
+
+            var classes = ParseClasses(Provider.DefaultAutoPlayClasses(), AutoPlayClasses);
+            if (classes.Any())
+            {
+                result["class"] = string.Join(' ', classes);
+            }
+
+            return result;
+        }
+        private Dictionary<string, object?> GetPreviousButtonAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["type"] = "button"
+            };
+
+            var classes = ParseClasses(Provider.DefaultPreviousClasses(), PreviousClasses);
+            if (classes.Any())
+            {
+                result["class"] = string.Join(' ', classes);
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetNextButtonAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["type"] = "button"
+            };
+
+            var classes = ParseClasses(Provider.DefaultNextClasses(), NextClasses);
+            if (classes.Any())
+            {
+                result["class"] = string.Join(' ', classes);
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetPreviousIconAttributes()
+        {
+            var result = new Dictionary<string, object?>();
+
+            var classes = ParseClasses(Provider.DefaultPreviousIconClasses(), PreviousIconClasses);
+            if (classes.Any())
+            {
+                result["class"] = string.Join(' ', classes);
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetNextIconAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["type"] = "button"
+            };
+
+            var classes = ParseClasses(Provider.DefaultNextIconClasses(), NextIconClasses);
+            if (classes.Any())
+            {
+                result["class"] = string.Join(' ', classes);
+            }
+
+            return result;
+        }
+
         private string GetItemClasses(bool current)
         {
-            return current
-                ? GetActiveItemClasses()
-                : GetInactiveItemClasses();
+            var classes = current
+                ? ParseClasses(Provider.DefaultActiveItemSelectClasses(), ActiveItemSelectClasses)
+                : ParseClasses(Provider.DefaultInactiveItemSelectClasses(), InactiveItemSelectClasses);
+
+            return string.Join(' ', classes);
         }
-        private string GetActiveItemClasses() => $"{Provider.DefaultActiveItemSelectClasses()} {ActiveItemSelectClasses}".Trim();
-        private string GetInactiveItemClasses() => $"{Provider.DefaultInactiveItemSelectClasses()} {InactiveItemSelectClasses}".Trim();
 
         private void Elapsed(object? state)
         {

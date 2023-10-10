@@ -43,21 +43,46 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public RenderFragment? EndButtons { get; set; }
         /// <summary>
-        /// Additonal classes to add
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
-        /// <summary>
         /// True if the bar should be sticky to its position
         /// </summary>
         [Parameter]
         public bool Sticky { get; set; }
-
-        private string GetOrientation()
+        
+        private Dictionary<string, object?> GetBarAttributes()
         {
-            return Orientation == Orientation.Horizontal
-                ? "horizontal"
-                : "vertical";
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-bar"] = true,
+                ["orientation"] = Orientation == Orientation.Horizontal
+                    ? "horizontal"
+                    : "vertical"
+            };
+
+            if (TryGetClasses(string.Empty, out var classes))
+            {
+                result["class"] = classes;
+            }
+
+            if (!string.IsNullOrEmpty(Id))
+            {
+                result["id"] = Id;
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetGroupAttributes(string alignment)
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-group"] = true,
+                ["orientation"] = Orientation == Orientation.Horizontal
+                    ? "horizontal"
+                    : "vertical",
+                ["button-alignment"] = alignment
+            };
+
+            return result;
         }
     }
 }

@@ -5,16 +5,8 @@
     /// </summary>
     public class CarouselDataProvider : ICarouselDataProvider
     {
-        private readonly string? _autoPlayText;
-        private readonly string? _autoPlayClasses;
-        private readonly string? _itemSelectClasses;
-        private readonly string? _activeItemSelectClasses;
-        private readonly string? _inactiveItemSelectClasses;
-        private readonly string? _nextClasses;
-        private readonly string? _previousClasses;
-        private readonly string? _nextIconClasses;
-        private readonly string? _previousIconClasses;
-        private readonly Dictionary<string, object?>? _itemSelectAttributes;
+        private readonly CarouselOptions _options;
+        private readonly Dictionary<string, object?> _itemSelectAttributes;
 
         /// <summary>
         /// Default constructor
@@ -22,40 +14,30 @@
         /// <param name="configuration"></param>
         public CarouselDataProvider(Action<CarouselOptions>? configuration = null)
         {
-            var options = new CarouselOptions();
-            configuration?.Invoke(options);
-
-            _autoPlayText = options.AutoPlayText;
-            _autoPlayClasses = options.AutoPlayClasses;
-            _itemSelectClasses = options.ItemSelectClasses;
-            _nextClasses = options.NextClasses;
-            _previousClasses = options.PreviousClasses;
-            _activeItemSelectClasses = options.ActiveItemSelectClasses;
-            _inactiveItemSelectClasses = options.InactiveItemSelectClasses;
-            _nextIconClasses = options.NextIconClasses;
-            _previousIconClasses = options.PreviousIconClasses;
-            _itemSelectAttributes = options.ItemSelectAttributes;
+            _options = new CarouselOptions();
+            configuration?.Invoke(_options);
+            _itemSelectAttributes = _options.ItemSelectAttributes ?? new();
         }
 
         /// <inheritdoc/>
-        public string GetAutoPlayText() => _autoPlayText ?? string.Empty;
+        public string GetAutoPlayText() => _options.AutoPlayText ?? string.Empty;
         /// <inheritdoc/>
-        public string DefaultAutoPlayClasses() => _autoPlayClasses ?? string.Empty;
+        public string DefaultAutoPlayClasses() => _options.AutoPlayClasses ?? string.Empty;
         /// <inheritdoc/>
-        public string DefaultItemSelectClasses() => _itemSelectClasses ?? string.Empty;
+        public string DefaultItemSelectClasses() => _options.ItemSelectClasses ?? string.Empty;
         /// <inheritdoc/>
-        public string DefaultActiveItemSelectClasses() => _activeItemSelectClasses ?? string.Empty;
+        public string DefaultActiveItemSelectClasses() => _options.ActiveItemSelectClasses ?? string.Empty;
         /// <inheritdoc/>
-        public string DefaultInactiveItemSelectClasses() => _inactiveItemSelectClasses ?? string.Empty;
+        public string DefaultInactiveItemSelectClasses() => _options.InactiveItemSelectClasses ?? string.Empty;
         /// <inheritdoc/>
-        public string DefaultNextClasses() => _nextClasses ?? string.Empty;
+        public string DefaultNextClasses() => _options.NextClasses ?? string.Empty;
         /// <inheritdoc/>
-        public string DefaultPreviousClasses() => _previousClasses ?? string.Empty;
+        public string DefaultPreviousClasses() => _options.PreviousClasses ?? string.Empty;
         /// <inheritdoc/>
-        public string DefaultNextIconClasses() => _nextIconClasses ?? string.Empty;
+        public string DefaultNextIconClasses() => _options.NextIconClasses ?? string.Empty;
         /// <inheritdoc/>
-        public string DefaultPreviousIconClasses() => _previousIconClasses ?? string.Empty;
+        public string DefaultPreviousIconClasses() => _options.PreviousIconClasses ?? string.Empty;
         /// <inheritdoc/>
-        public IDictionary<string, object?> AdditionalAttributesItemSelect() => _itemSelectAttributes ?? new();
+        public IDictionary<string, object?> AdditionalAttributesItemSelect() => _itemSelectAttributes;
     }
 }

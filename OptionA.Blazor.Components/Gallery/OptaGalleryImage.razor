@@ -4,13 +4,16 @@
 <li @attributes="@GetListAttributes()">
     @if (IsCurrent)
     {
-        <div class="opta-gallery-image-title">@ImageText</div>
-        <img @attributes="GetImageAttributes()" />
-        @if (ChildContent != null)
-        {
-            <div class="opta-gallery-image-description">
-                @ChildContent
-            </div>
-        }
+        <figure>
+            <figcaption opta-gallery-image-title>@ImageText</figcaption>
+            <img @attributes="GetImageAttributes()" />
+            @if (ChildContent != null)
+            {
+                
+            }
+        </figure>
+        <div opta-gallery-image-description>
+            @ChildContent
+        </div>
     }
 </li>
