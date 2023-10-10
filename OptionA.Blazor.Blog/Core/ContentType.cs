@@ -72,5 +72,9 @@ namespace OptionA.Blazor.Blog
         /// Icon resulting in a &lt;i&gt; or &lt;svg&gt; tag
         /// </summary>
         Icon,
+        /// <summary>
+        /// Cite resulteing in a &lt;cite&gt; tag
+        /// </summary>
+        Cite,
     }
 }

@@ -18,6 +18,10 @@
                 <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
             </label>
             <DirectInputText @bind-Value="Content.Source" AdditionalAttributes="@GetAttributes(SourceId, "Source...")" />
+            <label @attributes="@GetLabelAttributes(SourceUrlId)">
+                <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Source url")" />
+            </label>
+            <DirectInputText @bind-Value="Content.SourceUrl" AdditionalAttributes="@GetAttributes(SourceUrlId, "Source url...")" />
         </ChildContent>
         <AdditionalProperties>
             <OptaListBuilder ContentChanged="ContentChanged"

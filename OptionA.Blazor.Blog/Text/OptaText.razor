@@ -81,5 +81,17 @@
         case ContentType.LineBreak:
             <br />
             break;
+        case ContentType.Cite:
+            <cite @attributes=Content.GetAttributes(DataProvider)>
+                @if (Content.NotMarkdown)
+                {
+                    @Content.Content
+                }
+                else
+                {
+                    <OptaChildBuilder Content="_content" />
+                }
+            </cite>
+            break;
     }
 }

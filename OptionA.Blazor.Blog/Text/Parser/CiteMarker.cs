@@ -3,18 +3,18 @@
 namespace OptionA.Blazor.Blog.Text.Parser
 {
     /// <summary>
-    /// Markdown icon (html) part
+    /// Markdown cite (html) part
     /// </summary>
-    public class IconMarker : MarkerDefinition
+    public class CiteMarker : MarkerDefinition
     {
         /// <inheritdoc/>
         public override int Priority => 10;
         /// <inheritdoc/>
-        public override string Starter => "<i>";
+        public override string Starter => "<cite>";
         /// <inheritdoc/>
-        public override string Ender => "</i>";
+        public override string Ender => "</cite>";
         /// <inheritdoc/>
-        public override MarkerType Type => MarkerType.Icon;
+        public override MarkerType Type => MarkerType.Cite;
         /// <inheritdoc/>
         public override bool IsValidForMarker(string input, [NotNullWhen(true)] out string? content)
         {
@@ -44,10 +44,7 @@ namespace OptionA.Blazor.Blog.Text.Parser
         /// <inheritdoc/>
         public override IContent CreateContent(string content)
         {
-            var result = new IconContent
-            {
-                Mode = IconMode.Class
-            };
+            var result = new CiteContent();
             result.AdditionalClasses.AddRange(content.Split(" "));
 
             return result;

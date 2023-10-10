@@ -28,6 +28,7 @@ namespace OptionA.Blazor.Blog
                 .AddSingleton<IMarkerDefinition, LinkMarker>()
                 .AddSingleton<IMarkerDefinition, LineBreakMarker>()
                 .AddSingleton<IMarkerDefinition, IconMarker>()
+                .AddSingleton<IMarkerDefinition, CiteMarker>()
 
                 .AddSingleton<ICodeParser, CSharpParser>()
                 .AddSingleton<ICodeParser, HtmlParser>()

@@ -69,14 +69,14 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
 
         private OptaModal? _editModal;
 
-        private async Task EditProperties(MouseEventArgs args)
+        private void EditProperties()
         {
             if (_editModal is null)
             {
                 return;
             }
 
-            //await _editModal.ShowOnMouse(args);
+            _editModal.Show();
         }
 
         private Dictionary<string, object?> GetMoveUpAttributes()

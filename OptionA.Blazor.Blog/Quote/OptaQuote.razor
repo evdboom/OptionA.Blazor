@@ -2,7 +2,7 @@
 @if (QuoteContent is not null)
 {
     <figure>
-        <blockquote>
+        <blockquote @attributes="@GetQuoteAttributes()">
             <OptaChild Content="QuoteContent" />
         </blockquote>        
         @if (SourceContent is not null)

@@ -28,6 +28,10 @@
         /// <summary>
         /// Marker to tell there is an icon, specify icon class inside the tags
         /// </summary>
-        Icon
+        Icon,
+        /// <summary>
+        /// Marker to tell the next part is a citation
+        /// </summary>
+        Cite
     }
 }

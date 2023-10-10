@@ -25,6 +25,10 @@
         /// Quote source
         /// </summary>
         public string? Source { get; set; }
+        /// <summary>
+        /// url of quote source
+        /// </summary>
+        public string? SourceUrl { get; set; }
         /// <inheritdoc/>
         public override ContentType Type => ContentType.Quote;
     }

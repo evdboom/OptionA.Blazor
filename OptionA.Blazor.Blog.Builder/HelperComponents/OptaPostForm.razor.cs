@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Components.Forms;
 
 namespace OptionA.Blazor.Blog.Builder.HelperComponents
 {
+    /// <summary>
+    /// Form to create a new post
+    /// </summary>
     public partial class OptaPostForm
     {
         /// <summary>

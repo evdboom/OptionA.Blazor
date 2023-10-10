@@ -1,9 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OptionA.Blazor.Blog.Builder.Parts
 {
@@ -13,7 +8,8 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     public partial class OptaQuoteBuilder
     {
         private const string SourceId = "opta-quote-source";
-        private const string QuoteId = "opta-quote";        
+        private const string QuoteId = "opta-quote";
+        private const string SourceUrlId = "opta-quote-source-url";
 
         /// <summary>
         /// Index of the current content in the collection

@@ -56,5 +56,17 @@ namespace OptionA.Blazor.Blog
                 return result;
             }
         }
+
+        private Dictionary<string, object?> GetQuoteAttributes()
+        {
+            var result = new Dictionary<string, object?>();
+
+            if (!string.IsNullOrEmpty(Content?.SourceUrl))
+            {
+                result["cite"] = Content.SourceUrl;
+            }
+
+            return result;
+        }
     }
 }
