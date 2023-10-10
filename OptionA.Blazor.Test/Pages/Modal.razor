@@ -1,103 +1,32 @@
 ﻿@page "/modal"
 
-    <button type="button" @onclick="async (args) => await OpenModal(args, draggable: true)">
-        Click me! Drag
-    </button>
-<button type="button" @onclick="async (args) => await OpenModal(args, draggable: false)">
-        Click me! Nodrag
-    </button>
-
-<button type="button" @onclick="async (args) => await OpenModal(args, scrollable: true)">
-        Click me! scroll
-    </button>
-<button type="button" @onclick="async (args) => await OpenModal(args, scrollable: false)">
-        Click me! Nonoscroll
-    </button>
-
-<button type="button" @onclick="async (args) => await OpenModal(args, canClose: true)">
-        Click me! can close
-    </button>
-<button type="button" @onclick="async (args) => await OpenModal(args, canClose: false)">
-        Click me! no cancclose
-    </button>
-
-<button type="button" @onclick="async (args) => await OpenModal(args, dropdown: true)">
-        Click me! dropdown
-    </button>
-<button type="button" @onclick="async (args) => await OpenModal(args, dropdown: false)">
-        Click me! no dropdown
-    </button>
-
-<button type="button" @onclick="async (args) => await OpenModal(args, onMouse: true)">
-        Click me! on mouse
-    </button>
-<button type="button" @onclick="async (args) => await OpenModal2(args, onMouse: true)">
-    Click me! on mouse 2
+<button type="button" @onclick="() => OpenModal(draggable: true)">
+    Drag
 </button>
-<button type="button" @onclick="async (args) => await OpenModal3(args, onMouse: true)">
-    Click me! on mouse 3
+<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.Small)">
+    Small
 </button>
-    <textarea @bind="_text"/>
+<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.Large)">
+    large
+</button>
+<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.ExtraLarge)">
+    Extra large
+</button>
+<textarea @bind="_text"/>
 
 <OptaModal @ref="_modal"
            Draggable="_draggable"
            ModalId="my-modal"
-           ScrollableDialog="_scrollable"
-           SupportDropdowns="_dropdown"
-           UserCanClose="_canClose"
-           OnShow="ModalOpen"
-           OnClose="ModalClose">
-    <Title>
+           Size="_size">
+    <Header>
         <h1>My first modal</h1>
-    </Title>
-    <Body>
+    </Header>
+    <Content>
         <p style="white-space:pre">
             @_text
         </p>
-    </Body>
+    </Content>
     <Footer>
-        <p @onclick="async () => await _modal!.Close()">Close me</p>
-    </Footer>
-</OptaModal>
-
-<OptaModal @ref="_modal2"
-           Draggable="_draggable"
-           ModalId="my-modal"
-           ScrollableDialog="_scrollable"
-           SupportDropdowns="_dropdown"
-           UserCanClose="_canClose"
-           OnShow="ModalOpen"
-           OnClose="ModalClose">
-    <Title>
-        <h1>My second modal</h1>
-    </Title>
-    <Body>
-        <p style="white-space:pre">
-            @_text
-        </p>
-    </Body>
-    <Footer>
-        <p @onclick="async () => await _modal2!.Close()">Close me</p>
-    </Footer>
-</OptaModal>
-
-<OptaModal @ref="_modal3"
-           Draggable="_draggable"
-           ModalId="my-modal"
-           ScrollableDialog="_scrollable"
-           SupportDropdowns="_dropdown"
-           UserCanClose="_canClose"
-           OnShow="ModalOpen"
-           OnClose="ModalClose">
-    <Title>
-        <h1>My third modal</h1>
-    </Title>
-    <Body>
-        <p style="white-space:pre">
-            @_text
-        </p>
-    </Body>
-    <Footer>
-        <p @onclick="async () => await _modal3!.Close()">Close me</p>
+        <p @onclick="() => _modal!.Close()">Close me</p>
     </Footer>
 </OptaModal>

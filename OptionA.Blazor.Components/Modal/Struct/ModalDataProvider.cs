@@ -20,11 +20,11 @@ namespace OptionA.Blazor.Components.Modal.Struct
         }
 
         /// <inheritdoc/>
-        public string? ModalClass => _options.ModalClass;
-        /// <inheritdoc/>
-        public string? DialogClass => _options.DialogClass;
+        public string DialogClass => _options.DialogClass ?? string.Empty;
         /// <inheritdoc/>
         public string? ContentClass => _options.ContentClass;
+        /// <inheritdoc/>
+        public string? SectionClass => _options.SectionClass;
         /// <inheritdoc/>
         public string? HeaderClass => _options.HeaderClass;
         /// <inheritdoc/>
@@ -33,8 +33,6 @@ namespace OptionA.Blazor.Components.Modal.Struct
         public string? CloseButtonClass => _options.CloseButtonClass;
         /// <inheritdoc/>
         public string? CloseButtonContent => _options.CloseButtonContent;
-        /// <inheritdoc/>
-        public string? BodyClass => _options.BodyClass;
         /// <inheritdoc/>
         public string? FooterClass => _options.FooterClass;
         /// <inheritdoc/>

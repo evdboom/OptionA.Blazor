@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Components.Gallery;
 
 namespace OptionA.Blazor.Components
 {
@@ -49,11 +50,6 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public bool NextPreviousIsIcon { get; set; } = true;
-        /// <summary>
-        /// Additional classes to add to top level gallery
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
         /// <summary>
         /// Additional classes to add to thumbnail container
         /// </summary>
@@ -212,6 +208,21 @@ namespace OptionA.Blazor.Components
                 : _children.Max(child => child.Index);
 
             SelectIndex(newIndex);
+        }
+
+        private Dictionary<string, object?> GetGalleryAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-gallery"] = true
+            };
+
+            if (TryGetClasses(Provider.GetGalleryClasses(Mode), out string classes))
+            {
+                result["class"] = classes;
+            }
+
+            return result;
         }
     }
 }

@@ -49,11 +49,6 @@ namespace OptionA.Blazor.Components.Gallery
         [Parameter]
         public int? ActiveIndex { get; set; }
         /// <summary>
-        /// Additional classes to add to the container
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
-        /// <summary>
         /// Percentage width of total galley container may take in side by side mode.
         /// </summary>
         [Parameter]
@@ -88,12 +83,80 @@ namespace OptionA.Blazor.Components.Gallery
             }
         }
 
-
-        private string GetUrl(OptaGalleryImage image)
+        private Dictionary<string, object?> GetContainerAttributes()
         {
-            return !string.IsNullOrEmpty(image.ImageThumbnailUrl)
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-gallery-thumbnail-container"] = true
+            };
+
+            if (TryGetClasses(Provider.GetThumbnailContainerClasses(Mode), out var classes))
+            {
+                result["class"] = classes;
+            }
+
+            switch (Mode)
+            {
+                case GalleryMode.SideBySide:
+                    result["gallery-mode"] = "side-by-side";
+                    break;
+                case GalleryMode.Modal:
+                    result["gallery-mode"] = "modal";
+                    break;
+            }
+
+            var style = GetStyle();
+            if (!string.IsNullOrEmpty(style))
+            {
+                result["style"] = style;
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetThumbnailAttributes(int index)
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-thumbnail-image"] = true,
+                ["opta-index"] = $"{index}"
+            };
+
+            if (ActiveIndex == index)
+            {
+                result["active"] = true;
+            }
+            var style = GetThumbnailStyle();
+
+            if (!string.IsNullOrEmpty(style))
+            {
+                result["style"] = style;
+            }
+
+            if (!string.IsNullOrEmpty(Provider.GetDefaultThumbnailClasses()))
+            {
+                result["class"] = Provider.GetDefaultThumbnailClasses();
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetImageAttributes(OptaGalleryImage image)
+        {
+            var result = new Dictionary<string, object?>()
+            {
+                ["src"] = !string.IsNullOrEmpty(image.ImageThumbnailUrl)
                 ? image.ImageThumbnailUrl
-                : image.ImageUrl;
+                : image.ImageUrl
+            };
+
+            if (!string.IsNullOrEmpty(image.ImageText))
+            {
+                result["alt"] = image.ImageText;
+                result["title"] = image.ImageText;
+            }
+
+            return result;
         }
 
         private string? GetStyle()

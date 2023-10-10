@@ -3,37 +3,32 @@
 
 @if (_showDialog)
 {
-    <div @attributes="GetModalAttributes()" @onmousemove="OnDrag" @onmouseup="BackgroundUp" @onmousedown="BackgroundDown">
-        <div @attributes="GetDialogAttributes()" @onmousedown:stopPropagation="true">
-            <div @attributes="GetContentAttributes()" @onmousedown="SelectModal">
-                <div @attributes="GetHeaderAttributes()" @onmousedown="TitleMouseDown">
-                    <div @attributes="GetTitleAttributes()">
-                        @Title
-                    </div>
-                    @if (UserCanClose)
-                    {
-                        <button @attributes="GetCloseButtonAttributes()" @onclick="Close">
-                            @if (!string.IsNullOrEmpty(DataProvider.CloseButtonContent))
-                            {
-                                <span>@DataProvider.CloseButtonContent</span>
-                            }                            
-                        </button>
-                    }
-                </div>
-                <div @attributes="GetBodyAttributes()">
-                    @Body
-                </div>
-                @if (Footer is not null)
+    <dialog @attributes="@GetModalAttributes()" @ref="_dialog" @onmousemove="OnDrag" @onmouseup="EndDrag">   
+        <section @attributes="@GetSectionAttributes()">
+            <header @attributes="@GetHeaderAttributes()" @onmousedown="TitleMouseDown">
+                @if (Header is not null)
                 {
-                    <div @attributes="GetFooterAttributes()">
-                        @Footer
-                    </div>
+                    @Header
                 }
-            </div>
-        </div>
-    </div>
-    if (GetShowBackDrop())
-    {
-        <div @attributes="GetBackdropAttributes()"></div>
-    }    
+                <button @attributes="GetCloseButtonAttributes()" @onclick="Close">
+                    @if (!string.IsNullOrEmpty(DataProvider.CloseButtonContent))
+                    {
+                        <span>@DataProvider.CloseButtonContent</span>
+                    }
+                </button>
+            </header>
+            @if (Content is not null)
+            {
+                <div @attributes="@GetContentAttributes()">
+                    @Content
+                </div>
+            }
+            @if (Footer is not null)
+            {
+                <footer @attributes="@GetFooterAttributes()">
+                    @Footer
+                </footer>
+            }    
+        </section>
+    </dialog>
 }

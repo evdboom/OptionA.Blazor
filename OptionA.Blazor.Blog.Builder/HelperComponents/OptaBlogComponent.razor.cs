@@ -76,7 +76,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
                 return;
             }
 
-            await _editModal.ShowOnMouse(args);
+            //await _editModal.ShowOnMouse(args);
         }
 
         private Dictionary<string, object?> GetMoveUpAttributes()

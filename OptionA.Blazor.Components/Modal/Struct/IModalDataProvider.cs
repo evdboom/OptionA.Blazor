@@ -8,17 +8,17 @@ namespace OptionA.Blazor.Components
     public interface IModalDataProvider
     {
         /// <summary>
-        /// Class to add to the modal
+        /// Class to add to the modaldialog
         /// </summary>
-        string? ModalClass { get; }
-        /// <summary>
-        /// Class to add to the dialog of the modal
-        /// </summary>
-        string? DialogClass { get; }
+        string DialogClass { get; }
         /// <summary>
         /// Class to add to the content of the modal
         /// </summary>
         string? ContentClass { get; }
+        /// <summary>
+        /// Class to add to the section inside the dialog
+        /// </summary>
+        string? SectionClass { get; }
         /// <summary>
         /// Class to add to the header of the modal
         /// </summary>
@@ -35,10 +35,6 @@ namespace OptionA.Blazor.Components
         /// Content for the close button
         /// </summary>
         string? CloseButtonContent { get; }
-        /// <summary>
-        /// Class to add to the body of the modal
-        /// </summary>
-        string? BodyClass { get; }
         /// <summary>
         /// Class to add to the footer of the modal
         /// </summary>

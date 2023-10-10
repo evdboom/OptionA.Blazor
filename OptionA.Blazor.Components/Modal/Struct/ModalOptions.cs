@@ -14,6 +14,10 @@
         /// </summary>
         public string? DialogClass { get; set; }
         /// <summary>
+        /// Class to add to the section inside the dialog
+        /// </summary>
+        public string? SectionClass { get; set; }
+        /// <summary>
         /// Class to add to the content of the modal
         /// </summary>
         public string? ContentClass { get; set; }
@@ -33,10 +37,6 @@
         /// Content for the close button
         /// </summary>
         public string? CloseButtonContent { get; set; }
-        /// <summary>
-        /// Class to add to the body of the modal
-        /// </summary>
-        public string? BodyClass { get; set; }
         /// <summary>
         /// Class to add to the footer of the modal
         /// </summary>

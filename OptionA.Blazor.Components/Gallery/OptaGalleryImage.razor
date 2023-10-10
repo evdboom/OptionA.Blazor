@@ -1,10 +1,11 @@
 ﻿@namespace OptionA.Blazor.Components
+@inherits OptaComponent
 
-<li class="opta-gallery-slide @AdditionalClasses @Provider.GetDefaultImageClasses()" active="@IsCurrent">
+<li @attributes="@GetListAttributes()">
     @if (IsCurrent)
     {
         <div class="opta-gallery-image-title">@ImageText</div>
-        <img src="@ImageUrl" alt="@ImageText" title="@ImageText" class="opta-gallery-image" />
+        <img @attributes="GetImageAttributes()" />
         @if (ChildContent != null)
         {
             <div class="opta-gallery-image-description">

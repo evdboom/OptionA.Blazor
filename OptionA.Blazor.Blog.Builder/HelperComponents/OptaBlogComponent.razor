@@ -31,10 +31,10 @@
                Draggable="false"
                ScrollableDialog="true"
                Attributes="@DataProvider.GetAttributes(BuilderType.PropertiesModal)">
-        <Title>
+        <Header>
             <OptaChild Content="@DataProvider.GetContent(BuilderType.PropertiesModalTitle, "**Properties**")" />
-        </Title>
-        <Body>
+        </Header>
+        <Content>
             <OptaListBuilder ContentChanged="ContentChanged"
                              ItemPlaceholder="Class.."
                              ItemTitle="Add additional classes"
@@ -49,6 +49,6 @@
             {
                 @AdditionalProperties
             }
-        </Body>
+        </Content>
     </OptaModal>
 }

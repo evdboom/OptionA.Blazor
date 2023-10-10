@@ -11,7 +11,7 @@ namespace OptionA.Blazor.Components
         /// Additional classes to add to the component
         /// </summary>
         [Parameter]
-        public IList<string>? AdditionalClasses { get; set; }
+        public string? AdditionalClasses { get; set; }
         /// <summary>
         /// Classes to remove from the default supplied
         /// </summary>
@@ -31,22 +31,38 @@ namespace OptionA.Blazor.Components
         /// <returns></returns>
         protected bool TryGetClasses(string defaultClass, out string resultClass)
         {
-            var start = defaultClass
-                .Split(' ')
-                .ToList();
-            var additional = AdditionalClasses ?? new List<string>();
+            var start = ParseClasses(defaultClass, AdditionalClasses);
             var removed = RemovedClasses ?? new List<string>();
 
-            var classList = start
-                .Concat(additional)
+            var classList = start                
                 .Except(removed)
-                .Distinct()
-                .Where(c => !string.IsNullOrEmpty(c))
                 .ToList();
 
             resultClass = string.Join(' ', classList);
 
             return classList.Any();
+        }
+
+        /// <summary>
+        /// Gives the list of unique classes for the given default and additional
+        /// </summary>
+        /// <param name="defaultClass"></param>
+        /// <param name="additionalClass"></param>
+        /// <returns></returns>
+        protected List<string> ParseClasses(string? defaultClass, string? additionalClass)
+        {
+            var start = (defaultClass ?? string.Empty)
+                .Split(' ')
+                .ToList();
+            var additional = (additionalClass ?? string.Empty)
+                .Split(' ')
+                .ToList();
+
+            return start
+                .Concat(additional)                
+                .Distinct()
+                .Where(c => !string.IsNullOrEmpty(c))
+                .ToList();
         }
     }
 }

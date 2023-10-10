@@ -1,7 +1,8 @@
 ﻿@using OptionA.Blazor.Components.Gallery
 @namespace OptionA.Blazor.Components
+@inherits OptaComponent
 
-<div class="opta-gallery @AdditionalClasses @Provider.GetGalleryClasses(Mode)">
+<div @attributes="@GetGalleryAttributes()">
     <OptaGalleryThumbnailContainer Images="_children"
                                    ActiveIndex="@_selectedIndex"
                                    MaxHeight="@MaxThumbnailContainerHeight"
