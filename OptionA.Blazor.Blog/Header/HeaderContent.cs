@@ -15,5 +15,7 @@
         /// Size of the header
         /// </summary>
         public HeaderSize Size { get; set; }
+        /// <inheritdoc/>
+        public override bool IsInvalid => string.IsNullOrEmpty(Content);
     }
 }

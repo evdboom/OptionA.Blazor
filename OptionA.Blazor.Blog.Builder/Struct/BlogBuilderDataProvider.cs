@@ -20,6 +20,17 @@ namespace OptionA.Blazor.Blog.Builder
         }
 
         /// <inheritdoc/>
+        public IContent? ContentForContentButton(ContentType contentType, string? defaultContent)
+        {
+            if (_options.ComponentButtonOptions is null || !_options.ComponentButtonOptions.TryGetValue(contentType, out var properties))
+            {
+                properties = null;
+            }
+
+            return GetContent(properties, defaultContent);
+        }
+
+        /// <inheritdoc/>
         public IContent CreateContentForType(ContentType contentType)
         {
             return contentType switch
@@ -35,6 +46,7 @@ namespace OptionA.Blazor.Blog.Builder
                 },
                 ContentType.Image => new ImageContent(),
                 ContentType.Quote => new QuoteContent(),
+                ContentType.Frame => new FrameContent(),
                 _ => throw new NotSupportedException($"Contenttype {contentType} is not support as individual blogpart")
             };
         }
@@ -65,43 +77,58 @@ namespace OptionA.Blazor.Blog.Builder
         /// <inheritdoc/>
         public IContent? GetContent(BuilderType type, string? defaultContent)
         {
-            if (TryGetProperties(type, out var properties))
-            {
-                IContent result = properties.ContentType switch
-                {
-                    ContentType.Inline => new InlineContent(),
-                    ContentType.Block => new BlockContent(),
-                    _ => new InlineContent()
-                };
+            TryGetProperties(type, out var properties);
+            return GetContent(properties, defaultContent);            
+        }
 
-                if (result is TextContent text)
+        private IContent? GetContent(BuilderTypeProperties? properties, string? defaultContent)
+        {
+            if (properties is null)
+            {
+                return defaultContent is not null
+                    ? new InlineContent
+                    {
+                        Content = defaultContent
+                    }
+                    : null;
+            }
+
+            IContent result = properties.ContentType switch
+            {
+                ContentType.Inline => new InlineContent(),
+                ContentType.Block => new BlockContent(),
+                ContentType.Icon => new IconContent(),
+                _ => new InlineContent()
+            };
+
+            if (result is TextContent text)
+            {
+                if (properties.Content is not null)
                 {
-                    if (properties.Content is not null)
-                    {
-                        text.Content = properties.Content;
-                    }
-                    else if (defaultContent is not null)
-                    {
-                        text.Content = defaultContent;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    text.Content = properties.Content;
                 }
-
-                return result;
-            }
-           
-            if (defaultContent is not null)
-            {
-                return new InlineContent
+                else if (defaultContent is not null)
                 {
-                    Content = defaultContent
-                };
+                    text.Content = defaultContent;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else if (result is IconContent icon)
+            {
+                if (properties.Content is not null)
+                {
+                    icon.AdditionalClasses.Add(properties.Content);
+                }
+                else if (defaultContent is not null)
+                {
+                    icon.AdditionalClasses.Add(defaultContent);
+                }
             }
 
-            return null;
+            return result;
         }
         
         /// <inheritdoc/>

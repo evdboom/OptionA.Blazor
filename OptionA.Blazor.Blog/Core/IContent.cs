@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Interface for content to be rendered inside a post
@@ -23,5 +21,9 @@ namespace OptionA.Blazor.Blog
         /// Type of content
         /// </summary>
         ContentType Type { get; }
+        /// <summary>
+        /// True if this part is invalid for the final post and should be removed during saving
+        /// </summary>
+        bool IsInvalid { get; }
     }
 }

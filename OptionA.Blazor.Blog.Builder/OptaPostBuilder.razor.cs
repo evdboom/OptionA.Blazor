@@ -136,6 +136,12 @@ namespace OptionA.Blazor.Blog.Builder
             }
 
             _post.Tags.RemoveAll(string.IsNullOrWhiteSpace);
+            _post.Content.RemoveAll(content => content.IsInvalid);
+            foreach (var content in _post.Content)
+            {
+                content.RemovedClasses.RemoveAll(string.IsNullOrWhiteSpace);
+                content.AdditionalClasses.RemoveAll(string.IsNullOrWhiteSpace);                
+            }
 
             await PostSaved.InvokeAsync(_post);
             _post = null;

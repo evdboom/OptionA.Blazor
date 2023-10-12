@@ -15,5 +15,7 @@
         /// Language of the code
         /// </summary>
         public CodeLanguage Language { get; set; }
+        /// <inheritdoc/>
+        public override bool IsInvalid => string.IsNullOrEmpty(Code);
     }
 }

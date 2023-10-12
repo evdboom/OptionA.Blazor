@@ -127,6 +127,18 @@ namespace OptionA.Blazor.Blog.Builder
         /// <summary>
         /// Input for list item
         /// </summary>
-        ListItemInput
+        ListItemInput,
+        /// <summary>
+        /// Add content button
+        /// </summary>
+        AddContentButton,
+        /// <summary>
+        /// Container for add content button
+        /// </summary>
+        AddContentButtonContainer,
+        /// <summary>
+        /// Component bar
+        /// </summary>
+        ComponentBar
     }
 }

@@ -60,5 +60,15 @@ namespace OptionA.Blazor.Blog
                 return result;
             }
         }
+        /// <inheritdoc/>
+        public override bool IsInvalid
+        {
+            get
+            {
+                return Mode == IconMode.Class
+                    ? !AdditionalClasses.Any()
+                    : !Paths.Any();
+            }
+        }
     }
 }

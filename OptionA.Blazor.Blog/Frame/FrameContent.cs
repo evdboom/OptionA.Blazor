@@ -1,25 +1,29 @@
 ﻿namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// COntent for an image
+    /// Content for the frame component
     /// </summary>
-    public class ImageContent : Content
+    public class FrameContent : Content
     {
-        /// <inheritdoc/>
-        public override ContentType Type => ContentType.Image;
         /// <summary>
-        /// Image source
+        /// Source for the frame
         /// </summary>
         public string Source { get; set; } = string.Empty;
         /// <summary>
-        /// Title for the image, will be set to source if not provided
+        /// Title for the frame
         /// </summary>
         public string? Title { get; set; }
         /// <summary>
-        /// Alt for the image (if it fails to load), will be set to title if not provided
+        /// Width of the frame
         /// </summary>
-        public string? Alternative { get; set; }
-        ///<inheritdoc/>
+        public string? Width { get; set; }
+        /// <summary>
+        /// Height for the frame
+        /// </summary>
+        public string? Height { get; set; }        
+        /// <inheritdoc/>
+        public override ContentType Type => ContentType.Frame;
+        /// <inheritdoc/>
         public override Dictionary<string, object?> Attributes
         {
             get
@@ -29,7 +33,14 @@
                     ["src"] = Source,
                 };
                 result["title"] = Title ?? Source;
-                result["alt"] = Alternative ?? Title ?? Source;
+                if (!string.IsNullOrEmpty(Width))
+                {
+                    result["width"] = Width;
+                }
+                if (!string.IsNullOrEmpty(Height))
+                {
+                    result["height"] = Height;
+                }                
 
                 foreach (var attribute in base.Attributes)
                 {
@@ -38,7 +49,8 @@
                 return result;
             }
         }
+
         /// <inheritdoc/>
-        public override bool IsInvalid => !string.IsNullOrEmpty(Source);
+        public override bool IsInvalid => string.IsNullOrEmpty(Source);
     }
 }

@@ -1,25 +1,10 @@
-﻿<div>
-    <button type="button" @onclick="async () => await AddContent(ContentType.Header)">
-        Add header
-    </button>
-</div>
-<div>
-    <button type="button" @onclick="async () => await AddContent(ContentType.Paragraph)">
-        Add paragraph
-    </button>
-</div>
-<div>
-    <button type="button" @onclick="async () => await AddContent(ContentType.Code)">
-        Add code
-    </button>
-</div>
-<div>
-    <button type="button" @onclick="async () => await AddContent(ContentType.Image)">
-        Add Image
-    </button>
-</div>
-<div>
-    <button type="button" @onclick="async () => await AddContent(ContentType.Quote)">
-        Add Quote
-    </button>
+﻿<div @attributes="@GetAttributes()">
+@foreach(var content in _contentTypes)
+{
+    <div @attributes="@DataProvider.GetAttributes(BuilderType.AddContentButtonContainer)">
+            <button @attributes="GetButtonAttributes(content.Value.Title)" @onclick="async () => await AddContent(content.Key)">
+            <OptaChild Content="@DataProvider.ContentForContentButton(content.Key, content.Value.Content)"/>
+        </button>
+    </div>
+}
 </div>

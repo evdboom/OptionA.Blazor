@@ -34,5 +34,13 @@ namespace OptionA.Blazor.Blog.Builder
         /// <param name="contentType"></param>
         /// <returns></returns>
         IContent CreateContentForType(ContentType contentType);
+        /// <summary>
+        /// Creates content for a button on the content bar
+        /// </summary>
+        /// <param name="contentType"></param>
+        /// <param name="defaultContent"></param>
+        /// <returns></returns>
+        IContent? ContentForContentButton(ContentType contentType, string? defaultContent);
+
     }
 }

@@ -28,7 +28,7 @@
 @if (Content is not null)
 {
     <OptaModal @ref="_editModal"
-               Draggable="false"
+               Draggable="true"
                Attributes="@DataProvider.GetAttributes(BuilderType.PropertiesModal)">
         <Header>
             <OptaChild Content="@DataProvider.GetContent(BuilderType.PropertiesModalTitle, "**Properties**")" />

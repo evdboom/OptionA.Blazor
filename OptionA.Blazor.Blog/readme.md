@@ -1,0 +1,1 @@
+For a full documentation, releasenotes and examples, view [option-a.tech](https://option-a.tech/documentation/blazor/blog)

@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Base class for post content
@@ -15,5 +13,7 @@ namespace OptionA.Blazor.Blog
         public virtual Dictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
         /// <inheritdoc/>
         public abstract ContentType Type { get; }
+        /// <inheritdoc/>
+        public abstract bool IsInvalid { get; }
     }
 }

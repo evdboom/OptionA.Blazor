@@ -48,6 +48,15 @@
                               MovedUp="MovedUp"
                               MovedDown="MovedDown" />
             break;
+        case ContentType.Frame:
+            <OptaFrameBuilder Content="(FrameContent)Content"
+                              ContentChanged="ContentChanged"
+                              ContentRemoved="ContentRemoved"
+                              ContentIndex="ContentIndex"
+                              TotalContentCount="TotalContentCount"
+                              MovedUp="MovedUp"
+                              MovedDown="MovedDown" />
+            break;
 
     }
 }

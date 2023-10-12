@@ -15,5 +15,7 @@
         /// Set to true to skip markdown detection
         /// </summary>
         public bool NotMarkdown { get; set; }
+        /// <inheritdoc/>
+        public override bool IsInvalid => !string.IsNullOrEmpty(Content);
     }
 }

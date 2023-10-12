@@ -8,6 +8,7 @@
     <RootNamespace>OptionA.Blazor.Blog</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<PackageReadmeFile>readme.md</PackageReadmeFile>
     <Title>Blazor Blog Components</Title>
     <Authors>Erik van der Boom</Authors>
 	<IsPackable>true</IsPackable>
@@ -37,6 +38,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+	<None Include="readme.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>

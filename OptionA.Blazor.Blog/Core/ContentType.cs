@@ -76,5 +76,9 @@ namespace OptionA.Blazor.Blog
         /// Cite resulteing in a &lt;cite&gt; tag
         /// </summary>
         Cite,
+        /// <summary>
+        /// An external frame resulting in a &lt;iframe&gt; tag
+        /// </summary>
+        Frame,
     }
 }

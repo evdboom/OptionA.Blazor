@@ -176,6 +176,22 @@ namespace OptionA.Blazor.Blog.Services
                         result[nameof(image.Alternative)] = image.Alternative;
                     }
                     break;
+                case ContentType.Frame:
+                    var frame = (FrameContent)content;
+                    result[nameof(frame.Source)] = frame.Source;
+                    if (!string.IsNullOrEmpty(frame.Title))
+                    {
+                        result[nameof(frame.Title)] = frame.Title;
+                    }
+                    if (!string.IsNullOrEmpty(frame.Height))
+                    {
+                        result[nameof(frame.Height)] = frame.Height;
+                    }
+                    if (!string.IsNullOrEmpty(frame.Width))
+                    {
+                        result[nameof(frame.Width)] = frame.Width;
+                    }
+                    break;
             }
 
 
@@ -203,10 +219,10 @@ namespace OptionA.Blazor.Blog.Services
                 {
                     Href = content.TryGetValue(nameof(LinkContent.Href), out var href)
                         ? JsonSerializer.Deserialize<string>(href) ?? string.Empty
-                        : null,
+                        : default,
                     Target = content.TryGetValue(nameof(LinkContent.Target), out var target)
                         ? JsonSerializer.Deserialize<string>(target)
-                        : null,
+                        : default,
                 },
                 ContentType.Code => new CodeContent
                 {
@@ -221,7 +237,7 @@ namespace OptionA.Blazor.Blog.Services
                 {
                     Content = content.TryGetValue(nameof(HeaderContent.Content), out var stringContent)
                         ? JsonSerializer.Deserialize<string>(stringContent) ?? string.Empty
-                        : null,
+                        : default,
                     Size = content.TryGetValue(nameof(HeaderContent.Size), out var size)
                         ? JsonSerializer.Deserialize<HeaderSize>(size)
                         : HeaderSize.One
@@ -233,10 +249,10 @@ namespace OptionA.Blazor.Blog.Services
                         : new(),
                     Width = content.TryGetValue(nameof(IconContent.Width), out var width)
                         ? JsonSerializer.Deserialize<string>(width) ?? string.Empty
-                        : null,
+                        : default,
                     Height = content.TryGetValue(nameof(IconContent.Height), out var height)
                         ? JsonSerializer.Deserialize<string>(height) ?? string.Empty
-                        : null,
+                        : default,
                     ViewBoxValues = content.TryGetValue(nameof(IconContent.ViewBoxValues), out var viewbox)
                         ? JsonSerializer.Deserialize<int[]>(viewbox) ?? new int[4]
                         : new int[4],
@@ -248,10 +264,10 @@ namespace OptionA.Blazor.Blog.Services
                 {
                     Quote = content.TryGetValue(nameof(QuoteContent.Quote), out var quote)
                         ? JsonSerializer.Deserialize<string>(quote) ?? string.Empty
-                        : null,
+                        : default,
                     Source = content.TryGetValue(nameof(QuoteContent.Source), out var source)
                         ? JsonSerializer.Deserialize<string>(source) ?? string.Empty
-                        : null,
+                        : default,
                     AdditionalSourceClasses = content.TryGetValue(nameof(QuoteContent.AdditionalSourceClasses), out var sourceClasses)
                         ? JsonSerializer.Deserialize<List<string>>(sourceClasses) ?? new()
                         : new(),
@@ -269,10 +285,25 @@ namespace OptionA.Blazor.Blog.Services
                         : string.Empty,
                     Title = content.TryGetValue(nameof(ImageContent.Title), out var title)
                         ? JsonSerializer.Deserialize<string>(title) ?? string.Empty
-                        : null,
+                        : default,
                     Alternative = content.TryGetValue(nameof(ImageContent.Alternative), out var alternative)
                         ? JsonSerializer.Deserialize<string>(alternative) ?? string.Empty
-                        : null,
+                        : default,
+                },
+                ContentType.Frame => new FrameContent
+                {
+                    Source = content.TryGetValue(nameof(FrameContent.Source), out var source)
+                        ? JsonSerializer.Deserialize<string>(source) ?? string.Empty
+                        : string.Empty,
+                    Title = content.TryGetValue(nameof(FrameContent.Title), out var title)
+                        ? JsonSerializer.Deserialize<string>(title) ?? string.Empty
+                        : default,
+                    Width = content.TryGetValue(nameof(FrameContent.Width), out var width)
+                        ? JsonSerializer.Deserialize<string>(width)
+                        : default,
+                    Height = content.TryGetValue(nameof(FrameContent.Height), out var height)
+                        ? JsonSerializer.Deserialize<string>(height)
+                        : default,
                 },
                 _ => throw new NotSupportedException($"Canoot create postcontent for type {type}")
             };

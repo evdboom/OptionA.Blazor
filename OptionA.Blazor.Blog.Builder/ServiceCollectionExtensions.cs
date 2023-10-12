@@ -132,6 +132,18 @@ namespace OptionA.Blazor.Blog.Builder
                     [BuilderType.ListItemsContainer] = new BuilderTypeProperties
                     {
                         Class = "row g-1"
+                    },
+                    [BuilderType.AddContentButton] = new BuilderTypeProperties
+                    {
+                        Class = "btn btn-primary btn-sm p-1"
+                    },
+                    [BuilderType.AddContentButtonContainer] = new BuilderTypeProperties
+                    {
+                        Class = "col-auto"
+                    },
+                    [BuilderType.ComponentBar] = new BuilderTypeProperties
+                    {
+                        Class = "row g-1 sticky-top"
                     }
                 };
 

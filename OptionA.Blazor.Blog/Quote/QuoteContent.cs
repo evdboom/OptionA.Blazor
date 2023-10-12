@@ -31,5 +31,7 @@
         public string? SourceUrl { get; set; }
         /// <inheritdoc/>
         public override ContentType Type => ContentType.Quote;
+        /// <inheritdoc/>
+        public override bool IsInvalid => !string.IsNullOrEmpty(Quote);
     }
 }
