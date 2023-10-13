@@ -1,10 +1,10 @@
-﻿ul.opta-menu {
+﻿[opta-menu] {
     list-style-type: none;
     margin: 0;
     padding: 0;
     flex-direction: row;
 }
 
-ul.opta-menu[vertical] {
+[opta-menu][vertical] {
     flex-direction: column;
 }

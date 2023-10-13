@@ -1,0 +1,10 @@
+﻿<div @attributes="@GetAttributes()">
+@foreach(var content in _contentTypes)
+{
+    <div @attributes="@DataProvider.GetAttributes(BuilderType.AddContentButtonContainer)">
+            <button @attributes="GetButtonAttributes(content.Value.Title)" @onclick="async () => await AddContent(content.Key)">
+            <OptAChild Content="@DataProvider.ContentForContentButton(content.Key, content.Value.Content)"/>
+        </button>
+    </div>
+}
+</div>

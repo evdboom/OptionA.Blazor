@@ -1,11 +1,11 @@
-﻿.opta-gallery-modal {    
+﻿[opta-gallery-modal] {    
     position: relative;
     margin-left: auto;
     margin-right: auto;    
     display: block;
 }
 
-.opta-gallery-close {
+[opta-gallery-close] {
     position: absolute;
     z-index: 2000;
     right: 0;
@@ -13,7 +13,7 @@
 
 }
 
-.opta-modal-wrapper {
+[opta-modal-wrapper] {
     display: none;
     position: fixed;
     z-index: 1055;
@@ -23,11 +23,11 @@
     height: 100%;
 }
 
-.opta-modal-wrapper[show] {
+[opta-modal-wrapper][show] {
     display: block;
 }
 
-.opta-gallery-modal-background {
+[opta-gallery-modal-background] {
     position: fixed;
     z-index: 1000;
     top: 0;

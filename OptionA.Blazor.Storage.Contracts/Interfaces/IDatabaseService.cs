@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace OptionA.Blazor.Storage.Interfaces
+namespace OptionA.Blazor.Storage
 {
     /// <summary>
     /// Service for accessing an indexedDb, including making sure it is up to date.

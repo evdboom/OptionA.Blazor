@@ -1,6 +1,6 @@
 ﻿@page "/gallery-switch"
 <button @onclick="() => Switch()">Click me!</button>
-<OptaGallery MaxThumbnailContainerHeight="50vh"
+<OptAGallery MaxThumbnailContainerHeight="50vh"
              ShowTitleOnThumbnail="true"
              Mode="@_mode"
              ThumbnailsPerRow="4"
@@ -9,12 +9,12 @@
     <Images>
         @for (int i = 1; i <= 10; i++)
         {
-            <OptaGalleryImage ImageNumber="@i"
+            <OptAGalleryImage ImageNumber="@i"
                               ImageText="@i.ToString()"
                               ImageThumbnailUrl="@GetUrl(i)"
                               ImageUrl="@GetUrl(i)">
                 <p>This is some paragrapgh for below the image with some text, cause i Can</p>
-            </OptaGalleryImage>
+            </OptAGalleryImage>
         }
     </Images>
-</OptaGallery>
+</OptAGallery>

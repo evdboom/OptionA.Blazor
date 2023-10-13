@@ -3,17 +3,17 @@
 namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// Enum to determine how to render the icon
+    /// Way to display icon
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum IconMode
     {
         /// <summary>
-        /// Render from class
+        /// Icon is determined by a CSS class
         /// </summary>
-        IconClass,
+        Class,
         /// <summary>
-        /// Render from paths
+        /// Path for icon is provided in content
         /// </summary>
         Path
     }

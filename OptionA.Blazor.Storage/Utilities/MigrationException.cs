@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Storage.Utilities
+﻿namespace OptionA.Blazor.Storage
 {
     /// <summary>
     /// Exception for when a migration fails

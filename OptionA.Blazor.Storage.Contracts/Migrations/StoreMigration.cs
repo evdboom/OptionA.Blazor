@@ -1,5 +1,4 @@
-﻿using OptionA.Blazor.Storage.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace OptionA.Blazor.Storage.Migrations
 {

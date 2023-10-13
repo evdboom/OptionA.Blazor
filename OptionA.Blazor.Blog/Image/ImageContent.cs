@@ -1,100 +1,44 @@
-﻿using System.Text.Json;
-
-namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// Content for the <see cref="Image"/> component
+    /// COntent for an image
     /// </summary>
     public class ImageContent : Content
     {
+        /// <inheritdoc/>
+        public override ContentType Type => ContentType.Image;
         /// <summary>
-        /// Default constructor
-        /// </summary>
-        public ImageContent() : base() { }
-        /// <summary>
-        /// Constructor for use in deserialization
-        /// </summary>
-        /// <param name="items"></param>
-        public ImageContent(Dictionary<string, JsonElement> items) : base(items)
-        {
-            if (items.TryGetValue(nameof(Source), out var source))
-            {
-                Source = JsonSerializer.Deserialize<string>(source) ?? string.Empty;
-            }
-            if (items.TryGetValue(nameof(Width), out var width))
-            {
-                Width = JsonSerializer.Deserialize<string>(width);
-            }
-            if (items.TryGetValue(nameof(Height), out var height))
-            {
-                Height = JsonSerializer.Deserialize<string>(height);
-            }
-            if (items.TryGetValue(nameof(Mode), out var mode))
-            {
-                Mode = JsonSerializer.Deserialize<ImageMode>(mode);
-            }
-        }
-
-        /// <summary>
-        /// Source of the image
+        /// Image source
         /// </summary>
         public string Source { get; set; } = string.Empty;
         /// <summary>
-        /// Sets the width of the image
+        /// Title for the image, will be set to source if not provided
         /// </summary>
-        public string? Width { get; set; }
+        public string? Title { get; set; }
         /// <summary>
-        /// Sets the height of the image
+        /// Alt for the image (if it fails to load), will be set to title if not provided
         /// </summary>
-        public string? Height { get; set; }
-        /// <summary>
-        /// Mode for the image
-        /// </summary>
-        public ImageMode Mode { get; set; }
-        /// <inheritdoc/>
-        public override IDictionary<string, object?> Attributes
+        public string? Alternative { get; set; }
+        ///<inheritdoc/>
+        public override Dictionary<string, object?> Attributes
         {
             get
             {
-                var attributes = base.Attributes;
-                if (!attributes.ContainsKey("title"))
+                var result = new Dictionary<string, object?>
                 {
-                    attributes["title"] = Source;
-                }
-                if (!attributes.ContainsKey("alt"))
-                {
-                    attributes["alt"] = attributes["title"];
-                }
-                if (!string.IsNullOrEmpty(Width))
-                {
-                    attributes["width"] = Width;
-                }
-                if (!string.IsNullOrEmpty(Height))
-                {
-                    attributes["height"] = Height;
-                }
+                    ["src"] = Source,
+                };
+                result["title"] = Title ?? Source;
+                result["alt"] = Alternative ?? Title ?? Source;
 
-                attributes["src"] = Source;
-
-                return attributes;
+                foreach (var attribute in base.Attributes)
+                {
+                    result[attribute.Key] = attribute.Value;
+                }
+                return result;
             }
         }
         /// <inheritdoc/>
-        public override ComponentType Type => ComponentType.Image;
-
-        /// <inheritdoc/>
-        protected override void OnSerialize(Dictionary<string, object> items)
-        {
-            items[nameof(Source)] = Source;
-            if (!string.IsNullOrEmpty(Width))
-            {
-                items[nameof(Width)] = Width;
-            }
-            if (!string.IsNullOrEmpty(Height))
-            {
-                items[nameof(Height)] = Height;
-            }
-            items[nameof(Mode)] = Mode;
-        }
+        public override bool IsInvalid => !string.IsNullOrEmpty(Source);
     }
 }

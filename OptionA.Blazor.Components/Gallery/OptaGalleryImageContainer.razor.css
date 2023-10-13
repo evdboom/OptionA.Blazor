@@ -6,6 +6,6 @@
     padding: 0;
 }
 
-.opta-gallery-images-container {
+[opta-gallery-images-container] {
     position: relative;
 }

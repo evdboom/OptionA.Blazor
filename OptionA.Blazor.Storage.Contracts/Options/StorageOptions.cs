@@ -1,4 +1,4 @@
-﻿namespace OptionA.Storage.Options
+﻿namespace OptionA.Blazor.Storage
 { 
     /// <summary>
     /// Options for binding Storage options to configuration items

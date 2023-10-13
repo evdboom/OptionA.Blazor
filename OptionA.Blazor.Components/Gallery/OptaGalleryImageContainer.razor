@@ -1,6 +1,8 @@
-﻿@if (Parent != null)
+﻿@inherits OptAComponent
+
+@if (Parent != null)
 {
-    <div class="opta-gallery-images-container @AdditionalClasses @Provider.GetImageContainerClasses(Parent.Mode)">
+    <div @attributes="GetContainerAttributes()">
         <ol>
             @Parent.Images
         </ol>
@@ -8,19 +10,19 @@
         {
             @if (Parent.NextPreviousIsIcon)
             {
-                <button class="@Parent.PreviousClasses @Provider.DefaultPreviousClasses()" @onclick="async () => await SelectPrevious()">
-                    <i class="@Parent.PreviousIconClasses @Provider.DefaultPreviousIconClasses()" />
+                <button @attributes="@GetPreviousButtonAttributes()" @onclick="async () => await SelectPrevious()">
+                    <i @attributes="@GetPreviousIconAttributes()" />
                 </button>
-                <button class="@Parent.NextClasses @Provider.DefaultNextClasses()" @onclick="async () => await SelectNext()">
-                    <i class="@Parent.NextIconClasses @Provider.DefaultNextIconClasses()" />
+                <button @attributes="@GetNextButtonAttributes()" @onclick="async () => await SelectNext()">
+                    <i @attributes="@GetNextIconAttributes()" />
                 </button>
             }
             else
             {
-                <button class="@Parent.PreviousClasses @Provider.DefaultPreviousClasses()" @onclick="async () => await SelectPrevious()">
+                <button @attributes="@GetPreviousButtonAttributes()" @onclick="async () => await SelectPrevious()">
                     @Parent.PreviousContent
                 </button>
-                <button class="@Parent.NextClasses @Provider.DefaultNextClasses()" @onclick="async () => await SelectNext()">
+                <button @attributes="@GetNextButtonAttributes()" @onclick="async () => await SelectNext()">
                     @Parent.NextContent
                 </button>
             }

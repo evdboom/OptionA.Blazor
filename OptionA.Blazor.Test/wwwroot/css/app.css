@@ -1,4 +1,6 @@
 @import url('icons/bootstrap-icons.css');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -22,6 +24,18 @@ a, .btn-link {
     height: 3rem;
 }
 
+.opta-tag {
+    background-color: #552055;
+    user-select: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: #F5F5F5;
+}
+
+.opta-header {
+    color: #552055;
+}
+ 
 .opta-menu-group {
     background-color: red;
 }
@@ -32,6 +46,10 @@ a, .btn-link {
     overflow: hidden;
     height: 0;
     transition: height 250ms ease-in-out;
+}
+
+.opta-blog {
+    font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri;
 }
 
 .opta-menu-group[open] .opta-dropdown {
@@ -138,3 +156,23 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+:root {
+    --oa-code-keyword: #569cd6;
+    --oa-code-controlkeyword: #d8a0df;
+    --oa-code-string: #ce9178;
+    --oa-code-method: #dcdcaa;
+    --oa-code-comment: #63b456;
+    --oa-code-attribute: #9cdcfe;
+    --oa-code-tagdelimiter: #808080;
+    --oa-code-directive: #a699e6;
+    --oa-code-component: #0096aa;
+    --oa-code-background: #1e1e1e;
+    --oa-code-headerbackground: #3f3f3f;
+    --oa-code-color: #dcdcdc;
+    --oa-code-selected: rgba(51, 153, 255, .5);
+    --oa-code-class: #4ec9b0;
+    --oa-code-struct: #86c691;
+    --oa-code-enum: #b8d7a3;
+    --oa-code-interface: #b8d7a3;
+}

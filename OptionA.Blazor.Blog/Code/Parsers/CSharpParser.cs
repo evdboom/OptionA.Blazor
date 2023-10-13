@@ -1,18 +1,22 @@
-﻿namespace OptionA.Blazor.Blog.Parsers
+﻿namespace OptionA.Blazor.Blog.Code.Parsers
 {
     /// <summary>
-    /// Parser for parsing c# code to a more readable format.
+    /// Parser for c# code
     /// </summary>
     public class CSharpParser : ParserBase
     {
+        /// <inheritdoc/>
+        public override CodeLanguage Language => CodeLanguage.CSharp;
+
         /// <summary>
         /// Constructor
         /// </summary>
         public CSharpParser() : base()
         {
-            _partCheckers.Add((code, word, current) => IsKeyword(word));
-            _partCheckers.Add((code, word, current) => IsControlKeyword(word));
-            _partCheckers.Add((code, word, current) => IsMethodStart(current, code));
+            _partCheckers.Add((_, word, _) => IsKeyword(word));
+            _partCheckers.Add((_, word, _) => IsControlKeyword(word));
+            _partCheckers.Add((previous, word, next) => IsMethodStart(previous, next));
+            _partCheckers.Add(IsAttribute);
         }
 
         private readonly List<string> _controlKeywords = new()
@@ -157,6 +161,8 @@
             ';',
             ',',
             '|',
+            '[',
+            ']'
         };
 
         /// <inheritdoc/>
@@ -169,31 +175,45 @@
             { "@$\"", new(WordType.Interpolated, "@$\"", 3, "\"") },
             { "//", new(WordType.Comment, "//", 0, Environment.NewLine) },
             { "///", new(WordType.Comment, "///", 0, Environment.NewLine) },
+            { "/*", new(WordType.Comment, "/*", 0, "*/") },
         };
 
-        private static CodePart IsMethodStart(string current, string code)
+        private static CodeType IsMethodStart(string current, string code)
         {
             var nextChar = code.FirstOrDefault();
             return nextChar == '(' &&
                 (string.IsNullOrEmpty(current)
                 || current.EndsWith(' ')
                 || current.EndsWith('.'))
-                ? CodePart.Method
-                : CodePart.Text;
+                ? CodeType.Method
+                : CodeType.Text;
         }
 
-        private CodePart IsKeyword(string word)
+        private static CodeType IsAttribute(string previous, string current, string next)
+        {
+            var validStart =
+                previous.EndsWith(" [") ||
+                previous.EndsWith("([");
+            var validEnd =
+                next.StartsWith(']') ||
+                next.StartsWith('(');
+            return validStart && validEnd
+                ? CodeType.Class
+                : CodeType.Text;            
+        }
+
+        private CodeType IsKeyword(string word)
         {
             return _keyWords.Contains(word)
-                ? CodePart.Keyword
-                : CodePart.Text;
+                ? CodeType.Keyword
+                : CodeType.Text;
         }
 
-        private CodePart IsControlKeyword(string word)
+        private CodeType IsControlKeyword(string word)
         {
             return _controlKeywords.Contains(word)
-                ? CodePart.ControlKeyword
-                : CodePart.Text;
-        }        
+                ? CodeType.ControlKeyword
+                : CodeType.Text;
+        }
     }
 }

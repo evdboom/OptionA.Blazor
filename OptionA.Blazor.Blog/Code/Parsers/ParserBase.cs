@@ -1,16 +1,25 @@
-﻿namespace OptionA.Blazor.Blog.Parsers
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace OptionA.Blazor.Blog.Code.Parsers
 {
     /// <summary>
-    /// base class for code parsers   
+    /// Abstract base class for code parsers
     /// </summary>
-    public abstract class ParserBase : IParser
+    public abstract class ParserBase : ICodeParser
     {
+        /// <inheritdoc/>
+        public abstract CodeLanguage Language { get; }
+
         /// <summary>
         /// Supported markers
         /// </summary>
         protected readonly Dictionary<string, MarkerType> _markers = new()
         {
-            { "*M*", MarkerType.Selection }
+            { "*S*", MarkerType.Selection },
+            { "*C*", MarkerType.Class },
+            { "*I*", MarkerType.Interface },
+            { "*E*", MarkerType.Enum },
+            { "*T*", MarkerType.Struct },
         };
 
         /// <summary>
@@ -24,29 +33,33 @@
         protected abstract char[] Specials { get; }
 
         /// <summary>
-        /// list of methofs to determine the correct codeparts (other then strings and comments)
+        /// list of methods to determine the correct CodeTypes (other then strings and comments)
         /// </summary>
-        protected List<Func<string, string, string, CodePart>> _partCheckers = new(); 
+        protected List<Func<string, string, string, CodeType>> _partCheckers = new();
 
-        /// <inheritdoc/>
-        public virtual IEnumerable<(string Part, CodePart Type, MarkerType Marker)> GetParts(string code)
+        /// <summary>
+        /// gets the parts of the given code
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        protected virtual IEnumerable<(string Part, CodeType Type, MarkerType Marker)> GetParts(string code)
         {
             var current = string.Empty;
             var previous = string.Empty;
             var activeMarkers = MarkerType.None;
-            WordTypeModel? incomplete = null;
+            WordTypeModel? incompleteModel = null;
             var endedInside = false;
             while (!string.IsNullOrEmpty(code))
             {
-                var word = FindNextWord(code, incomplete, out WordTypeModel wordType);
+                var word = FindNextWord(code, incompleteModel, out WordTypeModel wordType, out bool incomplete);
                 code = RemoveFromStart(code, word);
 
-                if (wordType.WordType == WordType.Marker)
+                if (wordType.Type == WordType.Marker)
                 {
                     var marker = _markers[word];
                     if (!string.IsNullOrEmpty(current))
                     {
-                        yield return (current, CodePart.Text, activeMarkers);
+                        yield return (current, CodeType.Text, activeMarkers);
                         current = string.Empty;
                     }
 
@@ -62,28 +75,25 @@
                     continue;
                 }
 
-                var isIncomplete = wordType.WordType.HasFlag(WordType.Incomplete);
-                wordType.WordType &= ~WordType.Incomplete;
-
-                incomplete = isIncomplete
+                incompleteModel = incomplete
                     ? wordType
                     : null;
 
-                switch (wordType.WordType)
+                switch (wordType.Type)
                 {
                     case WordType.String:
                         if (!string.IsNullOrEmpty(current))
                         {
-                            yield return (current, CodePart.Text, activeMarkers);
+                            yield return (current, CodeType.Text, activeMarkers);
                             current = string.Empty;
                         }
                         previous = word;
-                        yield return (word, CodePart.String, activeMarkers);
+                        yield return (word, CodeType.String, activeMarkers);
                         break;
                     case WordType.Interpolated:
                         if (!string.IsNullOrEmpty(current))
                         {
-                            yield return (current, CodePart.Text, activeMarkers);
+                            yield return (current, CodeType.Text, activeMarkers);
                             current = string.Empty;
                         }
                         foreach (var (part, type, inside) in ParseInterpolatedString(word, endedInside))
@@ -96,24 +106,24 @@
                     case WordType.Comment:
                         if (!string.IsNullOrEmpty(current))
                         {
-                            yield return (current, CodePart.Text, activeMarkers);
+                            yield return (current, CodeType.Text, activeMarkers);
                             current = string.Empty;
                         }
                         previous = word;
-                        yield return (word, CodePart.Comment, activeMarkers);
+                        yield return (word, CodeType.Comment, activeMarkers);
                         break;
-                    case WordType.Unknown:
+                    case WordType.Other:
                         var found = false;
-                        foreach(var checker in _partCheckers)
+                        foreach (var checker in _partCheckers)
                         {
-                            var type = checker(code, word, previous);
-                            found = type != CodePart.Text;
+                            var type = checker(previous, word, code);
+                            found = type != CodeType.Text;
 
                             if (found)
                             {
                                 if (!string.IsNullOrEmpty(current))
                                 {
-                                    yield return (current, CodePart.Text, activeMarkers);
+                                    yield return (current, CodeType.Text, activeMarkers);
                                     current = string.Empty;
                                 }
                                 previous = word;
@@ -132,7 +142,7 @@
             }
             if (!string.IsNullOrEmpty(current))
             {
-                yield return (current, CodePart.Text, activeMarkers);
+                yield return (current, CodeType.Text, activeMarkers);
             }
         }
 
@@ -142,7 +152,7 @@
         /// <param name="word"></param>
         /// <param name="beginInside"></param>
         /// <returns></returns>
-        protected virtual IEnumerable<(string Part, CodePart Type, bool Inside)> ParseInterpolatedString(string word, bool beginInside)
+        protected virtual IEnumerable<(string Part, CodeType Type, bool Inside)> ParseInterpolatedString(string word, bool beginInside)
         {
             var interpolated = word.Split('{', '}');
             var inside = beginInside;
@@ -170,7 +180,7 @@
                 }
                 else
                 {
-                    yield return (part, CodePart.String, false);
+                    yield return (part, CodeType.String, false);
                 }
                 inside = !inside;
             }
@@ -216,12 +226,13 @@
         /// Finds the next word in the given string
         /// </summary>
         /// <param name="code"></param>
-        /// <param name="incomplete"></param>
+        /// <param name="incompleteModel"></param>
         /// <param name="wordType"></param>
+        /// <param name="incomplete"></param>
         /// <returns></returns>
-        protected virtual string FindNextWord(string code, WordTypeModel? incomplete, out WordTypeModel wordType)
+        protected virtual string FindNextWord(string code, WordTypeModel? incompleteModel, out WordTypeModel wordType, out bool incomplete)
         {
-
+            incomplete = false;
             if (string.IsNullOrEmpty(code))
             {
                 wordType = WordTypeModel.Empty;
@@ -234,10 +245,10 @@
                 wordType = WordTypeModel.Marker;
                 return marker;
             }
-                       
-            if (incomplete is not null)
+
+            if (incompleteModel is not null)
             {
-                wordType = incomplete;
+                wordType = incompleteModel;
             }
             else
             {
@@ -246,7 +257,7 @@
             }
 
             var word = string.Empty;
-            if (wordType.WordType != WordType.Unknown)
+            if (wordType.Type != WordType.Other)
             {
                 word = FindTillValue(code, wordType.SearchFromIndex, wordType.Ender);
             }
@@ -285,12 +296,70 @@
 
             if (_markers.Keys.Any(word.Contains))
             {
-                wordType.WordType |= WordType.Incomplete;
+                incomplete = true;
             }
 
             return word
                 .Split(_markers.Keys.ToArray(), StringSplitOptions.None)
                 .FirstOrDefault() ?? string.Empty;
+        }
+
+        /// <inheritdoc/>
+        public IEnumerable<IContent> Parse(string? content)
+        {
+            return GetParts(content ?? string.Empty)
+                .Select(ToContent);
+        }
+
+        private IContent ToContent((string Part, CodeType Type, MarkerType Marker) part)
+        {
+            var result = new InlineContent
+            {
+                Content = part.Part,
+                NotMarkdown = true
+            };
+            
+          
+            if (part.Marker.HasFlag(MarkerType.Selection))
+            {
+                if (result.Attributes.ContainsKey("opta-code-marker"))
+                {
+                    result.Attributes["opta-code-marker"] += " selected";
+                }
+                else
+                {
+                    result.Attributes["opta-code-marker"] = "selected";
+                }
+            }
+            if (part.Type == CodeType.Text)
+            {                
+                if (part.Marker.HasFlag(MarkerType.Class))
+                {
+                    result.Attributes["opta-code"] = MarkerType.Class.ToAttribute();
+                }
+                else if (part.Marker.HasFlag(MarkerType.Interface))
+                {
+                    result.Attributes["opta-code"] = MarkerType.Interface.ToAttribute();
+                }
+                else if (part.Marker.HasFlag(MarkerType.Enum))
+                {
+                    result.Attributes["opta-code"] = MarkerType.Enum.ToAttribute();
+                }
+                else if (part.Marker.HasFlag(MarkerType.Struct))
+                {
+                    result.Attributes["opta-code"] = MarkerType.Struct.ToAttribute();
+                }
+                else
+                {
+                    result.Attributes["opta-code"] = part.Type.ToAttribute();
+                }
+            }
+            else
+            {
+                result.Attributes["opta-code"] = part.Type.ToAttribute();
+            }
+
+            return result;
         }
     }
 }

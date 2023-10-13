@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace OptionA.Blazor.Storage.Interfaces
+namespace OptionA.Blazor.Storage
 {
     /// <summary>
     /// Layout for an indexedDb

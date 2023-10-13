@@ -24,7 +24,7 @@ namespace OptionA.Blazor.Components
         [Inject]
         private IJSRuntime JsRuntime { get; set; } = null!;
         [Inject]
-        private IMenuDataProvider Provider { get; set; } = null!;
+        private IMenuDataProvider DataProvider { get; set; } = null!;
         [Inject]
         private NavigationManager NavigationManager { get; set; } = null!;
         /// <summary>
@@ -47,11 +47,6 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public string? ActiveRoute { get; set; }
-        /// <summary>
-        /// Additonal classes to add
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
         /// <summary>
         /// Currently set orientation on the menu
         /// </summary>
@@ -112,7 +107,7 @@ namespace OptionA.Blazor.Components
 
         private void MouseEnter()
         {
-            if (Provider.OpenGroupOnMouseOver())
+            if (DataProvider.OpenGroupOnMouseOver())
             {
                 _openFromMouse = true;
                 _open = true;
@@ -122,12 +117,12 @@ namespace OptionA.Blazor.Components
 
         private void MouseLeave()
         {
-            if (Provider.OpenGroupOnMouseOver())
+            if (DataProvider.OpenGroupOnMouseOver())
             {
-                if (Provider.GroupCloseTime() > 0)
+                if (DataProvider.GroupCloseTime() > 0)
                 {
                     _closing = true;
-                    var timer = new Timer(Elapsed, null, Provider.GroupCloseTime(), Timeout.Infinite);
+                    var timer = new Timer(Elapsed, null, DataProvider.GroupCloseTime(), Timeout.Infinite);
                 }
 
                 _openFromMouse = false;
@@ -144,17 +139,101 @@ namespace OptionA.Blazor.Components
 
         private void Toggle()
         {
-            if (_open && Provider.GroupCloseTime() > 0)
+            if (_open && DataProvider.GroupCloseTime() > 0)
             {
                 _closing = true;
-                var timer = new Timer(Elapsed, null, Provider.GroupCloseTime(), Timeout.Infinite);
+                var timer = new Timer(Elapsed, null, DataProvider.GroupCloseTime(), Timeout.Infinite);
             }
 
             _open = _openFromMouse || !_open;
             StateHasChanged();
         }
 
-        private string GetClasses() => $"{Provider.GetMenuItemClass()} {AdditionalClasses}".Trim();
-        private string GetLinkClasses() => $"{Provider.GetGroupClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
+        private Dictionary<string, object?> GetAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-menu-group"] = true
+            };
+            if (TryGetClasses(DataProvider.GetMenuItemClass(), out var classes))
+            {
+                result["class"] = classes;
+            }
+            if (Attributes is not null)
+            {
+                foreach(var attribute in Attributes)
+                {
+                    result[attribute.Key] = attribute.Value;
+                }
+            }
+            if (!string.IsNullOrEmpty(Description))
+            {
+                result["title"] = Description;
+            }
+            if (_open)
+            {
+                result["open"] = true;
+            }
+            if (_closing)
+            {
+                result["closing"] = true;
+            }
+
+
+            return result;
+        }
+        private Dictionary<string, object?> GetLinkAttributes()
+        {
+            var result = new Dictionary<string, object?>();
+
+            var classes = DataProvider
+                .GetGroupClass()
+                .Split(' ')
+                .ToList();
+
+            if (_isActive)
+            {
+                classes.AddRange(DataProvider
+                    .GetActiveClass()
+                    .Split(' '));
+            }
+
+            var resultClasses = classes
+                .Distinct()
+                .Where(c => !string.IsNullOrEmpty(c))
+                .ToList();
+
+            if (resultClasses.Any())
+            {
+                result["class"] = string.Join(' ', resultClasses);
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetDropdownAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-dropdown"] = true,
+                ["style"] = $"--opta-menu-dropdown-size:{_scrollHeight}px;"
+            };
+            if (MenuOrientation == Orientation.Vertical)
+            {
+                result["vertical"] = true;
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetBackgroundAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-menu-group-background"] = true,                
+            };            
+
+            return result;
+        }
     }
 }

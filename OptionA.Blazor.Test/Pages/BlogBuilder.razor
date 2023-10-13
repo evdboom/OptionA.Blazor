@@ -1,1 +1,12 @@
 ﻿@page "/blogbuilder"
+@using OptionA.Blazor.Blog;
+@using OptionA.Blazor.Blog.Builder;
+
+<div class="row">
+    <div class="col-6">
+        <OptAPostBuilder PostChanged="OnPostChanged"/>
+    </div>
+    <div class="col-6 opta-blog sticky-top">
+        <OptAPost Post="_post"/>
+    </div>
+</div>

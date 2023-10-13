@@ -5,20 +5,15 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Slide for the carousel component
     /// </summary>
-    public partial class OptaCarouselSlide
+    public partial class OptACarouselSlide
     {
         private bool _registered;
 
         /// <summary>
-        /// <see cref="OptaCarousel"/> as parent
+        /// <see cref="OptACarousel"/> as parent
         /// </summary>
         [CascadingParameter(Name="CarouselParent")]
-        public OptaCarousel? Parent { get; set; }
-        /// <summary>
-        /// Additional classes to set
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
+        public OptACarousel? Parent { get; set; }
         /// <summary>
         /// Child content for the slde
         /// </summary>
@@ -76,11 +71,44 @@ namespace OptionA.Blazor.Components
             }
         }
 
-        private string? GetMinimumHeigth()
+        private Dictionary<string, object?> GetSlideAttributes()
         {
-            return Parent?.MinimumHeight.HasValue ?? false
-                ? $"min-height:{Parent.MinimumHeight.Value}px;"
-                : null;
-        }        
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-carousel-slide"] = true,
+                ["active"] = IsCurrent,
+                ["previous"] = IsPrevious,
+                ["next"] = IsNext,
+                ["was-next"] = WasNext
+            };
+
+            if (TryGetClasses(string.Empty, out var classes))
+            {
+                result["class"] = classes;
+            }
+            if (Parent?.MinimumHeight.HasValue ?? false)
+            {
+                result["style"] = $"min-height:{Parent.MinimumHeight.Value}px;";
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetImageAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-carousel-image"] = true,
+                ["src"] = ImageUrl
+            };
+
+            if (!string.IsNullOrEmpty(ImageText)) 
+            {
+                result["alt"] = ImageText;
+                result["title"] = ImageText;
+            }
+
+            return result;
+        }
     }
 }

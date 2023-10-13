@@ -1,32 +1,31 @@
-﻿.horizontal {
+﻿[orientation="horizontal"] {
     display: flex;
     flex-direction: row;
 }
 
-.vertical {
+[orientation="vertical"] {
     display: flex;
     flex-direction: column;
 }
 
-.opta-group {
+[opta-group] {
     gap: .4rem;
     flex: 1 0 0;
-
 }
 
-.opta-bar {   
+[opta-bar] {   
     justify-content: stretch;
 }
 
-.start {    
+[button-alignment="start"] {    
     justify-content: start;
 }
 
-.center {        
+[button-alignment="center"] {
     justify-content: center;
 }
 
-.end {    
+[button-alignment="end"] {
     justify-content: end;
 }
 

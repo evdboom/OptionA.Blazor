@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+	  <TargetFramework>net7.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	  <RootNamespace>OptionA.Blazor.Blog.Builder</RootNamespace>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <PackageReadmeFile>readme.md</PackageReadmeFile>
+	  <Title>Blazor Blog Builder</Title>
+	  <Authors>Erik van der Boom</Authors>
+	  <IsPackable>true</IsPackable>
+	  <Description>Builder for creating a Blog using Blazor.</Description>
+	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <Version>7.2.0</Version>
+	  <PackageReleaseNotes>
+		  7.2.0 Initial release of all components, following version of OptionA.Blazor.Blog for clarity		  
+	  </PackageReleaseNotes>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+	<None Include="readme.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OptionA.Blazor.Blog\OptionA.Blazor.Blog.csproj" />
+    <ProjectReference Include="..\OptionA.Blazor.Components\OptionA.Blazor.Components.csproj" />
+  </ItemGroup>
+
+</Project>

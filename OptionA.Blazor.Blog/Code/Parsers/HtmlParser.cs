@@ -1,12 +1,13 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace OptionA.Blazor.Blog.Parsers
+﻿namespace OptionA.Blazor.Blog.Code.Parsers
 {
     /// <summary>
-    /// Parser for parsing html (and razor syntax) in a readable format
+    /// Parser for html code (and some razor)
     /// </summary>
     public class HtmlParser : ParserBase
     {
+        /// <inheritdoc/>
+        public override CodeLanguage Language => CodeLanguage.Html;
+
         private bool _insideTag;
         private bool _directiveStarted;
 
@@ -253,13 +254,15 @@ namespace OptionA.Blazor.Blog.Parsers
             "wrap"
         };
 
-        private readonly CSharpParser _razor = new();
         private readonly Dictionary<string, string> _csharpStarters = new()
         {
             { "inherits", Environment.NewLine },
             { "if", "}" },
             { "switch", "}" },
-            { "foreach", "}" }
+            { "foreach", "}" },
+            { "using", Environment.NewLine },
+            { "page", Environment.NewLine },
+            { "namespace", Environment.NewLine }
         };
 
         /// <summary>
@@ -307,70 +310,69 @@ namespace OptionA.Blazor.Blog.Parsers
 
         private readonly string _cSharpStart = "@";
 
-        private CodePart IsPartOfDirective(string word)
+        private CodeType IsPartOfDirective(string word)
         {
             if (_directiveStarted)
             {
                 _directiveStarted = false;
                 return _csharpStarters.Keys.Contains(word)
-                    ? CodePart.Directive
-                    : CodePart.Text;               
+                    ? CodeType.Directive
+                    : CodeType.Text;
             }
 
-            return CodePart.Text;
+            return CodeType.Text;
         }
 
-        private CodePart IsDirective(string word)
+        private CodeType IsDirective(string word)
         {
             if (word == _cSharpStart)
             {
                 _directiveStarted = true;
-                return CodePart.Directive;
+                return CodeType.Directive;
             }
             else
             {
-                return CodePart.Text;
+                return CodeType.Text;
             }
-            
+
         }
 
 
-        private CodePart IsTag(string word, string previous)
+        private CodeType IsTag(string word, string previous)
         {
             if (!string.IsNullOrEmpty(word) && _tagStarters.Any(s => previous.EndsWith(s)))
             {
                 return _htmlElements.Contains(word)
-                    ? CodePart.Keyword
-                    : CodePart.Component;
+                    ? CodeType.Keyword
+                    : CodeType.Component;
             }
 
-            return CodePart.Text;
+            return CodeType.Text;
         }
 
-        private CodePart IsTagStart(string word)
+        private CodeType IsTagStart(string word)
         {
-            if(_tagStarters.Any(s => word == s))
+            if (_tagStarters.Any(s => word == s))
             {
                 _insideTag = true;
-                return CodePart.TagDelimiter;
+                return CodeType.TagDelimiter;
 
             }
             else if (_tagEnders.Any(e => word == e))
             {
                 _insideTag = false;
-                return CodePart.TagDelimiter;
+                return CodeType.TagDelimiter;
             }
 
-            return CodePart.Text;
+            return CodeType.Text;
         }
 
-        private CodePart IsAttribute(string word)
+        private CodeType IsAttribute(string word)
         {
             //var result = 
             return _insideTag && _htmlAttributes.Contains(word)
-                ? CodePart.Attribute
-                : CodePart.Text;
+                ? CodeType.Attribute
+                : CodeType.Text;
         }
-       
     }
 }

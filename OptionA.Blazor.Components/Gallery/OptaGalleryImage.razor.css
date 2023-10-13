@@ -1,4 +1,4 @@
-﻿.opta-gallery-slide {
+﻿[opta-gallery-slide] {
     display: none;
     width: 100%;
     max-width: 100%;
@@ -8,11 +8,11 @@
     position: relative;
 }
 
-.opta-gallery-slide[active] {
+[opta-gallery-slide][active] {
     display: block;
     order: 0;
 }
 
-.opta-gallery-image {
+[opta-gallery-image] {
     width: 100%;
 }

@@ -3,26 +3,54 @@
 namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// Supported code languages
+    /// Supported languages for code (styling)
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum CodeLanguage
     {
         /// <summary>
-        /// Unknown/Other language
-        /// </summary>
-        Other,
-        /// <summary>
-        /// c#
+        /// C#
         /// </summary>
         CSharp,
+        /// <summary>
+        /// Js
+        /// </summary>
+        Javascript,
         /// <summary>
         /// Html
         /// </summary>
         Html,
         /// <summary>
-        /// Javascript or js
+        /// Rust
         /// </summary>
-        Javascript
+        Rust,
+        /// <summary>
+        /// Java
+        /// </summary>
+        Java,
+        /// <summary>
+        /// Python
+        /// </summary>
+        Python,
+        /// <summary>
+        /// Php
+        /// </summary>
+        Php,
+        /// <summary>
+        /// Swift
+        /// </summary>
+        Swift,
+        /// <summary>
+        /// C
+        /// </summary>
+        C,
+        /// <summary>
+        /// C++
+        /// </summary>
+        CPlusPluss,
+        /// <summary>
+        /// Something else
+        /// </summary>
+        Other
     }
 }

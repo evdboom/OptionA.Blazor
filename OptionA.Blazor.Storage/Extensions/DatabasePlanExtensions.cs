@@ -1,5 +1,4 @@
-﻿using OptionA.Blazor.Storage.Interfaces;
-using OptionA.Blazor.Storage.Utilities;
+﻿using OptionA.Blazor.Storage.Utilities;
 
 namespace OptionA.Blazor.Storage.Extensions
 {

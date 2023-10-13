@@ -1,5 +1,4 @@
-﻿using OptionA.Blazor.Storage.Interfaces;
-using OptionA.Blazor.Storage.Migrations;
+﻿using OptionA.Blazor.Storage.Migrations;
 using System.Text.Json.Serialization;
 
 namespace OptionA.Blazor.Storage.Utilities
@@ -23,7 +22,7 @@ namespace OptionA.Blazor.Storage.Utilities
                 .Select(g => g
                     .OrderBy(m => m.Version)
                     .Last())
-                .Where(m => m.Mode != Enums.MigrationMode.Remove && StoresFilter(m.Name))
+                .Where(m => m.Mode != MigrationMode.Remove && StoresFilter(m.Name))
                 .Select(m => Name);
         }
 
@@ -33,12 +32,12 @@ namespace OptionA.Blazor.Storage.Utilities
                 .SelectMany(m => m.Stores
                     .Select(s => new { m.Version, s.Name, s.Mode, s.Indexes }))
                 .Where(m => m.Indexes is not null && GetObjectStoreNames().Contains(m.Name))
-                .GroupBy(m => m.Name)                
+                .GroupBy(m => m.Name)
                 .SelectMany(g => g.Select(m => m.Indexes!
                     .Select(i => new { m.Version, StoreName = m.Name, i.Name, i.Mode })
                     .OrderBy(i => i.Version)
                     .Last()))
-                .Where(i => i.Mode != Enums.MigrationMode.Remove)
+                .Where(i => i.Mode != MigrationMode.Remove)
                 .GroupBy(i => i.StoreName)
                 .ToDictionary(g => g.Key, g => g.Select(i => i.Name));
         }

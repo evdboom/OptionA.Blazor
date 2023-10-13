@@ -1,12 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using OptionA.Blazor.Storage.Interfaces;
+using OptionA.Blazor.Storage.Migrations;
 using OptionA.Blazor.Storage.Services;
-using OptionA.Blazor.Storage.Utilities;
-using OptionA.Storage.Options;
 
-namespace OptionA.Blazor.Storage.Extensions
+namespace OptionA.Blazor.Storage
 {
     /// <summary>
     /// Helper class for registering services.
@@ -22,7 +20,7 @@ namespace OptionA.Blazor.Storage.Extensions
         public static IServiceCollection AddStorageService(this IServiceCollection services)
         {
             services
-                .AddScoped<IStorageService, StorageService>();
+                .TryAddScoped<IStorageService, StorageService>();
 
             return services;
         }
@@ -37,8 +35,8 @@ namespace OptionA.Blazor.Storage.Extensions
         /// <returns></returns>
         public static IServiceCollection AddDatabaseService(this IServiceCollection services, IConfiguration configuration, string optionsKey)
         {
-            services                
-                .AddScoped<IDatabaseService, DatabaseService>()                
+            services
+                .AddScoped<IDatabaseService, DatabaseService>()
                 .Configure<StorageOptions>(options => configuration.Bind(optionsKey, options))
                 .TryAddSingleton<MigrationBuilder>();
 

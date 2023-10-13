@@ -1,7 +1,7 @@
 ﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
-    /// Options for Carousel data provider
+    /// Options for Gallery data provider
     /// </summary>
     public class GalleryOptions
     {        

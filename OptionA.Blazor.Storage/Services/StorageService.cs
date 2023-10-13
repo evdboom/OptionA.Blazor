@@ -1,6 +1,4 @@
 ﻿using Microsoft.JSInterop;
-using OptionA.Blazor.Storage.Enums;
-using OptionA.Blazor.Storage.Interfaces;
 using OptionA.Blazor.Storage.Utilities;
 using System.Text.Json;
 
@@ -59,7 +57,7 @@ namespace OptionA.Blazor.Storage.Services
 
             var value = JsonSerializer.Deserialize<StorageWrapper<T>>(result);
             return value!.Value;
-        }
+        }        
 
         /// <inheritdoc/>
         public async Task<bool> SetItemIfEmptyAsync<T>(StorageLocation location, string key, T value)

@@ -1,14 +1,14 @@
 ﻿@page "/gallery"
 
-<OptaGallery MaxThumbnailContainerHeight="70vh"
+<OptAGallery MaxThumbnailContainerHeight="70vh"
              ShowTitleOnThumbnail="true">
     <Images>
     @for(int i = 1; i <= 10; i++)
     {
-        <OptaGalleryImage ImageNumber="@i"
+        <OptAGalleryImage ImageNumber="@i"
                           ImageText="@i.ToString()"
                           ImageThumbnailUrl="@GetUrl(i)"
                           ImageUrl="@GetUrl(i)"/>
     }
     </Images>
-</OptaGallery>
+</OptAGallery>

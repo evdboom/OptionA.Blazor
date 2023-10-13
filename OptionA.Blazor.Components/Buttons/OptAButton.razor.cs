@@ -61,11 +61,35 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public string? OtherButtonClass { get; set; }
-        /// <summary>
-        /// Additional classes to be added to the button
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
+
+        private Dictionary<string, object?> GetButtonAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["type"] = IsSubmit
+                    ? "submit"
+                    : "button",
+                ["disabled"] = DisabledCondition != null && DisabledCondition.Invoke()
+            };
+
+            if (TryGetClasses(Provider.GetActionClass(ActionType, OtherButtonClass) ?? string.Empty, out var classes))
+            {
+                result["class"] = classes;
+            }
+
+            if (!string.IsNullOrEmpty(Id))
+            {
+                result["id"] = Id;
+            }
+
+            var toolTip = GetToolTip();
+            if (!string.IsNullOrEmpty(toolTip))
+            {
+                result["title"] = toolTip;
+            }
+
+            return result;
+        }
 
         private async Task Click(MouseEventArgs args)
         {
@@ -73,16 +97,6 @@ namespace OptionA.Blazor.Components
             {
                 await ClickAction.Invoke(args);
             }
-        }
-
-        private bool IsDisabled()
-        {
-            return DisabledCondition != null && DisabledCondition.Invoke();
-        }
-
-        private string GetButtonClass()
-        {
-            return $"{Provider.GetActionClass(ActionType, OtherButtonClass)} {AdditionalClasses}";
         }
 
         private string GetToolTip()
@@ -97,9 +111,6 @@ namespace OptionA.Blazor.Components
             return $"{Provider.GetIconClass(ActionType, OtherIconClass)}";
         }
 
-        private string GetButtonType()
-        {
-            return IsSubmit ? "submit" : "button";
-        }
+
     }
 }

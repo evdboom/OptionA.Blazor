@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using OptionA.Blazor.Components.Buttons.Struct;
 
 namespace OptionA.Blazor.Components
@@ -14,8 +15,13 @@ namespace OptionA.Blazor.Components
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionAButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null) => services
-                .AddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration));        
+        public static IServiceCollection AddOptionAButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
+        {
+            services
+                .TryAddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration));
+            return services;
+        }
+        
 
         /// <summary>
         /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons, prefilled with bootstrap (5.3) classes

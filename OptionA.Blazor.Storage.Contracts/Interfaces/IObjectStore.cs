@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Storage.Interfaces
+﻿namespace OptionA.Blazor.Storage
 {
     /// <summary>
     /// Interface for the indexedDb store

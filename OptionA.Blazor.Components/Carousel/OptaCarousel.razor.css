@@ -1,4 +1,4 @@
-﻿.opta-carousel ol {
+﻿[opta-carousel] ol {
     list-style-type: none;
     display: flex;
     flex-flow: row nowrap;
@@ -6,16 +6,16 @@
     padding: 0;
 }
 
-.opta-carousel {
+[opta-carousel] {
     position: relative;
 }
 
-.opta-carousel-item-select {
+[opta-carousel-item-select] {
     display: flex;
     flex-flow: row;
 }
 
-.opta-carousel-autoplay {
+[opta-carousel-autoplay] {
     position: absolute;
     right: 0;
     bottom: 0;

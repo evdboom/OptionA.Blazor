@@ -1,14 +1,14 @@
-﻿div[side-by-side] {
+﻿[gallery-mode="side-by-side"] {
     display: flex;
     flex-flow: column nowrap;
 }
 
-div[modal] {
+[gallery-mode="modal"] {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
 }
 
-.opta-thumbnail-image img {
+[opta-thumbnail-image] img {
     width: 100%;
 }

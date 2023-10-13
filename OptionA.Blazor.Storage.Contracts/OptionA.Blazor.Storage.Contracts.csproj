@@ -5,18 +5,27 @@
     <Nullable>enable</Nullable>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<Version>7.0.1</Version>
+	<PackageReadmeFile>readme.md</PackageReadmeFile>
+	<Version>7.0.3</Version>
 	<LangVersion>10</LangVersion>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Storage.Contracts</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Description>Contracts and abstraction to work together with the Blazor.Storage package, without the implementations</Description>		
+	<Description>Contracts and abstraction to work together with the Blazor.Storage package, without the implementations</Description>
+	<PackageReleaseNotes>
+		7.0.2 changed namespaces
+		7.0.3 Added readme
+	</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
     <PackageReference Include="System.Text.Json" Version="7.0.3" />
   </ItemGroup>
+
+	<ItemGroup>		
+		<None Include="readme.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 
 </Project>

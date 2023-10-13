@@ -1,6 +1,4 @@
-﻿using OptionA.Blazor.Storage.Enums;
-
-namespace OptionA.Blazor.Storage.Migrations
+﻿namespace OptionA.Blazor.Storage.Migrations
 {
     /// <summary>
     /// Specific type of migration to add or change indexes of the indexedDb

@@ -1,6 +1,6 @@
 ﻿@page "/gallery-modal"
 
-<OptaGallery MaxThumbnailContainerHeight="50vh"
+<OptAGallery MaxThumbnailContainerHeight="50vh"
              ShowTitleOnThumbnail="true"
              Mode="GalleryMode.Modal"
              ThumbnailsPerRow="4"
@@ -9,10 +9,10 @@
     <Images>
     @for(int i = 1; i <= 10; i++)
     {
-        <OptaGalleryImage ImageNumber="@i"
+        <OptAGalleryImage ImageNumber="@i"
                           ImageText="@i.ToString()"
                           ImageThumbnailUrl="@GetUrl(i)"
                           ImageUrl="@GetUrl(i)"/>
     }
     </Images>
-</OptaGallery>
+</OptAGallery>

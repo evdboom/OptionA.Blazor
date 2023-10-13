@@ -1,0 +1,62 @@
+﻿@using OptionA.Blazor.Blog.Builder.Parts
+@if (Content is not null)
+{
+    @switch (Content.Type)
+    {
+        case ContentType.Paragraph:
+            <OptAParagraphBuilder Content="(ParagraphContent)Content"
+                                  ContentChanged="ContentChanged"
+                                  ContentRemoved="ContentRemoved"
+                                  ContentIndex="ContentIndex"
+                                  TotalContentCount="TotalContentCount"
+                                  MovedUp="MovedUp"
+                                  MovedDown="MovedDown"/>
+            break;
+        case ContentType.Header:
+            <OptAHeaderBuilder Content="(HeaderContent)Content"
+                               ContentChanged="ContentChanged"
+                               ContentRemoved="ContentRemoved"
+                               ContentIndex="ContentIndex"
+                               TotalContentCount="TotalContentCount"
+                               MovedUp="MovedUp"
+                               MovedDown="MovedDown" />
+            break;
+        case ContentType.Code:
+            <OptACodeBuilder Content="(CodeContent)Content"
+                               ContentChanged="ContentChanged"
+                               ContentRemoved="ContentRemoved"
+                               ContentIndex="ContentIndex"
+                               TotalContentCount="TotalContentCount"
+                               MovedUp="MovedUp"
+                               MovedDown="MovedDown" />
+            break;
+        case ContentType.Image:
+            <OptAImageBuilder Content="(ImageContent)Content"
+                             ContentChanged="ContentChanged"
+                             ContentRemoved="ContentRemoved"
+                             ContentIndex="ContentIndex"
+                             TotalContentCount="TotalContentCount"
+                             MovedUp="MovedUp"
+                             MovedDown="MovedDown" />
+            break;
+        case ContentType.Quote:
+            <OptAQuoteBuilder Content="(QuoteContent)Content"
+                              ContentChanged="ContentChanged"
+                              ContentRemoved="ContentRemoved"
+                              ContentIndex="ContentIndex"
+                              TotalContentCount="TotalContentCount"
+                              MovedUp="MovedUp"
+                              MovedDown="MovedDown" />
+            break;
+        case ContentType.Frame:
+            <OptAFrameBuilder Content="(FrameContent)Content"
+                              ContentChanged="ContentChanged"
+                              ContentRemoved="ContentRemoved"
+                              ContentIndex="ContentIndex"
+                              TotalContentCount="TotalContentCount"
+                              MovedUp="MovedUp"
+                              MovedDown="MovedDown" />
+            break;
+
+    }
+}

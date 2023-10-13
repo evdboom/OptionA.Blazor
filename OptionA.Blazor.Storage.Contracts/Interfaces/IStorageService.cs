@@ -1,7 +1,6 @@
-﻿using OptionA.Blazor.Storage.Enums;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
-namespace OptionA.Blazor.Storage.Interfaces
+namespace OptionA.Blazor.Storage
 {
     /// <summary>
     /// Interface for accessing the browsers local and session storage.

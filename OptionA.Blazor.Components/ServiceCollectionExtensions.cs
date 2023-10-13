@@ -23,7 +23,8 @@ namespace OptionA.Blazor.Components
                 .AddOptionAMenu(options.MenuConfiguration)
                 .AddOptionACarousel(options.CarouselConfiguration)
                 .AddOptionAResponsive(options.ResponsiveConfiguration)
-                .AddOptionAGallery(options.GalleryConfiguration);
+                .AddOptionAGallery(options.GalleryConfiguration)
+                .AddOptionAModal(options.ModalConfiguration);
         }
 
         /// <summary>
@@ -43,7 +44,8 @@ namespace OptionA.Blazor.Components
                 .AddOptionABootstrapMenu(darkMode, options.MenuConfiguration)
                 .AddOptionABootstrapCarousel(options.CarouselConfiguration)
                 .AddOptionABootstrapResponsive(options.ResponsiveConfiguration)
-                .AddOptionABootstrapGallery(options.GalleryConfiguration);
+                .AddOptionABootstrapGallery(options.GalleryConfiguration)
+                .AddOptionABootstrapModal(options.ModalConfiguration);
         }
 
 

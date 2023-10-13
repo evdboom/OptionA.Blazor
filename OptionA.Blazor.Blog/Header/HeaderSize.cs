@@ -1,36 +1,33 @@
-﻿using System.Text.Json.Serialization;
-
-namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// Size for the headers
+    /// Size for the header (lower is bigger)
     /// </summary>
-    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum HeaderSize
     {
         /// <summary>
-        /// &lt;h1&gt; tag
+        /// results in a h1 tag
         /// </summary>
-        One = 1,
+        One,
         /// <summary>
-        /// &lt;h2&gt; tag
+        /// results in a h2 tag
         /// </summary>
-        Two = 2,
+        Two,
         /// <summary>
-        /// &lt;h3&gt; tag
+        /// results in a h3 tag
         /// </summary>
-        Three = 3,
+        Three,
         /// <summary>
-        /// &lt;h4&gt; tag
+        /// results in a h4 tag
         /// </summary>
-        Four = 4,
+        Four,
         /// <summary>
-        /// &lt;h5&gt; tag
+        /// results in a h5 tag
         /// </summary>
-        Five = 5,
+        Five,
         /// <summary>
-        /// &lt;h6&gt; tag
+        /// results in a h6 tag
         /// </summary>
-        Six = 6
+        Six
     }
 }

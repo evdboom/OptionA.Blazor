@@ -6,10 +6,11 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Version>7.2.16</Version>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<Version>7.3.0</Version>
 		<IsPackable>true</IsPackable>
 		<Authors>Erik van der Boom</Authors>
-		<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor.Components</PackageProjectUrl>
+		<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>Blazor component library with various component for use inside your Blazor application</Description>
 		<PackageReleaseNotes>
@@ -37,6 +38,7 @@
 			7.2.14 simplified gallery
 			7.2.15 expanded responsive with all breakpoints
 			7.2.16 Added childcontent to gallery image
+			7.3.0 Naming, breaking change
 		</PackageReleaseNotes>
 	</PropertyGroup>
 
@@ -46,10 +48,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.7" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="wwwroot\" />
+		<None Include="readme.md" Pack="true" PackagePath="\"/>
 	</ItemGroup>
 </Project>

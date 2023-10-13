@@ -1,17 +1,19 @@
-﻿@if (Images != null)
+﻿@inherits OptAComponent
+
+@if (Images != null)
 {   
-    <div class="opta-gallery-thumbnail-container @AdditionalClasses @Provider.GetThumbnailContainerClasses(Mode)" side-by-side="@(Mode == GalleryMode.SideBySide)" modal="@(Mode == GalleryMode.Modal)" style="@GetStyle()">
+    <div @attributes="@GetContainerAttributes()">
         @foreach(var image in Images)
         {
-            <div class="opta-thumbnail-image @Provider.GetDefaultThumbnailClasses()" @onclick="async () => await SelectImage(image.Index)" active="@(ActiveIndex == image.Index)" opta-index="@image.Index" style="@GetThumbnailStyle()">
+            <figure @attributes="@GetThumbnailAttributes(image.Index)" @onclick="async () => await SelectImage(image.Index)">
                 @if (ShowTitleOnThumbnail)
                 {
-                    <div class="opta-thumbnail-title">
+                    <figcaption opta-thumbnail-title>
                         @image.Image.ImageText
-                    </div>
+                    </figcaption>
                 }
-                <img src="@GetUrl(image.Image)" alt="@image.Image.ImageText" title="@image.Image.ImageText" />
-            </div>
+                <img @attributes="@GetImageAttributes(image.Image)"/>
+            </figure>
         }
     </div>
 }

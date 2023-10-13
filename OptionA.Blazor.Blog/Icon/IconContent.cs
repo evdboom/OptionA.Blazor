@@ -1,48 +1,23 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace OptionA.Blazor.Blog
 {
     /// <summary>
-    /// Content for Icon component
+    /// Content for icons
     /// </summary>
     public class IconContent : Content
     {
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        public IconContent() : base() { }
-        /// <summary>
-        /// Constructor for use in deserialization
-        /// </summary>
-        /// <param name="items"></param>
-        public IconContent(Dictionary<string, JsonElement> items) : base(items)
-        {
-            if (items.TryGetValue(nameof(Paths), out var paths))
-            {
-                Paths = JsonSerializer.Deserialize<List<string>>(paths) ?? new();
-            }
-            if (items.TryGetValue(nameof(Height), out var height))
-            {
-                Height = JsonSerializer.Deserialize<string>(height);
-            }
-            if (items.TryGetValue(nameof(Width), out var width))
-            {
-                Width = JsonSerializer.Deserialize<string>(width);
-            }
-            if (items.TryGetValue(nameof(ViewBoxValues), out var viewBox))
-            {
-                ViewBoxValues = JsonSerializer.Deserialize<int[]>(viewBox) ?? new int[4];
-            }
-            if (items.TryGetValue(nameof(Mode), out var mode))
-            {
-                Mode = JsonSerializer.Deserialize<IconMode>(mode);
-            }
-        }
+        /// <inheritdoc/>
+        public override ContentType Type => ContentType.Icon;
 
         /// <summary>
         /// Paths to render
         /// </summary>
-        public List<string> Paths { get; } = new();
+        public List<string> Paths { get; set; } = new();
         /// <summary>
         /// Width when in Pathing mode
         /// </summary>
@@ -54,55 +29,46 @@ namespace OptionA.Blazor.Blog
         /// <summary>
         /// Viewbox for when path is set
         /// </summary>
-        public int[] ViewBoxValues { get; } = new int[4];  
+        public int[] ViewBoxValues { get; set; } = new int[4];
         /// <summary>
         /// Gets the mode to render
         /// </summary>
         public IconMode Mode { get; set; }
         /// <inheritdoc/>
-        public override ComponentType Type => ComponentType.Icon;
-
-        /// <inheritdoc/>
-        public override IDictionary<string, object?> Attributes 
+        public override Dictionary<string, object?> Attributes
         {
             get
             {
-                var attributes = base.Attributes;               
-                if (!string.IsNullOrEmpty(Width))
+                var result = new Dictionary<string, object?>();
+                if (Mode == IconMode.Path)
                 {
-                    attributes["width"] = Width;
+                    if (!string.IsNullOrEmpty(Width))
+                    {
+                        result["width"] = Width;
+                    }
+                    if (!string.IsNullOrEmpty(Height))
+                    {
+                        result["height"] = Height;
+                    }
+                    result["fill"] = "currentColor";
+                    result["viewBox"] = string.Join(" ", ViewBoxValues);
                 }
-                if (!string.IsNullOrEmpty(Height))
+                foreach(var attribute in base.Attributes)
                 {
-                    attributes["height"] = Height;
+                    result[attribute.Key] = attribute.Value;
                 }
-                attributes["fill"] = "currentColor";
-                attributes["viewBox"] = string.Join(" ", ViewBoxValues);
-
-                return attributes;
+                return result;
             }
         }
-
         /// <inheritdoc/>
-        protected override void OnSerialize(Dictionary<string, object> items)
+        public override bool IsInvalid
         {
-            if (Paths.Any())
+            get
             {
-                items[nameof(Paths)] = Paths;
+                return Mode == IconMode.Class
+                    ? !AdditionalClasses.Any()
+                    : !Paths.Any();
             }
-            if (!string.IsNullOrEmpty(Width))
-            {
-                items[nameof(Width)] = Width;
-            }
-            if (!string.IsNullOrEmpty(Height))
-            {
-                items[nameof(Height)] = Height;
-            }
-            if (ViewBoxValues.Any(value => value != default))
-            {
-                items[nameof(ViewBoxValues)] = ViewBoxValues;
-            }
-            items[nameof(Mode)] = Mode;
         }
     }
 }

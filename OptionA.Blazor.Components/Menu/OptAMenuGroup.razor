@@ -1,25 +1,23 @@
 ﻿@namespace OptionA.Blazor.Components
+@inherits OptAComponent
 
-<li title="@Description"
-    class="opta-menu-group @GetClasses()"    
-    open="@_open"
-    closing="@_closing"
+<li @attributes="@GetAttributes()"
     @onclick="() => Toggle()"
     @onmouseenter="() => MouseEnter()" 
     @onmouseleave="() => MouseLeave()">
-    <a class="@GetLinkClasses()">@Name</a>
-    <div class="opta-dropdown" vertical="@(MenuOrientation == Orientation.Vertical)" style="--opta-menu-dropdown-size:@(_scrollHeight)px;" @ref="_dropDown">
-        <ul>
+    <a @attributes="@GetLinkAttributes()">@Name</a>
+    <div @attributes="@GetDropdownAttributes()" @ref="_dropDown">
+        <menu>
             @if (Items is not null)
             {
                 @Items
             }
-        </ul>
+        </menu>
     </div> 
 </li>
 
-@if (_open && !Provider.OpenGroupOnMouseOver())
+@if (_open && !DataProvider.OpenGroupOnMouseOver())
 {
-    <div class="opta-menu-group-background" @onclick="() => Toggle()"></div>
+    <div @attributes="@GetBackgroundAttributes()" @onclick="() => Toggle()"></div>
 
 }

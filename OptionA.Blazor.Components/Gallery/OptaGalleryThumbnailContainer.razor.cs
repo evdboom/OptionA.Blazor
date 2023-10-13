@@ -8,7 +8,7 @@ namespace OptionA.Blazor.Components.Gallery
     /// <summary>
     /// Container for use with the OptaGallery
     /// </summary>
-    public partial class OptaGalleryThumbnailContainer
+    public partial class OptAGalleryThumbnailContainer
     {
         private const string ScrollIntoViewFunction = "scrollActiveIntoView";        
         private Lazy<Task<IJSObjectReference>>? _moduleTask;
@@ -17,7 +17,7 @@ namespace OptionA.Blazor.Components.Gallery
         [Inject]
         private IJSRuntime JsRuntime { get; set; } = null!;
         [Inject]
-        private IGallerylDataProvider Provider { get; set; } = null!;
+        private IGalleryDataProvider Provider { get; set; } = null!;
         /// <summary>
         /// Mode for the gallery, in <see cref="GalleryMode.SideBySide"/> flex direction will be column, otherwise row
         /// </summary>
@@ -27,14 +27,14 @@ namespace OptionA.Blazor.Components.Gallery
         /// Images to display thumbnails for
         /// </summary>
         [Parameter]
-        public List<(int Index, OptaGalleryImage Image)>? Images { get; set; }
+        public List<(int Index, OptAGalleryImage Image)>? Images { get; set; }
         /// <summary>
         /// Maxheight to set for the thumbnail container
         /// </summary>
         [Parameter]
         public string? MaxHeight { get; set; }
         /// <summary>
-        /// True to display the <see cref="OptaGalleryImage.ImageText"/> as title, default = true
+        /// True to display the <see cref="OptAGalleryImage.ImageText"/> as title, default = true
         /// </summary>
         [Parameter]
         public bool ShowTitleOnThumbnail { get; set; } = true;
@@ -48,11 +48,6 @@ namespace OptionA.Blazor.Components.Gallery
         /// </summary>
         [Parameter]
         public int? ActiveIndex { get; set; }
-        /// <summary>
-        /// Additional classes to add to the container
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
         /// <summary>
         /// Percentage width of total galley container may take in side by side mode.
         /// </summary>
@@ -74,7 +69,7 @@ namespace OptionA.Blazor.Components.Gallery
         {
             _moduleTask = new(() => JsRuntime.InvokeAsync<IJSObjectReference>(
                 "import",
-                "./_content/OptionA.Blazor.Components/Gallery/OptaGalleryThumbnailContainer.razor.js").AsTask());
+                "./_content/OptionA.Blazor.Components/Gallery/OptAGalleryThumbnailContainer.razor.js").AsTask());
         }
 
         /// <inheritdoc/>
@@ -88,12 +83,80 @@ namespace OptionA.Blazor.Components.Gallery
             }
         }
 
-
-        private string GetUrl(OptaGalleryImage image)
+        private Dictionary<string, object?> GetContainerAttributes()
         {
-            return !string.IsNullOrEmpty(image.ImageThumbnailUrl)
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-gallery-thumbnail-container"] = true
+            };
+
+            if (TryGetClasses(Provider.GetThumbnailContainerClasses(Mode), out var classes))
+            {
+                result["class"] = classes;
+            }
+
+            switch (Mode)
+            {
+                case GalleryMode.SideBySide:
+                    result["gallery-mode"] = "side-by-side";
+                    break;
+                case GalleryMode.Modal:
+                    result["gallery-mode"] = "modal";
+                    break;
+            }
+
+            var style = GetStyle();
+            if (!string.IsNullOrEmpty(style))
+            {
+                result["style"] = style;
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetThumbnailAttributes(int index)
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-thumbnail-image"] = true,
+                ["opta-index"] = $"{index}"
+            };
+
+            if (ActiveIndex == index)
+            {
+                result["active"] = true;
+            }
+            var style = GetThumbnailStyle();
+
+            if (!string.IsNullOrEmpty(style))
+            {
+                result["style"] = style;
+            }
+
+            if (!string.IsNullOrEmpty(Provider.GetDefaultThumbnailClasses()))
+            {
+                result["class"] = Provider.GetDefaultThumbnailClasses();
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetImageAttributes(OptAGalleryImage image)
+        {
+            var result = new Dictionary<string, object?>()
+            {
+                ["src"] = !string.IsNullOrEmpty(image.ImageThumbnailUrl)
                 ? image.ImageThumbnailUrl
-                : image.ImageUrl;
+                : image.ImageUrl
+            };
+
+            if (!string.IsNullOrEmpty(image.ImageText))
+            {
+                result["alt"] = image.ImageText;
+                result["title"] = image.ImageText;
+            }
+
+            return result;
         }
 
         private string? GetStyle()

@@ -5,23 +5,18 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Image inside the gallery
     /// </summary>
-    public partial class OptaGalleryImage
+    public partial class OptAGalleryImage
     {
         private bool _registered;
 
         [Inject]
-        private IGallerylDataProvider Provider { get; set; } = null!;
+        private IGalleryDataProvider Provider { get; set; } = null!;
 
         /// <summary>
-        /// <see cref="OptaGallery"/> as parent
+        /// <see cref="OptAGallery"/> as parent
         /// </summary>
         [CascadingParameter(Name = "GalleryParent")]
-        public OptaGallery? Parent { get; set; }
-        /// <summary>
-        /// Additional classes to set
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
+        public OptAGallery? Parent { get; set; }
         /// <summary>
         /// Image
         /// </summary>
@@ -70,6 +65,39 @@ namespace OptionA.Blazor.Components
                 _registered = true;
                 Parent.RegisterChild(this);
             }
+        }
+
+        private Dictionary<string, object?> GetListAttributes()
+        {
+            var result = new Dictionary<string, object?>();
+
+            if (TryGetClasses(Provider.GetDefaultImageClasses(), out var classes))
+            {
+                result["class"] = classes;
+            }
+
+            if (IsCurrent)
+            {
+                result["active"] = true;
+            }
+            return result;
+        }
+
+        private Dictionary<string, object?> GetImageAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["src"] = ImageUrl,
+                ["opta-gallery-image"] = true
+            };
+
+            if (!string.IsNullOrEmpty(ImageText))
+            {
+                result["alt"] = ImageText;
+                result["title"] = ImageText;
+            }
+            
+            return result;
         }
     }
 }

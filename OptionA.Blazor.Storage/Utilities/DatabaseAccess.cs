@@ -1,6 +1,4 @@
-﻿using OptionA.Blazor.Storage.Interfaces;
-
-namespace OptionA.Blazor.Storage.Utilities
+﻿namespace OptionA.Blazor.Storage.Utilities
 {
     internal record DatabaseAccess : IDatabaseAccess
     {

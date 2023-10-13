@@ -1,0 +1,32 @@
+﻿@page "/modal"
+
+<button type="button" @onclick="() => OpenModal(draggable: true)">
+    Drag
+</button>
+<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.Small)">
+    Small
+</button>
+<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.Large)">
+    large
+</button>
+<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.ExtraLarge)">
+    Extra large
+</button>
+<textarea @bind="_text"/>
+
+<OptAModal @ref="_modal"
+           Draggable="_draggable"
+           ModalId="my-modal"
+           Size="_size">
+    <Header>
+        <h1>My first modal</h1>
+    </Header>
+    <Content>
+        <p style="white-space:pre">
+            @_text
+        </p>
+    </Content>
+    <Footer>
+        <p @onclick="() => _modal!.Close()">Close me</p>
+    </Footer>
+</OptAModal>

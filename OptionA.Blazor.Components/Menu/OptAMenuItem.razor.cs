@@ -10,7 +10,7 @@ namespace OptionA.Blazor.Components
     public partial class OptAMenuItem
     {
         [Inject]
-        private IMenuDataProvider Provider { get; set; } = null!;
+        private IMenuDataProvider DataProvider { get; set; } = null!;
         [Inject]
         private NavigationManager NavigationManager { get; set; } = null!;
 
@@ -31,11 +31,6 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public string? Href { get; set; }
-        /// <summary>
-        /// Additonal classes to add
-        /// </summary>
-        [Parameter]
-        public string? AdditionalClasses { get; set; }
         /// <summary>
         /// Optional child content
         /// </summary>
@@ -85,14 +80,71 @@ namespace OptionA.Blazor.Components
             }
         }
 
+        private Dictionary<string, object?> GetAttributes()
+        {
+            var result = new Dictionary<string, object?>();
+            if (!string.IsNullOrEmpty(Description))
+            {
+                result["title"] = Description;
+            }
+            if (TryGetClasses(DataProvider.GetMenuItemClass(), out string classes))
+            {
+                result["class"] = classes;
+            }
+            if (Attributes is not null)
+            {
+                foreach(var attribute in Attributes) 
+                {
+                    result[attribute.Key] = attribute.Value;
+                }
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetLinkAttributes()
+        {
+            var result = new Dictionary<string, object?>();
+            if (!string.IsNullOrEmpty(Href))
+            {
+                result["href"] = Href;
+            }
+
+            var classes = DataProvider
+                .GetLinkClass()
+                .Split(' ')
+                .ToList();
+            
+            if (_isActive)
+            {
+                classes.AddRange(DataProvider
+                    .GetActiveClass()
+                    .Split(' '));
+            }
+
+            var resultClasses = classes
+                .Distinct()
+                .Where(c => !string.IsNullOrEmpty(c))
+                .ToList();
+
+            if (resultClasses.Any())
+            {
+                result["class"] = string.Join(' ', resultClasses);
+            }
+
+            return result;
+        }
+
+
+
         private string GetClasses()
         {
-            return $"{Provider.GetMenuItemClass()} {AdditionalClasses}".Trim();
+            return $"{DataProvider.GetMenuItemClass()} {AdditionalClasses}".Trim();
         }
 
         private string GetLinkClasses()
         {
-            return $"{Provider.GetLinkClass()} {(_isActive ? Provider.GetActiveClass() : string.Empty)}".Trim();
+            return $"{DataProvider.GetLinkClass()} {(_isActive ? DataProvider.GetActiveClass() : string.Empty)}".Trim();
         }
     }
 }
