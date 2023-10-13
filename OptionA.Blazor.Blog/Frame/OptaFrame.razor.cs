@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Iframe component
     /// </summary>
-    public partial class OptaFrame
+    public partial class OptAFrame
     {
         /// <summary>
         /// Content for the Iframe

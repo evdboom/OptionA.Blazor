@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Image inside the gallery
     /// </summary>
-    public partial class OptaGalleryImage
+    public partial class OptAGalleryImage
     {
         private bool _registered;
 
@@ -13,10 +13,10 @@ namespace OptionA.Blazor.Components
         private IGalleryDataProvider Provider { get; set; } = null!;
 
         /// <summary>
-        /// <see cref="OptaGallery"/> as parent
+        /// <see cref="OptAGallery"/> as parent
         /// </summary>
         [CascadingParameter(Name = "GalleryParent")]
-        public OptaGallery? Parent { get; set; }
+        public OptAGallery? Parent { get; set; }
         /// <summary>
         /// Image
         /// </summary>

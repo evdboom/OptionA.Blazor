@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Map content to correct components
     /// </summary>
-    public partial class OptaChild
+    public partial class OptAChild
     {
         /// <summary>
         /// Content to render

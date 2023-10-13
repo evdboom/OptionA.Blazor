@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// <summary>
     /// Builds an external iframe
     /// </summary>
-    public partial class OptaFrameBuilder
+    public partial class OptAFrameBuilder
     {
         private const string SourceId = "opta-frame-source";
         private const string TitleId = "opta-frame-title";

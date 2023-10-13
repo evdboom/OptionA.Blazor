@@ -2,7 +2,7 @@
 {
     <div>
         <div>
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.List, Label)" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.List, Label)" />
         </div>
         <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemsContainer)">
             @foreach (var item in Items.Select((value, index) => new { Item = value, Index = index }))
@@ -13,7 +13,7 @@
                     </div>
                     <div @attributes="@DataProvider.GetAttributes(BuilderType.ListRemoveButtonContainer)">
                         <button type="button" @onclick="() => RemoveItem(item.Index)" @attributes="@DataProvider.GetAttributes(BuilderType.ListRemoveButton)">
-                            <OptaChild Content="@DataProvider.GetContent(BuilderType.ListRemoveButton, "Remove")" />
+                            <OptAChild Content="@DataProvider.GetContent(BuilderType.ListRemoveButton, "Remove")" />
                         </button>
                     </div>
                 </div>

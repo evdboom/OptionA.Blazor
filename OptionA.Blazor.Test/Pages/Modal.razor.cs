@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Test.Pages
 {
     public partial class Modal
     {
-        private OptaModal? _modal;
+        private OptAModal? _modal;
         private bool _draggable;
         private ModalSize _size;
 

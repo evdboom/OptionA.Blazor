@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Quote component
     /// </summary>
-    public partial class OptaQuote
+    public partial class OptAQuote
     {
         /// <summary>
         /// Quote to display

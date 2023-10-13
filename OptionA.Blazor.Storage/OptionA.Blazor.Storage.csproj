@@ -6,7 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  	<Version>7.0.3</Version>
+	<PackageReadmeFile>readme.md</PackageReadmeFile>
+  	<Version>7.0.4</Version>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
@@ -17,6 +18,7 @@
 		7.0.1 Update packages
 		7.0.2 Downgrade package for wider support
 		7.0.3 Package update and namespace changes
+		7.0.4 Added readme
 	</PackageReleaseNotes>
   </PropertyGroup>
 
@@ -34,4 +36,8 @@
     <ProjectReference Include="..\OptionA.Blazor.Storage.Contracts\OptionA.Blazor.Storage.Contracts.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Folder Include="wwwroot\" />
+		<None Include="readme.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
 </Project>

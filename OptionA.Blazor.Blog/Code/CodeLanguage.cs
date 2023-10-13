@@ -25,6 +25,30 @@ namespace OptionA.Blazor.Blog
         /// </summary>
         Rust,
         /// <summary>
+        /// Java
+        /// </summary>
+        Java,
+        /// <summary>
+        /// Python
+        /// </summary>
+        Python,
+        /// <summary>
+        /// Php
+        /// </summary>
+        Php,
+        /// <summary>
+        /// Swift
+        /// </summary>
+        Swift,
+        /// <summary>
+        /// C
+        /// </summary>
+        C,
+        /// <summary>
+        /// C++
+        /// </summary>
+        CPlusPluss,
+        /// <summary>
         /// Something else
         /// </summary>
         Other

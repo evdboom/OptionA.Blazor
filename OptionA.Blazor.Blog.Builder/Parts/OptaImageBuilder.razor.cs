@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// <summary>
     /// Build image blog part
     /// </summary>
-    public partial class OptaImageBuilder
+    public partial class OptAImageBuilder
     {
         private const string SourceId = "opta-image-source";
         private const string TitleId = "opta-image-title";

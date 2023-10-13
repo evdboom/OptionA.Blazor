@@ -1,4 +1,4 @@
-﻿@inherits OptaComponent
+﻿@inherits OptAComponent
 <div @attributes="@GetWrapperAttributes()" @onclick="async () => await Close()">
     <div @attributes="@GetModalAttributes()" @onclick:stopPropagation>
         <button @attributes="@GetCloseButtonAttributes()" @onclick="async () => await Close()">@Provider.ModalCloseButtonText()</button>

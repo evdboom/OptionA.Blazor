@@ -6,13 +6,13 @@
 {
     <div @attributes="@DataProvider.GetAttributes(BuilderType.CreatePostButtonContainer)">
         <button type="button" @onclick="CreateNewPost" @attributes="@DataProvider.GetAttributes(BuilderType.CreatePostButton)">
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.CreatePostButton, "Create new post")" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.CreatePostButton, "Create new post")" />
         </button>
     </div>
 }
 else
 {
-    <OptaPostForm Post="_post"
+    <OptAPostForm Post="_post"
                   PostChanged="OnPostChanged"
                   PostSubmitted="OnSavePost"/>
 }

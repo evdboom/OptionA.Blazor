@@ -5,15 +5,15 @@ namespace OptionA.Blazor.Components.Gallery
     /// <summary>
     /// Container for showing large image in OptaGallery component
     /// </summary>
-    public partial class OptaGalleryImageContainer
+    public partial class OptAGalleryImageContainer
     {
         [Inject]
         private IGalleryDataProvider Provider { get; set; } = null!;
         /// <summary>
-        /// <see cref="OptaGallery"/> as parent
+        /// <see cref="OptAGallery"/> as parent
         /// </summary>
         [CascadingParameter(Name = "GalleryParent")]
-        public OptaGallery? Parent { get; set; }
+        public OptAGallery? Parent { get; set; }
         /// <summary>
         /// Occurs when next button is clicked
         /// </summary>

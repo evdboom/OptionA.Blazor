@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Code component
     /// </summary>
-    public partial class OptaCode
+    public partial class OptACode
     {
         /// <summary>
         /// Code to display

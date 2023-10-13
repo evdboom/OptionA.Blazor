@@ -3,7 +3,7 @@
     /// <summary>
     /// Options for blog components
     /// </summary>
-    public class OptaBlogOptions
+    public class OptABlogOptions
     {
         /// <summary>
         /// If certain content types require default classes fill them here.

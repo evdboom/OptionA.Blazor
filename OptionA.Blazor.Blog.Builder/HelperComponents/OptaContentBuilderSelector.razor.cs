@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
     /// <summary>
     /// Component for selecting correct builder
     /// </summary>
-    public partial class OptaContentBuilderSelector
+    public partial class OptAContentBuilderSelector
     {
         /// <summary>
         /// Index of content in post (for id uniqueness)

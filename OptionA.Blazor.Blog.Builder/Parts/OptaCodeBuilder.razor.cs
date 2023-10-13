@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// <summary>
     /// Build code blog part
     /// </summary>
-    public partial class OptaCodeBuilder
+    public partial class OptACodeBuilder
     {
         private const string CodeId = "opta-code";
         private const string CodeLanguageId = "opta-code-Language";

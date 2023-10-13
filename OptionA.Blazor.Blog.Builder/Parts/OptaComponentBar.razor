@@ -3,7 +3,7 @@
 {
     <div @attributes="@DataProvider.GetAttributes(BuilderType.AddContentButtonContainer)">
             <button @attributes="GetButtonAttributes(content.Value.Title)" @onclick="async () => await AddContent(content.Key)">
-            <OptaChild Content="@DataProvider.ContentForContentButton(content.Key, content.Value.Content)"/>
+            <OptAChild Content="@DataProvider.ContentForContentButton(content.Key, content.Value.Content)"/>
         </button>
     </div>
 }

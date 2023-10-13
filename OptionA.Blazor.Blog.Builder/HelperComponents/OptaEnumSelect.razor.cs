@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
     /// <summary>
     /// Component to select an enum
     /// </summary>
-    public partial class OptaEnumSelect<TEnum> where TEnum : struct, Enum
+    public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
     {
         /// <summary>
         /// Selected Value

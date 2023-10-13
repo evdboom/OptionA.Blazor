@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Header component
     /// </summary>
-    public partial class OptaHeader
+    public partial class OptAHeader
     {
         /// <summary>
         /// Content for the header

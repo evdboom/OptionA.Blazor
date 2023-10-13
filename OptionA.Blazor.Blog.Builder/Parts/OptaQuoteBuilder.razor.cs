@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// <summary>
     /// Quote builder
     /// </summary>
-    public partial class OptaQuoteBuilder
+    public partial class OptAQuoteBuilder
     {
         private const string SourceId = "opta-quote-source";
         private const string QuoteId = "opta-quote";

@@ -6,7 +6,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
     /// <summary>
     /// Form to create a new post
     /// </summary>
-    public partial class OptaPostForm
+    public partial class OptAPostForm
     {
         /// <summary>
         /// _post for form

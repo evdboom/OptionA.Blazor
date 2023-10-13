@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// <summary>
     /// Header builder component
     /// </summary>
-    public partial class OptaHeaderBuilder
+    public partial class OptAHeaderBuilder
     {
         private const string SizeId = "opta-header-size";
         private const string HeaderId = "opta-header";

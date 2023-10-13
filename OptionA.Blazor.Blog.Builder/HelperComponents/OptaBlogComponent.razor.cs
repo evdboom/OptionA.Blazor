@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Blog.Builder.HelperComponents
@@ -7,7 +6,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
     /// <summary>
     /// Generic setup for blog components
     /// </summary>
-    public partial class OptaBlogComponent
+    public partial class OptABlogComponent
     {
         /// <summary>
         /// Set to true to not render the remove and up down buttons
@@ -67,7 +66,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         [Inject]
         private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
-        private OptaModal? _editModal;
+        private OptAModal? _editModal;
 
         private void EditProperties()
         {

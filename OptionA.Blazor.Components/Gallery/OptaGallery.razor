@@ -1,9 +1,9 @@
 ﻿@using OptionA.Blazor.Components.Gallery
 @namespace OptionA.Blazor.Components
-@inherits OptaComponent
+@inherits OptAComponent
 
 <div @attributes="@GetGalleryAttributes()">
-    <OptaGalleryThumbnailContainer Images="_children"
+    <OptAGalleryThumbnailContainer Images="_children"
                                    ActiveIndex="@_selectedIndex"
                                    MaxHeight="@MaxThumbnailContainerHeight"
                                    Mode="@Mode"
@@ -16,19 +16,19 @@
     <CascadingValue Name="GalleryParent" Value="this">
         @if (Mode == GalleryMode.SideBySide)
         {
-            <OptaGalleryImageContainer OnSelectNext="() => SelectNext()"
+            <OptAGalleryImageContainer OnSelectNext="() => SelectNext()"
                                        OnSelectPrevious="() => SelectPrevious()"
                                        AdditionalClasses="@AdditionalImageContainerClasses"/>                
         }
         else
         {
-            <OptaGalleryModal Show="@_selectedIndex.HasValue"
+            <OptAGalleryModal Show="@_selectedIndex.HasValue"
                               OnClose="() => Deselect()"
                               ModalMaxWidth="@MaxModalWidth">
-                <OptaGalleryImageContainer OnSelectNext="() => SelectNext()"
+                <OptAGalleryImageContainer OnSelectNext="() => SelectNext()"
                                            OnSelectPrevious="() => SelectPrevious()"
                                            AdditionalClasses="@AdditionalImageContainerClasses" />
-            </OptaGalleryModal>
+            </OptAGalleryModal>
         }
 
     </CascadingValue>

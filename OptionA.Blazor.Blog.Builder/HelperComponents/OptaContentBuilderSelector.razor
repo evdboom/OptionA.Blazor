@@ -4,7 +4,7 @@
     @switch (Content.Type)
     {
         case ContentType.Paragraph:
-            <OptaParagraphBuilder Content="(ParagraphContent)Content"
+            <OptAParagraphBuilder Content="(ParagraphContent)Content"
                                   ContentChanged="ContentChanged"
                                   ContentRemoved="ContentRemoved"
                                   ContentIndex="ContentIndex"
@@ -13,7 +13,7 @@
                                   MovedDown="MovedDown"/>
             break;
         case ContentType.Header:
-            <OptaHeaderBuilder Content="(HeaderContent)Content"
+            <OptAHeaderBuilder Content="(HeaderContent)Content"
                                ContentChanged="ContentChanged"
                                ContentRemoved="ContentRemoved"
                                ContentIndex="ContentIndex"
@@ -22,7 +22,7 @@
                                MovedDown="MovedDown" />
             break;
         case ContentType.Code:
-            <OptaCodeBuilder Content="(CodeContent)Content"
+            <OptACodeBuilder Content="(CodeContent)Content"
                                ContentChanged="ContentChanged"
                                ContentRemoved="ContentRemoved"
                                ContentIndex="ContentIndex"
@@ -31,7 +31,7 @@
                                MovedDown="MovedDown" />
             break;
         case ContentType.Image:
-            <OptaImageBuilder Content="(ImageContent)Content"
+            <OptAImageBuilder Content="(ImageContent)Content"
                              ContentChanged="ContentChanged"
                              ContentRemoved="ContentRemoved"
                              ContentIndex="ContentIndex"
@@ -40,7 +40,7 @@
                              MovedDown="MovedDown" />
             break;
         case ContentType.Quote:
-            <OptaQuoteBuilder Content="(QuoteContent)Content"
+            <OptAQuoteBuilder Content="(QuoteContent)Content"
                               ContentChanged="ContentChanged"
                               ContentRemoved="ContentRemoved"
                               ContentIndex="ContentIndex"
@@ -49,7 +49,7 @@
                               MovedDown="MovedDown" />
             break;
         case ContentType.Frame:
-            <OptaFrameBuilder Content="(FrameContent)Content"
+            <OptAFrameBuilder Content="(FrameContent)Content"
                               ContentChanged="ContentChanged"
                               ContentRemoved="ContentRemoved"
                               ContentIndex="ContentIndex"

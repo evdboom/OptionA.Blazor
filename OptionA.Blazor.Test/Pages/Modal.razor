@@ -14,7 +14,7 @@
 </button>
 <textarea @bind="_text"/>
 
-<OptaModal @ref="_modal"
+<OptAModal @ref="_modal"
            Draggable="_draggable"
            ModalId="my-modal"
            Size="_size">
@@ -29,4 +29,4 @@
     <Footer>
         <p @onclick="() => _modal!.Close()">Close me</p>
     </Footer>
-</OptaModal>
+</OptAModal>

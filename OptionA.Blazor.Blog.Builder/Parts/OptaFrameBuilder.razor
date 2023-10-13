@@ -1,7 +1,7 @@
 ﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
 @if (Content is not null)
 {
-    <OptaBlogComponent Name="**Frame**"
+    <OptABlogComponent Name="**Frame**"
                        ContentChanged="ContentChanged"
                        ContentRemoved="ContentRemoved"
                        ContentIndex="ContentIndex"
@@ -10,20 +10,20 @@
                        MovedDown="MovedDown"
                        Content="Content">
         <label @attributes="@GetLabelAttributes(SourceId)">
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
         </label>
         <DirectInputText @bind-Value="Content.Source" AdditionalAttributes="@GetAttributes(SourceId, "Source...")" />
         <label @attributes="@GetLabelAttributes(TitleId)">
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Title")" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Title")" />
         </label>
         <DirectInputText @bind-Value="Content.Title" AdditionalAttributes="@GetAttributes(TitleId, "Title...")" />
         <label @attributes="@GetLabelAttributes(WidthId)">
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Width")" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Width")" />
         </label>
         <DirectInputText @bind-Value="Content.Width" AdditionalAttributes="@GetAttributes(WidthId, "Width...")" />
         <label @attributes="@GetLabelAttributes(HeightId)">
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Height")" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Height")" />
         </label>
         <DirectInputText @bind-Value="Content.Height" AdditionalAttributes="@GetAttributes(HeightId, "Height...")" />
-    </OptaBlogComponent>
+    </OptABlogComponent>
 }

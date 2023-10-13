@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Icon component
     /// </summary>
-    public partial class OptaIcon
+    public partial class OptAIcon
     {
         /// <summary>
         /// Content for the component

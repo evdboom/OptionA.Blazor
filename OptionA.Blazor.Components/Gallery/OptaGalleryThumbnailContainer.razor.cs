@@ -8,7 +8,7 @@ namespace OptionA.Blazor.Components.Gallery
     /// <summary>
     /// Container for use with the OptaGallery
     /// </summary>
-    public partial class OptaGalleryThumbnailContainer
+    public partial class OptAGalleryThumbnailContainer
     {
         private const string ScrollIntoViewFunction = "scrollActiveIntoView";        
         private Lazy<Task<IJSObjectReference>>? _moduleTask;
@@ -27,14 +27,14 @@ namespace OptionA.Blazor.Components.Gallery
         /// Images to display thumbnails for
         /// </summary>
         [Parameter]
-        public List<(int Index, OptaGalleryImage Image)>? Images { get; set; }
+        public List<(int Index, OptAGalleryImage Image)>? Images { get; set; }
         /// <summary>
         /// Maxheight to set for the thumbnail container
         /// </summary>
         [Parameter]
         public string? MaxHeight { get; set; }
         /// <summary>
-        /// True to display the <see cref="OptaGalleryImage.ImageText"/> as title, default = true
+        /// True to display the <see cref="OptAGalleryImage.ImageText"/> as title, default = true
         /// </summary>
         [Parameter]
         public bool ShowTitleOnThumbnail { get; set; } = true;
@@ -69,7 +69,7 @@ namespace OptionA.Blazor.Components.Gallery
         {
             _moduleTask = new(() => JsRuntime.InvokeAsync<IJSObjectReference>(
                 "import",
-                "./_content/OptionA.Blazor.Components/Gallery/OptaGalleryThumbnailContainer.razor.js").AsTask());
+                "./_content/OptionA.Blazor.Components/Gallery/OptAGalleryThumbnailContainer.razor.js").AsTask());
         }
 
         /// <inheritdoc/>
@@ -141,7 +141,7 @@ namespace OptionA.Blazor.Components.Gallery
             return result;
         }
 
-        private Dictionary<string, object?> GetImageAttributes(OptaGalleryImage image)
+        private Dictionary<string, object?> GetImageAttributes(OptAGalleryImage image)
         {
             var result = new Dictionary<string, object?>()
             {

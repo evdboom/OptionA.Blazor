@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// <summary>
     /// Bar for adding content to the post
     /// </summary>
-    public partial class OptaComponentBar
+    public partial class OptAComponentBar
     {
         private readonly Dictionary<ContentType, (string Content, string Title)> _contentTypes = new()
         {

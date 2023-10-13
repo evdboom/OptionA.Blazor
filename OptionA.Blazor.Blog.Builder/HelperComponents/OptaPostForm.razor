@@ -5,12 +5,12 @@
     <EditForm EditContext="_context" 
               OnSubmit="SavePost" 
               AdditionalAttributes="@DataProvider.GetAttributes(BuilderType.Form)">
-        <OptaPostProperties Post="_post"
+        <OptAPostProperties Post="_post"
                             PropertyChanged="(property) => OnChange(property)"/>
-        <OptaComponentBar ContentAdded="OnContentAdded"/>
+        <OptAComponentBar ContentAdded="OnContentAdded"/>
         @foreach (var content in _post.Content.Select((c, i) => new { Content = c, Index = i }))
         {
-            <OptaContentBuilderSelector Content="content.Content"
+            <OptAContentBuilderSelector Content="content.Content"
                                         ContentChanged="() => OnChange(nameof(_post.Content))"
                                         ContentRemoved="() => OnRemove(content.Content)"
                                         ContentIndex="content.Index"
@@ -20,7 +20,7 @@
         }
         <div @attributes="@DataProvider.GetAttributes(BuilderType.SavePostButtonContainer)">
             <button type="submit" @attributes="@GetSavePostAttributes()">
-                <OptaChild Content="@DataProvider.GetContent(BuilderType.SavePostButton, "Save")" />
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.SavePostButton, "Save")" />
             </button>
         </div>
     </EditForm>

@@ -5,15 +5,15 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Slide for the carousel component
     /// </summary>
-    public partial class OptaCarouselSlide
+    public partial class OptACarouselSlide
     {
         private bool _registered;
 
         /// <summary>
-        /// <see cref="OptaCarousel"/> as parent
+        /// <see cref="OptACarousel"/> as parent
         /// </summary>
         [CascadingParameter(Name="CarouselParent")]
-        public OptaCarousel? Parent { get; set; }
+        public OptACarousel? Parent { get; set; }
         /// <summary>
         /// Child content for the slde
         /// </summary>

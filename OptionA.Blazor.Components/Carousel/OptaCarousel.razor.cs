@@ -6,12 +6,12 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Carousel component
     /// </summary>
-    public partial class OptaCarousel
+    public partial class OptACarousel
     {
         private const int DefaultSlideSpeed = 3000;
         private const string AllowedCharacters = "abcdefghijklmnopqrstuvwxyz";
 
-        private List<(int Index, OptaCarouselSlide Child)> _children = new();
+        private List<(int Index, OptACarouselSlide Child)> _children = new();
         private Timer? _timer;
         private string _randomId = string.Empty;
 
@@ -37,7 +37,7 @@ namespace OptionA.Blazor.Components
         private ICarouselDataProvider Provider { get; set; } = null!;
 
         /// <summary>
-        /// Slides to show should be of type <see cref="OptaCarouselSlide"/>
+        /// Slides to show should be of type <see cref="OptACarouselSlide"/>
         /// </summary>
         [Parameter]
         public RenderFragment? Slides { get; set; }
@@ -118,7 +118,7 @@ namespace OptionA.Blazor.Components
         public bool NextPreviousIsIcon { get; set; } = true;
         /// <summary>
         /// Content to load for item select items, should be set if not rendered as icon,
-        /// <see cref="OptaCarouselSlide"/> is passed as cascading parameter named Slide
+        /// <see cref="OptACarouselSlide"/> is passed as cascading parameter named Slide
         /// </summary>
         [Parameter]
         public RenderFragment? ItemSelectContent { get; set; }
@@ -142,7 +142,7 @@ namespace OptionA.Blazor.Components
         /// Register a child to include in slides
         /// </summary>
         /// <param name="child"></param>
-        public void RegisterChild(OptaCarouselSlide child)
+        public void RegisterChild(OptACarouselSlide child)
         {
             var current = _children
                 .Select(child => child.Child)

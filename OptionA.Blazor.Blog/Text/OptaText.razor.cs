@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Component for most text based parts
     /// </summary>
-    public partial class OptaText
+    public partial class OptAText
     {
         /// <summary>
         /// Content for this text block

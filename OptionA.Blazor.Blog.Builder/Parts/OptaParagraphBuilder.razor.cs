@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// <summary>
     /// Builder for paragraphs
     /// </summary>
-    public partial class OptaParagraphBuilder
+    public partial class OptAParagraphBuilder
     {
         private const string ParagraphId = "opta-paragraph";
 

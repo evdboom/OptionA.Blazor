@@ -1,0 +1,37 @@
+﻿@using OptionA.Blazor.Blog
+@using OptionA.Blazor.Blog.Builder
+@inject OptionA.Blazor.Blog.Services.IBuilderService _builder
+
+<OptAPostBuilder PostChanged="OnPostChanged" 
+                 PostSaved="OnPostSaved"
+                 Post="_editPost" />
+
+@code {
+    private Post? _editPost;
+
+    [Parameter]
+    public string? EditPostJson { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (string.IsNullOrEmpty(EditPostJson))
+        {
+            _editPost = null;
+            return;
+        }
+
+        _editPost = _builder.CreateFromJson(EditPostJson);
+    }
+
+    private Task OnPostChanged(Post? post)
+    {
+        // Do something with the post, for instance pass to a OptaPost component
+        return Task.CompletedTask;
+    }
+
+    private Task OnPostSaved(Post? post)
+    {
+        // Do something with the saved post
+        return Task.CompletedTask;
+    }
+}

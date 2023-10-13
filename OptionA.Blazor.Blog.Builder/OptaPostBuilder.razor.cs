@@ -9,7 +9,7 @@ namespace OptionA.Blazor.Blog.Builder
     /// <summary>
     /// Builder component for posts
     /// </summary>
-    public partial class OptaPostBuilder : IDisposable
+    public partial class OptAPostBuilder : IDisposable
     {
         private const string RegisterHandlerFunction = "registerHandler";
         private const string UnRegisterHandlerFunction = "unRegisterHandler";
@@ -69,7 +69,7 @@ namespace OptionA.Blazor.Blog.Builder
                 return;
             }
 
-            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OptionA.Blazor.Blog.Builder/OptaPostBuilder.razor.js");
+            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OptionA.Blazor.Blog.Builder/OptAPostBuilder.razor.js");
             var objRef = DotNetObjectReference.Create(this);
             _eventId = await _module.InvokeAsync<string>(RegisterHandlerFunction, objRef, nameof(BuilderUnloaded));
 

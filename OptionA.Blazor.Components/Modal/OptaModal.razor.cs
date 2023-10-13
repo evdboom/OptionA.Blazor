@@ -8,7 +8,7 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Modal implementation
     /// </summary>
-    public partial class OptaModal
+    public partial class OptAModal
     {
         private const string CloseDialogFunction = "closeDialog";
         private const string ShowDialogFunction = "showDialog";
@@ -116,7 +116,7 @@ namespace OptionA.Blazor.Components
         {
             if (firstRender)
             {
-                _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OptionA.Blazor.Components/Modal/OptaModal.razor.js");                
+                _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OptionA.Blazor.Components/Modal/OptAModal.razor.js");                
             }
             else if (_awaitShow && _module is not null)
             {

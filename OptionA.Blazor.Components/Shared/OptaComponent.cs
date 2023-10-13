@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Base class for components
     /// </summary>
-    public class OptaComponent : ComponentBase
+    public class OptAComponent : ComponentBase
     {
         /// <summary>
         /// Additional classes to add to the component

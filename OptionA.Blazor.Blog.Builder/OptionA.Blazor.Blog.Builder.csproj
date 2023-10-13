@@ -8,15 +8,16 @@
 	  <RootNamespace>OptionA.Blazor.Blog.Builder</RootNamespace>
 	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	  <PackageReadmeFile>readme.md</PackageReadmeFile>
 	  <Title>Blazor Blog Builder</Title>
 	  <Authors>Erik van der Boom</Authors>
 	  <IsPackable>true</IsPackable>
-	  <Description>Builders for creating a Blog using Blazor.</Description>
+	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <Version>7.2.0</Version>
 	  <PackageReleaseNotes>
-		  7.2.0 Initial release of all components, following version of Components for clarity		  
+		  7.2.0 Initial release of all components, following version of OptionA.Blazor.Blog for clarity		  
 	  </PackageReleaseNotes>
   </PropertyGroup>
 
@@ -31,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+	<None Include="readme.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
   <ItemGroup>

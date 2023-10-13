@@ -1,7 +1,7 @@
 ﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
 @if (Content is not null)
 {
-    <OptaBlogComponent Name="**Paragraph**"
+    <OptABlogComponent Name="**Paragraph**"
                        ContentChanged="ContentChanged"
                        ContentRemoved="ContentRemoved"
                        ContentIndex="ContentIndex"
@@ -10,8 +10,8 @@
                        MovedDown="MovedDown"
                        Content="Content">
         <label @attributes="@GetLabelAttributes(ParagraphId)">
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Value")" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Value")" />
         </label>
         <DirectInputTextArea @bind-Value="Content.Content" AdditionalAttributes="@GetAttributes()" AutoGrow="true" />
-    </OptaBlogComponent>
+    </OptABlogComponent>
 }

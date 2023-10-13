@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Post component
     /// </summary>
-    public partial class OptaPost
+    public partial class OptAPost
     {
         /// <summary>
         /// Post to display

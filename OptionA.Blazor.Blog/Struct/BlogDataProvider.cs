@@ -5,12 +5,12 @@
     /// </summary>
     public class BlogDataProvider : IBlogDataProvider
     {
-        private readonly OptaBlogOptions _options;
+        private readonly OptABlogOptions _options;
 
         /// <summary>
         /// Configured options for this provider
         /// </summary>
-        public OptaBlogOptions Options => _options;
+        public OptABlogOptions Options => _options;
 
         /// <inheritdoc/>
         public HeaderSize PostHeaderSize => _options.PostHeaderSize ?? HeaderSize.One;
@@ -35,7 +35,7 @@
         /// Constructor
         /// </summary>
         /// <param name="configuration"></param>
-        public BlogDataProvider(Action<OptaBlogOptions>? configuration = null)
+        public BlogDataProvider(Action<OptABlogOptions>? configuration = null)
         {
             _options = new();
             configuration?.Invoke(_options);

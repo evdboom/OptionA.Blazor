@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     /// <summary>
     /// Component for the general post properties
     /// </summary>
-    public partial class OptaPostProperties
+    public partial class OptAPostProperties
     {
         private const string TitleId = "post-builder-title";
         private const string SubtitleId = "post-builder-subtitle";

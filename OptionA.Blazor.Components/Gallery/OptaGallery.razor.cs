@@ -1,25 +1,24 @@
 ﻿using Microsoft.AspNetCore.Components;
-using OptionA.Blazor.Components.Gallery;
 
 namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Gallery Component
     /// </summary>
-    public partial class OptaGallery
+    public partial class OptAGallery
     {
-        private List<(int Index, OptaGalleryImage Child)> _children = new();
+        private List<(int Index, OptAGalleryImage Child)> _children = new();
         private int? _selectedIndex;
         private GalleryMode _oldMode;
-                
+
         [Inject]
         private IGalleryDataProvider Provider { get; set; } = null!;
 
         /// <summary>
-        /// Slides to show should be of type <see cref="OptaGalleryImage"/>
+        /// Slides to show should be of type <see cref="OptAGalleryImage"/>
         /// </summary>
         [Parameter]
-        public RenderFragment? Images { get; set; }        
+        public RenderFragment? Images { get; set; }
         /// <summary>
         /// Determines if next/previous are shown
         /// </summary>
@@ -110,7 +109,7 @@ namespace OptionA.Blazor.Components
         /// Register a child to include in slides
         /// </summary>
         /// <param name="newChild"></param>
-        public void RegisterChild(OptaGalleryImage newChild)
+        public void RegisterChild(OptAGalleryImage newChild)
         {
             var current = _children
                 .Select(child => child.Child)
@@ -169,12 +168,12 @@ namespace OptionA.Blazor.Components
             {
                 current.Child.IsCurrent = false;
             }
-           
-            var newCurrent = _children[index].Child;            
+
+            var newCurrent = _children[index].Child;
             newCurrent.IsCurrent = true;
-            current.Child?.Update();           
+            current.Child?.Update();
             newCurrent.Update();
-            
+
             _selectedIndex = index;
             StateHasChanged();
         }
@@ -191,7 +190,7 @@ namespace OptionA.Blazor.Components
             var newIndex = current.Index < _children.Count - 1
                 ? current.Index + 1
                 : 0;
-            SelectIndex(newIndex);          
+            SelectIndex(newIndex);
         }
 
         private void SelectPrevious()

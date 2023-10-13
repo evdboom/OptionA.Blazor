@@ -1,7 +1,7 @@
 ﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
 @if (Content is not null)
 {
-    <OptaBlogComponent Name="**Header**"
+    <OptABlogComponent Name="**Header**"
                        ContentChanged="ContentChanged"
                        ContentRemoved="ContentRemoved"
                        ContentIndex="ContentIndex"
@@ -10,12 +10,12 @@
                        MovedDown="MovedDown"
                        Content="Content">
         <label @attributes="@GetLabelAttributes(SizeId)">
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Size")"/>
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Size")" />
         </label>
-        <OptaEnumSelect TEnum="HeaderSize" @bind-Value="InternalSize" AdditionalAttributes="@GetSizeAttributes()"  />
+        <OptAEnumSelect TEnum="HeaderSize" @bind-Value="InternalSize" AdditionalAttributes="@GetSizeAttributes()"  />
         <label @attributes="@GetLabelAttributes(HeaderId)">
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.Label, "Value")" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Value")" />
         </label>
         <DirectInputText @bind-Value="Content.Content" AdditionalAttributes="@GetHeaderAttributes()" />
-    </OptaBlogComponent>
+    </OptABlogComponent>
 }

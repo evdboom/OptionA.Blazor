@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Components.Gallery
     /// <summary>
     /// Wrapper for gallery in modal mode
     /// </summary>
-    public partial class OptaGalleryModal
+    public partial class OptAGalleryModal
     {
         [Inject]
         private IGalleryDataProvider Provider { get; set; } = null!;
@@ -15,7 +15,7 @@ namespace OptionA.Blazor.Components.Gallery
         [Parameter]
         public bool Show { get; set; }
         /// <summary>
-        /// Content to display in modal, designed for <see cref="OptaGalleryImageContainer"/>
+        /// Content to display in modal, designed for <see cref="OptAGalleryImageContainer"/>
         /// </summary>
         [Parameter]
         public RenderFragment? ChildContent { get; set; }

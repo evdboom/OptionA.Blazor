@@ -1,7 +1,7 @@
 ﻿@using OptionA.Blazor.Components
 
 <div @attributes="@DataProvider.GetAttributes(BuilderType.Component)">
-    <OptaChild Content="@DataProvider.GetContent(BuilderType.ComponentTitle, Name)"/>    
+    <OptAChild Content="@DataProvider.GetContent(BuilderType.ComponentTitle, Name)"/>    
     <div @attributes="@DataProvider.GetAttributes(BuilderType.ComponentContent)">
         @ChildContent
     </div>
@@ -9,17 +9,17 @@
     {
         <div @attributes="@DataProvider.GetAttributes(BuilderType.ButtonContainer)">
             <button type="button" @attributes="@GetRemoveAttributes()" @onclick="async () => await ContentRemoved.InvokeAsync()">
-                <OptaChild Content="@DataProvider.GetContent(BuilderType.RemoveButton, "Remove")"/>
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.RemoveButton, "Remove")"/>
             </button>
             <button type="button" @attributes="@GetPropertiesAttributes()" @onclick="EditProperties">
-                <OptaChild Content="@DataProvider.GetContent(BuilderType.PropertiesButton, "Properties")" />
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.PropertiesButton, "Properties")" />
             </button>
             <div @attributes="@DataProvider.GetAttributes(BuilderType.MoveButtonContainer)">
                 <button type="button" @attributes="@GetMoveUpAttributes()" @onclick="async () => await MovedUp.InvokeAsync()">
-                    <OptaChild Content="@DataProvider.GetContent(BuilderType.MoveUpButton, "Up")" />
+                    <OptAChild Content="@DataProvider.GetContent(BuilderType.MoveUpButton, "Up")" />
                 </button>
                 <button type="button" @attributes="@GetMoveDownAttributes()" @onclick="async () => await MovedDown.InvokeAsync()">
-                    <OptaChild Content="@DataProvider.GetContent(BuilderType.MoveDownButton, "Down")" />
+                    <OptAChild Content="@DataProvider.GetContent(BuilderType.MoveDownButton, "Down")" />
                 </button>
             </div>
         </div>
@@ -27,19 +27,19 @@
 </div>
 @if (Content is not null)
 {
-    <OptaModal @ref="_editModal"
+    <OptAModal @ref="_editModal"
                Draggable="true"
                Attributes="@DataProvider.GetAttributes(BuilderType.PropertiesModal)">
         <Header>
-            <OptaChild Content="@DataProvider.GetContent(BuilderType.PropertiesModalTitle, "**Properties**")" />
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.PropertiesModalTitle, "**Properties**")" />
         </Header>
         <Content>
-            <OptaListBuilder ContentChanged="ContentChanged"
+            <OptAListBuilder ContentChanged="ContentChanged"
                              ItemPlaceholder="Class.."
                              ItemTitle="Add additional classes"
                              Label="Additional classes"
                              Items="Content.AdditionalClasses" />
-            <OptaListBuilder ContentChanged="ContentChanged"
+            <OptAListBuilder ContentChanged="ContentChanged"
                              ItemPlaceholder="Class to exclude.."
                              ItemTitle="Default classes to remove"
                              Label="Removed default classes"
@@ -49,5 +49,5 @@
                 @AdditionalProperties
             }
         </Content>
-    </OptaModal>
+    </OptAModal>
 }

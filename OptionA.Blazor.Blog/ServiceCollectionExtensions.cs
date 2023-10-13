@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using OptionA.Blazor.Blog.Code.Parsers;
 using OptionA.Blazor.Blog.Services;
 using OptionA.Blazor.Blog.Struct;
 using OptionA.Blazor.Blog.Text.Parser;
@@ -18,7 +17,7 @@ namespace OptionA.Blazor.Blog
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionABlog(this IServiceCollection services, Action<OptaBlogOptions>? configuration = null)
+        public static IServiceCollection AddOptionABlog(this IServiceCollection services, Action<OptABlogOptions>? configuration = null)
         {
             services
                 .AddSingleton<IBuilderService, BuilderService>()
@@ -44,11 +43,11 @@ namespace OptionA.Blazor.Blog
                 return services;
             }
 
-            foreach(var type in types)
+            foreach (var type in types)
             {
                 services
                     .AddSingleton(type.Interface!, type.Type);
-            }              
+            }
 
             return services;
         }
@@ -59,12 +58,12 @@ namespace OptionA.Blazor.Blog
         /// <param name="services"></param>
         /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionABootstrapBlog(this IServiceCollection services, Action<OptaBlogOptions>? configuration = null)
+        public static IServiceCollection AddOptionABootstrapBlog(this IServiceCollection services, Action<OptABlogOptions>? configuration = null)
         {
-            var bootstrapConfig = (OptaBlogOptions options) =>
+            var bootstrapConfig = (OptABlogOptions options) =>
             {
-                
-  
+
+
                 configuration?.Invoke(options);
             };
 

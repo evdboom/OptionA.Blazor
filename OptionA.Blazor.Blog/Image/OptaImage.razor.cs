@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog
     /// <summary>
     /// Image component
     /// </summary>
-    public partial class OptaImage
+    public partial class OptAImage
     {
         /// <summary>
         /// Content for the component
