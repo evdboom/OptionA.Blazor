@@ -1,0 +1,12 @@
+﻿@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+<li @attributes="@GetSlideAttributes()">
+    @if (!string.IsNullOrEmpty(ImageUrl))
+    {
+        <img @attributes="@GetImageAttributes()" />
+    }
+    <div opta-carousel-content>
+        @ChildContent
+    </div>
+</li>

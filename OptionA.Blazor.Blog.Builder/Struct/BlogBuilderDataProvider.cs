@@ -7,13 +7,13 @@ namespace OptionA.Blazor.Blog.Builder
     /// </summary>
     public class BlogBuilderDataProvider : IBlogBuilderDataProvider
     {
-        private readonly OptaBlogBuilderOptions _options;
+        private readonly OptABlogBuilderOptions _options;
        
         /// <summary>
         /// Creates the Dataprovider with the given options
         /// </summary>
         /// <param name="configuration"></param>
-        public BlogBuilderDataProvider(Action<OptaBlogBuilderOptions>? configuration)
+        public BlogBuilderDataProvider(Action<OptABlogBuilderOptions>? configuration)
         {
             _options = new();
             configuration?.Invoke(_options);
@@ -126,6 +126,11 @@ namespace OptionA.Blazor.Blog.Builder
                 {
                     icon.AdditionalClasses.Add(defaultContent);
                 }
+            }
+
+            if (!string.IsNullOrEmpty(properties.ContentClass)) 
+            {
+                result.AdditionalClasses.Add(properties.ContentClass);
             }
 
             return result;

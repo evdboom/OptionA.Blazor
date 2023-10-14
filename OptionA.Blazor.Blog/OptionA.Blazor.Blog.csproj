@@ -38,7 +38,8 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
-	<None Include="readme.md" Pack="true" PackagePath="\"/>
+    <Folder Include="wwwroot\" />
+	<None Include="readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

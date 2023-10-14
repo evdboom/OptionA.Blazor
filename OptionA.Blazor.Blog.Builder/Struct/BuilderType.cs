@@ -93,10 +93,6 @@ namespace OptionA.Blazor.Blog.Builder
         /// </summary>
         TextAreaAutoGrow,
         /// <summary>
-        /// Content for the title to edit properties
-        /// </summary>
-        PropertiesModalTitle,
-        /// <summary>
         /// Modal for properties
         /// </summary>
         PropertiesModal,
@@ -139,6 +135,10 @@ namespace OptionA.Blazor.Blog.Builder
         /// <summary>
         /// Component bar
         /// </summary>
-        ComponentBar
+        ComponentBar,
+        PropertiesModalHeader,
+        PropertiesModalContent,
+        PropertiesModalCloseButton,
+        PropertiesModalSection
     }
 }

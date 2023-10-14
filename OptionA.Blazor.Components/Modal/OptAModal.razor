@@ -1,0 +1,34 @@
+﻿@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+@if (_showDialog)
+{
+    <dialog @attributes="@GetModalAttributes()" @ref="_dialog" @onmousemove="OnDrag" @onmouseup="EndDrag">   
+        <section @attributes="@GetSectionAttributes()">
+            <header @attributes="@GetHeaderAttributes()" @onmousedown="TitleMouseDown">
+                @if (Header is not null)
+                {
+                    @Header
+                }
+                <button @attributes="GetCloseButtonAttributes()" @onclick="Close">
+                    @if (!string.IsNullOrEmpty(DataProvider.CloseButtonContent))
+                    {
+                        <span>@DataProvider.CloseButtonContent</span>
+                    }
+                </button>
+            </header>
+            @if (Content is not null)
+            {
+                <div @attributes="@GetContentAttributes()">
+                    @Content
+                </div>
+            }
+            @if (Footer is not null)
+            {
+                <footer @attributes="@GetFooterAttributes()">
+                    @Footer
+                </footer>
+            }    
+        </section>
+    </dialog>
+}

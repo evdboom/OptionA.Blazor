@@ -1,0 +1,97 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null)
+{
+    switch (Content.Type)
+    {
+        case ContentType.Text:
+            @Content.Content
+            break;
+        case ContentType.Block:
+            <div @attributes=Content.GetAttributes(DataProvider)>
+                @if (Content.NotMarkdown)
+                {
+                    @Content.Content
+                }
+                else
+                {
+                    <OptAChildBuilder Content="_content" />
+                }                
+            </div>
+            break;
+        case ContentType.Paragraph:
+            <p @attributes=Content.GetAttributes(DataProvider)>
+                @if (Content.NotMarkdown)
+                {
+                    @Content.Content
+                }
+                else
+                {
+                    <OptAChildBuilder Content="_content" />
+                }
+            </p>
+            break;
+        case ContentType.Inline:
+            <span @attributes=Content.GetAttributes(DataProvider)>
+                @if (Content.NotMarkdown)
+                {
+                    @Content.Content
+                }
+                else
+                {
+                    <OptAChildBuilder Content="_content" />
+                }
+            </span>
+            break;
+        case ContentType.Bold:
+            <strong @attributes=Content.GetAttributes(DataProvider)>
+                @if (Content.NotMarkdown)
+                {
+                    @Content.Content
+                }
+                else
+                {
+                    <OptAChildBuilder Content="_content" />
+                }
+            </strong>
+            break;
+        case ContentType.Italic:
+            <em @attributes=Content.GetAttributes(DataProvider)>
+                @if (Content.NotMarkdown)
+                {
+                    @Content.Content
+                }
+                else
+                {
+                    <OptAChildBuilder Content="_content" />
+                }
+            </em>
+            break;
+        case ContentType.Link:
+            <a @attributes=Content.GetAttributes(DataProvider)>
+                @if (Content.NotMarkdown)
+                {
+                    @Content.Content
+                }
+                else
+                {
+                    <OptAChildBuilder Content="_content" />
+                }
+            </a>
+            break;
+        case ContentType.LineBreak:
+            <br />
+            break;
+        case ContentType.Cite:
+            <cite @attributes=Content.GetAttributes(DataProvider)>
+                @if (Content.NotMarkdown)
+                {
+                    @Content.Content
+                }
+                else
+                {
+                    <OptAChildBuilder Content="_content" />
+                }
+            </cite>
+            break;
+    }
+}

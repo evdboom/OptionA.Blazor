@@ -1,0 +1,61 @@
+﻿@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+<div @attributes="@GetCarouselAttributes()" @onmouseenter="() => DisableTimer()" @onmouseleave="() => EnableTimer()">
+<ol>
+    <CascadingValue Name="CarouselParent" Value="this">
+        @Slides
+    </CascadingValue>
+</ol>
+
+@if (ShowItemSelect)
+{
+    <div @attributes="@GetItemSelectAttributes()">
+        @foreach (var child in _children)
+        {
+            @if (ItemSelectIsIcon)
+            {
+                <button @attributes="@GetItemSelectButtonAttributes(child.Child.IsCurrent)" @onclick="() => SelectIndex(child.Index)">
+                    <i @attributes="@GetItemSelectIconAttributes(child.Child.IsCurrent)"  />
+                </button>
+            }
+            else
+            {
+                <CascadingValue Name="Slide" Value="child.Child">
+                    <button @attributes="@GetItemSelectButtonAttributes(child.Child.IsCurrent)" @onclick="() => SelectIndex(child.Index)">
+                        @ItemSelectContent
+                    </button>             
+                </CascadingValue>
+            }    
+        }
+    </div>
+}
+@if (ShowAutoPlay)
+{
+    <div @attributes="@GetAutoPlayAttributes()">
+        <Microsoft.AspNetCore.Components.Forms.InputCheckbox @bind-Value="AutoPlay" id="@_randomId"/>
+        <label for="@_randomId">@Provider.GetAutoPlayText()</label>
+    </div>
+}
+@if (ShowNextPrevious)
+{
+    @if (NextPreviousIsIcon)
+    {
+        <button @attributes="@GetPreviousButtonAttributes()" @onclick="() => SelectPrevious(true)">
+            <i @attributes="@GetPreviousIconAttributes()" />
+        </button>
+        <button @attributes="@GetNextButtonAttributes()" @onclick="() => SelectNext(true)">
+            <i @attributes="@GetNextIconAttributes()" />
+        </button>
+    }
+    else
+    {
+        <button @attributes="@GetPreviousButtonAttributes()" @onclick="() => SelectPrevious(true)">
+            @PreviousContent
+        </button>
+        <button @attributes="@GetNextButtonAttributes()" @onclick="() => SelectNext(true)">
+            @NextContent
+        </button>
+    }  
+}
+</div>

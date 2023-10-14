@@ -32,12 +32,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
-	<None Include="readme.md" Pack="true" PackagePath="\"/>
+    <Folder Include="wwwroot\" />
+	<None Include="readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OptionA.Blazor.Blog\OptionA.Blazor.Blog.csproj" />
-    <ProjectReference Include="..\OptionA.Blazor.Components\OptionA.Blazor.Components.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,27 @@
+﻿@using OptionA.Blazor.Blog.Builder.Parts
+@using Microsoft.AspNetCore.Components.Forms
+@if (_post is not null)
+{
+    <EditForm EditContext="_context" 
+              OnSubmit="SavePost" 
+              AdditionalAttributes="@DataProvider.GetAttributes(BuilderType.Form)">
+        <OptAPostProperties Post="_post"
+                            PropertyChanged="(property) => OnChange(property)"/>
+        <OptAComponentBar ContentAdded="OnContentAdded"/>
+        @foreach (var content in _post.Content.Select((c, i) => new { Content = c, Index = i }))
+        {
+            <OptAContentBuilderSelector Content="content.Content"
+                                        ContentChanged="() => OnChange(nameof(_post.Content))"
+                                        ContentRemoved="() => OnRemove(content.Content)"
+                                        ContentIndex="content.Index"
+                                        TotalContentCount="_post.Content.Count"
+                                        MovedUp="() => OnMoveUp(content.Content)"
+                                        MovedDown="() => OnMoveDown(content.Content)" />
+        }
+        <div @attributes="@DataProvider.GetAttributes(BuilderType.SavePostButtonContainer)">
+            <button type="submit" @attributes="@GetSavePostAttributes()">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.SavePostButton, "Save")" />
+            </button>
+        </div>
+    </EditForm>
+}

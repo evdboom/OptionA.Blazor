@@ -1,0 +1,35 @@
+﻿@using OptionA.Blazor.Components.Gallery
+@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+<div @attributes="@GetGalleryAttributes()">
+    <OptAGalleryThumbnailContainer Images="_children"
+                                   ActiveIndex="@_selectedIndex"
+                                   MaxHeight="@MaxThumbnailContainerHeight"
+                                   Mode="@Mode"
+                                   OnImageSelected="(i) => SelectIndex(i)"
+                                   ShowTitleOnThumbnail="@ShowTitleOnThumbnail"
+                                   AdditionalClasses="@AdditionalThumbnailContainerClasses"
+                                   ThumbnailContainerPercentage="@ThumbnailContainerPercentage"
+                                   ThumbnailsPerRow="@ThumbnailsPerRow"
+                                   ThumbnailsPerRowMargin="@ThumbnailsPerRowMargin"/>
+    <CascadingValue Name="GalleryParent" Value="this">
+        @if (Mode == GalleryMode.SideBySide)
+        {
+            <OptAGalleryImageContainer OnSelectNext="() => SelectNext()"
+                                       OnSelectPrevious="() => SelectPrevious()"
+                                       AdditionalClasses="@AdditionalImageContainerClasses"/>                
+        }
+        else
+        {
+            <OptAGalleryModal Show="@_selectedIndex.HasValue"
+                              OnClose="() => Deselect()"
+                              ModalMaxWidth="@MaxModalWidth">
+                <OptAGalleryImageContainer OnSelectNext="() => SelectNext()"
+                                           OnSelectPrevious="() => SelectPrevious()"
+                                           AdditionalClasses="@AdditionalImageContainerClasses" />
+            </OptAGalleryModal>
+        }
+
+    </CascadingValue>
+</div>
