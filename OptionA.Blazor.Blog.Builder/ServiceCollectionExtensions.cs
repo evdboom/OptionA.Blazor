@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using OptionA.Blazor.Blog.Services;
-using OptionA.Blazor.Components;
 using OptionA.Blazor.Storage;
 
 namespace OptionA.Blazor.Blog.Builder
@@ -17,7 +16,7 @@ namespace OptionA.Blazor.Blog.Builder
         /// <param name="services"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptaBlogBuilderOptions>? configuration = null)
+        public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null)
         {
             services
                 .AddStorageService();
@@ -28,7 +27,7 @@ namespace OptionA.Blazor.Blog.Builder
 
             return services;
         }
-        
+
 
         /// <summary>
         /// Adds all blogparts to the servicecollection, prefilled with bootstrap (5.3) classes
@@ -36,9 +35,9 @@ namespace OptionA.Blazor.Blog.Builder
         /// <param name="services"></param>
         /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
         /// <returns></returns>
-        public static IServiceCollection AddOptionABootstrapBlogBuilder(this IServiceCollection services, Action<OptaBlogBuilderOptions>? configuration = null)
+        public static IServiceCollection AddOptionABootstrapBlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null)
         {
-            var bootstrapConfig = (OptaBlogBuilderOptions options) =>
+            var bootstrapConfig = (OptABlogBuilderOptions options) =>
             {
                 options.PostBuilderOptions = new()
                 {
@@ -144,7 +143,30 @@ namespace OptionA.Blazor.Blog.Builder
                     [BuilderType.ComponentBar] = new BuilderTypeProperties
                     {
                         Class = "row g-1 sticky-top"
+                    },
+                    [BuilderType.PropertiesModal] = new BuilderTypeProperties
+                    {
+                        Class = "opta-bs-modal modal-dialog"
+                    },
+                    [BuilderType.PropertiesModalCloseButton] = new BuilderTypeProperties
+                    {
+                        Class = "btn-close",
+                        Content = string.Empty
+                    },
+                    [BuilderType.PropertiesModalHeader] = new BuilderTypeProperties
+                    {
+                        Class = "modal-header",
+                        ContentClass = "modal-title"
+                    },
+                    [BuilderType.PropertiesModalContent] = new BuilderTypeProperties
+                    {
+                        Class = "modal-body"
+                    },
+                    [BuilderType.PropertiesModalSection] = new BuilderTypeProperties
+                    {
+                        Class = "modal-content"
                     }
+
                 };
 
                 configuration?.Invoke(options);
@@ -160,6 +182,6 @@ namespace OptionA.Blazor.Blog.Builder
             {
                 Class = $"form-control"
             };
-        }      
+        }
     }
 }

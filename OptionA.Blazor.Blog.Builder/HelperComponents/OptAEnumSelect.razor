@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@typeparam TEnum where TEnum: struct, Enum
+
+@if (_values is not null)
+{
+    <InputSelect @bind-Value="InternalValue" AdditionalAttributes="AdditionalAttributes">
+        @foreach (var value in _values)
+        {
+            <option value="@value">@value</option>
+        }
+    </InputSelect>
+}

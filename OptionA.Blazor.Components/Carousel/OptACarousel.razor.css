@@ -1,0 +1,26 @@
+﻿[opta-carousel] ol {
+    list-style-type: none;
+    display: flex;
+    flex-flow: row nowrap;
+    overflow: hidden;
+    padding: 0;
+}
+
+[opta-carousel] {
+    position: relative;
+}
+
+[opta-carousel-item-select] {
+    display: flex;
+    flex-flow: row;
+}
+
+[opta-carousel-autoplay] {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    z-index: 100;
+    user-select: none;
+}

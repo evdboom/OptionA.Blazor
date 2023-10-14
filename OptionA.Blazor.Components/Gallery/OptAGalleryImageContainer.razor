@@ -1,0 +1,32 @@
+﻿@inherits OptAComponent
+
+@if (Parent != null)
+{
+    <div @attributes="GetContainerAttributes()">
+        <ol>
+            @Parent.Images
+        </ol>
+        @if (Parent.ShowNextPrevious)
+        {
+            @if (Parent.NextPreviousIsIcon)
+            {
+                <button @attributes="@GetPreviousButtonAttributes()" @onclick="async () => await SelectPrevious()">
+                    <i @attributes="@GetPreviousIconAttributes()" />
+                </button>
+                <button @attributes="@GetNextButtonAttributes()" @onclick="async () => await SelectNext()">
+                    <i @attributes="@GetNextIconAttributes()" />
+                </button>
+            }
+            else
+            {
+                <button @attributes="@GetPreviousButtonAttributes()" @onclick="async () => await SelectPrevious()">
+                    @Parent.PreviousContent
+                </button>
+                <button @attributes="@GetNextButtonAttributes()" @onclick="async () => await SelectNext()">
+                    @Parent.NextContent
+                </button>
+            }
+
+        }
+    </div>
+}

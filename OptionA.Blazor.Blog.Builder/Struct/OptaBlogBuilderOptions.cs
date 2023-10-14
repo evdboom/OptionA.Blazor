@@ -3,7 +3,7 @@
     /// <summary>
     /// Options for blog components
     /// </summary>
-    public class OptaBlogBuilderOptions
+    public class OptABlogBuilderOptions
     {
         /// <summary>
         /// Specific options for the post builder

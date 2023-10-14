@@ -18,6 +18,10 @@
         /// </summary>
         public ContentType? ContentType { get; set; }
         /// <summary>
+        /// Class to set when called from GetContent
+        /// </summary>
+        public string? ContentClass { get; set; }
+        /// <summary>
         /// Additional attributes to set to override the default
         /// </summary>
         public Dictionary<string, object?>? AdditionalAttributes { get; set; }
