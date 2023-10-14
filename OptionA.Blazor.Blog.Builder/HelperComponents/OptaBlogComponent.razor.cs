@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
-using OptionA.Blazor.Components;
+using Microsoft.JSInterop;
 
 namespace OptionA.Blazor.Blog.Builder.HelperComponents
 {
@@ -8,6 +8,10 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
     /// </summary>
     public partial class OptABlogComponent
     {
+        private const string CloseDialogFunction = "closeDialog";
+        private const string ShowDialogFunction = "showDialog";
+        private const string ListCloseFunction = "listenClose";
+
         /// <summary>
         /// Set to true to not render the remove and up down buttons
         /// </summary>
@@ -65,17 +69,63 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         public EventCallback MovedDown { get; set; }
         [Inject]
         private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
+        [Inject]
+        private IJSRuntime JsRuntime { get; set; } = null!;
 
-        private OptAModal? _editModal;
+        private bool _showDialog;
+        private bool _awaitShow, _awaitClose;
+        private ElementReference _dialog;
+        private IJSObjectReference? _module;
 
         private void EditProperties()
         {
-            if (_editModal is null)
+            if (_showDialog)
             {
                 return;
             }
+            _showDialog = true;
+            _awaitShow = true;
+        }
 
-            _editModal.Show();
+        private void Close()
+        {
+            if (!_showDialog)
+            {
+                return;
+            }
+            _awaitClose = true;
+        }
+
+        /// <summary>
+        /// Invoked by JS when the dialog is closed
+        /// </summary>
+        /// <returns></returns>
+        [JSInvokable]
+        public void OnDialogClose()
+        {
+            _showDialog = false;
+            StateHasChanged();
+        }
+
+        /// <inheritdoc/>
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OptionA.Blazor.Blog.Builder/HelperComponents/OptABlogComponent.razor.js");
+            }
+            else if (_awaitShow && _module is not null)
+            {
+                _awaitShow = false;
+                var objRef = DotNetObjectReference.Create(this);
+                await _module.InvokeVoidAsync(ShowDialogFunction, _dialog, objRef, nameof(OnDialogClose));
+            }
+            else if (_awaitClose && _module is not null)
+            {
+                _awaitClose = false;
+                await _module.InvokeVoidAsync(CloseDialogFunction, _dialog);
+                OnDialogClose();
+            }
         }
 
         private Dictionary<string, object?> GetMoveUpAttributes()
@@ -126,6 +176,55 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
             };
 
             return DataProvider.GetAttributes(BuilderType.PropertiesButton, result);
+        }
+
+        private Dictionary<string, object?> GetPropertiesModalAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-modal-dialog"] = true
+            };
+
+            return DataProvider.GetAttributes(BuilderType.PropertiesModal, result);
+        }
+        private Dictionary<string, object?> GetHeaderAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-modal-header"] = true
+            };
+            
+            return DataProvider.GetAttributes(BuilderType.PropertiesModalHeader, result);
+        }
+
+        private Dictionary<string, object?> GetContentAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-modal-content"] = true
+            };
+
+            return DataProvider.GetAttributes(BuilderType.PropertiesModalContent, result);
+        }
+        
+        private Dictionary<string, object?> GetCloseButtonAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["type"] = "button"
+            };
+
+            return DataProvider.GetAttributes(BuilderType.PropertiesModalCloseButton, result);
+        }
+
+        private Dictionary<string, object?> GetSectionAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-modal-section"] = true
+            };
+
+            return DataProvider.GetAttributes(BuilderType.PropertiesModalSection, result);
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿@using OptionA.Blazor.Components
-
-<div @attributes="@DataProvider.GetAttributes(BuilderType.Component)">
+﻿<div @attributes="@DataProvider.GetAttributes(BuilderType.Component)">
     <OptAChild Content="@DataProvider.GetContent(BuilderType.ComponentTitle, Name)"/>    
     <div @attributes="@DataProvider.GetAttributes(BuilderType.ComponentContent)">
         @ChildContent
@@ -25,29 +23,32 @@
         </div>
     }
 </div>
-@if (Content is not null)
+@if (_showDialog && Content is not null)
 {
-    <OptAModal @ref="_editModal"
-               Draggable="true"
-               Attributes="@DataProvider.GetAttributes(BuilderType.PropertiesModal)">
-        <Header>
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.PropertiesModalTitle, "**Properties**")" />
-        </Header>
-        <Content>
-            <OptAListBuilder ContentChanged="ContentChanged"
-                             ItemPlaceholder="Class.."
-                             ItemTitle="Add additional classes"
-                             Label="Additional classes"
-                             Items="Content.AdditionalClasses" />
-            <OptAListBuilder ContentChanged="ContentChanged"
-                             ItemPlaceholder="Class to exclude.."
-                             ItemTitle="Default classes to remove"
-                             Label="Removed default classes"
-                             Items="Content.RemovedClasses" />
-            @if (AdditionalProperties is not null)
-            {
-                @AdditionalProperties
-            }
-        </Content>
-    </OptAModal>
+    <dialog @attributes="@GetPropertiesModalAttributes()" @ref="_dialog">
+        <section @attributes="@GetSectionAttributes()">
+            <header @attributes="@GetHeaderAttributes()">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.PropertiesModalHeader, "**Properties**")" />
+                <button @attributes="GetCloseButtonAttributes()" @onclick="Close">
+                    <OptAChild Content="@DataProvider.GetContent(BuilderType.PropertiesModalCloseButton, "Close")" />
+                </button>
+            </header>
+            <div @attributes="@GetContentAttributes()">
+                <OptAListBuilder ContentChanged="ContentChanged"
+                                 ItemPlaceholder="Class.."
+                                 ItemTitle="Add additional classes"
+                                 Label="Additional classes"
+                                 Items="Content.AdditionalClasses" />
+                <OptAListBuilder ContentChanged="ContentChanged"
+                                 ItemPlaceholder="Class to exclude.."
+                                 ItemTitle="Default classes to remove"
+                                 Label="Removed default classes"
+                                 Items="Content.RemovedClasses" />
+                @if (AdditionalProperties is not null)
+                {
+                    @AdditionalProperties
+                }
+            </div>
+        </section>
+    </dialog>
 }
