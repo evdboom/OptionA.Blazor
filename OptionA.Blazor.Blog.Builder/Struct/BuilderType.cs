@@ -136,9 +136,21 @@ namespace OptionA.Blazor.Blog.Builder
         /// Component bar
         /// </summary>
         ComponentBar,
+        /// <summary>
+        /// Header for the modal of the properties
+        /// </summary>
         PropertiesModalHeader,
+        /// <summary>
+        /// Content for the modal of the properties
+        /// </summary>
         PropertiesModalContent,
+        /// <summary>
+        /// Properties modal close button
+        /// </summary>
         PropertiesModalCloseButton,
+        /// <summary>
+        /// Section (content) of the properties modal
+        /// </summary>
         PropertiesModalSection
     }
 }
