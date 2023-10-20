@@ -7,38 +7,15 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Version>7.3.0</Version>
+		<Version>7.3.1</Version>
 		<IsPackable>true</IsPackable>
 		<Authors>Erik van der Boom</Authors>
 		<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>Blazor component library with various component for use inside your Blazor application</Description>
 		<PackageReleaseNotes>
-			7.0.2 Fixed small bug for menu with child content not displaying
-			7.0.3 Menugroup link was not loading correct class from provider
-			7.0.4 Fixed dropdown closing and showing for bootstrap
-			7.0.5 Added orientation to menu
-			7.0.6 Added OnItemSelectedCallback to menu
-			7.1.0 Added Carousel, moved to config setup #breaking change
-			7.1.1 Fixed a few warning (missing xml)
-			7.1.2 Carousel dit not render properly for 3 items
-			7.1.3 Added open attribute to menugroup
-			7.2.0 Moved to single namespace for components, renamed servicecollection extensions #breaking change
-			7.2.1 Added responsive, update for group to open on mouseover
-			7.2.4 typo
-			7.2.5 change group to css visibility, add support for delay close for animations
-			7.2.6 change responsive awaiter
-			7.2.7 added valid dimensions enumerable to responsive
-			7.2.8 keep click even on mouseover (for mobile)
-			7.2.9 added minheight to carousel for mobile
-			7.2.10 fix for dropdown on firefox
-			7.2.11 Update packages
-			7.2.12 Added Gallery
-			7.2.13 fix for switching gallery modes
-			7.2.14 simplified gallery
-			7.2.15 expanded responsive with all breakpoints
-			7.2.16 Added childcontent to gallery image
-			7.3.0 Naming, breaking change
+			Menu, added default flex
+      Responsive should be singleton
 		</PackageReleaseNotes>
 	</PropertyGroup>
 
