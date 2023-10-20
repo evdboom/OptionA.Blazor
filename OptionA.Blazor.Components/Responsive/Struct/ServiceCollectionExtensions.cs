@@ -17,7 +17,7 @@ namespace OptionA.Blazor.Components
         public static IServiceCollection AddOptionAResponsive(this IServiceCollection services, Action<ResponsiveOptions>? configuration = null)
         {
             services
-                .TryAddScoped<IResponsiveDataProvider>(provider => new ResponsiveDataProvider(configuration));
+                .TryAddSingleton<IResponsiveDataProvider>(provider => new ResponsiveDataProvider(configuration));
             services               
                 .TryAddSingleton<IResponsiveService, ResponsiveService>();
 
