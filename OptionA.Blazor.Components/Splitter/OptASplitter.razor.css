@@ -1,0 +1,27 @@
+﻿[opta-splitter] {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    --opta-first-percentage: 50%;
+}
+
+[opta-spitter][vertical] {
+    flex-direction: column;
+}
+
+[opta-splitter-bar] {
+    user-select: none;
+    cursor: col-resize;
+    flex: 0 0 auto;
+    background-color: gray;
+    min-width: 1em;
+    min-height: 1em;
+}
+
+[opta-splitter-bar][vertical] {
+    cursor: row-resize;
+}
+
+[opta-splitter-first] {
+    width: var(--opta-first-percentage);
+}

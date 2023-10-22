@@ -110,3 +110,21 @@ in SomeComponent:
     public IEnumerable<(string Name, int Width)>? BreakPoints { get; set; }
 }
 ```
+
+### Splitter
+```
+<OptASplitter>
+```
+A splitter component, creating a draggable bar in the center of two elements to change the relative size of the two.
+
+Usage:
+```
+<OptASplitter Orientation="Orientation.Horizontal">
+    <First>
+        @*first part here*@
+    </First>
+    <Second>
+        @*second part here*@
+    </Second>
+</OptASplitter>
+```

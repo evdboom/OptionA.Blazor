@@ -1,0 +1,14 @@
+﻿@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+<div opta-splitter>
+    <div @attributes="@GetFirstContainerAttributes()">
+        @First
+    </div>
+    <div @attributes="@GetSplitterAttributes()">
+
+    </div>
+    <div @attributes="@GetSecondContainerAttributes()">
+        @Second
+    </div>
+</div>
