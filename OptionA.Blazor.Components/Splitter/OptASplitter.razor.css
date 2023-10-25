@@ -2,7 +2,7 @@
     height: 100%;
     display: flex;
     flex-direction: row;
-    --opta-first-percentage: 50%;
+    --opta-first-width: 50%;
 }
 
 [opta-spitter][vertical] {
@@ -23,5 +23,5 @@
 }
 
 [opta-splitter-first] {
-    width: var(--opta-first-percentage);
+    width: var(--opta-first-width);   
 }

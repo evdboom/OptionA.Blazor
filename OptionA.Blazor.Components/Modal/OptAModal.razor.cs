@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
-using OptionA.Blazor.Components.Modal.Struct;
+using OptionA.Blazor.Components.Shared;
 
 namespace OptionA.Blazor.Components
 {
