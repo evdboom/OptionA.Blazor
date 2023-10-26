@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
-using OptionA.Blazor.Components.Modal.Struct;
+using OptionA.Blazor.Components.Shared;
+using System.Text;
 
 namespace OptionA.Blazor.Components
 {
@@ -52,6 +53,11 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public bool? Draggable { get; set; }
         /// <summary>
+        /// Way to drag, direct or drag outline and move on mouseup
+        /// </summary>
+        [Parameter]
+        public DragMode? DragMode { get; set; }
+        /// <summary>
         /// Size for the modal
         /// </summary>
         [Parameter]
@@ -65,7 +71,9 @@ namespace OptionA.Blazor.Components
         private bool _showDialog;
         private bool _awaitShow, _awaitClose;
         private bool _dragging;
-        private double? _startX, _startY, _startMouseX, _startMouseY, _offsetX, _offsetY;
+        private double _startMouseX, _startMouseY;
+        private BoundingRectangle? _bounds;
+        private int? _dragOffsetX, _dragOffsetY, _offsetX, _offsetY;
         private IJSObjectReference? _module;
 
         private ElementReference _dialog;
@@ -138,6 +146,11 @@ namespace OptionA.Blazor.Components
             return Draggable ?? DataProvider.Draggable;
         }
 
+        private DragMode GetDragMode()
+        {
+            return DragMode ?? DataProvider.DragMode;
+        }
+
         private async Task TitleMouseDown(MouseEventArgs args)
         {
             if (_module is null || !GetIsDraggable())
@@ -146,16 +159,20 @@ namespace OptionA.Blazor.Components
             }
 
             _dragging = true;
-            var rectangle = await _module.InvokeAsync<BoundingRectangle>(GetBoundsFunction, _dialog);
+            _bounds = await _module.InvokeAsync<BoundingRectangle>(GetBoundsFunction, _dialog);
             _startMouseX = args.ClientX;
             _startMouseY = args.ClientY;
-            _startX = rectangle.Left;
-            _startY = rectangle.Top;
+
+            if (GetDragMode() == Components.DragMode.Outline)
+            {
+                _dragOffsetX = (int)_bounds.Left;
+                _dragOffsetY = (int)_bounds.Top;
+            }
         }
 
-        private void OnDrag(MouseEventArgs args)
+        private void Drag(MouseEventArgs args)
         {
-            if (!_dragging)
+            if (!_dragging || _bounds is null)
             {
                 return;
             }
@@ -163,21 +180,58 @@ namespace OptionA.Blazor.Components
             var divX = args.ClientX - _startMouseX;
             var divY = args.ClientY - _startMouseY;
 
-            _offsetX = _startX + divX;
-            _offsetY = _startY + divY;
+            if (GetDragMode() == Components.DragMode.Direct)
+            {
+                _offsetX = (int)(_bounds.Left + divX);
+                _offsetY = (int)(_bounds.Top + divY);
+            }
+            else
+            {
+                _dragOffsetX = (int)(_bounds.Left + divX);
+                _dragOffsetY = (int)(_bounds.Top + divY);
+            }
+            
         }
 
         private void EndDrag(MouseEventArgs args)
         {
             _dragging = false;
+            if (_dragOffsetX.HasValue && _dragOffsetY.HasValue)
+            {
+                _offsetX = _dragOffsetX.Value;
+                _offsetY = _dragOffsetY.Value;
+                _dragOffsetX = null;
+                _dragOffsetY = null;
+            }
+        }
+
+        private Dictionary<string, object?> GetOutlineAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-modal-outline"] = true,
+            };
+
+            if (!string.IsNullOrEmpty(DataProvider.OutlineClass))
+            {
+                result["class"] = DataProvider.OutlineClass;
+            }
+
+            var sb = new StringBuilder();
+            sb.Append($"--opta-outline-width: {_bounds?.Width}px;");
+            sb.Append($"--opta-outline-height: {_bounds?.Height}px;");
+            sb.Append($"--opta-outline-top: {_dragOffsetY}px;");
+            sb.Append($"--opta-outline-left: {_dragOffsetX}px;");
+
+            result["style"] = sb.ToString();
+
+            return result;
         }
 
         private Dictionary<string, object?> GetModalAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-modal-dialog"] = true
-            };
+            var result = GetAttributes();
+            result["opta-modal-dialog"] = true;            
 
             if (!string.IsNullOrEmpty(ModalId))
             {
@@ -195,7 +249,7 @@ namespace OptionA.Blazor.Components
             }
             if (_offsetX.HasValue && _offsetY.HasValue)
             {
-                result["style"] = $"margin-top:{(int)_offsetY.Value}px;margin-left:{(int)_offsetX.Value}px;";
+                result["style"] = $"margin-top:{_offsetY.Value}px;margin-left:{_offsetX.Value}px;";
             }
 
             return result;

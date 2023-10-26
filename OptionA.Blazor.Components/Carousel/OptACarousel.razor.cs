@@ -193,10 +193,8 @@ namespace OptionA.Blazor.Components
 
         private Dictionary<string, object?> GetCarouselAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-carousel"] = true
-            };
+            var result = GetAttributes();
+            result["opta-carousel"] = true;            
 
             if (TryGetClasses(string.Empty, out var classes))
             {

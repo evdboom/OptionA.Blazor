@@ -28,23 +28,17 @@ namespace OptionA.Blazor.Components.Modal.Struct
         /// <inheritdoc/>
         public string? HeaderClass => _options.HeaderClass;
         /// <inheritdoc/>
-        public string? TitleClass => _options.TitleClass;
-        /// <inheritdoc/>
         public string? CloseButtonClass => _options.CloseButtonClass;
         /// <inheritdoc/>
         public string? CloseButtonContent => _options.CloseButtonContent;
         /// <inheritdoc/>
         public string? FooterClass => _options.FooterClass;
         /// <inheritdoc/>
-        public string? BackdropClass => _options.BackdropClass;
+        public DragMode DragMode => _options.DefaultDragMode;
         /// <inheritdoc/>
-        public bool Draggable => _options.Draggable;
+        public bool Draggable => _options.DefaultDraggable;
         /// <inheritdoc/>
-        public string? ScrollableDialogClass => _options.ScrollableDialogClass;
-        /// <inheritdoc/>
-        public int ModalZIndex => _options.ModalZIndex ?? 1000;
-        /// <inheritdoc/>
-        public int ModalZIndexSteps => _options.ModalZIndexSteps ?? 1;
+        public string? OutlineClass => _options.OutlineClass;
         /// <inheritdoc/>
         public bool TryGetClassForSize(ModalSize size, [NotNullWhen(true)] out string? className)
         {

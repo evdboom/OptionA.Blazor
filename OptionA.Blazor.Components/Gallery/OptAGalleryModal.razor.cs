@@ -60,10 +60,8 @@ namespace OptionA.Blazor.Components.Gallery
 
         private Dictionary<string, object?> GetModalAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-gallery-modal"] = true
-            };
+            var result = GetAttributes();
+            result["opta-gallery-modal"] = true;            
 
             if (TryGetClasses(Provider.ModalClasses(), out var classes))
             {

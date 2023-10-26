@@ -80,9 +80,9 @@ namespace OptionA.Blazor.Components
             }
         }
 
-        private Dictionary<string, object?> GetAttributes()
+        private Dictionary<string, object?> GetItemAttributes()
         {
-            var result = new Dictionary<string, object?>();
+            var result = GetAttributes();
             if (!string.IsNullOrEmpty(Description))
             {
                 result["title"] = Description;

@@ -1,23 +1,31 @@
 ﻿@page "/modal"
 
-<button type="button" @onclick="() => OpenModal(draggable: true)">
-    Drag
+<button @onclick="ChangeDraggable">
+    @if (!_draggable)
+    {
+        <span>Not draggable</span>
+    }
+    else
+    {
+        <span>Draggable</span>
+    }
 </button>
-<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.Small)">
-    Small
+<button @onclick="ChangeDragMode">
+    @_dragMode
 </button>
-<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.Large)">
-    large
+<button @onclick="ChangeSize">
+    @_size
 </button>
-<button type="button" @onclick="() => OpenModal(draggable: false, size: ModalSize.ExtraLarge)">
-    Extra large
+<button @onclick="() => _modal?.Show()">
+    Show
 </button>
-<textarea @bind="_text"/>
+<label>Text</label><textarea @bind="_text"/>
 
 <OptAModal @ref="_modal"
            Draggable="_draggable"
            ModalId="my-modal"
-           Size="_size">
+           Size="_size"
+           DragMode="_dragMode">
     <Header>
         <h1>My first modal</h1>
     </Header>

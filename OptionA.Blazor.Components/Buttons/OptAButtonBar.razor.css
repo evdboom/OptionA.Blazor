@@ -8,12 +8,12 @@
     flex-direction: column;
 }
 
-[opta-group] {
+[opta-button-group] {
     gap: .4rem;
     flex: 1 0 0;
 }
 
-[opta-bar] {   
+[opta-button-bar] {   
     justify-content: stretch;
 }
 

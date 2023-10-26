@@ -7,15 +7,15 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Version>7.3.1</Version>
+		<Version>7.3.2</Version>
 		<IsPackable>true</IsPackable>
 		<Authors>Erik van der Boom</Authors>
 		<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>Blazor component library with various component for use inside your Blazor application</Description>
 		<PackageReleaseNotes>
-			Menu, added default flex
-      Responsive should be singleton
+			Added splitter component
+      Implemented add attributes
 		</PackageReleaseNotes>
 	</PropertyGroup>
 
@@ -30,6 +30,6 @@
 
 	<ItemGroup>
 		<Folder Include="wwwroot\" />
-		<None Include="readme.md" Pack="true" PackagePath="\"/>
+		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>

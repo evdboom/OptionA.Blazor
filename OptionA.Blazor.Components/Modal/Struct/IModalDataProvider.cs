@@ -24,10 +24,6 @@ namespace OptionA.Blazor.Components
         /// </summary>
         string? HeaderClass { get; }
         /// <summary>
-        /// Class to add to the title of the modal
-        /// </summary>
-        string? TitleClass { get; }
-        /// <summary>
         /// Class to add to the close button of the modal
         /// </summary>
         string? CloseButtonClass { get; }
@@ -40,25 +36,17 @@ namespace OptionA.Blazor.Components
         /// </summary>
         string? FooterClass { get; }
         /// <summary>
-        /// Class to add to the backdrop of the modal
-        /// </summary>
-        string? BackdropClass { get; }
-        /// <summary>
         /// Default behavior for the Draggable property
         /// </summary>
         bool Draggable { get; }
         /// <summary>
-        /// Class to set if scrollable is set to true
+        /// Default behavior for the DragMode property
         /// </summary>
-        string? ScrollableDialogClass { get; }
+        DragMode DragMode { get; }
         /// <summary>
-        /// Default modal Z-index (needed to support multiple open modals)
+        /// Class to add to outline incase of dragmode outline
         /// </summary>
-        int ModalZIndex { get; }
-        /// <summary>
-        /// Steps for increasing the z-index when multiple modals are open, defaults to 1
-        /// </summary>
-        int ModalZIndexSteps { get; }
+        public string? OutlineClass { get; }
         /// <summary>
         /// true if the class for the given size it set
         /// </summary>

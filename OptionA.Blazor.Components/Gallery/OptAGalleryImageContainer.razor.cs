@@ -44,10 +44,8 @@ namespace OptionA.Blazor.Components.Gallery
 
         private Dictionary<string, object?> GetContainerAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-gallery-images-container"] = true
-            };
+            var result = GetAttributes();
+            result["opta-gallery-images-container"] = true;            
 
             if (Parent is not null && TryGetClasses(Provider.GetImageContainerClasses(Parent.Mode), out var classes))
             {

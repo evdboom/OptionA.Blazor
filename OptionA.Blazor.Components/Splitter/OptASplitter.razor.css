@@ -1,0 +1,57 @@
+﻿[opta-splitter] {
+    position: relative;    
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    --opta-first-width: 50%;
+}
+
+[opta-splitter][vertical] {
+    flex-direction: column;
+}
+
+[opta-splitter-bar] {
+    user-select: none;
+    cursor: col-resize;
+    flex: 0 0 auto;
+    background-color: gray;
+    min-width: 1em;
+    min-height: 1em;
+}
+
+[vertical] [opta-splitter-bar] {
+    cursor: row-resize;
+}
+
+[opta-splitter-first] {
+    width: var(--opta-first-width);   
+}
+
+[vertical] [opta-splitter-first] {
+    height: var(--opta-first-width);
+    width: unset;
+}
+
+[opta-drag-area] {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+}
+
+[opta-splitter-outline] {
+    position:absolute;
+    border: 1px solid gray;
+    width: var(--opta-outline-width);
+    height: var(--opta-outline-height);
+    top: 0;
+    left: var(--opta-outline-position);
+}
+
+[vertical] [opta-splitter-outline] {
+    top: var(--opta-outline-position);
+    left: 0;
+}

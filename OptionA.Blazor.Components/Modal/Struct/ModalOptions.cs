@@ -26,10 +26,6 @@
         /// </summary>
         public string? HeaderClass { get; set; }
         /// <summary>
-        /// Class to add to the title of the modal
-        /// </summary>
-        public string? TitleClass { get; set; }
-        /// <summary>
         /// Class to add to the close button of the modal
         /// </summary>
         public string? CloseButtonClass { get; set; }
@@ -42,28 +38,20 @@
         /// </summary>
         public string? FooterClass { get; set; }
         /// <summary>
-        /// Class to add to the backdrop of the modal
-        /// </summary>
-        public string? BackdropClass { get; set; }
-        /// <summary>
         /// Default behavior for the Draggable property
         /// </summary>
-        public bool Draggable { get; set; }
+        public bool DefaultDraggable { get; set; }
         /// <summary>
-        /// Class to set if scrollable is set to true
+        /// Default behavior for when dragging, direct or outline
         /// </summary>
-        public string? ScrollableDialogClass { get; set; }
+        public DragMode DefaultDragMode { get; set; }
+        /// <summary>
+        /// Class to add to outline incase of dragmode outline
+        /// </summary>
+        public string? OutlineClass { get; set; }
         /// <summary>
         /// Add to set size classes for the modal
         /// </summary>
         public Dictionary<ModalSize, string>? SizeClasses { get; set; }
-        /// <summary>
-        /// Default modal Z-index defaults to 1000
-        /// </summary>
-        public int? ModalZIndex { get; set; }
-        /// <summary>
-        /// Steps for increasing the z-index when multiple modals are open, defaults to 1
-        /// </summary>
-        public int? ModalZIndexSteps { get; set; }
     }
 }

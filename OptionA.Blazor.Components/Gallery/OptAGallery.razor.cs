@@ -211,11 +211,9 @@ namespace OptionA.Blazor.Components
 
         private Dictionary<string, object?> GetGalleryAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-gallery"] = true
-            };
-
+            var result = GetAttributes();
+            result["opta-gallery"] = true;
+            
             if (TryGetClasses(Provider.GetGalleryClasses(Mode), out string classes))
             {
                 result["class"] = classes;

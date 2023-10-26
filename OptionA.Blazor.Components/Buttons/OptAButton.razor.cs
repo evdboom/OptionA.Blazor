@@ -64,13 +64,11 @@ namespace OptionA.Blazor.Components
 
         private Dictionary<string, object?> GetButtonAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["type"] = IsSubmit
+            var result = GetAttributes();
+            result["type"] = IsSubmit
                     ? "submit"
-                    : "button",
-                ["disabled"] = DisabledCondition != null && DisabledCondition.Invoke()
-            };
+                    : "button";
+            result["disabled"] = DisabledCondition != null && DisabledCondition.Invoke();           
 
             if (TryGetClasses(Provider.GetActionClass(ActionType, OtherButtonClass) ?? string.Empty, out var classes))
             {

@@ -10,9 +10,9 @@ namespace OptionA.Blazor.Components
         [Inject]
         private IMenuDataProvider DataProvider { get; set; } = null!;
 
-        private Dictionary<string, object?> GetAttributes()
+        private Dictionary<string, object?> GetDividerAttributes()
         {
-            var result = new Dictionary<string, object?>();
+            var result = GetAttributes();
             if (TryGetClasses(DataProvider.GetDividerClass(), out string classes))
             {
                 result["class"] = classes;
