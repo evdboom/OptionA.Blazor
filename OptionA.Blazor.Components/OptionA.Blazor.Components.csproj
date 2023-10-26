@@ -15,6 +15,7 @@
 		<Description>Blazor component library with various component for use inside your Blazor application</Description>
 		<PackageReleaseNotes>
 			Added splitter component
+      Implemented add attributes
 		</PackageReleaseNotes>
 	</PropertyGroup>
 
@@ -28,7 +29,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Splitter\Struct\" />
 		<Folder Include="wwwroot\" />
 		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>

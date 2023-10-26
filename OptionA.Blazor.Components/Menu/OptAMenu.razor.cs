@@ -32,10 +32,9 @@ namespace OptionA.Blazor.Components
 
         private Dictionary<string, object?> GetMenuAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-menu"] = true
-            };
+            var result = GetAttributes();
+            result["opta-menu"] = true;
+            
             if (Orientation == Orientation.Vertical)
             {
                 result["vertical"] = true;

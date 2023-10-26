@@ -85,10 +85,8 @@ namespace OptionA.Blazor.Components.Gallery
 
         private Dictionary<string, object?> GetContainerAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-gallery-thumbnail-container"] = true
-            };
+            var result = GetAttributes();
+            result["opta-gallery-thumbnail-container"] = true;            
 
             if (TryGetClasses(Provider.GetThumbnailContainerClasses(Mode), out var classes))
             {

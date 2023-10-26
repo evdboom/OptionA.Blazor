@@ -149,12 +149,11 @@ namespace OptionA.Blazor.Components
             StateHasChanged();
         }
 
-        private Dictionary<string, object?> GetAttributes()
+        private Dictionary<string, object?> GetGroupAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-menu-group"] = true
-            };
+            var result = GetAttributes();
+            result["opta-menu-group"] = true;
+            
             if (TryGetClasses(DataProvider.GetMenuItemClass(), out var classes))
             {
                 result["class"] = classes;

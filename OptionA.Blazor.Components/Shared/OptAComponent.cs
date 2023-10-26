@@ -29,7 +29,7 @@ namespace OptionA.Blazor.Components
         /// <param name="defaultClass"></param>
         /// <param name="resultClass"></param>
         /// <returns></returns>
-        protected bool TryGetClasses(string defaultClass, out string resultClass)
+        protected bool TryGetClasses(string? defaultClass, out string resultClass)
         {
             var start = ParseClasses(defaultClass, AdditionalClasses);
             var removed = RemovedClasses ?? new List<string>();
@@ -41,6 +41,25 @@ namespace OptionA.Blazor.Components
             resultClass = string.Join(' ', classList);
 
             return classList.Any();
+        }
+
+        /// <summary>
+        /// Gets the attributes set for this component
+        /// </summary>
+        /// <returns></returns>
+        protected Dictionary<string, object?> GetAttributes()
+        {
+            var result = new Dictionary<string, object?>();
+
+            if (Attributes is not null)
+            {
+                foreach (var attribute in Attributes)
+                {
+                    result[attribute.Key] = attribute.Value;
+                }
+            }
+
+            return result;
         }
 
         /// <summary>

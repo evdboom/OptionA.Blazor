@@ -50,13 +50,11 @@ namespace OptionA.Blazor.Components
         
         private Dictionary<string, object?> GetBarAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-bar"] = true,
-                ["orientation"] = Orientation == Orientation.Horizontal
+            var result = GetAttributes();
+            result["opta-button-bar"] = true;
+            result["orientation"] = Orientation == Orientation.Horizontal
                     ? "horizontal"
-                    : "vertical"
-            };
+                    : "vertical";            
 
             if (TryGetClasses(string.Empty, out var classes))
             {
@@ -75,7 +73,7 @@ namespace OptionA.Blazor.Components
         {
             var result = new Dictionary<string, object?>
             {
-                ["opta-group"] = true,
+                ["opta-button-group"] = true,
                 ["orientation"] = Orientation == Orientation.Horizontal
                     ? "horizontal"
                     : "vertical",

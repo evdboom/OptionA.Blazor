@@ -1,14 +1,29 @@
 ﻿@namespace OptionA.Blazor.Components
 @inherits OptAComponent
 
-<div @ref="_splitter" opta-splitter>
+<div @ref="_splitter" @attributes="@GetMainAttributes()">
     <div @attributes="@GetFirstContainerAttributes()">
         @First
     </div>
-    <div @attributes="@GetSplitterAttributes()" @onmousedown="StartDrag">
-
+    <div @attributes="@GetSplitterAttributes()" @onmousedown="StartDrag" @ref="_bar">
+        @if (!string.IsNullOrEmpty(DataProvider.DragBarContent))
+        {
+            @DataProvider.DragBarContent
+        }
     </div>
+    @if (_dragging && DragMode == DragMode.Outline)
+    {
+        <div @attributes=@GetOutlineAttributes()>
+        </div>
+    }
+    
     <div @attributes="@GetSecondContainerAttributes()">
         @Second
     </div>
 </div>
+@if (_dragging)
+{
+    <div opta-drag-area @onmousemove="Drag" @onmouseup="EndDrag">
+
+    </div>
+}

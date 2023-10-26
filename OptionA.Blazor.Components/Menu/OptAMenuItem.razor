@@ -1,7 +1,7 @@
 ﻿@namespace OptionA.Blazor.Components
 @inherits OptAComponent
 
-<li @attributes="@GetAttributes()">    
+<li @attributes="@GetItemAttributes()">    
     @if (!string.IsNullOrEmpty(Name))
     {
         <a @attributes="@GetLinkAttributes()" @onclick="ItemSelected">@Name</a>

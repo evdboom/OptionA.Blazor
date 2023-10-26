@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using OptionA.Blazor.Components.Shared;
+using System.Text;
 
 namespace OptionA.Blazor.Components
 {
@@ -11,7 +12,6 @@ namespace OptionA.Blazor.Components
     public partial class OptASplitter
     {
         private const string GetBoundsFunction = "getBoundingRect";
-        private const string StartDragFunction = "startDragging";
 
         /// <summary>
         /// First child fragment, left or top (depending on orientation)
@@ -43,15 +43,23 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public int? MinimumPercentageSecond { get; set; }
+        /// <summary>
+        /// Way to drag, constantly updating, or just an outline
+        /// </summary>
+        [Parameter]
+        public DragMode DragMode { get; set; }
+
+        [Inject]
+        private ISplitterDataProvider DataProvider { get; set; } = null!;
         [Inject]
         private IJSRuntime JsRuntime { get; set; } = null!;
 
-        private int? _valueFirst, _min, _max;
+        private int? _valueFirst, _dragValue, _min, _max;
         private bool _dragging;
-        private double? _left, _top;
+        private double _left, _top, _barWidth, _barHeight, _onBarX, _onBarY;
         private ElementReference _splitter;
+        private ElementReference _bar;
         private IJSObjectReference? _module;
-        private IJSObjectReference? _abortController;
 
         /// <inheritdoc/>
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -72,6 +80,10 @@ namespace OptionA.Blazor.Components
             if (_valueFirst.HasValue)
             {
                 result["style"] = $"--opta-first-width: {_valueFirst.Value}px;";
+            }
+            else if (StartPercentageFirst.HasValue)
+            {
+                result["style"] = $"--opta-first-width: {StartPercentageFirst.Value}%;";
             }
 
 
@@ -95,6 +107,53 @@ namespace OptionA.Blazor.Components
                 ["opta-splitter-bar"] = true
             };
 
+            if (!string.IsNullOrEmpty(DataProvider.DragBarClass))
+            {
+                result["class"] = DataProvider.DragBarClass;
+            }
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetMainAttributes()
+        {
+
+            var result = GetAttributes();
+
+            result["opta-splitter"] = true;            
+
+            if (Orientation == Orientation.Vertical)
+            {
+                result["vertical"] = true;
+            }
+
+            if (TryGetClasses(null, out var classes))
+            {
+                result["class"] = classes;
+            }
+
+
+            return result;
+        }
+
+        private Dictionary<string, object?> GetOutlineAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-splitter-outline"] = true,
+            };
+            
+            if (!string.IsNullOrEmpty(DataProvider.OutlineClass))
+            {
+                result["class"] = DataProvider.OutlineClass;
+            }
+
+            var sb = new StringBuilder();
+            sb.Append($"--opta-outline-width: {_barWidth}px;");
+            sb.Append($"--opta-outline-height: {_barHeight}px;");
+            sb.Append($"--opta-outline-position: {_dragValue}px;");
+
+            result["style"] = sb.ToString();
 
             return result;
         }
@@ -105,79 +164,88 @@ namespace OptionA.Blazor.Components
             {
                 return;
             }
-
             _dragging = true;
             var rectangle = await _module.InvokeAsync<BoundingRectangle>(GetBoundsFunction, _splitter);
+            var barRectangle = await _module.InvokeAsync<BoundingRectangle>(GetBoundsFunction, _bar);
             _left = rectangle.Left;
             _top = rectangle.Top;
+            _barWidth = barRectangle.Width;
+            _barHeight = barRectangle.Height;
+
+            _onBarX = args.ClientX - barRectangle.Left;
+            _onBarY = args.ClientY - barRectangle.Top;
 
             _min = Orientation == Orientation.Horizontal
-                ? GetMin(rectangle.Width)
-                : GetMin(rectangle.Height);
+                ? GetMin(rectangle.Width - _barWidth)
+                : GetMin(rectangle.Height - _barHeight);
             _max = Orientation == Orientation.Horizontal
-                ? GetMax(rectangle.Width)
-                : GetMax(rectangle.Height);
+                ? GetMax(rectangle.Width - _barWidth)
+                : GetMax(rectangle.Height - _barHeight);
 
-            var objRef = DotNetObjectReference.Create(this);
-            await _module.InvokeVoidAsync(StartDragFunction, objRef, nameof(Drag), nameof(EndDrag));
-
+            if (DragMode == DragMode.Outline)
+            {
+                _dragValue = Orientation == Orientation.Horizontal
+                    ? (int)(barRectangle.Left - _left)
+                    : (int)(barRectangle.Top - _top);
+            }
         }
 
         private int GetMin(double bound)
         {
+            if (!MinimumPercentageFirst.HasValue)
+            {
+                return 0;
+            }
 
+            var percentage = (double)MinimumPercentageFirst.Value / 100;
+            return (int)(bound * percentage);
         }
 
         private int GetMax(double bound)
         {
+            if (!MinimumPercentageSecond.HasValue)
+            {
+                return (int)bound;
+            }
 
+            var percentage = (double)(100 - MinimumPercentageSecond.Value) / 100;
+            return (int)(bound * percentage);
         }
 
-        /// <summary>
-        /// called by js to end dragging
-        /// </summary>
-        [JSInvokable]
-        public void EndDrag()
-        {
-            _dragging = false;
-            StateHasChanged();
-
-        }
-
-        /// <summary>
-        /// called by js when dragging
-        /// </summary>
-        /// <param name="args"></param>
-        [JSInvokable]
-        public void Drag(MouseEvent args)
+        private void Drag(MouseEventArgs args)
         {
             if (!_dragging)
             {
                 return;
             }
-            var left = args.ClientX - _left;
-            var top = args.ClientY - _top;
 
-            var min = MinimumPercentageFirst ?? 0;
-            var max = 100 - (MinimumPercentageSecond ?? 0);
-            var percentage = Orientation == Orientation.Horizontal
-                ? 100 * left / _width
-                : 100 * top / _height;
+            var posX = args.ClientX - _left - _onBarX;
+            var posY = args.ClientY - _top - _onBarY;
 
-            if (percentage >= min && percentage <= max)
+            var value = Orientation == Orientation.Horizontal
+                ? (int)posX
+                : (int)posY;
+
+            if (value >= _min && value <= _max)
             {
-                _percentageFirst = (int?)percentage;
-                StateHasChanged();
+                if (DragMode == DragMode.Direct)
+                {
+                    _valueFirst = value;
+                }
+                else
+                {
+                    _dragValue = value;
+                }
             }
-            else if (percentage < min && (!_percentageFirst.HasValue ||  _percentageFirst.Value != min))
+        }
+
+        private void EndDrag()
+        {
+            _dragging = false;
+            if (_dragValue.HasValue)
             {
-                _percentageFirst = min;
-                StateHasChanged();
-            }
-            else if (percentage > max && (!_percentageFirst.HasValue || _percentageFirst.Value != max))
-            {
-                _percentageFirst = max;
-                StateHasChanged();
+                _valueFirst = _dragValue.Value;
+                _dragValue = null;
             }
         }
     }

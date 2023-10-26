@@ -69,7 +69,7 @@ namespace OptionA.Blazor.Components
 
         private Dictionary<string, object?> GetListAttributes()
         {
-            var result = new Dictionary<string, object?>();
+            var result = GetAttributes();
 
             if (TryGetClasses(Provider.GetDefaultImageClasses(), out var classes))
             {
