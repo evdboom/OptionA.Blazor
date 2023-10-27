@@ -1,4 +1,4 @@
-#OptionA.Blazor.Components
+# OptionA.Blazor.Components
 Blazor components for use in your Blazor website
 
 For full documentation, releasenotes and examples, go to [option-a.tech](https://www.option-a.tech/documentation/blazor/components). To full source can be viewed on [github](https://github.com/evdboom/OptionA.Blazor).
