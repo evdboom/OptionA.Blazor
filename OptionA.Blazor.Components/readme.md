@@ -11,10 +11,10 @@ To add the components you can use the extension method of each component, for ex
 Alternatively to add all the components in the package use the `AddOptionAComponents` or `AddOptionABootstrapComponents` extension methods.
 
 ## Latest release notes
-### 7.3.0 Naming
+### 7.3.2 Splitter
 #### Overall
-Naming in the package was not consistant, changed everything to OptA (instead of Opta).
-Updated the used .Net packages to be consisted for all OptionA.Blazor packages.
+Added splitter component
+Implemented additional attributes everywhere
 
 #### New features
 - Update the used .Net packages for consistency
