@@ -41,6 +41,11 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [CascadingParameter(Name = "OnItemSelected")]
         public EventCallback OnItemSelected { get; set; }
+        /// <summary>
+        /// Triggers when item is clicked
+        /// </summary>
+        [CascadingParameter(Name = "OnGroupItemSelected")]
+        public EventHandler? OnGroupItemSelected { get; set; }
 
         /// <summary>
         /// Override to map locationchanged
@@ -68,6 +73,10 @@ namespace OptionA.Blazor.Components
             {
                 await OnItemSelected.InvokeAsync();
             }
+            if (OnGroupItemSelected is not null)
+            {
+                OnGroupItemSelected.Invoke(this, EventArgs.Empty);
+            }
         }
 
         private void NavigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
@@ -87,7 +96,7 @@ namespace OptionA.Blazor.Components
             {
                 result["title"] = Description;
             }
-            if (TryGetClasses(DataProvider.GetMenuItemClass(), out string classes))
+            if (TryGetClasses(DataProvider.MenuItemClass, out string classes))
             {
                 result["class"] = classes;
             }
@@ -110,15 +119,13 @@ namespace OptionA.Blazor.Components
                 result["href"] = Href;
             }
 
-            var classes = DataProvider
-                .GetLinkClass()
+            var classes = DataProvider.LinkClass
                 .Split(' ')
                 .ToList();
             
             if (_isActive)
             {
-                classes.AddRange(DataProvider
-                    .GetActiveClass()
+                classes.AddRange(DataProvider.ActiveClass
                     .Split(' '));
             }
 
@@ -133,18 +140,6 @@ namespace OptionA.Blazor.Components
             }
 
             return result;
-        }
-
-
-
-        private string GetClasses()
-        {
-            return $"{DataProvider.GetMenuItemClass()} {AdditionalClasses}".Trim();
-        }
-
-        private string GetLinkClasses()
-        {
-            return $"{DataProvider.GetLinkClass()} {(_isActive ? DataProvider.GetActiveClass() : string.Empty)}".Trim();
         }
     }
 }

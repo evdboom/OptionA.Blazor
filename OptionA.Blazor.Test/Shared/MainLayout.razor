@@ -1,62 +1,35 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <main>
-        <div class="top-row px-4">
-            <OptAMenu>
-                <Items>
-                    <OptAMenuItem Name="Home"
-                                  Description="The home button"
-                                  Href="/" />
-                    <OptAMenuItem Href="/">
-                        <a href="/">
-                            <img src="https://mctsummiteu.blob.core.windows.net/sitecontent/mct_logo_small.png" class="bar-image" alt="Home" />
-                        </a>
-                    </OptAMenuItem>
-                    <OptAMenuItem Name="Home2"
-                                  Description="The menu button"
-                                  Href="/menu" />
-                    <OptAMenuItem Name="Home3"
-                                  Description="The menu button"
-                                  Href="/menu2" />
-                    <OptAMenuItem Name="Buttons"
-                                  Href="/buttons" />
-                    <OptAMenuItem Name="BlogBuilder"
-                                  Href="/blogbuilder" />
-                    <OptAMenuItem Name="Gallery"
-                                  Href="/gallery" />
-                    <OptAMenuItem Name="Modal"
-                                  Href="/modal" />
-                    <OptAMenuItem Name="Modal Gallery"
-                                  Href="/gallery-modal" />
-                    <OptAMenuItem Name="Gallery Switch"
-                                  Href="/gallery-switch" />
-                    <OptAMenuItem Name="Carousel"
-                                  Href="/carousel" />
-                    <OptAMenuItem Name="Splitter"
-                                  Href="/splitter" />
-                    <OptAMenuItem Name="Responsive Component"
-                                  Href="/responsive/component" />
-                    <OptAMenuItem Name="Responsive Service"
-                                  Href="/responsive/service" />
-                    <OptAMenuGroup Name="Group 1"
-                                   Description="My first group"
-                                   ActiveRoute="/menu3/">
-                        <Items>
-                            <OptAMenuItem Name="inner 1"
-                                          Href="/menu3/item1" />
-                            <OptAMenuDivider />
-                            <OptAMenuItem Name="Inner 2"
-                                          Href="/menu3/item2" />
-                        </Items>
-                    </OptAMenuGroup>
-                </Items>
-            </OptAMenu>
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+<main>
+    <OptAMenu>
+        <OptAMenuItem Name="Home"
+                      Description="The home button"
+                      Href="/" />           
+        <OptAMenuItem Name="BlogBuilder"
+                      Href="/blogbuilder" />
+        <OptAMenuGroup Name="Components"
+                       Description="Components to test"
+                       ActiveRoute="/components/">
+            <OptAMenuItem Name="Buttons"
+                          Href="/components/buttons" />
+            <OptAMenuItem Name="Carousel"
+                          Href="/components/carousel" />
+            <OptAMenuItem Name="Gallery"
+                          Href="/components/gallery" />
+            <OptAMenuItem Name="Modal"
+                          Href="/components/modal" />
+            <OptAMenuItem Name="Responsive Component"
+                          Href="/components/responsive/component" />
+            <OptAMenuItem Name="Responsive Service"
+                          Href="/components/responsive/service" />
+            <OptAMenuItem Name="Splitter"
+                          Href="/components/splitter" />
+        </OptAMenuGroup>
+        <OptAMenuItem Name="Storage service"
+                      Href="/storage" />               
+    </OptAMenu>
+    <article>
+        @Body
+    </article>
+</main>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>

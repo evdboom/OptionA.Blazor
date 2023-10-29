@@ -21,6 +21,7 @@ li {
 
 [opta-menu-group][open] [opta-dropdown] {
     visibility: visible;
+    height: var(--opta-menu-dropdown-size);
 }
 
 [opta-menu-group][closing] [opta-dropdown] {
@@ -34,6 +35,7 @@ li {
 
 [opta-menu-group] {
     position: relative;
+    --opta-menu-dropdown-size: 0px;
 }
 
 [opta-menu-group-background] {

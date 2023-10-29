@@ -11,10 +11,9 @@ To add the components you can use the extension method of each component, for ex
 Alternatively to add all the components in the package use the `AddOptionAComponents` or `AddOptionABootstrapComponents` extension methods.
 
 ## Latest release notes
-### 7.3.2 Splitter
+### 7.3.3 Fix
 #### Overall
-Added splitter component
-Implemented additional attributes everywhere
+Fix for menu size (variable wasn't used by default
 
 #### New features
 - Update the used .Net packages for consistency

@@ -41,5 +41,9 @@
         /// If set will wait the set time before closing (for doing animations and stuff)
         /// </summary>
         public int? GroupCloseTime { get; set; }
+        /// <summary>
+        /// Classes to add to an open dropdown
+        /// </summary>
+        public string? DefaultDropdownClass { get; set; }
     }
 }

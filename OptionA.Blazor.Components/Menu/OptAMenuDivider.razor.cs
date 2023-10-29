@@ -13,7 +13,7 @@ namespace OptionA.Blazor.Components
         private Dictionary<string, object?> GetDividerAttributes()
         {
             var result = GetAttributes();
-            if (TryGetClasses(DataProvider.GetDividerClass(), out string classes))
+            if (TryGetClasses(DataProvider.DividerClass, out string classes))
             {
                 result["class"] = classes;
             }
