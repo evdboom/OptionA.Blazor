@@ -17,6 +17,8 @@ li {
     z-index: 2000;
     left: 0;
     visibility: collapse;
+    overflow: hidden;
+    height: 0;
 }
 
 [opta-menu-group][open] [opta-dropdown] {

@@ -56,7 +56,6 @@ html, body {
 }
 
 .opta-dropdown {
-    height: 0;
     transition: height 250ms ease-in-out;
 }
 

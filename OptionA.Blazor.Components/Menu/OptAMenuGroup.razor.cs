@@ -18,6 +18,7 @@ namespace OptionA.Blazor.Components
         private int _scrollHeight;
         private bool _openFromMouse;
 
+        private Timer? _timer;
         private ElementReference _dropDown;
         private Lazy<Task<IJSObjectReference>>? _moduleTask;
 
@@ -91,6 +92,7 @@ namespace OptionA.Blazor.Components
         /// </summary>
         protected override void OnInitialized()
         {
+            _timer = new(Elapsed, null, Timeout.Infinite, Timeout.Infinite);
             _childClicked += OnChildClicked;
             NavigationManager.LocationChanged += NavigationManager_LocationChanged;
             _moduleTask = new(() => JsRuntime.InvokeAsync<IJSObjectReference>(
@@ -130,7 +132,7 @@ namespace OptionA.Blazor.Components
                 if (DataProvider.GroupCloseTime > 0)
                 {
                     _closing = true;
-                    var timer = new Timer(Elapsed, null, DataProvider.GroupCloseTime, Timeout.Infinite);
+                    _timer?.Change(DataProvider.GroupCloseTime, Timeout.Infinite);
                 }
 
                 _openFromMouse = false;
@@ -150,7 +152,7 @@ namespace OptionA.Blazor.Components
             if (_open && DataProvider.GroupCloseTime > 0)
             {
                 _closing = true;
-                var timer = new Timer(Elapsed, null, DataProvider.GroupCloseTime, Timeout.Infinite);
+                _timer?.Change(DataProvider.GroupCloseTime, Timeout.Infinite);
             }
 
             _open = _openFromMouse || !_open;
@@ -246,9 +248,21 @@ namespace OptionA.Blazor.Components
             return result;
         }
 
+        private bool _disposed;
+        /// <inheritdoc/>
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(!_disposed);
+            _disposed = true;
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing) 
+            {
+                _timer?.Dispose();
+            }
         }
     }
 }
