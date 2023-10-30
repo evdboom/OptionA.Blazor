@@ -73,14 +73,14 @@ namespace OptionA.Blazor.Components
 
         private Dictionary<string, object?> GetSlideAttributes()
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-carousel-slide"] = true,
-                ["active"] = IsCurrent,
-                ["previous"] = IsPrevious,
-                ["next"] = IsNext,
-                ["was-next"] = WasNext
-            };
+            var result = GetAttributes();
+
+            result["opta-carousel-slide"] = true;
+            result["active"] = IsCurrent;
+            result["previous"] = IsPrevious;
+            result["next"] = IsNext;
+            result["was-next"] = WasNext;
+            
 
             if (TryGetClasses(string.Empty, out var classes))
             {

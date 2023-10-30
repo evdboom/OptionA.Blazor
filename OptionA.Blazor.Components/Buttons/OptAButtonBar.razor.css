@@ -1,16 +1,24 @@
-﻿[orientation="horizontal"] {
+﻿[opta-button-bar] {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
-[orientation="vertical"] {
-    display: flex;
+[vertical] {
     flex-direction: column;
+    height: 100%;
+    width: unset;
 }
 
 [opta-button-group] {
-    gap: .4rem;
+    display: flex;
+    flex-direction: row;
     flex: 1 0 0;
+    align-items: flex-start;
+}
+
+[vertical] [opta-button-group] {
+    flex-direction: column;
 }
 
 [opta-button-bar] {   

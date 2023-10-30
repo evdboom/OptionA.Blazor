@@ -34,5 +34,9 @@ namespace OptionA.Blazor.Components
         /// Configuration for modal components
         /// </summary>
         public Action<ModalOptions>? ModalConfiguration { get; set; }
+        /// <summary>
+        /// Configuration for splitter components
+        /// </summary>
+        public Action<SplitterOptions>? SplitterConfiguration { get; set; }
     }
 }

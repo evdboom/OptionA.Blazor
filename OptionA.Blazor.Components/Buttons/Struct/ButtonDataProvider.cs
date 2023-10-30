@@ -5,10 +5,7 @@
     /// </summary>
     public class ButtonDataProvider : IButtonDataProvider
     {
-        private readonly Dictionary<ActionType, string>? _buttonClasses;
-        private readonly string? _defaultButtonClass;
-        private readonly Dictionary<ActionType, string>? _iconClasses;
-        private readonly string? _defaultIconClass;
+        private readonly ButtonOptions _options;
 
         /// <summary>
         /// Constructor, pass classes here
@@ -16,14 +13,15 @@
         /// <param name="configuration"></param>
         public ButtonDataProvider(Action<ButtonOptions>? configuration = null)
         {
-            var options = new ButtonOptions();
-            configuration?.Invoke(options);
-
-            _buttonClasses = options.ButtonClasses;
-            _defaultButtonClass = options.DefaultButtonClass;
-            _iconClasses = options.IconClasses;
-            _defaultIconClass = options.DefaultIconClass;
+            _options = new ButtonOptions();
+            configuration?.Invoke(_options);
         }
+
+        /// <inheritdoc/>
+        public string? DefaultButtonBarClass => _options.DefaultButtonBarClass;
+
+        /// <inheritdoc/>
+        public string? DefaultButtonGroupClass => _options?.DefaultButtonGroupClass;
 
         /// <inheritdoc/>
         public string GetActionClass(ActionType actionType)
@@ -39,12 +37,12 @@
                 return otherButtonClass;
             }
 
-            if (_buttonClasses?.TryGetValue(actionType, out string? buttonClass) ?? false)
+            if (_options.ButtonClasses?.TryGetValue(actionType, out string? buttonClass) ?? false)
             {
                 return buttonClass;
             }
 
-            return _defaultButtonClass ?? string.Empty;
+            return _options.DefaultButtonClass ?? string.Empty;
         }
 
         /// <inheritdoc/>
@@ -61,12 +59,12 @@
                 return otherIconClass;
             }
 
-            if (_iconClasses?.TryGetValue(actionType, out string? iconClass) ?? false)
+            if (_options.IconClasses?.TryGetValue(actionType, out string? iconClass) ?? false)
             {
                 return iconClass;
             }
 
-            return _defaultIconClass ?? string.Empty;
+            return _options.DefaultIconClass ?? string.Empty;
         }
     }
 }

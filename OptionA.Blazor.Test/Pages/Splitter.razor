@@ -1,5 +1,5 @@
 ﻿@page "/components/splitter"
-
+<PageTitle>Splitter</PageTitle>
 <div>
     <button @onclick="ChangeDragMode">@_dragMode</button>
     <button @onclick="ChangeOrientation">@_orientation</button>
@@ -7,11 +7,12 @@
     <label>Min First</label><input type="number" @bind="_minimumFirst"/>
     <label>Min Second</label><input type="number" @bind="_minimumSecond" />
     <label>Start First</label><input type="number" @bind="_startPercentageFirst" />
+    <label>Container size</label><input type="number" @bind="_containerSize" />
 </div>
 
 @if (_show)
 {
-    <div splitter-container>
+    <div @attributes="@GetContainerAttributes()">
     <OptASplitter DragMode="_dragMode"
                   Orientation="_orientation"
                   MinimumPercentageFirst="_minimumFirst"

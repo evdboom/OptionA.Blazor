@@ -1,0 +1,54 @@
+﻿<h3>Through Responsive service</h3>
+
+<h4>All dimensions</h4>
+<ul>
+    @if (_dimensionBreakPoints is not null)
+    {
+        @foreach (var dimension in _dimensionBreakPoints)
+        {
+            <li>
+                @dimension.Key @dimension.Value
+            </li>
+        }
+    }
+</ul>
+<br />
+<h4>Valid dimensions through function</h4>
+<ul>
+    @foreach (var dimension in ValidThroughAll())
+    {
+        <li>
+            @dimension
+        </li>
+    }
+</ul>
+<br />
+<h4>Valid dimensions from service</h4>
+<ul>
+    @foreach(var dimension in ResponsiveService.ValidDimensions())
+    {
+        <li>
+            @dimension
+        </li>
+    }
+</ul>
+<br />
+<h4>Dimension when changed</h4>
+<p>
+    @_dimension
+</p>
+<br />
+<h4>Windowsize when changed</h4>
+@if (_namedDimension.HasValue)
+{
+    <p>
+        @_namedDimension.Value.Name @_namedDimension.Value.Width @_namedDimension.Value.Height
+    </p>
+}
+<br />
+<h4>Windowsize from service</h4>
+<p>
+    @ResponsiveService.GetWindowSize().Name @ResponsiveService.GetWindowSize().Width @ResponsiveService.GetWindowSize().Height
+</p>
+<br />
+

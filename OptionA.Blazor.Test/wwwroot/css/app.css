@@ -59,6 +59,52 @@ html, body {
     transition: height 250ms ease-in-out;
 }
 
+.opta-dropdown li:hover {
+    background-color: var(--oa-main-hover-color);
+}
+
+.opta-menu-item {
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+[opta-carousel-image] {
+    max-height: 300px;
+}
+
+[opta-carousel-slide] {
+    background-color: var(--oa-main-active-color);
+    padding: 2em;
+}
+
+[opta-thumbnail-title] {
+    text-align: center;
+}
+
+[opta-thumbnail-image] img {
+    max-height: 75px;
+}
+
+[opta-thumbnail-image], [opta-gallery-image] {
+    background-color: var(--oa-main-active-color);
+    padding: 2em;
+}
+
+
+.carousel-image {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-left: 15%;
+    margin-right: 15%;
+    transform: translateY(-50%);
+    text-align: center;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: rgba(255,255,255,.5);
+}
+ 
 .btn-primary {
     --bs-btn-color: var(--oa-inverse-main-color);
     --bs-btn-bg: var(--oa-main-color);

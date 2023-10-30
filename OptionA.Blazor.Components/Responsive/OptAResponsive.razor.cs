@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Component for passing dimension and dimension name to child components
     /// </summary>
-    public partial class OptAResponsive
+    public partial class OptAResponsive : IDisposable
     {
         /// <summary>
         /// Name of the cascading parameter for the dimension
@@ -40,7 +40,11 @@ namespace OptionA.Blazor.Components
         /// <inheritdoc />
         protected override async Task OnInitializedAsync()
         {
+            ResponsiveService.WindowSizeChanged += OnWindowSizeChanged;
+            ResponsiveService.DimensionChanged += OnDimensionChanged;
+
             await ResponsiveService.Initialize();
+
             _dimension = ResponsiveService.GetWindowSize();
             _validDimensions = ResponsiveService
                 .ValidDimensions()
@@ -48,11 +52,9 @@ namespace OptionA.Blazor.Components
             _breakPoints = ResponsiveService
                 .GetAllDimensionBreakPoints()
                 .ToList();
-            ResponsiveService.OnWindowSizeChanged += WindowSizeChanged;
-            ResponsiveService.OnDimensionChanged += DimensionChanged;
         }
 
-        private void DimensionChanged(object? sender, string e)
+        private void OnDimensionChanged(object? sender, string e)
         {
             _dimensionName = e;
             _validDimensions = ResponsiveService
@@ -61,10 +63,26 @@ namespace OptionA.Blazor.Components
             StateHasChanged();
         }
 
-        private void WindowSizeChanged(object? sender, NamedDimension e)
+        private void OnWindowSizeChanged(object? sender, NamedDimension e)
         {
             _dimension = e;
             StateHasChanged();
+        }
+
+        private bool _disposed;
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            _disposed = true;
+            ResponsiveService.WindowSizeChanged -= OnWindowSizeChanged;
+            ResponsiveService.DimensionChanged -= OnDimensionChanged;
+
+            GC.SuppressFinalize(this);
         }
     }
 }

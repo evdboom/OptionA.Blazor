@@ -21,5 +21,13 @@
         /// Icon class to use if no specific is found
         /// </summary>
         public string? DefaultIconClass { get; set; }
+        /// <summary>
+        /// Class to add to button bar
+        /// </summary>
+        public string? DefaultButtonBarClass { get; set; }
+        /// <summary>
+        /// Class to add to group of buttons in button bar
+        /// </summary>
+        public string? DefaultButtonGroupClass { get; set; }
     }
 }

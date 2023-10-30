@@ -22,7 +22,8 @@ builder.Services
             menu.OpenGroupOnMouseOver = true;
             menu.GroupCloseTime = 250;
             menu.DefaultMenuContainerClass += " opta-bg ps-2 sticky-top";
-            menu.DefaultDropdownClass = "opta-bg p-2 opta-dropdown";
+            menu.DefaultDropdownClass = "opta-bg opta-dropdown";
+            menu.DefaultMenuItemClass += " opta-menu-item";
         };
     });
 builder.Services

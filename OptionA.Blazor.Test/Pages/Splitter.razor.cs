@@ -10,6 +10,7 @@ namespace OptionA.Blazor.Test.Pages
         private int _minimumFirst = 10;
         private int _minimumSecond = 10;
         private bool _show;
+        private int _containerSize = 600;
 
         private void ChangeOrientation()
         {
@@ -33,6 +34,17 @@ namespace OptionA.Blazor.Test.Pages
             {
                 _dragMode = DragMode.Direct;
             }
+        }
+
+        private Dictionary<string, object?> GetContainerAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["splitter-container"] = true,
+                ["style"] = $"--container-size: {_containerSize}px;"
+            };
+
+            return result;
         }
     }
 }

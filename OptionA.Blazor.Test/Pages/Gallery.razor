@@ -1,14 +1,50 @@
 ﻿@page "/components/gallery"
-
-<OptAGallery MaxThumbnailContainerHeight="70vh"
-             ShowTitleOnThumbnail="true">
-    <Images>
-    @for(int i = 1; i <= 10; i++)
+<PageTitle>Gallery</PageTitle>
+<button @onclick="() => _showNextPrevious = !_showNextPrevious">
+    @if (_showNextPrevious)
     {
-        <OptAGalleryImage ImageNumber="@i"
-                          ImageText="@i.ToString()"
-                          ImageThumbnailUrl="@GetUrl(i)"
-                          ImageUrl="@GetUrl(i)"/>
+        <span>Next/Previous</span>
     }
-    </Images>
-</OptAGallery>
+    else
+    {
+        <span>No Next/Previous</span>
+    }
+</button>
+<button @onclick="() => _showTitleOnThumbnail = !_showTitleOnThumbnail">
+    @if (_showTitleOnThumbnail)
+    {
+        <span>Thumbnail title</span>
+    }
+    else
+    {
+        <span>No Thumbnail title</span>
+    }
+</button>
+<button @onclick="ChangeGalleryMode">@_mode</button>
+<button @onclick="() => _show = !_show">Show</button>
+<label>Container height</label><input type="text" @bind="_thumbnailContainerHeight"/>
+<label>Modal width</label><input type="text" @bind="_modalWidth" />
+<label>Container percentage</label><input type="number" @bind="_containerPercentage"/>
+<label>Thumbs per row</label><input type="number" @bind="_thumbsPerRow"/>
+<label>Thumbsper row Margin</label><input type="number" @bind="_thumbsPerRowMargin"/>
+@if (_show)
+{
+    <OptAGallery MaxThumbnailContainerHeight="@_thumbnailContainerHeight"
+                 ShowTitleOnThumbnail="@_showTitleOnThumbnail"
+                 MaxModalWidth="@_modalWidth"
+                 Mode="_mode"
+                 ShowNextPrevious="_showNextPrevious"
+                 ThumbnailContainerPercentage="_containerPercentage"
+                 ThumbnailsPerRow="_thumbsPerRow"
+                 ThumbnailsPerRowMargin="_thumbsPerRowMargin">
+        <Images>
+            @for (int i = 1; i <= 10; i++)
+            {
+                <OptAGalleryImage ImageNumber="@i"
+                                  ImageText="@i.ToString()"
+                                  ImageThumbnailUrl="/assets/logo.svg"
+                                  ImageUrl="/assets/logo.svg" />
+            }
+        </Images>
+    </OptAGallery>
+}
