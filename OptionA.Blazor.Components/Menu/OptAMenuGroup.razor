@@ -8,15 +8,17 @@
     <a @attributes="@GetLinkAttributes()">@Name</a>
     <div @attributes="@GetDropdownAttributes()" @ref="_dropDown">
         <menu>
-            @if (Items is not null)
+            <CascadingValue Name="OnGroupItemSelected" Value="@_childClicked">
+            @if (ChildContent is not null)
             {
-                @Items
+                @ChildContent
             }
+            </CascadingValue>
         </menu>
     </div> 
 </li>
 
-@if (_open && !DataProvider.OpenGroupOnMouseOver())
+@if (_open && !DataProvider.OpenGroupOnMouseOver)
 {
     <div @attributes="@GetBackgroundAttributes()" @onclick="() => Toggle()"></div>
 

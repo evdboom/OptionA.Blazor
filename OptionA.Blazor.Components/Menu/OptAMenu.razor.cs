@@ -13,7 +13,7 @@ namespace OptionA.Blazor.Components
         /// Menu items to display
         /// </summary>
         [Parameter]
-        public RenderFragment? Items { get; set; }
+        public RenderFragment? ChildContent { get; set; }
         /// <summary>
         /// Additonal classes to add to the superceding nav container
         /// </summary>
@@ -39,7 +39,7 @@ namespace OptionA.Blazor.Components
             {
                 result["vertical"] = true;
             }
-            if (TryGetClasses(DataProvider.GetMenuClass(), out string classes))
+            if (TryGetClasses(DataProvider.MenuClass, out string classes))
             {
                 result["class"] = classes;
             }
@@ -57,8 +57,7 @@ namespace OptionA.Blazor.Components
         private Dictionary<string, object?> GetContainerAttributes()
         {
             var result = new Dictionary<string, object?>();
-            var defaultClasses = DataProvider
-                .GetMenuContainerClass()
+            var defaultClasses = DataProvider.MenuContainerClass
                 .Split(' ')
                 .ToList();
             var additional = (AdditionalContainerClasses ?? string.Empty)

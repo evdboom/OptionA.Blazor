@@ -24,7 +24,8 @@ namespace OptionA.Blazor.Components
                 .AddOptionACarousel(options.CarouselConfiguration)
                 .AddOptionAResponsive(options.ResponsiveConfiguration)
                 .AddOptionAGallery(options.GalleryConfiguration)
-                .AddOptionAModal(options.ModalConfiguration);
+                .AddOptionAModal(options.ModalConfiguration)
+                .AddOptionASplitter(options.SplitterConfiguration);
         }
 
         /// <summary>
@@ -45,7 +46,8 @@ namespace OptionA.Blazor.Components
                 .AddOptionABootstrapCarousel(options.CarouselConfiguration)
                 .AddOptionABootstrapResponsive(options.ResponsiveConfiguration)
                 .AddOptionABootstrapGallery(options.GalleryConfiguration)
-                .AddOptionABootstrapModal(options.ModalConfiguration);
+                .AddOptionABootstrapModal(options.ModalConfiguration)
+                .AddOptionASplitter(options.SplitterConfiguration);
         }
 
 

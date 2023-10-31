@@ -17,31 +17,34 @@
         }
 
         /// <inheritdoc/>
-        public string GetDividerClass() => _options.DefaultMenuDividerClass ?? string.Empty;
+        public string DividerClass => _options.DefaultMenuDividerClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetGroupClass() => _options.DefaultMenuGroupClass ?? string.Empty;
+        public string GroupClass => _options.DefaultMenuGroupClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetLinkClass() => _options.DefaultMenuLinkClass ?? string.Empty;
+        public string LinkClass => _options.DefaultMenuLinkClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuClass() => _options.DefaultMenuClass ?? string.Empty;
+        public string MenuClass => _options.DefaultMenuClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuItemClass() => _options.DefaultMenuItemClass ?? string.Empty;
+        public string MenuItemClass => _options.DefaultMenuItemClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetActiveClass() => _options.ActiveClass ?? string.Empty;
+        public string ActiveClass => _options.ActiveClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public string GetMenuContainerClass() => _options.DefaultMenuContainerClass ?? string.Empty;
+        public string MenuContainerClass => _options.DefaultMenuContainerClass ?? string.Empty;
+
+        /// <inheritdoc/> 
+        public string DropdownClass => _options.DefaultDropdownClass ?? string.Empty;
 
         /// <inheritdoc/>
-        public bool OpenGroupOnMouseOver() => _options.OpenGroupOnMouseOver ?? false;
+        public bool OpenGroupOnMouseOver => _options.OpenGroupOnMouseOver ?? false;
 
         /// <inheritdoc/>
-        public int GroupCloseTime() => _options.GroupCloseTime ?? 0;
+        public int GroupCloseTime => _options.GroupCloseTime ?? 0;
 
 
     }

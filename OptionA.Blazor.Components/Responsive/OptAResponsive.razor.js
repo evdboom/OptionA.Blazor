@@ -1,54 +1,25 @@
-﻿let handlers = [];
-
-export const registerHandler = (dotNetHelper, handlerName) => {
-    if (handlers.length === 0) {
-        window.addEventListener("resize", handleResize);
-    }
-    const id = generateId(6);
-    handlers.push({ helper: dotNetHelper, name: handlerName, id: id });
-    return id;
-}
-
-export const unRegisterHandler = (id) => {
-    handlers = handlers.filter(handler => handler.id !== id);
-
-    if (handlers.length === 0) {
-        window.removeEventListener("resize", handleResize);
-    }
+﻿export const registerHandler = (dotNetHelper, handlerName) => {
+    const controller = new AbortController();
+    window.addEventListener(
+        "resize",
+        async () => {
+            const result = {
+                width: window.innerWidth,
+                height: window.innerHeight,
+            };
+            await dotNetHelper.invokeMethodAsync(handlerName, result);
+        },
+        {
+            signal: controller.signal
+        });
+    return controller;
 }
 
 export const getDimension = () => {
-    var result = {
+    const result = {
         width: window.innerWidth,
         height: window.innerHeight
     }
 
     return result;
-}
-
-const generateId = function makeid(length) {
-    let result = '';
-    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    const charactersLength = characters.length;
-    let counter = 0;
-    while (counter < length) {
-        result += characters.charAt(Math.random() * charactersLength);
-        counter++;
-    }
-    return result;
-}
-
-const handleResize = async () => {
-    if (handlers.length === 0) {
-        return;
-    }
-
-    var result = {
-        width: window.innerWidth,
-        height: window.innerHeight,
-    }
-
-    for await (const handler of handlers) {
-        await handler.helper.invokeMethodAsync(handler.name, result);
-    }
 }

@@ -11,7 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services
-    .AddOptionABootstrapComponents(configuration: options =>
+    .AddOptionABootstrapComponents(darkMode: true, configuration: options =>
     {
         options.CarouselConfiguration = (carousel) =>
         {
@@ -21,6 +21,9 @@ builder.Services
         {
             menu.OpenGroupOnMouseOver = true;
             menu.GroupCloseTime = 250;
+            menu.DefaultMenuContainerClass += " opta-bg ps-2 sticky-top";
+            menu.DefaultDropdownClass = "opta-bg opta-dropdown";
+            menu.DefaultMenuItemClass += " opta-menu-item";
         };
     });
 builder.Services
@@ -44,6 +47,10 @@ builder.Services
             [ContentType.Image] = IconButton("bi bi-image"),
             [ContentType.Frame] = IconButton("bi bi-window")
         };
+        if (config.PostBuilderOptions is not null && config.PostBuilderOptions.TryGetValue(BuilderType.ComponentBar, out var componentBar))
+        {
+            componentBar.Class += " top-60";
+        }
     });
 await builder.Build().RunAsync();
 

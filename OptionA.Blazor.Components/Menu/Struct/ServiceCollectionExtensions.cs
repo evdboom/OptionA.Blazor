@@ -38,7 +38,7 @@ namespace OptionA.Blazor.Components
             var bootstrapConfig = (MenuOptions options) =>
             {
                 options.DefaultMenuClass = "navbar-nav";
-                options.DefaultMenuItemClass = "nav-item me-2";
+                options.DefaultMenuItemClass = "nav-item";
                 options.DefaultMenuLinkClass = "nav-link";
                 options.DefaultMenuGroupClass = "nav-link dropdown-toggle";
                 options.DefaultMenuDividerClass = "dropdown-divider";

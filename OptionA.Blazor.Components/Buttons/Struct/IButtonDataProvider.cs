@@ -6,6 +6,14 @@
     public interface IButtonDataProvider
     {
         /// <summary>
+        /// Class to add to button bar
+        /// </summary>
+        public string? DefaultButtonBarClass { get; }
+        /// <summary>
+        /// Class to add to group of buttons in button bar
+        /// </summary>
+        public string? DefaultButtonGroupClass { get; }
+        /// <summary>
         /// Get the button classes for the given <see cref="ActionType"/>
         /// </summary>
         /// <param name="actionType"></param>

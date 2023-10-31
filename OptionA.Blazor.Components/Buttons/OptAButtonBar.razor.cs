@@ -13,20 +13,10 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public string? Id { get; set; }
         /// <summary>
-        /// Adds a header to the bar with the given name
-        /// </summary>
-        [Parameter]
-        public string? Name { get; set; }
-        /// <summary>
         /// Orientation of the button bar
         /// </summary>
         [Parameter]
         public Orientation Orientation { get; set; }
-        /// <summary>
-        /// Location of the bar in the parent container
-        /// </summary>
-        [Parameter]
-        public Location Location { get; set; }
         /// <summary>
         /// Buttons on the left or top (depending on <see cref="Orientation"/>)
         /// </summary>
@@ -42,21 +32,19 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public RenderFragment? EndButtons { get; set; }
-        /// <summary>
-        /// True if the bar should be sticky to its position
-        /// </summary>
-        [Parameter]
-        public bool Sticky { get; set; }
+        [Inject]
+        private IButtonDataProvider DataProvider { get; set; } = null!;
         
         private Dictionary<string, object?> GetBarAttributes()
         {
             var result = GetAttributes();
             result["opta-button-bar"] = true;
-            result["orientation"] = Orientation == Orientation.Horizontal
-                    ? "horizontal"
-                    : "vertical";            
-
-            if (TryGetClasses(string.Empty, out var classes))
+            if (Orientation == Orientation.Vertical)
+            {
+                result["vertical"] = true;
+            }
+            
+            if (TryGetClasses(DataProvider.DefaultButtonBarClass, out var classes))
             {
                 result["class"] = classes;
             }
@@ -74,11 +62,13 @@ namespace OptionA.Blazor.Components
             var result = new Dictionary<string, object?>
             {
                 ["opta-button-group"] = true,
-                ["orientation"] = Orientation == Orientation.Horizontal
-                    ? "horizontal"
-                    : "vertical",
                 ["button-alignment"] = alignment
             };
+
+            if (!string.IsNullOrEmpty(DataProvider.DefaultButtonGroupClass))
+            {
+                result["class"] = DataProvider.DefaultButtonGroupClass;
+            }
 
             return result;
         }

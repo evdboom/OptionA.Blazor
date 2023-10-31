@@ -6,13 +6,13 @@
     public interface IResponsiveService
     {
         /// <summary>
-        /// Event that is invoked every time a dimension threshold is passed (e.g. moving from medium to large)
-        /// </summary>
-        event EventHandler<NamedDimension>? OnWindowSizeChanged;
-        /// <summary>
         /// Event that is invoked every time a dimension is changed
         /// </summary>
-        event EventHandler<string>? OnDimensionChanged;
+        event EventHandler<NamedDimension>? WindowSizeChanged;
+        /// <summary>
+        /// Event that is invoked every time a dimension threshold is passed (e.g. moving from medium to large)
+        /// </summary>
+        event EventHandler<string>? DimensionChanged;
         /// <summary>
         /// Returns the current windowsize
         /// </summary>

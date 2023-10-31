@@ -7,7 +7,7 @@ namespace OptionA.Blazor.Components
     /// <summary>
     /// Group of menu items (dropdown)
     /// </summary>
-    public partial class OptAMenuGroup
+    public partial class OptAMenuGroup : IDisposable
     {
         private const string GetScrollHeigth = "getScrollHeight";
 
@@ -18,6 +18,7 @@ namespace OptionA.Blazor.Components
         private int _scrollHeight;
         private bool _openFromMouse;
 
+        private Timer? _timer;
         private ElementReference _dropDown;
         private Lazy<Task<IJSObjectReference>>? _moduleTask;
 
@@ -31,7 +32,7 @@ namespace OptionA.Blazor.Components
         /// Menu items to display in this group
         /// </summary>
         [Parameter]
-        public RenderFragment? Items { get; set; }
+        public RenderFragment? ChildContent { get; set; }
         /// <summary>
         /// Name of the group
         /// </summary>
@@ -52,6 +53,8 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [CascadingParameter(Name = "MenuOrientation")]
         public Orientation MenuOrientation { get; set; }
+
+        private event EventHandler? _childClicked;
 
         /// <summary>
         /// Check for active
@@ -89,10 +92,17 @@ namespace OptionA.Blazor.Components
         /// </summary>
         protected override void OnInitialized()
         {
+            _timer = new(Elapsed, null, Timeout.Infinite, Timeout.Infinite);
+            _childClicked += OnChildClicked;
             NavigationManager.LocationChanged += NavigationManager_LocationChanged;
             _moduleTask = new(() => JsRuntime.InvokeAsync<IJSObjectReference>(
                 "import",
                 "./_content/OptionA.Blazor.Components/Menu/OptAMenuGroup.razor.js").AsTask());
+        }
+
+        private void OnChildClicked(object? sender, EventArgs e)
+        {
+            _openFromMouse = false;
         }
 
         private void NavigationManager_LocationChanged(object? sender, LocationChangedEventArgs e)
@@ -107,7 +117,7 @@ namespace OptionA.Blazor.Components
 
         private void MouseEnter()
         {
-            if (DataProvider.OpenGroupOnMouseOver())
+            if (DataProvider.OpenGroupOnMouseOver)
             {
                 _openFromMouse = true;
                 _open = true;
@@ -117,12 +127,12 @@ namespace OptionA.Blazor.Components
 
         private void MouseLeave()
         {
-            if (DataProvider.OpenGroupOnMouseOver())
+            if (DataProvider.OpenGroupOnMouseOver)
             {
-                if (DataProvider.GroupCloseTime() > 0)
+                if (DataProvider.GroupCloseTime > 0)
                 {
                     _closing = true;
-                    var timer = new Timer(Elapsed, null, DataProvider.GroupCloseTime(), Timeout.Infinite);
+                    _timer?.Change(DataProvider.GroupCloseTime, Timeout.Infinite);
                 }
 
                 _openFromMouse = false;
@@ -139,10 +149,10 @@ namespace OptionA.Blazor.Components
 
         private void Toggle()
         {
-            if (_open && DataProvider.GroupCloseTime() > 0)
+            if (_open && DataProvider.GroupCloseTime > 0)
             {
                 _closing = true;
-                var timer = new Timer(Elapsed, null, DataProvider.GroupCloseTime(), Timeout.Infinite);
+                _timer?.Change(DataProvider.GroupCloseTime, Timeout.Infinite);
             }
 
             _open = _openFromMouse || !_open;
@@ -154,7 +164,7 @@ namespace OptionA.Blazor.Components
             var result = GetAttributes();
             result["opta-menu-group"] = true;
             
-            if (TryGetClasses(DataProvider.GetMenuItemClass(), out var classes))
+            if (TryGetClasses(DataProvider.MenuItemClass, out var classes))
             {
                 result["class"] = classes;
             }
@@ -185,15 +195,13 @@ namespace OptionA.Blazor.Components
         {
             var result = new Dictionary<string, object?>();
 
-            var classes = DataProvider
-                .GetGroupClass()
+            var classes = DataProvider.GroupClass
                 .Split(' ')
                 .ToList();
 
             if (_isActive)
             {
-                classes.AddRange(DataProvider
-                    .GetActiveClass()
+                classes.AddRange(DataProvider.ActiveClass
                     .Split(' '));
             }
 
@@ -222,6 +230,11 @@ namespace OptionA.Blazor.Components
                 result["vertical"] = true;
             }
 
+            if (!string.IsNullOrEmpty(DataProvider.DropdownClass))
+            {
+                result["class"] = DataProvider.DropdownClass;
+            }
+
             return result;
         }
 
@@ -233,6 +246,23 @@ namespace OptionA.Blazor.Components
             };            
 
             return result;
+        }
+
+        private bool _disposed;
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(!_disposed);
+            _disposed = true;
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing) 
+            {
+                _timer?.Dispose();
+            }
         }
     }
 }

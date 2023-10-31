@@ -1,4 +1,4 @@
-﻿[splitter-container] {
+﻿[button-container] {
     --container-size: 600px;
     width: var(--container-size);
     height: var(--container-size);

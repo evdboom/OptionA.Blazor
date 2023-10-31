@@ -5,9 +5,9 @@
     <menu @attributes="@GetMenuAttributes()">
         <CascadingValue Name="MenuOrientation" Value="@Orientation">
             <CascadingValue Name="OnItemSelected" Value="@OnItemSelected">
-            @if (Items is not null)
+            @if (ChildContent is not null)
             {
-                @Items
+                    @ChildContent
             }
             </CascadingValue>
         </CascadingValue>

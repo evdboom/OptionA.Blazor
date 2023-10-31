@@ -1,5 +1,5 @@
-﻿@page "/modal"
-
+﻿@page "/components/modal"
+<PageTitle>Modal</PageTitle>
 <button @onclick="ChangeDraggable">
     @if (!_draggable)
     {
@@ -23,7 +23,6 @@
 
 <OptAModal @ref="_modal"
            Draggable="_draggable"
-           ModalId="my-modal"
            Size="_size"
            DragMode="_dragMode">
     <Header>
