@@ -58,6 +58,9 @@ To display a post, use the `<OptaPostBuilder>` component. You can hook an event 
 ```
 
 ## Latest release notes
+### 7.2.1 Enum display
+Added support for the enum select to customize display value and titles for options and ordering of items
+
 ### 7.2.0 Initial
 #### Overall
 Initial release of this package with all required components

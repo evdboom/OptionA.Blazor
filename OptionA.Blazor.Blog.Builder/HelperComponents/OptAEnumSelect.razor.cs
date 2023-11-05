@@ -32,6 +32,16 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// </summary>
         [Parameter]
         public Dictionary<TEnum, string>? TitleMappings { get; set; }
+        /// <summary>
+        /// Set to change the order of the items in the list
+        /// </summary>
+        [Parameter]
+        public EnumOrder OrderMode { get; set; }
+        /// <summary>
+        /// True to order descending
+        /// </summary>
+        [Parameter]
+        public bool OrderDescending { get; set; }
 
         private TEnum InternalValue
         {
@@ -50,6 +60,29 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         }
 
         private TEnum[]? _values;
+        private IEnumerable<TEnum> OrderedItems
+        {
+            get
+            {
+                if (_values is null)
+                {
+                    return Enumerable.Empty<TEnum>();
+                }
+
+                return OrderMode switch
+                {
+                    EnumOrder.Name => OrderDescending
+                        ? _values.OrderByDescending(value => $"{value}")
+                        : _values.OrderBy(value => $"{value}"),
+                    EnumOrder.DisplayValue => OrderDescending
+                        ? _values.OrderByDescending(GetDisplayName)
+                        : _values.OrderBy(GetDisplayName),
+                    _ => OrderDescending
+                        ? _values.OrderDescending()
+                        : _values
+                };
+            }
+        }
 
         /// <inheritdoc/>
         protected override void OnInitialized()

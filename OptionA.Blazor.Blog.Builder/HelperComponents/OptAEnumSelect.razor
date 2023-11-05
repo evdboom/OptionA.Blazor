@@ -4,7 +4,7 @@
 @if (_values is not null)
 {
     <InputSelect @bind-Value="InternalValue" AdditionalAttributes="AdditionalAttributes">
-        @foreach (var value in _values)
+        @foreach (var value in OrderedItems)
         {
             <option @attributes="@GetOptionAttributes(value)">@GetDisplayName(value)</option>
         }
