@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog.Builder.HelperComponents
+namespace OptionA.Blazor.Components.Direct.Input.Internal
 {
     /// <summary>
     /// Implementation of <see cref="Microsoft.AspNetCore.Components.Forms.InputTextArea"/> with bind to oninput
@@ -12,18 +12,12 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// </summary>
         [Parameter]
         public bool AutoGrow { get; set; }
-        [Inject]
-        private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
         private Dictionary<string, object> Attributes
         {
             get
             {
                 var result = AdditionalAttributes?.ToDictionary(d => d.Key, d => d.Value) ?? new();
-                if (!string.IsNullOrEmpty(CssClass))
-                {
-                    result["class"] = CssClass;
-                }
                 return result;
             }
         }
@@ -35,7 +29,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
                 ["auto-grow"] = true
             };
 
-            return DataProvider.GetAttributes(BuilderType.TextAreaAutoGrow, result);            
+            return result;
         }
     }
 }

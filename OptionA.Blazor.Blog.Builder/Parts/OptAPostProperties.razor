@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @using OptionA.Blazor.Blog.Builder.HelperComponents
+@using OptionA.Blazor.Components
 @if (Post is not null)
 {
     <OptABlogComponent Name="**Post**"
@@ -7,7 +8,8 @@
         <label @attributes="@GetLabelAttributes(TitleId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Title")" />
         </label>
-        <DirectInputText @bind-Value="Post.Title" AdditionalAttributes="@GetTitleAttributes()"  />
+        <OptAInputText @bind-Value="Post.Title" 
+                       Attributes="@GetTitleAttributes()"  />
         <label @attributes="@GetLabelAttributes(DateId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Date")" />
         </label>
@@ -15,7 +17,9 @@
         <label @attributes="@GetLabelAttributes(SubtitleId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Subtitle")" />
         </label>
-        <DirectInputTextArea @bind-Value="Post.Subtitle" AdditionalAttributes="GetSubtitleAttributes()" AutoGrow="true" />
+        <OptAInputTextArea @bind-Value="Post.Subtitle" 
+                           Attributes="GetSubtitleAttributes()" 
+                           AutoGrow="true" />
         <OptAListBuilder Items="Post.Tags"
                          Label="Tags"
                          ItemPlaceholder="Tag..."
