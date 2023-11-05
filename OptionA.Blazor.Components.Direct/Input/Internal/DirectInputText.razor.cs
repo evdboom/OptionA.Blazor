@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Blog.Builder.HelperComponents
+﻿namespace OptionA.Blazor.Components.Direct.Input.Internal
 {
     /// <summary>
     /// Implementation of <see cref="Microsoft.AspNetCore.Components.Forms.InputText"/> with bind to oninput
@@ -10,10 +10,7 @@
             get
             {
                 var result = AdditionalAttributes?.ToDictionary(d => d.Key, d => d.Value) ?? new();
-                if (!string.IsNullOrEmpty(CssClass))
-                {
-                    result["class"] = CssClass;
-                }
+                result["type"] = "text";
                 return result;
             }
         }

@@ -1,4 +1,4 @@
-﻿namespace OptionA.Blazor.Blog.Builder
+﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
     /// Way to order the enums in the EnumSelect component

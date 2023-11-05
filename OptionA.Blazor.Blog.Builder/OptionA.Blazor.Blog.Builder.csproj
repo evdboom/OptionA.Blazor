@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
 	  <TargetFramework>net7.0</TargetFramework>
@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>7.2.1</Version>
+	  <Version>7.3.0</Version>
 	  <PackageReleaseNotes>
-		  7.2.1 Add support for titles and display value in enum select
+		  7.3.0 Moved input components to new Components.Direct packages and use that
 	  </PackageReleaseNotes>
   </PropertyGroup>
 
@@ -31,13 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-    <Folder Include="wwwroot\" />
-	<None Include="readme.md" Pack="true" PackagePath="\" />
+		<None Include="readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OptionA.Blazor.Blog\OptionA.Blazor.Blog.csproj" />
+    <ProjectReference Include="..\OptionA.Blazor.Components.Direct\OptionA.Blazor.Components.Direct.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog.Builder.HelperComponents
-{
+namespace OptionA.Blazor.Components
+{ 
     /// <summary>
     /// Component to select an enum
     /// </summary>
@@ -17,11 +17,6 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// </summary>
         [Parameter]
         public EventCallback<TEnum> ValueChanged { get; set; }
-        /// <summary>
-        /// Additional attributes to add to the class
-        /// </summary>
-        [Parameter]
-        public Dictionary<string, object?>? AdditionalAttributes { get; set; }
         /// <summary>
         /// Optional name mappings for display value
         /// </summary>
@@ -89,6 +84,17 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         {
             base.OnInitialized();
             _values = Enum.GetValues<TEnum>();
+        }
+
+        private Dictionary<string, object?> GetAllAttributes()
+        {
+            var result = GetAttributes();
+            result["opta-enum-select"] = true;
+            if (TryGetClasses(null, out var classes))
+            {
+                result["class"] = classes;
+            }
+            return result;
         }
 
         private string? GetDisplayName(TEnum value) 

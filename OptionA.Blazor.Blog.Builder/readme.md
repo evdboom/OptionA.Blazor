@@ -58,8 +58,8 @@ To display a post, use the `<OptaPostBuilder>` component. You can hook an event 
 ```
 
 ## Latest release notes
-### 7.2.1 Enum display
-Added support for the enum select to customize display value and titles for options and ordering of items
+### 7.3.0 Remove input
+Removed the DirectInput components from this package and moved them to the new Components.Direct package and use it from there.
 
 ### 7.2.0 Initial
 #### Overall
@@ -82,20 +82,6 @@ Starting point for building posts. A block for the properties and buttons to add
 
 ### Helper components
 These components are used in the blogbuilder, but could be used seperatly
-
-#### Direct input
-```
-<DirectInputInteger>
-<DirectInputText>
-<DirectInputTextArea>
-```
-These three components inherit from the default microsoft `Microsoft.AspNetCore.Components.Forms` input classes. But binds the change event to `oninput` instead of `onchange` (when it looses focus).
-
-#### Enum select
-```
-<OptAEnumSelect>
-```
-Implementation of the microsoft `Microsoft.AspNetCore.Components.Forms.InputSelect`, but passed with a generic Enum, gives a select with all the enum values.
 
 #### List builder
 ```

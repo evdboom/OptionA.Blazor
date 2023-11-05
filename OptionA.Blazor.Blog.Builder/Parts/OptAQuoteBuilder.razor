@@ -1,4 +1,5 @@
 ﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
+@using OptionA.Blazor.Components
 @if (Content is not null)
 {
     <OptABlogComponent Name="**Quote**"
@@ -13,15 +14,19 @@
             <label @attributes="@GetLabelAttributes(QuoteId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Quote")" />
             </label>
-            <DirectInputTextArea @bind-Value="Content.Quote" AdditionalAttributes="@GetAttributes(QuoteId, "Quote...")" AutoGrow="true" />
+            <OptAInputTextArea @bind-Value="Content.Quote" 
+                               Attributes="@GetAttributes(QuoteId, "Quote...")"
+                               AutoGrow="true" />
             <label @attributes="@GetLabelAttributes(SourceId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
             </label>
-            <DirectInputText @bind-Value="Content.Source" AdditionalAttributes="@GetAttributes(SourceId, "Source...")" />
+            <OptAInputText @bind-Value="Content.Source"
+                           Attributes="@GetAttributes(SourceId, "Source...")" />
             <label @attributes="@GetLabelAttributes(SourceUrlId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source url")" />
             </label>
-            <DirectInputText @bind-Value="Content.SourceUrl" AdditionalAttributes="@GetAttributes(SourceUrlId, "Source url...")" />
+            <OptAInputText @bind-Value="Content.SourceUrl" 
+                           Attributes="@GetAttributes(SourceUrlId, "Source url...")" />
         </ChildContent>
         <AdditionalProperties>
             <OptAListBuilder ContentChanged="ContentChanged"
