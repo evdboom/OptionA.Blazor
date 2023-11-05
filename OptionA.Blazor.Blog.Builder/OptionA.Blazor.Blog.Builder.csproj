@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>7.2.0</Version>
+	  <Version>7.2.1</Version>
 	  <PackageReleaseNotes>
-		  7.2.0 Initial release of all components, following version of OptionA.Blazor.Blog for clarity		  
+		  7.2.1 Add support for titles and display value in enum select
 	  </PackageReleaseNotes>
   </PropertyGroup>
 

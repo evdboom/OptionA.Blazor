@@ -6,7 +6,7 @@
     <InputSelect @bind-Value="InternalValue" AdditionalAttributes="AdditionalAttributes">
         @foreach (var value in _values)
         {
-            <option value="@value">@value</option>
+            <option @attributes="@GetOptionAttributes(value)">@GetDisplayName(value)</option>
         }
     </InputSelect>
 }

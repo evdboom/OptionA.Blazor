@@ -21,7 +21,17 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// Additional attributes to add to the class
         /// </summary>
         [Parameter]
-        public Dictionary<string, object?>? AdditionalAttributes { get; set; }   
+        public Dictionary<string, object?>? AdditionalAttributes { get; set; }
+        /// <summary>
+        /// Optional name mappings for display value
+        /// </summary>
+        [Parameter]
+        public Dictionary<TEnum, string>? NameMappings { get; set; }
+        /// <summary>
+        /// Optional title mappings for title attribute of options
+        /// </summary>
+        [Parameter]
+        public Dictionary<TEnum, string>? TitleMappings { get; set; }
 
         private TEnum InternalValue
         {
@@ -46,6 +56,31 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         {
             base.OnInitialized();
             _values = Enum.GetValues<TEnum>();
+        }
+
+        private string? GetDisplayName(TEnum value) 
+        {
+            if (NameMappings is not null && NameMappings.TryGetValue(value, out var name))
+            {
+                return name;
+            }
+
+            return $"{value}";
+        }
+
+        private Dictionary<string, object?> GetOptionAttributes(TEnum value) 
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["value"] = value
+            };
+
+            if (TitleMappings is not null && TitleMappings.TryGetValue(value, out var title))
+            {
+                result["title"] = title;
+            }
+
+            return result;
         }
     }
 }
