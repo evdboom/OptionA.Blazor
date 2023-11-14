@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>7.3.0</Version>
+	  <Version>7.3.1</Version>
 	  <PackageReleaseNotes>
-		  7.3.0 Moved input components to new Components.Direct packages and use that
+		  7.3.1 Removed title from builder
 	  </PackageReleaseNotes>
   </PropertyGroup>
 
