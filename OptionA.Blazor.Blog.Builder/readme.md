@@ -58,16 +58,13 @@ To display a post, use the `<OptaPostBuilder>` component. You can hook an event 
 ```
 
 ## Latest release notes
-### 7.3.0 Remove input
-Removed the DirectInput components from this package and moved them to the new Components.Direct package and use it from there.
-
-### 7.2.0 Initial
+### 8.0.0
 #### Overall
-Initial release of this package with all required components
+Update to .NET 8
 
 #### New features
-- Added Builder and components for blog parts
-- Store incomplete posts in local storage upon unload or navigate await, and reload if an incomplete post is found 
+- Update package to .NET 8
+
 #### Solved Bugs
 - None
 

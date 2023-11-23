@@ -43,14 +43,12 @@ To display a post, use the `<OptAPost>` component and provide the `Post` paramet
 ```
 
 ## Latest release notes
-### 7.2.0 Rewrite
+### 8.0.0
 #### Overall
-Previous version had a 'create in fluent code' way of creating blogposts. However this would not scale nicely as posts could not be stored and every post would have to always be compiled. This was changed to incorperate storing and reading from Json, you can still create posts in code, but currently not in a fluent way.
+Update to .Net 8
 
 #### New features
-- Added (some) markdown support for inside paragraphs, this will be complemented later on. See the Paragraph part for supported markdown and custom marks
-- Rewrote to support to and from Json
-- Changed and updated all components
+- Update package to .NET 8
 #### Solved Bugs
 - None
 

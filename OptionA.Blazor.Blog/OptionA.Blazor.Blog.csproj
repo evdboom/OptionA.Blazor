@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -15,11 +15,9 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>7.2.0</Version>
+	<Version>8.0.0</Version>
 	<PackageReleaseNotes>
-		7.0.0 Initial release of all components
-		7.1.0 Add serialization support to support blogbuilder and external storing
-		7.2.0 Rewrite for use with visual builder instead of code (to better store in json)
+		Update to .NET 8
 	</PackageReleaseNotes>
   </PropertyGroup>
 
@@ -29,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
