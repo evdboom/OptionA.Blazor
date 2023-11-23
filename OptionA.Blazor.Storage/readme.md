@@ -13,12 +13,13 @@ To add the services you can use the extension method `AddStorageService` or `Add
 Inject either the `IStorageService` or `IDatabaseService` in your component and service.
 
 ## Latest release notes
-### 7.0.4 Add readme
+### 8.0.0
 #### Overall
-Added this readme file
+Update to .NET 8
 
 #### New features
-- readme added
+- Update package to .NET 8
+
 #### Solved Bugs
 - None
 

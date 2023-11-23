@@ -6,7 +6,7 @@
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>readme.md</PackageReadmeFile>
-	<Version>7.0.3</Version>
+	<Version>8.0.0</Version>
 	<LangVersion>10</LangVersion>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
@@ -14,18 +14,17 @@
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Description>Contracts and abstraction to work together with the Blazor.Storage package, without the implementations</Description>
 	<PackageReleaseNotes>
-		7.0.2 changed namespaces
-		7.0.3 Added readme
+		Version update to follow storage
 	</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-    <PackageReference Include="System.Text.Json" Version="7.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.0" />
   </ItemGroup>
 
 	<ItemGroup>		
-		<None Include="readme.md" Pack="true" PackagePath="\"/>
+		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 </Project>

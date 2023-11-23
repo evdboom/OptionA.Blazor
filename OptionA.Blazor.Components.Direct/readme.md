@@ -7,12 +7,13 @@ For full documentation, releasenotes and examples, go to [option-a.tech](https:/
 To start using the OptionA.Blazor.Components.Direct, use the components provided by the package in your application. For styling all components have an "opta-[component-name]" attribute, or you can use the parameters on a percomponent basis (see below)
 
 ## Latest release notes
-### 7.4.0 Initial
+### 8.0.0
 #### Overall
-Primary release
+Update to .NET 8
 
 #### New features
-- Added the direct input, and enum select components from the OptionA.Blazor.Blogbuilder package to be available everywhere, changed them to the default OptAComponent base class
+- Update package to .NET 8
+
 #### Solved Bugs
 - none
 
