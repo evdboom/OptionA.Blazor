@@ -1,7 +1,7 @@
 ﻿namespace OptionA.Blazor.Components
 {
     /// <summary>
-    /// Interface for adding base cvlasses to menu components
+    /// Interface for adding base classes to menu components
     /// </summary>
     public interface IMenuDataProvider
     {

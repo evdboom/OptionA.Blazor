@@ -1,0 +1,49 @@
+﻿[opta-message-box] {
+    --opta-messagebox-zindex: 1000;
+    position: fixed;
+    z-index: var(--opta-messagebox-zindex);
+}
+
+[opta-message-box][location="top"] {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+[opta-message-box][location="bottom"] {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+[opta-message-box][location="left"] {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+[opta-message-box][location="right"] {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+[opta-message-box][location="topleft"] {
+    top: 0;
+    left: 0;
+}
+
+[opta-message-box][location="topright"] {
+    top: 0;
+    right: 0;
+}
+
+[opta-message-box][location="bottomleft"] {
+    bottom: 0;
+    left: 0;
+}
+
+[opta-message-box][location="bottomright"] {
+    bottom: 0;
+    right: 0;
+}

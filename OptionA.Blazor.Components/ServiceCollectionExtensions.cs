@@ -25,7 +25,8 @@ namespace OptionA.Blazor.Components
                 .AddOptionAResponsive(options.ResponsiveConfiguration)
                 .AddOptionAGallery(options.GalleryConfiguration)
                 .AddOptionAModal(options.ModalConfiguration)
-                .AddOptionASplitter(options.SplitterConfiguration);
+                .AddOptionASplitter(options.SplitterConfiguration)
+                .AddOptionAMessageBox(options.MessageBoxConfiguration);
         }
 
         /// <summary>
@@ -47,7 +48,8 @@ namespace OptionA.Blazor.Components
                 .AddOptionABootstrapResponsive(options.ResponsiveConfiguration)
                 .AddOptionABootstrapGallery(options.GalleryConfiguration)
                 .AddOptionABootstrapModal(options.ModalConfiguration)
-                .AddOptionASplitter(options.SplitterConfiguration);
+                .AddOptionASplitter(options.SplitterConfiguration)
+                .AddOptionABootstrapMessageBox(options.MessageBoxConfiguration);
         }
 
 

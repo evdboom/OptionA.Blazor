@@ -11,12 +11,12 @@ To add the components you can use the extension method of each component, for ex
 Alternatively to add all the components in the package use the `AddOptionAComponents` or `AddOptionABootstrapComponents` extension methods.
 
 ## Latest release notes
-### 8.0.0
+### 8.1.0
 #### Overall
-Update to .NET 8
+Messagebox
 
 #### New features
-- Update package to .NET 8
+- Added Messagebox component for displaying notifications (toasts)
 
 #### Solved Bugs
 - None
@@ -127,3 +127,15 @@ Usage:
     </Second>
 </OptASplitter>
 ```
+
+### Message box
+```
+<OptAMessageBox>
+```
+A Message box component, place on the top level of the site to display messages (toasts).
+
+Usage:
+```
+<OptAMessageBox />
+```
+Inject message sending components with the `IMessageService` service and call the `AddMessage` method to add messages with supplied `MessageItem` classes.
