@@ -40,7 +40,7 @@ namespace OptionA.Blazor.Components
 
             resultClass = string.Join(' ', classList);
 
-            return classList.Any();
+            return classList.Count != 0;
         }
 
         /// <summary>

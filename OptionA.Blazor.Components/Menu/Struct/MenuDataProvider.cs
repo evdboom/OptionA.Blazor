@@ -9,7 +9,6 @@
         /// Default constructor
         /// </summary>
         /// <param name="configuration"></param>
-
         public MenuDataProvider(Action<MenuOptions>? configuration = null)
         {
             _options = new MenuOptions();

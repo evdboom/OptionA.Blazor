@@ -3,23 +3,28 @@
     /// <summary>
     /// Location to place
     /// </summary>
+    [Flags]
     public enum Location
     {
         /// <summary>
+        /// Default locations
+        /// </summary>
+        Unset = 0,
+        /// <summary>
         /// Place at the top
         /// </summary>
-        Top,
+        Top = 1,
         /// <summary>
         /// Place on the right
         /// </summary>
-        Right,
+        Right = 2,
         /// <summary>
         /// Place at the bottom
         /// </summary>
-        Bottom,
+        Bottom = 4,
         /// <summary>
         /// Place on the left
         /// </summary>
-        Left
+        Left = 8
     }
 }

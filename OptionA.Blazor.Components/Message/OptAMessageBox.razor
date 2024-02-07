@@ -1,0 +1,12 @@
+﻿@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+<div @attributes="@GetContainerAttributes()">
+@foreach(var message in _openMessages)
+    {
+        <OptAMessage Message="message"
+                     MessageClosed="CloseMessage"
+                     Attributes="MessageAttributes"
+                     ShowTime="ShowTime"/>
+    }
+</div>
