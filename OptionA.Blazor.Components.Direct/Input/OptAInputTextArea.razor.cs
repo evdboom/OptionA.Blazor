@@ -42,7 +42,7 @@ namespace OptionA.Blazor.Components
         private Dictionary<string, object?> GetAllAttributes()
         {
             var result = GetAttributes();
-            result["opta-intput-textarea"] = true;
+            result["opta-input-textarea"] = true;
             if (TryGetClasses(null, out var classes))
             {
                 result["class"] = classes;

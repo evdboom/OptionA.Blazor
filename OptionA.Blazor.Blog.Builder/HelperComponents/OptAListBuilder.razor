@@ -1,7 +1,7 @@
 ﻿@if (Items is not null)
 {
-    <div>
-        <div>
+    <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemsBuilder)">
+        <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemsHeader)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.List, Label)" />
         </div>
         <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemsContainer)">
