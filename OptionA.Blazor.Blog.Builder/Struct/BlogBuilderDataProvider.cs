@@ -54,7 +54,8 @@ namespace OptionA.Blazor.Blog.Builder
         /// <inheritdoc/>
         public Dictionary<string, object?> GetAttributes(BuilderType type, Dictionary<string, object?>? defaultAttributes = null)
         {
-            var result = defaultAttributes ?? new();
+            var result = defaultAttributes ?? [];
+            result[$"opta-{type}".ToLowerInvariant()] = true;
 
             if (TryGetProperties(type, out var attributes)) 
             {
