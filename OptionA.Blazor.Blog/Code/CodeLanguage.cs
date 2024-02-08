@@ -47,7 +47,7 @@ namespace OptionA.Blazor.Blog
         /// <summary>
         /// C++
         /// </summary>
-        CPlusPluss,
+        CPlusPlus,
         /// <summary>
         /// Something else
         /// </summary>

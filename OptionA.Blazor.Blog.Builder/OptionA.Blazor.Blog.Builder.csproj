@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>7.3.3</Version>
+	  <Version>7.3.4</Version>
 	  <PackageReleaseNotes>
-      Added more identifying attribute to bog parts
+      Fixed bug in code component
     </PackageReleaseNotes>
   </PropertyGroup>
 

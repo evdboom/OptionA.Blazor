@@ -13,7 +13,7 @@
         <label @attributes="@GetLabelAttributes(CodeLanguageId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Language")" />
         </label>
-        <OptAEnumSelect TEnum="CodeLanguage" @bind-Value="InternalLanguage" AdditionalAttributes="@GetCodeLanguageAttributes()" />
+        <OptAEnumSelect TEnum="CodeLanguage" @bind-Value="InternalLanguage" Attributes="@GetCodeLanguageAttributes()" />
         <label @attributes="@GetLabelAttributes(CodeId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Code")" />
         </label>
