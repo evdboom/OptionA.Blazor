@@ -97,6 +97,14 @@ namespace OptionA.Blazor.Blog.Builder
         /// </summary>
         PropertiesModal,
         /// <summary>
+        /// Container surrounding entire list builder
+        /// </summary>
+        ListItemsBuilder,
+        /// <summary>
+        /// Header for the list builder
+        /// </summary>
+        ListItemsHeader,
+        /// <summary>
         /// List of items
         /// </summary>
         List,
