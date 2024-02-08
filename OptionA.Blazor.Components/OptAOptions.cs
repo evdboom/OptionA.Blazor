@@ -38,5 +38,9 @@ namespace OptionA.Blazor.Components
         /// Configuration for splitter components
         /// </summary>
         public Action<SplitterOptions>? SplitterConfiguration { get; set; }
+        /// <summary>
+        /// Configuration for MessageBox components
+        /// </summary>
+        public Action<MessageBoxOptions>? MessageBoxConfiguration { get; set; }
     }
 }
