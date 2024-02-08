@@ -7,14 +7,14 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Version>7.4.1</Version>
+    <Version>7.4.2</Version>
     <IsPackable>true</IsPackable>
     <Authors>Erik van der Boom</Authors>
     <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Blazor component library with various component for use inside your Blazor application, direct components do not require setup</Description>
     <PackageReleaseNotes>
-      Initial release, following main version of components package
+      fixed typo
     </PackageReleaseNotes>
   </PropertyGroup>
 
