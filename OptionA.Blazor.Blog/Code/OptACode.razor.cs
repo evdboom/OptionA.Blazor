@@ -44,7 +44,7 @@ namespace OptionA.Blazor.Blog
                 var parser = Parsers.FirstOrDefault(p => p.Language == Content.Language);
                 if (parser != null) 
                 {
-                    _content = parser.Parse(Content.Code);
+                    _content = parser.Parse(Content.Code, DataProvider.NewLine);
                 }
                 else
                 {

@@ -14,6 +14,6 @@
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        IEnumerable<IContent> Parse(string? content);
+        IEnumerable<IContent> Parse(string? content, string? newLine);
     }
 }

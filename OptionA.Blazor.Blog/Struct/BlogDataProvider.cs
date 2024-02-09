@@ -30,6 +30,8 @@
         public string? TagOverviewHref => _options.TagOverviewHref;
         /// <inheritdoc/>
         public bool DisplayLineAfterPostHeader => _options.DisplayLineAfterPostHeader ?? true;
+        /// <inheritdoc/>
+        public string? NewLine => _options.NewLine;
 
         /// <summary>
         /// Constructor

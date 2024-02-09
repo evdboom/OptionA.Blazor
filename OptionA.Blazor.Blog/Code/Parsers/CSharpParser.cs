@@ -14,13 +14,12 @@
         public CSharpParser() : base()
         {
             _partCheckers.Add((_, word, _) => IsKeyword(word));
-            _partCheckers.Add((_, word, _) => IsControlKeyword(word));
             _partCheckers.Add((previous, word, next) => IsMethodStart(previous, next));
             _partCheckers.Add(IsAttribute);
         }
 
-        private readonly List<string> _controlKeywords = new()
-        {
+        private readonly List<string> _controlKeywords =
+        [
             "break",
             "case",
             "continue",
@@ -38,9 +37,9 @@
             "finally",
             "yield",
             "while",
-        };
-        private readonly List<string> _keyWords = new()
-        {
+        ];
+        private readonly List<string> _keyWords =
+        [
             "abstract",
             "as",
             "base",
@@ -144,7 +143,7 @@
             "when",
             "where",
             "with",
-        };
+        ];
         /// <inheritdoc/>
         protected override char[] Specials => new[]
         {
@@ -168,14 +167,15 @@
         /// <inheritdoc/>
         protected override Dictionary<string, WordTypeModel> StringStarters => new()
         {
-            { "\"", new(WordType.String, "\"", 1, "\"") },
-            { "@\"", new(WordType.String, "@\"", 2, "\"")  },
-            { "$\"", new(WordType.Interpolated, "$\"", 2, "\"") },
-            { "$@\"", new(WordType.Interpolated, "$@\"", 3, "\"") },
-            { "@$\"", new(WordType.Interpolated, "@$\"", 3, "\"") },
-            { "//", new(WordType.Comment, "//", 0, Environment.NewLine) },
-            { "///", new(WordType.Comment, "///", 0, Environment.NewLine) },
-            { "/*", new(WordType.Comment, "/*", 0, "*/") },
+            ["\"\"\"\""] = new(WordType.String, "\"\"\"\"", 4, "\"\"\"\""),
+            ["\""] = new(WordType.String, "\"", 1, "\""),
+            ["@\""] = new(WordType.String, "@\"", 2, "\""),            
+            ["$\""] = new(WordType.Interpolated, "$\"", 2, "\""),
+            ["$@\""] = new(WordType.Interpolated, "$@\"", 3, "\""),
+            ["@$\""] = new(WordType.Interpolated, "@$\"", 3, "\""),
+            ["//"] = new(WordType.Comment, "//", 0, Environment.NewLine),
+            ["///"] = new(WordType.Comment, "///", 0, Environment.NewLine),
+            ["/*"] = new(WordType.Comment, "/*", 0, "*/"),
         };
 
         private static CodeType IsMethodStart(string current, string code)
@@ -203,17 +203,19 @@
         }
 
         private CodeType IsKeyword(string word)
-        {
-            return _keyWords.Contains(word)
-                ? CodeType.Keyword
-                : CodeType.Text;
-        }
-
-        private CodeType IsControlKeyword(string word)
-        {
-            return _controlKeywords.Contains(word)
-                ? CodeType.ControlKeyword
-                : CodeType.Text;
+        {            
+            if (_keyWords.Contains(word))
+            {
+                return CodeType.Keyword;
+            }
+            else if (_controlKeywords.Contains(word))
+            {
+                return CodeType.ControlKeyword;
+            }
+            else
+            {
+                return CodeType.Text;
+            }
         }
     }
 }

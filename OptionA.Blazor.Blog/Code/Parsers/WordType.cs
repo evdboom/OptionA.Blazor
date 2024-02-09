@@ -28,6 +28,10 @@
         /// <summary>
         /// Word is a marker
         /// </summary>
-        Marker
+        Marker,
+        /// <summary>
+        /// Word is a new line
+        /// </summary>
+        NewLine
     }
 }
