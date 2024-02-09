@@ -71,6 +71,7 @@ namespace OptionA.Blazor.Components.Message.Struct
 
                 if (open.TotalSeconds > 60 && !_invokePerMinute)
                 {
+                    _invokePerMinute = true;
                     _timeTimer.Change(60000, 60000);                    
                 }
                 

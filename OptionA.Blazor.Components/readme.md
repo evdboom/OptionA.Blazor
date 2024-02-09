@@ -11,7 +11,7 @@ To add the components you can use the extension method of each component, for ex
 Alternatively to add all the components in the package use the `AddOptionAComponents` or `AddOptionABootstrapComponents` extension methods.
 
 ## Latest release notes
-### 8.1.0
+### 8.1.1
 #### Overall
 Messagebox
 
@@ -19,7 +19,7 @@ Messagebox
 - Added Messagebox component for displaying notifications (toasts)
 
 #### Solved Bugs
-- None
+- More efficient message time handling
 
 ## Components
 Following are the currently supported components. For all components there is a `Parameter` AdditionalClasses to provide specific classes for that single component. RemovedClasses to remove default classes (set by the config) for that single component, and an Attributes parameter to set additional required attributes to that single component.
