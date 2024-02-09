@@ -23,13 +23,17 @@
         public string Ender { get; }
 
         /// <summary>
-        /// Returns and empty WordTypeModel
+        /// Returns an empty WordTypeModel
         /// </summary>
-        public static WordTypeModel Empty => new WordTypeModel(WordType.Other, string.Empty, 0, string.Empty);
+        public static WordTypeModel Empty => new(WordType.Other, string.Empty, 0, string.Empty);
         /// <summary>
-        /// Returns and empty Marker
+        /// Returns an Markermodel
         /// </summary>
-        public static WordTypeModel Marker => new WordTypeModel(WordType.Marker, string.Empty, 0, string.Empty);
+        public static WordTypeModel Marker => new(WordType.Marker, string.Empty, 0, string.Empty);
+        /// <summary>
+        /// Returns an New Line model
+        /// </summary>
+        public static WordTypeModel NewLine => new(WordType.NewLine, string.Empty, 0, string.Empty);
 
         /// <summary>
         /// Constructor

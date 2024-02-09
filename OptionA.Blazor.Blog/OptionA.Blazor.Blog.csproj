@@ -15,10 +15,10 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>7.2.1</Version>
+	<Version>7.3.0</Version>
 	<PackageReleaseNotes>
-		small type in c++
-	</PackageReleaseNotes>
+    Better support for newline characters, allow newline override in settings (Maui hybrid Blazor uses \n instead of Environment.NewLine)
+  </PackageReleaseNotes>
   </PropertyGroup>
 
 

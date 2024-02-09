@@ -47,6 +47,9 @@
         /// True to place a hr tag after the header part of the post
         /// </summary>
         bool DisplayLineAfterPostHeader { get; }
-
+        /// <summary>
+        /// New line to use for the blog code parser, default is <see cref="Environment.NewLine"/>
+        /// </summary>
+        string? NewLine { get; }
     }
 }

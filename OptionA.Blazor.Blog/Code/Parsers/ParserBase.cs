@@ -41,8 +41,9 @@ namespace OptionA.Blazor.Blog.Code.Parsers
         /// gets the parts of the given code
         /// </summary>
         /// <param name="code"></param>
+        /// <param name="newLine"></param> 
         /// <returns></returns>
-        protected virtual IEnumerable<(string Part, CodeType Type, MarkerType Marker)> GetParts(string code)
+        protected virtual IEnumerable<(string Part, CodeType Type, MarkerType Marker)> GetParts(string code, string newLine)
         {
             var current = string.Empty;
             var previous = string.Empty;
@@ -51,7 +52,7 @@ namespace OptionA.Blazor.Blog.Code.Parsers
             var endedInside = false;
             while (!string.IsNullOrEmpty(code))
             {
-                var word = FindNextWord(code, incompleteModel, out WordTypeModel wordType, out bool incomplete);
+                var word = FindNextWord(code, incompleteModel, newLine, out WordTypeModel wordType, out bool incomplete);
                 code = RemoveFromStart(code, word);
 
                 if (wordType.Type == WordType.Marker)
@@ -81,6 +82,10 @@ namespace OptionA.Blazor.Blog.Code.Parsers
 
                 switch (wordType.Type)
                 {
+                    case WordType.NewLine:
+                        current += word;
+                        previous = current;
+                        break;
                     case WordType.String:
                         if (!string.IsNullOrEmpty(current))
                         {
@@ -96,7 +101,7 @@ namespace OptionA.Blazor.Blog.Code.Parsers
                             yield return (current, CodeType.Text, activeMarkers);
                             current = string.Empty;
                         }
-                        foreach (var (part, type, inside) in ParseInterpolatedString(word, endedInside))
+                        foreach (var (part, type, inside) in ParseInterpolatedString(word, endedInside, newLine))
                         {
                             endedInside = inside;
                             previous = part;
@@ -151,8 +156,9 @@ namespace OptionA.Blazor.Blog.Code.Parsers
         /// </summary>
         /// <param name="word"></param>
         /// <param name="beginInside"></param>
+        /// <param name="newLine"></param>
         /// <returns></returns>
-        protected virtual IEnumerable<(string Part, CodeType Type, bool Inside)> ParseInterpolatedString(string word, bool beginInside)
+        protected virtual IEnumerable<(string Part, CodeType Type, bool Inside)> ParseInterpolatedString(string word, bool beginInside, string newLine)
         {
             var interpolated = word.Split('{', '}');
             var inside = beginInside;
@@ -173,7 +179,7 @@ namespace OptionA.Blazor.Blog.Code.Parsers
                     var insidePart = $"{start}{part}{end}";
                     beginInside = false;
 
-                    foreach (var p in GetParts(insidePart))
+                    foreach (var p in GetParts(insidePart, newLine))
                     {
                         yield return (p.Part, p.Type, last);
                     }
@@ -227,10 +233,11 @@ namespace OptionA.Blazor.Blog.Code.Parsers
         /// </summary>
         /// <param name="code"></param>
         /// <param name="incompleteModel"></param>
+        /// <param name="newLine"></param>
         /// <param name="wordType"></param>
         /// <param name="incomplete"></param>
         /// <returns></returns>
-        protected virtual string FindNextWord(string code, WordTypeModel? incompleteModel, out WordTypeModel wordType, out bool incomplete)
+        protected virtual string FindNextWord(string code, WordTypeModel? incompleteModel, string newLine, out WordTypeModel wordType, out bool incomplete)
         {
             incomplete = false;
             if (string.IsNullOrEmpty(code))
@@ -239,7 +246,13 @@ namespace OptionA.Blazor.Blog.Code.Parsers
                 return string.Empty;
             }
 
-            var marker = _markers.Keys.FirstOrDefault(m => code.StartsWith(m));
+            if (code.StartsWith(newLine))
+            {
+                wordType = WordTypeModel.NewLine;
+                return newLine;
+            }
+
+            var marker = _markers.Keys.FirstOrDefault(code.StartsWith);
             if (!string.IsNullOrEmpty(marker))
             {
                 wordType = WordTypeModel.Marker;
@@ -259,7 +272,10 @@ namespace OptionA.Blazor.Blog.Code.Parsers
             var word = string.Empty;
             if (wordType.Type != WordType.Other)
             {
-                word = FindTillValue(code, wordType.SearchFromIndex, wordType.Ender);
+                var ender = string.Equals(wordType.Ender, Environment.NewLine)
+                    ? newLine
+                    : wordType.Ender;
+                word = FindTillValue(code, wordType.SearchFromIndex, ender);
             }
             else
             {
@@ -305,9 +321,9 @@ namespace OptionA.Blazor.Blog.Code.Parsers
         }
 
         /// <inheritdoc/>
-        public IEnumerable<IContent> Parse(string? content)
+        public IEnumerable<IContent> Parse(string? content, string? newLine)
         {
-            return GetParts(content ?? string.Empty)
+            return GetParts(content ?? string.Empty, newLine ?? Environment.NewLine)
                 .Select(ToContent);
         }
 

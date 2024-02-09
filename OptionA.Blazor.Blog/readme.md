@@ -43,16 +43,13 @@ To display a post, use the `<OptAPost>` component and provide the `Post` paramet
 ```
 
 ## Latest release notes
-### 7.2.0 Rewrite
+### 7.3.0 Rewrite
 #### Overall
-Previous version had a 'create in fluent code' way of creating blogposts. However this would not scale nicely as posts could not be stored and every post would have to always be compiled. This was changed to incorperate storing and reading from Json, you can still create posts in code, but currently not in a fluent way.
 
 #### New features
-- Added (some) markdown support for inside paragraphs, this will be complemented later on. See the Paragraph part for supported markdown and custom marks
-- Rewrote to support to and from Json
-- Changed and updated all components
+- Better support for newline characters, allow newline override in settings (Maui hybrid Blazor uses \n instead of Environment.NewLine)
 #### Solved Bugs
-- None
+- Newlines werent always detected in code parsers
 
 
 ## Components
