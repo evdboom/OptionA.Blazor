@@ -15,9 +15,9 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>8.1.0</Version>
+	<Version>8.1.1</Version>
 	<PackageReleaseNotes>
-		Better support for newline characters, allow newline override in settings (Maui hybrid Blazor uses \n instead of Environment.NewLine)
+		Removed unused code, added xml comments
 	</PackageReleaseNotes>
   </PropertyGroup>
 

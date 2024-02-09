@@ -288,11 +288,7 @@
                 {
                     var c = code[counter];
                     var isSpecial = Specials.Contains(c);
-                    if (c == '\n')
-                    {
-                        found = true;
-                    }
-                    else if (space && c != ' ')
+                    if (space && c != ' ')
                     {
                         found = true;
                     }

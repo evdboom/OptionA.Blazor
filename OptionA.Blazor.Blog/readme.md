@@ -43,14 +43,14 @@ To display a post, use the `<OptAPost>` component and provide the `Post` paramet
 ```
 
 ## Latest release notes
-### 8.0.0
+### 8.1.1
 #### Overall
-Update to .Net 8
+Removed unused code and added some xml documentation
 
 #### New features
-- Update package to .NET 8
+- Allow override for default Environment.NewLine for use in the code parser
 #### Solved Bugs
-- None
+- new lines werent always parsed correctly
 
 
 ## Components
