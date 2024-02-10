@@ -7,12 +7,12 @@ For full documentation, releasenotes and examples, go to [option-a.tech](https:/
 To start using the OptionA.Blazor.Components.Direct, use the components provided by the package in your application. For styling all components have an "opta-[component-name]" attribute, or you can use the parameters on a percomponent basis (see below)
 
 ## Latest release notes
-### 7.4.0 Initial
+### 7.5.0 Initial
 #### Overall
-Primary release
+Added component
 
 #### New features
-- Added the direct input, and enum select components from the OptionA.Blazor.Blogbuilder package to be available everywhere, changed them to the default OptAComponent base class
+- Added generic Select component
 #### Solved Bugs
 - none
 
@@ -45,3 +45,10 @@ for instance, for the bootstrap form-control the following css is needed to make
 ```
 Implementation of the microsoft `Microsoft.AspNetCore.Components.Forms.InputSelect`, but passed with a generic Enum, gives a select with all the enum values.
 Also supports giving dictionaries for mapping displaynames or option titles to customize.
+
+#### Select
+```
+<OptASelect>
+```
+Implementation of the microsoft `Microsoft.AspNetCore.Components.Forms.InputSelect`, but passed with a generic type, gives a select with all the passed values.
+Also supports giving functions for mapping displaynames or option titles to customize and ordering.

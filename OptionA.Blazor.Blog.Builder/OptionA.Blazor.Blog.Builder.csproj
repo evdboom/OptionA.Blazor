@@ -15,7 +15,7 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>7.3.4</Version>
+	  <Version>7.3.5</Version>
 	  <PackageReleaseNotes>
       Fixed bug in code component
     </PackageReleaseNotes>
