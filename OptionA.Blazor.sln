@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blazor.Components.Direct", "OptionA.Blazor.Components.Direct\OptionA.Blazor.Components.Direct.csproj", "{63A977B0-C528-462E-9AFD-21D0E820A65A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptionA.Blazor.Components.UnitTests", "OptionA.Blazor.Components.UnitTests\OptionA.Blazor.Components.UnitTests.csproj", "{C850E554-2F37-4E6D-AAA4-887767B1BF1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OptionA.Blazor.Components.UnitTests", "OptionA.Blazor.Components.UnitTests\OptionA.Blazor.Components.UnitTests.csproj", "{C850E554-2F37-4E6D-AAA4-887767B1BF1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -15,7 +15,7 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>8.1.0</Version>
+	  <Version>8.1.1</Version>
 	  <PackageReleaseNotes>
       Update reference for Blob package
     </PackageReleaseNotes>

@@ -1,0 +1,68 @@
+﻿@page "/components/direct"
+@using OptionA.Blazor.Test.Struct
+
+<PageTitle>Direct Components</PageTitle>
+<div>
+    <button @onclick="() => _orderDescending = !_orderDescending">
+        @if (_orderDescending)
+        {
+            <span>Order descending</span>
+        }
+        else
+        {
+            <span>Order ascending</span>
+        }
+    </button>
+    <button @onclick="ChangeOrderMode">
+        <span>Type: @_orderMode</span>
+    </button>
+    <OptAEnumSelect TEnum="TestEnum"
+                    OrderDescending="_orderDescending"
+                    OrderMode="_orderMode"
+                    NameMappings="_nameMappings"
+                    TitleMappings="_titleMappings"
+                    @bind-Value="_selectedEnum"/>
+    <span>@_selectedEnum</span>
+</div>
+<div>
+    <OptAInputInteger @bind-Value="_selectedInt"/>
+    <span>@_selectedInt</span>
+</div>
+<div>
+    <OptAInputText @bind-Value="_selectedText"/>
+    <span>@_selectedText</span>
+</div>
+<div>
+    <button @onclick="() => _autoGrow = !_autoGrow">
+        @if (_autoGrow)
+        {
+            <span>Auto grow</span>
+        }
+        else
+        {
+            <span>No auto grow</span>
+        }
+    </button>
+    <OptAInputTextArea @bind-Value="_selectedText2"
+                       AutoGrow="_autoGrow"/>
+    <span>@_selectedText2</span>
+</div>
+<div>
+    <button @onclick="() => _useComparer = !_useComparer">
+        @if (_useComparer)
+        {
+            <span>With comparer</span>
+        }
+        else
+        {
+            <span>No comparer</span>
+        }
+    </button>
+    <OptASelect TValue="TestObject"
+                Items="_items"
+                DisplayValue="DisplayValue"
+                TitleValue="TitleValue"
+                @bind-Value="@_selectedItem"
+                OrderComparer="Comparer" />
+    <span>@_selectedItem?.Name</span>
+</div>

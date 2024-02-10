@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+@typeparam TValue
+
+@if (Items is not null)
+{
+    <InputSelect @bind-Value="InternalValue" AdditionalAttributes="GetAllAttributes()">
+        @foreach (var value in OrderedItems)
+        {
+            <option @attributes="@GetOptionAttributes(value.Index, value.Value)">@GetDisplayName(value.Value)</option>
+        }
+    </InputSelect>
+}
