@@ -91,7 +91,7 @@ namespace OptionA.Blazor.Components
         {
             var open = SetDefaults(e);
             _openMessages.Add(open);
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private OpenMessage SetDefaults(MessageItem e)
@@ -125,7 +125,7 @@ namespace OptionA.Blazor.Components
             message.Closed -= CloseMessage;
             _openMessages.Remove(message);
             message.Dispose();
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         /// <inheritdoc/>

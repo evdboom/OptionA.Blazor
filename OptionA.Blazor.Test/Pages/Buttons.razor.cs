@@ -44,8 +44,7 @@ namespace OptionA.Blazor.Test.Pages
         private Task OnClick(MouseEventArgs e)
         {
             _clicked++;
-            StateHasChanged();
-            return Task.CompletedTask;            
+            return InvokeAsync(StateHasChanged);            
         }
 
         private bool IsDisabled()

@@ -80,7 +80,7 @@ namespace OptionA.Blazor.Blog.Builder
                     var post = BuilderService.CreateFromJson(postJson);
                     _post = post;
                     await PostChanged.InvokeAsync(_post);
-                    StateHasChanged();
+                    await InvokeAsync(StateHasChanged);
                 }
             }
         }
@@ -147,7 +147,7 @@ namespace OptionA.Blazor.Blog.Builder
             _post = null;
             await PostChanged.InvokeAsync(_post);
             await StorageService.RemoveItemAsync(StorageLocation.Local, StorageKey);
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
 
         private bool _disposed;

@@ -20,10 +20,10 @@ namespace OptionA.Blazor.Blog
         private IEnumerable<IContent>? _content;
 
         /// <inheritdoc/>
-        protected override void OnParametersSet()
+        protected override async Task OnParametersSetAsync()
         {
             _content = Parser.Parse(Content?.Content);
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
     }
 }

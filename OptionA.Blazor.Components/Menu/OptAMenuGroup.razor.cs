@@ -82,7 +82,7 @@ namespace OptionA.Blazor.Components
                 if (newScrollHeight != _scrollHeight)
                 {
                     _scrollHeight = newScrollHeight;
-                    StateHasChanged();
+                    await InvokeAsync(StateHasChanged);
                 }                
             }
         }
@@ -121,7 +121,7 @@ namespace OptionA.Blazor.Components
             {
                 _openFromMouse = true;
                 _open = true;
-                StateHasChanged();
+                InvokeAsync(StateHasChanged);
             }
         }
 
@@ -137,7 +137,7 @@ namespace OptionA.Blazor.Components
 
                 _openFromMouse = false;
                 _open = false;
-                StateHasChanged();
+                InvokeAsync(StateHasChanged);
             }
         }
 
@@ -156,7 +156,7 @@ namespace OptionA.Blazor.Components
             }
 
             _open = _openFromMouse || !_open;
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private Dictionary<string, object?> GetGroupAttributes()

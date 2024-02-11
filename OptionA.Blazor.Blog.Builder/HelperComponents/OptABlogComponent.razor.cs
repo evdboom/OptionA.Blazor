@@ -104,7 +104,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         public void OnDialogClose()
         {
             _showDialog = false;
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         /// <inheritdoc/>

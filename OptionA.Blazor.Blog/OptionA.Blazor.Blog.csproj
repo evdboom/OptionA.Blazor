@@ -15,7 +15,7 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>8.1.1</Version>
+	<Version>8.1.2</Version>
 	<PackageReleaseNotes>
 		Removed unused code, added xml comments
 	</PackageReleaseNotes>

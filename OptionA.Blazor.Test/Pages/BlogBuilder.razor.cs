@@ -9,7 +9,7 @@ namespace OptionA.Blazor.Test.Pages
         private void OnPostChanged(Post? post) 
         {
             _post = post;
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
     }
 }

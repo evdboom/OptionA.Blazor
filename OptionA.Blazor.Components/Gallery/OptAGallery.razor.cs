@@ -119,7 +119,7 @@ namespace OptionA.Blazor.Components
                 .OrderBy(child => child.ImageNumber)
                 .Select((child, index) => (index, child))
                 .ToList();
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         /// <inheritdoc/>
@@ -146,7 +146,7 @@ namespace OptionA.Blazor.Components
                 current.Child.Update();
             }
 
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private void SelectIndex(int index)
@@ -175,7 +175,7 @@ namespace OptionA.Blazor.Components
             newCurrent.Update();
 
             _selectedIndex = index;
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private void SelectNext()

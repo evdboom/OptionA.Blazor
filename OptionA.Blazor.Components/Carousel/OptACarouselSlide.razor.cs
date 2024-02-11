@@ -55,7 +55,7 @@ namespace OptionA.Blazor.Components
         /// </summary>
         public void Update()
         {
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         /// <summary>

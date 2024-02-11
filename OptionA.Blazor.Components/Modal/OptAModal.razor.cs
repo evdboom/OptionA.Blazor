@@ -116,7 +116,7 @@ namespace OptionA.Blazor.Components
             _offsetX = null;
             _offsetY = null;
             await OnClose.InvokeAsync();
-            StateHasChanged();
+            await InvokeAsync(StateHasChanged);
         }
 
         /// <inheritdoc/>
