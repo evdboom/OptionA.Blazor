@@ -60,13 +60,13 @@ namespace OptionA.Blazor.Components
             _validDimensions = ResponsiveService
                 .ValidDimensions()
                 .ToList();
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private void OnWindowSizeChanged(object? sender, NamedDimension e)
         {
             _dimension = e;
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private bool _disposed;

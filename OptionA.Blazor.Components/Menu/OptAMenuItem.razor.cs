@@ -85,7 +85,7 @@ namespace OptionA.Blazor.Components
             {
                 var location = NavigationManager.ToBaseRelativePath(e.Location);
                 _isActive = $"/{location}".Equals(Href, StringComparison.OrdinalIgnoreCase);
-                StateHasChanged();
+                InvokeAsync(StateHasChanged);
             }
         }
 
