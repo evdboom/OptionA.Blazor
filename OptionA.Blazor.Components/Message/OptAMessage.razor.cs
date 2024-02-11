@@ -40,7 +40,7 @@ namespace OptionA.Blazor.Components
 
         private void UpdateTime(object? sender, string e)
         {
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private Dictionary<string, object?> GetMessageAttributes()

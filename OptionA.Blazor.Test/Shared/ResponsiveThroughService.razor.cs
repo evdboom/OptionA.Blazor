@@ -42,13 +42,13 @@ namespace OptionA.Blazor.Test.Shared
         private void OnDimensionChanged(object? sender, string e)
         {
             _dimension = e;
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private void OnWindowSizeChanged(object? sender, NamedDimension e) 
         {
             _namedDimension = e;
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private bool _disposed;

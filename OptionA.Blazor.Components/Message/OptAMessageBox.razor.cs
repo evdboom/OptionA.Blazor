@@ -87,7 +87,6 @@ namespace OptionA.Blazor.Components
             return result;
         }
 
-
         private void AddMessage(object? sender, MessageItem e)
         {
             var open = SetDefaults(e);

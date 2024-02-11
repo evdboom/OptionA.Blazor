@@ -111,7 +111,7 @@ namespace OptionA.Blazor.Components
             {
                 var location = NavigationManager.ToBaseRelativePath(e.Location);
                 _isActive = $"/{location}".StartsWith(ActiveRoute, StringComparison.OrdinalIgnoreCase);
-                StateHasChanged();
+                InvokeAsync(StateHasChanged);
             }
         }
 
@@ -144,7 +144,7 @@ namespace OptionA.Blazor.Components
         private void Elapsed(object? state)
         {
             _closing = false;
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private void Toggle()

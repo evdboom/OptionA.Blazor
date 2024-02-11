@@ -346,7 +346,7 @@ namespace OptionA.Blazor.Components
         private void Elapsed(object? state)
         {
             SelectNext();
-            StateHasChanged();
+            InvokeAsync(StateHasChanged);
         }
 
         private void DisableTimer()
