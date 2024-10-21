@@ -7,14 +7,14 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Version>8.1.4</Version>
+		<Version>8.1.5</Version>
 		<IsPackable>true</IsPackable>
 		<Authors>Erik van der Boom</Authors>
 		<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>Blazor component library with various component for use inside your Blazor application</Description>
 		<PackageReleaseNotes>
-      More efficient message time handling
+      Package updates
     </PackageReleaseNotes>
 	</PropertyGroup>
 
@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
 	</ItemGroup>
 
 	<ItemGroup>
