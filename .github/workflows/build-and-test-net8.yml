@@ -1,4 +1,4 @@
-name: .Net9 - Build the solution and run tests
+name: .Net8 - Build the solution and run tests
 
 on:
   pull_request:
@@ -17,7 +17,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 8.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
