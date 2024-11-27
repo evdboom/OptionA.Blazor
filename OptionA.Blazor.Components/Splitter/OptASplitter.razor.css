@@ -25,12 +25,14 @@
 }
 
 [opta-splitter-first] {
-    width: var(--opta-first-width);   
+    width: var(--opta-first-width);
+    min-width: var(--opta-first-width);
 }
 
 [vertical] [opta-splitter-first] {
     height: var(--opta-first-width);
     width: unset;
+    min-width: var(--opta-first-width);
 }
 
 [opta-drag-area] {
