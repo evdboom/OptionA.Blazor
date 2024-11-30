@@ -166,3 +166,9 @@ A Quote, to quote somebody, results in a \<blockquote> tag
 <OptAFrame>
 ```
 A frame to an 'external' site, results in an \<iframe> tag to be able to incorporate just about anything you want in your blog.
+
+### List
+```
+<OptAList>
+```
+A list, either ordered or unordered, items inside are parsed as Text components supporting (light) markdown.

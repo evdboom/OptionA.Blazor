@@ -27,6 +27,7 @@ namespace OptionA.Blazor.Test.Pages
         private string? _selectedText;
         private string? _selectedText2;
 
+        private bool _newLineAsSeparator;
         private bool _autoGrow;
 
         private IEnumerable<TestObject> _items =
@@ -61,8 +62,9 @@ namespace OptionA.Blazor.Test.Pages
         private string? TitleValue(TestObject item) => item.Value;
 
         private TestObject? _selectedItem;
-        private bool _useComparer;
+        private bool _useComparer;      
 
+        private Orientation Orientation => _newLineAsSeparator ? Orientation.Vertical : Orientation.Horizontal;
         private TestObjectComparer? Comparer => _useComparer ? new TestObjectComparer() : null;
 
         private void ChangeOrderMode()

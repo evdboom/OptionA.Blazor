@@ -4,37 +4,13 @@
     @switch (Content.ListType)
     {
         case ListType.OrderedList:
-            <ol @attributes="@DataProvider.GetAttributes(BuilderType.ListItemsBuilder)">
-                @foreach (var item in Content.Items.Select((value, index) => new { Item = value, Index = index }))
-                {
-                    <li @attributes="@DataProvider.GetAttributes(BuilderType.ListItemContainer)">
-                        <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemInputContainer)">
-                            <input @attributes="@GetItemAttributes()" value="@item.Item" @oninput="@(e => UpdateItem($"{e.Value}", item.Index))" />
-                        </div>
-                        <div @attributes="@DataProvider.GetAttributes(BuilderType.ListRemoveButtonContainer)">
-                            <button type="button" @onclick="() => RemoveItem(item.Index)" @attributes="@DataProvider.GetAttributes(BuilderType.ListRemoveButton)">
-                                <OptAChild Content="@DataProvider.GetContent(BuilderType.ListRemoveButton, "Remove")" />
-                            </button>
-                        </div>
-                    </li>
-                }
+            <ol @attributes="@Content.GetAttributes(DataProvider)">
+                <OptAListContent Content="@Content"/>
             </ol>
             break;
         case ListType.UnorderedList:
-            <ul @attributes="@DataProvider.GetAttributes(BuilderType.ListItemsBuilder)">
-                @foreach (var item in Content.Items.Select((value, index) => new { Item = value, Index = index }))
-                {
-                    <li @attributes="@DataProvider.GetAttributes(BuilderType.ListItemContainer)">
-                        <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemInputContainer)">
-                            <input @attributes="@GetItemAttributes()" value="@item.Item" @oninput="@(e => UpdateItem($"{e.Value}", item.Index))" />
-                        </div>
-                        <div @attributes="@DataProvider.GetAttributes(BuilderType.ListRemoveButtonContainer)">
-                            <button type="button" @onclick="() => RemoveItem(item.Index)" @attributes="@DataProvider.GetAttributes(BuilderType.ListRemoveButton)">
-                                <OptAChild Content="@DataProvider.GetContent(BuilderType.ListRemoveButton, "Remove")" />
-                            </button>
-                        </div>
-                    </li>
-                }
+            <ul @attributes="@Content.GetAttributes(DataProvider)">
+                <OptAListContent Content="@Content" />
             </ul>
             break;
     }

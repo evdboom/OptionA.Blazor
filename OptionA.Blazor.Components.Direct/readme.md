@@ -7,12 +7,12 @@ For full documentation, releasenotes and examples, go to [option-a.tech](https:/
 To start using the OptionA.Blazor.Components.Direct, use the components provided by the package in your application. For styling all components have an "opta-[component-name]" attribute, or you can use the parameters on a percomponent basis (see below)
 
 ## Latest release notes
-### 8.1.0
+### 9.0.1
 #### Overall
-Update to .NET 8
+Update to .NET 9
 
 #### New features
-- Added generic Select component
+- Added generic radio select components
 
 #### Solved Bugs
 - none
@@ -25,8 +25,9 @@ Following are the currently supported components. For all components there is a 
 <OptAInputInteger>
 <OptAInputText>
 <OptAInputTextArea>
+<OptAInputRadioGroup>
 ```
-These three components are implementations of the the default microsoft `Microsoft.AspNetCore.Components.Forms` input classes. But binds the change event to `oninput` instead of `onchange` (when it looses focus). Also wraps them in the default OptAComponent for consistancy with other components.
+These components are implementations of the the default microsoft `Microsoft.AspNetCore.Components.Forms` input classes. But binds the change event to `oninput` instead of `onchange` (when it looses focus). Also wraps them in the default OptAComponent for consistancy with other components.
 The textarea components optionally supports AutoGrow to grow when the content changes (note: when using custom css, for instance bootstrap for the input, the mask used for the autogrow might need additional setup)
 for instance, for the bootstrap form-control the following css is needed to make sure the autogrow maps as expected:
 

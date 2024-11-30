@@ -5,7 +5,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
     /// <summary>
     /// Component for builder list, like tags or classes
     /// </summary>
-    public partial class OptAListBuilder
+    public partial class OptAHelperList
     {
         /// <summary>
         /// List of items

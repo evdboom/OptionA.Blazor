@@ -66,3 +66,33 @@
                 OrderComparer="Comparer" />
     <span>@_selectedItem?.Name</span>
 </div>
+<div>
+    <button @onclick="() => _useComparer = !_useComparer">
+        @if (_useComparer)
+        {
+            <span>With comparer</span>
+        }
+        else
+        {
+            <span>No comparer</span>
+        }
+    </button>
+    <button @onclick="() => _newLineAsSeparator = !_newLineAsSeparator">
+        @if (_newLineAsSeparator)
+        {
+            <span>Vertical</span>
+        }
+        else
+        {
+            <span>Horizontal</span>
+        }
+    </button>
+    <OptAInputRadioGroup TValue="TestObject"
+                Items="_items"
+                DisplayValue="DisplayValue"
+                TitleValue="TitleValue"
+                @bind-Value="@_selectedItem"
+                OrderComparer="Comparer"
+                Orientation="@Orientation"/>
+    <span>@_selectedItem?.Name</span>
+</div>

@@ -34,16 +34,16 @@
                 </button>
             </header>
             <div @attributes="@GetContentAttributes()">
-                <OptAListBuilder ContentChanged="ContentChanged"
-                                 ItemPlaceholder="Class.."
-                                 ItemTitle="Add additional classes"
-                                 Label="Additional classes"
-                                 Items="Content.AdditionalClasses" />
-                <OptAListBuilder ContentChanged="ContentChanged"
-                                 ItemPlaceholder="Class to exclude.."
-                                 ItemTitle="Default classes to remove"
-                                 Label="Removed default classes"
-                                 Items="Content.RemovedClasses" />
+                <OptAHelperList ContentChanged="ContentChanged"
+                                ItemPlaceholder="Class.."
+                                ItemTitle="Add additional classes"
+                                Label="Additional classes"
+                                Items="Content.AdditionalClasses" />
+                <OptAHelperList ContentChanged="ContentChanged"
+                                ItemPlaceholder="Class to exclude.."
+                                ItemTitle="Default classes to remove"
+                                Label="Removed default classes"
+                                Items="Content.RemovedClasses" />
                 @if (AdditionalProperties is not null)
                 {
                     @AdditionalProperties
