@@ -29,8 +29,23 @@
                         TitleMappings="_titleMappings"
                         @bind-Value="_selectedEnum"
                         Orientation="@Orientation"
-                        title="@_radioTitle"/>
+                        Title="@_radioTitle"/>
+        <OptAEnumCheckboxGroup TEnum="TestEnum"
+                        OrderDescending="_orderDescending"
+                        OrderMode="_orderMode"
+                        NameMappings="_nameMappings"
+                        TitleMappings="_titleMappings"
+                        @bind-Value="_selectedEnums"
+                        Orientation="@Orientation"
+                        Title="@_radioTitle"/>
     <span>@_selectedEnum</span>
+    @if (_selectedEnums != null)
+    {
+        foreach (var item in _selectedEnums)
+        {
+            <span>@item</span>
+        }
+    }
 </div>
 <div>
     <OptAInputInteger @bind-Value="_selectedInt"/>
@@ -103,12 +118,31 @@
                 @bind-Value="_selectedItem"
                 OrderComparer="Comparer"
                 Orientation="@Orientation"
-                title="@_radioTitle"/>
+                Title="@_radioTitle"/>
     <span>@_selectedItem?.Name</span>
 </div>
 <div>
     <OptAInputCheckbox @bind-Value="_inputCheckbox"
-                       Title="@_radioTitle"
+                       Attributes="@GetTitle()"
                        Description="@_radioTitle"/>
     <span>@_inputCheckbox</span>
+</div>
+<div>
+    <OptAInputCheckboxGroup TValue="TestObject"
+                         Items="_items"
+                         DisplayValue="DisplayValue"
+                         TitleValue="TitleValue"
+                         @bind-Value="_selectedItems"
+                         OrderComparer="Comparer"
+                         Orientation="@Orientation"
+                         Title="@_radioTitle" />
+<span>
+        @if (_selectedItems != null)
+        {
+            foreach (var item in _selectedItems)
+            {
+                <span>@item.Name</span>
+            }
+        }    
+</span>
 </div>

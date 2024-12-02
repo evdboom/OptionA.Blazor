@@ -1,0 +1,8 @@
+﻿[opta-checkbox-group] {
+    display: flex;
+    flex-direction: column;
+}
+
+[opta-checkbox-group][horizontal] {
+    flex-direction: row;
+}

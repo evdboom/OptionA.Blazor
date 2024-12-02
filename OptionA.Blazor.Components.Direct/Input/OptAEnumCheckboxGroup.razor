@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+@typeparam TEnum where TEnum : struct, Enum
+
+@if (!string.IsNullOrEmpty(Title))
+{
+    <fieldset @attributes="@GetSetAttributes()">
+        <legend>@Title</legend>
+        <div @attributes="@GetAllAttributes()">
+            @foreach (var item in OrderedItems)
+            {
+                <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item, selected)"
+                                   Description="@GetDisplayName(item)"
+                                   Attributes="@GetCheckboxAttributes(item)" />
+            }
+        </div>
+    </fieldset>
+}
+else
+{
+    <div @attributes="@GetAllAttributes()">
+        @foreach (var item in OrderedItems)
+        {
+            <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item, selected)"
+                               Description="@GetDisplayName(item)"
+                               Attributes="@GetCheckboxAttributes(item)" />
+        }
+    </div>
+}

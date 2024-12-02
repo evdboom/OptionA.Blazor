@@ -18,10 +18,6 @@
     </PackageReleaseNotes>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <Compile Include="..\OptionA.Blazor.Components.Direct\Input\OptAInputCheckBoxGroup.razor.cs" Link="OptAInputCheckBoxGroup.razor.cs" />
-	</ItemGroup>
-
 
 	<ItemGroup>
 		<SupportedPlatform Include="browser" />

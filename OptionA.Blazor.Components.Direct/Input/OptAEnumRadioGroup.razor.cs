@@ -96,6 +96,13 @@ namespace OptionA.Blazor.Components
             _values = Enum.GetValues<TEnum>();
         }
 
+        /// <inheritdoc/>
+        protected override void OnParametersSet()
+        {
+            base.OnParametersSet();
+            InternalValue = Value;
+        }
+
         private Dictionary<string, object?> GetAllAttributes()
         {
             var result = GetAttributes();

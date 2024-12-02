@@ -1,7 +1,30 @@
-﻿@using Microsoft.AspNetCore.Components.Forms
-@namespace OptionA.Blazor.Components
+﻿@namespace OptionA.Blazor.Components
 @inherits OptAComponent
 
 @typeparam TValue
 
-
+@if (!string.IsNullOrEmpty(Title))
+{
+    <fieldset @attributes="@GetSetAttributes()">
+        <legend>@Title</legend>
+        <div @attributes="@GetAllAttributes()">
+            @foreach (var item in OrderedItems)
+            {
+                <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item.Index, selected)" 
+                                   Description="@GetDisplayName(item.Value)" 
+                                   Attributes="@GetCheckboxAttributes(item.Value)"/>
+            }
+        </div>
+    </fieldset>
+}
+else
+{
+    <div @attributes="@GetAllAttributes()">
+        @foreach (var item in OrderedItems)
+        {
+            <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item.Index, selected)"
+                               Description="@GetDisplayName(item.Value)"
+                               Attributes="@GetCheckboxAttributes(item.Value)" />
+        }
+    </div>
+}

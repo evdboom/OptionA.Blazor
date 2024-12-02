@@ -8,11 +8,6 @@ namespace OptionA.Blazor.Components
     public partial class OptAInputCheckbox
     {
         /// <summary>
-        /// Optional title for the input
-        /// </summary>
-        [Parameter]
-        public string? Title { get; set; }
-        /// <summary>
         /// Display value    
         /// </summary>
         [Parameter]
@@ -62,9 +57,10 @@ namespace OptionA.Blazor.Components
                 ["opta-checkbox-label"] = true
             };
 
-            if (!string.IsNullOrEmpty(Title))
+            var baseAttributes = GetAttributes();
+            if (baseAttributes.TryGetValue("title", out var title))
             {
-                result["title"] = Title;
+                result["title"] = title;
             }
 
             return result;

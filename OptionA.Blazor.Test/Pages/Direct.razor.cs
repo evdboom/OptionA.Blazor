@@ -8,6 +8,7 @@ namespace OptionA.Blazor.Test.Pages
         private bool _orderDescending;
         private EnumOrder _orderMode;
         private TestEnum _selectedEnum;
+        private IEnumerable<TestEnum> _selectedEnums;
         private Dictionary<TestEnum, string> _nameMappings = new()
         {
             { TestEnum.One, "1_" },
@@ -64,7 +65,8 @@ namespace OptionA.Blazor.Test.Pages
         private string? TitleValue(TestObject item) => item.Value;
 
         private TestObject? _selectedItem;
-        private bool _useComparer;      
+        private IEnumerable<TestObject>? _selectedItems;
+        private bool _useComparer;
 
         private Orientation Orientation => _radioOrientationVertical ? Orientation.Vertical : Orientation.Horizontal;
         private TestObjectComparer? Comparer => _useComparer ? new TestObjectComparer() : null;
@@ -80,5 +82,13 @@ namespace OptionA.Blazor.Test.Pages
             };
         }
 
+        private Dictionary<string, object?> GetTitle()
+        {
+            return new Dictionary<string, object?>
+            {
+                ["title"] = _radioTitle
+            };
+
+        }
     }
 }
