@@ -1,0 +1,12 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+@if (!string.IsNullOrEmpty(Description))
+{
+    <label @attributes="@GetLabelAttributes()"><InputCheckbox @bind-Value="InternalValue" AdditionalAttributes="GetAllAttributes()" /> @Description</label>
+}
+else
+{
+    <InputCheckbox @bind-Value="InternalValue" AdditionalAttributes="GetAllAttributes()" />
+}

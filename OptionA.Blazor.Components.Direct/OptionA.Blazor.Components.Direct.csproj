@@ -14,7 +14,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Blazor component library with various component for use inside your Blazor application, direct components do not require setup</Description>
     <PackageReleaseNotes>
-      Added Radio select
+      Added Radio select, Radio enum select, Checkbox select and Checkbox Enum select
     </PackageReleaseNotes>
   </PropertyGroup>
 

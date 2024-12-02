@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Components;
-using System.Linq;
 
 namespace OptionA.Blazor.Components
 {
     /// <summary>
-    /// Component to select an enum
+    /// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputSelect{TValue}"/>
     /// </summary>
     public partial class OptASelect<TValue>
     {
@@ -63,7 +62,7 @@ namespace OptionA.Blazor.Components
             }
         }
 
-        private Dictionary<int,  TValue>? _items;
+        private Dictionary<int, TValue>? _items;
 
         private int? _internalValue;
         private int? InternalValue
@@ -83,7 +82,7 @@ namespace OptionA.Blazor.Components
                     {
                         Value = _items.TryGetValue(value.Value, out var item)
                             ? item
-                            : default;                       
+                            : default;
                     }
                     else
                     {

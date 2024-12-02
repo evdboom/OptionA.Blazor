@@ -2,17 +2,19 @@
 @namespace OptionA.Blazor.Components
 @inherits OptAComponent
 
-@typeparam TValue
+@typeparam TEnum where TEnum : struct, Enum
 
 @if (!string.IsNullOrEmpty(Title))
 {
     <fieldset @attributes="@GetSetAttributes()">
         <legend>@Title</legend>
         <div @attributes="@GetAllAttributes()">
-            <InputRadioGroup @bind-Value="InternalValue">
+            <InputRadioGroup @bind-Value="InternalValue">   
                 @foreach (var item in OrderedItems)
                 {
-                    <label @attributes="@GetOptionLabelAttributes(item.Value)"><InputRadio Value="@item.Index" /> @GetDisplayName(item.Value)</label>
+                    <label @attributes="@GetOptionLabelAttributes(item)">
+                        <InputRadio Value="@item" /> @GetDisplayName(item)
+                    </label>
                 }
             </InputRadioGroup>
         </div>
@@ -24,7 +26,9 @@ else
         <InputRadioGroup @bind-Value="InternalValue">
             @foreach (var item in OrderedItems)
             {
-                <label @attributes="@GetOptionLabelAttributes(item.Value)"><InputRadio Value="@item.Index" /> @GetDisplayName(item.Value)</label>
+                <label @attributes="@GetOptionLabelAttributes(item)">
+                    <InputRadio Value="@item" /> @GetDisplayName(item)
+                </label>
             }
         </InputRadioGroup>
     </div>

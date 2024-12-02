@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace OptionA.Blazor.Components
 {
+    /// <summary>
+    /// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputRadioGroup{TValue}"/>
+    /// </summary>
     public partial class OptAInputRadioGroup<TValue>
     {
         /// <summary>
@@ -135,11 +138,26 @@ namespace OptionA.Blazor.Components
         private Dictionary<string, object?> GetAllAttributes()
         {
             var result = GetAttributes();
-            result["opta-radio"] = true;
+            result["opta-radio-group"] = true;
             if (TryGetClasses(null, out var classes))
             {
                 result["class"] = classes;
             }
+
+            if (Orientation == Components.Orientation.Horizontal)
+            {
+                result["horizontal"] = true;
+            }
+
+
+            return result;
+        }
+        private Dictionary<string, object?> GetSetAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-field-set"] = true
+            };
             return result;
         }
 
@@ -153,7 +171,7 @@ namespace OptionA.Blazor.Components
             return $"{value}";
         }
 
-        private Dictionary<string, object?> GetOptionLabelAttributes(int index, TValue value)
+        private Dictionary<string, object?> GetOptionLabelAttributes(TValue value)
         {
             var result = new Dictionary<string, object?>();
 
@@ -163,11 +181,6 @@ namespace OptionA.Blazor.Components
             }
 
             return result;
-        }
-
-        private string GetSeparator()
-        {
-            return Separator ?? " ";
         }
     }
 }

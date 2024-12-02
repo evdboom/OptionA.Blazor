@@ -22,6 +22,14 @@
                     NameMappings="_nameMappings"
                     TitleMappings="_titleMappings"
                     @bind-Value="_selectedEnum"/>
+    <OptAEnumRadioGroup TEnum="TestEnum"
+                        OrderDescending="_orderDescending"
+                        OrderMode="_orderMode"
+                        NameMappings="_nameMappings"
+                        TitleMappings="_titleMappings"
+                        @bind-Value="_selectedEnum"
+                        Orientation="@Orientation"
+                        title="@_radioTitle"/>
     <span>@_selectedEnum</span>
 </div>
 <div>
@@ -77,8 +85,8 @@
             <span>No comparer</span>
         }
     </button>
-    <button @onclick="() => _newLineAsSeparator = !_newLineAsSeparator">
-        @if (_newLineAsSeparator)
+    <button @onclick="() => _radioOrientationVertical = !_radioOrientationVertical">
+        @if (_radioOrientationVertical)
         {
             <span>Vertical</span>
         }
@@ -87,12 +95,20 @@
             <span>Horizontal</span>
         }
     </button>
+    <OptAInputText @bind-Value="_radioTitle"/>
     <OptAInputRadioGroup TValue="TestObject"
                 Items="_items"
                 DisplayValue="DisplayValue"
                 TitleValue="TitleValue"
-                @bind-Value="@_selectedItem"
+                @bind-Value="_selectedItem"
                 OrderComparer="Comparer"
-                Orientation="@Orientation"/>
+                Orientation="@Orientation"
+                title="@_radioTitle"/>
     <span>@_selectedItem?.Name</span>
+</div>
+<div>
+    <OptAInputCheckbox @bind-Value="_inputCheckbox"
+                       Title="@_radioTitle"
+                       Description="@_radioTitle"/>
+    <span>@_inputCheckbox</span>
 </div>
