@@ -1,0 +1,8 @@
+﻿[opta-radio-group] {
+    display: flex;
+    flex-direction: column;
+}
+
+[opta-radio-group][horizontal] {
+    flex-direction: row;
+}

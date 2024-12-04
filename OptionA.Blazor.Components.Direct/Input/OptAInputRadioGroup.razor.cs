@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Components;
 namespace OptionA.Blazor.Components
 {
     /// <summary>
-    /// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputSelect{TValue}"/>
+    /// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputRadioGroup{TValue}"/>
     /// </summary>
-    public partial class OptASelect<TValue>
+    public partial class OptAInputRadioGroup<TValue>
     {
         /// <summary>
         /// Selected Value
@@ -42,6 +42,11 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public IEnumerable<TValue>? Items { get; set; }
+        /// <summary>
+        ///Orientation of the radio group, default is vertical
+        /// </summary>
+        [Parameter]
+        public Orientation? Orientation { get; set; }
 
         /// <inheritdoc/>
         protected override void OnParametersSet()
@@ -99,7 +104,7 @@ namespace OptionA.Blazor.Components
             {
                 if (_items is null)
                 {
-                    return Enumerable.Empty<(int Index, TValue Value)>();
+                    return [];
                 }
 
                 if (OrderComparer is not null)
@@ -128,11 +133,26 @@ namespace OptionA.Blazor.Components
         private Dictionary<string, object?> GetAllAttributes()
         {
             var result = GetAttributes();
-            result["opta-select"] = true;
+            result["opta-radio-group"] = true;
             if (TryGetClasses(null, out var classes))
             {
                 result["class"] = classes;
             }
+
+            if (Orientation == Components.Orientation.Horizontal)
+            {
+                result["horizontal"] = true;
+            }
+
+
+            return result;
+        }
+        private Dictionary<string, object?> GetSetAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-field-set"] = true
+            };
             return result;
         }
 
@@ -146,12 +166,9 @@ namespace OptionA.Blazor.Components
             return $"{value}";
         }
 
-        private Dictionary<string, object?> GetOptionAttributes(int index, TValue value)
+        private Dictionary<string, object?> GetOptionLabelAttributes(TValue value)
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["value"] = index
-            };
+            var result = new Dictionary<string, object?>();
 
             if (TitleValue is not null)
             {

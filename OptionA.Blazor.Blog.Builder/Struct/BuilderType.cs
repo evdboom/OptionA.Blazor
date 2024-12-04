@@ -159,6 +159,10 @@ namespace OptionA.Blazor.Blog.Builder
         /// <summary>
         /// Section (content) of the properties modal
         /// </summary>
-        PropertiesModalSection
+        PropertiesModalSection,
+        /// <summary>
+        /// Container around the properties modal section or radio fields
+        /// </summary>
+        Legend
     }
 }

@@ -15,10 +15,10 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>8.1.4</Version>
+	<Version>8.2.0</Version>
 	<PackageReleaseNotes>
-		Package updates
-	</PackageReleaseNotes>
+    Added new List component for displaying a list of items
+  </PackageReleaseNotes>
   </PropertyGroup>
 
 
@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.11" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>

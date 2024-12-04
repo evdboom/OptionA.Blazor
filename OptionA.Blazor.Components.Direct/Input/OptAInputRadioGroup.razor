@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+@typeparam TValue
+
+
+<div @attributes="@GetAllAttributes()">
+    <InputRadioGroup @bind-Value="InternalValue">
+        @foreach (var item in OrderedItems)
+        {
+            <label @attributes="@GetOptionLabelAttributes(item.Value)"><InputRadio Value="@item.Index" /> @GetDisplayName(item.Value)</label>
+        }
+    </InputRadioGroup>
+</div>

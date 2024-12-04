@@ -14,8 +14,8 @@
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Description>Blazor class library with services to access local storage, session storage and indexed db</Description>
     <PackageReleaseNotes>
-		Package updates
-	</PackageReleaseNotes>
+      Nothing
+    </PackageReleaseNotes>
   </PropertyGroup>
 
 
@@ -26,6 +26,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.11" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>

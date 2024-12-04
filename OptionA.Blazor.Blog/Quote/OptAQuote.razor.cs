@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Blog.Core.Extensions;
 
 namespace OptionA.Blazor.Blog
 {

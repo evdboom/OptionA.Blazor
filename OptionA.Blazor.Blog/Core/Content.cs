@@ -6,11 +6,11 @@
     public abstract class Content : IContent
     {
         /// <inheritdoc/>
-        public List<string> AdditionalClasses { get; } = new List<string>();
+        public IList<string> AdditionalClasses { get; } = [];
         /// <inheritdoc/>
-        public List<string> RemovedClasses { get; } = new List<string>();
+        public IList<string> RemovedClasses { get; } = [];
         /// <inheritdoc/>
-        public virtual Dictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
+        public virtual IDictionary<string, object?> Attributes { get; } = new Dictionary<string, object?>();
         /// <inheritdoc/>
         public abstract ContentType Type { get; }
         /// <inheritdoc/>
