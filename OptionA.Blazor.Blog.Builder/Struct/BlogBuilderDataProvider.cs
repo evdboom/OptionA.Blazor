@@ -47,6 +47,7 @@ namespace OptionA.Blazor.Blog.Builder
                 ContentType.Image => new ImageContent(),
                 ContentType.Quote => new QuoteContent(),
                 ContentType.Frame => new FrameContent(),
+                ContentType.List => new ListContent(),
                 _ => throw new NotSupportedException($"Contenttype {contentType} is not support as individual blogpart")
             };
         }

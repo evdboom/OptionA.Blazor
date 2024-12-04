@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -14,8 +14,8 @@
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Description>Blazor class library with services to access local storage, session storage and indexed db</Description>
     <PackageReleaseNotes>
-		Package updates
-	</PackageReleaseNotes>
+      Update to .Net 9
+    </PackageReleaseNotes>
   </PropertyGroup>
 
 

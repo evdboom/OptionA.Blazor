@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -14,7 +14,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Blazor component library with various component for use inside your Blazor application, direct components do not require setup</Description>
     <PackageReleaseNotes>
-      Package updates
+      Added Radio select, Radio enum select, Checkbox select and Checkbox Enum select
     </PackageReleaseNotes>
   </PropertyGroup>
 

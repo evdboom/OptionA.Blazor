@@ -22,7 +22,28 @@
                     NameMappings="_nameMappings"
                     TitleMappings="_titleMappings"
                     @bind-Value="_selectedEnum"/>
+    <OptAEnumRadioGroup TEnum="TestEnum"
+                        OrderDescending="_orderDescending"
+                        OrderMode="_orderMode"
+                        NameMappings="_nameMappings"
+                        TitleMappings="_titleMappings"
+                        @bind-Value="_selectedEnum"
+                        Orientation="@Orientation"/>
+        <OptAEnumCheckboxGroup TEnum="TestEnum"
+                        OrderDescending="_orderDescending"
+                        OrderMode="_orderMode"
+                        NameMappings="_nameMappings"
+                        TitleMappings="_titleMappings"
+                        @bind-Value="_selectedEnums"
+                        Orientation="@Orientation"/>
     <span>@_selectedEnum</span>
+    @if (_selectedEnums != null)
+    {
+        foreach (var item in _selectedEnums)
+        {
+            <span>@item</span>
+        }
+    }
 </div>
 <div>
     <OptAInputInteger @bind-Value="_selectedInt"/>
@@ -65,4 +86,56 @@
                 @bind-Value="@_selectedItem"
                 OrderComparer="Comparer" />
     <span>@_selectedItem?.Name</span>
+</div>
+<div>
+    <button @onclick="() => _useComparer = !_useComparer">
+        @if (_useComparer)
+        {
+            <span>With comparer</span>
+        }
+        else
+        {
+            <span>No comparer</span>
+        }
+    </button>
+    <button @onclick="() => _radioOrientationVertical = !_radioOrientationVertical">
+        @if (_radioOrientationVertical)
+        {
+            <span>Vertical</span>
+        }
+        else
+        {
+            <span>Horizontal</span>
+        }
+    </button>
+    <OptAInputRadioGroup TValue="TestObject"
+                Items="_items"
+                DisplayValue="DisplayValue"
+                TitleValue="TitleValue"
+                @bind-Value="_selectedItem"
+                OrderComparer="Comparer"
+                Orientation="@Orientation"/>
+    <span>@_selectedItem?.Name</span>
+</div>
+<div>
+    <OptAInputCheckbox @bind-Value="_inputCheckbox"/>
+    <span>@_inputCheckbox</span>
+</div>
+<div>
+    <OptAInputCheckboxGroup TValue="TestObject"
+                         Items="_items"
+                         DisplayValue="DisplayValue"
+                         TitleValue="TitleValue"
+                         @bind-Value="_selectedItems"
+                         OrderComparer="Comparer"
+                         Orientation="@Orientation"/>
+<span>
+        @if (_selectedItems != null)
+        {
+            foreach (var item in _selectedItems)
+            {
+                <span>@item.Name</span>
+            }
+        }    
+</span>
 </div>

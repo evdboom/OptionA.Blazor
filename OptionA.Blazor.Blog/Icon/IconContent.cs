@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog
 {
     /// <summary>
     /// Content for icons
@@ -17,7 +11,7 @@ namespace OptionA.Blazor.Blog
         /// <summary>
         /// Paths to render
         /// </summary>
-        public List<string> Paths { get; set; } = new();
+        public IList<string> Paths { get; set; } = [];
         /// <summary>
         /// Width when in Pathing mode
         /// </summary>
@@ -53,7 +47,7 @@ namespace OptionA.Blazor.Blog
                     result["fill"] = "currentColor";
                     result["viewBox"] = string.Join(" ", ViewBoxValues);
                 }
-                foreach(var attribute in base.Attributes)
+                foreach (var attribute in base.Attributes)
                 {
                     result[attribute.Key] = attribute.Value;
                 }
@@ -66,8 +60,8 @@ namespace OptionA.Blazor.Blog
             get
             {
                 return Mode == IconMode.Class
-                    ? !AdditionalClasses.Any()
-                    : !Paths.Any();
+                    ? AdditionalClasses.Count == 0
+                    : Paths.Count == 0;
             }
         }
     }

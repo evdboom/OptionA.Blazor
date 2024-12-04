@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
 	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -17,8 +17,8 @@
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Version>8.1.4</Version>
 	<PackageReleaseNotes>
-		Package updates
-	</PackageReleaseNotes>
+    Added new List component for displaying a list of items
+  </PackageReleaseNotes>
   </PropertyGroup>
 
 

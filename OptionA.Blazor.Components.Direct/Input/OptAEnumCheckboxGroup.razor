@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+@typeparam TEnum where TEnum : struct, Enum
+
+<div @attributes="@GetAllAttributes()">
+    @foreach (var item in OrderedItems)
+    {
+        <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item, selected)"
+                            Description="@GetDisplayName(item)"
+                            Attributes="@GetCheckboxAttributes(item)" />
+    }
+</div>

@@ -14,7 +14,8 @@ namespace OptionA.Blazor.Blog.Builder.Parts
             [ContentType.Image] = ("Add image", "Add an Image to the post"),
             [ContentType.Code] = ("Add Code", "Add a block of code to the post"),
             [ContentType.Quote] = ("Add quote", "Add a quote to the post"),
-            [ContentType.Frame] = ("Add frame", "Add a (external) frame to the post")
+            [ContentType.Frame] = ("Add frame", "Add a (external) frame to the post"),
+            [ContentType.List] = ("Add list", "Add a list to the post"),
         };
 
         /// <summary>

@@ -29,16 +29,16 @@
                            Attributes="@GetAttributes(SourceUrlId, "Source url...")" />
         </ChildContent>
         <AdditionalProperties>
-            <OptAListBuilder ContentChanged="ContentChanged"
-                             ItemPlaceholder="Source class.."
-                             ItemTitle="Add additional classes to source"
-                             Label="Additional source classes"
-                             Items="Content.AdditionalSourceClasses" />
-            <OptAListBuilder ContentChanged="ContentChanged"
-                             ItemPlaceholder="Class to exclude for source.."
-                             ItemTitle="Default classes to remove for source"
-                             Label="Removed default source classes"
-                             Items="Content.RemovedSourceClasses" />
+            <OptAHelperList ContentChanged="ContentChanged"
+                            ItemPlaceholder="Source class.."
+                            ItemTitle="Add additional classes to source"
+                            Label="Additional source classes"
+                            Items="Content.AdditionalSourceClasses" />
+            <OptAHelperList ContentChanged="ContentChanged"
+                            ItemPlaceholder="Class to exclude for source.."
+                            ItemTitle="Default classes to remove for source"
+                            Label="Removed default source classes"
+                            Items="Content.RemovedSourceClasses" />
         </AdditionalProperties>
     </OptABlogComponent>
 }
