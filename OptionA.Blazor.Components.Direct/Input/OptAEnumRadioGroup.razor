@@ -4,32 +4,13 @@
 
 @typeparam TEnum where TEnum : struct, Enum
 
-@if (!string.IsNullOrEmpty(Title))
-{
-    <fieldset @attributes="@GetSetAttributes()">
-        <legend>@Title</legend>
-        <div @attributes="@GetAllAttributes()">
-            <InputRadioGroup @bind-Value="InternalValue">   
-                @foreach (var item in OrderedItems)
-                {
-                    <label @attributes="@GetOptionLabelAttributes(item)">
-                        <InputRadio Value="@item" /> @GetDisplayName(item)
-                    </label>
-                }
-            </InputRadioGroup>
-        </div>
-    </fieldset>
-}
-else
-{
-    <div @attributes="@GetAllAttributes()">
-        <InputRadioGroup @bind-Value="InternalValue">
-            @foreach (var item in OrderedItems)
-            {
-                <label @attributes="@GetOptionLabelAttributes(item)">
-                    <InputRadio Value="@item" /> @GetDisplayName(item)
-                </label>
-            }
-        </InputRadioGroup>
-    </div>
-}
+<div @attributes="@GetAllAttributes()">
+    <InputRadioGroup @bind-Value="InternalValue">
+        @foreach (var item in OrderedItems)
+        {
+            <label @attributes="@GetOptionLabelAttributes(item)">
+                <InputRadio Value="@item" /> @GetDisplayName(item)
+            </label>
+        }
+    </InputRadioGroup>
+</div>

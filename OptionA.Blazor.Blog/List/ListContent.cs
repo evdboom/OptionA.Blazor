@@ -12,13 +12,9 @@
         /// </summary>
         public ListType ListType { get; set; }
         /// <summary>
-        /// Items to display in the list, set either Items or ItemsFromString though Items takes precedence if both are set
+        /// Items to display in the list
         /// </summary>
-        public IList<string> Items { get; } = [];
-        /// <summary>
-        /// Items to display in the list as a string, set either Items or ItemsFromString though Items takes precedence if both are set
-        /// </summary>
-        public string ItemsFromString { get; set; } = string.Empty;
+        public IList<string> Items { get; set; } = [];
 
         /// <inheritdoc/>
         public override bool IsInvalid => Items.Count == 0;

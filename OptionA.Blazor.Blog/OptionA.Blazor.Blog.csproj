@@ -15,10 +15,10 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>9.0.0</Version>
+	<Version>9.1.0</Version>
 	<PackageReleaseNotes>
-		Update to .Net 9
-	</PackageReleaseNotes>
+    Added new List component for displaying a list of items
+  </PackageReleaseNotes>
   </PropertyGroup>
 
 

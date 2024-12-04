@@ -45,15 +45,10 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public IEnumerable<TValue>? Items { get; set; }
         /// <summary>
-        ///Orientation of the radio group, default is vertical
+        ///Orientation of the input group, default is vertical
         /// </summary>
         [Parameter]
         public Orientation? Orientation { get; set; }
-        /// <summary>
-        /// Optional title for the radio group
-        /// </summary>
-        [Parameter]
-        public string? Title { get; set; }
 
         /// <inheritdoc/>
         protected override void OnParametersSet()
@@ -81,7 +76,7 @@ namespace OptionA.Blazor.Components
             {
                 if (_items is null)
                 {
-                    return Enumerable.Empty<(int Index, TValue Value)>();
+                    return [];
                 }
 
                 if (OrderComparer is not null)
@@ -114,10 +109,7 @@ namespace OptionA.Blazor.Components
                 return;
             }
 
-            if (_selectedItems is null)
-            {
-                _selectedItems = [];
-            }
+            _selectedItems ??= [];
 
             if (selected)
             {

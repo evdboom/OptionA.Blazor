@@ -8,15 +8,15 @@
         /// <summary>
         /// Additional classes to add to this specific content
         /// </summary>
-        List<string> AdditionalClasses { get; }
+        IList<string> AdditionalClasses { get; }
         /// <summary>
         /// Classes to remove from the defaults provided by the <see cref="IBlogDataProvider"/>
         /// </summary>
-        List<string> RemovedClasses { get; }
+        IList<string> RemovedClasses { get; }
         /// <summary>
         /// Attributes to add to this specific content
         /// </summary>
-        Dictionary<string, object?> Attributes { get; }
+        IDictionary<string, object?> Attributes { get; }
         /// <summary>
         /// Type of content
         /// </summary>

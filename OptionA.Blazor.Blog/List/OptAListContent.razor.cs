@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace OptionA.Blazor.Blog
 {
+    /// <summary>
+    /// Content for list items
+    /// </summary>
     public partial class OptAListContent
     {
         /// <summary>
@@ -20,11 +23,8 @@ namespace OptionA.Blazor.Blog
                 return;
             }
 
-            _content = Content.Items.Count > 0
-                ? Content.Items
-                    .Select(item => new TextContent { Content = item }) 
-                : Content.ItemsFromString
-                    .Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)
+            _content = Content.Items
+                    .Where(item => !string.IsNullOrEmpty(item))
                     .Select(item => new TextContent { Content = item });
 
             await InvokeAsync(StateHasChanged);

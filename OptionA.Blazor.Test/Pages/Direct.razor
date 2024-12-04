@@ -28,16 +28,14 @@
                         NameMappings="_nameMappings"
                         TitleMappings="_titleMappings"
                         @bind-Value="_selectedEnum"
-                        Orientation="@Orientation"
-                        Title="@_radioTitle"/>
+                        Orientation="@Orientation"/>
         <OptAEnumCheckboxGroup TEnum="TestEnum"
                         OrderDescending="_orderDescending"
                         OrderMode="_orderMode"
                         NameMappings="_nameMappings"
                         TitleMappings="_titleMappings"
                         @bind-Value="_selectedEnums"
-                        Orientation="@Orientation"
-                        Title="@_radioTitle"/>
+                        Orientation="@Orientation"/>
     <span>@_selectedEnum</span>
     @if (_selectedEnums != null)
     {
@@ -110,21 +108,17 @@
             <span>Horizontal</span>
         }
     </button>
-    <OptAInputText @bind-Value="_radioTitle"/>
     <OptAInputRadioGroup TValue="TestObject"
                 Items="_items"
                 DisplayValue="DisplayValue"
                 TitleValue="TitleValue"
                 @bind-Value="_selectedItem"
                 OrderComparer="Comparer"
-                Orientation="@Orientation"
-                Title="@_radioTitle"/>
+                Orientation="@Orientation"/>
     <span>@_selectedItem?.Name</span>
 </div>
 <div>
-    <OptAInputCheckbox @bind-Value="_inputCheckbox"
-                       Attributes="@GetTitle()"
-                       Description="@_radioTitle"/>
+    <OptAInputCheckbox @bind-Value="_inputCheckbox"/>
     <span>@_inputCheckbox</span>
 </div>
 <div>
@@ -134,8 +128,7 @@
                          TitleValue="TitleValue"
                          @bind-Value="_selectedItems"
                          OrderComparer="Comparer"
-                         Orientation="@Orientation"
-                         Title="@_radioTitle" />
+                         Orientation="@Orientation"/>
 <span>
         @if (_selectedItems != null)
         {

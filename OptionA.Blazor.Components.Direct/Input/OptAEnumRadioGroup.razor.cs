@@ -38,11 +38,6 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public bool OrderDescending { get; set; }
         /// <summary>
-        /// Optional title for the radio group
-        /// </summary>
-        [Parameter]
-        public string? Title { get; set; }
-        /// <summary>
         ///Orientation of the radio group, default is vertical
         /// </summary>
         [Parameter]
@@ -71,7 +66,7 @@ namespace OptionA.Blazor.Components
             {
                 if (_values is null)
                 {
-                    return Enumerable.Empty<TEnum>();
+                    return [];
                 }
 
                 return OrderMode switch

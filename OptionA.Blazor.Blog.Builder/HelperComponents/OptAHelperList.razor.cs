@@ -11,7 +11,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// List of items
         /// </summary>
         [Parameter]
-        public List<string>? Items { get; set; }
+        public IList<string>? Items { get; set; }
         /// <summary>
         /// Label for the list
         /// </summary>

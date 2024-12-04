@@ -4,28 +4,12 @@
 
 @typeparam TValue
 
-@if (!string.IsNullOrEmpty(Title))
-{
-    <fieldset @attributes="@GetSetAttributes()">
-        <legend>@Title</legend>
-        <div @attributes="@GetAllAttributes()">
-            <InputRadioGroup @bind-Value="InternalValue">
-                @foreach (var item in OrderedItems)
-                {
-                    <label @attributes="@GetOptionLabelAttributes(item.Value)"><InputRadio Value="@item.Index" /> @GetDisplayName(item.Value)</label>
-                }
-            </InputRadioGroup>
-        </div>
-    </fieldset>
-}
-else
-{
-    <div @attributes="@GetAllAttributes()">
-        <InputRadioGroup @bind-Value="InternalValue">
-            @foreach (var item in OrderedItems)
-            {
-                <label @attributes="@GetOptionLabelAttributes(item.Value)"><InputRadio Value="@item.Index" /> @GetDisplayName(item.Value)</label>
-            }
-        </InputRadioGroup>
-    </div>
-}
+
+<div @attributes="@GetAllAttributes()">
+    <InputRadioGroup @bind-Value="InternalValue">
+        @foreach (var item in OrderedItems)
+        {
+            <label @attributes="@GetOptionLabelAttributes(item.Value)"><InputRadio Value="@item.Index" /> @GetDisplayName(item.Value)</label>
+        }
+    </InputRadioGroup>
+</div>

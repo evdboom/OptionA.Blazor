@@ -38,12 +38,7 @@ namespace OptionA.Blazor.Components
         [Parameter]
         public bool OrderDescending { get; set; }
         /// <summary>
-        /// Optional title for the radio group
-        /// </summary>
-        [Parameter]
-        public string? Title { get; set; }
-        /// <summary>
-        ///Orientation of the radio group, default is vertical
+        ///Orientation of the input group, default is vertical
         /// </summary>
         [Parameter]
         public Orientation? Orientation { get; set; }
@@ -57,7 +52,7 @@ namespace OptionA.Blazor.Components
             {
                 if (_values is null)
                 {
-                    return Enumerable.Empty<TEnum>();
+                    return [];
                 }
 
                 return OrderMode switch
@@ -108,9 +103,7 @@ namespace OptionA.Blazor.Components
                 _selectedItems.Remove(value);
             }
 
-            Value = _selectedItems
-                .Order()
-                .ToList();
+            Value = [.. _selectedItems.Order()];
 
             if (ValueChanged.HasDelegate)
             {

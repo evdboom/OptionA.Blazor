@@ -45,5 +45,19 @@ namespace OptionA.Blazor.Blog.Builder.Parts
         public EventCallback MovedDown { get; set; }
         [Inject]
         private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
+
+        private int _inputMethod;
+
+        private string ItemsFromString
+        {
+            get => string.Join(Environment.NewLine, Content?.Items ?? []) ?? string.Empty;
+            set
+            {
+                if (Content is not null)
+                {
+                    Content.Items = [.. value.Split(Environment.NewLine)];
+                }
+            }
+        }
     }
 }

@@ -8,15 +8,15 @@ namespace OptionA.Blazor.Test.Pages
         private bool _orderDescending;
         private EnumOrder _orderMode;
         private TestEnum _selectedEnum;
-        private IEnumerable<TestEnum> _selectedEnums;
-        private Dictionary<TestEnum, string> _nameMappings = new()
+        private IEnumerable<TestEnum>? _selectedEnums;
+        private readonly Dictionary<TestEnum, string> _nameMappings = new()
         {
             { TestEnum.One, "1_" },
             { TestEnum.Two, "2_" },
             { TestEnum.Four, "4_" },
             { TestEnum.Eight, "8_" }
         };
-        private Dictionary<TestEnum, string> _titleMappings = new()
+        private readonly Dictionary<TestEnum, string> _titleMappings = new()
         {
             { TestEnum.One, "OneT" },
             { TestEnum.Two, "TwoT" },
@@ -29,11 +29,10 @@ namespace OptionA.Blazor.Test.Pages
         private string? _selectedText2;
 
         private bool _radioOrientationVertical;
-        private string? _radioTitle;
         private bool _autoGrow;
         private bool _inputCheckbox;
 
-        private IEnumerable<TestObject> _items =
+        private readonly IEnumerable<TestObject> _items =
         [
             new TestObject
             {
@@ -80,15 +79,6 @@ namespace OptionA.Blazor.Test.Pages
                 EnumOrder.DisplayValue => EnumOrder.Value,
                 _ => throw new ArgumentOutOfRangeException()
             };
-        }
-
-        private Dictionary<string, object?> GetTitle()
-        {
-            return new Dictionary<string, object?>
-            {
-                ["title"] = _radioTitle
-            };
-
         }
     }
 }
