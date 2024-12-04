@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 
 namespace OptionA.Blazor.Components
 {
     /// <summary>
-    /// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputSelect{TValue}"/> where TValue is an <see cref="Enum"/>
+    /// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputRadioGroup{TValue}"/> where TValue is an <see cref="Enum"/>
     /// </summary>
-    public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
+    public partial class OptAEnumRadioGroup<TEnum> where TEnum : struct, Enum
     {
         /// <summary>
         /// Selected Value
         /// </summary>
         [Parameter]
-        public TEnum Value { get; set; }        
+        public TEnum Value { get; set; }
         /// <summary>
         /// Occurs when the value is updated
         /// </summary>
@@ -37,6 +37,11 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public bool OrderDescending { get; set; }
+        /// <summary>
+        ///Orientation of the radio group, default is vertical
+        /// </summary>
+        [Parameter]
+        public Orientation? Orientation { get; set; }
 
         private TEnum InternalValue
         {
@@ -61,7 +66,7 @@ namespace OptionA.Blazor.Components
             {
                 if (_values is null)
                 {
-                    return Enumerable.Empty<TEnum>();
+                    return [];
                 }
 
                 return OrderMode switch
@@ -96,15 +101,30 @@ namespace OptionA.Blazor.Components
         private Dictionary<string, object?> GetAllAttributes()
         {
             var result = GetAttributes();
-            result["opta-enum-select"] = true;
+            result["opta-radio-group"] = true;
             if (TryGetClasses(null, out var classes))
             {
                 result["class"] = classes;
             }
+            if (Orientation == Components.Orientation.Horizontal)
+            {
+                result["horizontal"] = true;
+            }
             return result;
         }
 
-        private string? GetDisplayName(TEnum value) 
+        private Dictionary<string, object?> GetSetAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-field-set"] = true
+            };
+
+            return result;
+        }
+
+
+        private string? GetDisplayName(TEnum value)
         {
             if (NameMappings is not null && NameMappings.TryGetValue(value, out var name))
             {
@@ -114,12 +134,9 @@ namespace OptionA.Blazor.Components
             return $"{value}";
         }
 
-        private Dictionary<string, object?> GetOptionAttributes(TEnum value) 
+        private Dictionary<string, object?> GetOptionLabelAttributes(TEnum value)
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["value"] = value
-            };
+            var result = new Dictionary<string, object?>();
 
             if (TitleMappings is not null && TitleMappings.TryGetValue(value, out var title))
             {

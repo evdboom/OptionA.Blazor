@@ -8,14 +8,15 @@ namespace OptionA.Blazor.Test.Pages
         private bool _orderDescending;
         private EnumOrder _orderMode;
         private TestEnum _selectedEnum;
-        private Dictionary<TestEnum, string> _nameMappings = new()
+        private IEnumerable<TestEnum>? _selectedEnums;
+        private readonly Dictionary<TestEnum, string> _nameMappings = new()
         {
             { TestEnum.One, "1_" },
             { TestEnum.Two, "2_" },
             { TestEnum.Four, "4_" },
             { TestEnum.Eight, "8_" }
         };
-        private Dictionary<TestEnum, string> _titleMappings = new()
+        private readonly Dictionary<TestEnum, string> _titleMappings = new()
         {
             { TestEnum.One, "OneT" },
             { TestEnum.Two, "TwoT" },
@@ -27,9 +28,11 @@ namespace OptionA.Blazor.Test.Pages
         private string? _selectedText;
         private string? _selectedText2;
 
+        private bool _radioOrientationVertical;
         private bool _autoGrow;
+        private bool _inputCheckbox;
 
-        private IEnumerable<TestObject> _items =
+        private readonly IEnumerable<TestObject> _items =
         [
             new TestObject
             {
@@ -61,8 +64,10 @@ namespace OptionA.Blazor.Test.Pages
         private string? TitleValue(TestObject item) => item.Value;
 
         private TestObject? _selectedItem;
+        private IEnumerable<TestObject>? _selectedItems;
         private bool _useComparer;
 
+        private Orientation Orientation => _radioOrientationVertical ? Orientation.Vertical : Orientation.Horizontal;
         private TestObjectComparer? Comparer => _useComparer ? new TestObjectComparer() : null;
 
         private void ChangeOrderMode()
@@ -75,6 +80,5 @@ namespace OptionA.Blazor.Test.Pages
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-
     }
 }

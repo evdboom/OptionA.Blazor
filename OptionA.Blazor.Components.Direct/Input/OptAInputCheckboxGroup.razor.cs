@@ -1,22 +1,24 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Components.Direct.Input.Internal;
 
 namespace OptionA.Blazor.Components
 {
     /// <summary>
-    /// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputSelect{TValue}"/>
+    /// Implementation of a group of <see cref="Microsoft.AspNetCore.Components.Forms.InputCheckbox"/> effectively a creating a multiselect <see cref="Microsoft.AspNetCore.Components.Forms.InputRadioGroup{TValue}"/>
     /// </summary>
-    public partial class OptASelect<TValue>
+    /// <typeparam name="TValue"></typeparam>
+    public partial class OptAInputCheckboxGroup<TValue>
     {
         /// <summary>
-        /// Selected Value
+        /// Selected Values
         /// </summary>
         [Parameter]
-        public TValue? Value { get; set; }
+        public IEnumerable<TValue>? Value { get; set; }
         /// <summary>
         /// Occurs when the value is updated
         /// </summary>
         [Parameter]
-        public EventCallback<TValue> ValueChanged { get; set; }
+        public EventCallback<IEnumerable<TValue>> ValueChanged { get; set; }
         /// <summary>
         /// Optional name mappings for display value
         /// </summary>
@@ -42,6 +44,11 @@ namespace OptionA.Blazor.Components
         /// </summary>
         [Parameter]
         public IEnumerable<TValue>? Items { get; set; }
+        /// <summary>
+        ///Orientation of the input group, default is vertical
+        /// </summary>
+        [Parameter]
+        public Orientation? Orientation { get; set; }
 
         /// <inheritdoc/>
         protected override void OnParametersSet()
@@ -50,48 +57,18 @@ namespace OptionA.Blazor.Components
                 .Select((item, index) => (item, index))
                 .ToDictionary(i => i.index, i => i.item);
 
-            if (Value is not null)
+            if (_items is not null)
             {
-                InternalValue = _items
-                    ?.FirstOrDefault(i => i.Value?.Equals(Value) ?? false)
-                    .Key;
-            }
-            else
-            {
-                InternalValue = 0;
-            }
+                _selectedItems = Value?
+                .Select(value => _items
+                    .FirstOrDefault(i => i.Value?.Equals(value) ?? false)
+                    .Key)
+                .ToHashSet();
+            }                     
         }
 
-        private Dictionary<int, TValue>? _items;
-
-        private int? _internalValue;
-        private int? InternalValue
-        {
-            get => _internalValue;
-            set
-            {
-                if (_items is null)
-                {
-                    return;
-                }
-
-                if (_internalValue != value)
-                {
-                    _internalValue = value;
-                    if (value.HasValue)
-                    {
-                        Value = _items.TryGetValue(value.Value, out var item)
-                            ? item
-                            : default;
-                    }
-                    else
-                    {
-                        Value = default;
-                    }
-                    ValueChanged.InvokeAsync(Value);
-                }
-            }
-        }
+        private HashSet<int>? _selectedItems;
+        private Dictionary<int, TValue>? _items;               
 
         private IEnumerable<(int Index, TValue Value)> OrderedItems
         {
@@ -99,7 +76,7 @@ namespace OptionA.Blazor.Components
             {
                 if (_items is null)
                 {
-                    return Enumerable.Empty<(int Index, TValue Value)>();
+                    return [];
                 }
 
                 if (OrderComparer is not null)
@@ -125,14 +102,49 @@ namespace OptionA.Blazor.Components
             }
         }
 
+        private void OnSelectedChanged(int index, bool selected)
+        {
+            if (_items is null)
+            {
+                return;
+            }
+
+            _selectedItems ??= [];
+
+            if (selected)
+            {
+                _selectedItems.Add(index);
+            }
+            else
+            {
+                _selectedItems.Remove(index);
+            }
+
+            Value = _selectedItems
+                .Order()
+                .Select(index => _items[index])
+                .ToList();
+
+            if (ValueChanged.HasDelegate)
+            {
+                ValueChanged.InvokeAsync(Value);
+            }
+        }
+
         private Dictionary<string, object?> GetAllAttributes()
         {
             var result = GetAttributes();
-            result["opta-select"] = true;
+            result["opta-checkbox-group"] = true;
             if (TryGetClasses(null, out var classes))
             {
                 result["class"] = classes;
             }
+
+            if (Orientation == Components.Orientation.Horizontal)
+            {
+                result["horizontal"] = true;
+            }
+
             return result;
         }
 
@@ -146,18 +158,24 @@ namespace OptionA.Blazor.Components
             return $"{value}";
         }
 
-        private Dictionary<string, object?> GetOptionAttributes(int index, TValue value)
+        private Dictionary<string, object?> GetCheckboxAttributes(TValue value)
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["value"] = index
-            };
+            var result = new Dictionary<string, object?>();
 
             if (TitleValue is not null)
             {
                 result["title"] = TitleValue(value);
             }
 
+            return result;
+        }
+
+        private Dictionary<string, object?> GetSetAttributes()
+        {
+            var result = new Dictionary<string, object?>
+            {
+                ["opta-field-set"] = true
+            };
             return result;
         }
     }

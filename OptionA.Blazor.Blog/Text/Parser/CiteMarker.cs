@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using OptionA.Blazor.Blog.Core.Extensions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OptionA.Blazor.Blog.Text.Parser
 {

@@ -1,4 +1,5 @@
-﻿using System.Runtime.Serialization;
+﻿using OptionA.Blazor.Blog.Core.Extensions;
+using System.Runtime.Serialization;
 using System.Text.Json;
 
 namespace OptionA.Blazor.Blog.Services
@@ -12,7 +13,7 @@ namespace OptionA.Blazor.Blog.Services
         public string ToJson(Post post, JsonSerializerOptions? options = null)
         {
             var items = new Dictionary<string, object>();
-            if (post.Tags.Any())
+            if (post.Tags.Count > 0)
             {
                 items[nameof(post.Tags)] = post.Tags;
             }
@@ -30,11 +31,8 @@ namespace OptionA.Blazor.Blog.Services
         /// <inheritdoc/>
         public Post CreateFromJson(string json)
         {
-            var items = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
-            if (items == null)
-            {
-                throw new InvalidCastException("No valid json for post");
-            }
+            var items = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json) 
+                ?? throw new InvalidCastException("No valid json for post");
 
             var post = new Post();
             if (items.TryGetValue(nameof(Post.Tags), out var tags))
@@ -143,15 +141,15 @@ namespace OptionA.Blazor.Blog.Services
                     break;
                 case ContentType.Quote:
                     var quote = (QuoteContent)content;
-                    if (quote.AdditionalSourceClasses.Any())
+                    if (quote.AdditionalSourceClasses.Count > 0)
                     {
                         result[nameof(quote.AdditionalSourceClasses)] = quote.AdditionalSourceClasses;
                     }
-                    if (quote.RemovedSourceClasses.Any())
+                    if (quote.RemovedSourceClasses.Count > 0)
                     {
                         result[nameof(quote.RemovedSourceClasses)] = quote.RemovedSourceClasses;
                     }
-                    if (quote.SourceAttributes.Any())
+                    if (quote.SourceAttributes.Count > 0)
                     {
                         result[nameof(quote.SourceAttributes)] = quote.SourceAttributes;
                     }
@@ -198,7 +196,7 @@ namespace OptionA.Blazor.Blog.Services
             return result;
         }
 
-        private IContent CreateFromJson(Dictionary<string, JsonElement> content)
+        private static IContent CreateFromJson(Dictionary<string, JsonElement> content)
         {
             if (!content.TryGetValue(nameof(IContent.Type), out var contentType))
             {
@@ -245,8 +243,8 @@ namespace OptionA.Blazor.Blog.Services
                 ContentType.Icon => new IconContent
                 {
                     Paths = content.TryGetValue(nameof(IconContent.Paths), out var paths)
-                        ? JsonSerializer.Deserialize<List<string>>(paths) ?? new()
-                        : new(),
+                        ? JsonSerializer.Deserialize<List<string>>(paths) ?? []
+                        : [],
                     Width = content.TryGetValue(nameof(IconContent.Width), out var width)
                         ? JsonSerializer.Deserialize<string>(width) ?? string.Empty
                         : default,
@@ -269,14 +267,14 @@ namespace OptionA.Blazor.Blog.Services
                         ? JsonSerializer.Deserialize<string>(source) ?? string.Empty
                         : default,
                     AdditionalSourceClasses = content.TryGetValue(nameof(QuoteContent.AdditionalSourceClasses), out var sourceClasses)
-                        ? JsonSerializer.Deserialize<List<string>>(sourceClasses) ?? new()
-                        : new(),
+                        ? JsonSerializer.Deserialize<List<string>>(sourceClasses) ?? []
+                        : [],
                     RemovedSourceClasses = content.TryGetValue(nameof(QuoteContent.RemovedSourceClasses), out var removedClasses)
-                        ? JsonSerializer.Deserialize<List<string>>(removedClasses) ?? new()
-                        : new(),
+                        ? JsonSerializer.Deserialize<List<string>>(removedClasses) ?? []
+                        : [],
                     SourceAttributes = content.TryGetValue(nameof(QuoteContent.SourceAttributes), out var sourceAttributes)
                         ? DeserializeAttributes(sourceAttributes)
-                        : new(),
+                        : [],
                 },
                 ContentType.Image => new ImageContent
                 {
@@ -317,11 +315,11 @@ namespace OptionA.Blazor.Blog.Services
 
             if (content.TryGetValue(nameof(IContent.AdditionalClasses), out var additional))
             {
-                result.AdditionalClasses.AddRange(JsonSerializer.Deserialize<List<string>>(additional) ?? new());
+                result.AdditionalClasses.AddRange(JsonSerializer.Deserialize<List<string>>(additional) ?? []);
             }
             if (content.TryGetValue(nameof(IContent.RemovedClasses), out var removed))
             {
-                result.RemovedClasses.AddRange(JsonSerializer.Deserialize<List<string>>(removed) ?? new());
+                result.RemovedClasses.AddRange(JsonSerializer.Deserialize<List<string>>(removed) ?? []);
             }
             if (content.TryGetValue(nameof(IContent.Attributes), out var attributes))
             {
@@ -335,7 +333,7 @@ namespace OptionA.Blazor.Blog.Services
             return result;
         }
 
-        private Dictionary<string, object?> DeserializeAttributes(JsonElement attributes)
+        private static Dictionary<string, object?> DeserializeAttributes(JsonElement attributes)
         {
             var result = new Dictionary<string, object?>();
             var values = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(attributes);

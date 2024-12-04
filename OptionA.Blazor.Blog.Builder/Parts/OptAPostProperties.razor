@@ -20,10 +20,10 @@
         <OptAInputTextArea @bind-Value="Post.Subtitle" 
                            Attributes="GetSubtitleAttributes()" 
                            AutoGrow="true" />
-        <OptAListBuilder Items="Post.Tags"
-                         Label="Tags"
-                         ItemPlaceholder="Tag..."
-                         ItemTitle="Add a tag to the post"
-                         ContentChanged="async () => await PropertyChanged.InvokeAsync(nameof(Post.Tags))" />
+        <OptAHelperList Items="Post.Tags"
+                        Label="Tags"
+                        ItemPlaceholder="Tag..."
+                        ItemTitle="Add a tag to the post"
+                        ContentChanged="async () => await PropertyChanged.InvokeAsync(nameof(Post.Tags))" />
     </OptABlogComponent>
 }

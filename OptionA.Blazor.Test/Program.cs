@@ -45,7 +45,8 @@ builder.Services
             [ContentType.Code] = IconButton("bi bi-code-slash"),
             [ContentType.Quote] = IconButton("bi bi-chat-left-quote"),
             [ContentType.Image] = IconButton("bi bi-image"),
-            [ContentType.Frame] = IconButton("bi bi-window")
+            [ContentType.Frame] = IconButton("bi bi-window"),
+            [ContentType.List] = IconButton("bi bi-list-ul"),
         };
         if (config.PostBuilderOptions is not null && config.PostBuilderOptions.TryGetValue(BuilderType.ComponentBar, out var componentBar))
         {

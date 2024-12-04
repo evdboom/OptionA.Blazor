@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
+using OptionA.Blazor.Blog.Core.Extensions;
 using OptionA.Blazor.Blog.Services;
 using OptionA.Blazor.Storage;
 

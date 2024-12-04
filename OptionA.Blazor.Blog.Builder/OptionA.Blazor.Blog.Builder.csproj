@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>9.0.1</Version>
+	  <Version>9.1.0</Version>
 	  <PackageReleaseNotes>
-      Title of code was erroneously set to 'Paragraph' instead of 'Code'
+      Update of direct package with new select components (radio and checkbox)
     </PackageReleaseNotes>
   </PropertyGroup>
 

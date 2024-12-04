@@ -1,0 +1,37 @@
+﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
+@using OptionA.Blazor.Components
+@if (Content is not null)
+{
+    <OptABlogComponent Name="**List**"
+                       ContentChanged="ContentChanged"
+                       ContentRemoved="ContentRemoved"
+                       ContentIndex="ContentIndex"
+                       TotalContentCount="TotalContentCount"
+                       MovedUp="MovedUp"
+                       MovedDown="MovedDown"
+                       Content="Content">
+    <label>
+        <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "List Type")"/>
+    </label>
+    <OptAEnumRadioGroup @bind-Value="Content.ListType" />
+    <label>
+        <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Input Method")" />
+    </label>
+    <OptAInputRadioGroup @bind-Value="_inputMethod"
+                         Items="@([0,1])"
+                         DisplayValue="@((value) => value == 0 ? "Add to list" : "From string")" />
+    @if (_inputMethod == 0)
+    {
+            <OptAHelperList Items="Content.Items"
+                            Label="Content"
+                            ItemPlaceholder="item..."
+                            ItemTitle="Add an entry to the list"
+                            ContentChanged="ContentChanged" />
+    }
+    else
+    {
+            <OptAInputTextArea @bind-Value="ItemsFromString"
+                               Autogrow="true" />
+    }
+    </OptABlogComponent>
+}
