@@ -25,7 +25,7 @@ namespace OptionA.Blazor.Blog
 
             _content = Content.Items
                     .Where(item => !string.IsNullOrEmpty(item))
-                    .Select(item => new TextContent { Content = item });
+                    .Select(item => new InlineContent { Content = item });
 
             await InvokeAsync(StateHasChanged);
         }

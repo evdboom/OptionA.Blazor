@@ -72,10 +72,25 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         [Inject]
         private IJSRuntime JsRuntime { get; set; } = null!;
 
+        private List<string>? _additionalAttributes;
+
         private bool _showDialog;
         private bool _awaitShow, _awaitClose;
         private ElementReference _dialog;
         private IJSObjectReference? _module;
+
+        /// <inheritdoc/>
+        protected override void OnParametersSet()
+        {
+            if (Content is not null)
+            {
+                _additionalAttributes = Content.Attributes.Select(x => $"{x.Key}={x.Value}").ToList();
+            }
+            else
+            {
+                _additionalAttributes = null;
+            }
+        }
 
         private void EditProperties()
         {
