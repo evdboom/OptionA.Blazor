@@ -303,6 +303,16 @@ namespace OptionA.Blazor.Blog.Services
                         ? JsonSerializer.Deserialize<string>(height)
                         : default,
                 },
+                ContentType.List => new ListContent
+                {
+                    ListType = content.TryGetValue(nameof(ListContent.ListType), out var listType)
+                        ? JsonSerializer.Deserialize<ListType>(listType)
+                        : ListType.UnorderedList,
+                    Items = content.TryGetValue(nameof(ListContent.Items), out var items)
+                        ? JsonSerializer.Deserialize<List<string>>(items) ?? []
+                        : [],
+
+                },
                 _ => throw new NotSupportedException($"Canoot create postcontent for type {type}")
             };
 
