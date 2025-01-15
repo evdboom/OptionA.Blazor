@@ -38,7 +38,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         /// <inheritdoc/>
         protected override void OnParametersSet()
         {
-            if (Items is not null && !Items.Any())
+            if (Items is not null && !Items.Any(string.IsNullOrEmpty))
             {
                 AddItem();                
             }
