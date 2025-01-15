@@ -44,6 +44,11 @@
                                 ItemTitle="Default classes to remove"
                                 Label="Removed default classes"
                                 Items="Content.RemovedClasses" />
+                <OptAHelperList ContentChanged="ContentChanged"
+                                ItemPlaceholder="attribute=value.."
+                                ItemTitle="Additional attributes to set"
+                                Label="Additional attributes"
+                                Items="_additionalAttributes" />
                 @if (AdditionalProperties is not null)
                 {
                     @AdditionalProperties
