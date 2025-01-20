@@ -21,10 +21,6 @@
             </label>
             <OptAInputText @bind-Value="Content.OtherLanguage" Attributes="@GetOtherLanguageAttributes()" />
         }
-        <label @attributes="@GetLabelAttributes(OtherLanguageId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Other")" />
-        </label>
-        <OptAInputText @bind-Value="Content.OtherLanguage" Attributes="@GetOtherLanguageAttributes()" />
         <label @attributes="@GetLabelAttributes(CodeId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Code")" />
         </label>
