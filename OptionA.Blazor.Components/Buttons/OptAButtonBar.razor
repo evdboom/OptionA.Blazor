@@ -3,21 +3,21 @@
 
 <div @attributes="@GetBarAttributes()">
     @if (StartButtons is not null)
-    {
-        <div @attributes="@GetGroupAttributes("start")">
+{
+    <div @attributes="@GetGroupAttributes("start")">
             @StartButtons
         </div>
-    }
+}
     @if (CenterButtons is not null)
-    {
-        <div @attributes="@GetGroupAttributes("center")">
+{
+    <div @attributes="@GetGroupAttributes("center")">
             @CenterButtons
         </div>
-    }
+}
     @if (EndButtons is not null)
-    {
-        <div @attributes="@GetGroupAttributes("end")">
+{
+    <div @attributes="@GetGroupAttributes("end")">
             @EndButtons
         </div>
-    }
+}
 </div>

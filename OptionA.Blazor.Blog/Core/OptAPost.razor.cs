@@ -1,87 +1,86 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog
+namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Post component
+/// </summary>
+public partial class OptAPost
 {
     /// <summary>
-    /// Post component
+    /// Post to display
     /// </summary>
-    public partial class OptAPost
+    [Parameter]
+    public Post? Post { get; set; }
+    [Inject]
+    private IBlogDataProvider DataProvider { get; set; } = null!;
+
+    private HeaderContent? _title;
+    private IEnumerable<IContent>? _tags;
+    private BlockContent? _date;
+    private BlockContent? _subtitle;
+
+    /// <inheritdoc/>
+    protected override void OnParametersSet()
     {
-        /// <summary>
-        /// Post to display
-        /// </summary>
-        [Parameter]
-        public Post? Post { get; set; }
-        [Inject]
-        private IBlogDataProvider DataProvider { get; set; } = null!;
-
-        private HeaderContent? _title;
-        private IEnumerable<IContent>? _tags;
-        private BlockContent? _date;
-        private BlockContent? _subtitle;
-
-        /// <inheritdoc/>
-        protected override void OnParametersSet()
+        if (Post == null)
         {
-            if (Post == null)
+            _title = null;
+            _tags = null;
+            _date = null;
+            _subtitle = null;
+            return;
+        }
+        _title = new HeaderContent
+        {
+            Content = Post.Title,
+            Size = DataProvider.PostHeaderSize
+        };
+        if (!string.IsNullOrEmpty(DataProvider.PostTitleClass))
+        {
+            _title.AdditionalClasses.Add(DataProvider.PostTitleClass);
+        }
+        _tags = Post.Tags
+            .Select(GetTagContent);
+        _date = new BlockContent
+        {
+            Content = DataProvider.PostDateDisplay.ToDateFormat(Post.Date)
+        };
+        if (!string.IsNullOrEmpty(DataProvider.PostDateClass))
+        {
+            _date.AdditionalClasses.Add(DataProvider.PostDateClass);
+        }
+        if (!string.IsNullOrEmpty(Post.Subtitle))
+        {
+            _subtitle = new BlockContent
             {
-                _title = null;
-                _tags = null;
-                _date = null;
-                _subtitle = null;
-                return;
-            }
-            _title = new HeaderContent
-            {
-                Content = Post.Title,
-                Size = DataProvider.PostHeaderSize
+                Content = Post.Subtitle
             };
-            if (!string.IsNullOrEmpty(DataProvider.PostTitleClass))
+            if (!string.IsNullOrEmpty(DataProvider.PostSubtitleClass))
             {
-                _title.AdditionalClasses.Add(DataProvider.PostTitleClass);
-            }
-            _tags = Post.Tags
-                .Select(GetTagContent);
-            _date = new BlockContent
-            {
-                Content = DataProvider.PostDateDisplay.ToDateFormat(Post.Date)
-            };
-            if (!string.IsNullOrEmpty(DataProvider.PostDateClass))
-            {
-                _date.AdditionalClasses.Add(DataProvider.PostDateClass);
-            }
-            if (!string.IsNullOrEmpty(Post.Subtitle))
-            {
-                _subtitle = new BlockContent
-                {
-                    Content = Post.Subtitle
-                };
-                if (!string.IsNullOrEmpty(DataProvider.PostSubtitleClass))
-                {
-                    _subtitle.AdditionalClasses.Add(DataProvider.PostSubtitleClass);
-                }
+                _subtitle.AdditionalClasses.Add(DataProvider.PostSubtitleClass);
             }
         }
+    }
 
-        private IContent GetTagContent(string tag)
-        {
-            IContent result = !string.IsNullOrEmpty(DataProvider.TagOverviewHref)
-                ? new LinkContent
-                {
-                    Content = tag,
-                    Href = $"{DataProvider.TagOverviewHref}/{tag}".ToLowerInvariant(),
-                    Target = "_self"
-                }
-                : new InlineContent
-                {
-                    Content = tag
-                };
-            if (!string.IsNullOrEmpty(DataProvider.TagClass))
+    private IContent GetTagContent(string tag)
+    {
+        IContent result = !string.IsNullOrEmpty(DataProvider.TagOverviewHref)
+            ? new LinkContent
             {
-                result.AdditionalClasses.Add(DataProvider.TagClass);
+                Content = tag,
+                Href = $"{DataProvider.TagOverviewHref}/{tag}".ToLowerInvariant(),
+                Target = "_self"
             }
-
-            return result;
+            : new InlineContent
+            {
+                Content = tag
+            };
+        if (!string.IsNullOrEmpty(DataProvider.TagClass))
+        {
+            result.AdditionalClasses.Add(DataProvider.TagClass);
         }
+
+        return result;
     }
 }

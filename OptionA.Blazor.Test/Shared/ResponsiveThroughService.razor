@@ -3,34 +3,34 @@
 <h4>All dimensions</h4>
 <ul>
     @if (_dimensionBreakPoints is not null)
+{
+    @foreach (var dimension in _dimensionBreakPoints)
     {
-        @foreach (var dimension in _dimensionBreakPoints)
-        {
-            <li>
+        <li>
                 @dimension.Key @dimension.Value
             </li>
-        }
     }
+}
 </ul>
 <br />
 <h4>Valid dimensions through function</h4>
 <ul>
     @foreach (var dimension in ValidThroughAll())
-    {
-        <li>
+{
+    <li>
             @dimension
         </li>
-    }
+}
 </ul>
 <br />
 <h4>Valid dimensions from service</h4>
 <ul>
     @foreach(var dimension in ResponsiveService.ValidDimensions())
-    {
-        <li>
+{
+    <li>
             @dimension
         </li>
-    }
+}
 </ul>
 <br />
 <h4>Dimension when changed</h4>

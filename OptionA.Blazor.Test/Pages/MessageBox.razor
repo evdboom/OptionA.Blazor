@@ -9,43 +9,43 @@
 </button>
 <button @onclick="() => _dismissable = !_dismissable">
     @if (_dismissable)
-    {
-        <span>Dismissable</span>
-    }
-    else
-    {
-        <span>Not Dismissable</span>
-    }
+{
+    <span>Dismissable</span>
+}
+else
+{
+    <span>Not Dismissable</span>
+}
 </button>
 <button @onclick="() => _withTitle = !_withTitle">
     @if (_withTitle)
-    {
-        <span>With title</span>
-    }
-    else
-    {
-        <span>Without title</span>
-    }
+{
+    <span>With title</span>
+}
+else
+{
+    <span>Without title</span>
+}
 </button>
 <button @onclick="() => _withTimeout = !_withTimeout">
     @if (_withTimeout)
-    {
-        <span>With timeout</span>
-    }
-    else
-    {
-        <span>Without timeout</span>
-    }
+{
+    <span>With timeout</span>
+}
+else
+{
+    <span>Without timeout</span>
+}
 </button>
 <button @onclick="() => _showTime = !_showTime">
     @if (_showTime)
-    {
-        <span>With time</span>
-    }
-    else
-    {
-        <span>Without time</span>
-    }
+{
+    <span>With time</span>
+}
+else
+{
+    <span>Without time</span>
+}
 </button>
 <OptAMessageBox Location="@_location"
                 ShowTime="@_showTime"/>

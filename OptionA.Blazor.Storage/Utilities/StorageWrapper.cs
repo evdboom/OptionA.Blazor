@@ -1,17 +1,16 @@
-﻿namespace OptionA.Blazor.Storage.Utilities
+﻿namespace OptionA.Blazor.Storage.Utilities;
+
+internal class StorageWrapper<T>
 {
-    internal class StorageWrapper<T>
+    public T Value { get; set; } = default!;
+
+    public StorageWrapper()
     {
-        public T Value { get; set; } = default!;
 
-        public StorageWrapper()
-        {
+    }
 
-        }
-
-        public StorageWrapper(T value)
-        {
-            Value = value;
-        }
+    public StorageWrapper(T value)
+    {
+        Value = value;
     }
 }

@@ -4,8 +4,8 @@
         @ChildContent
     </div>
     @if (!HideButtons)
-    {
-        <div @attributes="@DataProvider.GetAttributes(BuilderType.ButtonContainer)">
+{
+    <div @attributes="@DataProvider.GetAttributes(BuilderType.ButtonContainer)">
             <button type="button" @attributes="@GetRemoveAttributes()" @onclick="async () => await ContentRemoved.InvokeAsync()">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.RemoveButton, "Remove")"/>
             </button>
@@ -21,7 +21,7 @@
                 </button>
             </div>
         </div>
-    }
+}
 </div>
 @if (_showDialog && Content is not null)
 {
@@ -50,9 +50,9 @@
                                 Label="Additional attributes"
                                 Items="_additionalAttributes" />
                 @if (AdditionalProperties is not null)
-                {
-                    @AdditionalProperties
-                }
+            {
+                @AdditionalProperties
+            }
             </div>
         </section>
     </dialog>

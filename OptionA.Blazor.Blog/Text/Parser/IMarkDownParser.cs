@@ -1,15 +1,14 @@
-﻿namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Interface for markdownparsing
+/// </summary>
+public interface IMarkDownParser
 {
     /// <summary>
-    /// Interface for markdownparsing
+    /// Parse content into a collection of content items to render
     /// </summary>
-    public interface IMarkDownParser
-    {
-        /// <summary>
-        /// Parse content into a collection of content items to render
-        /// </summary>
-        /// <param name="content"></param>
-        /// <returns></returns>
-        IEnumerable<IContent> Parse(string? content);
-    }
+    /// <param name="content"></param>
+    /// <returns></returns>
+    IEnumerable<IContent> Parse(string? content);
 }

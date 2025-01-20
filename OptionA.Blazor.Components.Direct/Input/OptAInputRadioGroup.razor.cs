@@ -1,181 +1,180 @@
 using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Components
+namespace OptionA.Blazor.Components;
+
+/// <summary>
+/// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputRadioGroup{TValue}"/>
+/// </summary>
+public partial class OptAInputRadioGroup<TValue>
 {
     /// <summary>
-    /// Implementation of  <see cref="Microsoft.AspNetCore.Components.Forms.InputRadioGroup{TValue}"/>
+    /// Selected Value
     /// </summary>
-    public partial class OptAInputRadioGroup<TValue>
+    [Parameter]
+    public TValue? Value { get; set; }
+    /// <summary>
+    /// Occurs when the value is updated
+    /// </summary>
+    [Parameter]
+    public EventCallback<TValue> ValueChanged { get; set; }
+    /// <summary>
+    /// Optional name mappings for display value
+    /// </summary>
+    [Parameter]
+    public Func<TValue, string?>? DisplayValue { get; set; }
+    /// <summary>
+    /// Optional title mappings for title attribute of options
+    /// </summary>
+    [Parameter]
+    public Func<TValue, string?>? TitleValue { get; set; }
+    /// <summary>
+    /// True to order descending
+    /// </summary>
+    [Parameter]
+    public bool OrderDescending { get; set; }
+    /// <summary>
+    /// Optional comparer to order the items
+    /// </summary>
+    [Parameter]
+    public IComparer<TValue>? OrderComparer { get; set; }
+    /// <summary>
+    /// Values to display
+    /// </summary>
+    [Parameter]
+    public IEnumerable<TValue>? Items { get; set; }
+    /// <summary>
+    ///Orientation of the radio group, default is vertical
+    /// </summary>
+    [Parameter]
+    public Orientation? Orientation { get; set; }
+
+    /// <inheritdoc/>
+    protected override void OnParametersSet()
     {
-        /// <summary>
-        /// Selected Value
-        /// </summary>
-        [Parameter]
-        public TValue? Value { get; set; }
-        /// <summary>
-        /// Occurs when the value is updated
-        /// </summary>
-        [Parameter]
-        public EventCallback<TValue> ValueChanged { get; set; }
-        /// <summary>
-        /// Optional name mappings for display value
-        /// </summary>
-        [Parameter]
-        public Func<TValue, string?>? DisplayValue { get; set; }
-        /// <summary>
-        /// Optional title mappings for title attribute of options
-        /// </summary>
-        [Parameter]
-        public Func<TValue, string?>? TitleValue { get; set; }
-        /// <summary>
-        /// True to order descending
-        /// </summary>
-        [Parameter]
-        public bool OrderDescending { get; set; }
-        /// <summary>
-        /// Optional comparer to order the items
-        /// </summary>
-        [Parameter]
-        public IComparer<TValue>? OrderComparer { get; set; }
-        /// <summary>
-        /// Values to display
-        /// </summary>
-        [Parameter]
-        public IEnumerable<TValue>? Items { get; set; }
-        /// <summary>
-        ///Orientation of the radio group, default is vertical
-        /// </summary>
-        [Parameter]
-        public Orientation? Orientation { get; set; }
+        _items = Items?
+            .Select((item, index) => (item, index))
+            .ToDictionary(i => i.index, i => i.item);
 
-        /// <inheritdoc/>
-        protected override void OnParametersSet()
+        if (Value is not null)
         {
-            _items = Items?
-                .Select((item, index) => (item, index))
-                .ToDictionary(i => i.index, i => i.item);
-
-            if (Value is not null)
-            {
-                InternalValue = _items
-                    ?.FirstOrDefault(i => i.Value?.Equals(Value) ?? false)
-                    .Key;
-            }
-            else
-            {
-                InternalValue = 0;
-            }
+            InternalValue = _items
+                ?.FirstOrDefault(i => i.Value?.Equals(Value) ?? false)
+                .Key;
         }
-
-        private Dictionary<int, TValue>? _items;
-
-        private int? _internalValue;
-        private int? InternalValue
+        else
         {
-            get => _internalValue;
-            set
-            {
-                if (_items is null)
-                {
-                    return;
-                }
-
-                if (_internalValue != value)
-                {
-                    _internalValue = value;
-                    if (value.HasValue)
-                    {
-                        Value = _items.TryGetValue(value.Value, out var item)
-                            ? item
-                            : default;
-                    }
-                    else
-                    {
-                        Value = default;
-                    }
-                    ValueChanged.InvokeAsync(Value);
-                }
-            }
+            InternalValue = 0;
         }
+    }
 
-        private IEnumerable<(int Index, TValue Value)> OrderedItems
+    private Dictionary<int, TValue>? _items;
+
+    private int? _internalValue;
+    private int? InternalValue
+    {
+        get => _internalValue;
+        set
         {
-            get
+            if (_items is null)
             {
-                if (_items is null)
-                {
-                    return [];
-                }
+                return;
+            }
 
-                if (OrderComparer is not null)
+            if (_internalValue != value)
+            {
+                _internalValue = value;
+                if (value.HasValue)
                 {
-                    return OrderDescending
-                        ? _items
-                            .OrderByDescending(item => item.Value, OrderComparer)
-                            .Select(item => (item.Key, item.Value))
-                        : _items
-                            .OrderBy(item => item.Value, OrderComparer)
-                            .Select(item => (item.Key, item.Value));
+                    Value = _items.TryGetValue(value.Value, out var item)
+                        ? item
+                        : default;
                 }
                 else
                 {
-                    return OrderDescending
-                        ? _items
-                            .OrderByDescending(item => item.Key)
-                            .Select(item => (item.Key, item.Value))
-                        : _items
-                            .OrderBy(item => item.Key)
-                            .Select(item => (item.Key, item.Value));
+                    Value = default;
                 }
+                ValueChanged.InvokeAsync(Value);
             }
         }
+    }
 
-        private Dictionary<string, object?> GetAllAttributes()
+    private IEnumerable<(int Index, TValue Value)> OrderedItems
+    {
+        get
         {
-            var result = GetAttributes();
-            result["opta-radio-group"] = true;
-            if (TryGetClasses(null, out var classes))
+            if (_items is null)
             {
-                result["class"] = classes;
+                return [];
             }
 
-            if (Orientation == Components.Orientation.Horizontal)
+            if (OrderComparer is not null)
             {
-                result["horizontal"] = true;
+                return OrderDescending
+                    ? _items
+                        .OrderByDescending(item => item.Value, OrderComparer)
+                        .Select(item => (item.Key, item.Value))
+                    : _items
+                        .OrderBy(item => item.Value, OrderComparer)
+                        .Select(item => (item.Key, item.Value));
             }
-
-
-            return result;
+            else
+            {
+                return OrderDescending
+                    ? _items
+                        .OrderByDescending(item => item.Key)
+                        .Select(item => (item.Key, item.Value))
+                    : _items
+                        .OrderBy(item => item.Key)
+                        .Select(item => (item.Key, item.Value));
+            }
         }
-        private Dictionary<string, object?> GetSetAttributes()
+    }
+
+    private Dictionary<string, object?> GetAllAttributes()
+    {
+        var result = GetAttributes();
+        result["opta-radio-group"] = true;
+        if (TryGetClasses(null, out var classes))
         {
-            var result = new Dictionary<string, object?>
-            {
-                ["opta-field-set"] = true
-            };
-            return result;
+            result["class"] = classes;
         }
 
-        private string? GetDisplayName(TValue value)
+        if (Orientation == Components.Orientation.Horizontal)
         {
-            if (DisplayValue is not null)
-            {
-                return DisplayValue(value);
-            }
-
-            return $"{value}";
+            result["horizontal"] = true;
         }
 
-        private Dictionary<string, object?> GetOptionLabelAttributes(TValue value)
+
+        return result;
+    }
+    private Dictionary<string, object?> GetSetAttributes()
+    {
+        var result = new Dictionary<string, object?>
         {
-            var result = new Dictionary<string, object?>();
+            ["opta-field-set"] = true
+        };
+        return result;
+    }
 
-            if (TitleValue is not null)
-            {
-                result["title"] = TitleValue(value);
-            }
-
-            return result;
+    private string? GetDisplayName(TValue value)
+    {
+        if (DisplayValue is not null)
+        {
+            return DisplayValue(value);
         }
+
+        return $"{value}";
+    }
+
+    private Dictionary<string, object?> GetOptionLabelAttributes(TValue value)
+    {
+        var result = new Dictionary<string, object?>();
+
+        if (TitleValue is not null)
+        {
+            result["title"] = TitleValue(value);
+        }
+
+        return result;
     }
 }

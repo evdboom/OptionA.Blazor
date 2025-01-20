@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog
+namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Map content to correct components
+/// </summary>
+public partial class OptAChild
 {
     /// <summary>
-    /// Map content to correct components
+    /// Content to render
     /// </summary>
-    public partial class OptAChild
-    {
-        /// <summary>
-        /// Content to render
-        /// </summary>
-        [Parameter]
-        public IContent? Content { get; set; }
-    }
+    [Parameter]
+    public IContent? Content { get; set; }
 }
 

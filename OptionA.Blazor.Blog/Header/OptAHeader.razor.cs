@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog
+namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Header component
+/// </summary>
+public partial class OptAHeader
 {
     /// <summary>
-    /// Header component
+    /// Content for the header
     /// </summary>
-    public partial class OptAHeader
-    {
-        /// <summary>
-        /// Content for the header
-        /// </summary>
-        [Parameter]
-        public HeaderContent? Content { get; set; }
-        [Inject]
-        private IBlogDataProvider DataProvider { get; set; } = null!;
-    }
+    [Parameter]
+    public HeaderContent? Content { get; set; }
+    [Inject]
+    private IBlogDataProvider DataProvider { get; set; } = null!;
 }

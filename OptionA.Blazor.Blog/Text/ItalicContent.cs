@@ -1,11 +1,10 @@
-﻿namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Content for italic text
+/// </summary>
+public class ItalicContent : TextContent
 {
-    /// <summary>
-    /// Content for italic text
-    /// </summary>
-    public class ItalicContent : TextContent
-    {
-        /// <inheritdoc/>
-        public override ContentType Type => ContentType.Italic;
-    }
+    /// <inheritdoc/>
+    public override ContentType Type => ContentType.Italic;
 }

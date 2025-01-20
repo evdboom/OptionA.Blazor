@@ -3,18 +3,18 @@
 ﻿@if (Content is not null)
 {
     @switch (Content.Mode)
-    {
-        case IconMode.Class:
-            <i @attributes="@Content.GetAttributes(DataProvider)"></i>
-            break;
-        case IconMode.Path:
-            <svg @attributes="@Content.GetAttributes(DataProvider)">
+{
+    case IconMode.Class:
+        <i @attributes="@Content.GetAttributes(DataProvider)"></i>
+        break;
+    case IconMode.Path:
+        <svg @attributes="@Content.GetAttributes(DataProvider)">
                 @foreach (var path in Content.Paths)
-                {
-                    <path d="@path" />
-                }
+            {
+                <path d="@path" />
+            }
             </svg>
-            break;
+        break;
 
-    }
+}
 }

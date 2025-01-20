@@ -7,15 +7,15 @@
     </div>
     <div @attributes="@GetSplitterAttributes()" @onmousedown="StartDrag" @ref="_bar">
         @if (!string.IsNullOrEmpty(DataProvider.DragBarContent))
-        {
-            @DataProvider.DragBarContent
-        }
+    {
+        @DataProvider.DragBarContent
+    }
     </div>
     @if (_dragging && DragMode == DragMode.Outline)
-    {
-        <div @attributes=@GetOutlineAttributes()>
+{
+    <div @attributes=@GetOutlineAttributes()>
         </div>
-    }
+}
     
     <div @attributes="@GetSecondContainerAttributes()">
         @Second

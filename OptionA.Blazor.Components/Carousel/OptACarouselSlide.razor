@@ -3,9 +3,9 @@
 
 <li @attributes="@GetSlideAttributes()">
     @if (!string.IsNullOrEmpty(ImageUrl))
-    {
-        <img @attributes="@GetImageAttributes()" />
-    }
+{
+    <img @attributes="@GetImageAttributes()" />
+}
     <div opta-carousel-content>
         @ChildContent
     </div>

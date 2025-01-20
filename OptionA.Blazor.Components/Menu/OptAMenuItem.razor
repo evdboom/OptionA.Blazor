@@ -3,11 +3,11 @@
 
 <li @attributes="@GetItemAttributes()" @onclick="ItemSelected">
     @if (!string.IsNullOrEmpty(Name))
-    {
-        <a @attributes="@GetLinkAttributes()">@Name</a>
-    }  
+{
+    <a @attributes="@GetLinkAttributes()">@Name</a>
+}  
     @if (ChildContent is not null)
-    {
-        @ChildContent
-    }
+{
+    @ChildContent
+}
 </li>

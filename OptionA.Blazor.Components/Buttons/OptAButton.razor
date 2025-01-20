@@ -3,11 +3,11 @@
 
 <button @attributes="@GetButtonAttributes()" @onclick="Click">
     @if (ButtonType.HasFlag(ButtonTypes.Icon))
-    {
-        <i class="@GetIcon()"></i>
-    }
+{
+    <i class="@GetIcon()"></i>
+}
     @if (ButtonType.HasFlag(ButtonTypes.Name))
-    {
-        <span>@Name</span>
-    }
+{
+    <span>@Name</span>
+}
 </button>

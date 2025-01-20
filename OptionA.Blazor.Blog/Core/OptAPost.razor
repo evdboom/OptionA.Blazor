@@ -3,16 +3,16 @@
 {
     <OptAHeader Content="_title"/>
     @if (_tags is not null && _tags.Any())
-    {
-        <div class="@DataProvider.HeaderTagContainerClass">
+{
+    <div class="@DataProvider.HeaderTagContainerClass">
             <OptAChildBuilder Content="_tags" />
         </div>
-    }
+}
     <OptAText Content="_date" />
     <OptAText Content="_subtitle"/>
     @if (DataProvider.DisplayLineAfterPostHeader)
-    {
-        <hr/>    
-    }    
+{
+    <hr/>    
+}    
     <OptAChildBuilder Content="Post.Content"/>
 }

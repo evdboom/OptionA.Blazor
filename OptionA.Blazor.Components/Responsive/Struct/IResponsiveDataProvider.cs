@@ -1,13 +1,12 @@
-﻿namespace OptionA.Blazor.Components
+﻿namespace OptionA.Blazor.Components;
+
+/// <summary>
+/// Data for the responsive service and components
+/// </summary>
+public interface IResponsiveDataProvider
 {
     /// <summary>
-    /// Data for the responsive service and components
+    /// Size threshold (lowest should be on 0) for each wanted trigger dimension
     /// </summary>
-    public interface IResponsiveDataProvider
-    {
-        /// <summary>
-        /// Size threshold (lowest should be on 0) for each wanted trigger dimension
-        /// </summary>
-        Dictionary<int, string> Sizes { get; }
-    }
+    Dictionary<int, string> Sizes { get; }
 }

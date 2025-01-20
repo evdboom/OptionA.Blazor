@@ -5,9 +5,9 @@
 
 <div @attributes="@GetAllAttributes()">
     @foreach (var item in OrderedItems)
-    {
-        <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item.Index, selected)"
+{
+    <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item.Index, selected)"
                             Description="@GetDisplayName(item.Value)"
                             Attributes="@GetCheckboxAttributes(item.Value)" />
-    }
+}
 </div>

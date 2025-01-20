@@ -1,18 +1,17 @@
-﻿namespace OptionA.Blazor.Components.Direct.Input.Internal
+﻿namespace OptionA.Blazor.Components.Direct.Input.Internal;
+
+/// <summary>
+/// Implementation of <see cref="Microsoft.AspNetCore.Components.Forms.InputText"/> with bind to oninput
+/// </summary>
+public partial class DirectInputText
 {
-    /// <summary>
-    /// Implementation of <see cref="Microsoft.AspNetCore.Components.Forms.InputText"/> with bind to oninput
-    /// </summary>
-    public partial class DirectInputText
+    private Dictionary<string, object> Attributes
     {
-        private Dictionary<string, object> Attributes
+        get
         {
-            get
-            {
-                var result = AdditionalAttributes?.ToDictionary(d => d.Key, d => d.Value) ?? new();
-                result["type"] = "text";
-                return result;
-            }
+            var result = AdditionalAttributes?.ToDictionary(d => d.Key, d => d.Value) ?? new();
+            result["type"] = "text";
+            return result;
         }
     }
 }

@@ -7,28 +7,28 @@
         <section @attributes="@GetSectionAttributes()">
             <header @attributes="@GetHeaderAttributes()" @onmousedown="TitleMouseDown">
                 @if (Header is not null)
-                {
-                    @Header
-                }
+            {
+                @Header
+            }
                 <button @attributes="GetCloseButtonAttributes()" @onclick="Close">
                     @if (!string.IsNullOrEmpty(DataProvider.CloseButtonContent))
-                    {
-                        <span>@DataProvider.CloseButtonContent</span>
-                    }
+                {
+                    <span>@DataProvider.CloseButtonContent</span>
+                }
                 </button>
             </header>
             @if (Content is not null)
-            {
-                <div @attributes="@GetContentAttributes()">
+        {
+            <div @attributes="@GetContentAttributes()">
                     @Content
                 </div>
-            }
+        }
             @if (Footer is not null)
-            {
-                <footer @attributes="@GetFooterAttributes()">
+        {
+            <footer @attributes="@GetFooterAttributes()">
                     @Footer
                 </footer>
-            }    
+        }    
         </section>
     </dialog>
 }

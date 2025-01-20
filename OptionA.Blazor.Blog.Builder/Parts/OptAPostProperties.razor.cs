@@ -1,69 +1,68 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog.Builder.Parts
+namespace OptionA.Blazor.Blog.Builder.Parts;
+
+/// <summary>
+/// Component for the general post properties
+/// </summary>
+public partial class OptAPostProperties
 {
+    private const string TitleId = "post-builder-title";
+    private const string SubtitleId = "post-builder-subtitle";
+    private const string DateId = "post-builder-date";
+
     /// <summary>
-    /// Component for the general post properties
+    /// Post to create
     /// </summary>
-    public partial class OptAPostProperties
+    [Parameter]
+    public Post? Post { get; set; }
+    /// <summary>
+    /// Called when a property gets updated
+    /// </summary>
+    [Parameter]
+    public EventCallback<string> PropertyChanged { get; set; }
+    [Inject]
+    private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
+
+    private Dictionary<string, object?> GetLabelAttributes(string id)
     {
-        private const string TitleId = "post-builder-title";
-        private const string SubtitleId = "post-builder-subtitle";
-        private const string DateId = "post-builder-date";
-
-        /// <summary>
-        /// Post to create
-        /// </summary>
-        [Parameter]
-        public Post? Post { get; set; }
-        /// <summary>
-        /// Called when a property gets updated
-        /// </summary>
-        [Parameter]
-        public EventCallback<string> PropertyChanged { get; set; }
-        [Inject]
-        private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
-
-        private Dictionary<string, object?> GetLabelAttributes(string id)
+        var defaultAttributes = new Dictionary<string, object?>
         {
-            var defaultAttributes = new Dictionary<string, object?>
-            {
-                ["for"] = id
-            };
+            ["for"] = id
+        };
 
-            return DataProvider.GetAttributes(BuilderType.Label, defaultAttributes);
-        }
+        return DataProvider.GetAttributes(BuilderType.Label, defaultAttributes);
+    }
 
-        private Dictionary<string, object?> GetTitleAttributes()
+    private Dictionary<string, object?> GetTitleAttributes()
+    {
+        var defaultAttributes = new Dictionary<string, object?>
         {
-            var defaultAttributes = new Dictionary<string, object?>
-            {
-                ["id"] = TitleId,
-                ["placeholder"] = "Title..."
-            };
+            ["id"] = TitleId,
+            ["placeholder"] = "Title..."
+        };
 
-            return DataProvider.GetAttributes(BuilderType.TextInput, defaultAttributes);
-        }
+        return DataProvider.GetAttributes(BuilderType.TextInput, defaultAttributes);
+    }
 
-        private Dictionary<string, object?> GetDateAttributes()
+    private Dictionary<string, object?> GetDateAttributes()
+    {
+        var defaultAttributes = new Dictionary<string, object?>
         {
-            var defaultAttributes = new Dictionary<string, object?>
-            {
-                ["id"] = DateId
-            };
+            ["id"] = DateId
+        };
 
-            return DataProvider.GetAttributes(BuilderType.DateInput, defaultAttributes);
-        }
+        return DataProvider.GetAttributes(BuilderType.DateInput, defaultAttributes);
+    }
 
-        private Dictionary<string, object?> GetSubtitleAttributes()
+    private Dictionary<string, object?> GetSubtitleAttributes()
+    {
+        var defaultAttributes = new Dictionary<string, object?>
         {
-            var defaultAttributes = new Dictionary<string, object?>
-            {
-                ["id"] = SubtitleId,
-                ["placeholder"] = "Subtitle..."
-            };
+            ["id"] = SubtitleId,
+            ["placeholder"] = "Subtitle..."
+        };
 
-            return DataProvider.GetAttributes(BuilderType.TextAreaInput, defaultAttributes);
-        }
+        return DataProvider.GetAttributes(BuilderType.TextAreaInput, defaultAttributes);
     }
 }

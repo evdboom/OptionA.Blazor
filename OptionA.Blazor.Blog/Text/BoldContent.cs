@@ -1,11 +1,10 @@
-﻿namespace OptionA.Blazor.Blog
+﻿namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Content for bold
+/// </summary>
+public class BoldContent : TextContent
 {
-    /// <summary>
-    /// Content for bold
-    /// </summary>
-    public class BoldContent : TextContent
-    {
-        /// <inheritdoc/>
-        public override ContentType Type => ContentType.Bold;
-    }
+    /// <inheritdoc/>
+    public override ContentType Type => ContentType.Bold;
 }

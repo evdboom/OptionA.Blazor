@@ -2,23 +2,23 @@
 <PageTitle>Gallery</PageTitle>
 <button @onclick="() => _showNextPrevious = !_showNextPrevious">
     @if (_showNextPrevious)
-    {
-        <span>Next/Previous</span>
-    }
-    else
-    {
-        <span>No Next/Previous</span>
-    }
+{
+    <span>Next/Previous</span>
+}
+else
+{
+    <span>No Next/Previous</span>
+}
 </button>
 <button @onclick="() => _showTitleOnThumbnail = !_showTitleOnThumbnail">
     @if (_showTitleOnThumbnail)
-    {
-        <span>Thumbnail title</span>
-    }
-    else
-    {
-        <span>No Thumbnail title</span>
-    }
+{
+    <span>Thumbnail title</span>
+}
+else
+{
+    <span>No Thumbnail title</span>
+}
 </button>
 <button @onclick="ChangeGalleryMode">@_mode</button>
 <button @onclick="() => _show = !_show">Show</button>
@@ -39,12 +39,12 @@
                  ThumbnailsPerRowMargin="_thumbsPerRowMargin">
         <Images>
             @for (int i = 1; i <= 10; i++)
-            {
-                <OptAGalleryImage ImageNumber="@i"
+        {
+            <OptAGalleryImage ImageNumber="@i"
                                   ImageText="@i.ToString()"
                                   ImageThumbnailUrl="/assets/logo.svg"
                                   ImageUrl="/assets/logo.svg" />
-            }
+        }
         </Images>
     </OptAGallery>
 }

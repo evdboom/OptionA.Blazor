@@ -2,43 +2,43 @@
 <PageTitle>Carousel</PageTitle>
 <button @onclick="() => _showAutoPlay = !_showAutoPlay">
     @if (_showAutoPlay)
-    {
-        <span>AutoPlay</span>
-    }
-    else
-    {
-        <span>No AutoPlay</span>
-    }
+{
+    <span>AutoPlay</span>
+}
+else
+{
+    <span>No AutoPlay</span>
+}
 </button>
 <button @onclick="() => _showItemSelect = !_showItemSelect">
     @if (_showItemSelect)
-    {
-        <span>Item select</span>
-    }
-    else
-    {
-        <span>No Item select</span>
-    }
+{
+    <span>Item select</span>
+}
+else
+{
+    <span>No Item select</span>
+}
 </button>
 <button @onclick="() => _showNextPrevious = !_showNextPrevious">
     @if (_showNextPrevious)
-    {
-        <span>Next/Previous</span>
-    }
-    else
-    {
-        <span>No Next/Previous</span>
-    }
+{
+    <span>Next/Previous</span>
+}
+else
+{
+    <span>No Next/Previous</span>
+}
 </button>
 <button @onclick="() => _autoPlayOnStart = !_autoPlayOnStart">
     @if (_autoPlayOnStart)
-    {
-        <span>Autoplay on start</span>
-    }
-    else
-    {
-        <span>No autoplay on start</span>
-    }
+{
+    <span>Autoplay on start</span>
+}
+else
+{
+    <span>No autoplay on start</span>
+}
 </button>
 <button @onclick="() => _show = !_show">Show</button>
 <label>Slide speed</label><input type="number" @bind="_slideSpeed"/>

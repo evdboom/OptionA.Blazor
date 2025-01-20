@@ -1,33 +1,32 @@
 using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog
+namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Content for list items
+/// </summary>
+public partial class OptAListContent
 {
     /// <summary>
-    /// Content for list items
+    /// Content for the component
     /// </summary>
-    public partial class OptAListContent
+    [Parameter]
+    public ListContent? Content { get; set; }
+
+    private IEnumerable<IContent>? _content;
+
+    /// <inheritdoc/>
+    protected override async Task OnParametersSetAsync()
     {
-        /// <summary>
-        /// Content for the component
-        /// </summary>
-        [Parameter]
-        public ListContent? Content { get; set; }
-
-        private IEnumerable<IContent>? _content;
-
-        /// <inheritdoc/>
-        protected override async Task OnParametersSetAsync()
+        if (Content is null)
         {
-            if (Content is null)
-            {
-                return;
-            }
-
-            _content = Content.Items
-                    .Where(item => !string.IsNullOrEmpty(item))
-                    .Select(item => new InlineContent { Content = item });
-
-            await InvokeAsync(StateHasChanged);
+            return;
         }
+
+        _content = Content.Items
+                .Where(item => !string.IsNullOrEmpty(item))
+                .Select(item => new InlineContent { Content = item });
+
+        await InvokeAsync(StateHasChanged);
     }
 }

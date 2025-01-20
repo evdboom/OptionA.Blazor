@@ -7,13 +7,13 @@
 <button @onclick="ChangeOrientation">@_orientation</button>
 <button @onclick="() => _disabled = !_disabled">
     @if (_disabled)
-    {
-        <span>Disabled</span>
-    }
-    else
-    {
-        <span>Enabled</span>        
-    }
+{
+    <span>Disabled</span>
+}
+else
+{
+    <span>Enabled</span>        
+}
 </button>
 <button @onclick="ChangeActionType">@_actionType</button>
 <button @onclick="ChangeButtonType">@_buttonTypes</button>
@@ -29,8 +29,8 @@
     <OptAButtonBar Orientation="_orientation">
         <StartButtons>
             @for(int i = 0; i < 3; i++)
-            {
-                <OptAButton ActionType="_actionType"
+        {
+            <OptAButton ActionType="_actionType"
                             ButtonType="_buttonTypes"
                             Name="@_name"
                             Description="@_description"
@@ -39,12 +39,12 @@
                             OtherButtonClass="@_otherButton"
                             OtherIconClass="@_otherIcon">
                 </OptAButton>
-            }
+        }
         </StartButtons>
         <CenterButtons>
             @for (int i = 0; i < 3; i++)
-            {
-                <OptAButton ActionType="_actionType"
+        {
+            <OptAButton ActionType="_actionType"
                             ButtonType="_buttonTypes"
                             Name="@_name"
                             Description="@_description"
@@ -53,12 +53,12 @@
                             OtherButtonClass="@_otherButton"
                             OtherIconClass="@_otherIcon">
                 </OptAButton>
-            }
+        }
         </CenterButtons>
         <EndButtons>
             @for (int i = 0; i < 3; i++)
-            {
-                <OptAButton ActionType="_actionType"
+        {
+            <OptAButton ActionType="_actionType"
                             ButtonType="_buttonTypes"
                             Name="@_name"
                             Description="@_description"
@@ -67,7 +67,7 @@
                             OtherButtonClass="@_otherButton"
                             OtherIconClass="@_otherIcon">
                 </OptAButton>
-            }
+        }
         </EndButtons>
     </OptAButtonBar>
     </div>

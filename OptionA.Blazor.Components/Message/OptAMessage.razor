@@ -6,25 +6,25 @@
     <div @attributes="@GetMessageAttributes()">        
             <div @attributes="@GetContentAttributes()">
                 @if (!string.IsNullOrEmpty(Message.Message.Title) || (ShowTime ?? DataProvider.ShowTime))
-                {
-                    <div @attributes="@GetHeaderAttributes()">
+            {
+                <div @attributes="@GetHeaderAttributes()">
                         <strong>@Message.Message.Title</strong>
                         @if (ShowTime ?? DataProvider.ShowTime)
-                        {
-                            <small>@Message.Time</small>
-                        }
+                    {
+                        <small>@Message.Time</small>
+                    }
                     </div>
-                }                
+            }                
                 <div @attributes="@GetBodyAttributes()">@Message.Message.Content</div>
             </div>        
             @if (Message.Message.Dismissable ?? true)
-            {
-                <button @attributes="GetCloseButtonAttributes()" @onclick="CloseMessage">
+        {
+            <button @attributes="GetCloseButtonAttributes()" @onclick="CloseMessage">
                     @if (!string.IsNullOrEmpty(DataProvider.CloseButtonContent))
-                    {
-                        <span>@DataProvider.CloseButtonContent</span>
-                    }
+                {
+                    <span>@DataProvider.CloseButtonContent</span>
+                }
                 </button>
-            }
+        }
     </div>
 }

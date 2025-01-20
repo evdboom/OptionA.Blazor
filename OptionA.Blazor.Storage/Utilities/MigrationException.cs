@@ -1,17 +1,16 @@
-﻿namespace OptionA.Blazor.Storage
+﻿namespace OptionA.Blazor.Storage;
+
+/// <summary>
+/// Exception for when a migration fails
+/// </summary>
+public class MigrationException : Exception
 {
     /// <summary>
-    /// Exception for when a migration fails
+    /// Default contructor
     /// </summary>
-    public class MigrationException : Exception
+    /// <param name="message"></param>
+    public MigrationException(string message) : base(message)
     {
-        /// <summary>
-        /// Default contructor
-        /// </summary>
-        /// <param name="message"></param>
-        public MigrationException(string message) : base(message)
-        {
 
-        }
     }
 }

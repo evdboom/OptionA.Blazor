@@ -1,29 +1,28 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog
+namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Component for most text based parts
+/// </summary>
+public partial class OptAText
 {
     /// <summary>
-    /// Component for most text based parts
+    /// Content for this text block
     /// </summary>
-    public partial class OptAText
+    [Parameter]
+    public TextContent? Content { get; set; }
+    [Inject]
+    private IMarkDownParser Parser { get; set; } = null!;
+    [Inject]
+    private IBlogDataProvider DataProvider { get; set; } = null!;
+
+    private IEnumerable<IContent>? _content;
+
+    /// <inheritdoc/>
+    protected override async Task OnParametersSetAsync()
     {
-        /// <summary>
-        /// Content for this text block
-        /// </summary>
-        [Parameter]
-        public TextContent? Content { get; set; }
-        [Inject]
-        private IMarkDownParser Parser { get; set; } = null!;
-        [Inject]
-        private IBlogDataProvider DataProvider { get; set; } = null!;
-
-        private IEnumerable<IContent>? _content;
-
-        /// <inheritdoc/>
-        protected override async Task OnParametersSetAsync()
-        {
-            _content = Parser.Parse(Content?.Content);
-            await InvokeAsync(StateHasChanged);
-        }
+        _content = Parser.Parse(Content?.Content);
+        await InvokeAsync(StateHasChanged);
     }
 }

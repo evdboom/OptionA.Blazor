@@ -3,17 +3,17 @@
 
 <li @attributes="@GetListAttributes()">
     @if (IsCurrent)
-    {
-        <figure>
+{
+    <figure>
             <figcaption opta-gallery-image-title>@ImageText</figcaption>
             <img @attributes="GetImageAttributes()" />
             @if (ChildContent != null)
-            {
-                
-            }
+        {
+            
+        }
         </figure>
-        <div opta-gallery-image-description>
+    <div opta-gallery-image-description>
             @ChildContent
         </div>
-    }
+}
 </li>

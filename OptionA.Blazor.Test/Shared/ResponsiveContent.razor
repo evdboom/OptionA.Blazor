@@ -3,27 +3,27 @@
 <h4>All dimensions</h4>
 <ul>
     @if (BreakPoints is not null)
+{
+    @foreach (var dimension in BreakPoints)
     {
-        @foreach (var dimension in BreakPoints)
-        {
-            <li>
+        <li>
                 @dimension.Name @dimension.Width
             </li>
-        }
     }
+}
 </ul>
 <br />
 <h4>Valid dimensions</h4>
 <ul>
     @if (ValidDimensions is not null)
+{
+    @foreach (var dimension in ValidDimensions)
     {
-        @foreach (var dimension in ValidDimensions)
-        {
-            <li>
+        <li>
                 @dimension
             </li>
-        }
     }
+}
 </ul>
 <br />
 <h4>Dimension</h4>

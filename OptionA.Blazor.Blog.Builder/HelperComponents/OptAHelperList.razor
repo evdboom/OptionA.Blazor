@@ -6,8 +6,8 @@
         </div>
         <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemsContainer)">
             @foreach (var item in Items.Select((value, index) => new { Item = value, Index = index }))
-            {
-                <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemContainer)">
+        {
+            <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemContainer)">
                     <div @attributes="@DataProvider.GetAttributes(BuilderType.ListItemInputContainer)">
                         <input @attributes="@GetItemAttributes()" value="@item.Item" @oninput="@(e => UpdateItem($"{e.Value}", item.Index))" />             
                     </div>
@@ -17,7 +17,7 @@
                         </button>
                     </div>
                 </div>
-            }
+        }
         </div>
     </div>
 }

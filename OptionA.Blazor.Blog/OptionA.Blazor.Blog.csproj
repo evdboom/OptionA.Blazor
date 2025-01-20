@@ -15,9 +15,9 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>9.1.1</Version>
+	<Version>9.1.2</Version>
 	<PackageReleaseNotes>
-    Fixed a bug for rendering the list, added basic markdown support for list items
+    Added support for custom languagues in code blocks
   </PackageReleaseNotes>
   </PropertyGroup>
 

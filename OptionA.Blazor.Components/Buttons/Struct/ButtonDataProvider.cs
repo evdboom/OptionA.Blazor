@@ -1,70 +1,69 @@
-﻿namespace OptionA.Blazor.Components.Buttons.Struct
+﻿namespace OptionA.Blazor.Components.Buttons.Struct;
+
+/// <summary>
+/// Default implementation of <see cref="IButtonDataProvider"/>
+/// </summary>
+public class ButtonDataProvider : IButtonDataProvider
 {
+    private readonly ButtonOptions _options;
+
     /// <summary>
-    /// Default implementation of <see cref="IButtonDataProvider"/>
+    /// Constructor, pass classes here
     /// </summary>
-    public class ButtonDataProvider : IButtonDataProvider
+    /// <param name="configuration"></param>
+    public ButtonDataProvider(Action<ButtonOptions>? configuration = null)
     {
-        private readonly ButtonOptions _options;
+        _options = new ButtonOptions();
+        configuration?.Invoke(_options);
+    }
 
-        /// <summary>
-        /// Constructor, pass classes here
-        /// </summary>
-        /// <param name="configuration"></param>
-        public ButtonDataProvider(Action<ButtonOptions>? configuration = null)
+    /// <inheritdoc/>
+    public string? DefaultButtonBarClass => _options.DefaultButtonBarClass;
+
+    /// <inheritdoc/>
+    public string? DefaultButtonGroupClass => _options?.DefaultButtonGroupClass;
+
+    /// <inheritdoc/>
+    public string GetActionClass(ActionType actionType)
+    {
+        return GetActionClass(actionType, null);
+    }
+
+    /// <inheritdoc/>
+    public string GetActionClass(ActionType actionType, string? otherButtonClass)
+    {
+        if (actionType == ActionType.Other && !string.IsNullOrEmpty(otherButtonClass))
         {
-            _options = new ButtonOptions();
-            configuration?.Invoke(_options);
+            return otherButtonClass;
         }
 
-        /// <inheritdoc/>
-        public string? DefaultButtonBarClass => _options.DefaultButtonBarClass;
-
-        /// <inheritdoc/>
-        public string? DefaultButtonGroupClass => _options?.DefaultButtonGroupClass;
-
-        /// <inheritdoc/>
-        public string GetActionClass(ActionType actionType)
+        if (_options.ButtonClasses?.TryGetValue(actionType, out string? buttonClass) ?? false)
         {
-            return GetActionClass(actionType, null);
+            return buttonClass;
         }
 
-        /// <inheritdoc/>
-        public string GetActionClass(ActionType actionType, string? otherButtonClass)
+        return _options.DefaultButtonClass ?? string.Empty;
+    }
+
+    /// <inheritdoc/>
+    public string GetIconClass(ActionType actionType)
+    {
+        return GetIconClass(actionType, null);
+    }
+
+    /// <inheritdoc/>
+    public string GetIconClass(ActionType actionType, string? otherIconClass)
+    {
+        if (actionType == ActionType.Other && !string.IsNullOrEmpty(otherIconClass))
         {
-            if (actionType == ActionType.Other && !string.IsNullOrEmpty(otherButtonClass))
-            {
-                return otherButtonClass;
-            }
-
-            if (_options.ButtonClasses?.TryGetValue(actionType, out string? buttonClass) ?? false)
-            {
-                return buttonClass;
-            }
-
-            return _options.DefaultButtonClass ?? string.Empty;
+            return otherIconClass;
         }
 
-        /// <inheritdoc/>
-        public string GetIconClass(ActionType actionType)
+        if (_options.IconClasses?.TryGetValue(actionType, out string? iconClass) ?? false)
         {
-            return GetIconClass(actionType, null);
+            return iconClass;
         }
 
-        /// <inheritdoc/>
-        public string GetIconClass(ActionType actionType, string? otherIconClass)
-        {
-            if (actionType == ActionType.Other && !string.IsNullOrEmpty(otherIconClass))
-            {
-                return otherIconClass;
-            }
-
-            if (_options.IconClasses?.TryGetValue(actionType, out string? iconClass) ?? false)
-            {
-                return iconClass;
-            }
-
-            return _options.DefaultIconClass ?? string.Empty;
-        }
+        return _options.DefaultIconClass ?? string.Empty;
     }
 }

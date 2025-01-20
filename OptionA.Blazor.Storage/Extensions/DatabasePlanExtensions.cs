@@ -1,16 +1,15 @@
 ﻿using OptionA.Blazor.Storage.Utilities;
 
-namespace OptionA.Blazor.Storage.Extensions
+namespace OptionA.Blazor.Storage.Extensions;
+
+internal static class DatabasePlanExtensions
 {
-    internal static class DatabasePlanExtensions
+    public static IDatabaseAccess ToAccess(this DatabasePlan plan)
     {
-        public static IDatabaseAccess ToAccess(this DatabasePlan plan)
+        return new DatabaseAccess
         {
-            return new DatabaseAccess
-            {
-                DatabaseName = plan.Name,
-                Version = plan.Version,
-            };
-        }
+            DatabaseName = plan.Name,
+            Version = plan.Version,
+        };
     }
 }

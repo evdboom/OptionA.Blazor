@@ -1,13 +1,12 @@
-﻿namespace OptionA.Blazor.Components
+﻿namespace OptionA.Blazor.Components;
+
+/// <summary>
+/// Options for the repsonsive service and responsive component
+/// </summary>
+public class ResponsiveOptions
 {
     /// <summary>
-    /// Options for the repsonsive service and responsive component
+    /// Size threshold (lowest should be on 0) for each wanted trigger dimension
     /// </summary>
-    public class ResponsiveOptions
-    {
-        /// <summary>
-        /// Size threshold (lowest should be on 0) for each wanted trigger dimension
-        /// </summary>
-        public Dictionary<int, string>? Sizes { get; set; }
-    }
+    public Dictionary<int, string>? Sizes { get; set; }
 }

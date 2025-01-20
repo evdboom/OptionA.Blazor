@@ -1,63 +1,65 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-namespace OptionA.Blazor.Blog
+namespace OptionA.Blazor.Blog;
+
+/// <summary>
+/// Code component
+/// </summary>
+public partial class OptACode
 {
     /// <summary>
-    /// Code component
+    /// Code to display
     /// </summary>
-    public partial class OptACode
+    [Parameter]
+    public CodeContent? Content { get; set; }
+    [Inject]
+    private IBlogDataProvider DataProvider { get; set; } = null!;
+    [Inject]
+    private IEnumerable<ICodeParser> Parsers { get; set; } = null!;
+    private BlockContent? Header
     {
-        /// <summary>
-        /// Code to display
-        /// </summary>
-        [Parameter]
-        public CodeContent? Content { get; set; }
-        [Inject]
-        private IBlogDataProvider DataProvider { get; set; } = null!;
-        [Inject]
-        private IEnumerable<ICodeParser> Parsers { get; set; } = null!;
-        private BlockContent? Header
+        get
         {
-            get
+            if (Content is null)
             {
-                if (Content is null)
-                {
-                    return null;
-                }
-                var result = new BlockContent
-                {
-                    Content = Content.Language.ToDisplayLanguage()
-                };
-                result.Attributes["opta-code"] = "header";
-                return result;
+                return null;
             }
-        }
-
-        private IEnumerable<IContent>? _content;
-
-        /// <inheritdoc/>
-        protected override void OnParametersSet()
-        {
-            if (Content != null)
+            var language = Content.Language == CodeLanguage.Other && !string.IsNullOrEmpty(Content.OtherLanguage)
+                    ? Content.OtherLanguage
+                    : Content.Language.ToDisplayLanguage();
+            var result = new BlockContent
             {
-                Content.Attributes["opta-code"] = "block";
-                var parser = Parsers.FirstOrDefault(p => p.Language == Content.Language);
-                if (parser != null) 
-                {
-                    _content = parser.Parse(Content.Code, DataProvider.NewLine);
-                }
-                else
-                {
-                    _content = new List<IContent>
-                    {
-                        new TextContent { Content = Content.Code ?? string.Empty }
-                    };
-                }
+                Content = language
+            };
+            result.Attributes["opta-code"] = "header";
+            return result;
+        }
+    }
+
+    private IEnumerable<IContent>? _content;
+
+    /// <inheritdoc/>
+    protected override void OnParametersSet()
+    {
+        if (Content != null)
+        {
+            Content.Attributes["opta-code"] = "block";
+            var parser = Parsers.FirstOrDefault(p => p.Language == Content.Language);
+            if (parser != null) 
+            {
+                _content = parser.Parse(Content.Code, DataProvider.NewLine);
             }
             else
             {
-                _content = null;
+                _content = new List<IContent>
+                {
+                    new TextContent { Content = Content.Code ?? string.Empty }
+                };
             }
+        }
+        else
+        {
+            _content = null;
         }
     }
 }

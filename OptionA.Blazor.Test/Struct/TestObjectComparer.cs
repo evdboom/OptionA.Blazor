@@ -1,10 +1,9 @@
-﻿namespace OptionA.Blazor.Test.Struct
+﻿namespace OptionA.Blazor.Test.Struct;
+
+public class TestObjectComparer : IComparer<TestObject>
 {
-    public class TestObjectComparer : IComparer<TestObject>
+    public int Compare(TestObject? x, TestObject? y)
     {
-        public int Compare(TestObject? x, TestObject? y)
-        {
-            return (x?.ValueInt ?? 0) - (y?.ValueInt ?? 0);
-        }
+        return (x?.ValueInt ?? 0) - (y?.ValueInt ?? 0);
     }
 }
