@@ -49,6 +49,14 @@ namespace OptionA.Blazor.Blog
         /// </summary>
         CPlusPlus,
         /// <summary>
+        /// PowerShell
+        /// </summary>
+        PowerShell,
+        /// <summary>
+        /// Bash
+        /// </summary>
+        Bash,
+        /// <summary>
         /// Something else
         /// </summary>
         Other
