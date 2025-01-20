@@ -24,9 +24,12 @@ namespace OptionA.Blazor.Blog
                 {
                     return null;
                 }
+                var language = Content.Language == CodeLanguage.Other && !string.IsNullOrEmpty(Content.OtherLanguage) 
+                    ? Content.OtherLanguage 
+                    : Content.Language.ToDisplayLanguage();
                 var result = new BlockContent
                 {
-                    Content = Content.Language.ToDisplayLanguage()
+                    Content = language
                 };
                 result.Attributes["opta-code"] = "header";
                 return result;

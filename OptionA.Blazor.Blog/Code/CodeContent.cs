@@ -15,6 +15,10 @@
         /// Language of the code
         /// </summary>
         public CodeLanguage Language { get; set; }
+        /// <summary>
+        /// If Language is Other, this is the language to display
+        /// </summary>
+        public string? OtherLanguage { get; set; }
         /// <inheritdoc/>
         public override bool IsInvalid => string.IsNullOrEmpty(Code);
     }

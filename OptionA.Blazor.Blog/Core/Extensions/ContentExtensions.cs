@@ -49,6 +49,7 @@ namespace OptionA.Blazor.Blog
             {
                 CodeLanguage.CSharp => "C#",
                 CodeLanguage.Html => "HTML",
+                CodeLanguage.CPlusPlus => "C++",
                 _ => $"{language}"
             };
         }

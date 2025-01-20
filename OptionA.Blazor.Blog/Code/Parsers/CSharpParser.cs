@@ -145,8 +145,8 @@
             "with",
         ];
         /// <inheritdoc/>
-        protected override char[] Specials => new[]
-        {
+        protected override char[] Specials =>
+        [
             '(',
             '<',
             '.',
@@ -162,7 +162,7 @@
             '|',
             '[',
             ']'
-        };
+        ];
 
         /// <inheritdoc/>
         protected override Dictionary<string, WordTypeModel> StringStarters => new()

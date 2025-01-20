@@ -9,6 +9,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts
     {
         private const string CodeId = "opta-code";
         private const string CodeLanguageId = "opta-code-Language";
+        private const string OtherLanguageId = "opta-other-Language";
 
         /// <summary>
         /// Index of the current content in the collection
@@ -87,6 +88,16 @@ namespace OptionA.Blazor.Blog.Builder.Parts
             };
 
             return DataProvider.GetAttributes(BuilderType.SelectInput, defaultAttributes);
+        }
+
+        private Dictionary<string, object?> GetOtherLanguageAttributes()
+        {
+            var defaultAttributes = new Dictionary<string, object?>
+            {
+                ["id"] = $"{OtherLanguageId}-{ContentIndex}"
+            };
+
+            return DataProvider.GetAttributes(BuilderType.TextInput, defaultAttributes);
         }
 
 

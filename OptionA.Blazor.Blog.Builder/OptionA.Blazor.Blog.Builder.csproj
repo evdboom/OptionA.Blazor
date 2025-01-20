@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>8.2.2</Version>
+	  <Version>8.2.3</Version>
 	  <PackageReleaseNotes>
-      Fixes for additional atributes and update from blog package
+      Added other option to code builder
     </PackageReleaseNotes>
   </PropertyGroup>
 
