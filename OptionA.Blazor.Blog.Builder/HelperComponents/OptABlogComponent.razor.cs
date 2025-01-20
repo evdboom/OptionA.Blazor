@@ -84,7 +84,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         {
             if (Content is not null)
             {
-                _additionalAttributes = Content.Attributes.Select(x => $"{x.Key}={x.Value}").ToList();
+                _additionalAttributes ??= Content.Attributes.Select(x => $"{x.Key}={x.Value}").ToList();
             }
             else
             {
@@ -141,6 +141,27 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
                 await _module.InvokeVoidAsync(CloseDialogFunction, _dialog);
                 OnDialogClose();
             }
+        }
+
+        private async Task AttributesChanged()
+        {
+            if (_additionalAttributes is null || Content is null)
+            {
+                return;
+            }
+
+            Content.Attributes.Clear();
+            foreach (var attr in _additionalAttributes)
+            {
+                var split = attr.Split('=');
+                if (split.Length != 2)
+                {
+                    continue;
+                }
+                Content.Attributes.Add(split[0], split[1]);
+            }
+
+            await ContentChanged.InvokeAsync();
         }
 
         private Dictionary<string, object?> GetMoveUpAttributes()
