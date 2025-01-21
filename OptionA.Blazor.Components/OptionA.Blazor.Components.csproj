@@ -7,14 +7,14 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Version>9.1.0</Version>
+		<Version>9.1.1</Version>
 		<IsPackable>true</IsPackable>
 		<Authors>Erik van der Boom</Authors>
 		<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<Description>Blazor component library with various component for use inside your Blazor application</Description>
 		<PackageReleaseNotes>
-      Added Radio select, Radio enum select, Checkbox select and Checkbox Enum select
+      Fixed a bug with outline draggable
     </PackageReleaseNotes>
 	</PropertyGroup>
 

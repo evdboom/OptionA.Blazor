@@ -30,10 +30,10 @@
                 </footer>
         }    
         </section>
+        @if (_dragging && GetDragMode() == Components.DragMode.Outline)
+        {
+            <div @attributes="@GetOutlineAttributes()">
+            </div>
+        }
     </dialog>
-}
-@if (_dragging && GetDragMode() == Components.DragMode.Outline)
-{
-    <div @attributes=@GetOutlineAttributes()>
-    </div>
 }

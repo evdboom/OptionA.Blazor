@@ -268,6 +268,10 @@ public partial class OptAModal
         {
             result["class"] = DataProvider.HeaderClass;
         }
+        if (_dragging)
+        {
+            result["dragging"] = true;
+        }
 
         return result;
     }
