@@ -16,3 +16,7 @@ export const closeDialog = (dialogElement) => {
 
     dialogElement.close();
 }
+
+export const getBoundingRect = (element) => {
+    return element.getBoundingClientRect();
+}

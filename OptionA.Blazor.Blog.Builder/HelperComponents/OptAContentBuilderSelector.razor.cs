@@ -42,4 +42,14 @@ public partial class OptAContentBuilderSelector
     /// </summary>
     [Parameter]
     public EventCallback MovedDown { get; set; }
+    /// <summary>
+    /// Called when the drag operation is started
+    /// </summary>
+    [Parameter]
+    public EventCallback<DragEvent> DragStarted { get; set; }
+    /// <summary>
+    /// Called when the drag operation is ended
+    /// </summary>
+    [Parameter]
+    public EventCallback<DragEvent> DragEnded { get; set; }
 }

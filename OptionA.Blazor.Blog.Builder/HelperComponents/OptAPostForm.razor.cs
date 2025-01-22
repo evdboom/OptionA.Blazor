@@ -29,6 +29,8 @@ public partial class OptAPostForm
     private EditContext? _context;
     private Post? _post;
 
+    private int? _dragSourceIndex;
+
     /// <inheritdoc/>
     protected override void OnParametersSet()
     {
@@ -78,7 +80,8 @@ public partial class OptAPostForm
     {
         var result = new Dictionary<string, object?>()
         {
-            ["title"] = "Save the Post"
+            ["title"] = "Save the Post",
+            ["type"] = "submit"
         };
 
         return DataProvider.GetAttributes(BuilderType.SavePostButton, result);            
@@ -105,6 +108,56 @@ public partial class OptAPostForm
 
         var id = _context.Field(property);
         _context.NotifyFieldChanged(id);
+    }
+
+    private void OnDragStarted(DragEvent dragEvent)
+    {
+        if (_post is null || _context is null)
+        {
+            return;
+        }
+
+        _dragSourceIndex = _post.Content.IndexOf(dragEvent.Content);
+    }
+
+    private void OnDragEnded(DragEvent dragResult)
+    {
+        if (_post is null || _context is null || !_dragSourceIndex.HasValue || _dragSourceIndex.Value < 0)
+        {
+            return;
+        }
+
+        var targetIndex = _post.Content.IndexOf(dragResult.Content);
+
+        if (targetIndex < 0)
+        {
+            return;
+        }
+
+        if (!dragResult.Above)
+        {
+            targetIndex++;
+        }
+
+        if (_dragSourceIndex.Value == targetIndex)
+        {
+            return;
+        }
+
+        if (_dragSourceIndex.Value < targetIndex)
+        {
+            targetIndex--;
+        }
+
+        var source = _post.Content[_dragSourceIndex.Value];
+
+        _post.Content.RemoveAt(_dragSourceIndex.Value);
+        _post.Content.Insert(targetIndex, source);
+
+
+        var id = _context.Field(nameof(_post.Content));
+        _context.NotifyFieldChanged(id);
+
     }
 
     private void OnMoveUp(IContent content)

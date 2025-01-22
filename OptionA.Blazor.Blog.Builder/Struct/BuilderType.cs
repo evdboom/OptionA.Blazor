@@ -163,5 +163,17 @@ public enum BuilderType
     /// <summary>
     /// Container around the properties modal section or radio fields
     /// </summary>
-    Legend
+    Legend,
+    /// <summary>
+    /// Button to collapse the properties
+    /// </summary>
+    CollapseButton,
+    /// <summary>
+    /// Button to expand the properties
+    /// </summary>
+    ExpandButton,
+    /// <summary>
+    /// Container around the collapse/expand buttons
+    /// </summary>
+    ComponentHeaderBar
 }

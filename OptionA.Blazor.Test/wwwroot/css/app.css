@@ -111,7 +111,11 @@ html, body {
     line-height: 1.5;
     width: 100%;
 }
- 
+
+.no-border {
+    border: 0;
+}
+
 .btn-primary {
     --bs-btn-color: var(--oa-inverse-main-color);
     --bs-btn-bg: var(--oa-main-color);

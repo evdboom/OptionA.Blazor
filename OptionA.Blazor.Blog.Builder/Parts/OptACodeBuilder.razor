@@ -9,7 +9,10 @@
                        TotalContentCount="TotalContentCount"
                        MovedUp="MovedUp"
                        MovedDown="MovedDown"
-                       Content="Content">
+                       Content="Content"
+                       CanDrag="true"
+                       DragStarted="DragStarted"
+                       DragEnded="DragEnded">
         <label @attributes="@GetLabelAttributes(CodeLanguageId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Language")" />
         </label>
