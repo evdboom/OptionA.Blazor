@@ -1,6 +1,10 @@
 ﻿[draggable] {
     user-select: none;
-    cursor: move;
+    cursor: grab;
+}
+
+[dragging] {
+    cursor: grabbing;
 }
 
 [opta-modal-content] {
@@ -21,6 +25,8 @@
     height: var(--opta-outline-height);
     top: var(--opta-outline-top);
     left: var(--opta-outline-left);
+    pointer-events: all;
+    cursor: grabbing;
 }
 
 .opta-bs-modal {

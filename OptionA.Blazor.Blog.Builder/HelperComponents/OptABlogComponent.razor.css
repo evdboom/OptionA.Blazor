@@ -13,6 +13,35 @@
     flex-direction: column;
 }
 
+[dragging] {
+    opacity: 0.5;    
+}
+
+[opta-componentcontent] {
+    position: relative;
+}
+
+[drag-target] {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+[drag-target][lower] {
+    top: unset;
+    bottom: 0;
+}
+
+[opta-componentheaderbar] {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+}
+
 .opta-bs-modal {
     --bs-modal-zindex: 1055;
     --bs-modal-padding: 1rem;

@@ -78,8 +78,7 @@ public static class ServiceCollectionExtensions
                 },
                 [BuilderType.ComponentTitle] = new BuilderTypeProperties
                 {
-                    Class = "col-12",
-                    ContentType = ContentType.Block
+                    Class = "align-items-center",                    
                 },
                 [BuilderType.Component] = new BuilderTypeProperties
                 {
@@ -93,6 +92,16 @@ public static class ServiceCollectionExtensions
                 {
                     Class = "btn btn-danger btn-sm mb-1 p-1",
                     Content = "**🗙**"
+                },
+                [BuilderType.CollapseButton] = new BuilderTypeProperties
+                {
+                    Class = "btn btn-outline-secondary btn-sm no-border me-1",
+                    Content = "**△**"
+                },
+                [BuilderType.ExpandButton] = new BuilderTypeProperties
+                {
+                    Class = "btn btn-outline-secondary btn-sm no-border me-1",
+                    Content = "**▽**"
                 },
                 [BuilderType.MoveButtonContainer] = new BuilderTypeProperties
                 {

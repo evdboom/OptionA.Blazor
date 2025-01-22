@@ -9,7 +9,10 @@
                        TotalContentCount="TotalContentCount"
                        MovedUp="MovedUp"
                        MovedDown="MovedDown"
-                       Content="Content">
+                       Content="Content"
+                       CanDrag="true"
+                       DragStarted="DragStarted"
+                       DragEnded="DragEnded">
     <label>
         <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "List Type")"/>
     </label>

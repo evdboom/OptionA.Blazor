@@ -9,7 +9,10 @@
                        TotalContentCount="TotalContentCount"
                        MovedUp="MovedUp"
                        MovedDown="MovedDown"
-                       Content="Content">
+                       Content="Content"
+                       CanDrag="true"
+                       DragStarted="DragStarted"
+                       DragEnded="DragEnded">
         <ChildContent>
             <label @attributes="@GetLabelAttributes(QuoteId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Quote")" />

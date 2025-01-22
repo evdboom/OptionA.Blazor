@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>9.1.3</Version>
+	  <Version>9.2.0</Version>
 	  <PackageReleaseNotes>
-      FAdded builder for custom languages in code blocks
+      Made blog components draggable to reorder
     </PackageReleaseNotes>
   </PropertyGroup>
 
