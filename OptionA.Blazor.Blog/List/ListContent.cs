@@ -17,5 +17,5 @@ public class ListContent : Content
     public IList<string> Items { get; set; } = [];
 
     /// <inheritdoc/>
-    public override bool IsInvalid => Items.Count == 0;
+    public override bool IsInvalid => Items.All(string.IsNullOrEmpty);
 }

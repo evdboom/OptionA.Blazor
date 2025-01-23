@@ -32,5 +32,5 @@ public class QuoteContent : Content
     /// <inheritdoc/>
     public override ContentType Type => ContentType.Quote;
     /// <inheritdoc/>
-    public override bool IsInvalid => !string.IsNullOrEmpty(Quote);
+    public override bool IsInvalid => string.IsNullOrEmpty(Quote);
 }

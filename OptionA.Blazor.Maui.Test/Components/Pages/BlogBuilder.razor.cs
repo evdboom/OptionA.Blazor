@@ -11,4 +11,9 @@ public partial class BlogBuilder
         _post = post;
         InvokeAsync(StateHasChanged);
     }
+
+    private void OnPostSaved(Post post)
+    {
+        // Save the post
+    }
 }

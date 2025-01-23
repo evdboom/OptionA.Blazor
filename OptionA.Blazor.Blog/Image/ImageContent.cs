@@ -39,5 +39,5 @@ public class ImageContent : Content
         }
     }
     /// <inheritdoc/>
-    public override bool IsInvalid => !string.IsNullOrEmpty(Source);
+    public override bool IsInvalid => string.IsNullOrEmpty(Source);
 }

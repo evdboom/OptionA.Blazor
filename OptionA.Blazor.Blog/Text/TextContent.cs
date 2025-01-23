@@ -16,5 +16,5 @@ public class TextContent : Content
     /// </summary>
     public bool NotMarkdown { get; set; }
     /// <inheritdoc/>
-    public override bool IsInvalid => !string.IsNullOrEmpty(Content);
+    public override bool IsInvalid => string.IsNullOrEmpty(Content);
 }
