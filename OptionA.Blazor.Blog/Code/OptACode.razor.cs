@@ -45,17 +45,9 @@ public partial class OptACode
         {
             Content.Attributes["opta-code"] = "block";
             var parser = Parsers.FirstOrDefault(p => p.Language == Content.Language);
-            if (parser != null) 
-            {
-                _content = parser.Parse(Content.Code, DataProvider.NewLine);
-            }
-            else
-            {
-                _content = new List<IContent>
-                {
-                    new TextContent { Content = Content.Code ?? string.Empty }
-                };
-            }
+            _content = parser != null
+                ? parser.Parse(Content.Code, DataProvider.NewLine)
+                : [ new TextContent { Content = Content.Code ?? string.Empty } ];
         }
         else
         {

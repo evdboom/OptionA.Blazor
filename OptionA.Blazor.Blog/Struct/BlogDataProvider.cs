@@ -51,6 +51,6 @@ public class BlogDataProvider : IBlogDataProvider
             return classes;
         }
 
-        return new();
+        return [];
     }
 }

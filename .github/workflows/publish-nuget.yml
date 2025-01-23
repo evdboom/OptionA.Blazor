@@ -33,7 +33,12 @@ jobs:
           dotnet build $_.FullName --no-restore --configuration Release
         }
     - name: Test
-      run: dotnet test --verbosity normal
+      run: |
+        Write-Host "Running unittests:"
+        Get-ChildItem -Recurse -Filter *.csproj | Where-Object { $_.Name -match '\.UnitTests\.csproj$' } | ForEach-Object {           
+          Write-Host "$($_.Name)"
+          dotnet test $_.FullName  --verbosity normal --no-build --configuration Release
+        }
     - name: publish
       run: |
         Write-Host "Publishing nuget packages:"
