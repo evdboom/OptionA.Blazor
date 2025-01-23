@@ -42,7 +42,7 @@ jobs:
     - name: publish
       run: |
         Write-Host "Publishing nuget packages:"
-        Get-ChildItem -Recurse -Include *.nupkg | Where-Object { $_.FullName -like '*Release*' })) {
+        Get-ChildItem -Recurse -Include *.nupkg | Where-Object { $_.FullName -like '*Release*' } | ForEach-Object {
             Write-Host "$($_.Name)"
             dotnet nuget push $_.FullName --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
         }             
