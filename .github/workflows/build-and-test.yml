@@ -19,8 +19,18 @@ jobs:
       with:
         dotnet-version: 9.0.x
     - name: Restore dependencies
-      run: dotnet restore --exclude OptionA.Blazor.Maui.Test
+      run: |
+        Write-Host "Restoring dependencies for projects:"
+        Get-ChildItem -Recurse -Filter *.csproj | Where-Object { $_.Name -notmatch '\.Test\.csproj$' } | ForEach-Object {           
+          Write-Host "$($_.Name)"
+          dotnet restore $_.FullName 
+        }
     - name: Build
-      run: dotnet build --no-restore --configuration Release --exclude OptionA.Blazor.Maui.Test
+      run: |
+        Write-Host "Building projects:"
+        Get-ChildItem -Recurse -Filter *.csproj | Where-Object { $_.Name -notmatch '\.Test\.csproj$' } | ForEach-Object {           
+          Write-Host "$($_.Name)"
+          dotnet build $_.FullName --no-restore --configuration Release
+        }
     - name: Test
       run: dotnet test --verbosity normal
