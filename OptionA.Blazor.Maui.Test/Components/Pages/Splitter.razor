@@ -1,0 +1,33 @@
+﻿@page "/components/splitter"
+<PageTitle>Splitter</PageTitle>
+<div>
+    <button @onclick="ChangeDragMode">@_dragMode</button>
+    <button @onclick="ChangeOrientation">@_orientation</button>
+    <button @onclick="() => _show = !_show">Show</button>
+    <label>Min First</label><input type="number" @bind="_minimumFirst"/>
+    <label>Min Second</label><input type="number" @bind="_minimumSecond" />
+    <label>Start First</label><input type="number" @bind="_startPercentageFirst" />
+    <label>Container size</label><input type="number" @bind="_containerSize" />
+</div>
+
+@if (_show)
+{
+    <div @attributes="@GetContainerAttributes()">
+    <OptASplitter DragMode="_dragMode"
+                  Orientation="_orientation"
+                  MinimumPercentageFirst="_minimumFirst"
+                  MinimumPercentageSecond="_minimumSecond"
+                  StartPercentageFirst="_startPercentageFirst">
+        <First>
+            <div>
+                Test 1
+            </div>
+        </First>
+        <Second>
+            <div>
+                Test 2
+            </div>
+        </Second>
+    </OptASplitter>
+    </div>
+}

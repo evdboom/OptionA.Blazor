@@ -1,0 +1,39 @@
+﻿@page "/components/modal"
+<PageTitle>Modal</PageTitle>
+<button @onclick="ChangeDraggable">
+    @if (!_draggable)
+{
+    <span>Not draggable</span>
+}
+else
+{
+    <span>Draggable</span>
+}
+</button>
+<button @onclick="ChangeDragMode">
+    @_dragMode
+</button>
+<button @onclick="ChangeSize">
+    @_size
+</button>
+<button @onclick="() => _modal?.Show()">
+    Show
+</button>
+<label>Text</label><textarea @bind="_text"/>
+
+<OptAModal @ref="_modal"
+           Draggable="_draggable"
+           Size="_size"
+           DragMode="_dragMode">
+    <Header>
+        <h1>My first modal</h1>
+    </Header>
+    <Content>
+        <p style="white-space:pre">
+            @_text
+        </p>
+    </Content>
+    <Footer>
+        <p @onclick="() => _modal!.Close()">Close me</p>
+    </Footer>
+</OptAModal>

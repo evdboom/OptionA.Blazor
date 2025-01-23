@@ -1,0 +1,10 @@
+﻿using Foundation;
+
+namespace OptionA.Blazor.Maui.Test
+{
+    [Register("AppDelegate")]
+    public class AppDelegate : MauiUIApplicationDelegate
+    {
+        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+    }
+}

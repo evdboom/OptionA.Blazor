@@ -24,7 +24,6 @@ public class OpenMessage : IDisposable
         _openTime = DateTime.UtcNow;
         if (Message.Timeout.HasValue && message.Timeout!.Value != Timeout.Infinite)
         {                
-            var closeTimer = new Timer(CloseElapsed, null, Message.Timeout.Value, Timeout.Infinite);
             Time = (Message.Timeout.Value / 1000).ToString("F0");
             _timeTimer = new Timer(TimeElapsed, null, 1000, 1000);
         }
@@ -60,6 +59,12 @@ public class OpenMessage : IDisposable
         if (Message.Timeout.HasValue && Message.Timeout.Value != Timeout.Infinite)
         {
             var time = (Message.Timeout.Value / 1000) - open.TotalSeconds;
+            if (time <= 0)
+            {
+                _timeTimer.Change(Timeout.Infinite, Timeout.Infinite);
+                Closed?.Invoke(this, this);
+                return;
+            }
             Time = time.ToString("F0");
         }
         else
@@ -78,11 +83,6 @@ public class OpenMessage : IDisposable
         }            
 
        TimeUpdated?.Invoke(this, Time);
-    }
-
-    private void CloseElapsed(object? state)
-    {
-        Closed?.Invoke(this, this);
     }
 
     /// <inheritdoc/>

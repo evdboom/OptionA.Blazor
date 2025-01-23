@@ -1,0 +1,42 @@
+﻿<h3>Through Responsive component</h3>
+
+<h4>All dimensions</h4>
+<ul>
+    @if (BreakPoints is not null)
+{
+    @foreach (var dimension in BreakPoints)
+    {
+        <li>
+                @dimension.Name @dimension.Width
+            </li>
+    }
+}
+</ul>
+<br />
+<h4>Valid dimensions</h4>
+<ul>
+    @if (ValidDimensions is not null)
+{
+    @foreach (var dimension in ValidDimensions)
+    {
+        <li>
+                @dimension
+            </li>
+    }
+}
+</ul>
+<br />
+<h4>Dimension</h4>
+<p>
+    @DimensionName
+</p>
+<br />
+<h4>Windowsize</h4>
+@if (Dimension.HasValue)
+{
+    <p>
+        @Dimension.Value.Name @Dimension.Value.Width @Dimension.Value.Height
+    </p>
+}
+<br />
+

@@ -1,0 +1,74 @@
+﻿@page "/components/buttons"
+<PageTitle>Buttons</PageTitle>
+
+<p>
+    Clicked @_clicked number of times
+</p>
+<button @onclick="ChangeOrientation">@_orientation</button>
+<button @onclick="() => _disabled = !_disabled">
+    @if (_disabled)
+{
+    <span>Disabled</span>
+}
+else
+{
+    <span>Enabled</span>        
+}
+</button>
+<button @onclick="ChangeActionType">@_actionType</button>
+<button @onclick="ChangeButtonType">@_buttonTypes</button>
+<button @onclick="() => _show = !_show">Show</button>
+<label>Name</label><input type="text" @bind="_name"/>
+<label>Description</label><input type="text" @bind="_description"/>
+<label>Other button</label><input type="text" @bind="_otherButton"/>
+<label>Other icon</label><input type="text" @bind="_otherIcon"/>
+<label>Container size</label><input type="number" @bind="_containerSize" />
+@if (_show)
+{
+    <div @attributes="@GetContainerAttributes()">
+    <OptAButtonBar Orientation="_orientation">
+        <StartButtons>
+            @for(int i = 0; i < 3; i++)
+        {
+            <OptAButton ActionType="_actionType"
+                            ButtonType="_buttonTypes"
+                            Name="@_name"
+                            Description="@_description"
+                            ClickAction="OnClick"
+                            DisabledCondition="IsDisabled"
+                            OtherButtonClass="@_otherButton"
+                            OtherIconClass="@_otherIcon">
+                </OptAButton>
+        }
+        </StartButtons>
+        <CenterButtons>
+            @for (int i = 0; i < 3; i++)
+        {
+            <OptAButton ActionType="_actionType"
+                            ButtonType="_buttonTypes"
+                            Name="@_name"
+                            Description="@_description"
+                            ClickAction="OnClick"
+                            DisabledCondition="IsDisabled"
+                            OtherButtonClass="@_otherButton"
+                            OtherIconClass="@_otherIcon">
+                </OptAButton>
+        }
+        </CenterButtons>
+        <EndButtons>
+            @for (int i = 0; i < 3; i++)
+        {
+            <OptAButton ActionType="_actionType"
+                            ButtonType="_buttonTypes"
+                            Name="@_name"
+                            Description="@_description"
+                            ClickAction="OnClick"
+                            DisabledCondition="IsDisabled"
+                            OtherButtonClass="@_otherButton"
+                            OtherIconClass="@_otherIcon">
+                </OptAButton>
+        }
+        </EndButtons>
+    </OptAButtonBar>
+    </div>
+}

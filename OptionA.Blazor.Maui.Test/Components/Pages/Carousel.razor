@@ -1,0 +1,87 @@
+﻿@page "/components/carousel"
+<PageTitle>Carousel</PageTitle>
+<button @onclick="() => _showAutoPlay = !_showAutoPlay">
+    @if (_showAutoPlay)
+{
+    <span>AutoPlay</span>
+}
+else
+{
+    <span>No AutoPlay</span>
+}
+</button>
+<button @onclick="() => _showItemSelect = !_showItemSelect">
+    @if (_showItemSelect)
+{
+    <span>Item select</span>
+}
+else
+{
+    <span>No Item select</span>
+}
+</button>
+<button @onclick="() => _showNextPrevious = !_showNextPrevious">
+    @if (_showNextPrevious)
+{
+    <span>Next/Previous</span>
+}
+else
+{
+    <span>No Next/Previous</span>
+}
+</button>
+<button @onclick="() => _autoPlayOnStart = !_autoPlayOnStart">
+    @if (_autoPlayOnStart)
+{
+    <span>Autoplay on start</span>
+}
+else
+{
+    <span>No autoplay on start</span>
+}
+</button>
+<button @onclick="() => _show = !_show">Show</button>
+<label>Slide speed</label><input type="number" @bind="_slideSpeed"/>
+<label>Minumum height</label><input type="number" @bind="_minimumHeight"/>
+@if (_show)
+{
+    <OptACarousel MinimumHeight="@_minimumHeight"
+                  SlideSpeedInMiliseconds="_slideSpeed"
+                  ShowAutoPlay="_showAutoPlay"
+                  ShowItemSelect="_showItemSelect"
+                  ShowNextPrevious="_showNextPrevious"
+                  AutoPlayOnStart="_autoPlayOnStart">
+        <Slides>
+            <OptACarouselSlide SlideNumber="1"
+                               ImageUrl="/assets/logo.svg"
+                               ImageText="Choose option A">
+                <div class="carousel-image">
+                    <h1>Slide 1</h1>
+                    <p>
+                        My first slide is about a lot of text in the slide to show the capabilities
+                    </p>
+                </div>
+            </OptACarouselSlide>
+            <OptACarouselSlide SlideNumber="2"
+                               ImageUrl="/assets/logo.svg"
+                               ImageText="Choose option A again">
+                <div class="carousel-image">
+                    <h1>Slide 2</h1>
+                    <p>
+                        My second slide is about a lot of text in the slide to show the capabilities
+                    </p>
+                </div>
+            </OptACarouselSlide>
+            <OptACarouselSlide SlideNumber="3"
+                               ImageUrl="/assets/logo.svg"
+                               ImageText="If B, see A">
+                <div class="carousel-image">
+                    <h1>Slide 3</h1>
+                    <p>
+                        My third slide is about a lot of text in the slide to show the capabilities
+                    </p>
+                </div>
+            </OptACarouselSlide>
+        </Slides>
+    </OptACarousel>
+}
