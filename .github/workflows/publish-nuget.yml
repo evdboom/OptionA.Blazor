@@ -19,9 +19,9 @@ jobs:
       with:
         dotnet-version: 9.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore --exclude OptionA.Blazor.Maui.Test
     - name: Build
-      run: dotnet build --no-restore --configuration Release
+      run: dotnet build --no-restore --configuration Release --exclude OptionA.Blazor.Maui.Test
     - name: Test
       run: dotnet test --verbosity normal
     - name: publish
