@@ -60,7 +60,7 @@ public partial class OptACarouselSlide
 
     /// <summary>
     /// <inheritdoc/>
-    /// Ùsed to register with parent
+    /// Used to register with parent
     /// </summary>
     protected override void OnParametersSet()
     {

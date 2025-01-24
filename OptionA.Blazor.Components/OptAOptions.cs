@@ -1,9 +1,4 @@
-﻿using OptionA.Blazor.Components.Buttons.Struct;
-using OptionA.Blazor.Components.Carousel.Struct;
-using OptionA.Blazor.Components.Menu.Struct;
-using OptionA.Blazor.Components.Modal.Struct;
-
-namespace OptionA.Blazor.Components;
+﻿namespace OptionA.Blazor.Components;
 
 /// <summary>
 /// Overal options class for all components
@@ -42,4 +37,8 @@ public class OptAOptions
     /// Configuration for MessageBox components
     /// </summary>
     public Action<MessageBoxOptions>? MessageBoxConfiguration { get; set; }
+    /// <summary>
+    /// Configuration for Tabs components
+    /// </summary>
+    public Action<TabsOptions>? TabsConfiguration { get; set; }
 }

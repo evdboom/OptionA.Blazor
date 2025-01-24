@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace OptionA.Blazor.Blog;
 
+/// <summary>
+/// Header for a table
+/// </summary>
 public partial class OptATableHeader
 {
     /// <summary>

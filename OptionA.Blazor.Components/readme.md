@@ -11,18 +11,18 @@ To add the components you can use the extension method of each component, for ex
 Alternatively to add all the components in the package use the `AddOptionAComponents` or `AddOptionABootstrapComponents` extension methods.
 
 ## Latest release notes
-### 8.1.1
+### 9.2.0
 #### Overall
-Messagebox
+Added Tabs component
 
 #### New features
-- Added Messagebox component for displaying notifications (toasts)
+- Added Tabs component to create a tabbed interface
 
 #### Solved Bugs
-- More efficient message time handling
+- None
 
 ## Components
-Following are the currently supported components. For all components there is a `Parameter` AdditionalClasses to provide specific classes for that single component. RemovedClasses to remove default classes (set by the config) for that single component, and an Attributes parameter to set additional required attributes to that single component.
+Following are the currently supported components. For all components there is a `Parameter` AdditionalClasses to provide specific classes for that single component. `RemovedClasses` to remove default classes (set by the config) for that single component, and an `Attributes` parameter to set additional required attributes to that single component.
 
 ### Buttons
 ```
@@ -139,3 +139,21 @@ Usage:
 <OptAMessageBox />
 ```
 Inject message sending components with the `IMessageService` service and call the `AddMessage` method to add messages with supplied `MessageItem` classes.
+
+### Tabs
+```
+<OptATabs />
+```
+A tab component, to display multiple tabs with content. The content can be set with the `OptATab` component.
+
+Usage:
+```
+<OptATabs>
+    <OptATab Title="Tab 1">
+        @*Content for tab 1*@
+    </OptATab>
+    <OptATab Title="Tab 2">
+        @*Content for tab 2*@
+    </OptATab>
+</OptATabs>
+```
