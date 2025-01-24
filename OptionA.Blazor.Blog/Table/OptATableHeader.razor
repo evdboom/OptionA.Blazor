@@ -1,0 +1,14 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null && _content is not null)
+{
+    <thead>
+        <tr>
+            @foreach (var item in _content)
+            {
+                <th>
+                    <OptAChild Content="item" />
+                </th>
+            }
+        </tr>
+    </thead>
+}

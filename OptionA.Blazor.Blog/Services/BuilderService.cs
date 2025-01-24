@@ -190,6 +190,29 @@ public class BuilderService : IBuilderService
                     result[nameof(frame.Width)] = frame.Width;
                 }
                 break;
+            case ContentType.List:
+                var list = (ListContent)content;
+                result[nameof(list.ListType)] = list.ListType;
+                if (list.Items.Any())
+                {
+                    result[nameof(list.Items)] = list.Items;
+                }
+                break;
+            case ContentType.Table:
+                var table = (TableContent)content;
+                if (table.Headers.Any())
+                {
+                    result[nameof(table.Headers)] = table.Headers;
+                }
+                if (table.Rows.Any())
+                {
+                    result[nameof(table.Rows)] = table.Rows;
+                }
+                if (table.Footer.Any())
+                {
+                    result[nameof(table.Footer)] = table.Footer;
+                }
+                break;
         }
 
 
@@ -311,7 +334,18 @@ public class BuilderService : IBuilderService
                 Items = content.TryGetValue(nameof(ListContent.Items), out var items)
                     ? JsonSerializer.Deserialize<List<string>>(items) ?? []
                     : [],
-
+            },
+            ContentType.Table => new TableContent
+            {
+                Headers = content.TryGetValue(nameof(TableContent.Headers), out var headers)
+                    ? JsonSerializer.Deserialize<List<string>>(headers) ?? []
+                    : [],
+                Rows = content.TryGetValue(nameof(TableContent.Rows), out var rows)
+                    ? JsonSerializer.Deserialize<List<IList<string>>>(rows) ?? []
+                    : [],
+                Footer = content.TryGetValue(nameof(TableContent.Footer), out var footer)
+                    ? JsonSerializer.Deserialize<List<string>>(footer) ?? []
+                    : [],
             },
             _ => throw new NotSupportedException($"Cannot create postcontent for type {type}")
         };

@@ -27,50 +27,6 @@
             break;
         case ContentType.Code:
             <OptACodeBuilder Content="(CodeContent)Content"
-                               ContentChanged="ContentChanged"
-                               ContentRemoved="ContentRemoved"
-                               ContentIndex="ContentIndex"
-                               TotalContentCount="TotalContentCount"
-                               MovedUp="MovedUp"
-                               MovedDown="MovedDown"
-                               DragStarted="DragStarted"
-                               DragEnded="DragEnded" />
-            break;
-        case ContentType.Image:
-        <OptAImageBuilder Content="(ImageContent)Content"
-                              ContentChanged="ContentChanged"
-                              ContentRemoved="ContentRemoved"
-                              ContentIndex="ContentIndex"
-                              TotalContentCount="TotalContentCount"
-                              MovedUp="MovedUp"
-                              MovedDown="MovedDown"
-                              DragStarted="DragStarted"
-                              DragEnded="DragEnded" />
-            break;
-        case ContentType.Quote:
-        <OptAQuoteBuilder Content="(QuoteContent)Content"
-                              ContentChanged="ContentChanged"
-                              ContentRemoved="ContentRemoved"
-                              ContentIndex="ContentIndex"
-                              TotalContentCount="TotalContentCount"
-                              MovedUp="MovedUp"
-                              MovedDown="MovedDown"
-                              DragStarted="DragStarted"
-                              DragEnded="DragEnded" />
-            break;
-        case ContentType.Frame:
-        <OptAFrameBuilder Content="(FrameContent)Content"
-                              ContentChanged="ContentChanged"
-                              ContentRemoved="ContentRemoved"
-                              ContentIndex="ContentIndex"
-                              TotalContentCount="TotalContentCount"
-                              MovedUp="MovedUp"
-                              MovedDown="MovedDown"
-                              DragStarted="DragStarted"
-                              DragEnded="DragEnded" />
-            break;
-        case ContentType.List:
-        <OptAListBuilder Content="(ListContent)Content"
                              ContentChanged="ContentChanged"
                              ContentRemoved="ContentRemoved"
                              ContentIndex="ContentIndex"
@@ -79,6 +35,61 @@
                              MovedDown="MovedDown"
                              DragStarted="DragStarted"
                              DragEnded="DragEnded" />
+            break;
+        case ContentType.Image:
+        <OptAImageBuilder Content="(ImageContent)Content"
+                          ContentChanged="ContentChanged"
+                          ContentRemoved="ContentRemoved"
+                          ContentIndex="ContentIndex"
+                          TotalContentCount="TotalContentCount"
+                          MovedUp="MovedUp"
+                          MovedDown="MovedDown"
+                          DragStarted="DragStarted"
+                          DragEnded="DragEnded" />
+            break;
+        case ContentType.Quote:
+        <OptAQuoteBuilder Content="(QuoteContent)Content"
+                          ContentChanged="ContentChanged"
+                          ContentRemoved="ContentRemoved"
+                          ContentIndex="ContentIndex"
+                          TotalContentCount="TotalContentCount"
+                          MovedUp="MovedUp"
+                          MovedDown="MovedDown"
+                          DragStarted="DragStarted"
+                          DragEnded="DragEnded" />
+            break;
+        case ContentType.Frame:
+        <OptAFrameBuilder Content="(FrameContent)Content"
+                          ContentChanged="ContentChanged"
+                          ContentRemoved="ContentRemoved"
+                          ContentIndex="ContentIndex"
+                          TotalContentCount="TotalContentCount"
+                          MovedUp="MovedUp"
+                          MovedDown="MovedDown"
+                          DragStarted="DragStarted"
+                          DragEnded="DragEnded" />
+            break;
+        case ContentType.List:
+        <OptAListBuilder Content="(ListContent)Content"
+                         ContentChanged="ContentChanged"
+                         ContentRemoved="ContentRemoved"
+                         ContentIndex="ContentIndex"
+                         TotalContentCount="TotalContentCount"
+                         MovedUp="MovedUp"
+                         MovedDown="MovedDown"
+                         DragStarted="DragStarted"
+                         DragEnded="DragEnded" />
+            break;
+        case ContentType.Table:
+        <OptATableBuilder Content="(TableContent)Content"
+                          ContentChanged="ContentChanged"
+                          ContentRemoved="ContentRemoved"
+                          ContentIndex="ContentIndex"
+                          TotalContentCount="TotalContentCount"
+                          MovedUp="MovedUp"
+                          MovedDown="MovedDown"
+                          DragStarted="DragStarted"
+                          DragEnded="DragEnded" />
             break;
 
     }

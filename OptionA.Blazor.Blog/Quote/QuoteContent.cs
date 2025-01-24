@@ -8,15 +8,15 @@ public class QuoteContent : Content
     /// <summary>
     /// Additional classes for source element
     /// </summary>
-    public List<string> AdditionalSourceClasses { get; set; } = new List<string>();
+    public List<string> AdditionalSourceClasses { get; set; } = [];
     /// <summary>
     /// Removed classes for source element
     /// </summary>
-    public List<string> RemovedSourceClasses { get; set; } = new List<string>();
+    public List<string> RemovedSourceClasses { get; set; } = [];
     /// <summary>
     /// Attributes for source element
     /// </summary>
-    public Dictionary<string, object?> SourceAttributes { get; set; } = new Dictionary<string, object?>();
+    public Dictionary<string, object?> SourceAttributes { get; set; } = [];
     /// <summary>
     /// Actual quote
     /// </summary>

@@ -47,6 +47,7 @@ builder.Services
             [ContentType.Image] = IconButton("bi bi-image"),
             [ContentType.Frame] = IconButton("bi bi-window"),
             [ContentType.List] = IconButton("bi bi-list-ul"),
+            [ContentType.Table] = IconButton("bi bi-table"),
         };
         if (config.PostBuilderOptions is not null && config.PostBuilderOptions.TryGetValue(BuilderType.ComponentBar, out var componentBar))
         {

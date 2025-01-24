@@ -16,6 +16,7 @@ public partial class OptAComponentBar
         [ContentType.Quote] = ("Add quote", "Add a quote to the post"),
         [ContentType.Frame] = ("Add frame", "Add a (external) frame to the post"),
         [ContentType.List] = ("Add list", "Add a list to the post"),
+        [ContentType.Table] = ("Add table", "Add a table to the post"),
     };
 
     /// <summary>

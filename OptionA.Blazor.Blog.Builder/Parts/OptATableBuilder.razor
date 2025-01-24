@@ -1,0 +1,44 @@
+﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
+@using OptionA.Blazor.Components
+@if (Content is not null)
+{
+    <OptABlogComponent Name="**Table**"
+                       ContentChanged="ContentChanged"
+                       ContentRemoved="ContentRemoved"
+                       ContentIndex="ContentIndex"
+                       TotalContentCount="TotalContentCount"
+                       MovedUp="MovedUp"
+                       MovedDown="MovedDown"
+                       Content="Content"
+                       CanDrag="true"
+                       DragStarted="DragStarted"
+                       DragEnded="DragEnded">
+        <ChildContent>
+            <OptAHelperList ContentChanged="ContentChanged"
+                            ItemPlaceholder="Column..."
+                            ItemTitle="Add column to table"
+                            Label="Columns"
+                            Items="Content.Headers" />
+            <label>
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Input Method")" />
+            </label>
+            <OptAInputRadioGroup @bind-Value="_inputMethod"
+                                 Items="@([0,1])"
+                                 DisplayValue="@((value) => value == 0 ? "Add to table" : "From comma seperated string")" />
+            @if (_inputMethod == 0)
+            {
+                // todo
+            }
+            else
+            {
+                <OptAInputTextArea @bind-Value="ItemsFromString"
+                                   Autogrow="true" />
+            }
+            <OptAHelperList ContentChanged="ContentChanged"
+                            ItemPlaceholder="Footer..."
+                            ItemTitle="Add column to footer"
+                            Label="Footer"
+                            Items="Content.Footer" />
+        </ChildContent>
+    </OptABlogComponent>
+}

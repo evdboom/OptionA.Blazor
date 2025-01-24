@@ -1,0 +1,9 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null)
+{
+    <table @attributes="@Content.GetAttributes(DataProvider)">
+        <OptATableHeader  Content="@Content" />
+        <OptATableBody Content="@Content" />
+        <OptATableFooter Content="@Content" />
+    </table>
+}

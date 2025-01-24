@@ -1,7 +1,7 @@
 # OptionA.Blazor.Blog.Builder
 Blazor components building a blog in Blazor.
 
-For full documentation, releasenotes and examples, go to [option-a.tech](https://www.option-a.tech/documentation/blazor/blogbuilder). To full source can be viewed on [github](https://github.com/evdboom/OptionA.Blazor).
+For full documentation, releasenotes and examples, go to [option-a.tech](https://www.option-a.tech/documentation/blazor/blogbuilder). The full source can be viewed on [github](https://github.com/evdboom/OptionA.Blazor).
 
 ## Getting started
 To start using the OptionA.Blazor.Blog.Builder include the required depencenies in your service provider. The package uses the default .Net Dependency Injection.
@@ -58,12 +58,12 @@ To display a post, use the `<OptaPostBuilder>` component. You can hook an event 
 ```
 
 ## Latest release notes
-### 8.0.0
+### 9.3.0
 #### Overall
-Update to .NET 8
+Added Table builder
 
 #### New features
-- Update package to .NET 8
+- Added Table builder
 
 #### Solved Bugs
 - None
@@ -77,11 +77,63 @@ Following are the currently supported components. For all components there is a 
 ```
 Starting point for building posts. A block for the properties and buttons to add parts to the post
 
+### Post part builders
+The following components can be added to the post builder to create a post. They can also be used seperatly.
+
+### Code builder
+```
+<OptACodeBuilder>
+```
+Component for generating code blocks. The code can be edited in the component.
+
+### Image builder
+```
+<OptAImageBuilder>
+```
+Component for placing images, source can be set in the component.
+
+### Paragraph builder
+```
+<OptAParagraphBuilder>
+```
+Component for generating paragraphs. The text can be edited in the component.
+
+### Quote builder
+```
+<OptAQuoteBuilder>
+```
+Component for generating quotes. The text can be edited in the component.
+
+### Frame builder
+```
+<OptAFrameBuilder>
+```
+Component for generating external iframes. The source can be set in the component.
+
+### List builder
+```
+<OptAListBuilder>
+```
+Component for generating lists of items (only string)
+
+### Table builder
+```
+<OptATableBuilder>
+```
+Component for generating tables. The table can be edited in the component.
+
+### Header builder
+```
+<OptAHeaderBuilder>
+```
+Component for generating headers. The text can be edited in the component.
+
+
 ### Helper components
 These components are used in the blogbuilder, but could be used seperatly
 
-#### List builder
+#### Helper list builder
 ```
-<OptAListBuilder>
+<OptAHelperList>
 ```
 Component for generating lists of items (only string). When an item get added, automatically provides a slot for a new Item.

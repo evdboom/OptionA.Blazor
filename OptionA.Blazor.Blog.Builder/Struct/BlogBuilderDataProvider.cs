@@ -48,6 +48,7 @@ public class BlogBuilderDataProvider : IBlogBuilderDataProvider
             ContentType.Quote => new QuoteContent(),
             ContentType.Frame => new FrameContent(),
             ContentType.List => new ListContent(),
+            ContentType.Table => new TableContent(),
             _ => throw new NotSupportedException($"Contenttype {contentType} is not support as individual blogpart")
         };
     }

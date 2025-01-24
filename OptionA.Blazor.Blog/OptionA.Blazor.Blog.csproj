@@ -15,9 +15,9 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>9.1.4</Version>
+	<Version>9.2.0</Version>
 	<PackageReleaseNotes>
-    Fixed a bug where content could be marked as invalid when it was not.
+    Added table component
   </PackageReleaseNotes>
   </PropertyGroup>
 

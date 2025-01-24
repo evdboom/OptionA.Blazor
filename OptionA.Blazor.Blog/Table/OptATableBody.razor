@@ -1,0 +1,10 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null)
+{
+    <tbody>
+        @foreach (var item in Content.Rows)
+        {
+            <OptATableRow Content="item"/>
+        }
+    </tbody>
+}

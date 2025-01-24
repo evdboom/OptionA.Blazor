@@ -1,39 +1,42 @@
 ﻿@namespace OptionA.Blazor.Blog
 @if (Content is not null)
 {
-switch (Content.Type)
-{
-    case ContentType.Text:
-    case ContentType.Paragraph:
-    case ContentType.Bold:
-    case ContentType.Block:
-    case ContentType.Inline:
-    case ContentType.Link:
-    case ContentType.Italic:
-    case ContentType.LineBreak:
-    case ContentType.Cite:
-        <OptAText Content="(TextContent)Content" />
-        break;
-    case ContentType.Quote:
-        <OptAQuote Content="(QuoteContent)Content" />
-        break;
-    case ContentType.Code:
-        <OptACode Content="(CodeContent)Content" />
-        break;
-    case ContentType.Header:
-        <OptAHeader Content="(HeaderContent)Content" />
-        break;
-    case ContentType.Icon:
-        <OptAIcon Content="(IconContent)Content" />
-        break;
-    case ContentType.Image:
-        <OptAImage Content="(ImageContent)Content" />
-        break;
-    case ContentType.Frame:
-        <OptAFrame Content="(FrameContent)Content" />
-        break;
-    case ContentType.List:
-        <OptAList Content="(ListContent)Content" />
-        break;
-}
+    switch (Content.Type)
+    {
+        case ContentType.Text:
+        case ContentType.Paragraph:
+        case ContentType.Bold:
+        case ContentType.Block:
+        case ContentType.Inline:
+        case ContentType.Link:
+        case ContentType.Italic:
+        case ContentType.LineBreak:
+        case ContentType.Cite:
+            <OptAText Content="(TextContent)Content" />
+            break;
+        case ContentType.Quote:
+            <OptAQuote Content="(QuoteContent)Content" />
+            break;
+        case ContentType.Code:
+            <OptACode Content="(CodeContent)Content" />
+            break;
+        case ContentType.Header:
+            <OptAHeader Content="(HeaderContent)Content" />
+            break;
+        case ContentType.Icon:
+            <OptAIcon Content="(IconContent)Content" />
+            break;
+        case ContentType.Image:
+            <OptAImage Content="(ImageContent)Content" />
+            break;
+        case ContentType.Frame:
+            <OptAFrame Content="(FrameContent)Content" />
+            break;
+        case ContentType.List:
+            <OptAList Content="(ListContent)Content" />
+            break;
+        case ContentType.Table:
+            <OptATable Content="(TableContent)Content" />
+            break;
+    }
 }

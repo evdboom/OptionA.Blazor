@@ -1,7 +1,7 @@
 # OptionA.Blazor.Blog
 Blazor components for displaying a blog in Blazor.
 
-For full documentation, releasenotes and examples, go to [option-a.tech](https://www.option-a.tech/documentation/blazor/blog). To full source can be viewed on [github](https://github.com/evdboom/OptionA.Blazor).
+For full documentation, releasenotes and examples, go to [option-a.tech](https://www.option-a.tech/documentation/blazor/blog). The full source can be viewed on [github](https://github.com/evdboom/OptionA.Blazor).
 
 ## Getting started
 To start using the OptionA.Blazor.Blog include the required depencenies in your service provider. The package uses the default .Net Dependency Injection.
@@ -43,18 +43,16 @@ To display a post, use the `<OptAPost>` component and provide the `Post` paramet
 ```
 
 ## Latest release notes
-### 8.1.1
+### 9.2.0
 #### Overall
-Removed unused code and added some xml documentation
-
+Added Table component
 #### New features
-- Allow override for default Environment.NewLine for use in the code parser
+- Added table component
 #### Solved Bugs
-- new lines werent always parsed correctly
 
 
 ## Components
-Following are the currently supported components. For all components there is a `Parameter` AdditionalClasses to provide specific classes for that single component. RemovedClasses to remove default classes (set by the config) for that single component, and an Attributes parameter to set additional required attributes to that single component.
+Following are the currently supported components. For all components there is a `Parameter` AdditionalClasses to provide specific classes for that single component. `RemovedClasses` to remove default classes (set by the config) for that single component, and an `Attributes` parameter to set additional required attributes to that single component.
 
 ### Post
 ```
@@ -172,3 +170,9 @@ A frame to an 'external' site, results in an \<iframe> tag to be able to incorpo
 <OptAList>
 ```
 A list, either ordered or unordered, items inside are parsed as Text components supporting (light) markdown.
+
+### Table
+```
+<OptATable>
+```
+A table, with headers, rows and footer. Cell contents are parsed as Text components supporting (light) markdown.

@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>9.2.2</Version>
+	  <Version>9.3.0</Version>
 	  <PackageReleaseNotes>
-      Blog package updated
+      Added table builder
     </PackageReleaseNotes>
   </PropertyGroup>
 

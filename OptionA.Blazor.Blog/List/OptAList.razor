@@ -2,18 +2,18 @@
 @if (Content is not null)
 {
     @switch (Content.ListType)
-{
-    case ListType.OrderedList:
+    {
+        case ListType.OrderedList:
         <ol @attributes="@Content.GetAttributes(DataProvider)">
-                <OptAListContent Content="@Content"/>
-            </ol>
+            <OptAListContent Content="@Content"/>
+        </ol>
         break;
-    case ListType.UnorderedList:
+        case ListType.UnorderedList:
         <ul @attributes="@Content.GetAttributes(DataProvider)">
-                <OptAListContent Content="@Content" />
-            </ul>
+            <OptAListContent Content="@Content" />
+        </ul>
         break;
-}
+    }
 }
 
 
