@@ -2,6 +2,9 @@ using Microsoft.AspNetCore.Components;
 
 namespace OptionA.Blazor.Blog;
 
+/// <summary>
+/// Table to display
+/// </summary>
 public partial class OptATable
 {
     /// <summary>

@@ -26,7 +26,8 @@ public static partial class ServiceCollectionExtensions
             .AddOptionAGallery(options.GalleryConfiguration)
             .AddOptionAModal(options.ModalConfiguration)
             .AddOptionASplitter(options.SplitterConfiguration)
-            .AddOptionAMessageBox(options.MessageBoxConfiguration);
+            .AddOptionAMessageBox(options.MessageBoxConfiguration)
+            .AddOptionATabs(options.TabsConfiguration);
     }
 
     /// <summary>
@@ -48,8 +49,9 @@ public static partial class ServiceCollectionExtensions
             .AddOptionABootstrapResponsive(options.ResponsiveConfiguration)
             .AddOptionABootstrapGallery(options.GalleryConfiguration)
             .AddOptionABootstrapModal(options.ModalConfiguration)
-            .AddOptionASplitter(options.SplitterConfiguration)
-            .AddOptionABootstrapMessageBox(options.MessageBoxConfiguration);
+            .AddOptionABootstrapSplitter(options.SplitterConfiguration)
+            .AddOptionABootstrapMessageBox(options.MessageBoxConfiguration)
+            .AddOptionABootstrapTabs(options.TabsConfiguration);
     }
 
 

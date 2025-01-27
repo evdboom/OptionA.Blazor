@@ -21,4 +21,17 @@ public static partial class ServiceCollectionExtensions
 
         return services;
     }
+
+    /// <summary>
+    /// Adds splitters to the serviceprovider using default Bootstrap 5.3 configuration
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="configuration"></param>
+    /// <returns></returns>
+    public static IServiceCollection AddOptionABootstrapSplitter(this IServiceCollection services, Action<SplitterOptions>? configuration = null)
+    {
+        services.TryAddSingleton<ISplitterDataProvider>(provider => new SplitterDataProvider(configuration));
+
+        return services;
+    }
 }

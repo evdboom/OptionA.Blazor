@@ -5,9 +5,9 @@
     /// </summary>
     public class TableContent : Content
     {
-        /// <inheritdoc>
+        /// <inheritdoc/>
         public override ContentType Type => ContentType.Table;
-        /// <inheritdoc>
+        /// <inheritdoc/>
         public override bool IsInvalid => !Rows.Any();
 
         /// <summary>

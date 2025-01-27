@@ -1,0 +1,16 @@
+﻿@namespace OptionA.Blazor.Components
+@inherits OptAComponent
+
+<menu @attributes="GetHeaderAttributes()">
+@foreach (var child in _children)
+{
+    <li>
+        <button @attributes="GetTabSelectAttributes(child.Key, child.Value)">@child.Value.Name</button>
+    </li>
+}
+</menu>
+<div @attributes="GetContainerAttributes()">
+    <CascadingValue Name="@TabsParameterName" Value="@this">
+        @ChildContent
+    </CascadingValue>
+</div>
