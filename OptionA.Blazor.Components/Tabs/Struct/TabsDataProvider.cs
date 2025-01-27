@@ -16,4 +16,15 @@ public class TabsDataProvider : ITabsDataProvider
         _options = new TabsOptions();
         configuration?.Invoke(_options);
     }
+
+    /// <inheritdoc/>
+    public string? ContainerClass => _options.ContainerClass;
+    /// <inheritdoc/>
+    public string? ActiveTabClass => _options.ActiveTabClass;
+    /// <inheritdoc/>
+    public string? TabClass => _options.TabClass;
+    /// <inheritdoc/>
+    public string? HeaderClass => _options.HeaderClass;
+    /// <inheritdoc/>
+    public string? TabItemClass => _options.TabItemClass;
 }

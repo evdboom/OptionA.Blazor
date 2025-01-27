@@ -9,7 +9,8 @@
     </li>
 }
 </menu>
-
-<CascadingValue Name="@TabsParameterName" Value="@this">
-    @ChildContent
-</CascadingValue>
+<div @attributes="GetContainerAttributes()">
+    <CascadingValue Name="@TabsParameterName" Value="@this">
+        @ChildContent
+    </CascadingValue>
+</div>

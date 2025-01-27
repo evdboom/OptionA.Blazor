@@ -16,6 +16,8 @@ public partial class OptATabs
     /// </summary>
     [Parameter]
     public RenderFragment? ChildContent { get; set; }
+    [Inject]
+    private ITabsDataProvider TabsDataProvider { get; set; } = null!;
 
     private Dictionary<int, OptATab> _children = [];
 
@@ -53,6 +55,7 @@ public partial class OptATabs
     {
         var result = new Dictionary<string, object?>
         {
+            ["type"] = "button",
             ["opta-tab-select"] = true,
             ["onclick"] = EventCallback.Factory.Create(this, () => SelectTab(index))
         };
@@ -60,10 +63,26 @@ public partial class OptATabs
         {
             result["title"] = tab.Title;
         }
+        List<string> classes = [];
+        if (!string.IsNullOrEmpty(TabsDataProvider.TabClass))
+        {
+            classes.Add(TabsDataProvider.TabClass);
+        }
+
         if (tab.IsCurrent)
         {
             result["active"] = true;
+            if (!string.IsNullOrEmpty(TabsDataProvider.ActiveTabClass))
+            {
+                classes.Add(TabsDataProvider.ActiveTabClass);
+            }
         }
+
+        if (classes.Count > 0)
+        {
+            result["class"] = string.Join(" ", classes);
+        }
+
 
         return result;
     }
@@ -73,9 +92,24 @@ public partial class OptATabs
         var result = GetAttributes();
         result["opta-tabs-header"] = true;
 
-        if (TryGetClasses(string.Empty, out var classes))
+        if (TryGetClasses(TabsDataProvider.HeaderClass, out var classes))
         {
             result["class"] = classes;
+        }
+
+        return result;
+    }
+
+    private Dictionary<string, object?> GetContainerAttributes()
+    {
+        var result = new Dictionary<string, object?>
+        {
+            ["opta-tabs-container"] = true
+        };
+
+        if (!string.IsNullOrEmpty(TabsDataProvider.ContainerClass))
+        {
+            result["class"] = TabsDataProvider.ContainerClass;
         }
 
         return result;

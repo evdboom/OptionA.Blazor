@@ -30,7 +30,7 @@ public partial class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddOptionABootstrapMessageBox(this IServiceCollection services, Action<MessageBoxOptions>? configuration = null)
     {
-        var bootstrapConfig = (MessageBoxOptions options) =>
+        void bootstrapConfig(MessageBoxOptions options)
         {
             options.DefaultZIndex = 1090;
             options.MessageClasses = new()
@@ -56,7 +56,7 @@ public partial class ServiceCollectionExtensions
             options.ContentClass = "w-100";
 
             configuration?.Invoke(options);
-        };
+        }
 
         return AddOptionAMessageBox(services, bootstrapConfig);
     }

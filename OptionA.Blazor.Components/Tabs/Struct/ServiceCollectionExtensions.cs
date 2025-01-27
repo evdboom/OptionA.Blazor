@@ -5,7 +5,7 @@ using OptionA.Blazor.Components.Tabs.Struct;
 namespace OptionA.Blazor.Components;
 
 /// <summary>
-/// Extensions for adding splitter
+/// Extensions for adding tabs
 /// </summary>
 public static partial class ServiceCollectionExtensions
 {
@@ -30,8 +30,16 @@ public static partial class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddOptionABootstrapTabs(this IServiceCollection services, Action<TabsOptions>? configuration = null)
     {
-        services.TryAddSingleton<ITabsDataProvider>(provider => new TabsDataProvider(configuration));
+        void bootstrapConfig(TabsOptions options)
+        {
+            options.HeaderClass = "nav nav-tabs";
+            options.ActiveTabClass = "active";
+            options.TabItemClass = "nav-item";
+            options.TabClass = "nav-link";
 
-        return services;
+            configuration?.Invoke(options);
+        }
+
+        return AddOptionATabs(services, bootstrapConfig);
     }
 }
