@@ -7,18 +7,18 @@ For full documentation, releasenotes and examples, go to [option-a.tech](https:/
 To start using the OptionA.Blazor.Storage include the required depencenies in your service provider. The package uses the default .Net Dependency Injection.
 
 ### Service collection
-To add the services you can use the extension method `AddStorageService` or `AddDatabaseService`.
+To add the services you can use the extension method `AddStorageService`, `AddDatabaseService` or `AddStorageServices`.
 
 ### Use package
-Inject either the `IStorageService` or `IDatabaseService` in your component and service.
+Inject either the `IStorageService`, `IDatabaseService` or `IFileSystem` in your component and service.
 
 ## Latest release notes
-### 8.0.0
+### 9.1.0
 #### Overall
-Update to .NET 8
+Added Filesystem sypport
 
 #### New features
-- Update package to .NET 8
+- Added IFilesystem implementation to interact with the file system
 
 #### Solved Bugs
 - None
@@ -37,3 +37,9 @@ Service for accessing local and session storage
 IDatabaseService
 ```
 Service for accessing the local indexed database. Uses database migration to keep the indexed db up to date.
+
+### Filesystem service
+```
+IFilesystem
+```
+Service for accessing the file system. Uses the javascript Filesystem API to interact with the file system. Most interaction can only be done in the user initiated event (like pressing a button).

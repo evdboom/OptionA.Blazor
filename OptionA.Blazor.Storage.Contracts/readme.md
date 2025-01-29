@@ -5,3 +5,4 @@ For full documentation, releasenotes and examples, go to [option-a.tech](https:/
 
 ## Getting started
 This package is made available to be able to build Migrations without the need for the full Storage package (which is a RCL (Razor Class Library)).
+Also holds all the interfaces and models for the Storage package.

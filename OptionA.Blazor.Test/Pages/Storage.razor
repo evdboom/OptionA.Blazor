@@ -1,1 +1,22 @@
 ﻿@page "/storage"
+
+<div>
+<button @onclick="OpenFiles">Load files</button>
+@if (_files is not null)
+{
+    <ul>
+        @foreach (var file in _files)
+        {
+            <li>@file.Name (@file.Key) <button @onclick="async () => await OpenStream(file)">content</button></li>
+        }
+    </ul>
+}
+
+@if (_content is not null)
+{
+    <pre>@_content</pre>
+}
+</div>
+<label>Description</label>
+<input type="text" @bind="_saveContent" />
+<button @onclick="SaveFile">Save file</button>
