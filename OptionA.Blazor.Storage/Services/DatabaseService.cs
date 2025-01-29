@@ -5,7 +5,7 @@ using OptionA.Blazor.Storage.Utilities;
 
 namespace OptionA.Blazor.Storage.Services;
 
-internal class DatabaseService : IDatabaseService
+internal class DatabaseService(IJSRuntime jsRuntime, MigrationBuilder migrationBuilder) : IDatabaseService
 {
     private const string InitializeFunction = "initializeDatabase";
     private const string OpenStoreFunction = "openStore";
@@ -15,14 +15,9 @@ internal class DatabaseService : IDatabaseService
     private const string GetAllFromStoreFunction = "getAllFromStore";
     private const string GetCountFunction = "getObjectCount";
 
-    private readonly MigrationBuilder _migrationBuilder;
-    private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
-    public DatabaseService(IJSRuntime jsRuntime, MigrationBuilder migrationBuilder)
-    {
-        _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+    private readonly MigrationBuilder _migrationBuilder = migrationBuilder;
+    private readonly Lazy<Task<IJSObjectReference>> _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
           "import", "./_content/OptionA.Blazor.Storage/indexed-db.js").AsTask());
-        _migrationBuilder = migrationBuilder;
-    }
 
     public async Task ClearStoreAsync(IDatabaseAccess access, string tableName)
     {
@@ -154,7 +149,7 @@ internal class DatabaseService : IDatabaseService
         return (module, store);
     }
 
-    private async Task InitializeDatabaseAsync(IJSObjectReference module, DatabasePlan plan, Func<DatabasePlan, Task>? afterInitialize)
+    private static async Task InitializeDatabaseAsync(IJSObjectReference module, DatabasePlan plan, Func<DatabasePlan, Task>? afterInitialize)
     {
         await module.InvokeVoidAsync(InitializeFunction, plan);
         if (afterInitialize is not null)
@@ -163,7 +158,7 @@ internal class DatabaseService : IDatabaseService
         }
     }
 
-    private async Task<T> InitializeDatabaseAsync<T>(IJSObjectReference module, DatabasePlan plan, Func<DatabasePlan, Task<T>> afterInitialize)
+    private static async Task<T> InitializeDatabaseAsync<T>(IJSObjectReference module, DatabasePlan plan, Func<DatabasePlan, Task<T>> afterInitialize)
     {
         await module.InvokeVoidAsync(InitializeFunction, plan);
         return await afterInitialize(plan);

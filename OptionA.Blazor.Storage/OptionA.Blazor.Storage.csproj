@@ -7,14 +7,14 @@
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>readme.md</PackageReadmeFile>
-  	<Version>9.0.1</Version>
+  	<Version>9.1.0</Version>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Description>Blazor class library with services to access local storage, session storage and indexed db</Description>
     <PackageReleaseNotes>
-      Pakage updates
+      Added File System Storage for Blazor
     </PackageReleaseNotes>
   </PropertyGroup>
 
@@ -33,7 +33,6 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="wwwroot\" />
 		<None Include="readme.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 </Project>

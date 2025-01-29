@@ -2,14 +2,9 @@
 
 namespace OptionA.Blazor.Storage.Migrations;
 
-internal class MigrationBuilder
+internal class MigrationBuilder(IEnumerable<Migration> migrations)
 {
-    private readonly IEnumerable<Migration> _migrations;
-
-    public MigrationBuilder(IEnumerable<Migration> migrations)
-    {
-        _migrations = migrations;
-    }
+    private readonly IEnumerable<Migration> _migrations = migrations;
 
     /// <inheritdoc/>
     public IEnumerable<DatabasePlan> Build()

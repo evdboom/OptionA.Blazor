@@ -6,7 +6,7 @@
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>readme.md</PackageReadmeFile>
-	<Version>9.0.1</Version>
+	<Version>9.1.0</Version>
 	<LangVersion>10</LangVersion>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
@@ -14,7 +14,7 @@
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Description>Contracts and abstraction to work together with the Blazor.Storage package, without the implementations</Description>
 	<PackageReleaseNotes>
-		Package updates again
+		Added file system storage
 	</PackageReleaseNotes>
   </PropertyGroup>
 

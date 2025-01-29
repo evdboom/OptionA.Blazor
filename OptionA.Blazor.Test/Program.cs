@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using OptionA.Blazor.Blog;
 using OptionA.Blazor.Blog.Builder;
 using OptionA.Blazor.Components;
+using OptionA.Blazor.Storage;
 using OptionA.Blazor.Test;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -53,10 +54,11 @@ builder.Services
         {
             componentBar.Class += " top-60";
         }
-    });
+    })
+    .AddStorageServices();
 await builder.Build().RunAsync();
 
-BuilderTypeProperties IconButton(string icon)
+static BuilderTypeProperties IconButton(string icon)
 {
     return new BuilderTypeProperties
     {
