@@ -7,14 +7,14 @@
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	<PackageReadmeFile>readme.md</PackageReadmeFile>
-  	<Version>9.1.0</Version>
+  	<Version>9.1.1</Version>
 	<IsPackable>true</IsPackable>
 	<Authors>Erik van der Boom</Authors>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	<Description>Blazor class library with services to access local storage, session storage and indexed db</Description>
     <PackageReleaseNotes>
-      Added File System Storage for Blazor
+      Made service collection extensions have optional servicelifetime parameter
     </PackageReleaseNotes>
   </PropertyGroup>
 

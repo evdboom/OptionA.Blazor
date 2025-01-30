@@ -13,28 +13,57 @@ public static class ServiceCollectionExtensions
 {
     /// <summary>
     /// Adds the following services to the container:
-    /// <para><see cref="ServiceLifetime.Scoped"/> <see cref="IStorageService"/> for storing and retrieving from local and or session storage</para>
+    /// <para><see cref="IStorageService"/> with given <see cref="ServiceLifetime" /> for storing and retrieving from local and or session storage</para>
     /// </summary>
     /// <param name="services"></param>
+    /// <param name="serviceLifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddStorageService(this IServiceCollection services)
+    public static IServiceCollection AddOptionAStorageService(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
     {
-        services
-            .TryAddScoped<IStorageService, StorageService>();
+        switch (serviceLifetime)
+        {
+            case ServiceLifetime.Singleton:
+                services
+                    .TryAddSingleton<IStorageService, StorageService>();
+                break;
+            case ServiceLifetime.Transient:
+                services
+                    .TryAddTransient<IStorageService, StorageService>();
+                break;
+            case ServiceLifetime.Scoped:
+                services
+                    .TryAddScoped<IStorageService, StorageService>();
+                break;
+        }
 
         return services;
     }
 
     /// <summary>
     /// Adds the following services to the container:        
-    /// <para><see cref="ServiceLifetime.Scoped"/> <see cref="IDatabaseService"/> for storing and retrieving from indexed db</para>
+    /// <para> <see cref="IDatabaseService"/> with given <see cref="ServiceLifetime" /> for storing and retrieving from indexed db</para>
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddDatabaseService(this IServiceCollection services)
+    public static IServiceCollection AddOptionADatabaseService(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
     {
+        switch (serviceLifetime)
+        {
+            case ServiceLifetime.Singleton:
+                services
+                    .TryAddSingleton<IDatabaseService, DatabaseService>();
+                break;
+            case
+            ServiceLifetime.Transient:
+                services
+                    .TryAddTransient<IDatabaseService, DatabaseService>();
+                break;
+            case ServiceLifetime.Scoped:
+                services
+                    .TryAddScoped<IDatabaseService, DatabaseService>();
+            break;
+        }
         services
-            .AddScoped<IDatabaseService, DatabaseService>()
             .TryAddSingleton<MigrationBuilder>();
 
         return services;
@@ -42,18 +71,33 @@ public static class ServiceCollectionExtensions
 
     /// <summary>
     /// Adds the following services to the container:
-    /// <para><see cref="ServiceLifetime.Scoped"/> <see cref="IFileSystem"/> for file system access using the browser</para>
-    /// <para><see cref="ServiceLifetime.Scoped"/> <see cref="IDatabaseService"/> for storing filehandles</para>
-    /// <para><see cref="ServiceLifetime.Scoped"/> <see cref="IStorageService"/> for session id</para>
+    /// <para><see cref="IFileSystem"/> with given <see cref="ServiceLifetime" /> for file system access using the browser</para>
+    /// <para><see cref="IDatabaseService"/> with given <see cref="ServiceLifetime" /> for storing filehandles</para>
+    /// <para><see cref="IStorageService"/> with given <see cref="ServiceLifetime" /> for session id</para>
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
-    public static IServiceCollection AddStorageServices(this IServiceCollection services)
+    public static IServiceCollection AddOptionAStorageServices(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
     {
+        switch (serviceLifetime)
+        {
+            case ServiceLifetime.Singleton:
+                services
+                    .TryAddSingleton<IFileSystem, FileSystem>();
+                break;
+            case ServiceLifetime.Transient:
+                services
+                    .TryAddTransient<IFileSystem, FileSystem>();
+                break;
+            case ServiceLifetime.Scoped:
+                services
+                    .TryAddScoped<IFileSystem, FileSystem>();
+                break;
+        }
+
         return services
-            .AddDatabaseService()
-            .AddStorageService()
-            .AddScoped<IFileSystem, FileSystem>()
-            .RegisterMigration<M001_FileSystem_Initialize>();
+            .AddOptionADatabaseService(serviceLifetime)
+            .AddOptionAStorageService(serviceLifetime)
+            .RegisterMigration<M001_FileSystem_Initialize>();           
     }
 }

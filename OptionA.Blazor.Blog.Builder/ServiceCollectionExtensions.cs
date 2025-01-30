@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null)
     {
         services
-            .AddStorageService();
+            .AddOptionAStorageService();
         services
             .TryAddSingleton<IBuilderService, BuilderService>();
         services
