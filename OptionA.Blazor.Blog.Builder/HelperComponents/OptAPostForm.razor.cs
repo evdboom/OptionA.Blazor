@@ -23,6 +23,11 @@ public partial class OptAPostForm
     /// </summary>
     [Parameter]
     public EventCallback PostSubmitted { get; set; }
+    /// <summary>
+    /// Additional buttons to display on the form next to the save button
+    /// </summary>
+    [Parameter]
+    public RenderFragment? AdditionalButtons { get; set; }
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 

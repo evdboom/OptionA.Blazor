@@ -63,8 +63,6 @@ public static class ServiceCollectionExtensions
     {
         var bootstrapConfig = (OptABlogOptions options) =>
         {
-
-
             configuration?.Invoke(options);
         };
 

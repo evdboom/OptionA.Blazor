@@ -24,6 +24,10 @@
             <button @attributes="GetSavePostAttributes()">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.SavePostButton, "Save")" />
             </button>
+            @if (AdditionalButtons != null)
+            {
+                @AdditionalButtons
+            }
         </div>
     </EditForm>
 }

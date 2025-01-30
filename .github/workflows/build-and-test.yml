@@ -37,7 +37,7 @@ jobs:
         Write-Host "Running unittests:"
         Get-ChildItem -Recurse -Filter *.csproj | Where-Object { $_.Name -match '\.UnitTests\.csproj$' } | ForEach-Object {           
           Write-Host "$($_.Name)"
-          dotnet test $_.FullName  --verbosity normal --no-build
+          dotnet test $_.FullName  --verbosity normal --no-build --configuration Release
         }
         
         

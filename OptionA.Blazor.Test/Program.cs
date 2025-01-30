@@ -55,7 +55,7 @@ builder.Services
             componentBar.Class += " top-60";
         }
     })
-    .AddStorageServices();
+    .AddOptionAStorageServices(ServiceLifetime.Singleton);
 await builder.Build().RunAsync();
 
 static BuilderTypeProperties IconButton(string icon)
