@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using OptionA.Blazor.Blog.Services;
-using OptionA.Blazor.Storage;
 
 namespace OptionA.Blazor.Blog.Builder;
 
@@ -18,8 +17,6 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null)
     {
-        services
-            .AddOptionAStorageService();
         services
             .TryAddSingleton<IBuilderService, BuilderService>();
         services
@@ -78,7 +75,7 @@ public static class ServiceCollectionExtensions
                 },
                 [BuilderType.ComponentTitle] = new BuilderTypeProperties
                 {
-                    Class = "align-items-center",                    
+                    Class = "align-items-center",
                 },
                 [BuilderType.Component] = new BuilderTypeProperties
                 {

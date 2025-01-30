@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using OptionA.Blazor.Blog.Core.Extensions;
 using OptionA.Blazor.Blog.Services;
-using OptionA.Blazor.Storage;
 
 namespace OptionA.Blazor.Blog.Builder;
 
@@ -31,10 +30,23 @@ public partial class OptAPostBuilder : IDisposable
     /// </summary>
     [Parameter]
     public EventCallback<Post> PostSaved { get; set; }
+    /// <summary>
+    /// Called whenever the component is closed (e.g. the user navigates away)
+    /// </summary>
+    [Parameter]   
+    public EventCallback<Post> ComponentClosed { get; set; }
+    /// <summary>
+    /// If the builder should close when the post is saved
+    /// </summary>
+    [Parameter]
+    public bool CloseOnSave { get; set; } = true;
+    /// <summary>
+    /// Additional buttons to display on the builder next to the save button
+    /// </summary>
+    [Parameter]
+    public RenderFragment? AdditionalButtons { get; set; }
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
-    [Inject]
-    private IStorageService StorageService { get; set; } = null!;
     [Inject]
     private NavigationManager Navigation { get; set; } = null!;
     [Inject]
@@ -53,7 +65,10 @@ public partial class OptAPostBuilder : IDisposable
     public async void BuilderUnloaded()
     {
         Navigation.LocationChanged -= LocationChanged;
-        await StoreUnfinishedPost();
+        if (_post is not null && ComponentClosed.HasDelegate)
+        {
+            await ComponentClosed.InvokeAsync(_post);
+        }
     }
 
     /// <inheritdoc/>
@@ -73,17 +88,6 @@ public partial class OptAPostBuilder : IDisposable
         _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OptionA.Blazor.Blog.Builder/OptAPostBuilder.razor.js");
         var objRef = DotNetObjectReference.Create(this);
         _eventId = await _module.InvokeAsync<string>(RegisterHandlerFunction, objRef, nameof(BuilderUnloaded));
-
-        if (_post is null)
-        {
-            if ((await StorageService.GetItemAsync<string>(StorageLocation.Local, StorageKey)) is string postJson)
-            {
-                var post = BuilderService.CreateFromJson(postJson);
-                _post = post;
-                await PostChanged.InvokeAsync(_post);
-                await InvokeAsync(StateHasChanged);
-            }
-        }
     }
 
     /// <inheritdoc/>
@@ -97,15 +101,9 @@ public partial class OptAPostBuilder : IDisposable
 
     private async void LocationChanged(object? sender, LocationChangedEventArgs e)
     {
-        await StoreUnfinishedPost();
-    }
-
-    private async Task StoreUnfinishedPost()
-    {
-        if (_post is not null)
+        if (_post is not null && ComponentClosed.HasDelegate)
         {
-            var json = BuilderService.ToJson(_post);
-            await StorageService.SetItemAsync(StorageLocation.Local, StorageKey, json);
+            await ComponentClosed.InvokeAsync(_post);
         }
     }
 
@@ -141,14 +139,16 @@ public partial class OptAPostBuilder : IDisposable
         foreach (var content in _post.Content)
         {
             content.RemovedClasses.RemoveAll(string.IsNullOrWhiteSpace);
-            content.AdditionalClasses.RemoveAll(string.IsNullOrWhiteSpace);                
+            content.AdditionalClasses.RemoveAll(string.IsNullOrWhiteSpace);
         }
 
         await PostSaved.InvokeAsync(_post);
-        _post = null;
-        await PostChanged.InvokeAsync(_post);
-        await StorageService.RemoveItemAsync(StorageLocation.Local, StorageKey);
-        await InvokeAsync(StateHasChanged);
+        if (CloseOnSave)
+        {
+            _post = null;
+            await PostChanged.InvokeAsync(_post);
+            await InvokeAsync(StateHasChanged);
+        }                
     }
 
     private bool _disposed;
@@ -173,7 +173,7 @@ public partial class OptAPostBuilder : IDisposable
             if (_module is not null && !string.IsNullOrEmpty(_eventId))
             {
                 await _module.InvokeVoidAsync(UnRegisterHandlerFunction, _eventId);
-            }                
+            }
         }
     }
 }

@@ -44,6 +44,7 @@ public static class ServiceCollectionExtensions
     /// <para> <see cref="IDatabaseService"/> with given <see cref="ServiceLifetime" /> for storing and retrieving from indexed db</para>
     /// </summary>
     /// <param name="services"></param>
+    /// <param name="serviceLifetime"></param>
     /// <returns></returns>
     public static IServiceCollection AddOptionADatabaseService(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
     {
@@ -76,6 +77,7 @@ public static class ServiceCollectionExtensions
     /// <para><see cref="IStorageService"/> with given <see cref="ServiceLifetime" /> for session id</para>
     /// </summary>
     /// <param name="services"></param>
+    /// <param name="serviceLifetime"></param>
     /// <returns></returns>
     public static IServiceCollection AddOptionAStorageServices(this IServiceCollection services, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
     {

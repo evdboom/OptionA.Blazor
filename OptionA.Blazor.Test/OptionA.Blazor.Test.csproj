@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OptionA.Blazor.Blog.Builder\OptionA.Blazor.Blog.Builder.csproj" />
     <ProjectReference Include="..\OptionA.Blazor.Components\OptionA.Blazor.Components.csproj" />
+    <ProjectReference Include="..\OptionA.Blazor.Storage\OptionA.Blazor.Storage.csproj" />
   </ItemGroup>
 
 </Project>
