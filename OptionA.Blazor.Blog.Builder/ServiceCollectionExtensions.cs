@@ -171,6 +171,10 @@ public static class ServiceCollectionExtensions
                 [BuilderType.PropertiesModalSection] = new BuilderTypeProperties
                 {
                     Class = "modal-content"
+                },
+                [BuilderType.CheckboxInput] = new BuilderTypeProperties
+                {
+                    Class = "form-check-input"
                 }
 
             };

@@ -33,5 +33,10 @@
         </label>
         <OptAInputText @bind-Value="Content.Height"
                        Attributes="@GetAttributes(HeightId, "Height...")" />
+        <OptAInputCheckbox @bind-Value="Content.PreviewMode"
+                           Attributes="@GetCheckBoxAttributes(PreviewId)" />
+        <label @attributes="@GetLabelAttributes(PreviewId)">
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Preview mode")" />
+        </label>
     </OptABlogComponent>
 }

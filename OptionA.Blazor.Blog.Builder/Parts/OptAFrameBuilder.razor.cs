@@ -11,6 +11,7 @@ public partial class OptAFrameBuilder
     private const string TitleId = "opta-frame-title";
     private const string WidthId = "opta-frame-width";
     private const string HeightId = "opta-frame-height";
+    private const string PreviewId = "opta-frame-preview-mode";
 
     /// <summary>
     /// Index of content in post (for id uniqueness)
@@ -69,6 +70,16 @@ public partial class OptAFrameBuilder
         };
 
         return DataProvider.GetAttributes(BuilderType.TextInput, defaultAttributes);
+    }
+
+    private Dictionary<string, object?> GetCheckBoxAttributes(string id)
+    {
+        var defaultAttributes = new Dictionary<string, object?>
+        {
+            ["id"] = $"{id}-{ContentIndex}"
+        };
+
+        return DataProvider.GetAttributes(BuilderType.CheckboxInput, defaultAttributes);
     }
 
     private Dictionary<string, object?> GetLabelAttributes(string id)
