@@ -175,5 +175,9 @@ public enum BuilderType
     /// <summary>
     /// Container around the collapse/expand buttons
     /// </summary>
-    ComponentHeaderBar
+    ComponentHeaderBar,
+    /// <summary>
+    /// input type checkbox element
+    /// </summary>
+    CheckboxInput
 }
