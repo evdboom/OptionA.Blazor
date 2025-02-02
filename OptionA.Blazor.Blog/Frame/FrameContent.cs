@@ -20,7 +20,11 @@ public class FrameContent : Content
     /// <summary>
     /// Height for the frame
     /// </summary>
-    public string? Height { get; set; }        
+    public string? Height { get; set; }      
+    /// <summary>
+    /// Set to true to display a block of the size of the iframe without trying to load the actual Iframe
+    /// </summary>
+    public bool PreviewMode { get; set; }
     /// <inheritdoc/>
     public override ContentType Type => ContentType.Frame;
     /// <inheritdoc/>

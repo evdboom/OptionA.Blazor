@@ -15,9 +15,9 @@
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
 	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>9.2.2</Version>
+	<Version>9.2.3</Version>
 	<PackageReleaseNotes>
-    Removed unneeded reference to storage
+    Added preview option to prevent loading frames
   </PackageReleaseNotes>
   </PropertyGroup>
 
