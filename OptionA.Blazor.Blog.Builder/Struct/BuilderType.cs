@@ -179,5 +179,13 @@ public enum BuilderType
     /// <summary>
     /// input type checkbox element
     /// </summary>
-    CheckboxInput
+    CheckboxInput,
+    /// <summary>
+    /// Container around the checkbox for autogrow of flexible textarea
+    /// </summary>
+    TextAreaAutoGrowContainer,
+    /// <summary>
+    /// Container around the flexible textarea
+    /// </summary>
+    FlexibleTextArea
 }

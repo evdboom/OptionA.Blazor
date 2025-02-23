@@ -1,0 +1,12 @@
+﻿<div @attributes="GetFleixbleTextAreaAttributes()">
+    <div @attributes="GetCheckboxContainerAttributes()">
+        <OptAInputCheckbox @bind-Value="_autoGrow"
+                            Attributes="@GetCheckBoxAttributes(_id)" />
+        <label @attributes="@GetLabelAttributes(_id)">
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Auto grow")" />
+        </label>
+    </div>
+    <OptAInputTextArea @bind-Value="InternalValue"
+                        Attributes="Attributes" 
+                        AutoGrow="_autoGrow" />
+</div>

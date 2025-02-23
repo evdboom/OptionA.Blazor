@@ -1,0 +1,16 @@
+﻿[opta-checkbox-container] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding-top: .5em;
+    padding-right: .5em;
+}
+
+[opta-flexible-text-area] {
+    position: relative;
+}
+
+[opta-checkbox-container] label {
+    cursor: pointer;
+}

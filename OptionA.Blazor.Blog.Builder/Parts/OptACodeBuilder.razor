@@ -1,6 +1,4 @@
-﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
-@using OptionA.Blazor.Components
-@if (Content is not null)
+﻿@if (Content is not null)
 {
     <OptABlogComponent Name="**Code**"
                        ContentChanged="ContentChanged"
@@ -27,8 +25,7 @@
         <label @attributes="@GetLabelAttributes(CodeId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Code")" />
         </label>
-        <OptAInputTextArea @bind-Value="Content.Code"
-                           Attributes="@GetCodeAttributes()" 
-                           AutoGrow="true" />
+        <OptAFlexibleTextArea @bind-Value="Content.Code"
+                              Attributes="@GetCodeAttributes()" />
     </OptABlogComponent>
 }

@@ -1,6 +1,4 @@
-﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
-@using OptionA.Blazor.Components
-@if (Content is not null)
+﻿@if (Content is not null)
 {
     <OptABlogComponent Name="**Table**"
                        ContentChanged="ContentChanged"
@@ -31,8 +29,7 @@
             }
             else
             {
-                <OptAInputTextArea @bind-Value="ItemsFromString"
-                                   Autogrow="true" />
+                <OptAFlexibleTextArea @bind-Value="ItemsFromString" />
             }
             <OptAHelperList ContentChanged="ContentChanged"
                             ItemPlaceholder="Footer..."

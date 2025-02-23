@@ -1,6 +1,4 @@
-﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
-@using OptionA.Blazor.Components
-@if (Content is not null)
+﻿@if (Content is not null)
 {
     <OptABlogComponent Name="**List**"
                        ContentChanged="ContentChanged"
@@ -25,16 +23,15 @@
                          DisplayValue="@((value) => value == 0 ? "Add to list" : "From string")" />
     @if (_inputMethod == 0)
     {
-            <OptAHelperList Items="Content.Items"
-                            Label="Content"
-                            ItemPlaceholder="item..."
-                            ItemTitle="Add an entry to the list"
-                            ContentChanged="ContentChanged" />
+        <OptAHelperList Items="Content.Items"
+                        Label="Content"
+                        ItemPlaceholder="item..."
+                        ItemTitle="Add an entry to the list"
+                        ContentChanged="ContentChanged" />
     }
     else
     {
-            <OptAInputTextArea @bind-Value="ItemsFromString"
-                               Autogrow="true" />
+        <OptAFlexibleTextArea @bind-Value="ItemsFromString" />
     }
     </OptABlogComponent>
 }

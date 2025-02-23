@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
-@using OptionA.Blazor.Blog.Builder.HelperComponents
-@using OptionA.Blazor.Components
+
 @if (Post is not null)
 {
     <OptABlogComponent Name="**Post**"
@@ -17,9 +16,8 @@
         <label @attributes="@GetLabelAttributes(SubtitleId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Subtitle")" />
         </label>
-        <OptAInputTextArea @bind-Value="Post.Subtitle" 
-                           Attributes="GetSubtitleAttributes()" 
-                           AutoGrow="true" />
+        <OptAFlexibleTextArea @bind-Value="Post.Subtitle"
+                              Attributes="GetSubtitleAttributes()" />
         <OptAHelperList Items="Post.Tags"
                         Label="Tags"
                         ItemPlaceholder="Tag..."

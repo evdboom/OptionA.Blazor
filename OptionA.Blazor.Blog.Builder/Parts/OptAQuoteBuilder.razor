@@ -1,6 +1,4 @@
-﻿@using OptionA.Blazor.Blog.Builder.HelperComponents
-@using OptionA.Blazor.Components
-@if (Content is not null)
+﻿@if (Content is not null)
 {
     <OptABlogComponent Name="**Quote**"
                        ContentChanged="ContentChanged"
@@ -17,9 +15,8 @@
             <label @attributes="@GetLabelAttributes(QuoteId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Quote")" />
             </label>
-            <OptAInputTextArea @bind-Value="Content.Quote" 
-                               Attributes="@GetAttributes(QuoteId, "Quote...")"
-                               AutoGrow="true" />
+            <OptAFlexibleTextArea @bind-Value="Content.Quote"
+                                  Attributes="@GetAttributes(QuoteId, "Quote...")" />
             <label @attributes="@GetLabelAttributes(SourceId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
             </label>
