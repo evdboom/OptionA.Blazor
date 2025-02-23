@@ -1,2 +1,10 @@
 ﻿@inherits Microsoft.AspNetCore.Components.Forms.InputNumber<int>
-<input opta-input-integer @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
+@switch (InternalMode)
+{
+    case BindMode.OnInput:
+        <input opta-input-integer @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
+        break;
+    case BindMode.OnChange:
+        <input opta-input-integer @attributes="Attributes" @bind="@CurrentValueAsString" />
+        break;
+}

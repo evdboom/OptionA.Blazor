@@ -1,12 +1,31 @@
 ﻿@inherits Microsoft.AspNetCore.Components.Forms.InputTextArea
-@if (AutoGrow)
+@switch (InternalMode)
 {
-    <div opta-text="@CurrentValueAsString" @attributes="GetContainerAttributes()">
-        <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
-    </div>
+    case BindMode.OnInput:
+        @if (AutoGrow)
+        {
+            <div opta-text="@CurrentValueAsString" @attributes="GetContainerAttributes()">
+                <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
+            </div>
+        }
+        else
+        {
+            <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
+        }
+        break;
+    case BindMode.OnChange:
+        @if (AutoGrow)
+        {
+            <div opta-text="@CurrentValueAsString" @attributes="GetContainerAttributes()">
+                <textarea @attributes="Attributes" @bind="@CurrentValueAsString" />
+            </div>
+        }
+        else
+        {
+            <textarea @attributes="Attributes" @bind="@CurrentValueAsString" />
+        }                   
+        break;
 }
-else
-{
-    <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
-}
+
+
 

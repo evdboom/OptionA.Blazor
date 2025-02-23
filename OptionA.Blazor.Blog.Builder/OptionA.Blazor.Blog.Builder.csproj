@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>9.3.3</Version>
+	  <Version>9.3.4</Version>
 	  <PackageReleaseNotes>
-      Added flexible input textarea with autogrow option for better performance
+      Updated the direct package with mode support for inputs to change the input event, changed event for blox text area to onchange
     </PackageReleaseNotes>
   </PropertyGroup>
 

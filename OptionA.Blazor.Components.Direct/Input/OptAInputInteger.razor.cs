@@ -8,6 +8,11 @@ namespace OptionA.Blazor.Components;
 public partial class OptAInputInteger
 {
     /// <summary>
+    /// Bindmode for the input, default is <see cref="BindMode.OnInput"/>
+    /// </summary>
+    [Parameter]
+    public BindMode? Mode { get; set; }
+    /// <summary>
     /// Value to bind to
     /// </summary>
     [Parameter]

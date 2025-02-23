@@ -7,14 +7,14 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Version>9.1.1</Version>
+    <Version>9.1.2</Version>
     <IsPackable>true</IsPackable>
     <Authors>Erik van der Boom</Authors>
     <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Blazor component library with various component for use inside your Blazor application, direct components do not require setup</Description>
     <PackageReleaseNotes>
-      Package updates
+      Added Mode support for inputs to change the input event
     </PackageReleaseNotes>
   </PropertyGroup>
 

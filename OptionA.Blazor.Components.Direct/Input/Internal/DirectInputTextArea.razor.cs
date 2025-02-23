@@ -8,6 +8,14 @@ namespace OptionA.Blazor.Components.Direct.Input.Internal;
 public partial class DirectInputTextArea
 {
     /// <summary>
+    /// Bindmode for the input, default is <see cref="BindMode.OnInput"/>
+    /// </summary>
+    [Parameter]
+    public BindMode? Mode { get; set; }
+
+    private BindMode InternalMode => Mode ?? BindMode.OnInput;
+
+    /// <summary>
     /// Set to true to enable autogrow
     /// </summary>
     [Parameter]
