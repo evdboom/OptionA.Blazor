@@ -10,22 +10,38 @@
                        Content="Content"
                        CanDrag="true"
                        DragStarted="DragStarted"
-                       DragEnded="DragEnded">
-        <label @attributes="@GetLabelAttributes(CodeLanguageId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Language")" />
-        </label>
-        <OptAEnumSelect TEnum="CodeLanguage" @bind-Value="InternalLanguage" Attributes="@GetCodeLanguageAttributes()" />
-        @if (InternalLanguage == CodeLanguage.Other)
-        {
-            <label @attributes="@GetLabelAttributes(OtherLanguageId)">
-                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Other")" />
+                       DragEnded="DragEnded"
+                       MovedToIndex="MovedToIndex">
+        <ChildContent>
+            <label @attributes="@GetLabelAttributes(CodeLanguageId)">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Language")" />
             </label>
-            <OptAInputText @bind-Value="Content.OtherLanguage" Attributes="@GetOtherLanguageAttributes()" />
-        }
-        <label @attributes="@GetLabelAttributes(CodeId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Code")" />
-        </label>
-        <OptAFlexibleTextArea @bind-Value="Content.Code"
-                              Attributes="@GetCodeAttributes()" />
+            <OptAEnumSelect TEnum="CodeLanguage" @bind-Value="InternalLanguage" Attributes="@GetCodeLanguageAttributes()" />
+            @if (InternalLanguage == CodeLanguage.Other)
+            {
+                <label @attributes="@GetLabelAttributes(OtherLanguageId)">
+                    <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Other")" />
+                </label>
+                <OptAInputText @bind-Value="Content.OtherLanguage" 
+                               Attributes="@GetOtherLanguageAttributes()"
+                               Mode="_bindMode"/>
+            }
+            <label @attributes="@GetLabelAttributes(CodeId)">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Code")" />
+            </label>
+            <OptAFlexibleTextArea @bind-Value="Content.Code"
+                                  Attributes="@GetCodeAttributes()"
+                                  DisplayAutoGrow="_showAutoGrow"
+                                  Mode="_bindMode"
+                                  InitialAutoGrow="_autoGrow"/>
+        </ChildContent>
+        <AdditionalProperties>
+            <label>
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Bind mode")" />
+            </label>
+            <OptAEnumSelect @bind-Value="_bindMode" TEnum="BindMode" />
+            <OptAInputCheckbox @bind-Value="_showAutoGrow" Description="Show enable autogrow" />
+            <OptAInputCheckbox @bind-Value="_autoGrow" Description="Auto grow status" />
+        </AdditionalProperties>
     </OptABlogComponent>
 }

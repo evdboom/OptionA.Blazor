@@ -84,14 +84,34 @@ public partial class OptABlogComponent
     /// </summary>
     [Parameter]
     public EventCallback<DragEvent> DragEnded { get; set; }
+    /// <summary>
+    /// Called when the component is moved to a new index
+    /// </summary>
+    [Parameter]
+    public EventCallback<int> MovedToIndex { get; set; }
+
 
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = null!;
 
+    private int Index
+    {
+        get => _index;
+        set
+        {
+            _index = value;
+            if (MovedToIndex.HasDelegate)
+            {
+                MovedToIndex.InvokeAsync(value);
+            }
+        }
+    }
+
     private List<string>? _additionalAttributes;
 
+    private int _index;
     private bool _dragging;
     private bool _dragTargetLower;
     private bool _dragTargetUpper;
@@ -113,7 +133,9 @@ public partial class OptABlogComponent
         else
         {
             _additionalAttributes = null;
-        } 
+        }
+
+        _index = ContentIndex;
     }
 
     private async Task DragStart(DragEventArgs args)
@@ -257,6 +279,24 @@ public partial class OptABlogComponent
         }
 
         await ContentChanged.InvokeAsync();
+    }
+
+    private Dictionary<string, object?> GetMoveToIndexAttributes()
+    {
+        var result = new Dictionary<string, object?>
+        {
+            ["title"] = "Move to index",
+        };
+        return DataProvider.GetAttributes(BuilderType.MoveToIndexInput, result);
+    }
+
+    private Dictionary<string, object?> GetMoveToIndexContainerAttributes()
+    {
+        var result = new Dictionary<string, object?>
+        {
+            ["title"] = "Move to index",
+        };
+        return DataProvider.GetAttributes(BuilderType.MoveToIndexInputContainer, result);
     }
 
     private Dictionary<string, object?> GetMoveUpAttributes()

@@ -17,8 +17,16 @@
     opacity: 0.5;    
 }
 
+::deep .input3em {
+    width: 3em;
+}
+
 [opta-componentcontent] {
     position: relative;
+}
+
+[opta-movetoindexinput] {
+    width: 30px!important;
 }
 
 [drag-target] {

@@ -10,21 +10,33 @@
                        Content="Content"
                        CanDrag="true"
                        DragStarted="DragStarted"
-                       DragEnded="DragEnded">
-        <label @attributes="@GetLabelAttributes(SourceId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
-        </label>
-        <OptAInputText @bind-Value="Content.Source"
-                       Attributes="@GetAttributes(SourceId, "Source...")" />
-        <label @attributes="@GetLabelAttributes(TitleId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Title")" />
-        </label>
-        <OptAInputText @bind-Value="Content.Title" 
-                       Attributes="@GetAttributes(TitleId, "Title...")" />
-        <label @attributes="@GetLabelAttributes(AlternativeId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Alternative")" />
-        </label>
-        <OptAInputText @bind-Value="Content.Alternative" 
-                       Attributes="@GetAttributes(AlternativeId, "Alternative...")" />
+                       DragEnded="DragEnded"
+                       MovedToIndex="MovedToIndex">
+        <ChildContent>
+            <label @attributes="@GetLabelAttributes(SourceId)">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
+            </label>
+            <OptAInputText @bind-Value="Content.Source"
+                           Attributes="@GetAttributes(SourceId, "Source...")"
+                           Mode="_bindMode" />
+            <label @attributes="@GetLabelAttributes(TitleId)">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Title")" />
+            </label>
+            <OptAInputText @bind-Value="Content.Title" 
+                           Attributes="@GetAttributes(TitleId, "Title...")"
+                           Mode="_bindMode" />
+            <label @attributes="@GetLabelAttributes(AlternativeId)">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Alternative")" />
+            </label>
+            <OptAInputText @bind-Value="Content.Alternative" 
+                           Attributes="@GetAttributes(AlternativeId, "Alternative...")"
+                           Mode="_bindMode" />
+        </ChildContent>
+        <AdditionalProperties>
+            <label>
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Bind mode")" />
+            </label>
+            <OptAEnumSelect @bind-Value="_bindMode" TEnum="BindMode" />
+        </AdditionalProperties>
     </OptABlogComponent>
 }

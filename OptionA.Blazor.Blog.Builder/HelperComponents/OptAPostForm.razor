@@ -11,14 +11,15 @@
     @foreach (var content in _post.Content.Select((c, i) => new { Content = c, Index = i }))
     {
         <OptAContentBuilderSelector Content="content.Content"
-                                        ContentChanged="() => OnChange(nameof(_post.Content))"
-                                        ContentRemoved="() => OnRemove(content.Content)"
-                                        ContentIndex="content.Index"
-                                        TotalContentCount="_post.Content.Count"
-                                        MovedUp="() => OnMoveUp(content.Content)"
-                                        MovedDown="() => OnMoveDown(content.Content)"
-                                        DragStarted="OnDragStarted"
-                                        DragEnded="OnDragEnded" />
+                                    ContentChanged="() => OnChange(nameof(_post.Content))"
+                                    ContentRemoved="() => OnRemove(content.Content)"
+                                    ContentIndex="content.Index"
+                                    TotalContentCount="_post.Content.Count"
+                                    MovedUp="() => OnMoveUp(content.Content)"
+                                    MovedDown="() => OnMoveDown(content.Content)"
+                                    DragStarted="OnDragStarted"
+                                    DragEnded="OnDragEnded"
+                                    MovedToIndex="(index) => MovedToIndex(content.Content, index)"/>
     }
         <div @attributes="@DataProvider.GetAttributes(BuilderType.SavePostButtonContainer)">
             <button @attributes="GetSavePostAttributes()">

@@ -202,4 +202,21 @@ public partial class OptAPostForm
             _context.NotifyFieldChanged(id);
         }
     }
+
+    private void MovedToIndex(IContent content, int index)
+    {
+        if (_post is null || _context is null || index < 0 || index >= _post.Content.Count)
+        {
+            return;
+        }
+        var currentIndex = _post.Content.IndexOf(content);
+        if (currentIndex < 0 || currentIndex == index)
+        {
+            return;
+        }
+        _post.Content.RemoveAt(currentIndex);
+        _post.Content.Insert(index, content);
+        var id = _context.Field(nameof(_post.Content));
+        _context.NotifyFieldChanged(id);
+    }
 }

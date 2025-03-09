@@ -10,23 +10,29 @@
                        Content="Content"
                        CanDrag="true"
                        DragStarted="DragStarted"
-                       DragEnded="DragEnded">
+                       DragEnded="DragEnded"
+                       MovedToIndex="MovedToIndex">
         <ChildContent>
             <label @attributes="@GetLabelAttributes(QuoteId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Quote")" />
             </label>
             <OptAFlexibleTextArea @bind-Value="Content.Quote"
-                                  Attributes="@GetAttributes(QuoteId, "Quote...")" />
+                                  Attributes="@GetAttributes(QuoteId, "Quote...")"
+                                  Mode="_bindMode"
+                                  DisplayAutoGrow="_showAutoGrow"
+                                  InitialAutoGrow="_autoGrow"/>
             <label @attributes="@GetLabelAttributes(SourceId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
             </label>
             <OptAInputText @bind-Value="Content.Source"
-                           Attributes="@GetAttributes(SourceId, "Source...")" />
+                           Attributes="@GetAttributes(SourceId, "Source...")"
+                           Mode="_bindMode"/>
             <label @attributes="@GetLabelAttributes(SourceUrlId)">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source url")" />
             </label>
             <OptAInputText @bind-Value="Content.SourceUrl" 
-                           Attributes="@GetAttributes(SourceUrlId, "Source url...")" />
+                           Attributes="@GetAttributes(SourceUrlId, "Source url...")"
+                           Mode="_bindMode"/>
         </ChildContent>
         <AdditionalProperties>
             <OptAHelperList ContentChanged="ContentChanged"
@@ -39,6 +45,12 @@
                             ItemTitle="Default classes to remove for source"
                             Label="Removed default source classes"
                             Items="Content.RemovedSourceClasses" />
+            <label>
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Bind mode")" />
+            </label>
+            <OptAEnumSelect @bind-Value="_bindMode" TEnum="BindMode" />
+            <OptAInputCheckbox @bind-Value="_showAutoGrow" Description="Show enable autogrow" />
+            <OptAInputCheckbox @bind-Value="_autoGrow" Description="Auto grow status" />
         </AdditionalProperties>
     </OptABlogComponent>
 }

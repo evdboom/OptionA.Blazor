@@ -187,5 +187,13 @@ public enum BuilderType
     /// <summary>
     /// Container around the flexible textarea
     /// </summary>
-    FlexibleTextArea
+    FlexibleTextArea,
+    /// <summary>
+    /// Input to move component to specific index
+    /// </summary>
+    MoveToIndexInput,
+    /// <summary>
+    /// Div around the MoveToIndexInput
+    /// </summary>
+    MoveToIndexInputContainer
 }

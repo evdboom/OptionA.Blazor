@@ -1,4 +1,6 @@
 ﻿<div @attributes="GetFleixbleTextAreaAttributes()">
+    @if (_showAutoGrow)
+    {
     <div @attributes="GetCheckboxContainerAttributes()">
         <OptAInputCheckbox @bind-Value="_autoGrow"
                             Attributes="@GetCheckBoxAttributes(_id)" />
@@ -6,8 +8,9 @@
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Auto grow")" />
         </label>
     </div>
+    }
     <OptAInputTextArea @bind-Value="InternalValue"
                         Attributes="Attributes" 
                         AutoGrow="_autoGrow"
-                        Mode="BindMode.OnChange"/>
+                        Mode="Mode"/>
 </div>

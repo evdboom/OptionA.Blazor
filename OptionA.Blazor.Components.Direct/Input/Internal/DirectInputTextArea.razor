@@ -17,7 +17,7 @@
         @if (AutoGrow)
         {
             <div opta-text="@CurrentValueAsString" @attributes="GetContainerAttributes()">
-                <textarea @attributes="Attributes" @bind="@CurrentValueAsString" />
+                <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @onkeydown="ForceBindOnEnter" @ref="_element" />
             </div>
         }
         else

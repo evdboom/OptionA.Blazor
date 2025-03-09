@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Blog.Builder.HelperComponents
 {
@@ -7,6 +8,16 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
     /// </summary>
     public partial class OptAFlexibleTextArea
     {
+        /// <summary>
+        /// Set required bindmode for the input
+        /// </summary>
+        [Parameter]
+        public BindMode? Mode { get; set; }
+        /// <summary>
+        /// Set to false to hide the autogrow option (default is true)
+        /// </summary>
+        [Parameter]
+        public bool? DisplayAutoGrow { get; set; }
         /// <summary>
         /// Set to true to enable autogrow initially
         /// </summary>
@@ -46,6 +57,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
             }
         }
 
+        private bool _showAutoGrow = true;
         private bool _autoGrow;
         private string _id = string.Empty;
 
@@ -61,6 +73,10 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
             if (InitialAutoGrow.HasValue)
             {
                 _autoGrow = InitialAutoGrow.Value;
+            }
+            if (DisplayAutoGrow.HasValue)
+            {
+                _showAutoGrow = DisplayAutoGrow.Value;
             }
         }
 

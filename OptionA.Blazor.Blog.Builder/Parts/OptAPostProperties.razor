@@ -16,8 +16,9 @@
         <label @attributes="@GetLabelAttributes(SubtitleId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Subtitle")" />
         </label>
-        <OptAFlexibleTextArea @bind-Value="Post.Subtitle"
-                              Attributes="GetSubtitleAttributes()" />
+        <OptAInputTextArea @bind-Value="Post.Subtitle"
+                           Attributes="GetSubtitleAttributes()"
+                           Mode="BindMode.OnChange"/>
         <OptAHelperList Items="Post.Tags"
                         Label="Tags"
                         ItemPlaceholder="Tag..."

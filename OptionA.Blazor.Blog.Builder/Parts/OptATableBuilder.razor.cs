@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Blog.Builder.Parts;
 
@@ -54,10 +55,18 @@ public partial class OptATableBuilder
     /// </summary>
     [Parameter]
     public EventCallback<DragEvent> DragEnded { get; set; }
+    /// <summary>
+    /// Called when the component is moved to a new index
+    /// </summary>
+    [Parameter]
+    public EventCallback<int> MovedToIndex { get; set; }
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
     private int _inputMethod;
+    private BindMode _bindMode = BindMode.OnChange;
+    private bool _showAutoGrow = false;
+    private bool _autoGrow = true;
 
     private string ItemsFromString
     {

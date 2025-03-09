@@ -10,7 +10,8 @@
                        Content="Content"
                        CanDrag="true"
                        DragStarted="DragStarted"
-                       DragEnded="DragEnded">
+                       DragEnded="DragEnded"
+                       MovedToIndex="MovedToIndex">
         <ChildContent>
             <OptAHelperList ContentChanged="ContentChanged"
                             ItemPlaceholder="Column..."
@@ -29,7 +30,10 @@
             }
             else
             {
-                <OptAFlexibleTextArea @bind-Value="ItemsFromString" />
+                <OptAFlexibleTextArea @bind-Value="ItemsFromString"
+                                      Mode="_bindMode"
+                                      DisplayAutoGrow="_showAutoGrow"
+                                      InitialAutoGrow="_autoGrow"/>
             }
             <OptAHelperList ContentChanged="ContentChanged"
                             ItemPlaceholder="Footer..."
@@ -37,5 +41,13 @@
                             Label="Footer"
                             Items="Content.Footer" />
         </ChildContent>
+        <AdditionalProperties>
+            <label>
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Bind mode")" />
+            </label>
+            <OptAEnumSelect @bind-Value="_bindMode" TEnum="BindMode" />
+            <OptAInputCheckbox @bind-Value="_showAutoGrow" Description="Show enable autogrow" />
+            <OptAInputCheckbox @bind-Value="_autoGrow" Description="Auto grow status" />
+        </AdditionalProperties>
     </OptABlogComponent>
 }

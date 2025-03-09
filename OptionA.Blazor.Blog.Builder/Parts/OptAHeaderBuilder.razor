@@ -10,17 +10,27 @@
                        Content="Content"
                        CanDrag="true"
                        DragStarted="DragStarted"
-                       DragEnded="DragEnded">
-        <label @attributes="@GetLabelAttributes(SizeId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Size")" />
-        </label>
-        <OptAEnumSelect @bind-Value="InternalSize"
-                        TEnum="HeaderSize"
-                        Attributes="@GetSizeAttributes()" />
-        <label @attributes="@GetLabelAttributes(HeaderId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Value")" />
-        </label>
-        <OptAInputText @bind-Value="Content.Content" 
-                       Attributes="@GetHeaderAttributes()" />
+                       DragEnded="DragEnded"
+                       MovedToIndex="MovedToIndex">
+        <ChildContent>
+            <label @attributes="@GetLabelAttributes(SizeId)">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Size")" />
+            </label>
+            <OptAEnumSelect @bind-Value="InternalSize"
+                            TEnum="HeaderSize"
+                            Attributes="@GetSizeAttributes()" />
+            <label @attributes="@GetLabelAttributes(HeaderId)">
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Value")" />
+            </label>
+            <OptAInputText @bind-Value="Content.Content" 
+                           Attributes="@GetHeaderAttributes()"
+                           Mode="_bindMode" />
+        </ChildContent>
+        <AdditionalProperties>
+            <label>
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Bind mode")" />
+            </label>
+            <OptAEnumSelect @bind-Value="_bindMode" TEnum="BindMode" />
+        </AdditionalProperties>
     </OptABlogComponent>
 }

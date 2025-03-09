@@ -10,31 +10,44 @@
                        Content="Content"
                        CanDrag="true"
                        DragStarted="DragStarted"
-                       DragEnded="DragEnded">
+                       DragEnded="DragEnded"
+                       MovedToIndex="MovedToIndex">
+        <ChildContent>
         <label @attributes="@GetLabelAttributes(SourceId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Source")" />
         </label>
         <OptAInputText @bind-Value="Content.Source"
-                       Attributes="@GetAttributes(SourceId, "Source...")" />
+                       Attributes="@GetAttributes(SourceId, "Source...")"
+                       Mode="_bindMode"/>
         <label @attributes="@GetLabelAttributes(TitleId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Title")" />
         </label>
         <OptAInputText @bind-Value="Content.Title" 
-                       Attributes="@GetAttributes(TitleId, "Title...")" />
+                       Attributes="@GetAttributes(TitleId, "Title...")"
+                       Mode="_bindMode" />
         <label @attributes="@GetLabelAttributes(WidthId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Width")" />
         </label>
         <OptAInputText @bind-Value="Content.Width" 
-                       Attributes="@GetAttributes(WidthId, "Width...")" />
+                       Attributes="@GetAttributes(WidthId, "Width...")"
+                       Mode="_bindMode"/>
         <label @attributes="@GetLabelAttributes(HeightId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Height")" />
         </label>
         <OptAInputText @bind-Value="Content.Height"
-                       Attributes="@GetAttributes(HeightId, "Height...")" />
+                       Attributes="@GetAttributes(HeightId, "Height...")"
+                       Mode="_bindMode"/>
         <OptAInputCheckbox @bind-Value="Content.PreviewMode"
                            Attributes="@GetCheckBoxAttributes(PreviewId)" />
         <label @attributes="@GetLabelAttributes(PreviewId)">
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Preview mode")" />
         </label>
+        </ChildContent>
+            <AdditionalProperties>
+                <label>
+                    <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Bind mode")" />
+                </label>
+                <OptAEnumSelect @bind-Value="_bindMode" TEnum="BindMode" />
+        </AdditionalProperties>
     </OptABlogComponent>
 }

@@ -52,4 +52,9 @@ public partial class OptAContentBuilderSelector
     /// </summary>
     [Parameter]
     public EventCallback<DragEvent> DragEnded { get; set; }
+    /// <summary>
+    /// Called when the component is moved to a new index
+    /// </summary>
+    [Parameter]
+    public EventCallback<int> MovedToIndex { get; set; }
 }

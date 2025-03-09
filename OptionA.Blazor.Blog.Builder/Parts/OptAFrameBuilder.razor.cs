@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Blog.Builder.Parts;
 
@@ -58,8 +59,15 @@ public partial class OptAFrameBuilder
     /// </summary>
     [Parameter]
     public EventCallback<DragEvent> DragEnded { get; set; }
+    /// <summary>
+    /// Called when the component is moved to a new index
+    /// </summary>
+    [Parameter]
+    public EventCallback<int> MovedToIndex { get; set; }
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
+
+    private BindMode _bindMode = BindMode.OnChange;
 
     private Dictionary<string, object?> GetAttributes(string id, string placeholder)
     {

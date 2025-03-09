@@ -50,6 +50,11 @@
             <button @attributes="GetMoveUpAttributes()">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.MoveUpButton, "Up")" />
             </button>
+            <div @attributes="GetMoveToIndexContainerAttributes()">
+                <OptAInputInteger @bind-Value="Index" 
+                                  Attributes="GetMoveToIndexAttributes()" 
+                                  Mode="BindMode.OnChange"/>
+            </div>
             <button @attributes="GetMoveDownAttributes()">
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.MoveDownButton, "Down")" />
             </button>

@@ -10,11 +10,22 @@
                        Content="Content"
                        CanDrag="true"
                        DragStarted="DragStarted"
-                       DragEnded="DragEnded">
-        <label @attributes="@GetLabelAttributes(ParagraphId)">
-            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Value")" />
-        </label>
-        <OptAFlexibleTextArea @bind-Value="Content.Content"
-                              Attributes="@GetAttributes()" />
+                       DragEnded="DragEnded"
+                       MovedToIndex="MovedToIndex">
+        <ChildContent>
+            <OptAFlexibleTextArea @bind-Value="Content.Content"
+                                  Attributes="@GetAttributes()"
+                                  Mode="_bindMode"
+                                  DisplayAutoGrow="_showAutoGrow"
+                                  InitialAutoGrow="_autoGrow"/>
+        </ChildContent>
+        <AdditionalProperties>
+            <label>
+                <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Bind mode")" />
+            </label>
+            <OptAEnumSelect @bind-Value="_bindMode" TEnum="BindMode" />
+            <OptAInputCheckbox @bind-Value="_showAutoGrow" Description="Show enable autogrow" />
+            <OptAInputCheckbox @bind-Value="_autoGrow" Description="Auto grow status" />
+        </AdditionalProperties>
     </OptABlogComponent>
 }

@@ -1,37 +1,51 @@
 ﻿@if (Content is not null)
 {
-    <OptABlogComponent Name="**List**"
-                       ContentChanged="ContentChanged"
-                       ContentRemoved="ContentRemoved"
-                       ContentIndex="ContentIndex"
-                       TotalContentCount="TotalContentCount"
-                       MovedUp="MovedUp"
-                       MovedDown="MovedDown"
-                       Content="Content"
-                       CanDrag="true"
-                       DragStarted="DragStarted"
-                       DragEnded="DragEnded">
-    <label>
-        <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "List Type")"/>
-    </label>
-    <OptAEnumRadioGroup @bind-Value="Content.ListType" />
-    <label>
-        <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Input Method")" />
-    </label>
-    <OptAInputRadioGroup @bind-Value="_inputMethod"
-                         Items="@([0,1])"
-                         DisplayValue="@((value) => value == 0 ? "Add to list" : "From string")" />
-    @if (_inputMethod == 0)
-    {
-        <OptAHelperList Items="Content.Items"
-                        Label="Content"
-                        ItemPlaceholder="item..."
-                        ItemTitle="Add an entry to the list"
-                        ContentChanged="ContentChanged" />
-    }
-    else
-    {
-        <OptAFlexibleTextArea @bind-Value="ItemsFromString" />
-    }
-    </OptABlogComponent>
+<OptABlogComponent Name="**List**"
+                    ContentChanged="ContentChanged"
+                    ContentRemoved="ContentRemoved"
+                    ContentIndex="ContentIndex"
+                    TotalContentCount="TotalContentCount"
+                    MovedUp="MovedUp"
+                    MovedDown="MovedDown"
+                    Content="Content"
+                    CanDrag="true"
+                    DragStarted="DragStarted"
+                    DragEnded="DragEnded"
+                    MovedToIndex="MovedToIndex">
+    <ChildContent>
+        <label>
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "List Type")"/>
+        </label>
+        <OptAEnumRadioGroup @bind-Value="Content.ListType" />
+        <label>
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Input Method")" />
+        </label>
+        <OptAInputRadioGroup @bind-Value="_inputMethod"
+                             Items="@([0,1])"
+                             DisplayValue="@((value) => value == 0 ? "Add to list" : "From string")" />
+        @if (_inputMethod == 0)
+        {
+            <OptAHelperList Items="Content.Items"
+                            Label="Content"
+                            ItemPlaceholder="item..."
+                            ItemTitle="Add an entry to the list"
+                            ContentChanged="ContentChanged" />
+        }
+        else
+        {
+            <OptAFlexibleTextArea @bind-Value="ItemsFromString"
+                                  Mode="_bindMode"
+                                  DisplayAutoGrow="_showAutoGrow"
+                                  InitialAutoGrow="_autoGrow"/>
+        }
+    </ChildContent>
+    <AdditionalProperties>
+        <label>
+            <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Bind mode")" />
+        </label>
+        <OptAEnumSelect @bind-Value="_bindMode" TEnum="BindMode" />
+        <OptAInputCheckbox @bind-Value="_showAutoGrow" Description="Show enable autogrow" />
+        <OptAInputCheckbox @bind-Value="_autoGrow" Description="Auto grow status" />
+    </AdditionalProperties>
+</OptABlogComponent>
 }

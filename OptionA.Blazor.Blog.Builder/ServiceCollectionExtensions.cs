@@ -175,8 +175,15 @@ public static class ServiceCollectionExtensions
                 [BuilderType.CheckboxInput] = new BuilderTypeProperties
                 {
                     Class = "form-check-input"
+                },
+                [BuilderType.MoveToIndexInputContainer] = new BuilderTypeProperties
+                {
+                    Class = "btn btn-secondary btn-sm p-1"
+                },
+                [BuilderType.MoveToIndexInput] = new BuilderTypeProperties
+                {
+                    Class = "input3em"
                 }
-
             };
 
             configuration?.Invoke(options);
