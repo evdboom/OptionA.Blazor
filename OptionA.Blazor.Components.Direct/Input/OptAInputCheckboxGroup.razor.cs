@@ -10,6 +10,10 @@ namespace OptionA.Blazor.Components;
 public partial class OptAInputCheckboxGroup<TValue>
 {
     /// <summary>
+    /// Returns the reference to first checkbox, null if there are no elements
+    /// </summary>
+    public ElementReference? Element => _input?.Element;
+    /// <summary>
     /// Selected Values
     /// </summary>
     [Parameter]
@@ -68,7 +72,8 @@ public partial class OptAInputCheckboxGroup<TValue>
     }
 
     private HashSet<int>? _selectedItems;
-    private Dictionary<int, TValue>? _items;               
+    private Dictionary<int, TValue>? _items;
+    private OptAInputCheckbox? _input;
 
     private IEnumerable<(int Index, TValue Value)> OrderedItems
     {

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace OptionA.Blazor.Components;
 
@@ -7,6 +8,10 @@ namespace OptionA.Blazor.Components;
 /// </summary>
 public partial class OptASelect<TValue>
 {
+    /// <summary>
+    /// Gets or sets the <see cref="ElementReference"/> for the select element
+    /// </summary>
+    public ElementReference Element => _select?.Element ?? throw new InvalidOperationException("Element is not available until after the component has been rendered");
     /// <summary>
     /// Selected Value
     /// </summary>
@@ -63,6 +68,7 @@ public partial class OptASelect<TValue>
     }
 
     private Dictionary<int, TValue>? _items;
+    private InputSelect<int?>? _select;
 
     private int? _internalValue;
     private int? InternalValue

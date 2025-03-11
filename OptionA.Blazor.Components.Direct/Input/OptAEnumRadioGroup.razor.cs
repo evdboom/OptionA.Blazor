@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace OptionA.Blazor.Components;
 
@@ -7,6 +8,10 @@ namespace OptionA.Blazor.Components;
 /// </summary>
 public partial class OptAEnumRadioGroup<TEnum> where TEnum : struct, Enum
 {
+    /// <summary>
+    /// Returns the reference to first radiobutton, null if there are no elements
+    /// </summary>
+    public ElementReference? Element => _input?.Element;
     /// <summary>
     /// Selected Value
     /// </summary>
@@ -83,6 +88,8 @@ public partial class OptAEnumRadioGroup<TEnum> where TEnum : struct, Enum
             };
         }
     }
+
+    private InputRadio<TEnum>? _input;
 
     /// <inheritdoc/>
     protected override void OnInitialized()

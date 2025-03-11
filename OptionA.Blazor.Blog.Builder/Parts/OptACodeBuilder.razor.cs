@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Blog.Builder.HelperComponents;
 using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Blog.Builder.Parts;
@@ -65,6 +66,7 @@ public partial class OptACodeBuilder
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
+    private OptAFlexibleTextArea? _input;
     private BindMode _bindMode = BindMode.OnChange;
     private bool _showAutoGrow = false;
     private bool _autoGrow = true;
@@ -87,6 +89,19 @@ public partial class OptACodeBuilder
                 }
             }
         }
+    }
+
+    /// <inheritdoc/>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (_input is not null)
+            {
+                await _input.Element.FocusAsync(false);
+            }
+        }
+
     }
 
     private Dictionary<string, object?> GetCodeAttributes()

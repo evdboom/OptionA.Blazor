@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using System;
+using OptionA.Blazor.Components.Direct.Input.Internal;
 
 namespace OptionA.Blazor.Components;
 
@@ -8,6 +8,10 @@ namespace OptionA.Blazor.Components;
 /// </summary>
 public partial class OptAInputText
 {
+    /// <summary>
+    /// Gets the <see cref="ElementReference"/> for the input element
+    /// </summary>
+    public ElementReference Element => _input?.Element ?? throw new InvalidOperationException("Element is not available until after the component has been rendered");
     /// <summary>
     /// Bindmode for the input, default is <see cref="BindMode.OnInput"/>
     /// </summary>
@@ -39,6 +43,8 @@ public partial class OptAInputText
             }
         }
     }
+
+    private DirectInputText? _input;
 
     private Dictionary<string, object?> GetAllAttributes()
     {

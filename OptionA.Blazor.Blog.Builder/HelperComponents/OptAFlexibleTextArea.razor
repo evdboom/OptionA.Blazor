@@ -9,8 +9,9 @@
         </label>
     </div>
     }
-    <OptAInputTextArea @bind-Value="InternalValue"
-                        Attributes="Attributes" 
-                        AutoGrow="_autoGrow"
-                        Mode="Mode"/>
+    <OptAInputTextArea @ref="_input"
+                       @bind-Value="InternalValue"
+                       Attributes="Attributes" 
+                       AutoGrow="_autoGrow"
+                       Mode="Mode"/>
 </div>

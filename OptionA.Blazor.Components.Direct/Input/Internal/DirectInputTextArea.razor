@@ -5,24 +5,24 @@
         @if (AutoGrow)
         {
             <div opta-text="@CurrentValueAsString" @attributes="GetContainerAttributes()">
-                <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
+                <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" @ref="_input" />
             </div>
         }
         else
         {
-            <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
+            <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" @ref="_input" />
         }
         break;
     case BindMode.OnChange:
         @if (AutoGrow)
         {
             <div opta-text="@CurrentValueAsString" @attributes="GetContainerAttributes()">
-                <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @onkeydown="ForceBindOnEnter" @ref="_element" />
+                <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @onkeydown="ForceBindOnEnter" @ref="_input" />
             </div>
         }
         else
         {
-            <textarea @attributes="Attributes" @bind="@CurrentValueAsString" />
+            <textarea @attributes="Attributes" @bind="@CurrentValueAsString" @ref="_input" />
         }                   
         break;
 }

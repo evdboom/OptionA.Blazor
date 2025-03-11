@@ -14,6 +14,7 @@
                        MovedToIndex="MovedToIndex">
         <ChildContent>
             <OptAFlexibleTextArea @bind-Value="Content.Content"
+                                  @ref="_input"
                                   Attributes="@GetAttributes()"
                                   Mode="_bindMode"
                                   DisplayAutoGrow="_showAutoGrow"
