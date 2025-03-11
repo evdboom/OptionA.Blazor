@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>9.3.5</Version>
+	  <Version>9.3.6</Version>
 	  <PackageReleaseNotes>
-      Added more flexibility to the blogbuilder with autogrow and bind options, also added option to move to index instead of only 1 up and 1 down
+      Updated blog package
     </PackageReleaseNotes>
   </PropertyGroup>
 

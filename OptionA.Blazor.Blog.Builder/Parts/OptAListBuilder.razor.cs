@@ -8,7 +8,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts;
 /// </summary>
 public partial class OptAListBuilder
 {
-
+    private readonly List<string> NewLineSplitters = [ "\r\n", "\n" ];
     /// <summary>
     /// Index of content in post (for id uniqueness)
     /// </summary>
@@ -74,6 +74,16 @@ public partial class OptAListBuilder
         {
             if (Content is not null)
             {
+                foreach(var splitter in NewLineSplitters)
+                {
+                    var items = value.Split(splitter);
+                    if (items.Length > 1)
+                    {
+                        Content.Items = items.ToList();
+                        return;
+                    }
+                }
+                
                 Content.Items = value.Split(Environment.NewLine).ToList();
             }
         }

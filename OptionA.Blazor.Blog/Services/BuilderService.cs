@@ -77,7 +77,7 @@ public class BuilderService : IBuilderService
         }
         if (content.Attributes.Any())
         {
-            result[nameof(content)] = content.Attributes;
+            result[nameof(content.Attributes)] = content.Attributes;
         }
         result[nameof(content.Type)] = content.Type;
 

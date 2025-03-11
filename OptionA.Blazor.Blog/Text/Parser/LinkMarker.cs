@@ -47,7 +47,7 @@ public class LinkMarker : MarkerDefinition
     public override IContent CreateContent(string content)
     {
         var parts = content.Split("](");
-        var target = parts[1].StartsWith("/")
+        var target = parts[1].StartsWith('/')
             ? "_self"
             : "_blank";
         return new LinkContent
