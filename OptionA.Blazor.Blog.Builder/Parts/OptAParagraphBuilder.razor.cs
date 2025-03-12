@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using OptionA.Blazor.Blog.Builder.HelperComponents;
 using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Blog.Builder.Parts;
@@ -63,28 +64,32 @@ public partial class OptAParagraphBuilder
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
+    private OptAFlexibleTextArea? _input;
     private BindMode _bindMode = BindMode.OnChange;
     private bool _showAutoGrow = false;
     private bool _autoGrow = true;
+
+    /// <inheritdoc/>
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (_input is not null)
+            {
+                await _input.Element.FocusAsync(false);
+            }
+        }
+      
+    }
 
     private Dictionary<string, object?> GetAttributes()
     {
         var defaultAttributes = new Dictionary<string, object?>
         {
             ["placeholder"] = "Text...",
-            ["id"] = $"{ParagraphId}-{ContentIndex}"
+            ["id"] = $"{ParagraphId}-{ContentIndex}"            
         };
 
         return DataProvider.GetAttributes(BuilderType.TextAreaInput, defaultAttributes);
-    }
-
-    private Dictionary<string, object?> GetLabelAttributes(string id)
-    {
-        var defaultAttributes = new Dictionary<string, object?>
-        {
-            ["for"] = $"{id}-{ContentIndex}"
-        };
-
-        return DataProvider.GetAttributes(BuilderType.Label, defaultAttributes);
     }
 }

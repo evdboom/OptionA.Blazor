@@ -1,5 +1,6 @@
 ﻿@namespace OptionA.Blazor.Components
 @inherits OptAComponent
-<OptionA.Blazor.Components.Direct.Input.Internal.DirectInputInteger @bind-Value="InternalValue"                                                                    
+<OptionA.Blazor.Components.Direct.Input.Internal.DirectInputInteger @ref="_input"
+                                                                    @bind-Value="InternalValue"                                                                    
                                                                     AdditionalAttributes="GetAllAttributes()"
                                                                     Mode="Mode"/>

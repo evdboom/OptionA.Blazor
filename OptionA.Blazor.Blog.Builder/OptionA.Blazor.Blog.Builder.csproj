@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>9.3.6</Version>
+	  <Version>9.4.0</Version>
 	  <PackageReleaseNotes>
-      Updated blog package
+      Added auto focus when adding a new blog post component
     </PackageReleaseNotes>
   </PropertyGroup>
 

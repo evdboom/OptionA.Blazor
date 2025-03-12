@@ -13,6 +13,10 @@ public partial class DirectInputTextArea
     private const string ForceFocusFunction = "forceFocus";
 
     /// <summary>
+    /// Gets the reference to the input
+    /// </summary>
+    public new ElementReference Element => _input;
+    /// <summary>
     /// Bindmode for the input, default is <see cref="BindMode.OnInput"/>
     /// </summary>
     [Parameter]
@@ -20,7 +24,7 @@ public partial class DirectInputTextArea
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = null!;
 
-    private ElementReference _element;
+    private ElementReference _input;
     private BindMode InternalMode => Mode ?? BindMode.OnInput;
     private Lazy<Task<IJSObjectReference>>? _moduleTask;
 
@@ -39,6 +43,8 @@ public partial class DirectInputTextArea
         }
     }
 
+    
+
     /// <inheritdoc/>
     protected override void OnInitialized()
     {
@@ -52,7 +58,7 @@ public partial class DirectInputTextArea
         if (args.Key == EnterKey)
         {
             var module = await _moduleTask!.Value;
-            await module.InvokeVoidAsync(ForceFocusFunction, _element);
+            await module.InvokeVoidAsync(ForceFocusFunction, _input);
         }
     }
 

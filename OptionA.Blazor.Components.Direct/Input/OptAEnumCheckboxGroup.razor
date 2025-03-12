@@ -5,10 +5,21 @@
 @typeparam TEnum where TEnum : struct, Enum
 
 <div @attributes="@GetAllAttributes()">
-    @foreach (var item in OrderedItems)
+@foreach (var (item, index) in OrderedItems.Select((item, index) => (item, index)))
 {
-    <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item, selected)"
-                            Description="@GetDisplayName(item)"
-                            Attributes="@GetCheckboxAttributes(item)" />
+    @if (index == 0)
+    {
+        <OptAInputCheckbox @ref="_input"
+                           ValueChanged="(selected) => OnSelectedChanged(item, selected)"
+                           Description="@GetDisplayName(item)"
+                           Attributes="@GetCheckboxAttributes(item)" />
+    }
+    else
+    {
+        <OptAInputCheckbox ValueChanged="(selected) => OnSelectedChanged(item, selected)"
+                           Description="@GetDisplayName(item)"
+                           Attributes="@GetCheckboxAttributes(item)" />
+    }
+
 }
 </div>

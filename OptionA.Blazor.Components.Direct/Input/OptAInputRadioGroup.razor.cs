@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace OptionA.Blazor.Components;
 
@@ -7,6 +8,10 @@ namespace OptionA.Blazor.Components;
 /// </summary>
 public partial class OptAInputRadioGroup<TValue>
 {
+    /// <summary>
+    /// Returns the reference to first radiobutton, null if there are no elements
+    /// </summary>
+    public ElementReference? Element => _input?.Element;
     /// <summary>
     /// Selected Value
     /// </summary>
@@ -68,6 +73,7 @@ public partial class OptAInputRadioGroup<TValue>
     }
 
     private Dictionary<int, TValue>? _items;
+    private InputRadio<int>? _input;
 
     private int? _internalValue;
     private int? InternalValue

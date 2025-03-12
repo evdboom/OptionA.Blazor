@@ -30,6 +30,7 @@
                 <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Code")" />
             </label>
             <OptAFlexibleTextArea @bind-Value="Content.Code"
+                                  @ref="_input"
                                   Attributes="@GetCodeAttributes()"
                                   DisplayAutoGrow="_showAutoGrow"
                                   Mode="_bindMode"

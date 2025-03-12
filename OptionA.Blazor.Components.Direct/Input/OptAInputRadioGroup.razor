@@ -7,9 +7,20 @@
 
 <div @attributes="@GetAllAttributes()">
     <InputRadioGroup @bind-Value="InternalValue">
-        @foreach (var item in OrderedItems)
+        @foreach (var (item, index) in OrderedItems.Select((item, index) => (item, index)))
         {
-            <label @attributes="@GetOptionLabelAttributes(item.Value)"><InputRadio Value="@item.Index" /> @GetDisplayName(item.Value)</label>
+            @if (index == 0)
+            {
+                <label @attributes="@GetOptionLabelAttributes(item.Value)">
+                    <InputRadio Value="@item.Index" @ref="_input" /> @GetDisplayName(item.Value)
+                </label>
+            }
+            else
+            {
+                <label @attributes="@GetOptionLabelAttributes(item.Value)">
+                    <InputRadio Value="@item.Index" /> @GetDisplayName(item.Value)
+                </label>
+            }
         }
     </InputRadioGroup>
 </div>

@@ -7,6 +7,10 @@ namespace OptionA.Blazor.Components;
 /// </summary>
 public partial class OptAEnumCheckboxGroup<TEnum> where TEnum : struct, Enum
 {
+    /// <summary>
+    /// Returns the reference to first checkbox, null if there are no elements
+    /// </summary>
+    public ElementReference? Element => _input?.Element;
     ///  <summary>
     /// Selected Value
     /// </summary>
@@ -46,6 +50,8 @@ public partial class OptAEnumCheckboxGroup<TEnum> where TEnum : struct, Enum
 
     private TEnum[]? _values;
     private HashSet<TEnum>? _selectedItems;
+    private OptAInputCheckbox? _input;
+
     private IEnumerable<TEnum> OrderedItems
     {
         get

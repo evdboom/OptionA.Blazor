@@ -9,6 +9,10 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
     public partial class OptAFlexibleTextArea
     {
         /// <summary>
+        /// Gets the <see cref="ElementReference"/> for the input element
+        /// </summary>
+        public ElementReference Element => _input?.Element ?? throw new InvalidOperationException("Element is not available until after the component has been rendered");
+        /// <summary>
         /// Set required bindmode for the input
         /// </summary>
         [Parameter]
@@ -60,6 +64,7 @@ namespace OptionA.Blazor.Blog.Builder.HelperComponents
         private bool _showAutoGrow = true;
         private bool _autoGrow;
         private string _id = string.Empty;
+        private OptAInputTextArea? _input;
 
         /// <inheritdoc/>
         protected override void OnInitialized()

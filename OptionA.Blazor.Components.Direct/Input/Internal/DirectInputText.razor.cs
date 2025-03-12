@@ -8,12 +8,17 @@ namespace OptionA.Blazor.Components.Direct.Input.Internal;
 public partial class DirectInputText
 {
     /// <summary>
+    /// Gets the reference to the input
+    /// </summary>
+    public new ElementReference Element => _input;
+    /// <summary>
     /// Bindmode for the input, default is <see cref="BindMode.OnInput"/>
     /// </summary>
     [Parameter]
     public BindMode? Mode { get; set; }
 
     private BindMode InternalMode => Mode ?? BindMode.OnInput;
+    private ElementReference _input;
 
     private Dictionary<string, object> Attributes
     {

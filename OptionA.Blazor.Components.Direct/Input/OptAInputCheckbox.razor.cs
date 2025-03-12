@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace OptionA.Blazor.Components;
 
@@ -7,6 +8,10 @@ namespace OptionA.Blazor.Components;
 /// </summary>
 public partial class OptAInputCheckbox
 {
+    /// <summary>
+    /// Gets or sets the <see cref="ElementReference"/> for the input element
+    /// </summary>
+    public ElementReference Element => _input?.Element ?? throw new InvalidOperationException("Element is not available until after the component has been rendered");
     /// <summary>
     /// Display value    
     /// </summary>
@@ -38,6 +43,8 @@ public partial class OptAInputCheckbox
             }
         }
     }
+
+    private InputCheckbox? _input;
 
     private Dictionary<string, object?> GetAllAttributes()
     {            

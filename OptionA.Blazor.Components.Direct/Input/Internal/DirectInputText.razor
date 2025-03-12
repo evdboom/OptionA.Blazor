@@ -2,9 +2,9 @@
 @switch (InternalMode)
 {
     case BindMode.OnInput:
-        <input @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" />
+        <input @attributes="Attributes" @bind="@CurrentValueAsString" @bind:event="oninput" @ref="_input" />
         break;
     case BindMode.OnChange:
-        <input @attributes="Attributes" @bind="@CurrentValueAsString" />
+        <input @attributes="Attributes" @bind="@CurrentValueAsString" @ref="_input" />
         break;
 }
