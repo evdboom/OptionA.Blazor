@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>9.4.2</Version>
+	  <Version>9.4.3</Version>
 	  <PackageReleaseNotes>
-      Remove none option after selecting a value in enum select
+      Made input integer nullable
     </PackageReleaseNotes>
   </PropertyGroup>
 

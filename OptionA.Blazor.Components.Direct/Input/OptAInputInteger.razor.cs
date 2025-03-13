@@ -21,14 +21,14 @@ public partial class OptAInputInteger
     /// Value to bind to
     /// </summary>
     [Parameter]
-    public int Value { get; set; }
+    public int? Value { get; set; }
     /// <summary>
     /// Occurs when value changes
     /// </summary>
     [Parameter]
-    public EventCallback<int> ValueChanged { get; set; }
+    public EventCallback<int?> ValueChanged { get; set; }
 
-    private int InternalValue
+    private int? InternalValue
     {
         get => Value;
         set

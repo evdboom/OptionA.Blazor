@@ -24,7 +24,7 @@ public partial class Direct
         { TestEnum.Eight, "EightT" }
     };
 
-    private int _selectedInt;
+    private int? _selectedInt;
     private string? _selectedText;
     private string? _selectedText2;
 

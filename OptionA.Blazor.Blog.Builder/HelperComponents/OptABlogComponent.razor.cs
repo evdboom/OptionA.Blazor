@@ -96,22 +96,22 @@ public partial class OptABlogComponent
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = null!;
 
-    private int Index
+    private int? Index
     {
         get => _index;
         set
         {
             _index = value;
-            if (MovedToIndex.HasDelegate)
+            if (MovedToIndex.HasDelegate && value.HasValue)
             {
-                MovedToIndex.InvokeAsync(value);
+                MovedToIndex.InvokeAsync(value.Value);
             }
         }
     }
 
     private List<string>? _additionalAttributes;
 
-    private int _index;
+    private int? _index;
     private bool _dragging;
     private bool _dragTargetLower;
     private bool _dragTargetUpper;
