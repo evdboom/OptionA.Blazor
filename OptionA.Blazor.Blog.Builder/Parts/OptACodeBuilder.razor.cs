@@ -67,22 +67,22 @@ public partial class OptACodeBuilder
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
     private OptAFlexibleTextArea? _input;
-    private BindMode _bindMode = BindMode.OnChange;
+    private BindMode? _bindMode = BindMode.OnChange;
     private bool _showAutoGrow = false;
     private bool _autoGrow = true;
 
-    private CodeLanguage InternalLanguage
+    private CodeLanguage? InternalLanguage
     {
         get => Content?.Language ?? default;
         set
         {
-            if (Content is null)
+            if (Content is null || !value.HasValue)
             {
                 return;
             }
-            if (!value.Equals(Content.Language))
+            if (!value.Value.Equals(Content.Language))
             {
-                Content.Language = value;
+                Content.Language = value.Value;
                 if (ContentChanged.HasDelegate)
                 {
                     ContentChanged.InvokeAsync();

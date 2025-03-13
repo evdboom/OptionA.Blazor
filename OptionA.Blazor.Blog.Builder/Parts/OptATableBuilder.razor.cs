@@ -64,7 +64,7 @@ public partial class OptATableBuilder
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
     private int _inputMethod;
-    private BindMode _bindMode = BindMode.OnChange;
+    private BindMode? _bindMode = BindMode.OnChange;
     private bool _showAutoGrow = false;
     private bool _autoGrow = true;
 

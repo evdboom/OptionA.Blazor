@@ -3,6 +3,16 @@
 
 <PageTitle>Direct Components</PageTitle>
 <div>
+    <button @onclick="() => _showNoneOption = !_showNoneOption">
+        @if (_showNoneOption)
+        {
+            <span>With none option</span>
+        }
+        else
+        {
+            <span>without none option</span>
+        }
+    </button>
     <button @onclick="() => _orderDescending = !_orderDescending">
         @if (_orderDescending)
     {
@@ -21,6 +31,9 @@
                     OrderMode="_orderMode"
                     NameMappings="_nameMappings"
                     TitleMappings="_titleMappings"
+                    ShowNoneOption="_showNoneOption"
+                    NoneOptionName="@_noneOptiopnName"
+                    NoneOptionTitle="@_noneOptionsTitle"
                     @bind-Value="_selectedEnum"/>
     <OptAEnumRadioGroup TEnum="TestEnum"
                         OrderDescending="_orderDescending"
@@ -52,6 +65,14 @@
 <div>
     <OptAInputText @bind-Value="_selectedText"/>
     <span>@_selectedText</span>
+</div>
+<div>
+    <OptAInputText @bind-Value="_noneOptiopnName"/>
+    <span>@_noneOptiopnName</span>
+</div>
+<div>
+    <OptAInputText @bind-Value="_noneOptionsTitle" />
+    <span>@_noneOptionsTitle</span>
 </div>
 <div>
     <button @onclick="() => _autoGrow = !_autoGrow">

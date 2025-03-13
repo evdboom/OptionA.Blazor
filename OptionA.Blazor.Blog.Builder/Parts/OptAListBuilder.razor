@@ -16,7 +16,7 @@
         <label>
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "List Type")"/>
         </label>
-        <OptAEnumRadioGroup @bind-Value="Content.ListType" />
+        <OptAEnumRadioGroup TEnum="ListType" @bind-Value="InternalListType" />
         <label>
             <OptAChild Content="@DataProvider.GetContent(BuilderType.Label, "Input Method")" />
         </label>

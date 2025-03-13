@@ -65,7 +65,7 @@ public partial class OptAImageBuilder
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
-    private BindMode _bindMode = BindMode.OnChange;
+    private BindMode? _bindMode = BindMode.OnChange;
 
     private Dictionary<string, object?> GetAttributes(string id, string placeholder)
     {

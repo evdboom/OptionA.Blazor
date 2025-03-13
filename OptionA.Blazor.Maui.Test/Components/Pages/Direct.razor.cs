@@ -7,7 +7,7 @@ public partial class Direct
 {
     private bool _orderDescending;
     private EnumOrder _orderMode;
-    private TestEnum _selectedEnum;
+    private TestEnum? _selectedEnum;
     private IEnumerable<TestEnum>? _selectedEnums;
     private readonly Dictionary<TestEnum, string> _nameMappings = new()
     {
@@ -27,6 +27,10 @@ public partial class Direct
     private int _selectedInt;
     private string? _selectedText;
     private string? _selectedText2;
+
+    private bool _showNoneOption = true;
+    private string? _noneOptiopnName;
+    private string? _noneOptionsTitle;
 
     private bool _radioOrientationVertical;
     private bool _autoGrow;

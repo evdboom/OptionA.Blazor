@@ -16,12 +16,12 @@ public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
     /// Selected Value
     /// </summary>
     [Parameter]
-    public TEnum Value { get; set; }        
+    public TEnum? Value { get; set; }        
     /// <summary>
     /// Occurs when the value is updated
     /// </summary>
     [Parameter]
-    public EventCallback<TEnum> ValueChanged { get; set; }
+    public EventCallback<TEnum?> ValueChanged { get; set; }
     /// <summary>
     /// Optional name mappings for display value
     /// </summary>
@@ -33,6 +33,21 @@ public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
     [Parameter]
     public Dictionary<TEnum, string>? TitleMappings { get; set; }
     /// <summary>
+    /// Add option for no value
+    /// </summary>
+    [Parameter]
+    public bool? ShowNoneOption { get; set; }
+    /// <summary>
+    /// Name for none option
+    /// </summary>
+    [Parameter]
+    public string? NoneOptionName { get; set; }
+    /// <summary>
+    /// Title for none option
+    /// </summary>
+    [Parameter]
+    public string? NoneOptionTitle { get; set; }
+    /// <summary>
     /// Set to change the order of the items in the list
     /// </summary>
     [Parameter]
@@ -43,12 +58,12 @@ public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
     [Parameter]
     public bool OrderDescending { get; set; }
 
-    private TEnum InternalValue
+    private TEnum? InternalValue
     {
         get => Value;
         set
         {
-            if (!Value.Equals(value))
+            if (!EqualValue(Value, value))
             {
                 Value = value;
                 if (ValueChanged.HasDelegate)
@@ -75,8 +90,8 @@ public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
                     ? _values.OrderByDescending(value => $"{value}")
                     : _values.OrderBy(value => $"{value}"),
                 EnumOrder.DisplayValue => OrderDescending
-                    ? _values.OrderByDescending(GetDisplayName)
-                    : _values.OrderBy(GetDisplayName),
+                    ? _values.OrderByDescending(x => GetDisplayName(x))
+                    : _values.OrderBy(x => GetDisplayName(x)),
                 _ => OrderDescending
                     ? _values.OrderDescending()
                     : _values
@@ -84,7 +99,7 @@ public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
         }
     }
 
-    private InputSelect<TEnum>? _select;
+    private InputSelect<TEnum?>? _select;
 
     /// <inheritdoc/>
     protected override void OnInitialized()
@@ -100,6 +115,22 @@ public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
         InternalValue = Value;
     }
 
+    private bool EqualValue(TEnum? oldValue, TEnum? newValue)
+    {
+        if (oldValue.HasValue != newValue.HasValue)
+        {
+            return false;
+        }
+        if (!oldValue.HasValue && !newValue.HasValue)
+        {
+            return true;
+        }
+        else
+        {
+            return oldValue!.Value.Equals(newValue!.Value);
+        }
+    }
+
     private Dictionary<string, object?> GetAllAttributes()
     {
         var result = GetAttributes();
@@ -111,26 +142,34 @@ public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
         return result;
     }
 
-    private string? GetDisplayName(TEnum value) 
+    private string? GetDisplayName(TEnum? value) 
     {
-        if (NameMappings is not null && NameMappings.TryGetValue(value, out var name))
+        if (NameMappings is not null && value.HasValue && NameMappings.TryGetValue(value.Value, out var name))
         {
             return name;
         }
-
+        else if (!value.HasValue)
+        {
+            return NoneOptionName ?? "None";
+        }
+        
         return $"{value}";
     }
 
-    private Dictionary<string, object?> GetOptionAttributes(TEnum value) 
+    private Dictionary<string, object?> GetOptionAttributes(TEnum? value) 
     {
         var result = new Dictionary<string, object?>
         {
             ["value"] = value
         };
 
-        if (TitleMappings is not null && TitleMappings.TryGetValue(value, out var title))
+        if (TitleMappings is not null && value.HasValue && TitleMappings.TryGetValue(value.Value, out var title))
         {
             result["title"] = title;
+        }
+        else if (!value.HasValue && !string.IsNullOrEmpty(NoneOptionTitle))
+        {
+            result["title"] = NoneOptionTitle;
         }
 
         return result;

@@ -8,7 +8,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts;
 /// </summary>
 public partial class OptAListBuilder
 {
-    private readonly List<string> NewLineSplitters = [ "\r\n", "\n" ];
+    private readonly List<string> NewLineSplitters = ["\r\n", "\n"];
     /// <summary>
     /// Index of content in post (for id uniqueness)
     /// </summary>
@@ -63,9 +63,21 @@ public partial class OptAListBuilder
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
     private int _inputMethod;
-    private BindMode _bindMode = BindMode.OnChange;
+    private BindMode? _bindMode = BindMode.OnChange;
     private bool _showAutoGrow = false;
     private bool _autoGrow = true;
+
+    private ListType? InternalListType
+    {
+        get => Content?.ListType;
+        set
+        {
+            if (Content != null)
+            {
+                Content.ListType = value ?? ListType.UnorderedList;
+            }            
+        }
+    }
 
     private string ItemsFromString
     {

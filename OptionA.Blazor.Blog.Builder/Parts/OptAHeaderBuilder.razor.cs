@@ -63,20 +63,20 @@ public partial class OptAHeaderBuilder
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
     
-    private BindMode _bindMode = BindMode.OnChange;
+    private BindMode? _bindMode = BindMode.OnChange;
 
-    private HeaderSize InternalSize
+    private HeaderSize? InternalSize
     {
         get => Content?.Size ?? default;
         set
         {
-            if (Content is null)
+            if (Content is null || !value.HasValue)
             {
                 return;
             }
-            if (!value.Equals(Content.Size))
+            if (!value.Value.Equals(Content.Size))
             {
-                Content.Size = value;
+                Content.Size = value.Value;
                 if (ContentChanged.HasDelegate)
                 {
                     ContentChanged.InvokeAsync();

@@ -65,7 +65,7 @@ public partial class OptAQuoteBuilder
     [Inject]
     private IBlogBuilderDataProvider DataProvider { get; set; } = null!;
 
-    private BindMode _bindMode = BindMode.OnChange;
+    private BindMode? _bindMode = BindMode.OnChange;
     private bool _showAutoGrow = false;
     private bool _autoGrow = true;
 
