@@ -16,12 +16,12 @@ public partial class OptAEnumRadioGroup<TEnum> where TEnum : struct, Enum
     /// Selected Value
     /// </summary>
     [Parameter]
-    public TEnum Value { get; set; }
+    public TEnum? Value { get; set; }
     /// <summary>
     /// Occurs when the value is updated
     /// </summary>
     [Parameter]
-    public EventCallback<TEnum> ValueChanged { get; set; }
+    public EventCallback<TEnum?> ValueChanged { get; set; }
     /// <summary>
     /// Optional name mappings for display value
     /// </summary>
@@ -48,12 +48,12 @@ public partial class OptAEnumRadioGroup<TEnum> where TEnum : struct, Enum
     [Parameter]
     public Orientation? Orientation { get; set; }
 
-    private TEnum InternalValue
+    private TEnum? InternalValue
     {
         get => Value;
         set
-        {
-            if (!Value.Equals(value))
+        {           
+            if (!EqualValue(Value, value))
             {
                 Value = value;
                 if (ValueChanged.HasDelegate)
@@ -105,6 +105,22 @@ public partial class OptAEnumRadioGroup<TEnum> where TEnum : struct, Enum
         InternalValue = Value;
     }
 
+    private bool EqualValue(TEnum? oldValue, TEnum? newValue)
+    {
+        if (oldValue.HasValue != newValue.HasValue)
+        {
+            return false;
+        }
+        if (!oldValue.HasValue && !newValue.HasValue)
+        {
+            return true;
+        }
+        else
+        {
+            return oldValue!.Value.Equals(newValue!.Value);
+        }
+    }
+
     private Dictionary<string, object?> GetAllAttributes()
     {
         var result = GetAttributes();
@@ -119,17 +135,6 @@ public partial class OptAEnumRadioGroup<TEnum> where TEnum : struct, Enum
         }
         return result;
     }
-
-    private Dictionary<string, object?> GetSetAttributes()
-    {
-        var result = new Dictionary<string, object?>
-        {
-            ["opta-field-set"] = true
-        };
-
-        return result;
-    }
-
 
     private string? GetDisplayName(TEnum value)
     {
