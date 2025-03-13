@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>9.4.1</Version>
+	  <Version>9.4.2</Version>
 	  <PackageReleaseNotes>
-      Made enum radiogroup and enum select nullable to have no initial value
+      Remove none option after selecting a value in enum select
     </PackageReleaseNotes>
   </PropertyGroup>
 

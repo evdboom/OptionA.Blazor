@@ -7,7 +7,7 @@
 @if (_values is not null)
 {
     <InputSelect @bind-Value="InternalValue" AdditionalAttributes="GetAllAttributes()" @ref="_select">
-        @if (ShowNoneOption ?? false)
+        @if ((ShowNoneOption ?? false) && !InternalValue.HasValue)
         {
             <option @attributes="@GetOptionAttributes(null)">@GetDisplayName(null)</option>
         }
