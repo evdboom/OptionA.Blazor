@@ -150,7 +150,7 @@ public partial class OptAEnumSelect<TEnum> where TEnum : struct, Enum
         }
         else if (!value.HasValue)
         {
-            return NoneOptionName ?? "None";
+            return NoneOptionName ?? "None...";
         }
         
         return $"{value}";
