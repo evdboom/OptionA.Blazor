@@ -8,13 +8,20 @@ public partial class Modal
     private bool _draggable;
     private ModalSize _size;
     private DragMode _dragMode;
+    private bool _asModal = true;
 
     private string _text = string.Empty;
+
+    private void ChangeModal()
+    {
+        _asModal = !_asModal;
+    }
 
     private void ChangeDraggable()
     {
         _draggable = !_draggable;
     }
+
     private void ChangeDragMode()
     {
         if (_dragMode == DragMode.Direct)
@@ -26,7 +33,8 @@ public partial class Modal
             _dragMode = DragMode.Direct;
         }
     }
-    private void ChangeSize() 
+
+    private void ChangeSize()
     {
         if (_size == ModalSize.Default)
         {
@@ -45,5 +53,4 @@ public partial class Modal
             _size = ModalSize.Default;
         }
     }
-
 }

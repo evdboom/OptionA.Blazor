@@ -16,6 +16,16 @@ else
 <button @onclick="ChangeSize">
     @_size
 </button>
+<button @onclick="ChangeModal">
+    @if (_asModal)
+    {
+        <span>As modal</span>
+    }
+    else
+    {
+        <span>As Dialog</span>
+    }
+</button>
 <button @onclick="() => _modal?.Show()">
     Show
 </button>
@@ -24,7 +34,8 @@ else
 <OptAModal @ref="_modal"
            Draggable="_draggable"
            Size="_size"
-           DragMode="_dragMode">
+           DragMode="_dragMode"
+           IsModal="_asModal">
     <Header>
         <h1>My first modal</h1>
     </Header>

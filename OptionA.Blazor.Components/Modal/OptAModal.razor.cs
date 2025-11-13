@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Text;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using OptionA.Blazor.Components.Shared;
-using System.Text;
 
 namespace OptionA.Blazor.Components;
 
@@ -13,7 +13,6 @@ public partial class OptAModal
 {
     private const string CloseDialogFunction = "closeDialog";
     private const string ShowDialogFunction = "showDialog";
-    private const string ListCloseFunction = "listenClose";
     private const string GetBoundsFunction = "getBoundingRect";
 
     /// <summary>
@@ -21,59 +20,79 @@ public partial class OptAModal
     /// </summary>
     [Parameter]
     public string? ModalId { get; set; }
+
     /// <summary>
     /// Fragment to show as title
     /// </summary>
     [Parameter]
     public RenderFragment? Header { get; set; }
+
     /// <summary>
     /// Fragment to show as body
     /// </summary>
     [Parameter]
     public RenderFragment? Content { get; set; }
+
     /// <summary>
     /// Fragment to show as footer
     /// </summary>
     [Parameter]
     public RenderFragment? Footer { get; set; }
+
     /// <summary>
     /// Called when the modal is closed (not close silent)
     /// </summary>
     [Parameter]
     public EventCallback OnClose { get; set; }
+
     /// <summary>
     /// Called when the modal is shown
     /// </summary>
     [Parameter]
     public EventCallback OnShow { get; set; }
+
     /// <summary>
     /// Set to true to enable dragging (like a window) of the modal, this will disable closing by clicking on the background
     /// Defaults to the value set in the <see cref="ModalOptions"/>
     /// </summary>
     [Parameter]
     public bool? Draggable { get; set; }
+
     /// <summary>
     /// Way to drag, direct or drag outline and move on mouseup
     /// </summary>
     [Parameter]
     public DragMode? DragMode { get; set; }
+
     /// <summary>
     /// Size for the modal
     /// </summary>
     [Parameter]
     public ModalSize Size { get; set; }
 
+    /// <summary>
+    /// If true, the modal will be shown as a modal dialog, blocking interaction with the background
+    /// </summary>
+    [Parameter]
+    public bool IsModal { get; set; } = true;
+
     [Inject]
     private IModalDataProvider DataProvider { get; set; } = null!;
+
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = null!;
 
     private bool _showDialog;
-    private bool _awaitShow, _awaitClose;
+    private bool _awaitShow,
+        _awaitClose;
     private bool _dragging;
-    private double _startMouseX, _startMouseY;
+    private double _startMouseX,
+        _startMouseY;
     private BoundingRectangle? _bounds;
-    private int? _dragOffsetX, _dragOffsetY, _offsetX, _offsetY;
+    private int? _dragOffsetX,
+        _dragOffsetY,
+        _offsetX,
+        _offsetY;
     private IJSObjectReference? _module;
 
     private ElementReference _dialog;
@@ -89,7 +108,7 @@ public partial class OptAModal
             return;
         }
         _showDialog = true;
-        _awaitShow = true;                        
+        _awaitShow = true;
     }
 
     /// <summary>
@@ -102,7 +121,7 @@ public partial class OptAModal
         {
             return;
         }
-        _awaitClose = true;            
+        _awaitClose = true;
     }
 
     /// <summary>
@@ -124,15 +143,24 @@ public partial class OptAModal
     {
         if (firstRender)
         {
-            _module = await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/OptionA.Blazor.Components/Modal/OptAModal.razor.js");                
+            _module = await JsRuntime.InvokeAsync<IJSObjectReference>(
+                "import",
+                "./_content/OptionA.Blazor.Components/Modal/OptAModal.razor.js"
+            );
         }
         else if (_awaitShow && _module is not null)
         {
             _awaitShow = false;
             var objRef = DotNetObjectReference.Create(this);
-            await _module.InvokeVoidAsync(ShowDialogFunction, _dialog, objRef, nameof(OnDialogClose));
+            await _module.InvokeVoidAsync(
+                ShowDialogFunction,
+                _dialog,
+                objRef,
+                nameof(OnDialogClose),
+                IsModal
+            );
             await OnShow.InvokeAsync();
-        }      
+        }
         else if (_awaitClose && _module is not null)
         {
             _awaitClose = false;
@@ -176,7 +204,7 @@ public partial class OptAModal
         {
             return;
         }
-        
+
         var divX = args.ClientX - _startMouseX;
         var divY = args.ClientY - _startMouseY;
 
@@ -190,7 +218,6 @@ public partial class OptAModal
             _dragOffsetX = (int)(_bounds.Left + divX);
             _dragOffsetY = (int)(_bounds.Top + divY);
         }
-        
     }
 
     private void EndDrag(MouseEventArgs args)
@@ -207,10 +234,7 @@ public partial class OptAModal
 
     private Dictionary<string, object?> GetOutlineAttributes()
     {
-        var result = new Dictionary<string, object?>
-        {
-            ["opta-modal-outline"] = true,
-        };
+        var result = new Dictionary<string, object?> { ["opta-modal-outline"] = true };
 
         if (!string.IsNullOrEmpty(DataProvider.OutlineClass))
         {
@@ -231,14 +255,14 @@ public partial class OptAModal
     private Dictionary<string, object?> GetModalAttributes()
     {
         var result = GetAttributes();
-        result["opta-modal-dialog"] = true;            
+        result["opta-modal-dialog"] = true;
 
         if (!string.IsNullOrEmpty(ModalId))
         {
             result["id"] = ModalId;
         }
         var baseClass = DataProvider.DialogClass;
-        if (DataProvider.TryGetClassForSize(Size, out var sizeClass)) 
+        if (DataProvider.TryGetClassForSize(Size, out var sizeClass))
         {
             result["opta-size"] = $"{Size}".ToLowerInvariant();
             baseClass += $" {sizeClass}";
@@ -254,12 +278,10 @@ public partial class OptAModal
 
         return result;
     }
+
     private Dictionary<string, object?> GetHeaderAttributes()
     {
-        var result = new Dictionary<string, object?>
-        {
-            ["opta-modal-header"] = true
-        };
+        var result = new Dictionary<string, object?> { ["opta-modal-header"] = true };
         if (GetIsDraggable())
         {
             result["draggable"] = true;
@@ -278,40 +300,29 @@ public partial class OptAModal
 
     private Dictionary<string, object?> GetFooterAttributes()
     {
-        var result = new Dictionary<string, object?>
-        {
-            ["opta-modal-footer"] = true
-        };
+        var result = new Dictionary<string, object?> { ["opta-modal-footer"] = true };
         if (!string.IsNullOrEmpty(DataProvider.FooterClass))
         {
             result["class"] = DataProvider.FooterClass;
         }
-
 
         return result;
     }
 
     private Dictionary<string, object?> GetContentAttributes()
     {
-        var result = new Dictionary<string, object?>
-        {
-            ["opta-modal-content"] = true
-        };
+        var result = new Dictionary<string, object?> { ["opta-modal-content"] = true };
         if (!string.IsNullOrEmpty(DataProvider.ContentClass))
         {
             result["class"] = DataProvider.ContentClass;
         }
-
 
         return result;
     }
 
     private Dictionary<string, object?> GetCloseButtonAttributes()
     {
-        var result = new Dictionary<string, object?>
-        {
-            ["type"] = "button"
-        };
+        var result = new Dictionary<string, object?> { ["type"] = "button" };
         if (!string.IsNullOrEmpty(DataProvider.CloseButtonClass))
         {
             result["class"] = DataProvider.CloseButtonClass;
@@ -322,10 +333,7 @@ public partial class OptAModal
 
     private Dictionary<string, object?> GetSectionAttributes()
     {
-        var result = new Dictionary<string, object?>
-        {
-            ["opta-modal-section"] = true
-        };
+        var result = new Dictionary<string, object?> { ["opta-modal-section"] = true };
 
         if (!string.IsNullOrEmpty(DataProvider.SectionClass))
         {

@@ -1,9 +1,14 @@
-﻿export const showDialog = (dialogElement, dotNetHelper, closeHandlerName) => {
+﻿export const showDialog = (dialogElement, dotNetHelper, closeHandlerName, isModal) => {
     if (!dialogElement) {
         return;
     }
 
-    dialogElement.showModal();
+    if (isModal) {
+        dialogElement.showModal();
+    } else {
+        dialogElement.show();
+    }
+    
     dialogElement.addEventListener("close", async () => {
         await dotNetHelper.invokeMethodAsync(closeHandlerName);
     });
