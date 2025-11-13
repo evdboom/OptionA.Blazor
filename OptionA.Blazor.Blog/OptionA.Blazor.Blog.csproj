@@ -1,37 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>OptionA.Blazor.Blog</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<GenerateDocumentationFile>true</GenerateDocumentationFile>
-	<PackageReadmeFile>readme.md</PackageReadmeFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Title>Blazor Blog Components</Title>
     <Authors>Erik van der Boom</Authors>
-	<IsPackable>true</IsPackable>
+    <IsPackable>true</IsPackable>
     <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
-	<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<Version>9.2.4</Version>
-	<PackageReleaseNotes>
-    Fixed an issue with parsing custom attributes
+    <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>9.2.5</Version>
+    <PackageReleaseNotes>
+    Allow modal to open in a non modal way
   </PackageReleaseNotes>
   </PropertyGroup>
-
-
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.1" />
   </ItemGroup>
-
   <ItemGroup>
-	  <None Include="readme.md" Pack="true" PackagePath="\" />
+    <None Include="readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
-
 </Project>
