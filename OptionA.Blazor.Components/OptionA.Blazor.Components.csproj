@@ -1,37 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
-
-	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
-		<Nullable>enable</Nullable>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<Version>9.3.3</Version>
-		<IsPackable>true</IsPackable>
-		<Authors>Erik van der Boom</Authors>
-		<PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<Description>Blazor component library with various component for use inside your Blazor application</Description>
-		<PackageReleaseNotes>
-      Made input integer nullable
-    </PackageReleaseNotes>
-	</PropertyGroup>
-
-
-	<ItemGroup>
-		<SupportedPlatform Include="browser" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="readme.md" Pack="true" PackagePath="\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\OptionA.Blazor.Components.Direct\OptionA.Blazor.Components.Direct.csproj" />
-	</ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <Version>9.3.4</Version>
+    <IsPackable>true</IsPackable>
+    <Authors>Erik van der Boom</Authors>
+    <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Blazor component library with various component for use inside your Blazor application</Description>
+    <PackageReleaseNotes>
+			Make modal non modal configurable
+		</PackageReleaseNotes>
+  </PropertyGroup>
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OptionA.Blazor.Components.Direct\OptionA.Blazor.Components.Direct.csproj" />
+  </ItemGroup>
 </Project>
