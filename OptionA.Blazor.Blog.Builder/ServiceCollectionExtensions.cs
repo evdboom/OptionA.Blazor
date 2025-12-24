@@ -46,6 +46,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
+    /// <param name="lifetime">The lifetime to use for the services.</param>
     /// <returns></returns>
     public static IServiceCollection AddOptionABootstrapBlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
