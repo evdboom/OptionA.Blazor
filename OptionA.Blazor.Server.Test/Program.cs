@@ -1,33 +1,27 @@
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using OptionA.Blazor.Blog;
 using OptionA.Blazor.Blog.Builder;
 using OptionA.Blazor.Components;
 using OptionA.Blazor.Storage;
-using OptionA.Blazor.Test;
 using OptionA.Blazor.Test.Shared;
 
-var builder = WebAssemblyHostBuilder.CreateDefault(args);
-builder.RootComponents.Add<App>("#app");
-builder.RootComponents.Add<HeadOutlet>("head::after");
+var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+// Add services to the container.
+builder.Services.AddRazorComponents();
+
+// Note: Some OptionA components use JSRuntime which is scoped in Blazor Server.
+// The library registers these as Singleton, which causes DI validation errors.
+// For this test project, we'll register the core components that work with Server.
 builder.Services
-    .AddOptionABootstrapComponents(darkMode: true, configuration: options =>
-    {
-        options.CarouselConfiguration = (carousel) =>
-        {
-            carousel.AutoPlayText = "Autoplay";
-        };
-        options.MenuConfiguration = (menu) =>
-        {
-            menu.OpenGroupOnMouseOver = true;
-            menu.GroupCloseTime = 250;
-            menu.DefaultMenuContainerClass += " opta-bg ps-2 sticky-top";
-            menu.DefaultDropdownClass = "opta-bg opta-dropdown";
-            menu.DefaultMenuItemClass += " opta-menu-item";
-        };
-    });
+    .AddOptionABootstrapButtons()
+    .AddOptionABootstrapMenu(darkMode: true)
+    .AddOptionABootstrapCarousel()
+    .AddOptionABootstrapGallery()
+    .AddOptionABootstrapModal()
+    .AddOptionABootstrapSplitter()
+    .AddOptionABootstrapMessageBox()
+    .AddOptionABootstrapTabs();
+
 builder.Services
     .AddOptionABootstrapBlog(config =>
     {
@@ -55,9 +49,26 @@ builder.Services
         {
             componentBar.Class += " top-60";
         }
-    })
-    .AddOptionAStorageServices(ServiceLifetime.Singleton);
-await builder.Build().RunAsync();
+    });
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+
+app.UseAntiforgery();
+
+app.MapStaticAssets();
+app.MapRazorComponents<App>();
+
+app.Run();
 
 static BuilderTypeProperties IconButton(string icon)
 {
