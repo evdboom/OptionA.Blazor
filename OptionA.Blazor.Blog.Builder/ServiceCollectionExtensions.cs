@@ -37,7 +37,7 @@ public static class ServiceCollectionExtensions
             throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
         }
 
-        return services;    
+        return services;
     }
 
 
