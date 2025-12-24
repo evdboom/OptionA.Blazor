@@ -1,4 +1,4 @@
-name: .Net9 - Build the solution and run tests
+name: .Net10 - Build the solution and run tests
 
 on:
   pull_request:

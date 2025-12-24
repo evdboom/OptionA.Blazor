@@ -1,4 +1,4 @@
-name: .Net9 - Package and publish nuget packages
+name: .Net10 - Package and publish nuget packages
 
 on:
   push:
