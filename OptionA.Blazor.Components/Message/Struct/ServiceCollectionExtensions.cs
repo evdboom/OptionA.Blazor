@@ -20,11 +20,15 @@ public partial class ServiceCollectionExtensions
         {
             services
                 .TryAddSingleton<IMessageBoxDataProvider>(provider => new MessageBoxDataProvider(configuration));
+            services
+                .TryAddSingleton<IMessageService, MessageService>();
         }
         else if (lifetime == ServiceLifetime.Scoped)
         {
             services
                 .TryAddScoped<IMessageBoxDataProvider>(provider => new MessageBoxDataProvider(configuration));
+            services
+                .TryAddScoped<IMessageService, MessageService>();
         }
         else
         {
