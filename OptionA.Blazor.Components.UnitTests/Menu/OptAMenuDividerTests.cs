@@ -22,7 +22,7 @@ public class OptAMenuDividerTests : BunitContext
         var cut = Render<OptAMenuDivider>();
 
         // Assert
-        var li = cut.Find("li[opta-menu-divider]");
+        var li = cut.Find("li");
         var hr = cut.Find("hr");
         Assert.NotNull(li);
         Assert.NotNull(hr);

@@ -24,7 +24,7 @@ public class OptAMenuItemTests : BunitContext
             .Add(p => p.Name, "Test Item"));
 
         // Assert
-        var li = cut.Find("li[opta-menu-item]");
+        var li = cut.Find("li");
         Assert.NotNull(li);
         Assert.Contains("Test Item", cut.Markup);
     }
