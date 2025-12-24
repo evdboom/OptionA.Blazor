@@ -71,10 +71,6 @@ public static class ServiceCollectionExtensions
                 services
                     .AddScoped(type.Interface!, type.Type);
             }
-            else
-            {
-                throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
-            }
         }
 
         return services;
