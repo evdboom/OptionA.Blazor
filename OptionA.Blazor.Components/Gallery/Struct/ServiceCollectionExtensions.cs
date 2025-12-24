@@ -34,7 +34,7 @@ public static partial class ServiceCollectionExtensions
         }
 
         return services;
-    } 
+    }
 
     /// <summary>
     /// Adds default bootstrap (5.3) classes and icon for use of gallery
