@@ -11,7 +11,7 @@ defaults:
     shell: pwsh
 
 jobs:
-  build:
+  build-and-unit-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -33,12 +33,41 @@ jobs:
           Write-Host "$($_.Name)"
           dotnet build $_.FullName --no-restore --configuration Release
         }
-    - name: Test
+    - name: Unit Tests
       run: |
-        Write-Host "Running unittests:"
+        Write-Host "Running unit tests:"
         Get-ChildItem -Recurse -Filter *.csproj | Where-Object { $_.Name -match '\.UnitTests\.csproj$' } | ForEach-Object {           
           Write-Host "$($_.Name)"
           dotnet test $_.FullName  --verbosity normal --no-build --configuration Release
         }
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    needs: build-and-unit-test
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 10.0.x
+    - name: Restore dependencies
+      run: |
+        Write-Host "Restoring all dependencies including E2E test project:"
+        Get-ChildItem -Recurse -Filter *.csproj | ForEach-Object {           
+          Write-Host "$($_.Name)"
+          dotnet restore $_.FullName 
+        }
+    - name: Build E2E test project
+      run: |
+        Write-Host "Building E2E test project:"
+        dotnet build tests/OptionA.Blazor.E2E/OptionA.Blazor.E2E.csproj --configuration Release
+    - name: Install Playwright browsers
+      run: |
+        Write-Host "Installing Playwright browsers:"
+        pwsh tests/OptionA.Blazor.E2E/bin/Release/net10.0/playwright.ps1 install --with-deps chromium
+    - name: Run E2E Tests
+      run: |
+        Write-Host "Running E2E tests:"
+        dotnet test tests/OptionA.Blazor.E2E/OptionA.Blazor.E2E.csproj --filter "Category=E2E" --verbosity normal --configuration Release --no-build
         
         
