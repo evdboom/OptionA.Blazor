@@ -23,7 +23,6 @@ public class OptATabTests : BunitContext
     public void OptATabRendersChildContentWhenIsCurrent()
     {
         // Arrange & Act
-        var tab = new OptATab { IsCurrent = true };
         var cut = Render<OptATab>(parameters => parameters
             .AddChildContent("<div>Tab Content</div>"));
 
