@@ -4,7 +4,7 @@ using Moq;
 
 namespace OptionA.Blazor.Blog.UnitTests.Parts;
 
-public class OptACodeTests : TestContext
+public class OptACodeTests : BunitContext
 {
     private readonly Mock<IBlogDataProvider> _blogDataProvider;
     private readonly Mock<ICodeParser> _parser;
@@ -43,7 +43,7 @@ public class OptACodeTests : TestContext
         var x = content.AdditionalClasses.Count;
         var y = content.RemovedClasses.Count;
 
-        var cut = RenderComponent<OptACode>(parameters => parameters
+        var cut = Render<OptACode>(parameters => parameters
             .Add(p => p.Content, content));
         // Assert
         cut.Find("pre").MarkupMatches("<pre><code>public class Test</code></pre>");

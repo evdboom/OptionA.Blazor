@@ -1,4 +1,4 @@
-name: .Net9 - Package and publish nuget packages
+name: .Net10 - Package and publish nuget packages
 
 on:
   push:
@@ -17,7 +17,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
     - name: Restore dependencies
       run: |
         Write-Host "Restoring dependencies for projects:"

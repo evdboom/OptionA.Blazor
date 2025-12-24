@@ -1,9 +1,10 @@
-name: .Net9 - Build the solution and run tests
+name: .Net10 - Build the solution and run tests
 
 on:
   pull_request:
     types: [opened, reopened]
-    branches: 'main'
+    branches: 
+      - main
 
 defaults:
   run:
@@ -17,7 +18,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 9.0.x
+        dotnet-version: 10.0.x
     - name: Restore dependencies
       run: |
         Write-Host "Restoring dependencies for projects:"

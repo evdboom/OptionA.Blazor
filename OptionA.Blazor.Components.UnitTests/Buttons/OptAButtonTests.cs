@@ -4,7 +4,7 @@ using Moq;
 
 namespace OptionA.Blazor.Components.UnitTests.Buttons;
 
-public class OptAButtonTests : TestContext
+public class OptAButtonTests : BunitContext
 {
     private readonly Mock<IButtonDataProvider> _buttonDataProvider;
 
@@ -19,7 +19,7 @@ public class OptAButtonTests : TestContext
     {
         // Arrange
         _buttonDataProvider.Setup(p => p.GetIconClass(It.IsAny<ActionType>(), It.IsAny<string>())).Returns("test-icon");
-        var cut = RenderComponent<OptAButton>(parameters => parameters
+        var cut = Render<OptAButton>(parameters => parameters
             .Add(p => p.ButtonType, ButtonTypes.Icon | ButtonTypes.Name)
             .Add(p => p.Name, "Test Button")
             .Add(p => p.ActionType, ActionType.Add));
@@ -34,7 +34,7 @@ public class OptAButtonTests : TestContext
     {
         // Arrange
         _buttonDataProvider.Setup(p => p.GetIconClass(It.IsAny<ActionType>(), It.IsAny<string>())).Returns("test-icon");
-        var cut = RenderComponent<OptAButton>(parameters => parameters
+        var cut = Render<OptAButton>(parameters => parameters
             .Add(p => p.ButtonType, ButtonTypes.Icon)
             .Add(p => p.ActionType, ActionType.Add));
 
@@ -47,7 +47,7 @@ public class OptAButtonTests : TestContext
     public void OptAButtonRendersCorrectlyWithOnlyName()
     {
         // Arrange
-        var cut = RenderComponent<OptAButton>(parameters => parameters
+        var cut = Render<OptAButton>(parameters => parameters
             .Add(p => p.ButtonType, ButtonTypes.Name)
             .Add(p => p.Name, "Test Button"));
 
@@ -61,7 +61,7 @@ public class OptAButtonTests : TestContext
     {
         // Arrange
         var clickActionMock = new Mock<Func<MouseEventArgs, Task>>();
-        var cut = RenderComponent<OptAButton>(parameters => parameters
+        var cut = Render<OptAButton>(parameters => parameters
             .Add(p => p.ClickAction, clickActionMock.Object));
 
         // Act
