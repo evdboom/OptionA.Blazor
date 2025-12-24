@@ -3,7 +3,8 @@ name: .Net7 - Build the solution and run tests
 on:
   pull_request:
     types: [opened, reopened]
-    branches: 'net7-release'
+    branches: 
+      -'net7-release'
 
 defaults:
   run:

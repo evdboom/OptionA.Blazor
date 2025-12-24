@@ -1,0 +1,2724 @@
+{
+  "settings": {
+    "components": {
+      "code": false,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2025-12-24T21:32:14.6269288Z",
+  "analysisEndTime": "2025-12-24T21:32:18.3392599Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 10,
+      "issues": 5,
+      "incidents": 98,
+      "effort": 98
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 12,
+        "Optional": 0,
+        "Potential": 86,
+        "Information": 0
+      },
+      "category": {
+        "NuGet": 11,
+        "Project": 9,
+        "Api": 78
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "OptionA.Blazor.Blog.Builder\\OptionA.Blazor.Blog.Builder.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "OptionA.Blazor.Blog.Builder",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 42,
+        "numberOfCodeFiles": 25,
+        "linesTotal": 3546,
+        "linesOfCode": 2839,
+        "totalApiScanned": 7532,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "cc569721-466d-4b10-9a3e-2efa4d78333d",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Blog.Builder\\OptionA.Blazor.Blog.Builder.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+              "protected": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Blog.Builder\\OptionA.Blazor.Blog.Builder.csproj",
+            "snippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "protectedSnippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "label": "Microsoft.AspNetCore.Components.Web 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Components.Web",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "003a7ada-0225-4ebc-bccc-2477b573c4bb",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Blog.Builder\\OptionA.Blazor.Blog.Builder.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net9.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Blog.Builder\\OptionA.Blazor.Blog.Builder.csproj",
+            "snippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Blog\\OptionA.Blazor.Blog.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 3,
+      "properties": {
+        "appName": "OptionA.Blazor.Blog",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 89,
+        "numberOfCodeFiles": 71,
+        "linesTotal": 4206,
+        "linesOfCode": 3859,
+        "totalApiScanned": 3084,
+        "minLinesOfCodeToChange": 1,
+        "maxLinesOfCodeToChange": 1
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "19c1c6a2-cb41-4c61-8664-5c00270f8b01",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Blog\\OptionA.Blazor.Blog.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+              "protected": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Blog\\OptionA.Blazor.Blog.csproj",
+            "snippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "protectedSnippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "label": "Microsoft.AspNetCore.Components.Web 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Components.Web",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "48c63f3b-318a-4447-9e5e-43c8ae651bfd",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Blog\\OptionA.Blazor.Blog.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net9.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Blog\\OptionA.Blazor.Blog.csproj",
+            "snippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "7cf1c789-a0d8-4efb-99f2-2640d173e79d",
+          "ruleId": "Api.0002",
+          "description": "Breaking change: C# overload resolution prefers \u0060params\u0060 span-type overloads ",
+          "projectPath": "OptionA.Blazor.Blog\\OptionA.Blazor.Blog.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var interpolated = word.Split(\u0027{\u0027, \u0027}\u0027);",
+              "protected": "M:System.String.Split(System.ReadOnlySpan{System.Char})"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Blog\\Code\\Parsers\\ParserBase.cs",
+            "snippet": "var interpolated = word.Split(\u0027{\u0027, \u0027}\u0027);",
+            "protectedSnippet": "M:System.String.Split(System.ReadOnlySpan{System.Char})",
+            "label": "M:System.String.Split(System.ReadOnlySpan{System.Char})",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/params-overloads.md",
+                "isCustom": false
+              }
+            ],
+            "line": 160,
+            "column": 8
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "OptionA.Blazor.Blog.UnitTests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 4,
+        "numberOfCodeFiles": 2,
+        "linesTotal": 1835,
+        "linesOfCode": 52,
+        "totalApiScanned": 125,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "15fb1f97-44ce-484a-9940-8288d3b310f6",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net9.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj",
+            "snippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Components\\OptionA.Blazor.Components.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "OptionA.Blazor.Components",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 96,
+        "numberOfCodeFiles": 75,
+        "linesTotal": 6158,
+        "linesOfCode": 5726,
+        "totalApiScanned": 6502,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "65627bc0-43c5-4b44-a1b9-6bc33cc68995",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Components\\OptionA.Blazor.Components.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+              "protected": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Components\\OptionA.Blazor.Components.csproj",
+            "snippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "protectedSnippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "label": "Microsoft.AspNetCore.Components.Web 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Components.Web",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "1377678e-32f9-4e41-8497-c90c07b79707",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Components\\OptionA.Blazor.Components.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net9.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Components\\OptionA.Blazor.Components.csproj",
+            "snippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Components.Direct\\OptionA.Blazor.Components.Direct.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "OptionA.Blazor.Components.Direct",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 33,
+        "numberOfCodeFiles": 17,
+        "linesTotal": 1810,
+        "linesOfCode": 1581,
+        "totalApiScanned": 2558,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "589eba04-1350-4289-b35a-24a16594b76c",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Components.Direct\\OptionA.Blazor.Components.Direct.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+              "protected": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Components.Direct\\OptionA.Blazor.Components.Direct.csproj",
+            "snippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "protectedSnippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "label": "Microsoft.AspNetCore.Components.Web 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Components.Web",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "25dda469-d334-4f7b-b295-0ac8ac5b7d56",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Components.Direct\\OptionA.Blazor.Components.Direct.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net9.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Components.Direct\\OptionA.Blazor.Components.Direct.csproj",
+            "snippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Components.UnitTests\\OptionA.Blazor.Components.UnitTests.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 1,
+      "properties": {
+        "appName": "OptionA.Blazor.Components.UnitTests",
+        "projectKind": "DotNetCoreApp",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 4,
+        "numberOfCodeFiles": 2,
+        "linesTotal": 1859,
+        "linesOfCode": 76,
+        "totalApiScanned": 156,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "e266951a-cf32-481c-8324-36e8248496dc",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Components.UnitTests\\OptionA.Blazor.Components.UnitTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net9.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Components.UnitTests\\OptionA.Blazor.Components.UnitTests.csproj",
+            "snippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+      "startingProject": true,
+      "issues": 5,
+      "storyPoints": 76,
+      "properties": {
+        "appName": "OptionA.Blazor.Maui.Test",
+        "projectKind": "WinForms",
+        "frameworks": [
+          "net9.0-windows10.0.19041.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 47,
+        "numberOfCodeFiles": 19,
+        "linesTotal": 6655,
+        "linesOfCode": 651,
+        "totalApiScanned": 4248,
+        "minLinesOfCodeToChange": 74,
+        "maxLinesOfCodeToChange": 74
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "3174c712-02e0-4c47-a297-1d1fd81953b0",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Logging.Debug, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.Logging.Debug, and replace with new package Microsoft.Extensions.Logging.Debug 10.0.1",
+              "protected": "Microsoft.Extensions.Logging.Debug, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.Logging.Debug, and replace with new package Microsoft.Extensions.Logging.Debug 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+            "snippet": "Microsoft.Extensions.Logging.Debug, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.Logging.Debug, and replace with new package Microsoft.Extensions.Logging.Debug 10.0.1",
+            "protectedSnippet": "Microsoft.Extensions.Logging.Debug, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.Logging.Debug, and replace with new package Microsoft.Extensions.Logging.Debug 10.0.1",
+            "label": "Microsoft.Extensions.Logging.Debug 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Logging.Debug",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "780ed78b-f033-4c56-944e-01e22927d0f3",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0-windows10.0.19041.0\nRecommended target framework: net10.0-windows10.0.22000.0",
+              "protected": "Current target framework: net9.0-windows10.0.19041.0\nRecommended target framework: net10.0-windows10.0.22000.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+            "snippet": "Current target framework: net9.0-windows10.0.19041.0\nRecommended target framework: net10.0-windows10.0.22000.0",
+            "protectedSnippet": "Current target framework: net9.0-windows10.0.19041.0\nRecommended target framework: net10.0-windows10.0.22000.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0-windows10.0.19041.0",
+              "RecommendedTargetFramework": "net10.0-windows10.0.22000.0"
+            }
+          }
+        },
+        {
+          "incidentId": "336deeb7-468b-4b8c-b3d7-20510faa768d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private static bool ShouldUseSetter(BindingMode mode)",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "private static bool ShouldUseSetter(BindingMode mode)",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 24,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "3ac5bbe2-9ef7-4f6b-9282-b6aa183bf923",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.Default",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.Default",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 27,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "71aa5ba6-5574-45f0-bd8c-4fb62f65e1cf",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.Default",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.Default",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 27,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "7a1a8899-f646-4fae-8b51-44b8da1e916d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.Default",
+              "protected": "F:Microsoft.Maui.Controls.BindingMode.Default"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.Default",
+            "protectedSnippet": "F:Microsoft.Maui.Controls.BindingMode.Default",
+            "label": "F:Microsoft.Maui.Controls.BindingMode.Default",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 27,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "30fd29ea-042c-47e3-9b3a-d74993c74131",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 26,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "1f856a46-a5eb-4a65-aefb-25195db15056",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 26,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "4071a0fa-399d-406f-ac7f-c0edbae4cca9",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "F:Microsoft.Maui.Controls.BindingMode.TwoWay"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "F:Microsoft.Maui.Controls.BindingMode.TwoWay",
+            "label": "F:Microsoft.Maui.Controls.BindingMode.TwoWay",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 26,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "cb2ea368-aade-499a-bcf4-28fcfad196f7",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 25,
+            "column": 14
+          }
+        },
+        {
+          "incidentId": "0d6330b8-bdb4-4b7a-a6af-757036862cef",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 25,
+            "column": 14
+          }
+        },
+        {
+          "incidentId": "5269c865-5666-4b1a-8bcb-e803ea21d65a",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource",
+            "label": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 25,
+            "column": 14
+          }
+        },
+        {
+          "incidentId": "d8e07bbd-ac5f-490d-af09-d7864df80e0e",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private static bool ShouldUseSetter(BindingMode mode, BindableProperty bindableProperty)",
+              "protected": "T:Microsoft.Maui.Controls.BindableProperty"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "private static bool ShouldUseSetter(BindingMode mode, BindableProperty bindableProperty)",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindableProperty",
+            "label": "T:Microsoft.Maui.Controls.BindableProperty",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 17,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "a6fbcb02-4e8b-40e2-8155-ab072abf8004",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "private static bool ShouldUseSetter(BindingMode mode, BindableProperty bindableProperty)",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "private static bool ShouldUseSetter(BindingMode mode, BindableProperty bindableProperty)",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 17,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "b99cfada-5dab-4531-8079-b629d41e293d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 22,
+            "column": 48
+          }
+        },
+        {
+          "incidentId": "dae351d3-ffbd-4e04-8ce8-33bb5c853a08",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 22,
+            "column": 48
+          }
+        },
+        {
+          "incidentId": "9c2b9595-22c2-4458-94fa-bdf858eb7924",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "F:Microsoft.Maui.Controls.BindingMode.TwoWay"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "F:Microsoft.Maui.Controls.BindingMode.TwoWay",
+            "label": "F:Microsoft.Maui.Controls.BindingMode.TwoWay",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 22,
+            "column": 48
+          }
+        },
+        {
+          "incidentId": "e595eaf0-87e7-4c9e-9fbb-0441eda12233",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "bindableProperty.DefaultBindingMode",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "bindableProperty.DefaultBindingMode",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 22,
+            "column": 9
+          }
+        },
+        {
+          "incidentId": "34d58cb0-39f7-47de-a203-ba1541e9f5d9",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "bindableProperty.DefaultBindingMode",
+              "protected": "P:Microsoft.Maui.Controls.BindableProperty.DefaultBindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "bindableProperty.DefaultBindingMode",
+            "protectedSnippet": "P:Microsoft.Maui.Controls.BindableProperty.DefaultBindingMode",
+            "label": "P:Microsoft.Maui.Controls.BindableProperty.DefaultBindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 22,
+            "column": 9
+          }
+        },
+        {
+          "incidentId": "315336cf-8422-4267-9091-8d35424cd5ef",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 21,
+            "column": 48
+          }
+        },
+        {
+          "incidentId": "3990532b-6a1d-419e-bb07-b800babad9b6",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 21,
+            "column": 48
+          }
+        },
+        {
+          "incidentId": "d2c85b51-e4e3-42d5-8943-644bdf7c1d74",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource",
+            "label": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 21,
+            "column": 48
+          }
+        },
+        {
+          "incidentId": "b753803c-c151-451e-88e9-061bce2e5e89",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "bindableProperty.DefaultBindingMode",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "bindableProperty.DefaultBindingMode",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 21,
+            "column": 9
+          }
+        },
+        {
+          "incidentId": "60c450ea-7c78-46cd-ad14-c07550f13204",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "bindableProperty.DefaultBindingMode",
+              "protected": "P:Microsoft.Maui.Controls.BindableProperty.DefaultBindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "bindableProperty.DefaultBindingMode",
+            "protectedSnippet": "P:Microsoft.Maui.Controls.BindableProperty.DefaultBindingMode",
+            "label": "P:Microsoft.Maui.Controls.BindableProperty.DefaultBindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 21,
+            "column": 9
+          }
+        },
+        {
+          "incidentId": "c30b3dd7-68e8-4466-8305-4e930c2f01ad",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.Default",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.Default",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 20,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "09896336-ddfd-4b36-bfc8-f6235e638ae8",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.Default",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.Default",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 20,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "bb3d4de1-504f-43bf-bc02-8aa709b045a2",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.Default",
+              "protected": "F:Microsoft.Maui.Controls.BindingMode.Default"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.Default",
+            "protectedSnippet": "F:Microsoft.Maui.Controls.BindingMode.Default",
+            "label": "F:Microsoft.Maui.Controls.BindingMode.Default",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 20,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "fc3275a9-499d-4ea0-8cca-939668605d9a",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 19,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "184d6e76-4d40-4336-8e6d-9210d113173d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 19,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "eb726339-6b0c-4e06-83d3-22cd019eb33b",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.TwoWay",
+              "protected": "F:Microsoft.Maui.Controls.BindingMode.TwoWay"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.TwoWay",
+            "protectedSnippet": "F:Microsoft.Maui.Controls.BindingMode.TwoWay",
+            "label": "F:Microsoft.Maui.Controls.BindingMode.TwoWay",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 19,
+            "column": 15
+          }
+        },
+        {
+          "incidentId": "034fa4ad-3112-4837-bb55-06b9e4575773",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 18,
+            "column": 14
+          }
+        },
+        {
+          "incidentId": "2fdae64b-9e01-4473-8402-b1fecb3977c1",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "T:Microsoft.Maui.Controls.BindingMode"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.BindingMode",
+            "label": "T:Microsoft.Maui.Controls.BindingMode",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 18,
+            "column": 14
+          }
+        },
+        {
+          "incidentId": "43253cea-cac8-4808-ab1a-5f9877ea9775",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "BindingMode.OneWayToSource",
+              "protected": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.BindingSourceGen\\Microsoft.Maui.Controls.BindingSourceGen.BindingSourceGenerator\\GeneratedBindingInterceptorsCommon.g.cs",
+            "snippet": "BindingMode.OneWayToSource",
+            "protectedSnippet": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource",
+            "label": "F:Microsoft.Maui.Controls.BindingMode.OneWayToSource",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 18,
+            "column": 14
+          }
+        },
+        {
+          "incidentId": "1b003882-965c-45f1-a718-015ea8442ef1",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: Support for empty environment variables ",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Environment.SetEnvironmentVariable(\u0022MICROSOFT_WINDOWSAPPRUNTIME_BASE_DIRECTORY\u0022, AppContext.BaseDirectory);",
+              "protected": "M:System.Environment.SetEnvironmentVariable(System.String,System.String)"
+            },
+            "kind": "File",
+            "path": "%USERPROFILE%\\.nuget\\packages\\microsoft.windowsappsdk\\1.6.241114003\\include\\UndockedRegFreeWinRT-AutoInitializer.cs",
+            "snippet": "Environment.SetEnvironmentVariable(\u0022MICROSOFT_WINDOWSAPPRUNTIME_BASE_DIRECTORY\u0022, AppContext.BaseDirectory);",
+            "protectedSnippet": "M:System.Environment.SetEnvironmentVariable(System.String,System.String)",
+            "label": "M:System.Environment.SetEnvironmentVariable(System.String,System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/core-libraries/9.0/empty-env-variable.md",
+                "isCustom": false
+              }
+            ],
+            "line": 26,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "1734558c-54a1-4e89-93ed-ebfd4af3c5ad",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "global::System.Uri resourceLocator = new global::System.Uri(\u0022ms-appx:///Platforms/Windows/App.xaml\u0022);",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+            "snippet": "global::System.Uri resourceLocator = new global::System.Uri(\u0022ms-appx:///Platforms/Windows/App.xaml\u0022);",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 50,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "e6b61284-5410-4226-9370-0f6aaf1b6fa6",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "global::System.Uri resourceLocator = new global::System.Uri(\u0022ms-appx:///Platforms/Windows/App.xaml\u0022);",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Platforms\\Windows\\App.g.i.cs",
+            "snippet": "global::System.Uri resourceLocator = new global::System.Uri(\u0022ms-appx:///Platforms/Windows/App.xaml\u0022);",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 50,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "c4f9c048-78a4-4b2a-bc52-e789d53db98a",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "protected override MauiApp CreateMauiApp()",
+              "protected": "T:Microsoft.Maui.Hosting.MauiApp"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\Platforms\\Windows\\App.xaml.cs",
+            "snippet": "protected override MauiApp CreateMauiApp()",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.MauiApp",
+            "label": "T:Microsoft.Maui.Hosting.MauiApp",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 21,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "745446f7-067b-4c66-a82b-2c4476fd5ce6",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MauiProgram.CreateMauiApp()",
+              "protected": "T:Microsoft.Maui.Hosting.MauiApp"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\Platforms\\Windows\\App.xaml.cs",
+            "snippet": "MauiProgram.CreateMauiApp()",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.MauiApp",
+            "label": "T:Microsoft.Maui.Hosting.MauiApp",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 21,
+            "column": 54
+          }
+        },
+        {
+          "incidentId": "9335cda4-2e50-4daa-90d3-c232a3fa7615",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public App()\r\n        {\r\n            this.InitializeComponent();\r\n        }",
+              "protected": "M:Microsoft.Maui.MauiWinUIApplication.#ctor"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\Platforms\\Windows\\App.xaml.cs",
+            "snippet": "public App()\r\n        {\r\n            this.InitializeComponent();\r\n        }",
+            "protectedSnippet": "M:Microsoft.Maui.MauiWinUIApplication.#ctor",
+            "label": "M:Microsoft.Maui.MauiWinUIApplication.#ctor",
+            "line": 16,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "e6fdbf71-9420-4e7a-bec9-f3df46500253",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public App()\r\n        {\r\n            this.InitializeComponent();\r\n        }",
+              "protected": "M:Microsoft.Maui.MauiWinUIApplication.#ctor"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\Platforms\\Windows\\App.xaml.cs",
+            "snippet": "public App()\r\n        {\r\n            this.InitializeComponent();\r\n        }",
+            "protectedSnippet": "M:Microsoft.Maui.MauiWinUIApplication.#ctor",
+            "label": "M:Microsoft.Maui.MauiWinUIApplication.#ctor",
+            "line": 16,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "84aecd43-20d7-45db-903e-eaa3f54be804",
+          "ruleId": "Api.0001",
+          "description": "API is unavailable in net8.0 ",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "MauiWinUIApplication",
+              "protected": "T:Microsoft.Maui.MauiWinUIApplication"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\Platforms\\Windows\\App.xaml.cs",
+            "snippet": "MauiWinUIApplication",
+            "protectedSnippet": "T:Microsoft.Maui.MauiWinUIApplication",
+            "label": "T:Microsoft.Maui.MauiWinUIApplication",
+            "line": 10,
+            "column": 31
+          }
+        },
+        {
+          "incidentId": "85fb8937-dfd2-4400-8798-27bf8fad15ab",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "blazorWebView = global::Microsoft.Maui.Controls.NameScopeExtensions.FindByName\u003Cglobal::Microsoft.AspNetCore.Components.WebView.Maui.BlazorWebView\u003E(this, \u0022blazorWebView\u0022);",
+              "protected": "T:Microsoft.Maui.Controls.NameScopeExtensions"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.SourceGen\\Microsoft.Maui.Controls.SourceGen.CodeBehindGenerator\\MainPage.xaml.sg.cs",
+            "snippet": "blazorWebView = global::Microsoft.Maui.Controls.NameScopeExtensions.FindByName\u003Cglobal::Microsoft.AspNetCore.Components.WebView.Maui.BlazorWebView\u003E(this, \u0022blazorWebView\u0022);",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.NameScopeExtensions",
+            "label": "T:Microsoft.Maui.Controls.NameScopeExtensions",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 27,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "86af8d3e-598b-4815-b2d1-8ec398335c26",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "blazorWebView = global::Microsoft.Maui.Controls.NameScopeExtensions.FindByName\u003Cglobal::Microsoft.AspNetCore.Components.WebView.Maui.BlazorWebView\u003E(this, \u0022blazorWebView\u0022);",
+              "protected": "M:Microsoft.Maui.Controls.NameScopeExtensions.FindByName\u0060\u00601(Microsoft.Maui.Controls.Element,System.String)"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.SourceGen\\Microsoft.Maui.Controls.SourceGen.CodeBehindGenerator\\MainPage.xaml.sg.cs",
+            "snippet": "blazorWebView = global::Microsoft.Maui.Controls.NameScopeExtensions.FindByName\u003Cglobal::Microsoft.AspNetCore.Components.WebView.Maui.BlazorWebView\u003E(this, \u0022blazorWebView\u0022);",
+            "protectedSnippet": "M:Microsoft.Maui.Controls.NameScopeExtensions.FindByName\u0060\u00601(Microsoft.Maui.Controls.Element,System.String)",
+            "label": "M:Microsoft.Maui.Controls.NameScopeExtensions.FindByName\u0060\u00601(Microsoft.Maui.Controls.Element,System.String)",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 27,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "6530d679-11ef-4fcd-a1f1-322338f7404d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Xaml, 8.0.40. Add package reference to Microsoft.Maui.Controls.Xaml, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "global::Microsoft.Maui.Controls.Xaml.Extensions.LoadFromXaml(this, typeof(MainPage));",
+              "protected": "T:Microsoft.Maui.Controls.Xaml.Extensions"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.SourceGen\\Microsoft.Maui.Controls.SourceGen.CodeBehindGenerator\\MainPage.xaml.sg.cs",
+            "snippet": "global::Microsoft.Maui.Controls.Xaml.Extensions.LoadFromXaml(this, typeof(MainPage));",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.Xaml.Extensions",
+            "label": "T:Microsoft.Maui.Controls.Xaml.Extensions",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Xaml",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 26,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "44ab2d28-6bc2-4334-872a-1164d8313052",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public MainPage()\r\n        {\r\n            InitializeComponent();\r\n        }",
+              "protected": "M:Microsoft.Maui.Controls.ContentPage.#ctor"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MainPage.xaml.cs",
+            "snippet": "public MainPage()\r\n        {\r\n            InitializeComponent();\r\n        }",
+            "protectedSnippet": "M:Microsoft.Maui.Controls.ContentPage.#ctor",
+            "label": "M:Microsoft.Maui.Controls.ContentPage.#ctor",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 4,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "0109b5b1-0e3d-4ca4-acc4-3b50deb4ea27",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public MainPage()\r\n        {\r\n            InitializeComponent();\r\n        }",
+              "protected": "M:Microsoft.Maui.Controls.ContentPage.#ctor"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MainPage.xaml.cs",
+            "snippet": "public MainPage()\r\n        {\r\n            InitializeComponent();\r\n        }",
+            "protectedSnippet": "M:Microsoft.Maui.Controls.ContentPage.#ctor",
+            "label": "M:Microsoft.Maui.Controls.ContentPage.#ctor",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 4,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "b18412a5-fd04-4470-bb6c-ab8cb5eac118",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "ContentPage",
+              "protected": "T:Microsoft.Maui.Controls.ContentPage"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MainPage.xaml.cs",
+            "snippet": "ContentPage",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.ContentPage",
+            "label": "T:Microsoft.Maui.Controls.ContentPage",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 2,
+            "column": 36
+          }
+        },
+        {
+          "incidentId": "36022785-b3ed-4e99-a5f9-50db518c0f51",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public static MauiApp CreateMauiApp()",
+              "protected": "T:Microsoft.Maui.Hosting.MauiApp"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "public static MauiApp CreateMauiApp()",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.MauiApp",
+            "label": "T:Microsoft.Maui.Hosting.MauiApp",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 9,
+            "column": 4
+          }
+        },
+        {
+          "incidentId": "86463676-ac19-40d9-9f54-5999be753473",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return builder.Build();",
+              "protected": "T:Microsoft.Maui.Hosting.MauiApp"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "return builder.Build();",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.MauiApp",
+            "label": "T:Microsoft.Maui.Hosting.MauiApp",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 76,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "aec8966c-6199-469a-80eb-bd7f5df2c653",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return builder.Build();",
+              "protected": "M:Microsoft.Maui.Hosting.MauiAppBuilder.Build"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "return builder.Build();",
+            "protectedSnippet": "M:Microsoft.Maui.Hosting.MauiAppBuilder.Build",
+            "label": "M:Microsoft.Maui.Hosting.MauiAppBuilder.Build",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 76,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "5b5f5549-aa5a-4fa7-b156-72fd27b72791",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services\r\n            .AddOptionABootstrapBlog(config =\u003E\r\n            {\r\n                config.PostTitleClass = \u0022text-center opta-header\u0022;\r\n                config.HeaderTagContainerClass = \u0022text-center\u0022;\r\n                config.PostDateClass = \u0022text-center fst-italic\u0022;\r\n                config.PostSubtitleClass = \u0022text-center\u0022;\r\n                config.TagClass = \u0022opta-tag px-2 py-1 mx-1\u0022;\r\n\r\n            })\r\n            .AddOptionABootstrapBlogBuilder(config =\u003E\r\n            {\r\n                config.ComponentButtonOptions = new()\r\n                {\r\n                    [ContentType.Paragraph] = IconButton(\u0022bi bi-paragraph\u0022),\r\n                    [ContentType.Header] = IconButton(\u0022bi bi-type-h2\u0022),\r\n                    [ContentType.Code] = IconButton(\u0022bi bi-code-slash\u0022),\r\n                    [ContentType.Quote] = IconButton(\u0022bi bi-chat-left-quote\u0022),\r\n                    [ContentType.Image] = IconButton(\u0022bi bi-image\u0022),\r\n                    [ContentType.Frame] = IconButton(\u0022bi bi-window\u0022),\r\n                    [ContentType.List] = IconButton(\u0022bi bi-list-ul\u0022),\r\n                    [ContentType.Table] = IconButton(\u0022bi bi-table\u0022)\r\n                };\r\n                if (config.PostBuilderOptions is not null \u0026\u0026 config.PostBuilderOptions.TryGetValue(BuilderType.ComponentBar, out var componentBar))\r\n                {\r\n                    componentBar.Class \u002B= \u0022 top-60\u0022;\r\n                }\r\n                if (config.PostBuilderOptions is not null \u0026\u0026 config.PostBuilderOptions.TryGetValue(BuilderType.ComponentContent, out var component))\r\n                {\r\n                    component.AdditionalAttributes ??= [];\r\n                    component.AdditionalAttributes[\u0022draggable\u0022] = null;\r\n                }\r\n            });",
+              "protected": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder.Services\r\n            .AddOptionABootstrapBlog(config =\u003E\r\n            {\r\n                config.PostTitleClass = \u0022text-center opta-header\u0022;\r\n                config.HeaderTagContainerClass = \u0022text-center\u0022;\r\n                config.PostDateClass = \u0022text-center fst-italic\u0022;\r\n                config.PostSubtitleClass = \u0022text-center\u0022;\r\n                config.TagClass = \u0022opta-tag px-2 py-1 mx-1\u0022;\r\n\r\n            })\r\n            .AddOptionABootstrapBlogBuilder(config =\u003E\r\n            {\r\n                config.ComponentButtonOptions = new()\r\n                {\r\n                    [ContentType.Paragraph] = IconButton(\u0022bi bi-paragraph\u0022),\r\n                    [ContentType.Header] = IconButton(\u0022bi bi-type-h2\u0022),\r\n                    [ContentType.Code] = IconButton(\u0022bi bi-code-slash\u0022),\r\n                    [ContentType.Quote] = IconButton(\u0022bi bi-chat-left-quote\u0022),\r\n                    [ContentType.Image] = IconButton(\u0022bi bi-image\u0022),\r\n                    [ContentType.Frame] = IconButton(\u0022bi bi-window\u0022),\r\n                    [ContentType.List] = IconButton(\u0022bi bi-list-ul\u0022),\r\n                    [ContentType.Table] = IconButton(\u0022bi bi-table\u0022)\r\n                };\r\n                if (config.PostBuilderOptions is not null \u0026\u0026 config.PostBuilderOptions.TryGetValue(BuilderType.ComponentBar, out var componentBar))\r\n                {\r\n                    componentBar.Class \u002B= \u0022 top-60\u0022;\r\n                }\r\n                if (config.PostBuilderOptions is not null \u0026\u0026 config.PostBuilderOptions.TryGetValue(BuilderType.ComponentContent, out var component))\r\n                {\r\n                    component.AdditionalAttributes ??= [];\r\n                    component.AdditionalAttributes[\u0022draggable\u0022] = null;\r\n                }\r\n            });",
+            "protectedSnippet": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services",
+            "label": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 42,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "3222f544-3813-495e-817f-86a08dc34c07",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services\r\n            .AddOptionABootstrapComponents(darkMode: true, configuration: options =\u003E\r\n            {\r\n                options.CarouselConfiguration = (carousel) =\u003E\r\n                {\r\n                    carousel.AutoPlayText = \u0022Autoplay\u0022;\r\n                };\r\n                options.MenuConfiguration = (menu) =\u003E\r\n                {\r\n                    menu.OpenGroupOnMouseOver = true;\r\n                    menu.GroupCloseTime = 250;\r\n                    menu.DefaultMenuContainerClass \u002B= \u0022 opta-bg ps-2 sticky-top\u0022;\r\n                    menu.DefaultDropdownClass = \u0022opta-bg opta-dropdown\u0022;\r\n                    menu.DefaultMenuItemClass \u002B= \u0022 opta-menu-item\u0022;\r\n                };\r\n            });",
+              "protected": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder.Services\r\n            .AddOptionABootstrapComponents(darkMode: true, configuration: options =\u003E\r\n            {\r\n                options.CarouselConfiguration = (carousel) =\u003E\r\n                {\r\n                    carousel.AutoPlayText = \u0022Autoplay\u0022;\r\n                };\r\n                options.MenuConfiguration = (menu) =\u003E\r\n                {\r\n                    menu.OpenGroupOnMouseOver = true;\r\n                    menu.GroupCloseTime = 250;\r\n                    menu.DefaultMenuContainerClass \u002B= \u0022 opta-bg ps-2 sticky-top\u0022;\r\n                    menu.DefaultDropdownClass = \u0022opta-bg opta-dropdown\u0022;\r\n                    menu.DefaultMenuItemClass \u002B= \u0022 opta-menu-item\u0022;\r\n                };\r\n            });",
+            "protectedSnippet": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services",
+            "label": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 26,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "46bcace1-2842-424d-8937-effddba01166",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Logging.AddDebug();",
+              "protected": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Logging"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder.Logging.AddDebug();",
+            "protectedSnippet": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Logging",
+            "label": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Logging",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 23,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "f87729cb-5731-455f-bc54-f39bb4b92add",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddBlazorWebViewDeveloperTools();",
+              "protected": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder.Services.AddBlazorWebViewDeveloperTools();",
+            "protectedSnippet": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services",
+            "label": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 22,
+            "column": 2
+          }
+        },
+        {
+          "incidentId": "f05ee189-2978-4ae4-b6bc-43d4fd429c36",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddMauiBlazorWebView();",
+              "protected": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder.Services.AddMauiBlazorWebView();",
+            "protectedSnippet": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services",
+            "label": "P:Microsoft.Maui.Hosting.MauiAppBuilder.Services",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 19,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "74720405-50bf-4447-b6e0-07d91c3aadf2",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);",
+              "protected": "T:Microsoft.Maui.Hosting.FontCollectionExtensions"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.FontCollectionExtensions",
+            "label": "T:Microsoft.Maui.Hosting.FontCollectionExtensions",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 16,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "fc196eda-e7e0-45ad-96f7-2b06ee783bf8",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);",
+              "protected": "T:Microsoft.Maui.Hosting.IFontCollection"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.IFontCollection",
+            "label": "T:Microsoft.Maui.Hosting.IFontCollection",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 16,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "c581bc4c-490e-4eeb-9501-6600a53dfdbd",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);",
+              "protected": "M:Microsoft.Maui.Hosting.FontCollectionExtensions.AddFont(Microsoft.Maui.Hosting.IFontCollection,System.String,System.String)"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);",
+            "protectedSnippet": "M:Microsoft.Maui.Hosting.FontCollectionExtensions.AddFont(Microsoft.Maui.Hosting.IFontCollection,System.String,System.String)",
+            "label": "M:Microsoft.Maui.Hosting.FontCollectionExtensions.AddFont(Microsoft.Maui.Hosting.IFontCollection,System.String,System.String)",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 16,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "0f2ea2f6-f916-44b3-b342-ec3710415628",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+              "protected": "T:Microsoft.Maui.Controls.Hosting.AppHostBuilderExtensions"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.Hosting.AppHostBuilderExtensions",
+            "label": "T:Microsoft.Maui.Controls.Hosting.AppHostBuilderExtensions",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 12,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "bd636165-6a41-4149-bec2-75b99bb0da2b",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+              "protected": "T:Microsoft.Maui.Hosting.MauiAppBuilder"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.MauiAppBuilder",
+            "label": "T:Microsoft.Maui.Hosting.MauiAppBuilder",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 12,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "26d68483-c23c-4fe7-ab0d-de1335aa2c89",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Xaml, 8.0.40. Add package reference to Microsoft.Maui.Controls.Xaml, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+              "protected": "M:Microsoft.Maui.Controls.Hosting.AppHostBuilderExtensions.UseMauiApp\u0060\u00601(Microsoft.Maui.Hosting.MauiAppBuilder)"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+            "protectedSnippet": "M:Microsoft.Maui.Controls.Hosting.AppHostBuilderExtensions.UseMauiApp\u0060\u00601(Microsoft.Maui.Hosting.MauiAppBuilder)",
+            "label": "M:Microsoft.Maui.Controls.Hosting.AppHostBuilderExtensions.UseMauiApp\u0060\u00601(Microsoft.Maui.Hosting.MauiAppBuilder)",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Xaml",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 12,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "84866a39-e110-48cf-b0fa-246a6e95d343",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+              "protected": "T:Microsoft.Maui.Hosting.FontsMauiAppBuilderExtensions"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.FontsMauiAppBuilderExtensions",
+            "label": "T:Microsoft.Maui.Hosting.FontsMauiAppBuilderExtensions",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 12,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "8563908a-4cac-4889-9c19-dd93be4b2aa3",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+              "protected": "T:Microsoft.Maui.Hosting.MauiAppBuilder"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.MauiAppBuilder",
+            "label": "T:Microsoft.Maui.Hosting.MauiAppBuilder",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 12,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "f848cc1c-9e1d-4f0e-85ff-77352bb7474d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+              "protected": "M:Microsoft.Maui.Hosting.FontsMauiAppBuilderExtensions.ConfigureFonts(Microsoft.Maui.Hosting.MauiAppBuilder,System.Action{Microsoft.Maui.Hosting.IFontCollection})"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "builder\r\n            .UseMauiApp\u003CApp\u003E()\r\n            .ConfigureFonts(fonts =\u003E\r\n            {\r\n                fonts.AddFont(\u0022OpenSans-Regular.ttf\u0022, \u0022OpenSansRegular\u0022);\r\n            });",
+            "protectedSnippet": "M:Microsoft.Maui.Hosting.FontsMauiAppBuilderExtensions.ConfigureFonts(Microsoft.Maui.Hosting.MauiAppBuilder,System.Action{Microsoft.Maui.Hosting.IFontCollection})",
+            "label": "M:Microsoft.Maui.Hosting.FontsMauiAppBuilderExtensions.ConfigureFonts(Microsoft.Maui.Hosting.MauiAppBuilder,System.Action{Microsoft.Maui.Hosting.IFontCollection})",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 12,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "e98fea71-ec0b-4f90-9515-232a697bfda3",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var builder = MauiApp.CreateBuilder();",
+              "protected": "T:Microsoft.Maui.Hosting.MauiApp"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "var builder = MauiApp.CreateBuilder();",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.MauiApp",
+            "label": "T:Microsoft.Maui.Hosting.MauiApp",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 11,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "22a6494b-74da-4c22-a70a-c14fc52fd8c3",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var builder = MauiApp.CreateBuilder();",
+              "protected": "T:Microsoft.Maui.Hosting.MauiAppBuilder"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "var builder = MauiApp.CreateBuilder();",
+            "protectedSnippet": "T:Microsoft.Maui.Hosting.MauiAppBuilder",
+            "label": "T:Microsoft.Maui.Hosting.MauiAppBuilder",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 11,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "e05e3926-c0c0-4b71-a12e-f082dc0494a7",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var builder = MauiApp.CreateBuilder();",
+              "protected": "M:Microsoft.Maui.Hosting.MauiApp.CreateBuilder(System.Boolean)"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\MauiProgram.cs",
+            "snippet": "var builder = MauiApp.CreateBuilder();",
+            "protectedSnippet": "M:Microsoft.Maui.Hosting.MauiApp.CreateBuilder(System.Boolean)",
+            "label": "M:Microsoft.Maui.Hosting.MauiApp.CreateBuilder(System.Boolean)",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 11,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "696eeb94-e47d-46ca-b7a8-ed771647e47f",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Xaml, 8.0.40. Add package reference to Microsoft.Maui.Controls.Xaml, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "global::Microsoft.Maui.Controls.Xaml.Extensions.LoadFromXaml(this, typeof(App));",
+              "protected": "T:Microsoft.Maui.Controls.Xaml.Extensions"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\obj\\Debug\\net9.0-windows10.0.19041.0\\win10-x64\\Microsoft.Maui.Controls.SourceGen\\Microsoft.Maui.Controls.SourceGen.CodeBehindGenerator\\App.xaml.sg.cs",
+            "snippet": "global::Microsoft.Maui.Controls.Xaml.Extensions.LoadFromXaml(this, typeof(App));",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.Xaml.Extensions",
+            "label": "T:Microsoft.Maui.Controls.Xaml.Extensions",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Xaml",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 22,
+            "column": 3
+          }
+        },
+        {
+          "incidentId": "5339f4d0-3769-480a-827f-5524e19af6b2",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Core, 8.0.40. Add package reference to Microsoft.Maui.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "protected override Window CreateWindow(IActivationState? activationState)",
+              "protected": "T:Microsoft.Maui.IActivationState"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\App.xaml.cs",
+            "snippet": "protected override Window CreateWindow(IActivationState? activationState)",
+            "protectedSnippet": "T:Microsoft.Maui.IActivationState",
+            "label": "T:Microsoft.Maui.IActivationState",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 9,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "b9a1ea2b-c6b8-4267-a715-f3b6980c288e",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "protected override Window CreateWindow(IActivationState? activationState)",
+              "protected": "T:Microsoft.Maui.Controls.Window"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\App.xaml.cs",
+            "snippet": "protected override Window CreateWindow(IActivationState? activationState)",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.Window",
+            "label": "T:Microsoft.Maui.Controls.Window",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 9,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "b123b5e1-d4cd-47a2-a8c6-1ff4fb253bb1",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return new Window(new MainPage()) { Title = \u0022OptionA.Blazor.Maui.Test\u0022 };",
+              "protected": "P:Microsoft.Maui.Controls.Window.Title"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\App.xaml.cs",
+            "snippet": "return new Window(new MainPage()) { Title = \u0022OptionA.Blazor.Maui.Test\u0022 };",
+            "protectedSnippet": "P:Microsoft.Maui.Controls.Window.Title",
+            "label": "P:Microsoft.Maui.Controls.Window.Title",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 11,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "e997ade6-daf9-4061-b862-8ef0faa6876f",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return new Window(new MainPage()) { Title = \u0022OptionA.Blazor.Maui.Test\u0022 };",
+              "protected": "T:Microsoft.Maui.Controls.Window"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\App.xaml.cs",
+            "snippet": "return new Window(new MainPage()) { Title = \u0022OptionA.Blazor.Maui.Test\u0022 };",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.Window",
+            "label": "T:Microsoft.Maui.Controls.Window",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 11,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "c0d67766-cdbf-49aa-81b1-7a41c51d95d2",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return new Window(new MainPage()) { Title = \u0022OptionA.Blazor.Maui.Test\u0022 };",
+              "protected": "M:Microsoft.Maui.Controls.Window.#ctor(Microsoft.Maui.Controls.Page)"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\App.xaml.cs",
+            "snippet": "return new Window(new MainPage()) { Title = \u0022OptionA.Blazor.Maui.Test\u0022 };",
+            "protectedSnippet": "M:Microsoft.Maui.Controls.Window.#ctor(Microsoft.Maui.Controls.Page)",
+            "label": "M:Microsoft.Maui.Controls.Window.#ctor(Microsoft.Maui.Controls.Page)",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 11,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "5674e414-0526-46e1-9578-bd2f6e6c745e",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public App()\r\n        {\r\n            InitializeComponent();\r\n        }",
+              "protected": "M:Microsoft.Maui.Controls.Application.#ctor"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\App.xaml.cs",
+            "snippet": "public App()\r\n        {\r\n            InitializeComponent();\r\n        }",
+            "protectedSnippet": "M:Microsoft.Maui.Controls.Application.#ctor",
+            "label": "M:Microsoft.Maui.Controls.Application.#ctor",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 4,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "cafb4486-a710-4ecf-b666-198d59c60f78",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "public App()\r\n        {\r\n            InitializeComponent();\r\n        }",
+              "protected": "M:Microsoft.Maui.Controls.Application.#ctor"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\App.xaml.cs",
+            "snippet": "public App()\r\n        {\r\n            InitializeComponent();\r\n        }",
+            "protectedSnippet": "M:Microsoft.Maui.Controls.Application.#ctor",
+            "label": "M:Microsoft.Maui.Controls.Application.#ctor",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 4,
+            "column": 8
+          }
+        },
+        {
+          "incidentId": "dd84ac98-28e3-4725-b041-e99e843500f6",
+          "ruleId": "Api.0002",
+          "description": "API is available in package Microsoft.Maui.Controls.Core, 8.0.40. Add package reference to Microsoft.Maui.Controls.Core, 8.0.40",
+          "projectPath": "OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Application",
+              "protected": "T:Microsoft.Maui.Controls.Application"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Maui.Test\\App.xaml.cs",
+            "snippet": "Application",
+            "protectedSnippet": "T:Microsoft.Maui.Controls.Application",
+            "label": "T:Microsoft.Maui.Controls.Application",
+            "properties": {
+              "PackageId": "Microsoft.Maui.Controls.Core",
+              "PackageNewVersion": "8.0.40"
+            },
+            "line": 2,
+            "column": 31
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Storage.Contracts\\OptionA.Blazor.Storage.Contracts.csproj",
+      "startingProject": true,
+      "issues": 1,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "OptionA.Blazor.Storage.Contracts",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "netstandard2.1"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 16,
+        "numberOfCodeFiles": 16,
+        "linesTotal": 569,
+        "linesOfCode": 569,
+        "totalApiScanned": 226,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "3ecf5dca-4247-472c-b46b-6471b62a5465",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Storage.Contracts\\OptionA.Blazor.Storage.Contracts.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.DependencyInjection.Abstractions, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.DependencyInjection.Abstractions, and replace with new package Microsoft.Extensions.DependencyInjection.Abstractions 10.0.1",
+              "protected": "Microsoft.Extensions.DependencyInjection.Abstractions, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.DependencyInjection.Abstractions, and replace with new package Microsoft.Extensions.DependencyInjection.Abstractions 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Storage.Contracts\\OptionA.Blazor.Storage.Contracts.csproj",
+            "snippet": "Microsoft.Extensions.DependencyInjection.Abstractions, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.DependencyInjection.Abstractions, and replace with new package Microsoft.Extensions.DependencyInjection.Abstractions 10.0.1",
+            "protectedSnippet": "Microsoft.Extensions.DependencyInjection.Abstractions, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.DependencyInjection.Abstractions, and replace with new package Microsoft.Extensions.DependencyInjection.Abstractions 10.0.1",
+            "label": "Microsoft.Extensions.DependencyInjection.Abstractions 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.DependencyInjection.Abstractions",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "53370c6f-87f7-4492-b80a-5bd2f77c273b",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Storage.Contracts\\OptionA.Blazor.Storage.Contracts.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "System.Text.Json, 9.0.1\n\nRecommendation:\n\nRemove System.Text.Json, and replace with new package System.Text.Json 10.0.1",
+              "protected": "System.Text.Json, 9.0.1\n\nRecommendation:\n\nRemove System.Text.Json, and replace with new package System.Text.Json 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Storage.Contracts\\OptionA.Blazor.Storage.Contracts.csproj",
+            "snippet": "System.Text.Json, 9.0.1\n\nRecommendation:\n\nRemove System.Text.Json, and replace with new package System.Text.Json 10.0.1",
+            "protectedSnippet": "System.Text.Json, 9.0.1\n\nRecommendation:\n\nRemove System.Text.Json, and replace with new package System.Text.Json 10.0.1",
+            "label": "System.Text.Json 9.0.1",
+            "properties": {
+              "PackageId": "System.Text.Json",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Storage\\OptionA.Blazor.Storage.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 3,
+      "properties": {
+        "appName": "OptionA.Blazor.Storage",
+        "projectKind": "ClassLibrary",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 15,
+        "numberOfCodeFiles": 12,
+        "linesTotal": 1052,
+        "linesOfCode": 711,
+        "totalApiScanned": 694,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "d673a890-fc6e-47b3-81bd-11df9057add5",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Storage\\OptionA.Blazor.Storage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+              "protected": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Storage\\OptionA.Blazor.Storage.csproj",
+            "snippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "protectedSnippet": "Microsoft.AspNetCore.Components.Web, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.Web, and replace with new package Microsoft.AspNetCore.Components.Web 10.0.1",
+            "label": "Microsoft.AspNetCore.Components.Web 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Components.Web",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "6afa6d11-406a-4f45-bb4e-b6c8be32013a",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Storage\\OptionA.Blazor.Storage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.Extensions.Configuration.Binder, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.Configuration.Binder, and replace with new package Microsoft.Extensions.Configuration.Binder 10.0.1",
+              "protected": "Microsoft.Extensions.Configuration.Binder, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.Configuration.Binder, and replace with new package Microsoft.Extensions.Configuration.Binder 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Storage\\OptionA.Blazor.Storage.csproj",
+            "snippet": "Microsoft.Extensions.Configuration.Binder, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.Configuration.Binder, and replace with new package Microsoft.Extensions.Configuration.Binder 10.0.1",
+            "protectedSnippet": "Microsoft.Extensions.Configuration.Binder, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.Extensions.Configuration.Binder, and replace with new package Microsoft.Extensions.Configuration.Binder 10.0.1",
+            "label": "Microsoft.Extensions.Configuration.Binder 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.Extensions.Configuration.Binder",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "c38a6001-2ce3-494d-a23c-a9159c358092",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Storage\\OptionA.Blazor.Storage.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net9.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Storage\\OptionA.Blazor.Storage.csproj",
+            "snippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    },
+    {
+      "path": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 6,
+      "properties": {
+        "appName": "OptionA.Blazor.Test",
+        "projectKind": "AspNetCore",
+        "frameworks": [
+          "net9.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 45,
+        "numberOfCodeFiles": 17,
+        "linesTotal": 5595,
+        "linesOfCode": 662,
+        "totalApiScanned": 3945,
+        "minLinesOfCodeToChange": 3,
+        "maxLinesOfCodeToChange": 3
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "8f6dd321-b0a0-432b-8ab5-a75c35fa4422",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Components.WebAssembly, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.WebAssembly, and replace with new package Microsoft.AspNetCore.Components.WebAssembly 10.0.1",
+              "protected": "Microsoft.AspNetCore.Components.WebAssembly, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.WebAssembly, and replace with new package Microsoft.AspNetCore.Components.WebAssembly 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+            "snippet": "Microsoft.AspNetCore.Components.WebAssembly, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.WebAssembly, and replace with new package Microsoft.AspNetCore.Components.WebAssembly 10.0.1",
+            "protectedSnippet": "Microsoft.AspNetCore.Components.WebAssembly, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.WebAssembly, and replace with new package Microsoft.AspNetCore.Components.WebAssembly 10.0.1",
+            "label": "Microsoft.AspNetCore.Components.WebAssembly 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Components.WebAssembly",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "28655a21-7f6e-4e66-a4d6-c881055a64ba",
+          "ruleId": "NuGet.0002",
+          "projectPath": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Microsoft.AspNetCore.Components.WebAssembly.DevServer, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.WebAssembly.DevServer, and replace with new package Microsoft.AspNetCore.Components.WebAssembly.DevServer 10.0.1",
+              "protected": "Microsoft.AspNetCore.Components.WebAssembly.DevServer, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.WebAssembly.DevServer, and replace with new package Microsoft.AspNetCore.Components.WebAssembly.DevServer 10.0.1"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+            "snippet": "Microsoft.AspNetCore.Components.WebAssembly.DevServer, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.WebAssembly.DevServer, and replace with new package Microsoft.AspNetCore.Components.WebAssembly.DevServer 10.0.1",
+            "protectedSnippet": "Microsoft.AspNetCore.Components.WebAssembly.DevServer, 9.0.1\n\nRecommendation:\n\nRemove Microsoft.AspNetCore.Components.WebAssembly.DevServer, and replace with new package Microsoft.AspNetCore.Components.WebAssembly.DevServer 10.0.1",
+            "label": "Microsoft.AspNetCore.Components.WebAssembly.DevServer 9.0.1",
+            "properties": {
+              "PackageId": "Microsoft.AspNetCore.Components.WebAssembly.DevServer",
+              "PackageVersion": "9.0.1",
+              "PackageNewVersion": "10.0.1",
+              "PackageReplacements": null
+            }
+          }
+        },
+        {
+          "incidentId": "01391a88-93e5-43b1-9ae5-30d34e42ae1f",
+          "ruleId": "Project.0002",
+          "projectPath": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Current target framework: net9.0\nRecommended target framework: net10.0",
+              "protected": "Current target framework: net9.0\nRecommended target framework: net10.0"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+            "snippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "protectedSnippet": "Current target framework: net9.0\nRecommended target framework: net10.0",
+            "properties": {
+              "CurrentTargetFramework": "net9.0",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        },
+        {
+          "incidentId": "f8bb3457-93fa-47f7-837c-21bc7c13368a",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Test\\Program.cs",
+            "snippet": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 12,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "d202d2d0-89e8-4cbf-a290-88ceee7da16b",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });",
+              "protected": "M:System.Uri.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Test\\Program.cs",
+            "snippet": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });",
+            "protectedSnippet": "M:System.Uri.#ctor(System.String)",
+            "label": "M:System.Uri.#ctor(System.String)",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 12,
+            "column": 0
+          }
+        },
+        {
+          "incidentId": "d4833f44-ed17-4021-bb08-1446ca76d493",
+          "ruleId": "Api.0003",
+          "description": "Breaking change: URI length limits removed ",
+          "projectPath": "OptionA.Blazor.Test\\OptionA.Blazor.Test.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });",
+              "protected": "T:System.Uri"
+            },
+            "kind": "File",
+            "path": "OptionA.Blazor.Test\\Program.cs",
+            "snippet": "builder.Services.AddScoped(sp =\u003E new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });",
+            "protectedSnippet": "T:System.Uri",
+            "label": "T:System.Uri",
+            "links": [
+              {
+                "title": "API documentation",
+                "url": "https://github.com/dotnet/docs/blob/main/docs/core/compatibility/networking/10.0/uri-length-limits-removed.md",
+                "isCustom": false
+              }
+            ],
+            "line": 12,
+            "column": 0
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "NuGet.0002": {
+      "id": "NuGet.0002",
+      "isFeature": false,
+      "description": "NuGet package upgrade is recommended for selected target framework.\n\nStandard .NET packages are recommended to have versions matching version of .NET that project targets.\n\nSome other packages also are known to work better for selected target frameworks.",
+      "label": "NuGet package upgrade is recommended",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262530",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "Project\u0027s target framework(s) needs to be changed to the new target framework that you selected for this upgrade.\n\nDuring upgrade target framework will be adjusted to corresponding platform when applicable. In some cases project would result in multiple target frameworks after the upgrade if it was using features that now have their own platforms in modern .NET frameworks (windows, iOS, Android etc).",
+      "label": "Project\u0027s target framework(s) needs to be changed",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Overview of porting from .NET Framework to .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": ".NET project SDKs",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API is source incompatible for selected .NET version: requires code changes to compile successfully when targeting a new version, such as removing obsolete APIs or changing method signatures.",
+      "label": "Source incompatible for selected .NET version",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0003": {
+      "id": "Api.0003",
+      "isFeature": false,
+      "description": "API has a behavioral change in selected .NET version: code and binaries may behave differently at runtime without needing recompilation, but the new behavior might be undesirable and require updates.",
+      "label": "Behavioral change in selected .NET version",
+      "severity": "Potential",
+      "effort": 1
+    },
+    "Api.0001": {
+      "id": "Api.0001",
+      "isFeature": false,
+      "description": "API is binary incompatible for selected .NET version: affects existing binaries, often requiring recompilation, because the API has changed in a way that prevents older binaries from loading or executing.",
+      "label": "Binary incompatible for selected .NET version",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Breaking changes in .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}
