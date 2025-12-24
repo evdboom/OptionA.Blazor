@@ -41,12 +41,20 @@ public partial class ResponsiveThroughService : ComponentBase, IDisposable
 
     private void OnDimensionChanged(object? sender, string e)
     {
+        if (_disposed)
+        {
+            return;
+        }
         _dimension = e;
         InvokeAsync(StateHasChanged);
     }
 
     private void OnWindowSizeChanged(object? sender, NamedDimension e) 
     {
+        if (_disposed)
+        {
+            return;
+        }
         _namedDimension = e;
         InvokeAsync(StateHasChanged);
     }

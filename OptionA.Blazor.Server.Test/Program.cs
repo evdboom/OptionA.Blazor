@@ -9,22 +9,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents();
 
+// Note: Some OptionA components use JSRuntime which is scoped in Blazor Server.
+// The library registers these as Singleton, which causes DI validation errors.
+// For this test project, we'll register the core components that work with Server.
 builder.Services
-    .AddOptionABootstrapComponents(darkMode: true, configuration: options =>
-    {
-        options.CarouselConfiguration = (carousel) =>
-        {
-            carousel.AutoPlayText = "Autoplay";
-        };
-        options.MenuConfiguration = (menu) =>
-        {
-            menu.OpenGroupOnMouseOver = true;
-            menu.GroupCloseTime = 250;
-            menu.DefaultMenuContainerClass += " opta-bg ps-2 sticky-top";
-            menu.DefaultDropdownClass = "opta-bg opta-dropdown";
-            menu.DefaultMenuItemClass += " opta-menu-item";
-        };
-    });
+    .AddOptionABootstrapButtons()
+    .AddOptionABootstrapMenu(darkMode: true)
+    .AddOptionABootstrapCarousel()
+    .AddOptionABootstrapGallery()
+    .AddOptionABootstrapModal()
+    .AddOptionABootstrapSplitter()
+    .AddOptionABootstrapMessageBox()
+    .AddOptionABootstrapTabs();
+
 builder.Services
     .AddOptionABootstrapBlog(config =>
     {
@@ -52,8 +49,7 @@ builder.Services
         {
             componentBar.Class += " top-60";
         }
-    })
-    .AddOptionAStorageServices(ServiceLifetime.Singleton);
+    });
 
 var app = builder.Build();
 
