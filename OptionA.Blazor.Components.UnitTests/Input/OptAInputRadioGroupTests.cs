@@ -1,0 +1,52 @@
+namespace OptionA.Blazor.Components.UnitTests.Input;
+
+public class OptAInputRadioGroupTests : BunitContext
+{
+    [Fact]
+    public void OptAInputRadioGroupRendersCorrectly()
+    {
+        // Arrange
+        var items = new[] { "Option1", "Option2", "Option3" };
+
+        // Act
+        var cut = Render<OptAInputRadioGroup<string>>(parameters => parameters
+            .Add(p => p.Items, items));
+
+        // Assert
+        var group = cut.Find("div[opta-input-radio-group]");
+        Assert.NotNull(group);
+    }
+
+    [Fact]
+    public void OptAInputRadioGroupRendersAllRadioButtons()
+    {
+        // Arrange
+        var items = new[] { "Option1", "Option2", "Option3" };
+
+        // Act
+        var cut = Render<OptAInputRadioGroup<string>>(parameters => parameters
+            .Add(p => p.Items, items));
+
+        // Assert
+        var radios = cut.FindAll("input[type='radio']");
+        Assert.Equal(3, radios.Count);
+    }
+
+    [Fact]
+    public void OptAInputRadioGroupBindsValueCorrectly()
+    {
+        // Arrange
+        var items = new[] { "Option1", "Option2", "Option3" };
+        var value = "Option2";
+
+        // Act
+        var cut = Render<OptAInputRadioGroup<string>>(parameters => parameters
+            .Add(p => p.Items, items)
+            .Add(p => p.Value, value));
+
+        // Assert
+        var radios = cut.FindAll("input[type='radio']");
+        var checkedRadio = radios.FirstOrDefault(r => r.HasAttribute("checked"));
+        Assert.NotNull(checkedRadio);
+    }
+}
