@@ -15,9 +15,9 @@
 	  <Description>Builder for creating a Blog using Blazor.</Description>
 	  <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <Version>10.0.0</Version>
+	  <Version>10.0.1</Version>
 	  <PackageReleaseNotes>
-		  Upgraded to .NET 10
+		  Add lifetime support to service registrations
 	  </PackageReleaseNotes>
   </PropertyGroup>
 

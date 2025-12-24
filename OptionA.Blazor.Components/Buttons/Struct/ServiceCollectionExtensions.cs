@@ -10,26 +10,40 @@ namespace OptionA.Blazor.Components;
 public static partial class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons
+    /// Adds a <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons, with the provider configuration and lifetime
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionAButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
+    public static IServiceCollection AddOptionAButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services
-            .TryAddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration));
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services
+                .TryAddSingleton<IButtonDataProvider>(provider => new ButtonDataProvider(configuration));
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services
+                .TryAddScoped<IButtonDataProvider>(provider => new ButtonDataProvider(configuration));
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
+
         return services;
     }
-    
 
     /// <summary>
-    /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons, prefilled with bootstrap (5.3) classes
+    /// Adds a <see cref="IButtonDataProvider"/> with the specified lifetime to the service collection for use in the OptAButtons, prefilled with bootstrap (5.3) classes
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapButtons(this IServiceCollection services, Action<ButtonOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var buttonClasses = new Dictionary<ActionType, string>
         {
@@ -58,6 +72,6 @@ public static partial class ServiceCollectionExtensions
             configuration?.Invoke(options);
         };
 
-        return AddOptionAButtons(services, bootstrapConfig);
+        return AddOptionAButtons(services, bootstrapConfig, lifetime);
     }
 }

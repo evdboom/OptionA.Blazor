@@ -6,14 +6,14 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Version>10.0.0</Version>
+    <Version>10.0.1</Version>
     <IsPackable>true</IsPackable>
     <Authors>Erik van der Boom</Authors>
     <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Description>Blazor component library with various component for use inside your Blazor application</Description>
     <PackageReleaseNotes>
-		Upgraded to .NET 10
+		Add lifetime support to service registrations
 	</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>

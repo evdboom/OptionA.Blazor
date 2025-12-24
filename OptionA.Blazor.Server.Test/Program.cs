@@ -9,19 +9,22 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents();
 
-// Note: Some OptionA components use JSRuntime which is scoped in Blazor Server.
-// The library registers these as Singleton, which causes DI validation errors.
-// For this test project, we'll register the core components that work with Server.
 builder.Services
-    .AddOptionABootstrapButtons()
-    .AddOptionABootstrapMenu(darkMode: true)
-    .AddOptionABootstrapCarousel()
-    .AddOptionABootstrapGallery()
-    .AddOptionABootstrapModal()
-    .AddOptionABootstrapSplitter()
-    .AddOptionABootstrapMessageBox()
-    .AddOptionABootstrapTabs();
-
+    .AddOptionABootstrapComponents(darkMode: true, configuration: options =>
+    {
+        options.CarouselConfiguration = (carousel) =>
+        {
+            carousel.AutoPlayText = "Autoplay";
+        };
+        options.MenuConfiguration = (menu) =>
+        {
+            menu.OpenGroupOnMouseOver = true;
+            menu.GroupCloseTime = 250;
+            menu.DefaultMenuContainerClass += " opta-bg ps-2 sticky-top";
+            menu.DefaultDropdownClass = "opta-bg opta-dropdown";
+            menu.DefaultMenuItemClass += " opta-menu-item";
+        };
+    }, lifetime: ServiceLifetime.Scoped);
 builder.Services
     .AddOptionABootstrapBlog(config =>
     {
@@ -30,13 +33,13 @@ builder.Services
         config.PostDateClass = "text-center fst-italic";
         config.PostSubtitleClass = "text-center";
         config.TagClass = "opta-tag px-2 py-1 mx-1";
-        
-    })
+
+    }, lifetime: ServiceLifetime.Scoped)
     .AddOptionABootstrapBlogBuilder(config =>
     {
         config.ComponentButtonOptions = new()
         {
-            [ContentType.Paragraph] = IconButton("bi bi-paragraph"),            
+            [ContentType.Paragraph] = IconButton("bi bi-paragraph"),
             [ContentType.Header] = IconButton("bi bi-type-h2"),
             [ContentType.Code] = IconButton("bi bi-code-slash"),
             [ContentType.Quote] = IconButton("bi bi-chat-left-quote"),
@@ -49,8 +52,8 @@ builder.Services
         {
             componentBar.Class += " top-60";
         }
-    });
-
+    }, lifetime: ServiceLifetime.Scoped)
+    .AddOptionAStorageServices(ServiceLifetime.Scoped);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -14,10 +14,22 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionASplitter(this IServiceCollection services, Action<SplitterOptions>? configuration = null)
+    public static IServiceCollection AddOptionASplitter(this IServiceCollection services, Action<SplitterOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services.TryAddSingleton<ISplitterDataProvider>(provider => new SplitterDataProvider(configuration));
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services.TryAddSingleton<ISplitterDataProvider>(provider => new SplitterDataProvider(configuration));
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services.TryAddScoped<ISplitterDataProvider>(provider => new SplitterDataProvider(configuration));
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
 
         return services;
     }
@@ -27,11 +39,10 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapSplitter(this IServiceCollection services, Action<SplitterOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapSplitter(this IServiceCollection services, Action<SplitterOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services.TryAddSingleton<ISplitterDataProvider>(provider => new SplitterDataProvider(configuration));
-
-        return services;
+        return AddOptionASplitter(services, configuration, lifetime);
     }
 }

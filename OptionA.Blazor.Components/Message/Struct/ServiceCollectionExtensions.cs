@@ -8,27 +8,44 @@ public partial class ServiceCollectionExtensions
 {
 
     /// <summary>
-    /// Adds a singleton <see cref="IMessageBoxDataProvider"/> to the service collection for use in the OptAMessageBox component
+    /// Adds a <see cref="IMessageBoxDataProvider"/> to the service collection for use in the OptAMessageBox component with the provided configuration and lifetime
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionAMessageBox(this IServiceCollection services, Action<MessageBoxOptions>? configuration = null)
+    public static IServiceCollection AddOptionAMessageBox(this IServiceCollection services, Action<MessageBoxOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services
-            .TryAddSingleton<IMessageBoxDataProvider>(provider => new MessageBoxDataProvider(configuration));
-        services
-            .TryAddSingleton<IMessageService, MessageService>();
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services
+                .TryAddSingleton<IMessageBoxDataProvider>(provider => new MessageBoxDataProvider(configuration));
+            services
+                .TryAddSingleton<IMessageService, MessageService>();
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services
+                .TryAddScoped<IMessageBoxDataProvider>(provider => new MessageBoxDataProvider(configuration));
+            services
+                .TryAddScoped<IMessageService, MessageService>();
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
+
         return services;
     }
 
     /// <summary>
-    /// Adds a singleton <see cref="IMenuDataProvider"/> to the service collection for use in the OptAMessageBox component, prefilled with bootstrap (5.3) classes
+    /// Adds a <see cref="IMenuDataProvider"/> to the service collection for use in the OptAMessageBox component, prefilled with bootstrap (5.3) classes with the provided configuration and lifetime
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be set after applying bootstrap config</param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapMessageBox(this IServiceCollection services, Action<MessageBoxOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapMessageBox(this IServiceCollection services, Action<MessageBoxOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         void bootstrapConfig(MessageBoxOptions options)
         {
@@ -58,6 +75,6 @@ public partial class ServiceCollectionExtensions
             configuration?.Invoke(options);
         }
 
-        return AddOptionAMessageBox(services, bootstrapConfig);
+        return AddOptionAMessageBox(services, bootstrapConfig, lifetime);
     }
 }

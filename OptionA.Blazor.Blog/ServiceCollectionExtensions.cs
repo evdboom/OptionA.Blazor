@@ -17,13 +17,28 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABlog(this IServiceCollection services, Action<OptABlogOptions>? configuration = null)
+    public static IServiceCollection AddOptionABlog(this IServiceCollection services, Action<OptABlogOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services
-            .AddSingleton<IBuilderService, BuilderService>()
-            .AddSingleton<IMarkDownParser, MarkDownParser>()
-            .AddSingleton<IBlogDataProvider>(provider => new BlogDataProvider(configuration));
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services
+                .AddSingleton<IBuilderService, BuilderService>()
+                .AddSingleton<IMarkDownParser, MarkDownParser>()
+                .AddSingleton<IBlogDataProvider>(provider => new BlogDataProvider(configuration));
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services
+                .AddScoped<IBuilderService, BuilderService>()
+                .AddScoped<IMarkDownParser, MarkDownParser>()
+                .AddScoped<IBlogDataProvider>(provider => new BlogDataProvider(configuration));
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
 
         var interfaces = new[]
         {
@@ -46,8 +61,16 @@ public static class ServiceCollectionExtensions
 
         foreach (var type in types)
         {
-            services
-                .AddSingleton(type.Interface!, type.Type);
+            if (lifetime == ServiceLifetime.Singleton)
+            {
+                services
+                    .AddSingleton(type.Interface!, type.Type);
+            }
+            else if (lifetime == ServiceLifetime.Scoped)
+            {
+                services
+                    .AddScoped(type.Interface!, type.Type);
+            }
         }
 
         return services;
@@ -58,15 +81,16 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapBlog(this IServiceCollection services, Action<OptABlogOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapBlog(this IServiceCollection services, Action<OptABlogOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var bootstrapConfig = (OptABlogOptions options) =>
         {
             configuration?.Invoke(options);
         };
 
-        return AddOptionABlog(services, bootstrapConfig);
+        return AddOptionABlog(services, bootstrapConfig, lifetime);
     }
 
     private static Type? GetValidInterface(Type type, Type[] interfaces)

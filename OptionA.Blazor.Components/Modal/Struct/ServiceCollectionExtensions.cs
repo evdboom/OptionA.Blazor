@@ -14,10 +14,24 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionAModal(this IServiceCollection services, Action<ModalOptions>? configuration = null)
+    public static IServiceCollection AddOptionAModal(this IServiceCollection services, Action<ModalOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services.TryAddSingleton<IModalDataProvider>(provider => new ModalDataProvider(configuration));
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services
+                .TryAddSingleton<IModalDataProvider>(provider => new ModalDataProvider(configuration));
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services
+                .TryAddScoped<IModalDataProvider>(provider => new ModalDataProvider(configuration));
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
 
         return services;
     }
@@ -28,8 +42,9 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapModal(this IServiceCollection services, Action<ModalOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapModal(this IServiceCollection services, Action<ModalOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {            
         var bootstrapConfig = (ModalOptions options) =>
         {
@@ -49,6 +64,6 @@ public static partial class ServiceCollectionExtensions
             configuration?.Invoke(options);
         };
 
-        return AddOptionAModal(services, bootstrapConfig);
+        return AddOptionAModal(services, bootstrapConfig, lifetime);
     }
 }
