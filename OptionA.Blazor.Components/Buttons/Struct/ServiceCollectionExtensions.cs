@@ -37,7 +37,7 @@ public static partial class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds a singleton <see cref="IButtonDataProvider"/> to the service collection for use in the OptAButtons, prefilled with bootstrap (5.3) classes
+    /// Adds a <see cref="IButtonDataProvider"/> with the specified lifetime to the service collection for use in the OptAButtons, prefilled with bootstrap (5.3) classes
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
