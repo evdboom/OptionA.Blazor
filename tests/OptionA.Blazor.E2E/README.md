@@ -9,7 +9,7 @@ This project contains automated E2E tests that validate the behavior of OptionA.
 ## Prerequisites
 
 - .NET 10.0 SDK or later
-- Node.js (for Playwright browser installation)
+- PowerShell (for running Playwright installation script)
 
 ## Getting Started
 
@@ -19,10 +19,10 @@ Before running the tests for the first time, you need to install the Playwright 
 
 ```powershell
 # Build the E2E project first
-dotnet build tests/OptionA.Blazor.E2E/OptionA.Blazor.E2E.csproj
+dotnet build tests/OptionA.Blazor.E2E/OptionA.Blazor.E2E.csproj --configuration Release
 
-# Install Playwright browsers
-pwsh tests/OptionA.Blazor.E2E/bin/Debug/net10.0/playwright.ps1 install
+# Install Playwright browsers (Chromium is used for tests)
+pwsh tests/OptionA.Blazor.E2E/bin/Release/net10.0/playwright.ps1 install --with-deps chromium
 ```
 
 Alternatively, you can use the NPX method:
@@ -113,7 +113,6 @@ The E2E test suite covers the following scenarios:
 
 ### 3. Navigation Flow
 - Tests navigation between pages
-- Verifies correct page titles
 - Ensures navigation state is preserved
 - Tests for both WebAssembly and Server modes
 
@@ -129,6 +128,27 @@ E2E tests are automatically run in GitHub Actions on pull requests to the main b
 
 See `.github/workflows/build-and-test.yml` for the full CI configuration.
 
+## Architecture
+
+### Fixtures
+
+The test infrastructure uses xUnit collection fixtures to manage application lifecycle:
+
+- **BlazorAppFixture**: Base fixture that handles starting/stopping test applications
+- **WebAssemblyAppFixture**: Manages the Blazor WebAssembly test app using `dotnet run`
+- **ServerAppFixture**: Manages the Blazor Server test app using `dotnet run`
+
+Both fixtures use dynamic port allocation (`http://127.0.0.1:0`) to avoid port conflicts and run applications without publishing for faster test execution.
+
+### Page Objects
+
+Page objects encapsulate UI interactions and provide a clean API for tests:
+
+- **HomePage**: Interactions with the home/landing page
+- **ButtonsPage**: Interactions with the buttons test page
+
+Page objects handle waiting for elements, navigation, and querying the DOM.
+
 ## Troubleshooting
 
 ### Playwright Browsers Not Found
@@ -142,16 +162,16 @@ See `.github/workflows/build-and-test.yml` for the full CI configuration.
 **Issue:** Tests fail with timeout errors
 
 **Solutions:**
-- Increase timeout values in test code if necessary
-- Check that the test applications are building correctly
-- Ensure no other processes are using the required ports
-- Run tests with `--verbosity detailed` to see detailed logs
+- Increase timeout values in page object methods if necessary
+- Check that the test applications (OptionA.Blazor.Test and OptionA.Blazor.Server.Test) build correctly
+- Ensure no other processes are using required ports
+- Run tests with `--verbosity detailed` to see detailed logs including app output
 
 ### Port Already in Use
 
 **Issue:** Application fails to start because port is in use
 
-**Solution:** The test fixtures use dynamic port allocation (`--urls=http://localhost:0`), but if you encounter issues, check for processes holding ports and terminate them.
+**Solution:** The test fixtures use dynamic port allocation (`http://127.0.0.1:0`), which should automatically find an available port. If issues persist, check for zombie processes and terminate them.
 
 ### Browser Launch Failures
 
@@ -167,8 +187,18 @@ See `.github/workflows/build-and-test.yml` for the full CI configuration.
 **Issue:** E2E tests fail because test applications don't build
 
 **Solution:**
-- Manually build the test applications: `dotnet build OptionA.Blazor.Test` and `dotnet build OptionA.Blazor.Server.Test`
+- Manually build the test applications first:
+  ```powershell
+  dotnet build OptionA.Blazor.Test --configuration Release
+  dotnet build OptionA.Blazor.Server.Test --configuration Release
+  ```
 - Check for build errors and resolve them before running E2E tests
+
+### Dynamic Port Binding Error
+
+**Issue:** `Dynamic port binding is not supported when binding to localhost`
+
+**Solution:** This is a .NET 10 requirement. The fixtures already use `http://127.0.0.1:0` instead of `http://localhost:0`. If you see this error, verify that your fixture uses the correct URL format.
 
 ## Adding New Tests
 
@@ -177,7 +207,7 @@ To add new E2E tests:
 1. Create a new test class in the `Tests/` folder
 2. Inherit from `PlaywrightTestBase`
 3. Add the `[Trait("Category", "E2E")]` attribute
-4. Use the `[Collection]` attribute to specify which app fixture to use
+4. Use the `[Collection]` attribute to specify which app fixture to use (WebAssemblyCollection or ServerCollection)
 5. Follow the Given/When/Then naming convention
 6. Create page objects in `PageObjects/` for new pages as needed
 
@@ -211,19 +241,27 @@ To debug tests in Visual Studio or VS Code:
 
 1. Set a breakpoint in your test
 2. Use "Debug Test" from the test explorer
-3. The browser will launch in non-headless mode for easier inspection
+3. The browser will launch in headless mode by default
 
-To run tests in non-headless mode from CLI, modify `PlaywrightTestBase.cs` and set `Headless = false`.
+To run tests in non-headless mode for easier inspection, modify `PlaywrightTestBase.cs` and set `Headless = false` in the `LaunchAsync` options.
 
 ## Performance Considerations
 
 - E2E tests are slower than unit tests by nature
 - Tests share application instances via xUnit collection fixtures to improve performance
 - Each test gets its own browser context and page to ensure isolation
-- Consider running E2E tests in parallel with `dotnet test --parallel`
+- Applications run using `dotnet run --no-build` to avoid repeated publishing overhead
+- Dynamic port allocation prevents port conflicts when running tests in parallel
+
+## Known Limitations
+
+- Page titles may be empty in some Blazor Server scenarios - tests have been adjusted to not rely on specific titles
+- Some OptionA components that depend on `IJSRuntime` may have limited functionality in Server mode due to service lifetime differences
+- Tests use Chromium browser only (other browsers can be added if needed)
 
 ## Further Reading
 
 - [Playwright for .NET Documentation](https://playwright.dev/dotnet/)
 - [xUnit Documentation](https://xunit.net/)
 - [Blazor Testing Best Practices](https://learn.microsoft.com/en-us/aspnet/core/blazor/test)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
