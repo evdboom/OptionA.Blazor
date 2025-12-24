@@ -15,18 +15,17 @@ public class ButtonsPage
 
     public async Task NavigateAsync(string baseUrl)
     {
-        await _page.GotoAsync($"{baseUrl}{ButtonsPageUrl}");
+        await _page.GotoAsync($"{baseUrl}{ButtonsPageUrl}", new PageGotoOptions { WaitUntil = WaitUntilState.NetworkIdle, Timeout = 30000 });
     }
 
     public async Task<bool> IsLoadedAsync()
     {
-        // Wait for the OptAButtonBar component to be present
-        var buttonBar = await _page.WaitForSelectorAsync("button", new PageWaitForSelectorOptions
-        {
-            State = WaitForSelectorState.Attached,
-            Timeout = 10000
-        });
-        return buttonBar != null;
+        // Wait for page to load
+        await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded, new PageWaitForLoadStateOptions { Timeout = 15000 });
+        
+        // Check for button elements to be present
+        var button = await _page.QuerySelectorAsync("button");
+        return button != null;
     }
 
     public async Task<string> GetClickCountTextAsync()

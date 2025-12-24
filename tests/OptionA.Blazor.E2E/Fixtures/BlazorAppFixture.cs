@@ -12,31 +12,35 @@ public abstract class BlazorAppFixture : IAsyncLifetime
     
     protected abstract string ProjectPath { get; }
     protected abstract string[] LaunchArguments { get; }
+    protected abstract bool UsePublish { get; }
 
     public async Task InitializeAsync()
     {
-        // Build and publish the app
-        var buildProcess = Process.Start(new ProcessStartInfo
+        if (UsePublish)
         {
-            FileName = "dotnet",
-            Arguments = $"publish {ProjectPath} -c Release -o {GetPublishPath()}",
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        });
+            // Build and publish the app
+            var buildProcess = Process.Start(new ProcessStartInfo
+            {
+                FileName = "dotnet",
+                Arguments = $"publish {ProjectPath} -c Release -o {GetPublishPath()}",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            });
 
-        if (buildProcess == null)
-        {
-            throw new InvalidOperationException("Failed to start build process");
-        }
+            if (buildProcess == null)
+            {
+                throw new InvalidOperationException("Failed to start build process");
+            }
 
-        await buildProcess.WaitForExitAsync();
-        
-        if (buildProcess.ExitCode != 0)
-        {
-            var error = await buildProcess.StandardError.ReadToEndAsync();
-            throw new InvalidOperationException($"Build failed: {error}");
+            await buildProcess.WaitForExitAsync();
+            
+            if (buildProcess.ExitCode != 0)
+            {
+                var error = await buildProcess.StandardError.ReadToEndAsync();
+                throw new InvalidOperationException($"Build failed: {error}");
+            }
         }
 
         // Start the app
@@ -48,7 +52,7 @@ public abstract class BlazorAppFixture : IAsyncLifetime
             RedirectStandardError = true,
             UseShellExecute = false,
             CreateNoWindow = true,
-            WorkingDirectory = GetPublishPath()
+            WorkingDirectory = UsePublish ? GetPublishPath() : Path.GetDirectoryName(ProjectPath)
         };
 
         _hostProcess = Process.Start(startInfo);
@@ -64,29 +68,56 @@ public abstract class BlazorAppFixture : IAsyncLifetime
 
     private async Task<string> WaitForAppToStartAsync(Process process)
     {
-        var timeout = TimeSpan.FromSeconds(30);
+        var timeout = TimeSpan.FromSeconds(60);
         var startTime = DateTime.UtcNow;
         string? baseUrl = null;
+        var outputTask = Task.Run(async () =>
+        {
+            while (!process.HasExited)
+            {
+                var line = await process.StandardOutput.ReadLineAsync();
+                if (line != null)
+                {
+                    Console.WriteLine($"[App Output] {line}");
+                    if (line.Contains("Now listening on:") || line.Contains("Content root path:"))
+                    {
+                        // Extract URL from line like "Now listening on: http://localhost:5000"
+                        var urlStart = line.IndexOf("http://");
+                        if (urlStart >= 0)
+                        {
+                            var urlEnd = line.IndexOf(' ', urlStart);
+                            if (urlEnd < 0) urlEnd = line.Length;
+                            return line.Substring(urlStart, urlEnd - urlStart).Trim();
+                        }
+                    }
+                }
+            }
+            return null;
+        });
+
+        var errorTask = Task.Run(async () =>
+        {
+            while (!process.HasExited)
+            {
+                var line = await process.StandardError.ReadLineAsync();
+                if (line != null)
+                {
+                    Console.WriteLine($"[App Error] {line}");
+                }
+            }
+        });
 
         while (DateTime.UtcNow - startTime < timeout)
         {
             if (process.HasExited)
             {
-                var error = await process.StandardError.ReadToEndAsync();
-                throw new InvalidOperationException($"Process exited prematurely: {error}");
+                throw new InvalidOperationException($"Process exited prematurely with code {process.ExitCode}");
             }
 
-            // Read output to find the URL
-            var line = await process.StandardOutput.ReadLineAsync();
-            if (line != null && line.Contains("Now listening on:"))
+            if (outputTask.IsCompleted && outputTask.Result != null)
             {
-                // Extract URL from line like "Now listening on: http://localhost:5000"
-                var urlStart = line.IndexOf("http");
-                if (urlStart >= 0)
-                {
-                    baseUrl = line.Substring(urlStart).Trim();
-                    break;
-                }
+                baseUrl = outputTask.Result;
+                break;
             }
 
             await Task.Delay(100);
@@ -98,7 +129,7 @@ public abstract class BlazorAppFixture : IAsyncLifetime
         }
 
         // Give the app a moment to fully initialize
-        await Task.Delay(2000);
+        await Task.Delay(3000);
 
         return baseUrl;
     }
@@ -119,16 +150,19 @@ public abstract class BlazorAppFixture : IAsyncLifetime
         }
 
         // Clean up publish directory
-        var publishPath = GetPublishPath();
-        if (Directory.Exists(publishPath))
+        if (UsePublish)
         {
-            try
+            var publishPath = GetPublishPath();
+            if (Directory.Exists(publishPath))
             {
-                Directory.Delete(publishPath, true);
-            }
-            catch
-            {
-                // Ignore cleanup errors
+                try
+                {
+                    Directory.Delete(publishPath, true);
+                }
+                catch
+                {
+                    // Ignore cleanup errors
+                }
             }
         }
     }

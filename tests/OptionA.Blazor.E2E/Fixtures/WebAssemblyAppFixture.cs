@@ -2,6 +2,7 @@ namespace OptionA.Blazor.E2E.Fixtures;
 
 /// <summary>
 /// Fixture for running E2E tests against the Blazor WebAssembly test application.
+/// WebAssembly apps require a static file server to host the published content.
 /// </summary>
 public class WebAssemblyAppFixture : BlazorAppFixture
 {
@@ -9,7 +10,9 @@ public class WebAssemblyAppFixture : BlazorAppFixture
         Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "OptionA.Blazor.Test", "OptionA.Blazor.Test.csproj"));
 
     protected override string[] LaunchArguments =>
-        new[] { "OptionA.Blazor.Test.dll", "--urls=http://localhost:0" };
+        new[] { "run", "--project", ProjectPath, "--no-build", "--configuration", "Release", "--urls=http://127.0.0.1:0" };
+    
+    protected override bool UsePublish => false;
 }
 
 /// <summary>

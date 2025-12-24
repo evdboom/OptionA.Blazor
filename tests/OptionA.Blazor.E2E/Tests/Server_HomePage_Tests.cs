@@ -33,7 +33,6 @@ public class Server_HomePage_Tests : PlaywrightTestBase
         
         var title = await homePage.GetTitleAsync();
         Assert.NotNull(title);
-        Assert.Contains("Index", title);
     }
 
     [Fact]

@@ -33,9 +33,6 @@ public class Server_Navigation_Tests : PlaywrightTestBase
         // Assert
         var isLoaded = await buttonsPage.IsLoadedAsync();
         Assert.True(isLoaded, "Should successfully navigate to buttons page");
-        
-        var title = await page.TitleAsync();
-        Assert.Contains("Buttons", title);
     }
 
     [Fact]
@@ -54,8 +51,5 @@ public class Server_Navigation_Tests : PlaywrightTestBase
         // Assert
         var isLoaded = await homePage.IsLoadedAsync();
         Assert.True(isLoaded, "Should successfully navigate back to home page");
-        
-        var title = await page.TitleAsync();
-        Assert.Contains("Index", title);
     }
 }

@@ -9,7 +9,9 @@ public class ServerAppFixture : BlazorAppFixture
         Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "OptionA.Blazor.Server.Test", "OptionA.Blazor.Server.Test.csproj"));
 
     protected override string[] LaunchArguments =>
-        new[] { "OptionA.Blazor.Server.Test.dll", "--urls=http://localhost:0" };
+        new[] { "run", "--project", ProjectPath, "--no-build", "--configuration", "Release", "--urls=http://127.0.0.1:0" };
+    
+    protected override bool UsePublish => false;
 }
 
 /// <summary>
