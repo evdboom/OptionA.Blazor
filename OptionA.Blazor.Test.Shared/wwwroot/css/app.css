@@ -1,0 +1,158 @@
+@import url('icons/bootstrap-icons.css');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.opta-blog {
+    font-family: "Exo 2", "Open Sans", "Sans Serif Collection", "Segoe UI Variable Text", Calibri;
+}
+
+[loader] {
+    height: 15%;
+    width: 100%;
+    position: absolute;
+    top: 35%;
+    text-align: center;
+}
+
+[loader] svg {
+    height: 100%;
+    filter: drop-shadow(3px 3px 3px rgba(0,0,0,.7));
+}
+
+#a-outline {
+    fill: var(--oa-inverse-main-color);
+}
+
+#a-fill {
+    fill: var(--oa-main-color);
+}
+
+#fill-rect {
+    height: calc(100% - var(--blazor-load-percentage));
+}
+
+[loader-text]::after {
+    content: var(--blazor-load-percentage-text);
+    font-weight: 700;
+    color: var(--oa-main-color);
+    text-shadow: 3px 3px 3px rgba(0,0,0,.7);
+}
+
+[loader-text] {
+    margin-top: -1.5em;
+}
+
+.opta-bg {
+    background-color: var(--oa-main-color);
+    color: var(--oa-inverse-main-color);
+}
+
+.top-60 {
+    top: 60px;
+}
+
+.opta-dropdown {
+    transition: height 250ms ease-in-out;
+}
+
+.opta-dropdown li:hover {
+    background-color: var(--oa-main-hover-color);
+}
+
+.opta-menu-item {
+    padding-left: .5em;
+    padding-right: .5em;
+}
+
+[opta-carousel-image] {
+    max-height: 300px;
+}
+
+[opta-carousel-slide] {
+    background-color: var(--oa-main-active-color);
+    padding: 2em;
+}
+
+[opta-thumbnail-title] {
+    text-align: center;
+}
+
+[opta-thumbnail-image] img {
+    max-height: 75px;
+}
+
+[opta-thumbnail-image], [opta-gallery-image] {
+    background-color: var(--oa-main-active-color);
+    padding: 2em;
+}
+
+.carousel-image {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-left: 15%;
+    margin-right: 15%;
+    transform: translateY(-50%);
+    text-align: center;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: rgba(255,255,255,.5);
+}
+
+[auto-grow]::after {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    width: 100%;
+}
+
+.no-border {
+    border: 0;
+}
+
+.btn-primary {
+    --bs-btn-color: var(--oa-inverse-main-color);
+    --bs-btn-bg: var(--oa-main-color);
+    --bs-btn-border-color: var(--oa-main-color);
+    --bs-btn-hover-color: var(--oa-inverse-main-color);
+    --bs-btn-hover-bg: var(--oa-main-hover-color);
+    --bs-btn-hover-border-color: var(--oa-main-hover-color);
+    --bs-btn-focus-shadow-rgb: 49,132,253;
+    --bs-btn-active-color: var(--oa-inverse-main-color);
+    --bs-btn-active-bg: var(--oa-main-active-color);
+    --bs-btn-active-border-color: var(--oa-main-active-color);
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: var(--oa-inverse-main-color);
+    --bs-btn-disabled-bg: var(--oa-main-color);
+    --bs-btn-disabled-border-color: var(--oa-main-color);
+}
+
+:root {
+    --oa-code-keyword: #569cd6;
+    --oa-code-controlkeyword: #d8a0df;
+    --oa-code-string: #ce9178;
+    --oa-code-method: #dcdcaa;
+    --oa-code-comment: #63b456;
+    --oa-code-attribute: #9cdcfe;
+    --oa-code-tagdelimiter: #808080;
+    --oa-code-directive: #a699e6;
+    --oa-code-component: #0096aa;
+    --oa-code-background: #1e1e1e;
+    --oa-code-headerbackground: #3f3f3f;
+    --oa-code-color: #dcdcdc;
+    --oa-code-selected: rgba(51, 153, 255, .5);
+    --oa-code-class: #4ec9b0;
+    --oa-code-struct: #86c691;
+    --oa-code-enum: #b8d7a3;
+    --oa-code-interface: #b8d7a3;
+    --oa-main-color: #2a125e;
+    --oa-inverse-main-color: #f5f5f5;
+    --oa-main-hover-color: #3e2672;
+    --oa-main-active-color: #5c4490;
+}
