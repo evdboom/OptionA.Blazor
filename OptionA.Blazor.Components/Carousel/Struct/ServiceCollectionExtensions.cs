@@ -14,11 +14,24 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionACarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null)
+    public static IServiceCollection AddOptionACarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services
-            .TryAddSingleton<ICarouselDataProvider>(provider => new CarouselDataProvider(configuration));
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services
+                .TryAddSingleton<ICarouselDataProvider>(provider => new CarouselDataProvider(configuration));
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services
+                .TryAddScoped<ICarouselDataProvider>(provider => new CarouselDataProvider(configuration));
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
 
         return services;
     }
@@ -28,8 +41,9 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapCarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapCarousel(this IServiceCollection services, Action<CarouselOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var bootstrapConfig = (CarouselOptions options) =>
         {
@@ -47,6 +61,6 @@ public static partial class ServiceCollectionExtensions
             configuration?.Invoke(options);
         };
 
-        return AddOptionACarousel(services, bootstrapConfig);
+        return AddOptionACarousel(services, bootstrapConfig, lifetime);
     }
 }

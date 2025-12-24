@@ -9,29 +9,44 @@ namespace OptionA.Blazor.Components;
 public static partial class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds a Singleton <see cref="IResponsiveService"/> to the service collection, after which it can be injected or used through <see cref="OptAResponsive"/> component
+    /// Adds a <see cref="IResponsiveService"/> to the service collection, after which it can be injected or used through <see cref="OptAResponsive"/> component with the provided configuration options and lifetime
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionAResponsive(this IServiceCollection services, Action<ResponsiveOptions>? configuration = null)
+    public static IServiceCollection AddOptionAResponsive(this IServiceCollection services, Action<ResponsiveOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services
-            .TryAddSingleton<IResponsiveDataProvider>(provider => new ResponsiveDataProvider(configuration));
-        services               
-            .TryAddSingleton<IResponsiveService, ResponsiveService>();
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services
+                .TryAddSingleton<IResponsiveDataProvider>(provider => new ResponsiveDataProvider(configuration));
+            services
+                .TryAddSingleton<IResponsiveService, ResponsiveService>();
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services
+                .TryAddScoped<IResponsiveDataProvider>(provider => new ResponsiveDataProvider(configuration));
+            services
+                .TryAddScoped<IResponsiveService, ResponsiveService>();
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
 
         return services;
-
     }
 
     /// <summary>
-    /// Adds a Singleton <see cref="IResponsiveService"/> to the service collection, with the thresholds filled with the bootstrap thresholds, after which it can be injected or used through <see cref="OptAResponsive"/> component
+    /// Adds a <see cref="IResponsiveService"/> to the service collection, with the thresholds filled with the bootstrap thresholds, after which it can be injected or used through <see cref="OptAResponsive"/> component with the provided configuration options and lifetime
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapResponsive(this IServiceCollection services, Action<ResponsiveOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapResponsive(this IServiceCollection services, Action<ResponsiveOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var bootstrapConfig = (ResponsiveOptions options) =>
         {
@@ -48,6 +63,6 @@ public static partial class ServiceCollectionExtensions
             configuration?.Invoke(options);
         };
 
-        return AddOptionAResponsive(services, bootstrapConfig);
+        return AddOptionAResponsive(services, bootstrapConfig, lifetime);
     }
 }

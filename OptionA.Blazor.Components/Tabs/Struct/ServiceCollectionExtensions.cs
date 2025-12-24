@@ -14,10 +14,22 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionATabs(this IServiceCollection services, Action<TabsOptions>? configuration = null)
+    public static IServiceCollection AddOptionATabs(this IServiceCollection services, Action<TabsOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services.TryAddSingleton<ITabsDataProvider>(provider => new TabsDataProvider(configuration));
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services.TryAddSingleton<ITabsDataProvider>(provider => new TabsDataProvider(configuration));
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services.TryAddScoped<ITabsDataProvider>(provider => new TabsDataProvider(configuration));
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
 
         return services;
     }
@@ -27,8 +39,9 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapTabs(this IServiceCollection services, Action<TabsOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapTabs(this IServiceCollection services, Action<TabsOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         void bootstrapConfig(TabsOptions options)
         {
@@ -40,6 +53,6 @@ public static partial class ServiceCollectionExtensions
             configuration?.Invoke(options);
         }
 
-        return AddOptionATabs(services, bootstrapConfig);
+        return AddOptionATabs(services, bootstrapConfig, lifetime);
     }
 }

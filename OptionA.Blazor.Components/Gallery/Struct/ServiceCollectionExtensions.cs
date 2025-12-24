@@ -14,22 +14,36 @@ public static partial class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionAGallery(this IServiceCollection services, Action<GalleryOptions>? configuration = null)
+    public static IServiceCollection AddOptionAGallery(this IServiceCollection services, Action<GalleryOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services
-            .TryAddSingleton<IGalleryDataProvider>(provider => new GalleryDataProvider(configuration));
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services
+                .TryAddSingleton<IGalleryDataProvider>(provider => new GalleryDataProvider(configuration));
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services
+                .TryAddScoped<IGalleryDataProvider>(provider => new GalleryDataProvider(configuration));
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
 
         return services;
-    }
+    } 
 
     /// <summary>
     /// Adds default bootstrap (5.3) classes and icon for use of gallery
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapGallery(this IServiceCollection services, Action<GalleryOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapGallery(this IServiceCollection services, Action<GalleryOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var bootstrapConfig = (GalleryOptions options) =>
         {
@@ -45,6 +59,6 @@ public static partial class ServiceCollectionExtensions
             configuration?.Invoke(options);
         };
 
-        return AddOptionAGallery(services, bootstrapConfig);
+        return AddOptionAGallery(services, bootstrapConfig, lifetime);
     }
 }

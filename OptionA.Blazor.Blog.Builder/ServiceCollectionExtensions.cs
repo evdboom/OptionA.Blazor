@@ -14,15 +14,30 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services"></param>
     /// <param name="configuration"></param>
+    /// <param name="lifetime"></param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null)
+    public static IServiceCollection AddOptionABlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
-        services
-            .TryAddSingleton<IBuilderService, BuilderService>();
-        services
-            .TryAddSingleton<IBlogBuilderDataProvider>(provider => new BlogBuilderDataProvider(configuration));
+        if (lifetime == ServiceLifetime.Singleton)
+        {
+            services
+                .TryAddSingleton<IBuilderService, BuilderService>();
+            services
+                .TryAddSingleton<IBlogBuilderDataProvider>(provider => new BlogBuilderDataProvider(configuration));
+        }
+        else if (lifetime == ServiceLifetime.Scoped)
+        {
+            services
+                .TryAddScoped<IBuilderService, BuilderService>();
+            services
+                .TryAddScoped<IBlogBuilderDataProvider>(provider => new BlogBuilderDataProvider(configuration));
+        }
+        else
+        {
+            throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
+        }
 
-        return services;
+        return services;    
     }
 
 
@@ -32,7 +47,7 @@ public static class ServiceCollectionExtensions
     /// <param name="services"></param>
     /// <param name="configuration">Additional configuration to be applied after setting bootstrap config</param>
     /// <returns></returns>
-    public static IServiceCollection AddOptionABootstrapBlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null)
+    public static IServiceCollection AddOptionABootstrapBlogBuilder(this IServiceCollection services, Action<OptABlogBuilderOptions>? configuration = null, ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var bootstrapConfig = (OptABlogBuilderOptions options) =>
         {
@@ -189,7 +204,7 @@ public static class ServiceCollectionExtensions
             configuration?.Invoke(options);
         };
 
-        return AddOptionABlogBuilder(services, bootstrapConfig);
+        return AddOptionABlogBuilder(services, bootstrapConfig, lifetime);
     }
 
 
