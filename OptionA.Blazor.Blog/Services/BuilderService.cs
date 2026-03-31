@@ -1,6 +1,6 @@
-﻿using OptionA.Blazor.Blog.Core.Extensions;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System.Text.Json;
+using OptionA.Blazor.Blog.Core.Extensions;
 
 namespace OptionA.Blazor.Blog.Services;
 
@@ -31,7 +31,8 @@ public class BuilderService : IBuilderService
     /// <inheritdoc/>
     public Post CreateFromJson(string json)
     {
-        var items = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json) 
+        var items =
+            JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json)
             ?? throw new InvalidCastException("No valid json for post");
 
         var post = new Post();
@@ -53,13 +54,14 @@ public class BuilderService : IBuilderService
         }
         if (items.TryGetValue(nameof(Post.Content), out var content))
         {
-            var contentList = JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(content);
+            var contentList = JsonSerializer.Deserialize<List<Dictionary<string, JsonElement>>>(
+                content
+            );
             foreach (var contentItem in contentList!)
             {
                 post.Content.Add(CreateFromJson(contentItem));
             }
         }
-
 
         return post;
     }
@@ -213,8 +215,16 @@ public class BuilderService : IBuilderService
                     result[nameof(table.Footer)] = table.Footer;
                 }
                 break;
+            case ContentType.ContentGroup:
+                var contentGroup = (ContentGroupContent)content;
+                if (contentGroup.Content.Any())
+                {
+                    result[nameof(contentGroup.Content)] = contentGroup.Content.Select(
+                        ToJsonDictionary
+                    );
+                }
+                break;
         }
-
 
         return result;
     }
@@ -252,7 +262,7 @@ public class BuilderService : IBuilderService
                     : string.Empty,
                 Language = content.TryGetValue(nameof(CodeContent.Language), out var language)
                     ? JsonSerializer.Deserialize<CodeLanguage>(language)
-                    : CodeLanguage.Other
+                    : CodeLanguage.Other,
             },
             ContentType.Header => new HeaderContent
             {
@@ -261,7 +271,7 @@ public class BuilderService : IBuilderService
                     : default,
                 Size = content.TryGetValue(nameof(HeaderContent.Size), out var size)
                     ? JsonSerializer.Deserialize<HeaderSize>(size)
-                    : HeaderSize.One
+                    : HeaderSize.One,
             },
             ContentType.Icon => new IconContent
             {
@@ -274,7 +284,10 @@ public class BuilderService : IBuilderService
                 Height = content.TryGetValue(nameof(IconContent.Height), out var height)
                     ? JsonSerializer.Deserialize<string>(height) ?? string.Empty
                     : default,
-                ViewBoxValues = content.TryGetValue(nameof(IconContent.ViewBoxValues), out var viewbox)
+                ViewBoxValues = content.TryGetValue(
+                    nameof(IconContent.ViewBoxValues),
+                    out var viewbox
+                )
                     ? JsonSerializer.Deserialize<int[]>(viewbox) ?? new int[4]
                     : new int[4],
                 Mode = content.TryGetValue(nameof(IconContent.Mode), out var mode)
@@ -289,13 +302,22 @@ public class BuilderService : IBuilderService
                 Source = content.TryGetValue(nameof(QuoteContent.Source), out var source)
                     ? JsonSerializer.Deserialize<string>(source) ?? string.Empty
                     : default,
-                AdditionalSourceClasses = content.TryGetValue(nameof(QuoteContent.AdditionalSourceClasses), out var sourceClasses)
+                AdditionalSourceClasses = content.TryGetValue(
+                    nameof(QuoteContent.AdditionalSourceClasses),
+                    out var sourceClasses
+                )
                     ? JsonSerializer.Deserialize<List<string>>(sourceClasses) ?? []
                     : [],
-                RemovedSourceClasses = content.TryGetValue(nameof(QuoteContent.RemovedSourceClasses), out var removedClasses)
+                RemovedSourceClasses = content.TryGetValue(
+                    nameof(QuoteContent.RemovedSourceClasses),
+                    out var removedClasses
+                )
                     ? JsonSerializer.Deserialize<List<string>>(removedClasses) ?? []
                     : [],
-                SourceAttributes = content.TryGetValue(nameof(QuoteContent.SourceAttributes), out var sourceAttributes)
+                SourceAttributes = content.TryGetValue(
+                    nameof(QuoteContent.SourceAttributes),
+                    out var sourceAttributes
+                )
                     ? DeserializeAttributes(sourceAttributes)
                     : [],
             },
@@ -307,7 +329,10 @@ public class BuilderService : IBuilderService
                 Title = content.TryGetValue(nameof(ImageContent.Title), out var title)
                     ? JsonSerializer.Deserialize<string>(title) ?? string.Empty
                     : default,
-                Alternative = content.TryGetValue(nameof(ImageContent.Alternative), out var alternative)
+                Alternative = content.TryGetValue(
+                    nameof(ImageContent.Alternative),
+                    out var alternative
+                )
                     ? JsonSerializer.Deserialize<string>(alternative) ?? string.Empty
                     : default,
             },
@@ -347,7 +372,20 @@ public class BuilderService : IBuilderService
                     ? JsonSerializer.Deserialize<List<string>>(footer) ?? []
                     : [],
             },
-            _ => throw new NotSupportedException($"Cannot create postcontent for type {type}")
+            ContentType.ContentGroup => new ContentGroupContent
+            {
+                Content = content.TryGetValue(
+                    nameof(ContentGroupContent.Content),
+                    out var contentGroupContent
+                )
+                    ? JsonSerializer
+                        .Deserialize<List<Dictionary<string, JsonElement>>>(contentGroupContent)
+                        ?.Select(CreateFromJson)
+                        .ToList()
+                        ?? []
+                    : [],
+            },
+            _ => throw new NotSupportedException($"Cannot create postcontent for type {type}"),
         };
 
         if (result is TextContent text)
@@ -359,7 +397,9 @@ public class BuilderService : IBuilderService
 
         if (content.TryGetValue(nameof(IContent.AdditionalClasses), out var additional))
         {
-            result.AdditionalClasses.AddRange(JsonSerializer.Deserialize<List<string>>(additional) ?? []);
+            result.AdditionalClasses.AddRange(
+                JsonSerializer.Deserialize<List<string>>(additional) ?? []
+            );
         }
         if (content.TryGetValue(nameof(IContent.RemovedClasses), out var removed))
         {
@@ -392,7 +432,7 @@ public class BuilderService : IBuilderService
                     JsonValueKind.True => true,
                     JsonValueKind.False => false,
                     JsonValueKind.Null => null,
-                    _ => throw new NotSupportedException("Unsupported valuetype")
+                    _ => throw new NotSupportedException("Unsupported valuetype"),
                 };
             }
         }

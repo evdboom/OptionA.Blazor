@@ -1,18 +1,31 @@
 ﻿@namespace OptionA.Blazor.Blog
-@if (Post is not null)
+@if (_title is not null)
 {
     <OptAHeader Content="_title"/>
-    @if (_tags is not null && _tags.Any())
+}
+@if (_tags is not null && _tags.Any())
 {
     <div class="@DataProvider.HeaderTagContainerClass">
-            <OptAChildBuilder Content="_tags" />
-        </div>
+        <OptAChildBuilder Content="_tags" />
+    </div>
 }
-    <OptAText Content="_date" />
-    <OptAText Content="_subtitle"/>
-    @if (DataProvider.DisplayLineAfterPostHeader)
+@if (_date is not null)
 {
-    <hr/>    
-}    
-    <OptAChildBuilder Content="Post.Content"/>
+    <OptAText Content="_date" />
+}
+@if (_subtitle is not null)
+{
+    <OptAText Content="_subtitle"/>
+}
+@if (DataProvider.DisplayLineAfterPostHeader)
+{
+    <hr/>
+}
+@if (ChildContent is not null)
+{
+    @ChildContent
+}
+else if (_content is not null)
+{
+    <OptAChildBuilder Content="_content"/>
 }

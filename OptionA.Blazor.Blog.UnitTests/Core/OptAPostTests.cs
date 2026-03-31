@@ -117,4 +117,40 @@ public class OptAPostTests : BunitContext
         // Assert
         Assert.NotNull(cut);
     }
+
+    [Fact]
+    public void OptAPostRendersFromParametersWithoutPost()
+    {
+        // Arrange
+        var content = new List<IContent> { new TextContent { Content = "Parameter Body" } };
+
+        // Act
+        var cut = Render<OptAPost>(parameters => parameters
+            .Add(p => p.Title, "Parameter Title")
+            .Add(p => p.Subtitle, "Parameter Subtitle")
+            .Add(p => p.Date, new DateTime(2024, 2, 1))
+            .Add(p => p.Tags, new[] { "tag-a", "tag-b" })
+            .Add(p => p.Content, content));
+
+        // Assert
+        Assert.Contains("Parameter Title", cut.Markup);
+        Assert.Contains("Parameter Subtitle", cut.Markup);
+        Assert.Contains("tag-a", cut.Markup);
+        Assert.Contains("tag-b", cut.Markup);
+        Assert.Contains("Parameter Body", cut.Markup);
+    }
+
+    [Fact]
+    public void OptAPostRendersChildContentWhenProvided()
+    {
+        // Act
+        var cut = Render<OptAPost>(parameters => parameters
+            .Add(p => p.Title, "My docs")
+            .AddChildContent("<div class='custom-content'>Nice header</div>"));
+
+        // Assert
+        Assert.Contains("My docs", cut.Markup);
+        Assert.Contains("custom-content", cut.Markup);
+        Assert.Contains("Nice header", cut.Markup);
+    }
 }

@@ -1,0 +1,14 @@
+﻿@namespace OptionA.Blazor.Blog
+@if (Content is not null)
+{
+    <div @attributes="Content.GetAttributes(DataProvider)">
+        @if (ChildContent is not null)
+        {
+            @ChildContent
+        }
+        else if (Content is not null)
+        {
+            <OptAChildBuilder Content="Content.Content"/>
+        }
+    </div>
+}
