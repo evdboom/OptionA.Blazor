@@ -34,7 +34,7 @@
     "SelectedIssueIds": [],
     "Rationale": "",
     "SessionId": "",
-    "UpdatedAtUtc": "2026-04-22T17:10:15.7149747\u002B00:00"
+    "UpdatedAtUtc": "2026-04-22T17:33:25.1067450\u002B00:00"
   },
   "RoadmapFile": "roadmap.json",
   "IssuesFile": "issues.json",
@@ -44,16 +44,16 @@
   "DecisionsFile": "decisions.json",
   "PipelinesFile": "pipelines.json",
   "RoadmapCount": 1,
-  "IssueCount": 113,
-  "QuestionCount": 21,
-  "RunCount": 67,
-  "SessionCount": 44,
-  "DecisionCount": 153,
-  "PipelineCount": 70,
+  "IssueCount": 140,
+  "QuestionCount": 33,
+  "RunCount": 75,
+  "SessionCount": 49,
+  "DecisionCount": 165,
+  "PipelineCount": 83,
   "NextRoadmapId": 2,
-  "NextIssueId": 115,
-  "NextQuestionId": 22,
-  "NextRunId": 68,
-  "NextDecisionId": 154,
-  "NextPipelineId": 71
+  "NextIssueId": 142,
+  "NextQuestionId": 34,
+  "NextRunId": 76,
+  "NextDecisionId": 166,
+  "NextPipelineId": 84
 }

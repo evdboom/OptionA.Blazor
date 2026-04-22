@@ -28,7 +28,7 @@ public partial class OptAInteractive
     {
         var result = GetAttributes();
         result["opta-interactive"] = true;
-        result["code-editing-enabled"] = DataProvider.CodeEditingEnabled;
+        result["code-editing-enabled"] = DataProvider.CodeEditingEnabled.ToString().ToLowerInvariant();
         result["preferred-code-editor"] = DataProvider.PreferredCodeEditor.ToString().ToLowerInvariant();
         result["default-code-language"] = DataProvider.DefaultCodeLanguage ?? string.Empty;
         result["export-formats"] = string.Join(",", DataProvider.EnabledExportFormats.Select(format => format.ToString().ToLowerInvariant()));

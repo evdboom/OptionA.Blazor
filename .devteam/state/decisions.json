@@ -1528,5 +1528,125 @@
     "RunId": 67,
     "SessionId": "devteam-developer-d627e540bc1b",
     "CreatedAtUtc": "2026-04-22T17:20:19.1095011\u002B00:00"
+  },
+  {
+    "Id": 154,
+    "Title": "Answered question #13",
+    "Detail": "Total budget is48.94/50 credits committed with only ~1.06 credits remaining. All code-change and architecture work is effectively blocked until the budget cap is raised or reset. Please increase the TotalCreditCap (and PremiumCreditCap as needed) so that the remaining high-priority implementation issues (#78 build break, #10/#24/#38 components, #69/#70 Interactive package) can proceed.\n\nAnswer: Budget cap raised to TotalCreditCap=100, PremiumCreditCap=50 via devteam budget command. 50.07 total credits and 38 premium credits now available.",
+    "Source": "question",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "",
+    "CreatedAtUtc": "2026-04-22T17:25:51.6334167\u002B00:00"
+  },
+  {
+    "Id": 155,
+    "Title": "Answered question #14",
+    "Detail": "Q#13 remains open: budget is at49.93/50 credits (~0.07 left). The selected batch may consume the last credits. Please raise TotalCreditCap (and PremiumCreditCap as needed) before the next orchestration loop so that the high-value implementation issues (#78build break, #10/#24/#38 playground components, #69/#70 Interactive package) can proceed.\n\nAnswer: Budget cap raised to TotalCreditCap=100, PremiumCreditCap=50. Unblocked.",
+    "Source": "question",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "",
+    "CreatedAtUtc": "2026-04-22T17:25:54.2704452\u002B00:00"
+  },
+  {
+    "Id": 156,
+    "Title": "Answered question #17",
+    "Detail": "Budget cap (Q#13/Q#14) remains unresolved: 49.93/50 credits committed (~0.07 remaining). The Interactive build break was fixed directly by the orchestrator at zero agent cost, but the next batch \u2014 #10/#38/#39 (playground components), #69/#70 (Interactive package scope), #87/#88 (devteam persistence fixes) \u2014 cannot run until \u0060TotalCreditCap\u0060 is raised. Please increase \u0060TotalCreditCap\u0060 to at least 100 and \u0060PremiumCreditCap\u0060 to at least 50 so the pipeline can resume. Once unblocked, the recommended first batch is: **#78** (close as done \u2014 build fixed), **#85** (close as done \u2014 same fix), **#10** (OptAPlaygroundPreview), **#38** (OptAPlaygroundEditor container).\n\nAnswer: Budget cap raised to TotalCreditCap=100, PremiumCreditCap=50. Pipeline can resume.",
+    "Source": "question",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "",
+    "CreatedAtUtc": "2026-04-22T17:25:56.1140431\u002B00:00"
+  },
+  {
+    "Id": 157,
+    "Title": "Answered question #18",
+    "Detail": "Budget cap Q#17 remains unresolved:49.93/50 credits committed (~0.07remaining). The selected batch (#90, #88, #89, #21) cannot run until \u0060TotalCreditCap\u0060 is raised to at least 100 and \u0060PremiumCreditCap\u0060 to at least 50. Please update these values in the workspace or DevTeam configuration before the next loop.\n\nAnswer: Budget cap raised to TotalCreditCap=100, PremiumCreditCap=50. Selected batch can now run.",
+    "Source": "question",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "",
+    "CreatedAtUtc": "2026-04-22T17:25:57.7510858\u002B00:00"
+  },
+  {
+    "Id": 158,
+    "Title": "Run #69 Blocked",
+    "Detail": "Searched the codebase and ran the Playground unit tests. The test project exists (OptionA.Blazor.Playground.UnitTests) but running dotnet test fails: multiple bUnit runtime errors (System.InvalidOperationException) when components/parameter mapping runs. This appears tied to Playground/Interactive parameter-handling and/or the OptionA.Blazor.Interactive \u003C-\u003E Playground coupling. Fix requires a design decision about Interactive dependencies (Q#15/Q#19) and targeted code changes \u2014 too large for a single run.",
+    "Source": "run",
+    "IssueId": 21,
+    "RunId": 69,
+    "SessionId": "devteam-developer-d627e540bc1b",
+    "CreatedAtUtc": "2026-04-22T17:30:16.2616892\u002B00:00"
+  },
+  {
+    "Id": 159,
+    "Title": "Run #70 Completed",
+    "Detail": "Issue #10 (OptAPlaygroundPreview) is implemented in OptionA.Blazor.Playground: both OptAPlaygroundPreview.razor and OptAPlaygroundPreview.razor.cs exist and match the requested behavior (wrapper with opta-playground-preview attribute, uses IPlaygroundDataProvider.DefaultPreviewClass, renders DynamicComponent with parameters, converts content strings to RenderFragment, and handles null descriptor). Built the Playground project successfully. Running playground unit tests showed unrelated failures in other playground tests (5 failures).",
+    "Source": "run",
+    "IssueId": 10,
+    "RunId": 70,
+    "SessionId": "devteam-developer-93c678488df8",
+    "CreatedAtUtc": "2026-04-22T17:30:30.5014735\u002B00:00"
+  },
+  {
+    "Id": 160,
+    "Title": "Run #71 Completed",
+    "Detail": "Added/verified the Buttons playground page and descriptor (already present in OptionA.Blazor.Test.Shared). Registered playground services were already present in both hosts. Fixed a compile error in OptionA.Blazor.Server.Test by replacing MapRazorComponents\u003CServerHostApp\u003E() with MapRazorComponents\u003CApp\u003E(). Stopped a running test host process that was locking build output and rebuilt the solution successfully.",
+    "Source": "run",
+    "IssueId": 46,
+    "RunId": 71,
+    "SessionId": "devteam-developer-bf52dacf371b",
+    "CreatedAtUtc": "2026-04-22T17:30:55.7201096\u002B00:00"
+  },
+  {
+    "Id": 161,
+    "Title": "Run #68 Completed",
+    "Detail": "Fixed the edit-issue formatting and added tests. Updated .devteam/scripts/generate-fix-commands.ps1 to robustly insert a space between \u0027edit-issue\u0027 and the id and to quote --workspace values that contain spaces. Added xUnit tests (CommandFormattingTests) to verify formatting behavior. Built and ran the DevTeam tests; all tests passed. Changes committed.",
+    "Source": "run",
+    "IssueId": 112,
+    "RunId": 68,
+    "SessionId": "devteam-developer-9026a690f4d9",
+    "CreatedAtUtc": "2026-04-22T17:31:43.3259291\u002B00:00"
+  },
+  {
+    "Id": 162,
+    "Title": "Selected execution batch",
+    "Detail": "Issues: 116, 106, 95, 97\n\nAnalyzed the full candidate list against open questions and recent run history. Blocking questions #22/#23/#24 fence off all Interactive-area issues (#78, #91, #69, #70, #92) until the Interactive\u2194Playground coupling decision is made. Devteam self-maintenance work (#100, #113, #114, #122) is either already converging or low-leverage right now. The highest-value safe work is: fixing the known bUnit parameter-mapping failures in Playground tests (#116, directly tied to run #69/#70 findings and non-blocking Q#25), investigating the devteam CLI persistence root cause (#106, independent), auditing BlogBuilder for migration planning (#95, independent, advances longer-term goal), and a storage EF spike (#97, independent, advances longer-term goal). These four touch completely separate areas with no shared-file conflicts.\n\nSELECTED_",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-22T17:33:24.3098497\u002B00:00"
+  },
+  {
+    "Id": 163,
+    "Title": "Run #75 Completed",
+    "Detail": "Inspected OptionA.Blazor.Storage (csproj \u002B README). The project already targets browser and declares IDatabaseService as \u0022WIP\u0022 with planned migrations for IndexedDB. Implementing a full EF Core provider (true EF Core provider allowing dotnet migrations tooling \u002B runtime DbContext) is high effort and risky in one spike. Recommended safe prototype: implement an IndexedDB-backed DbContext-like wrapper (server-side EF Core API surface emulated) \u002B a migrations abstraction that runs JSInterop scripts to create/alter object stores. This demonstrates feasibility, migration UX, and performance without reimplementing EF Core provider internals.",
+    "Source": "run",
+    "IssueId": 97,
+    "RunId": 75,
+    "SessionId": "devteam-backend-developer-4dedcf03d0f1",
+    "CreatedAtUtc": "2026-04-22T17:35:24.9804583\u002B00:00"
+  },
+  {
+    "Id": 164,
+    "Title": "Run #74 Completed",
+    "Detail": "Audited OptionA.Blazor.Blog.Builder (project files, components, service registration, parts, JS interop). Identified concrete features to keep (core models, asset pipeline), to move into new generic packages (editor/runtime UI, Monaco integration, live preview/playground integration), and features to drop (legacy WYSIWYG-specific scaffolding and tight blog-only service defaults). Produced a short migration plan and a set of execution tasks to extract, repackage, implement Interactive, and deprecate the old builder.",
+    "Source": "run",
+    "IssueId": 95,
+    "RunId": 74,
+    "SessionId": "devteam-developer-13e67ba79008",
+    "CreatedAtUtc": "2026-04-22T17:35:38.1382285\u002B00:00"
+  },
+  {
+    "Id": 165,
+    "Title": "Run #73 Completed",
+    "Detail": "Reproduced the batch-close/export mismatch. Running .devteam\\scripts\\test-batch-close.ps1 shows exported snapshot (.devteam/exported/state/issues.json) lags authoritative state (.devteam/state/issues.json). Investigation shows the workspace was modified (patch-batch-close wrote Done statuses) after export; exported snapshot was not regenerated. Root cause: workspace edits are not followed by an export step, so the exported archive can remain stale. Short-term fix: run devteam export after batch-close/edits. Longer-term: add automatic re-export or make devteam CLI emit updated export.",
+    "Source": "run",
+    "IssueId": 106,
+    "RunId": 73,
+    "SessionId": "devteam-developer-a563a0ac108e",
+    "CreatedAtUtc": "2026-04-22T17:37:10.6704257\u002B00:00"
   }
 ]

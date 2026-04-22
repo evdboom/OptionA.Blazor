@@ -10,7 +10,7 @@
 | 0007 | Scaffold Playground project and core model | done | developer | playground-core | — |
 | 0008 | Scaffold Playground unit test project | done | developer | playground-core | — |
 | 0009 | Implement OptAPlayground container component | done | developer | playground-components | — |
-| 0010 | Implement OptAPlaygroundPreview component | open | developer | playground-components | — |
+| 0010 | Implement OptAPlaygroundPreview component | done | developer | playground-components | — |
 | 0011 | Implement OptAPlaygroundEditor and individual editor components | open | developer | playground-components | — |
 | 0012 | Implement OptAPlaygroundCode component | open | developer | playground-components | — |
 | 0013 | Implement playground CSS and Bootstrap defaults | open | developer | playground-css | — |
@@ -21,7 +21,7 @@
 | 0018 | Add browser coverage for playground interactions | open | tester | playground-host | 0015 |
 | 0019 | Implement Scaffold Playground project and core model | done | developer | playground-core | 0007 |
 | 0020 | Close superseded issue #19 — PlaygroundDescriptorBase covered by #9 | done | developer | playground-core | — |
-| 0021 | Implement Scaffold Playground unit test project | open | developer | playground-core | 0008 |
+| 0021 | Implement Scaffold Playground unit test project | blocked | developer | playground-core | 0008 |
 | 0022 | Scout codebase for: OptAPlaygroundEditor and individual editor components | done | navigator | playground-components | — |
 | 0023 | Implement Close superseded issue #19 — PlaygroundDescriptorBase covered by #9 | done | developer | playground-core | 0020 |
 | 0024 | Implement OptAPlayground container component | open | developer | playground-components | 0009 |
@@ -46,7 +46,7 @@
 | 0043 | Test Fix broken playground editor tests | open | tester | playground-components | 0034 |
 | 0044 | Batch-close 18 stale/completed issues | done | developer | — | — |
 | 0045 | Implement PlaygroundCodeGenerator helper | done | developer | playground-components | — |
-| 0046 | Add Buttons playground page to test hosts | open | developer | playground-host | — |
+| 0046 | Add Buttons playground page to test hosts | done | developer | playground-host | — |
 | 0047 | Add Tabs playground page to test hosts | open | developer | playground-host | — |
 | 0048 | Fix4 failing button E2E tests | open | developer | tests | — |
 | 0049 | Add bUnit tests for Carousel and Gallery components | open | tester | tests | — |
@@ -95,9 +95,9 @@
 | 0092 | Integrate Monaco editor for editable code examples | open | frontend-developer | interactive | — |
 | 0093 | Add bUnit and Playwright tests for Interactive flows | open | developer | testing | — |
 | 0094 | Auto-generate component parameter docs and example pages | open | docs | docs | — |
-| 0095 | Audit BlogBuilder and propose migration split | open | developer | migration | — |
+| 0095 | Audit BlogBuilder and propose migration split | done | developer | migration | — |
 | 0096 | Define hosting and deployment strategy for interactive docs | open | devops | deployment | — |
-| 0097 | Spike: EF Core-backed IndexedDB prototype | open | backend-developer | storage | — |
+| 0097 | Spike: EF Core-backed IndexedDB prototype | done | backend-developer | storage | — |
 | 0098 | Test the technical approach and create execution issues | open | tester | — | 0016 |
 | 0099 | Add DevTeam workspace regression test to CI | open | devops | ci | 0087 |
 | 0100 | Implement Fix persistence of superseded status for issue #16 in authoritative .devteam workspace state | open | developer | devteam | 0087 |
@@ -106,12 +106,39 @@
 | 0103 | Investigate intermittent failure when running full Playground unit test suite | open | developer | playground-core | — |
 | 0104 | Test Scaffold Playground project and core model | open | tester | playground-core | 0019 |
 | 0105 | Wire reconcile-batch-close into CI | open | developer | devteam | — |
-| 0106 | Investigate root cause in devteam CLI persistence | open | developer | devteam | — |
+| 0106 | Investigate root cause in devteam CLI persistence | done | developer | devteam | — |
 | 0107 | Add automated test for exported-state parity | open | developer | devteam | — |
 | 0108 | Document reconcile-batch-close usage | open | docs | devteam | — |
 | 0109 | Test Investigate batch-close persistence | open | tester | devteam | 0089 |
 | 0110 | Resolve missing Playground references for Interactive | open | developer | interactive | 0090 |
 | 0111 | Clean up Interactive duplicates and confirm API surface | open | developer | interactive | 0090 |
-| 0112 | Fix command-generation that concatenates \"edit-issue\" and ID | open | developer | devteam | 0088 |
+| 0112 | Fix command-generation that concatenates \"edit-issue\" and ID | done | developer | devteam | 0088 |
 | 0113 | Re-apply missing issue updates using corrected commands | open | developer | devteam | 0088 |
 | 0114 | Implement Investigate and fix automation that failed to persist issue updates | open | developer | devteam | 0088 |
+| 0115 | Decide Interactive dependency strategy | open | developer | playground-core | 0019, 0015 |
+| 0116 | Investigate and fix bUnit parameter mapping errors in Playground tests | inprogress | developer | playground-core | — |
+| 0117 | Stabilize Playground.UnitTests CI run | open | developer | playground-core | — |
+| 0118 | Investigate failing Playground unit tests | open | developer | playground-tests | — |
+| 0119 | Implement OptAPlaygroundPreview component | open | developer | playground-components | 0010 |
+| 0120 | Implement Add Buttons playground page to test hosts | open | developer | playground-host | 0046 |
+| 0121 | Verify external devteam CLI generator | open | developer | devteam | — |
+| 0122 | Implement Fix command-generation that concatenates \"edit-issue\" and ID | open | developer | devteam | 0112 |
+| 0123 | Prototype IndexedDB-backed DbContext wrapper | open | backend-developer | storage | 0097 |
+| 0124 | Design and implement migration abstraction for IndexedDB | open | backend-developer | storage | 0097 |
+| 0125 | JSInterop layer for IndexedDB primitives | open | backend-developer | storage | — |
+| 0126 | Performance & security evaluation | open | backend-developer | storage | — |
+| 0127 | Decide long-term integration vs separate package | open | backend-developer | storage | — |
+| 0128 | Test Spike: EF Core-backed IndexedDB prototype | open | tester | storage | 0097 |
+| 0129 | Extract blog content model and services into Builder.Core | open | developer | interactive-migration | — |
+| 0130 | Create OptionA.Blazor.Interactive package (editor + live preview) | open | developer | interactive | — |
+| 0131 | Extract editor UI and Monaco integration into OptionA.Blazor.Editor | open | developer | editor | — |
+| 0132 | Design Playground ↔ Interactive integration contract | open | developer | playground-integration | — |
+| 0133 | Deprecate Blog.Builder package and update docs | open | developer | packaging-deprecation | — |
+| 0134 | Add unit/integration tests for new packages | open | developer | tests | — |
+| 0135 | Update documentation and samples | open | developer | documentation | — |
+| 0136 | Implement Audit BlogBuilder and propose migration split | open | developer | migration | 0095 |
+| 0137 | Run export after batch-close | open | developer | devteam | — |
+| 0138 | Make devteam CLI re-export on workspace changes (upstream) | open | developer | devteam | — |
+| 0139 | CI check for exported/state parity | open | developer | devteam | — |
+| 0140 | Improve patch-batch-close to auto-export and report | open | developer | devteam | — |
+| 0141 | Implement Investigate root cause in devteam CLI persistence | open | developer | devteam | 0106 |

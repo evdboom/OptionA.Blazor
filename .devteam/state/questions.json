@@ -111,18 +111,18 @@
     "Id": 13,
     "Text": "Total budget is48.94/50 credits committed with only ~1.06 credits remaining. All code-change and architecture work is effectively blocked until the budget cap is raised or reset. Please increase the TotalCreditCap (and PremiumCreditCap as needed) so that the remaining high-priority implementation issues (#78 build break, #10/#24/#38 components, #69/#70 Interactive package) can proceed.",
     "IsBlocking": true,
-    "Status": "Open",
+    "Status": "Answered",
     "CreatedAtUtc": "2026-04-22T16:35:59.1231397\u002B00:00",
-    "Answer": "",
+    "Answer": "Budget cap raised to TotalCreditCap=100, PremiumCreditCap=50 via devteam budget command. 50.07 total credits and 38 premium credits now available.",
     "ExternalReference": ""
   },
   {
     "Id": 14,
     "Text": "Q#13 remains open: budget is at49.93/50 credits (~0.07 left). The selected batch may consume the last credits. Please raise TotalCreditCap (and PremiumCreditCap as needed) before the next orchestration loop so that the high-value implementation issues (#78build break, #10/#24/#38 playground components, #69/#70 Interactive package) can proceed.",
     "IsBlocking": true,
-    "Status": "Open",
+    "Status": "Answered",
     "CreatedAtUtc": "2026-04-22T16:47:19.4754341\u002B00:00",
-    "Answer": "",
+    "Answer": "Budget cap raised to TotalCreditCap=100, PremiumCreditCap=50. Unblocked.",
     "ExternalReference": ""
   },
   {
@@ -147,18 +147,18 @@
     "Id": 17,
     "Text": "Budget cap (Q#13/Q#14) remains unresolved: 49.93/50 credits committed (~0.07 remaining). The Interactive build break was fixed directly by the orchestrator at zero agent cost, but the next batch \u2014 #10/#38/#39 (playground components), #69/#70 (Interactive package scope), #87/#88 (devteam persistence fixes) \u2014 cannot run until \u0060TotalCreditCap\u0060 is raised. Please increase \u0060TotalCreditCap\u0060 to at least 100 and \u0060PremiumCreditCap\u0060 to at least 50 so the pipeline can resume. Once unblocked, the recommended first batch is: **#78** (close as done \u2014 build fixed), **#85** (close as done \u2014 same fix), **#10** (OptAPlaygroundPreview), **#38** (OptAPlaygroundEditor container).",
     "IsBlocking": true,
-    "Status": "Open",
+    "Status": "Answered",
     "CreatedAtUtc": "2026-04-22T17:02:53.3804887\u002B00:00",
-    "Answer": "",
+    "Answer": "Budget cap raised to TotalCreditCap=100, PremiumCreditCap=50. Pipeline can resume.",
     "ExternalReference": ""
   },
   {
     "Id": 18,
     "Text": "Budget cap Q#17 remains unresolved:49.93/50 credits committed (~0.07remaining). The selected batch (#90, #88, #89, #21) cannot run until \u0060TotalCreditCap\u0060 is raised to at least 100 and \u0060PremiumCreditCap\u0060 to at least 50. Please update these values in the workspace or DevTeam configuration before the next loop.",
     "IsBlocking": true,
-    "Status": "Open",
+    "Status": "Answered",
     "CreatedAtUtc": "2026-04-22T17:10:14.8754049\u002B00:00",
-    "Answer": "",
+    "Answer": "Budget cap raised to TotalCreditCap=100, PremiumCreditCap=50. Selected batch can now run.",
     "ExternalReference": ""
   },
   {
@@ -185,6 +185,114 @@
     "IsBlocking": false,
     "Status": "Open",
     "CreatedAtUtc": "2026-04-22T17:14:44.7804269\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 22,
+    "Text": "Q#15 and Q#19 remain open: shouldOptionA.Blazor.Interactive be fixed in-place (add Playground reference) or excluded from the solution until types are settled? This blocks all Interactive-area issues (#78, #91, #69, #70, #92).",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:26:27.2289380\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 23,
+    "Text": "Should OptionA.Blazor.Interactive be fixed in-place (restore or change its references/types to match Playground) or temporarily removed from the solution/test runs until Interactive/Playground types are settled?",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:30:16.2614876\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 24,
+    "Text": "Should Interactive depend on Playground (restore/add reference) to obtain PlaygroundDescriptorBase, PlaygroundLayout, IPlaygroundDataProvider, and other types \u2014 or should Interactive be rewritten to a decoupled API and unit tests updated accordingly?",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:30:16.2614890\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 25,
+    "Text": "Preferred approach for resolving parameter-mapping failures: adapt playground runtime to accept arbitrary parameter names (more tolerant) or update unit-test fixtures so test components declare the exact parameter properties used in descriptors?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:30:16.2615923\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 26,
+    "Text": "Q#22/23/24 remain unresolved: shouldOptionA.Blazor.Interactive be fixed in-place (restore/change references to Playground types) or temporarily excluded from the solution until the Interactive/Playground API shape is decided? All high-priority Interactive issues (#78, #91, #69, #70, #92) are gated on this answer.",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:33:24.3095833\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 27,
+    "Text": "Preferred delivery: should the prototype be added inside OptionA.Blazor.Storage or published as a new separate package (recommended: separate package to avoid destabilizing current APIs)?",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:35:24.9802814\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 28,
+    "Text": "For migrations: prefer C#-first migration classes (IIndexedDbMigration) applied at runtime, or generate migration scripts from model diffs (more complex)?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:35:24.9802866\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 29,
+    "Text": "Is browser-only support acceptable (SupportedPlatform=browser already set), or must server-side usage (via server-side prerendering) be explicitly supported?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:35:24.9802880\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 30,
+    "Text": "Should the new Interactive package depend on the existing Playground types (reuse PlaygroundDescriptorBase, PlaygroundLayout, IPlaygroundDataProvider) or should both Playground and Interactive depend on a new small shared contracts package (preferred for decoupling)? This affects extraction order and adapter work.",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:35:38.1380342\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 31,
+    "Text": "Confirm preferred package names: OptionA.Blazor.Builder.Core (or OptionA.Blazor.ContentModel) for models/services, OptionA.Blazor.Interactive for live editing, and OptionA.Blazor.Editor for Monaco \u2014 acceptable?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:35:38.1380387\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 32,
+    "Text": "Should Monaco/editor integration be included in the Interactive package by default or provided as an optional separate package (to keep runtime lean)?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:35:38.1381001\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 33,
+    "Text": "Prefer local/script-level mitigation (always run devteam export after edits) or pursue upstream change to the devteam CLI to re-export automatically after mutating operations?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:37:10.6703000\u002B00:00",
     "Answer": "",
     "ExternalReference": ""
   }

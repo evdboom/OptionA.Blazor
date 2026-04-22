@@ -52,8 +52,18 @@ public partial class OptAPlaygroundPreview
 
     private Dictionary<string, object?> CreatePreviewParameters(PlaygroundDescriptorBase descriptor)
     {
-        var previewParameters = new Dictionary<string, object?>(CurrentParameters);
+        var previewParameters = new Dictionary<string, object?>();
 
+        // Only include parameters that the target component can accept. Keep CurrentParameters intact elsewhere.
+        foreach (var kvp in CurrentParameters)
+        {
+            if (GetParameterType(descriptor.ComponentType, kvp.Key) is not null)
+            {
+                previewParameters[kvp.Key] = kvp.Value;
+            }
+        }
+
+        // Convert string content to RenderFragment for parameters that expect RenderFragment
         foreach (var parameter in descriptor.Parameters)
         {
             if (!previewParameters.TryGetValue(parameter.Name, out var value) || value is not string content)
