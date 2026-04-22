@@ -7,6 +7,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts;
 /// <summary>
 /// Builder for paragraphs
 /// </summary>
+[Obsolete("Blog.Builder WYSIWYG editors are deprecated. Use OptionA.Blazor.Interactive for live component editing. This package will be removed in a future release.", false)]
 public partial class OptAParagraphBuilder
 {
     private const string ParagraphId = "opta-paragraph";

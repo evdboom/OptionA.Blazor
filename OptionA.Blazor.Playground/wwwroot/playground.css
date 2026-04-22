@@ -1,0 +1,57 @@
+[opta-playground] {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+[opta-playground][stacked] {
+    flex-direction: column;
+}
+
+[opta-playground-preview] {
+    flex: 1 1 0;
+    padding: 1rem;
+    min-height: 12rem;
+    border: 1px solid #d0d7de;
+    box-sizing: border-box;
+}
+
+[opta-playground-editor] {
+    flex: 0 0 auto;
+    width: 350px;
+    max-width: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+[opta-playground][stacked] [opta-playground-editor] {
+    width: 100%;
+}
+
+[opta-playground-code] {
+    flex: 1 0 100%;
+    width: 100%;
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    box-sizing: border-box;
+    font-family: Consolas, "Courier New", monospace;
+    background: #f6f8fa;
+}
+
+[opta-playground-code] code {
+    display: block;
+    font-family: inherit;
+    white-space: pre;
+}
+
+[opta-playground-editor-field] {
+    margin-bottom: 1rem;
+}
+
+[opta-playground-editor-group] {
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+}

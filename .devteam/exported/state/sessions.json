@@ -1,0 +1,362 @@
+﻿[
+  {
+    "ScopeKey": "workspace:planning",
+    "ScopeKind": "workspace",
+    "RoleSlug": "planner",
+    "IssueId": 1,
+    "PipelineId": null,
+    "LastRunId": 1,
+    "SessionId": "devteam-planner-3cf289212622",
+    "UpdatedAtUtc": "2026-04-21T20:41:04.2463372\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:1:role:architect",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "architect",
+    "IssueId": null,
+    "PipelineId": 1,
+    "LastRunId": 4,
+    "SessionId": "devteam-architect-370bb67a7c3e",
+    "UpdatedAtUtc": "2026-04-21T21:19:24.3033074\u002B00:00"
+  },
+  {
+    "ScopeKey": "workspace:execution-orchestrator",
+    "ScopeKind": "workspace",
+    "RoleSlug": "orchestrator",
+    "IssueId": null,
+    "PipelineId": null,
+    "LastRunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "UpdatedAtUtc": "2026-04-22T16:33:42.2761741\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:6:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 6,
+    "LastRunId": 6,
+    "SessionId": "devteam-developer-8948f5cfc667",
+    "UpdatedAtUtc": "2026-04-21T21:43:53.3502295\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:7:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 7,
+    "LastRunId": 7,
+    "SessionId": "devteam-developer-d627e540bc1b",
+    "UpdatedAtUtc": "2026-04-22T07:38:39.8999282\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:8:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 8,
+    "LastRunId": 20,
+    "SessionId": "devteam-developer-b242209d58e2",
+    "UpdatedAtUtc": "2026-04-22T08:29:01.8142891\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:17:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 17,
+    "LastRunId": 11,
+    "SessionId": "devteam-developer-6a66a7618045",
+    "UpdatedAtUtc": "2026-04-22T08:06:23.1997462\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:18:role:navigator",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "navigator",
+    "IssueId": null,
+    "PipelineId": 18,
+    "LastRunId": 12,
+    "SessionId": "devteam-navigator-45d8b2b2a3f9",
+    "UpdatedAtUtc": "2026-04-22T08:06:23.2061404\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:19:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 19,
+    "LastRunId": 17,
+    "SessionId": "devteam-developer-c1e799c719a1",
+    "UpdatedAtUtc": "2026-04-22T08:29:00.9322170\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:17:role:tester",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "tester",
+    "IssueId": null,
+    "PipelineId": 17,
+    "LastRunId": 14,
+    "SessionId": "devteam-tester-9eb71e9d839f",
+    "UpdatedAtUtc": "2026-04-22T08:12:39.3935360\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:10:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 10,
+    "LastRunId": 18,
+    "SessionId": "devteam-developer-492880ae33fc",
+    "UpdatedAtUtc": "2026-04-22T08:29:01.8000582\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:12:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 12,
+    "LastRunId": 19,
+    "SessionId": "devteam-developer-019675fc6206",
+    "UpdatedAtUtc": "2026-04-22T08:29:01.8056400\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:23:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 23,
+    "LastRunId": 54,
+    "SessionId": "devteam-developer-ddd9c13e231f",
+    "UpdatedAtUtc": "2026-04-22T16:36:00.5150731\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:26:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 26,
+    "LastRunId": 26,
+    "SessionId": "devteam-developer-9d8459c5590e",
+    "UpdatedAtUtc": "2026-04-22T08:59:10.3073763\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:19:role:tester",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "tester",
+    "IssueId": null,
+    "PipelineId": 19,
+    "LastRunId": 23,
+    "SessionId": "devteam-tester-ba61aa65d614",
+    "UpdatedAtUtc": "2026-04-22T08:43:08.8037139\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:27:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 27,
+    "LastRunId": 53,
+    "SessionId": "devteam-developer-d1f95dd84858",
+    "UpdatedAtUtc": "2026-04-22T16:36:00.5111917\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:24:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 24,
+    "LastRunId": 25,
+    "SessionId": "devteam-developer-e3559e83d4a0",
+    "UpdatedAtUtc": "2026-04-22T08:59:10.3020160\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:28:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 28,
+    "LastRunId": 27,
+    "SessionId": "devteam-developer-1c270c79e8b0",
+    "UpdatedAtUtc": "2026-04-22T08:59:10.3137271\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:42:role:architect",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "architect",
+    "IssueId": null,
+    "PipelineId": 42,
+    "LastRunId": 28,
+    "SessionId": "devteam-architect-50884f7a1606",
+    "UpdatedAtUtc": "2026-04-22T14:37:05.0044606\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:32:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 32,
+    "LastRunId": 49,
+    "SessionId": "devteam-developer-37209e1df7e2",
+    "UpdatedAtUtc": "2026-04-22T16:23:38.9503926\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:33:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 33,
+    "LastRunId": 50,
+    "SessionId": "devteam-developer-3f7ac6a2bb83",
+    "UpdatedAtUtc": "2026-04-22T16:23:38.9543909\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:34:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 34,
+    "LastRunId": 33,
+    "SessionId": "devteam-developer-bf52dacf371b",
+    "UpdatedAtUtc": "2026-04-22T15:04:36.4590525\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:43:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 43,
+    "LastRunId": 32,
+    "SessionId": "devteam-developer-772dff288cdb",
+    "UpdatedAtUtc": "2026-04-22T14:50:54.0163553\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:36:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 36,
+    "LastRunId": 34,
+    "SessionId": "devteam-developer-0a8be3f134bf",
+    "UpdatedAtUtc": "2026-04-22T15:04:36.4656135\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:37:role:tester",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "tester",
+    "IssueId": null,
+    "PipelineId": 37,
+    "LastRunId": 52,
+    "SessionId": "devteam-tester-f3511f7f447b",
+    "UpdatedAtUtc": "2026-04-22T16:23:38.9636022\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:2:role:analyst",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "analyst",
+    "IssueId": null,
+    "PipelineId": 2,
+    "LastRunId": 36,
+    "SessionId": "devteam-analyst-7251ed9ba679",
+    "UpdatedAtUtc": "2026-04-22T15:04:36.4743434\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:49:role:architect",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "architect",
+    "IssueId": null,
+    "PipelineId": 49,
+    "LastRunId": 37,
+    "SessionId": "devteam-architect-1c7bde134e58",
+    "UpdatedAtUtc": "2026-04-22T15:21:43.9204039\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:50:role:architect",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "architect",
+    "IssueId": null,
+    "PipelineId": 50,
+    "LastRunId": 38,
+    "SessionId": "devteam-architect-e0b28dfd66da",
+    "UpdatedAtUtc": "2026-04-22T15:26:33.3699701\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:48:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 48,
+    "LastRunId": 46,
+    "SessionId": "devteam-developer-60ef5a00a46f",
+    "UpdatedAtUtc": "2026-04-22T16:09:34.8560020\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:31:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 31,
+    "LastRunId": 55,
+    "SessionId": "devteam-developer-fbd2e368631d",
+    "UpdatedAtUtc": "2026-04-22T16:36:00.5191599\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:49:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 49,
+    "LastRunId": 41,
+    "SessionId": "devteam-developer-2ec7974b86e2",
+    "UpdatedAtUtc": "2026-04-22T15:34:40.8226544\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:9:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 9,
+    "LastRunId": 44,
+    "SessionId": "devteam-developer-93c678488df8",
+    "UpdatedAtUtc": "2026-04-22T15:50:58.5826364\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:50:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 50,
+    "LastRunId": 45,
+    "SessionId": "devteam-developer-5cff1ca0dee2",
+    "UpdatedAtUtc": "2026-04-22T15:50:58.5874736\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:52:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 52,
+    "LastRunId": 47,
+    "SessionId": "devteam-developer-dae189006ad4",
+    "UpdatedAtUtc": "2026-04-22T16:09:34.8601393\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:51:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 51,
+    "LastRunId": 51,
+    "SessionId": "devteam-developer-2150a8a08a85",
+    "UpdatedAtUtc": "2026-04-22T16:23:38.9591868\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:32:role:tester",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "tester",
+    "IssueId": null,
+    "PipelineId": 32,
+    "LastRunId": 56,
+    "SessionId": "devteam-tester-da7d9f0f5022",
+    "UpdatedAtUtc": "2026-04-22T16:36:00.5247929\u002B00:00"
+  }
+]

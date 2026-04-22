@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>OptionA.Blazor.Helpers</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <Title>Blazor Helper Components</Title>
+    <Authors>Erik van der Boom</Authors>
+    <IsPackable>true</IsPackable>
+    <Description>Reusable helper components for building blog and interactive Blazor experiences.</Description>
+    <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>10.1.0</Version>
+    <PackageReleaseNotes>
+      Extracted reusable helper components from OptionA.Blazor.Blog.Builder.
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OptionA.Blazor.Blog\OptionA.Blazor.Blog.csproj" />
+    <ProjectReference Include="..\OptionA.Blazor.Components\OptionA.Blazor.Components.csproj" />
+  </ItemGroup>
+</Project>

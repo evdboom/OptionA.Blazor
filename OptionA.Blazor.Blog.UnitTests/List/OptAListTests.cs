@@ -74,4 +74,38 @@ public class OptAListTests : BunitContext
         // Assert
         Assert.NotNull(cut);
     }
+
+    [Fact]
+    public void OptAListAppliesClassesAndSkipsEmptyItems()
+    {
+        // Arrange
+        _blogDataProvider
+            .Setup(x => x.DefaultClassesForType(ContentType.List))
+            .Returns(new List<string> { "list-default" });
+        _markDownParser
+            .Setup(x => x.Parse(It.IsAny<string?>()))
+            .Returns((string? text) => string.IsNullOrEmpty(text)
+                ? new List<IContent>()
+                : new List<IContent> { new TextContent { Content = text } });
+        var content = new ListContent
+        {
+            ListType = ListType.UnorderedList
+        };
+        content.Items.Add("Item 1");
+        content.Items.Add(string.Empty);
+        content.Items.Add("Item 2");
+        content.AdditionalClasses.Add("list-custom");
+
+        // Act
+        var cut = Render<OptAList>(parameters => parameters.Add(p => p.Content, content));
+
+        // Assert
+        var list = cut.Find("ul");
+        Assert.Contains("list-custom", list.GetAttribute("class"));
+        Assert.Contains("list-default", list.GetAttribute("class"));
+        var items = cut.FindAll("li");
+        Assert.Equal(2, items.Count);
+        Assert.Contains("Item 1", cut.Markup);
+        Assert.Contains("Item 2", cut.Markup);
+    }
 }

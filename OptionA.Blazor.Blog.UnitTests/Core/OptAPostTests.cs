@@ -153,4 +153,64 @@ public class OptAPostTests : BunitContext
         Assert.Contains("custom-content", cut.Markup);
         Assert.Contains("Nice header", cut.Markup);
     }
+
+    [Fact]
+    public void OptAPostAppliesConfiguredClassesAndRendersBody()
+    {
+        // Arrange
+        _blogDataProvider
+            .Setup(x => x.PostHeaderSize)
+            .Returns(HeaderSize.Two);
+        _blogDataProvider
+            .Setup(x => x.PostDateDisplay)
+            .Returns(DateDisplayType.UsableDate);
+        _blogDataProvider
+            .Setup(x => x.HeaderTagContainerClass)
+            .Returns("post-tags");
+        _blogDataProvider
+            .Setup(x => x.PostTitleClass)
+            .Returns("post-title");
+        _blogDataProvider
+            .Setup(x => x.PostDateClass)
+            .Returns("post-date");
+        _blogDataProvider
+            .Setup(x => x.PostSubtitleClass)
+            .Returns("post-subtitle");
+        _blogDataProvider
+            .Setup(x => x.TagClass)
+            .Returns("post-tag");
+        _blogDataProvider
+            .Setup(x => x.TagOverviewHref)
+            .Returns("/tags");
+        _blogDataProvider
+            .Setup(x => x.DisplayLineAfterPostHeader)
+            .Returns(true);
+
+        var post = new Post
+        {
+            Title = "Configured Title",
+            Subtitle = "Configured Subtitle",
+            Date = new DateTime(2024, 2, 3)
+        };
+        post.Tags.Add("TagOne");
+        post.Content.Add(new TextContent { Content = "Configured Body" });
+
+        // Act
+        var cut = Render<OptAPost>(parameters => parameters.Add(p => p.Post, post));
+
+        // Assert
+        var header = cut.Find("h2");
+        Assert.Equal("Configured Title", header.TextContent);
+        Assert.Contains("post-title", header.GetAttribute("class"));
+        Assert.Contains("20240203", cut.Markup);
+        Assert.Contains("post-date", cut.Markup);
+        Assert.Contains("Configured Subtitle", cut.Markup);
+        Assert.Contains("post-subtitle", cut.Markup);
+        Assert.Equal("post-tags", cut.Find("div.post-tags").GetAttribute("class"));
+        var tagLink = cut.Find("a");
+        Assert.Equal("/tags/tagone", tagLink.GetAttribute("href"));
+        Assert.Contains("post-tag", tagLink.GetAttribute("class"));
+        Assert.Contains("<hr", cut.Markup);
+        Assert.Contains("Configured Body", cut.Markup);
+    }
 }

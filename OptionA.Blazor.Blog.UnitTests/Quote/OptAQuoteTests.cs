@@ -91,4 +91,35 @@ public class OptAQuoteTests : BunitContext
         Assert.NotNull(blockquote);
         Assert.Contains("Quote without source", cut.Markup);
     }
+
+    [Fact]
+    public void OptAQuoteAppliesClassesToQuoteAndSource()
+    {
+        // Arrange
+        _blogDataProvider
+            .Setup(x => x.DefaultClassesForType(ContentType.Paragraph))
+            .Returns(new List<string> { "quote-default" });
+        var content = new QuoteContent
+        {
+            Quote = "Classed quote",
+            Source = "Source name",
+            SourceUrl = "https://example.com"
+        };
+        content.AdditionalClasses.Add("quote-custom");
+        content.AdditionalSourceClasses.Add("source-custom");
+        content.SourceAttributes["data-source"] = "yes";
+
+        // Act
+        var cut = Render<OptAQuote>(parameters => parameters.Add(p => p.Content, content));
+
+        // Assert
+        var blockquote = cut.Find("blockquote");
+        Assert.Equal("https://example.com", blockquote.GetAttribute("cite"));
+        var quote = cut.Find("blockquote p");
+        Assert.Contains("quote-custom", quote.GetAttribute("class"));
+        Assert.Contains("quote-default", quote.GetAttribute("class"));
+        var source = cut.Find("figcaption span");
+        Assert.Contains("source-custom", source.GetAttribute("class"));
+        Assert.Equal("yes", source.GetAttribute("data-source"));
+    }
 }

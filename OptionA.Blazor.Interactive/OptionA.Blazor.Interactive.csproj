@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <Version>10.0.0</Version>
+    <IsPackable>true</IsPackable>
+    <Authors>Erik van der Boom</Authors>
+    <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Description>Interactive documentation shell for live component exploration, previewing, and future code editing support.</Description>
+    <PackageReleaseNotes>
+      Initial interactive package scaffold and playground bridge.
+    </PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OptionA.Blazor.Components\OptionA.Blazor.Components.csproj" />
+    <ProjectReference Include="..\OptionA.Blazor.Components.Direct\OptionA.Blazor.Components.Direct.csproj" />
+    <ProjectReference Include="..\OptionA.Blazor.Playground\OptionA.Blazor.Playground.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

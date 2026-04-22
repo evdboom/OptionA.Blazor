@@ -88,4 +88,30 @@ public class OptATextTests : BunitContext
         // Assert
         Assert.NotNull(cut);
     }
+
+    [Fact]
+    public async Task OptATextAppliesClassesAndRendersParagraphContent()
+    {
+        // Arrange
+        _blogDataProvider
+            .Setup(x => x.DefaultClassesForType(ContentType.Paragraph))
+            .Returns(new List<string> { "paragraph-default" });
+        _markDownParser
+            .Setup(x => x.Parse(It.IsAny<string?>()))
+            .Returns((string? text) => string.IsNullOrEmpty(text)
+                ? new List<IContent>()
+                : new List<IContent> { new TextContent { Content = text } });
+        var content = new ParagraphContent { Content = "Paragraph text" };
+        content.AdditionalClasses.Add("paragraph-custom");
+
+        // Act
+        var cut = Render<OptAText>(parameters => parameters.Add(p => p.Content, content));
+        await Task.Delay(100);
+
+        // Assert
+        var paragraph = cut.Find("p");
+        Assert.Equal("Paragraph text", paragraph.TextContent);
+        Assert.Contains("paragraph-custom", paragraph.GetAttribute("class"));
+        Assert.Contains("paragraph-default", paragraph.GetAttribute("class"));
+    }
 }

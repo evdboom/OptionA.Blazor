@@ -7,6 +7,9 @@ public class ButtonsPage
 {
     private readonly IPage _page;
     private const string ButtonsPageUrl = "/components/buttons";
+    private const string ShowButtonSelector = "button:has-text('Show')";
+    private const string ButtonBarSelector = "[opta-button-bar]";
+    private const string ButtonBarButtonSelector = $"{ButtonBarSelector} button";
 
     public ButtonsPage(IPage page)
     {
@@ -22,10 +25,9 @@ public class ButtonsPage
     {
         // Wait for page to load
         await _page.WaitForLoadStateAsync(LoadState.DOMContentLoaded, new PageWaitForLoadStateOptions { Timeout = 15000 });
-        
-        // Check for button elements to be present
-        var button = await _page.QuerySelectorAsync("button");
-        return button != null;
+
+        // Check for the page's control buttons to be present
+        return await _page.Locator(ShowButtonSelector).CountAsync() > 0;
     }
 
     public async Task<string> GetClickCountTextAsync()
@@ -42,31 +44,29 @@ public class ButtonsPage
     public async Task ClickShowButtonAsync()
     {
         // Click the "Show" button to display the button bar
-        var showButton = await _page.QuerySelectorAsync("button:has-text('Show')");
-        if (showButton != null)
+        await _page.Locator(ShowButtonSelector).ClickAsync();
+        await _page.Locator(ButtonBarSelector).WaitForAsync(new LocatorWaitForOptions
         {
-            await showButton.ClickAsync();
-            // Wait for buttons to appear
-            await _page.WaitForTimeoutAsync(500);
-        }
+            State = WaitForSelectorState.Visible,
+            Timeout = 15000
+        });
     }
 
     public async Task ClickFirstOptAButtonAsync()
     {
         // Click the first OptA button in the button bar
-        var optaButton = await _page.QuerySelectorAsync("[opta-button]");
-        if (optaButton != null)
+        var button = _page.Locator(ButtonBarButtonSelector).First;
+        await button.WaitForAsync(new LocatorWaitForOptions
         {
-            await optaButton.ClickAsync();
-            // Wait for state to update
-            await _page.WaitForTimeoutAsync(300);
-        }
+            State = WaitForSelectorState.Visible,
+            Timeout = 15000
+        });
+        await button.ClickAsync();
     }
 
     public async Task<int> GetOptAButtonCountAsync()
     {
         // Count OptA buttons on the page
-        var buttons = await _page.QuerySelectorAllAsync("[opta-button]");
-        return buttons.Count;
+        return await _page.Locator(ButtonBarButtonSelector).CountAsync();
     }
 }

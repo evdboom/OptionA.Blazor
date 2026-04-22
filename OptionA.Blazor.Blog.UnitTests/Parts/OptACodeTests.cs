@@ -48,4 +48,36 @@ public class OptACodeTests : BunitContext
         // Assert
         cut.Find("pre").MarkupMatches("<pre><code>public class Test</code></pre>");
     }
+
+    [Fact]
+    public void OptACodeFallsBackToRawTextAndUsesCustomLanguageLabel()
+    {
+        // Arrange
+        _blogDataProvider
+            .Setup(x => x.DefaultClassesForType(ContentType.Code))
+            .Returns(new List<string> { "code-default" });
+        _markDownParser
+            .Setup(x => x.Parse(It.IsAny<string?>()))
+            .Returns((string? text) => string.IsNullOrEmpty(text)
+                ? new List<IContent>()
+                : new List<IContent> { new TextContent { Content = text } });
+        var content = new CodeContent
+        {
+            Code = "let value = 1",
+            Language = CodeLanguage.Other,
+            OtherLanguage = "F#",
+        };
+        content.AdditionalClasses.Add("code-custom");
+
+        // Act
+        var cut = Render<OptACode>(parameters => parameters.Add(p => p.Content, content));
+
+        // Assert
+        var block = cut.Find("p");
+        Assert.Equal("block", block.GetAttribute("opta-code"));
+        Assert.Contains("code-default", block.GetAttribute("class"));
+        Assert.Contains("code-custom", block.GetAttribute("class"));
+        Assert.Contains("F#", cut.Markup);
+        Assert.Contains("let value = 1", cut.Markup);
+    }
 }

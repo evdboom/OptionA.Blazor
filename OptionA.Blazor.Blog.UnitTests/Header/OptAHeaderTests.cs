@@ -80,4 +80,31 @@ public class OptAHeaderTests : BunitContext
         // Assert
         Assert.NotNull(cut);
     }
+
+    [Theory]
+    [InlineData(HeaderSize.Four, "h4")]
+    [InlineData(HeaderSize.Five, "h5")]
+    [InlineData(HeaderSize.Six, "h6")]
+    public void OptAHeaderRendersRemainingHeaderSizesWithClasses(HeaderSize size, string tagName)
+    {
+        // Arrange
+        _blogDataProvider
+            .Setup(x => x.DefaultClassesForType(ContentType.Header))
+            .Returns(new List<string> { "header-default" });
+        var content = new HeaderContent
+        {
+            Content = "Sized Header",
+            Size = size
+        };
+        content.AdditionalClasses.Add("header-custom");
+
+        // Act
+        var cut = Render<OptAHeader>(parameters => parameters.Add(p => p.Content, content));
+
+        // Assert
+        var header = cut.Find(tagName);
+        Assert.Equal("Sized Header", header.TextContent);
+        Assert.Contains("header-custom", header.GetAttribute("class"));
+        Assert.Contains("header-default", header.GetAttribute("class"));
+    }
 }

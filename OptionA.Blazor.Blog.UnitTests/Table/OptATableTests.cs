@@ -105,4 +105,29 @@ public class OptATableTests : BunitContext
         // Assert
         Assert.NotNull(cut);
     }
+
+    [Fact]
+    public void OptATableAppliesClassesAndRendersAllSections()
+    {
+        // Arrange
+        _blogDataProvider
+            .Setup(x => x.DefaultClassesForType(ContentType.Table))
+            .Returns(new List<string> { "table-default" });
+        var content = new TableContent();
+        content.Headers.Add("Heading");
+        content.Rows.Add(new List<string> { "Cell" });
+        content.Footer.Add("Footer");
+        content.AdditionalClasses.Add("table-custom");
+
+        // Act
+        var cut = Render<OptATable>(parameters => parameters.Add(p => p.Content, content));
+
+        // Assert
+        var table = cut.Find("table");
+        Assert.Contains("table-custom", table.GetAttribute("class"));
+        Assert.Contains("table-default", table.GetAttribute("class"));
+        Assert.Contains("Heading", cut.Markup);
+        Assert.Contains("Cell", cut.Markup);
+        Assert.Contains("Footer", cut.Markup);
+    }
 }

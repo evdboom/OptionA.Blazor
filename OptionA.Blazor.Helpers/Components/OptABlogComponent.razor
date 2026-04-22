@@ -1,0 +1,99 @@
+<div @attributes="@StyleProvider.GetAttributes(ComponentElementType.Component)">
+@if (!_collapsed)
+{
+    <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ComponentHeaderBar)">
+        <button @attributes="GetCollapseAttributes()">
+            <OptAChild Content="@GetCollapseContent()" />
+        </button>
+        <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.ComponentTitle, Name)"/>
+    </div>
+}
+    <div @attributes="GetComponentContentAttributes()" @ref="_component">
+    @if (_collapsed)
+    {
+        <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ComponentHeaderBar)">
+            <button @attributes="GetCollapseAttributes()">
+                <OptAChild Content="@GetCollapseContent()" />
+            </button>
+            <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.ComponentTitle, Name)" />
+        </div>
+    }
+    else
+    {
+        @ChildContent
+    }
+    @if (_dragTargetLower)
+    {
+        <div @attributes="GetDragTargetAttributes(lower: true)"
+             @ondragenter:preventDefault="true"
+             @ondragover:preventDefault="true"></div>
+    }
+    @if (_dragTargetUpper)
+    {
+        <div @attributes="GetDragTargetAttributes(lower: false)"
+             @ondragenter:preventDefault="true"
+             @ondragover:preventDefault="true"></div>
+    }
+    </div>
+@if (!HideButtons)
+{
+    <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ButtonContainer)">
+        <button @attributes="GetRemoveAttributes()">
+            <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.RemoveButton, "Remove")"/>
+        </button>
+    @if (!_collapsed)
+    {
+        <button @attributes="GetPropertiesAttributes()">
+            <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.PropertiesButton, "Properties")" />
+        </button>
+        <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.MoveButtonContainer)">
+            <button @attributes="GetMoveUpAttributes()">
+                <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.MoveUpButton, "Up")" />
+            </button>
+            <div @attributes="GetMoveToIndexContainerAttributes()">
+                <OptAInputInteger @bind-Value="Index"
+                                  Attributes="GetMoveToIndexAttributes()"
+                                  Mode="BindMode.OnChange"/>
+            </div>
+            <button @attributes="GetMoveDownAttributes()">
+                <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.MoveDownButton, "Down")" />
+            </button>
+        </div>
+    }
+    </div>
+}
+</div>
+@if (_showDialog && Content is not null)
+{
+    <dialog @attributes="GetPropertiesModalAttributes()" @ref="_dialog">
+        <section @attributes="GetSectionAttributes()">
+            <header @attributes="GetHeaderAttributes()">
+                <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.PropertiesModalHeader, "**Properties**")" />
+                <button @attributes="GetCloseButtonAttributes()">
+                    <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.PropertiesModalCloseButton, "Close")" />
+                </button>
+            </header>
+            <div @attributes="GetContentAttributes()">
+                <OptAHelperList ContentChanged="ContentChanged"
+                                ItemPlaceholder="Class.."
+                                ItemTitle="Add additional classes"
+                                Label="Additional classes"
+                                Items="Content.AdditionalClasses" />
+                <OptAHelperList ContentChanged="ContentChanged"
+                                ItemPlaceholder="Class to exclude.."
+                                ItemTitle="Default classes to remove"
+                                Label="Removed default classes"
+                                Items="Content.RemovedClasses" />
+                <OptAHelperList ContentChanged="AttributesChanged"
+                                ItemPlaceholder="attribute=value.."
+                                ItemTitle="Additional attributes to set"
+                                Label="Additional attributes"
+                                Items="_additionalAttributes" />
+            @if (AdditionalProperties is not null)
+            {
+                @AdditionalProperties
+            }
+            </div>
+        </section>
+    </dialog>
+}

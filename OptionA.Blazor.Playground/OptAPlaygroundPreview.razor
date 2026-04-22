@@ -1,0 +1,9 @@
+@namespace OptionA.Blazor.Playground
+@inherits OptAComponent
+
+<div @attributes="@GetPreviewAttributes()">
+    @if (TryGetPreviewRenderContext(out var previewRenderContext))
+    {
+        <DynamicComponent Type="@previewRenderContext.ComponentType" Parameters="@previewRenderContext.Parameters" />
+    }
+</div>

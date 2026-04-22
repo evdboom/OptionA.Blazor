@@ -1,0 +1,919 @@
+﻿[
+  {
+    "Id": 1,
+    "RootIssueId": 2,
+    "FamilyKey": "designthetechnicalapproachandcreateexecutionissues",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      2,
+      16
+    ],
+    "ActiveIssueId": 16,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T21:25:10.3566930\u002B00:00"
+  },
+  {
+    "Id": 2,
+    "RootIssueId": 3,
+    "FamilyKey": "blog",
+    "Area": "blog",
+    "RoleSequence": [
+      "analyst"
+    ],
+    "IssueIds": [
+      3
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-22T15:07:23.2593952\u002B00:00"
+  },
+  {
+    "Id": 3,
+    "RootIssueId": 4,
+    "FamilyKey": "ghpages",
+    "Area": "ghpages",
+    "RoleSequence": [
+      "devops"
+    ],
+    "IssueIds": [
+      4
+    ],
+    "ActiveIssueId": 4,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T20:58:27.1372179\u002B00:00"
+  },
+  {
+    "Id": 4,
+    "RootIssueId": 5,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      5
+    ],
+    "ActiveIssueId": 5,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T20:58:27.1372336\u002B00:00"
+  },
+  {
+    "Id": 5,
+    "RootIssueId": 6,
+    "FamilyKey": "storage",
+    "Area": "storage",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      6
+    ],
+    "ActiveIssueId": 6,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T20:58:27.1372417\u002B00:00"
+  },
+  {
+    "Id": 6,
+    "RootIssueId": 7,
+    "FamilyKey": "playgroundcore",
+    "Area": "playground-core",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      7,
+      19
+    ],
+    "ActiveIssueId": 19,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T21:49:10.3781782\u002B00:00"
+  },
+  {
+    "Id": 7,
+    "RootIssueId": 8,
+    "FamilyKey": "playgroundcore",
+    "Area": "playground-core",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      8,
+      21
+    ],
+    "ActiveIssueId": 21,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T07:43:34.0384420\u002B00:00"
+  },
+  {
+    "Id": 8,
+    "RootIssueId": 9,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      9,
+      24
+    ],
+    "ActiveIssueId": 24,
+    "Status": "Blocked",
+    "UpdatedAtUtc": "2026-04-22T08:35:14.8626092\u002B00:00"
+  },
+  {
+    "Id": 9,
+    "RootIssueId": 10,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      10
+    ],
+    "ActiveIssueId": 10,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:01:02.8178615\u002B00:00"
+  },
+  {
+    "Id": 10,
+    "RootIssueId": 11,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      11
+    ],
+    "ActiveIssueId": 11,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T08:39:04.3119362\u002B00:00"
+  },
+  {
+    "Id": 11,
+    "RootIssueId": 12,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      12
+    ],
+    "ActiveIssueId": 12,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T21:05:34.6434168\u002B00:00"
+  },
+  {
+    "Id": 12,
+    "RootIssueId": 13,
+    "FamilyKey": "playgroundcss",
+    "Area": "playground-css",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      13
+    ],
+    "ActiveIssueId": 13,
+    "Status": "Blocked",
+    "UpdatedAtUtc": "2026-04-22T08:35:36.5025583\u002B00:00"
+  },
+  {
+    "Id": 13,
+    "RootIssueId": 14,
+    "FamilyKey": "playgroundcore",
+    "Area": "playground-core",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      14
+    ],
+    "ActiveIssueId": 14,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T21:05:34.6434347\u002B00:00"
+  },
+  {
+    "Id": 14,
+    "RootIssueId": 15,
+    "FamilyKey": "playgroundci",
+    "Area": "playground-ci",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      15
+    ],
+    "ActiveIssueId": 15,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T21:05:34.6434461\u002B00:00"
+  },
+  {
+    "Id": 15,
+    "RootIssueId": 17,
+    "FamilyKey": "playgroundhost",
+    "Area": "playground-host",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      17
+    ],
+    "ActiveIssueId": 17,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T21:32:21.1991831\u002B00:00"
+  },
+  {
+    "Id": 16,
+    "RootIssueId": 18,
+    "FamilyKey": "playgroundhost",
+    "Area": "playground-host",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      18
+    ],
+    "ActiveIssueId": 18,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-21T21:32:21.1991951\u002B00:00"
+  },
+  {
+    "Id": 17,
+    "RootIssueId": 20,
+    "FamilyKey": "playgroundcore",
+    "Area": "playground-core",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      20,
+      23,
+      26
+    ],
+    "ActiveIssueId": 26,
+    "Status": "Blocked",
+    "UpdatedAtUtc": "2026-04-22T08:21:43.7601887\u002B00:00"
+  },
+  {
+    "Id": 18,
+    "RootIssueId": 22,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "navigator"
+    ],
+    "IssueIds": [
+      22
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-22T08:09:19.0934107\u002B00:00"
+  },
+  {
+    "Id": 19,
+    "RootIssueId": 25,
+    "FamilyKey": "closesupersededissue16technicalapproachalreadydeliveredbyscaffoldandcomponentissues",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      25
+    ],
+    "ActiveIssueId": 31,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T08:50:51.0422589\u002B00:00"
+  },
+  {
+    "Id": 20,
+    "RootIssueId": 28,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      28
+    ],
+    "ActiveIssueId": 28,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T08:22:42.9483236\u002B00:00"
+  },
+  {
+    "Id": 21,
+    "RootIssueId": 29,
+    "FamilyKey": "playgroundcore",
+    "Area": "playground-core",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      29
+    ],
+    "ActiveIssueId": 29,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T08:34:28.9316046\u002B00:00"
+  },
+  {
+    "Id": 22,
+    "RootIssueId": 30,
+    "FamilyKey": "playgroundcore",
+    "Area": "playground-core",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      30
+    ],
+    "ActiveIssueId": 30,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T08:34:28.9316494\u002B00:00"
+  },
+  {
+    "Id": 23,
+    "RootIssueId": 29,
+    "FamilyKey": "playgroundcore",
+    "Area": "playground-core",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      29,
+      35
+    ],
+    "ActiveIssueId": 80,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:38:39.8155290\u002B00:00"
+  },
+  {
+    "Id": 24,
+    "RootIssueId": 30,
+    "FamilyKey": "playgroundcore",
+    "Area": "playground-core",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      30
+    ],
+    "ActiveIssueId": 42,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T09:04:52.8562202\u002B00:00"
+  },
+  {
+    "Id": 25,
+    "RootIssueId": 32,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      32
+    ],
+    "ActiveIssueId": 32,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T08:39:05.3006713\u002B00:00"
+  },
+  {
+    "Id": 26,
+    "RootIssueId": 33,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      33,
+      34,
+      43
+    ],
+    "ActiveIssueId": 43,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T09:03:29.7727063\u002B00:00"
+  },
+  {
+    "Id": 27,
+    "RootIssueId": 36,
+    "FamilyKey": "persistsupersededstatusforissue16inauthoritativeworkspacestate",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      36
+    ],
+    "ActiveIssueId": 81,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:38:37.6170860\u002B00:00"
+  },
+  {
+    "Id": 28,
+    "RootIssueId": 37,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      37
+    ],
+    "ActiveIssueId": 37,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T09:09:12.5317186\u002B00:00"
+  },
+  {
+    "Id": 29,
+    "RootIssueId": 38,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      38
+    ],
+    "ActiveIssueId": 38,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T08:59:08.6177435\u002B00:00"
+  },
+  {
+    "Id": 30,
+    "RootIssueId": 39,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      39
+    ],
+    "ActiveIssueId": 39,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T08:59:08.6177462\u002B00:00"
+  },
+  {
+    "Id": 31,
+    "RootIssueId": 40,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      40,
+      71,
+      82
+    ],
+    "ActiveIssueId": 82,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:40:21.2509925\u002B00:00"
+  },
+  {
+    "Id": 32,
+    "RootIssueId": 44,
+    "FamilyKey": "batchclose18stalecompletedissues",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      44,
+      62
+    ],
+    "ActiveIssueId": 77,
+    "Status": "Running",
+    "UpdatedAtUtc": "2026-04-22T16:36:00.5247974\u002B00:00"
+  },
+  {
+    "Id": 33,
+    "RootIssueId": 45,
+    "FamilyKey": "playgroundcomponents",
+    "Area": "playground-components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      45,
+      63,
+      79
+    ],
+    "ActiveIssueId": 79,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:33:13.9072150\u002B00:00"
+  },
+  {
+    "Id": 34,
+    "RootIssueId": 46,
+    "FamilyKey": "playgroundhost",
+    "Area": "playground-host",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      46
+    ],
+    "ActiveIssueId": 46,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T15:14:38.7934819\u002B00:00"
+  },
+  {
+    "Id": 35,
+    "RootIssueId": 47,
+    "FamilyKey": "playgroundhost",
+    "Area": "playground-host",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      47
+    ],
+    "ActiveIssueId": 47,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:33:01.7664967\u002B00:00"
+  },
+  {
+    "Id": 36,
+    "RootIssueId": 48,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      48
+    ],
+    "ActiveIssueId": 48,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T15:14:39.5848813\u002B00:00"
+  },
+  {
+    "Id": 37,
+    "RootIssueId": 49,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      49
+    ],
+    "ActiveIssueId": 49,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:33:41.2255895\u002B00:00"
+  },
+  {
+    "Id": 38,
+    "RootIssueId": 50,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      50
+    ],
+    "ActiveIssueId": 50,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:33:01.7665038\u002B00:00"
+  },
+  {
+    "Id": 39,
+    "RootIssueId": 51,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      51
+    ],
+    "ActiveIssueId": 51,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:33:01.7665064\u002B00:00"
+  },
+  {
+    "Id": 40,
+    "RootIssueId": 52,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      52
+    ],
+    "ActiveIssueId": 52,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:33:01.7665091\u002B00:00"
+  },
+  {
+    "Id": 41,
+    "RootIssueId": 53,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      53
+    ],
+    "ActiveIssueId": 53,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:33:01.7665120\u002B00:00"
+  },
+  {
+    "Id": 42,
+    "RootIssueId": 54,
+    "FamilyKey": "storage",
+    "Area": "storage",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      54,
+      60
+    ],
+    "ActiveIssueId": 60,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:44:47.2098408\u002B00:00"
+  },
+  {
+    "Id": 43,
+    "RootIssueId": 55,
+    "FamilyKey": "playgroundci",
+    "Area": "playground-ci",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      55,
+      61
+    ],
+    "ActiveIssueId": 61,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:55:36.2352473\u002B00:00"
+  },
+  {
+    "Id": 44,
+    "RootIssueId": 56,
+    "FamilyKey": "storage",
+    "Area": "storage",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      56
+    ],
+    "ActiveIssueId": 56,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:44:48.0330081\u002B00:00"
+  },
+  {
+    "Id": 45,
+    "RootIssueId": 57,
+    "FamilyKey": "storage",
+    "Area": "storage",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      57
+    ],
+    "ActiveIssueId": 57,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:44:48.0330101\u002B00:00"
+  },
+  {
+    "Id": 46,
+    "RootIssueId": 58,
+    "FamilyKey": "storage",
+    "Area": "storage",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      58
+    ],
+    "ActiveIssueId": 58,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:44:48.0330111\u002B00:00"
+  },
+  {
+    "Id": 47,
+    "RootIssueId": 59,
+    "FamilyKey": "storage",
+    "Area": "storage",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      59
+    ],
+    "ActiveIssueId": 59,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T14:44:48.0330143\u002B00:00"
+  },
+  {
+    "Id": 48,
+    "RootIssueId": 64,
+    "FamilyKey": "closestalepipelinegeneratedissues",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      64,
+      72
+    ],
+    "ActiveIssueId": 74,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:15:07.1122323\u002B00:00"
+  },
+  {
+    "Id": 49,
+    "RootIssueId": 65,
+    "FamilyKey": "interactive",
+    "Area": "interactive",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      65,
+      69
+    ],
+    "ActiveIssueId": 69,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T15:44:43.5457943\u002B00:00"
+  },
+  {
+    "Id": 50,
+    "RootIssueId": 66,
+    "FamilyKey": "interactive",
+    "Area": "interactive",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      66,
+      70
+    ],
+    "ActiveIssueId": 70,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:01:03.7286185\u002B00:00"
+  },
+  {
+    "Id": 51,
+    "RootIssueId": 67,
+    "FamilyKey": "blog",
+    "Area": "blog",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      67,
+      75,
+      76
+    ],
+    "ActiveIssueId": 76,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:26:34.3777926\u002B00:00"
+  },
+  {
+    "Id": 52,
+    "RootIssueId": 68,
+    "FamilyKey": "blog",
+    "Area": "blog",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      68,
+      73
+    ],
+    "ActiveIssueId": 73,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:13:07.8153085\u002B00:00"
+  },
+  {
+    "Id": 53,
+    "RootIssueId": 78,
+    "FamilyKey": "interactivepackage",
+    "Area": "interactive-package",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      78
+    ],
+    "ActiveIssueId": 78,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:33:42.2761068\u002B00:00"
+  }
+]

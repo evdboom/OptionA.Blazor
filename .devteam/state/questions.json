@@ -1,0 +1,92 @@
+﻿[
+  {
+    "Id": 1,
+    "Text": "Should the new interactive documentation package be a reusable NuGet package (so any project can adopt it to build its own interactive component showcase), or is it exclusively a documentation application for this project to be deployed on GitHub Pages? This determines whether Monaco and the parameter-editor surface ship as a distributable library or stay as an internal app.",
+    "IsBlocking": true,
+    "Status": "Answered",
+    "CreatedAtUtc": "2026-04-21T20:46:59.9317438\u002B00:00",
+    "Answer": "All projects (bar actual testing) should be nugets. The GH pages itself is in a different repo that will consume these packages. If live editing is too heavy for wasm start with just parameter setting. This can be a \u0027manual\u0027 task no need to autodetect all parameters, the consumer can set this up.",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 2,
+    "Text": "For the package/application name, do you have a preference direction? \u0022Interactive\u0022 is broad \u2014 alternatives worth considering: \u0060Playground\u0060 (emphasises live experimentation), \u0060Showcase\u0060 (emphasises display), \u0060Studio\u0060 (IDE-like feel), \u0060Lab\u0060 (experimental/exploratory). Any of these resonate, or is there a different direction entirely?",
+    "IsBlocking": false,
+    "Status": "Answered",
+    "CreatedAtUtc": "2026-04-21T20:46:59.9318164\u002B00:00",
+    "Answer": "Playground has a nice ring as its possible to play around. (see 1: primarily just parameteres, but other modes or extensions for full blown roslyn/monaco perhaps for the future)",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 3,
+    "Text": "For the Storage EF implementation: should the goal be a full EF Core provider (leveraging EF Core\u0027s extensibility so developers use standard EF Core APIs), or a standalone EF-inspired API that avoids the EF Core dependency entirely?",
+    "IsBlocking": false,
+    "Status": "Answered",
+    "CreatedAtUtc": "2026-04-21T20:46:59.9318268\u002B00:00",
+    "Answer": "The original idea was a full EF core provider as thats what people are used to. When we get to that milestone perhaps discuss the full impact.",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 4,
+    "Text": "Issue #16 (\u0022Implement the technical approach and create execution issues\u0022, pipeline 1 stage 1) is listed as ready but its scaffold work is already covered by #7 and the component issues #9\u2013#15. Should #16 be closed as superseded, or is there additional implementation work it\u0027s expected to produce?",
+    "IsBlocking": false,
+    "Status": "Answered",
+    "CreatedAtUtc": "2026-04-22T07:56:27.8514779\u002B00:00",
+    "Answer": "Close #16 as superseded. Its intent was already delivered by #7/#8 and the follow-on execution issues #9-#15, so there is no additional implementation expected from #16.",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 5,
+    "Text": "#24 (\u0022Implement OptAPlayground container component\u0022) depends on #9 which was already verified fully done in Run #21. When the agent runs #24 it will almost certainly just verify and close. Should we proactively close #24 now and save the credit, or let the agent confirm so the pipeline has an explicit done record?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T08:06:22.4976126\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 6,
+    "Text": "#10 (OptAPlaygroundPreview) and #12 (OptAPlaygroundCode) are both in \u0060playground-components\u0060 and can\u0027t run alongside #11. Should the next batch after this one pair #10 \u002B #12 together (same area, different files \u2014 \u0060Preview.razor\u0060 vs \u0060Code.razor\u0060), or should they run sequentially to reduce merge risk?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T08:12:38.5080385\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 7,
+    "Text": "Q#5 answered: include #24 in this batch so the pipeline has an explicit done record; proactive close would save one credit but lose audit trail \u2014 not worth it.",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T08:28:59.9949119\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 8,
+    "Text": "Q#6 answered: pair #10 \u002B #12 together in the batch immediately after #11 completes (same area, different files \u2014 \u0060Preview.razor\u0060 vs \u0060Code.razor\u0060 \u2014 low merge risk; running them together saves one iteration).",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T08:28:59.9949124\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 9,
+    "Text": "Issue #11 (OptAPlaygroundEditor) has timed out twice at600 s. The Editors/ folder already exists with all component stubs. Should the next attempt increase the timeout budget, or should #11 be split into smaller issues (e.g., separate issues for the container editor and each individual OptAEditor* component)?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T08:43:07.7910866\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 10,
+    "Text": "Q#9 answered: split #11 into two focused issues \u2014 \u0022Implement OptAPlaygroundEditor container component\u0022 and \u0022Implement individual OptAEditor* components\u0022 \u2014 see new ISSUES above. Running them separately eliminates the 600s timeout risk. Issues #28 and #32 (currently blocked on #11) should have their dependency updated to the new split issues once the supersession is recorded.",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T08:59:08.6165505\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  }
+]

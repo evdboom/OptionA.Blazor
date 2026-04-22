@@ -6,6 +6,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts;
 /// <summary>
 /// Quote builder
 /// </summary>
+[Obsolete("Blog.Builder WYSIWYG editors are deprecated. Use OptionA.Blazor.Interactive for live component editing. This package will be removed in a future release.", false)]
 public partial class OptAQuoteBuilder
 {
     private const string SourceId = "opta-quote-source";

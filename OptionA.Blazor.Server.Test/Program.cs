@@ -1,13 +1,16 @@
 using OptionA.Blazor.Blog;
 using OptionA.Blazor.Blog.Builder;
 using OptionA.Blazor.Components;
+using OptionA.Blazor.Playground;
 using OptionA.Blazor.Storage;
 using OptionA.Blazor.Test.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorComponents();
+builder.Services
+    .AddRazorComponents()
+    .AddInteractiveServerComponents();
 
 builder.Services
     .AddOptionABootstrapComponents(darkMode: true, configuration: options =>
@@ -24,7 +27,8 @@ builder.Services
             menu.DefaultDropdownClass = "opta-bg opta-dropdown";
             menu.DefaultMenuItemClass += " opta-menu-item";
         };
-    }, lifetime: ServiceLifetime.Scoped);
+    }, lifetime: ServiceLifetime.Scoped)
+    .AddOptionABootstrapPlayground();
 builder.Services
     .AddOptionABootstrapBlog(config =>
     {
@@ -69,7 +73,8 @@ app.UseHttpsRedirection();
 app.UseAntiforgery();
 
 app.MapStaticAssets();
-app.MapRazorComponents<App>();
+app.MapRazorComponents<ServerHostApp>()
+    .AddInteractiveServerRenderMode();
 
 app.Run();
 

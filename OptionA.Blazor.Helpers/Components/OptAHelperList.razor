@@ -1,0 +1,23 @@
+@if (Items is not null)
+{
+    <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ListItemsBuilder)">
+        <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ListItemsHeader)">
+            <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.List, Label)" />
+        </div>
+        <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ListItemsContainer)">
+            @foreach (var item in Items.Select((value, index) => new { Item = value, Index = index }))
+            {
+                <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ListItemContainer)">
+                    <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ListItemInputContainer)">
+                        <input @attributes="@GetItemAttributes()" value="@item.Item" @oninput="@(e => UpdateItem($"{e.Value}", item.Index))" />
+                    </div>
+                    <div @attributes="@StyleProvider.GetAttributes(ComponentElementType.ListRemoveButtonContainer)">
+                        <button type="button" @onclick="() => RemoveItem(item.Index)" @attributes="@StyleProvider.GetAttributes(ComponentElementType.ListRemoveButton)">
+                            <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.ListRemoveButton, "Remove")" />
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

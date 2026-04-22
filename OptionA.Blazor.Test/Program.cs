@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using OptionA.Blazor.Blog;
 using OptionA.Blazor.Blog.Builder;
 using OptionA.Blazor.Components;
+using OptionA.Blazor.Playground;
 using OptionA.Blazor.Storage;
 using OptionA.Blazor.Test.Shared;
 
@@ -26,7 +27,8 @@ builder.Services
             menu.DefaultDropdownClass = "opta-bg opta-dropdown";
             menu.DefaultMenuItemClass += " opta-menu-item";
         };
-    });
+    })
+    .AddOptionABootstrapPlayground();
 builder.Services
     .AddOptionABootstrapBlog(config =>
     {

@@ -1,0 +1,22 @@
+@namespace OptionA.Blazor.Playground
+@inherits OptAComponent
+
+<div @attributes="@GetEditorAttributes()">
+    @foreach (var group in GetParameterGroups())
+    {
+        <div @attributes="@GetGroupAttributes()">
+            @if (!string.IsNullOrWhiteSpace(group.Name))
+            {
+                <div>@group.Name</div>
+            }
+
+            @foreach (var parameter in group.Parameters)
+            {
+                <div opta-playground-editor-field>
+                    <label @attributes="@GetLabelAttributes()">@GetLabelText(parameter)</label>
+                    <DynamicComponent Type="@GetEditorComponentType(parameter)" Parameters="@GetEditorParameters(parameter)" />
+                </div>
+            }
+        </div>
+    }
+</div>

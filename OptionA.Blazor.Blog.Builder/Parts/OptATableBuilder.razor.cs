@@ -6,6 +6,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts;
 /// <summary>
 /// Build table blog part
 /// </summary>
+[Obsolete("Blog.Builder WYSIWYG editors are deprecated. Use OptionA.Blazor.Interactive for live component editing. This package will be removed in a future release.", false)]
 public partial class OptATableBuilder
 {
     private const string RowId = "opta-table-row";

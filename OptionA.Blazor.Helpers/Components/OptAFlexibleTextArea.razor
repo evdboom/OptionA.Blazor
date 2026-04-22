@@ -1,0 +1,17 @@
+<div @attributes="GetFlexibleTextAreaAttributes()">
+    @if (_showAutoGrow)
+    {
+        <div @attributes="GetCheckboxContainerAttributes()">
+            <OptAInputCheckbox @bind-Value="_autoGrow"
+                               Attributes="@GetCheckBoxAttributes(_id)" />
+            <label @attributes="@GetLabelAttributes(_id)">
+                <OptAChild Content="@StyleProvider.GetContent(ComponentElementType.Label, "Auto grow")" />
+            </label>
+        </div>
+    }
+    <OptAInputTextArea @ref="_input"
+                       @bind-Value="InternalValue"
+                       Attributes="Attributes"
+                       AutoGrow="_autoGrow"
+                       Mode="Mode" />
+</div>

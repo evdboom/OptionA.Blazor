@@ -1,0 +1,12 @@
+@namespace OptionA.Blazor.Playground
+@inherits OptAComponent
+
+<CascadingValue Value="CurrentParameters" IsFixed="false">
+    <CascadingValue Value="ValueChangedCallback" IsFixed="true">
+        <div @attributes="@GetContainerAttributes()">
+            <OptAPlaygroundPreview Descriptor="Descriptor" />
+            <OptAPlaygroundEditor Descriptor="Descriptor" />
+            <OptAPlaygroundCode Descriptor="Descriptor" />
+        </div>
+    </CascadingValue>
+</CascadingValue>

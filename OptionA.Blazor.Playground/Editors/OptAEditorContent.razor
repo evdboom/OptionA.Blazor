@@ -1,0 +1,4 @@
+@namespace OptionA.Blazor.Playground
+@inherits OptAEditorBase
+
+<textarea @attributes="@GetInputAttributes()" @oninput="HandleInput">@CurrentStringValue</textarea>

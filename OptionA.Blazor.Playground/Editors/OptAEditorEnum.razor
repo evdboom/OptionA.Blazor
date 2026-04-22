@@ -1,0 +1,9 @@
+@namespace OptionA.Blazor.Playground
+@inherits OptAEditorBase
+
+<select value="@CurrentEnumValue" @attributes="@GetInputAttributes()" @onchange="HandleChange">
+    @foreach (var value in GetEnumNames())
+    {
+        <option value="@value">@value</option>
+    }
+</select>

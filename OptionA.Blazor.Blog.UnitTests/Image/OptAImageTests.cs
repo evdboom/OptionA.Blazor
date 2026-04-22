@@ -63,4 +63,28 @@ public class OptAImageTests : BunitContext
         // Assert
         Assert.NotNull(cut);
     }
+
+    [Fact]
+    public void OptAImageAppliesClassesAndFallsBackToSourceMetadata()
+    {
+        // Arrange
+        _blogDataProvider
+            .Setup(x => x.DefaultClassesForType(ContentType.Image))
+            .Returns(new List<string> { "image-default" });
+        var content = new ImageContent
+        {
+            Source = "/images/fallback.jpg"
+        };
+        content.AdditionalClasses.Add("image-custom");
+
+        // Act
+        var cut = Render<OptAImage>(parameters => parameters.Add(p => p.Content, content));
+
+        // Assert
+        var img = cut.Find("img");
+        Assert.Equal("/images/fallback.jpg", img.GetAttribute("title"));
+        Assert.Equal("/images/fallback.jpg", img.GetAttribute("alt"));
+        Assert.Contains("image-custom", img.GetAttribute("class"));
+        Assert.Contains("image-default", img.GetAttribute("class"));
+    }
 }

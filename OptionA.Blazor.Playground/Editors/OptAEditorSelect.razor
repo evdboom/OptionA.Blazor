@@ -1,0 +1,9 @@
+@namespace OptionA.Blazor.Playground
+@inherits OptAEditorBase
+
+<select value="@CurrentSelectedIndex" @attributes="@GetInputAttributes()" @onchange="HandleChange">
+    @for (var index = 0; index < Descriptor.AllowedValues.Count; index++)
+    {
+        <option value="@index">@FormatDisplayValue(Descriptor.AllowedValues[index])</option>
+    }
+</select>
