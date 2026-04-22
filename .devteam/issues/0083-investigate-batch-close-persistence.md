@@ -1,6 +1,6 @@
 ﻿# Issue 0083: Investigate batch-close persistence
 
-- Status: open
+- Status: done
 - Role: developer
 - Area: devteam
 - Priority: 95
@@ -8,8 +8,8 @@
 - Roadmap Item: 1
 - Family: devteam
 - External: none
-- Pipeline: none
-- Pipeline Stage: none
+- Pipeline: 54
+- Pipeline Stage: 0
 - Planning Issue: no
 
 ## Detail
@@ -18,8 +18,16 @@ Run29/62 reported closing the listed stale/completed issues, but exported worksp
 
 ## Latest Run
 
-(none)
+- Run: 57
+- Status: Completed
+- Model: gpt-5-mini
+- Session: devteam-developer-e8e9e8323950
+- Updated: 2026-04-22T16:57:11.2489173+00:00
+- Summary: Reproduced the export failure (run-056): exported and local .devteam state showed only issues35,40,41 as Done. Added a revertable patch, ran it, and committed the reconciliation: all19 target issues are now marked Done in .devteam/state and .devteam/exported/state. A follow-up issue created to fix the automation root cause (why update/edit commands didn't persist).
+- Skills Used: debug- verify
+- Tools Used: functions.report_intent- functions.grep- functions.view- functions.powershell- functions.create- functions.edit- functions.task
+- Changed Files: none
 
 ## Recent Decisions
 
-(none)
+- #143 [run] Run #57 Completed: Reproduced the export failure (run-056): exported and local .devteam state showed only issues35,40,41 as Done. Added a revertable patch, ran it, and committed the reconciliation: all19 target issues are now marked Done in .devteam/state and .devteam/exported/state. A follow-up issue created to fix the automation root cause (why update/edit commands didn't persist).

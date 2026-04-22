@@ -388,8 +388,8 @@
       35
     ],
     "ActiveIssueId": 80,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-04-22T16:38:39.8155290\u002B00:00"
+    "Status": "Blocked",
+    "UpdatedAtUtc": "2026-04-22T16:50:33.9723951\u002B00:00"
   },
   {
     "Id": 24,
@@ -457,9 +457,9 @@
     "IssueIds": [
       36
     ],
-    "ActiveIssueId": 81,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-04-22T16:38:37.6170860\u002B00:00"
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-22T16:52:08.2040405\u002B00:00"
   },
   {
     "Id": 28,
@@ -915,5 +915,40 @@
     "ActiveIssueId": 78,
     "Status": "Open",
     "UpdatedAtUtc": "2026-04-22T16:33:42.2761068\u002B00:00"
+  },
+  {
+    "Id": 54,
+    "RootIssueId": 83,
+    "FamilyKey": "devteam",
+    "Area": "devteam",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      83,
+      89
+    ],
+    "ActiveIssueId": 89,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:57:11.2489474\u002B00:00"
+  },
+  {
+    "Id": 55,
+    "RootIssueId": 84,
+    "FamilyKey": "tests",
+    "Area": "tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      84
+    ],
+    "ActiveIssueId": 84,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-22T16:44:10.8388163\u002B00:00"
   }
 ]

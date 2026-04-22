@@ -1,6 +1,6 @@
 ﻿# Issue 0013: Implement playground CSS and Bootstrap defaults
 
-- Status: blocked
+- Status: open
 - Role: developer
 - Area: playground-css
 - Priority: 70
@@ -30,5 +30,7 @@ Create OptionA.Blazor.Playground/wwwroot/playground.css with: (1) Layout rules f
 
 ## Recent Decisions
 
+- #100 [issue-edit] Edited issue #13: status=Done; note appended
+- #66 [issue-edit] Edited issue #13: status=Done; note appended
 - #36 [run] Run #19 Blocked: No summary provided.
 - #32 [run] Run #16 Failed: Agent timed out after 600 seconds.

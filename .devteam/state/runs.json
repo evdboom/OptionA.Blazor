@@ -1492,5 +1492,91 @@
     ],
     "CreatedQuestionIds": [],
     "UpdatedAtUtc": "2026-04-22T16:44:09.5758437\u002B00:00"
+  },
+  {
+    "Id": 57,
+    "IssueId": 83,
+    "RoleSlug": "developer",
+    "ModelName": "gpt-5-mini",
+    "SessionId": "devteam-developer-e8e9e8323950",
+    "Status": "Completed",
+    "Summary": "Reproduced the export failure (run-056): exported and local .devteam state showed only issues35,40,41 as Done. Added a revertable patch, ran it, and committed the reconciliation: all19 target issues are now marked Done in .devteam/state and .devteam/exported/state. A follow-up issue created to fix the automation root cause (why update/edit commands didn\u0027t persist).",
+    "CreditsUsed": 0,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "debug- verify"
+    ],
+    "ToolsUsed": [
+      "functions.report_intent- functions.grep- functions.view- functions.powershell- functions.create- functions.edit- functions.task"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      88
+    ],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-22T16:57:11.2489173\u002B00:00"
+  },
+  {
+    "Id": 58,
+    "IssueId": 80,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5-mini",
+    "SessionId": "devteam-tester-e6182a24494a",
+    "Status": "Blocked",
+    "Summary": "Ran dotnet test for OptionA.Blazor.Playground.UnitTests to verify scaffold/regressions. Build failed because OptionA.Blazor.Interactive fails to compile (missing types), so tests could not run.\n\nVerificationCMD: dotnet test \u0022OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj\u0022 --verbosity normalResult: Build failed with9 error(s) and10 warning(s) in6.8sExit code:1",
+    "CreditsUsed": 0,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "powershell (dotnet test \u0022OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj\u0022 --verbosity normal)",
+      "report_intent (\u0022Running playground tests\u0022)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      85,
+      86
+    ],
+    "CreatedQuestionIds": [
+      15,
+      16
+    ],
+    "UpdatedAtUtc": "2026-04-22T16:50:33.9723826\u002B00:00"
+  },
+  {
+    "Id": 59,
+    "IssueId": 81,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5-mini",
+    "SessionId": "devteam-tester-8ac790e26ddd",
+    "Status": "Completed",
+    "Summary": "Added a new test project that verifies authoritative .devteam state and issue markdown for issue #16. Test: OptionA.Blazor.DevTeam.Tests/DevTeamWorkspaceTests.cs checks .devteam\\state\\issues.json and .devteam\\issues\\0016-...md expect Status = \u0022Done\u0022. Committed files and ran dotnet test; test failed: issues.json reports \u0022Open\u0022 (Expected: \u0022Done\u0022), proving persistence did not occur.\n\nTests added:\n- OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj \u2014 xUnit test project- OptionA.Blazor.DevTeam.Tests\\DevTeamWorkspaceTests.cs \u2014 verifies issue #16 status in JSON and markdown",
+    "CreditsUsed": 0,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "tdd- verify"
+    ],
+    "ToolsUsed": [
+      "functions.report_intent- functions.glob- functions.grep- functions.view- functions.powershell"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      87
+    ],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-22T16:52:08.2040369\u002B00:00"
   }
 ]

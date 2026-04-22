@@ -27,7 +27,7 @@
     "PipelineId": null,
     "LastRunId": null,
     "SessionId": "devteam-orchestrator-b5cdd350b8e8",
-    "UpdatedAtUtc": "2026-04-22T16:33:42.2761741\u002B00:00"
+    "UpdatedAtUtc": "2026-04-22T16:44:10.8389030\u002B00:00"
   },
   {
     "ScopeKey": "pipeline:6:role:developer",
@@ -358,5 +358,35 @@
     "LastRunId": 56,
     "SessionId": "devteam-tester-da7d9f0f5022",
     "UpdatedAtUtc": "2026-04-22T16:36:00.5247929\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:54:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 54,
+    "LastRunId": 57,
+    "SessionId": "devteam-developer-e8e9e8323950",
+    "UpdatedAtUtc": "2026-04-22T16:47:21.0501705\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:23:role:tester",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "tester",
+    "IssueId": null,
+    "PipelineId": 23,
+    "LastRunId": 58,
+    "SessionId": "devteam-tester-e6182a24494a",
+    "UpdatedAtUtc": "2026-04-22T16:47:21.0542255\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:27:role:tester",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "tester",
+    "IssueId": null,
+    "PipelineId": 27,
+    "LastRunId": 59,
+    "SessionId": "devteam-tester-8ac790e26ddd",
+    "UpdatedAtUtc": "2026-04-22T16:47:21.0588405\u002B00:00"
   }
 ]

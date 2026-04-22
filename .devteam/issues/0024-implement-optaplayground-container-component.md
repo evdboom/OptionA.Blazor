@@ -1,6 +1,6 @@
 ﻿# Issue 0024: Implement OptAPlayground container component
 
-- Status: blocked
+- Status: open
 - Role: developer
 - Area: playground-components
 - Priority: 80
@@ -32,6 +32,8 @@ Implement OptAPlayground container component based on the approved prior-stage g
 
 ## Recent Decisions
 
+- #105 [issue-edit] Edited issue #24: status=Done; note appended
+- #77 [issue-edit] Edited issue #24: status=Done; note appended
 - #35 [run] Run #20 Blocked: Issue **#24** was verified as already implemented, but it cannot be cleanly closed under the current guardrails because unrelated playground editor tests prevent full unit-test verification.
 
 **

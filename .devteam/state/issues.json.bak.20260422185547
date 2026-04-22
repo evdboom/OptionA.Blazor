@@ -1632,7 +1632,7 @@
     "Area": "devteam",
     "FamilyKey": "devteam",
     "IsPlanningIssue": false,
-    "Status": "Done",
+    "Status": "InProgress",
     "RoleSlug": "developer",
     "Priority": 95,
     "RoadmapItemId": 1,
@@ -1720,48 +1720,6 @@
     "ParentIssueId": null,
     "PipelineId": null,
     "PipelineStageIndex": null,
-    "Notes": "",
-    "ExternalReference": "",
-    "ComplexityHint": null
-  },
-  {
-    "Id": 88,
-    "Title": "Investigate and fix automation that failed to persist issue updates",
-    "Detail": "Examine run logs and automation that invoked devteam edit-issue/update_issue_status. Verify command formatting (e.g., argument spacing and --workspace usage), ensure the automation checks return codes and stderr, add post-update verification (export and compare) and logging, and add tests so future batch-close runs fail fast and clearly on persistence problems.",
-    "Area": "devteam",
-    "FamilyKey": "devteam",
-    "IsPlanningIssue": false,
-    "Status": "Open",
-    "RoleSlug": "developer",
-    "Priority": 90,
-    "RoadmapItemId": 1,
-    "DependsOnIssueIds": [
-      83
-    ],
-    "ParentIssueId": null,
-    "PipelineId": null,
-    "PipelineStageIndex": null,
-    "Notes": "",
-    "ExternalReference": "",
-    "ComplexityHint": null
-  },
-  {
-    "Id": 89,
-    "Title": "Implement Investigate batch-close persistence",
-    "Detail": "Implement Investigate batch-close persistence based on the approved prior-stage guidance and carry the design into working code.",
-    "Area": "devteam",
-    "FamilyKey": "devteam",
-    "IsPlanningIssue": false,
-    "Status": "Open",
-    "RoleSlug": "developer",
-    "Priority": 90,
-    "RoadmapItemId": 1,
-    "DependsOnIssueIds": [
-      83
-    ],
-    "ParentIssueId": 83,
-    "PipelineId": 54,
-    "PipelineStageIndex": 1,
     "Notes": "",
     "ExternalReference": "",
     "ComplexityHint": null
