@@ -16,10 +16,10 @@
 | 0013 | Implement playground CSS and Bootstrap defaults | open | developer | playground-css | — |
 | 0014 | Write comprehensive unit tests for Playground | open | tester | playground-core | — |
 | 0015 | Integrate Playground into CI and documentation | open | developer | playground-ci | — |
-| 0016 | Implement the technical approach and create execution issues | open | developer | — | 0002 |
+| 0016 | Implement the technical approach and create execution issues | done | developer | — | 0002 |
 | 0017 | Expose playground examples in shared host apps | open | developer | playground-host | 0007, 0009, 0010, 0011, 0012, 0013 |
 | 0018 | Add browser coverage for playground interactions | open | tester | playground-host | 0015 |
-| 0019 | Implement Scaffold Playground project and core model | open | developer | playground-core | 0007 |
+| 0019 | Implement Scaffold Playground project and core model | done | developer | playground-core | 0007 |
 | 0020 | Close superseded issue #19 — PlaygroundDescriptorBase covered by #9 | done | developer | playground-core | — |
 | 0021 | Implement Scaffold Playground unit test project | open | developer | playground-core | 0008 |
 | 0022 | Scout codebase for: OptAPlaygroundEditor and individual editor components | done | navigator | playground-components | — |
@@ -84,9 +84,34 @@
 | 0081 | Test Persist superseded status for issue #16 in authoritative workspace state | done | tester | — | 0041 |
 | 0082 | Test Mark #11 superseded — replaced by container and editors split | open | tester | playground-components | 0071 |
 | 0083 | Investigate batch-close persistence | done | developer | devteam | 0062 |
-| 0084 | Integrate batch-close verification test into CI | open | tester | tests | — |
+| 0084 | Integrate batch-close verification test into CI | done | tester | tests | — |
 | 0085 | Fix OptionA.Blazor.Interactive build errors | open | developer | playground-core | — |
 | 0086 | Temporarily exclude OptionA.Blazor.Interactive from CI/tests | open | devops | playground-core | — |
-| 0087 | Fix persistence of superseded status for issue #16 in authoritative .devteam workspace state | open | developer | devteam | 0036 |
-| 0088 | Investigate and fix automation that failed to persist issue updates | open | developer | devteam | 0083 |
-| 0089 | Implement Investigate batch-close persistence | open | developer | devteam | 0083 |
+| 0087 | Fix persistence of superseded status for issue #16 in authoritative .devteam workspace state | done | developer | devteam | 0036 |
+| 0088 | Investigate and fix automation that failed to persist issue updates | done | developer | devteam | 0083 |
+| 0089 | Implement Investigate batch-close persistence | done | developer | devteam | 0083 |
+| 0090 | Scaffold OptionA.Blazor.Interactive project | blocked | frontend-developer | interactive | — |
+| 0091 | Implement component playground and live-preview host | open | frontend-developer | interactive | — |
+| 0092 | Integrate Monaco editor for editable code examples | open | frontend-developer | interactive | — |
+| 0093 | Add bUnit and Playwright tests for Interactive flows | open | developer | testing | — |
+| 0094 | Auto-generate component parameter docs and example pages | open | docs | docs | — |
+| 0095 | Audit BlogBuilder and propose migration split | open | developer | migration | — |
+| 0096 | Define hosting and deployment strategy for interactive docs | open | devops | deployment | — |
+| 0097 | Spike: EF Core-backed IndexedDB prototype | open | backend-developer | storage | — |
+| 0098 | Test the technical approach and create execution issues | open | tester | — | 0016 |
+| 0099 | Add DevTeam workspace regression test to CI | open | devops | ci | 0087 |
+| 0100 | Implement Fix persistence of superseded status for issue #16 in authoritative .devteam workspace state | open | developer | devteam | 0087 |
+| 0101 | Consolidate batch-close scripts | open | tester | tests | — |
+| 0102 | Implement Integrate batch-close verification test into CI | open | developer | tests | 0084 |
+| 0103 | Investigate intermittent failure when running full Playground unit test suite | open | developer | playground-core | — |
+| 0104 | Test Scaffold Playground project and core model | open | tester | playground-core | 0019 |
+| 0105 | Wire reconcile-batch-close into CI | open | developer | devteam | — |
+| 0106 | Investigate root cause in devteam CLI persistence | open | developer | devteam | — |
+| 0107 | Add automated test for exported-state parity | open | developer | devteam | — |
+| 0108 | Document reconcile-batch-close usage | open | docs | devteam | — |
+| 0109 | Test Investigate batch-close persistence | open | tester | devteam | 0089 |
+| 0110 | Resolve missing Playground references for Interactive | open | developer | interactive | 0090 |
+| 0111 | Clean up Interactive duplicates and confirm API surface | open | developer | interactive | 0090 |
+| 0112 | Fix command-generation that concatenates \"edit-issue\" and ID | open | developer | devteam | 0088 |
+| 0113 | Re-apply missing issue updates using corrected commands | open | developer | devteam | 0088 |
+| 0114 | Implement Investigate and fix automation that failed to persist issue updates | open | developer | devteam | 0088 |

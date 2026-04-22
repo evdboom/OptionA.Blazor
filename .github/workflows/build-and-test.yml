@@ -70,4 +70,14 @@ jobs:
         Write-Host "Running E2E tests:"
         dotnet test tests/OptionA.Blazor.E2E/OptionA.Blazor.E2E.csproj --filter "Category=E2E" --verbosity normal --configuration Release --no-build
         
+  devteam-verification:
+    runs-on: ubuntu-latest
+    needs: e2e-tests
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run devteam batch-close verification
+      run: |
+        Write-Host "Running test-batch-close-ci.ps1"
+        pwsh ./.devteam/scripts/test-batch-close-ci.ps1 -Targets 10,11,13,14,16,19,21,24,26,28,31,32,35,38,39,40,41,42,43 -OutputJsonPath ./.devteam/test-batch-close-result.json
+        
         

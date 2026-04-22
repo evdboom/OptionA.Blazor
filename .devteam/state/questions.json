@@ -142,5 +142,50 @@
     "CreatedAtUtc": "2026-04-22T16:50:33.9719812\u002B00:00",
     "Answer": "",
     "ExternalReference": ""
+  },
+  {
+    "Id": 17,
+    "Text": "Budget cap (Q#13/Q#14) remains unresolved: 49.93/50 credits committed (~0.07 remaining). The Interactive build break was fixed directly by the orchestrator at zero agent cost, but the next batch \u2014 #10/#38/#39 (playground components), #69/#70 (Interactive package scope), #87/#88 (devteam persistence fixes) \u2014 cannot run until \u0060TotalCreditCap\u0060 is raised. Please increase \u0060TotalCreditCap\u0060 to at least 100 and \u0060PremiumCreditCap\u0060 to at least 50 so the pipeline can resume. Once unblocked, the recommended first batch is: **#78** (close as done \u2014 build fixed), **#85** (close as done \u2014 same fix), **#10** (OptAPlaygroundPreview), **#38** (OptAPlaygroundEditor container).",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:02:53.3804887\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 18,
+    "Text": "Budget cap Q#17 remains unresolved:49.93/50 credits committed (~0.07remaining). The selected batch (#90, #88, #89, #21) cannot run until \u0060TotalCreditCap\u0060 is raised to at least 100 and \u0060PremiumCreditCap\u0060 to at least 50. Please update these values in the workspace or DevTeam configuration before the next loop.",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:10:14.8754049\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 19,
+    "Text": "Should OptionA.Blazor.Interactive depend on OptionA.Blazor.Playground (restore/add reference) to obtain PlaygroundDescriptorBase, PlaygroundLayout, PlaygroundOptions, IPlaygroundDataProvider, OptAComponent, and related types \u2014 or should Interactive be adapted to a new, decoupled API (please confirm preferred shape)?",
+    "IsBlocking": true,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:13:50.8536813\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 20,
+    "Text": "Preferred package metadata values (Authors/Company/Version) beyond the defaults added (OptionA /0.1.0)?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:13:50.8537462\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 21,
+    "Text": "Should the corrected commands be executed automatically by CI (generate-and-run), or should generation remain manual review \u002B operator-run for safety?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-22T17:14:44.7804269\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
   }
 ]

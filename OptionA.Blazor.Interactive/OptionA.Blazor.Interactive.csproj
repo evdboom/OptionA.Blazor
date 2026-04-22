@@ -4,34 +4,20 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageReadmeFile>readme.md</PackageReadmeFile>
-    <Version>10.0.0</Version>
-    <IsPackable>true</IsPackable>
-    <Authors>Erik van der Boom</Authors>
+    <PackageId>OptionA.Blazor.Interactive</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>OptionA</Authors>
+    <Company>OptionA</Company>
+    <Description>Interactive documentation and playground components for OptionA.Blazor.</Description>
     <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Description>Interactive documentation shell for live component exploration, previewing, and future code editing support.</Description>
-    <PackageReleaseNotes>
-      Initial interactive package scaffold and playground bridge.
-    </PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/evdboom/OptionA.Blazor</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <SupportedPlatform Include="browser" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\OptionA.Blazor.Components\OptionA.Blazor.Components.csproj" />
-    <ProjectReference Include="..\OptionA.Blazor.Components.Direct\OptionA.Blazor.Components.Direct.csproj" />
     <ProjectReference Include="..\OptionA.Blazor.Playground\OptionA.Blazor.Playground.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="readme.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>

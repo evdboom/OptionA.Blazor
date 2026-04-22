@@ -6,10 +6,10 @@
 - Priority: 20
 - Depends On: none
 - Roadmap Item: 1
-- Family: playground-core
+- Family: playgroundcore
 - External: none
-- Pipeline: none
-- Pipeline Stage: none
+- Pipeline: 56
+- Pipeline Stage: 0
 - Planning Issue: no
 
 ## Detail
