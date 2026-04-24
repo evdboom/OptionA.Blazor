@@ -2,18 +2,368 @@ name: .Net10 - Package and publish nuget packages
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '20[0-9][0-9]-[0-1][0-9]-[0-3][0-9]-*'
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Release tag in yyyy-MM-dd-X format
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  issues: write
 
 defaults:
   run:
     shell: pwsh
 
 jobs:
-  build:
+  determine-packages:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.determine.outputs.matrix }}
+      package_count: ${{ steps.determine.outputs.package_count }}
+      previous_tag: ${{ steps.determine.outputs.previous_tag }}
+      has_warnings: ${{ steps.determine.outputs.has_warnings }}
+      warnings_markdown: ${{ steps.determine.outputs.warnings_markdown }}
+      release_tag: ${{ steps.determine.outputs.release_tag }}
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        ref: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag || github.ref }}
+    - name: Determine changed packages and dependent packages
+      id: determine
+      run: |
+        $eventName = "${{ github.event_name }}"
+        $manualTag = "${{ github.event.inputs.release_tag }}"
+        if ($eventName -eq 'workflow_dispatch') {
+          $tag = $manualTag
+        }
+        else {
+          $tag = "${{ github.ref_name }}"
+        }
+
+        if ($tag -notmatch '^\d{4}-\d{2}-\d{2}-\d+$') {
+          throw "Tag '$tag' must match yyyy-MM-dd-X."
+        }
+
+        git rev-parse --verify "refs/tags/$tag" | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+          throw "Tag '$tag' does not exist in the repository."
+        }
+
+        $allTags = git tag --sort=-creatordate | ForEach-Object { $_.Trim() } | Where-Object { $_ -match '^\d{4}-\d{2}-\d{2}-\d+$' }
+        $previousTag = $allTags | Where-Object { $_ -ne $tag } | Select-Object -First 1
+
+        if ([string]::IsNullOrWhiteSpace($previousTag)) {
+          Write-Host "No previous tag found. Selecting all packable projects."
+          $changedFiles = @()
+        }
+        else {
+          Write-Host "Diffing changes from $previousTag..$tag"
+          $changedFiles = git diff --name-only "$previousTag..$tag"
+        }
+
+        function Is-PackableProject {
+          param([string]$ProjectPath)
+
+          if ($ProjectPath -match '(\.UnitTests|\.Test|\.Tests)\.csproj$') {
+            return $false
+          }
+
+          [xml]$xml = Get-Content -LiteralPath $ProjectPath
+          $generateFlags = @($xml.Project.PropertyGroup.GeneratePackageOnBuild)
+          foreach ($flag in $generateFlags) {
+            if (("$flag").Trim().ToLowerInvariant() -eq 'true') {
+              return $true
+            }
+          }
+
+          return $false
+        }
+
+        function Normalize-RelativePath {
+          param([string]$Path)
+          return ($Path -replace '\\', '/').TrimStart('./')
+        }
+
+        function Get-ProjectVersionFromXml {
+          param([xml]$Xml)
+
+          $versions = @($Xml.Project.PropertyGroup.Version)
+          foreach ($version in $versions) {
+            if (-not [string]::IsNullOrWhiteSpace($version)) {
+              return ("$version").Trim()
+            }
+          }
+
+          return $null
+        }
+
+        $projects = @()
+        Get-ChildItem -Recurse -Filter *.csproj | ForEach-Object {
+          $fullPath = $_.FullName
+          if (-not (Is-PackableProject -ProjectPath $fullPath)) {
+            return
+          }
+
+          $relativePath = Normalize-RelativePath -Path (Resolve-Path -LiteralPath $fullPath -Relative)
+          $relativeDir = Normalize-RelativePath -Path (Resolve-Path -LiteralPath $_.DirectoryName -Relative)
+
+          [xml]$xml = Get-Content -LiteralPath $fullPath
+          $version = Get-ProjectVersionFromXml -Xml $xml
+          $refs = @()
+          foreach ($projectReference in @($xml.Project.ItemGroup.ProjectReference)) {
+            if ($null -eq $projectReference) {
+              continue
+            }
+
+            $includePath = $projectReference.Include
+            if ([string]::IsNullOrWhiteSpace($includePath)) {
+              continue
+            }
+
+            $resolvedRef = [System.IO.Path]::GetFullPath([System.IO.Path]::Combine($_.DirectoryName, $includePath))
+            $refs += $resolvedRef
+          }
+
+          $projects += [PSCustomObject]@{
+            Name = $_.BaseName
+            FullPath = $fullPath
+            RelativePath = $relativePath
+            RelativeDir = $relativeDir
+            Version = $version
+            References = $refs
+          }
+        }
+
+        if ($projects.Count -eq 0) {
+          throw "No packable projects detected."
+        }
+
+        $projectByFullPath = @{}
+        $projectByName = @{}
+        foreach ($project in $projects) {
+          $projectByFullPath[$project.FullPath] = $project
+          $projectByName[$project.Name] = $project
+        }
+
+        $dependents = @{}
+        foreach ($project in $projects) {
+          if (-not $dependents.ContainsKey($project.Name)) {
+            $dependents[$project.Name] = New-Object System.Collections.Generic.List[string]
+          }
+        }
+
+        foreach ($project in $projects) {
+          foreach ($referencePath in $project.References) {
+            if ($projectByFullPath.ContainsKey($referencePath)) {
+              $referencedName = $projectByFullPath[$referencePath].Name
+              if (-not $dependents.ContainsKey($referencedName)) {
+                $dependents[$referencedName] = New-Object System.Collections.Generic.List[string]
+              }
+
+              $dependents[$referencedName].Add($project.Name)
+            }
+          }
+        }
+
+        $globalImpactFiles = @(
+          'Directory.Build.props',
+          'global.json',
+          'NuGet.config'
+        )
+
+        $changedNormalized = @()
+        foreach ($changedFile in $changedFiles) {
+          if (-not [string]::IsNullOrWhiteSpace($changedFile)) {
+            $changedNormalized += Normalize-RelativePath -Path $changedFile
+          }
+        }
+
+        $selectAll = $false
+        if ([string]::IsNullOrWhiteSpace($previousTag)) {
+          $selectAll = $true
+        }
+        else {
+          foreach ($globalFile in $globalImpactFiles) {
+            if ($changedNormalized -contains $globalFile) {
+              $selectAll = $true
+              break
+            }
+          }
+        }
+
+        $seedNames = New-Object System.Collections.Generic.HashSet[string]
+
+        if ($selectAll) {
+          foreach ($project in $projects) {
+            $null = $seedNames.Add($project.Name)
+          }
+        }
+        else {
+          foreach ($project in $projects) {
+            $projectPrefix = "$($project.RelativeDir)/"
+            foreach ($changedFile in $changedNormalized) {
+              if ($changedFile.StartsWith($projectPrefix, [System.StringComparison]::OrdinalIgnoreCase) -or
+                  $changedFile.Equals($project.RelativePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+                $null = $seedNames.Add($project.Name)
+                break
+              }
+            }
+          }
+        }
+
+        $selectedNames = New-Object System.Collections.Generic.HashSet[string]
+        $queue = New-Object System.Collections.Generic.Queue[string]
+
+        foreach ($seedName in $seedNames) {
+          if ($selectedNames.Add($seedName)) {
+            $queue.Enqueue($seedName)
+          }
+        }
+
+        while ($queue.Count -gt 0) {
+          $current = $queue.Dequeue()
+          if ($dependents.ContainsKey($current)) {
+            foreach ($dependentName in $dependents[$current]) {
+              if ($selectedNames.Add($dependentName)) {
+                $queue.Enqueue($dependentName)
+              }
+            }
+          }
+        }
+
+        $selectedProjects = @($projects | Where-Object { $selectedNames.Contains($_.Name) } | Sort-Object Name)
+
+        $projectReferenceNames = @{}
+        foreach ($project in $projects) {
+          $refNames = New-Object System.Collections.Generic.List[string]
+          foreach ($referencePath in $project.References) {
+            if ($projectByFullPath.ContainsKey($referencePath)) {
+              $refNames.Add($projectByFullPath[$referencePath].Name)
+            }
+          }
+
+          $projectReferenceNames[$project.Name] = $refNames
+        }
+
+        $warnings = New-Object System.Collections.Generic.List[string]
+        $versionChanged = New-Object System.Collections.Generic.HashSet[string]
+        $projectVersions = @{}
+
+        if (-not [string]::IsNullOrWhiteSpace($previousTag)) {
+          foreach ($project in $selectedProjects) {
+            $previousVersion = $null
+            $showResult = git show "$previousTag`:$($project.RelativePath)" 2>$null
+            if ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($showResult)) {
+              try {
+                [xml]$previousXml = $showResult
+                $previousVersion = Get-ProjectVersionFromXml -Xml $previousXml
+              }
+              catch {
+                $previousVersion = $null
+              }
+            }
+
+            $projectVersions[$project.Name] = [PSCustomObject]@{
+              Current = $project.Version
+              Previous = $previousVersion
+            }
+
+            if (-not [string]::IsNullOrWhiteSpace($previousVersion) -and -not [string]::IsNullOrWhiteSpace($project.Version) -and $project.Version -ne $previousVersion) {
+              $null = $versionChanged.Add($project.Name)
+            }
+          }
+
+          foreach ($project in $selectedProjects) {
+            $versionInfo = $projectVersions[$project.Name]
+            if ($null -eq $versionInfo -or [string]::IsNullOrWhiteSpace($versionInfo.Previous)) {
+              continue
+            }
+
+            $currentVersion = $versionInfo.Current
+            $previousVersion = $versionInfo.Previous
+
+            if ($seedNames.Contains($project.Name) -and $currentVersion -eq $previousVersion) {
+              $warnings.Add("- Missing direct bump: $($project.Name) stayed at $currentVersion (changed files under $($project.RelativeDir)).")
+            }
+
+            if ($currentVersion -eq $previousVersion) {
+              $changedReferences = @()
+              foreach ($referenceName in $projectReferenceNames[$project.Name]) {
+                if ($versionChanged.Contains($referenceName)) {
+                  $changedRefVersion = $projectVersions[$referenceName]
+                  if ($null -ne $changedRefVersion) {
+                    $changedReferences += "$referenceName $($changedRefVersion.Previous) -> $($changedRefVersion.Current)"
+                  }
+                  else {
+                    $changedReferences += $referenceName
+                  }
+                }
+              }
+
+              if ($changedReferences.Count -gt 0) {
+                $joinedReferences = $changedReferences -join '; '
+                $warnings.Add("- Missing dependent bump: $($project.Name) stayed at $currentVersion while referenced package(s) changed ($joinedReferences).")
+              }
+            }
+          }
+        }
+
+        if ($selectedProjects.Count -eq 0) {
+          Write-Host "No package changes detected between tags."
+          $matrix = '[]'
+        }
+        else {
+          Write-Host "Selected package projects:"
+          $selectedProjects | ForEach-Object { Write-Host "- $($_.RelativePath)" }
+
+          $matrixEntries = @()
+          foreach ($selectedProject in $selectedProjects) {
+            $matrixEntries += [PSCustomObject]@{
+              projectName = $selectedProject.Name
+              projectPath = $selectedProject.RelativePath
+            }
+          }
+
+          $matrix = ($matrixEntries | ConvertTo-Json -Compress)
+        }
+
+        $hasWarnings = if ($warnings.Count -gt 0) { 'true' } else { 'false' }
+        if ($warnings.Count -eq 0) {
+          $warningsMarkdown = "No version drift warnings detected."
+        }
+        else {
+          $warningsMarkdown = @(
+            "Release tag: $tag",
+            "Previous tag: $previousTag",
+            "",
+            "Potential missed package version bumps:",
+            ($warnings -join "`n")
+          ) -join "`n"
+        }
+
+        "matrix=$matrix" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        "package_count=$($selectedProjects.Count)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        "previous_tag=$previousTag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        "has_warnings=$hasWarnings" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        "release_tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        "warnings_markdown<<EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        $warningsMarkdown | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+        "EOF" | Out-File -FilePath $env:GITHUB_OUTPUT -Append -Encoding utf8
+
+  verify:
+    runs-on: ubuntu-latest
+    needs: determine-packages
+    if: ${{ needs.determine-packages.outputs.package_count != '0' }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ needs.determine-packages.outputs.release_tag }}
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -39,10 +389,139 @@ jobs:
           Write-Host "$($_.Name)"
           dotnet test $_.FullName  --verbosity normal --no-build --configuration Release
         }
-    - name: publish
+
+  pack:
+    runs-on: ubuntu-latest
+    needs: [determine-packages, verify]
+    if: ${{ needs.determine-packages.outputs.package_count != '0' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include: ${{ fromJson(needs.determine-packages.outputs.matrix) }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ needs.determine-packages.outputs.release_tag }}
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+    - name: Pack selected project
+      run: |
+        Write-Host "Packing ${{ matrix.projectPath }} with csproj-defined version"
+        dotnet pack "${{ matrix.projectPath }}" --configuration Release --output ./artifacts
+    - name: Upload package artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nupkg-${{ matrix.projectName }}
+        path: ./artifacts/*.nupkg
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: [determine-packages, pack]
+    if: ${{ needs.determine-packages.outputs.package_count != '0' }}
+    steps:
+    - name: Download package artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ./packages
+        pattern: nupkg-*
+        merge-multiple: true
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 10.0.x
+    - name: Publish packages to NuGet and track results
       run: |
         Write-Host "Publishing nuget packages:"
-        Get-ChildItem -Recurse -Include *.nupkg | Where-Object { $_.FullName -like '*Release*' } | ForEach-Object {
-            Write-Host "$($_.Name)"
-            dotnet nuget push $_.FullName --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
-        }             
+        $published = New-Object System.Collections.Generic.List[string]
+        $duplicates = New-Object System.Collections.Generic.List[string]
+
+        Get-ChildItem -Path ./packages -Recurse -Filter *.nupkg | ForEach-Object {
+          Write-Host "$($_.Name)"
+          $output = dotnet nuget push $_.FullName --api-key "${{ secrets.NUGET_API_KEY }}" --source https://api.nuget.org/v3/index.json --skip-duplicate 2>&1
+          $outputText = ($output | Out-String)
+
+          if ($outputText -match 'already exists|skip duplicate|conflict') {
+            $duplicates.Add($_.Name)
+          }
+          elseif ($LASTEXITCODE -eq 0) {
+            $published.Add($_.Name)
+          }
+          else {
+            Write-Host $outputText
+            throw "Failed to publish package $($_.Name)."
+          }
+        }
+
+        Write-Host "Published packages ($($published.Count)):"
+        foreach ($item in $published) {
+          Write-Host "- $item"
+        }
+
+        Write-Host "Duplicate/skipped packages ($($duplicates.Count)):"
+        foreach ($item in $duplicates) {
+          Write-Host "- $item"
+        }
+
+  create-release:
+    runs-on: ubuntu-latest
+    needs: [determine-packages, publish]
+    if: ${{ needs.determine-packages.outputs.package_count != '0' }}
+    steps:
+    - name: Download package artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: ./packages
+        pattern: nupkg-*
+        merge-multiple: true
+    - name: Create GitHub release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{ needs.determine-packages.outputs.release_tag }}
+        generate_release_notes: true
+        files: ./packages/*.nupkg
+
+  report-version-drift:
+    runs-on: ubuntu-latest
+    needs: [determine-packages]
+    if: ${{ needs.determine-packages.outputs.has_warnings == 'true' }}
+    steps:
+    - name: Create or update version drift issue
+      uses: actions/github-script@v7
+      env:
+        RELEASE_TAG: ${{ needs.determine-packages.outputs.release_tag }}
+        DRIFT_BODY: ${{ needs.determine-packages.outputs.warnings_markdown }}
+      with:
+        script: |
+          const tag = process.env.RELEASE_TAG;
+          const title = `[release-version-drift] ${tag}`;
+          const body = process.env.DRIFT_BODY || 'Potential version drift detected, but no details were provided.';
+          const owner = context.repo.owner;
+          const repo = context.repo.repo;
+
+          const { data: issues } = await github.rest.issues.listForRepo({
+            owner,
+            repo,
+            state: 'open',
+            labels: 'release-version-drift',
+            per_page: 100
+          });
+
+          const existing = issues.find(i => i.title === title);
+          if (existing) {
+            await github.rest.issues.update({
+              owner,
+              repo,
+              issue_number: existing.number,
+              body
+            });
+          } else {
+            await github.rest.issues.create({
+              owner,
+              repo,
+              title,
+              body,
+              labels: ['release-version-drift']
+            });
+          }

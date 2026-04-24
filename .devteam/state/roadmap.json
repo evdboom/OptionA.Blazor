@@ -1,9 +1,0 @@
-﻿[
-  {
-    "Id": 1,
-    "Title": "Plan the delivery strategy",
-    "Detail": "Turn the goal into milestones, issues, role assignments, and open questions: # Goal\r\n\r\nThis project has a set of packages which are have more or less relevance. The goal is to have a robust set of blazor components usuable and that are consistant in setup and usage. They should be \u0027whitelabel\u0027 or have popular defaults (bootstrap is currently implemented).\r\n\r\n# Current focus\r\nTo setup the documentation in github pages the original plan was to use the blogbuilder package, however that one is outdated. I would like a OptionA.Blazor.Interactive (name to be discussed). The goals is to have documentation set up with examples : displayed component, settings for all parameters, code editing (monaco?) so people can edit and preview live. The interactive name might not be exhaustive, part is to determine a nice name.\r\n\r\n# Longer term goals\r\n - Tests for all components, unit, bunit (semi frontend), playwright e2e tests\r\n - Blogbuilder is not user friendly and mostly outdated with all AI capabilities of the current day. Brainstorm what to keep / move to a more generic named package, what to let go\r\n - Storage: My idea was to have a entity framework implementation for indexed db, complete with migrations so client side databases can be easily accessed from blazor using that EF implementation\r\n - More default css configurations (material, ..)",
-    "Status": "Open",
-    "Priority": 100
-  }
-]

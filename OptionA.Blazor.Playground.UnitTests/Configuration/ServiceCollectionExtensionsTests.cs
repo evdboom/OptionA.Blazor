@@ -16,12 +16,18 @@ public class ServiceCollectionExtensionsTests
         var dataProvider = provider.GetRequiredService<IPlaygroundDataProvider>();
 
         // Assert
+        Assert.Equal("card", dataProvider.DefaultInteractiveClass);
         Assert.Equal("card", dataProvider.DefaultPlaygroundClass);
         Assert.Equal("card-body", dataProvider.DefaultPreviewClass);
         Assert.Equal("card-body", dataProvider.DefaultEditorClass);
         Assert.Equal("card-body bg-light", dataProvider.DefaultCodeClass);
         Assert.Equal("form-label", dataProvider.DefaultEditorLabelClass);
         Assert.Equal("form-control", dataProvider.DefaultEditorInputClass);
-        Assert.Equal("fw-bold mb-2mt-3", dataProvider.DefaultEditorGroupClass);
+        Assert.Equal("fw-bold mb-2 mt-3", dataProvider.DefaultEditorGroupClass);
+        Assert.True(dataProvider.CodeEditingEnabled);
+        Assert.Equal(PlaygroundEditorKind.TextArea, dataProvider.PreferredCodeEditor);
+        Assert.Equal("razor", dataProvider.DefaultCodeLanguage);
+        Assert.Contains(PlaygroundExportFormat.Razor, dataProvider.EnabledExportFormats);
+        Assert.Contains(PlaygroundExportFormat.Json, dataProvider.EnabledExportFormats);
     }
 }

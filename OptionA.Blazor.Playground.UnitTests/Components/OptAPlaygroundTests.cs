@@ -13,6 +13,7 @@ public class OptAPlaygroundTests : BunitContext
     public OptAPlaygroundTests()
     {
         _playgroundDataProvider = new Mock<IPlaygroundDataProvider>();
+        _playgroundDataProvider.SetupGet(p => p.DefaultInteractiveClass).Returns("interactive-shell");
         _playgroundDataProvider.SetupGet(p => p.DefaultPlaygroundClass).Returns("playground-shell");
         _playgroundDataProvider.SetupGet(p => p.DefaultPreviewClass).Returns("preview-shell");
         _playgroundDataProvider.SetupGet(p => p.DefaultEditorClass).Returns("editor-shell");
@@ -21,6 +22,10 @@ public class OptAPlaygroundTests : BunitContext
         _playgroundDataProvider.SetupGet(p => p.DefaultEditorInputClass).Returns("input-shell");
         _playgroundDataProvider.SetupGet(p => p.DefaultEditorGroupClass).Returns("group-shell");
         _playgroundDataProvider.SetupGet(p => p.DefaultLayout).Returns(PlaygroundLayout.SideBySide);
+        _playgroundDataProvider.SetupGet(p => p.CodeEditingEnabled).Returns(true);
+        _playgroundDataProvider.SetupGet(p => p.PreferredCodeEditor).Returns(PlaygroundEditorKind.TextArea);
+        _playgroundDataProvider.SetupGet(p => p.DefaultCodeLanguage).Returns("razor");
+        _playgroundDataProvider.SetupGet(p => p.EnabledExportFormats).Returns([PlaygroundExportFormat.Razor, PlaygroundExportFormat.Json]);
 
         Services.AddSingleton(_playgroundDataProvider.Object);
     }
@@ -58,6 +63,24 @@ public class OptAPlaygroundTests : BunitContext
         // Assert
         var container = cut.Find("div[opta-playground]");
         Assert.True(container.HasAttribute("stacked"));
+    }
+
+    [Fact]
+    public void OptAPlayground_EmitsInteractiveMetadataAttributes()
+    {
+        // Arrange
+        var descriptor = CreateDescriptor();
+
+        // Act
+        var cut = Render<OptAPlayground>(parameters => parameters
+            .Add(p => p.Descriptor, descriptor));
+
+        // Assert
+        var container = cut.Find("div[opta-playground]");
+        Assert.Equal("true", container.GetAttribute("code-editing-enabled"));
+        Assert.Equal("textarea", container.GetAttribute("preferred-code-editor"));
+        Assert.Equal("razor", container.GetAttribute("default-code-language"));
+        Assert.Equal("razor,json", container.GetAttribute("export-formats"));
     }
 
     [Fact]

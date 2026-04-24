@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OptionA.Blazor.Playground\OptionA.Blazor.Playground.csproj" />
-    <ProjectReference Include="..\OptionA.Blazor.Interactive\OptionA.Blazor.Interactive.csproj" />
   </ItemGroup>
 
 </Project>

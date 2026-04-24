@@ -2,14 +2,26 @@ using Microsoft.AspNetCore.Components;
 
 namespace OptionA.Blazor.Playground;
 
+/// <summary>
+/// Renders parameter editors for a playground descriptor.
+/// </summary>
 public partial class OptAPlaygroundEditor
 {
+    /// <summary>
+    /// Gets or sets the descriptor that defines which parameters are editable.
+    /// </summary>
     [Parameter]
     public PlaygroundDescriptorBase? Descriptor { get; set; }
 
+    /// <summary>
+    /// Gets or sets the current playground parameter values.
+    /// </summary>
     [CascadingParameter]
     public Dictionary<string, object?> CurrentParameters { get; set; } = [];
 
+    /// <summary>
+    /// Gets or sets the callback raised when a parameter value changes.
+    /// </summary>
     [CascadingParameter]
     public EventCallback<(string Name, object? Value)> ValueChanged { get; set; }
 

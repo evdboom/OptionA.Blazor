@@ -56,6 +56,10 @@ public partial class OptAPlayground
     {
         var result = GetAttributes();
         result["opta-playground"] = true;
+        result["code-editing-enabled"] = DataProvider.CodeEditingEnabled.ToString().ToLowerInvariant();
+        result["preferred-code-editor"] = DataProvider.PreferredCodeEditor.ToString().ToLowerInvariant();
+        result["default-code-language"] = DataProvider.DefaultCodeLanguage ?? string.Empty;
+        result["export-formats"] = string.Join(",", DataProvider.EnabledExportFormats.Select(format => format.ToString().ToLowerInvariant()));
 
         if (ResolvedLayout == PlaygroundLayout.Stacked)
         {

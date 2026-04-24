@@ -18,6 +18,9 @@ public class PlaygroundDataProvider : IPlaygroundDataProvider
     }
 
     /// <inheritdoc/>
+    public string? DefaultInteractiveClass => _options.DefaultInteractiveClass;
+
+    /// <inheritdoc/>
     public string? DefaultPlaygroundClass => _options.DefaultPlaygroundClass;
 
     /// <inheritdoc/>
@@ -40,4 +43,16 @@ public class PlaygroundDataProvider : IPlaygroundDataProvider
 
     /// <inheritdoc/>
     public PlaygroundLayout DefaultLayout => _options.DefaultLayout;
+
+    /// <inheritdoc/>
+    public bool CodeEditingEnabled => _options.CodeEditingEnabled;
+
+    /// <inheritdoc/>
+    public PlaygroundEditorKind PreferredCodeEditor => _options.PreferredCodeEditor;
+
+    /// <inheritdoc/>
+    public string? DefaultCodeLanguage => _options.DefaultCodeLanguage;
+
+    /// <inheritdoc/>
+    public IReadOnlyList<PlaygroundExportFormat> EnabledExportFormats => _options.EnabledExportFormats;
 }

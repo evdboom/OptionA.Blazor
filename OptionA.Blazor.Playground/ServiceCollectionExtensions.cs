@@ -45,13 +45,18 @@ public static partial class ServiceCollectionExtensions
     {
         var bootstrapConfig = (PlaygroundOptions options) =>
         {
+            options.DefaultInteractiveClass = "card";
             options.DefaultPlaygroundClass = "card";
             options.DefaultPreviewClass = "card-body";
             options.DefaultEditorClass = "card-body";
             options.DefaultCodeClass = "card-body bg-light";
             options.DefaultEditorLabelClass = "form-label";
             options.DefaultEditorInputClass = "form-control";
-            options.DefaultEditorGroupClass = "fw-bold mb-2mt-3";
+            options.DefaultEditorGroupClass = "fw-bold mb-2 mt-3";
+            options.CodeEditingEnabled = true;
+            options.PreferredCodeEditor = PlaygroundEditorKind.TextArea;
+            options.DefaultCodeLanguage = "razor";
+            options.EnabledExportFormats = [PlaygroundExportFormat.Razor, PlaygroundExportFormat.Json];
 
             configuration?.Invoke(options);
         };

@@ -6,6 +6,11 @@ namespace OptionA.Blazor.Playground;
 public interface IPlaygroundDataProvider
 {
     /// <summary>
+    /// Gets the default CSS class for the interactive wrapper.
+    /// </summary>
+    string? DefaultInteractiveClass { get; }
+
+    /// <summary>
     /// Gets the default CSS class for the top-level playground container.
     /// </summary>
     string? DefaultPlaygroundClass { get; }
@@ -44,4 +49,24 @@ public interface IPlaygroundDataProvider
     /// Gets the default playground layout.
     /// </summary>
     PlaygroundLayout DefaultLayout { get; }
+
+    /// <summary>
+    /// Gets whether code editing is enabled.
+    /// </summary>
+    bool CodeEditingEnabled { get; }
+
+    /// <summary>
+    /// Gets the preferred editor implementation.
+    /// </summary>
+    PlaygroundEditorKind PreferredCodeEditor { get; }
+
+    /// <summary>
+    /// Gets the default code language label.
+    /// </summary>
+    string? DefaultCodeLanguage { get; }
+
+    /// <summary>
+    /// Gets the enabled export formats.
+    /// </summary>
+    IReadOnlyList<PlaygroundExportFormat> EnabledExportFormats { get; }
 }
