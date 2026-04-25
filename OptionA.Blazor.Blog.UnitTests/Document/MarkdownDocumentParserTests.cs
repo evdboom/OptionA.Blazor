@@ -1,6 +1,8 @@
 using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using OptionA.Blazor.Blog.Document.Internal;
+using OptionA.Blazor.Playground;
 
 namespace OptionA.Blazor.Blog.UnitTests.Document;
 
@@ -353,11 +355,202 @@ public class MarkdownDocumentParserTests
 }
 
 /// <summary>
+/// Playground-specific unit tests for <see cref="IMarkdownDocumentParser"/>.
+/// </summary>
+public class MarkdownDocumentParserPlaygroundTests
+{
+    private static IMarkdownDocumentParser BuildParser(IPlaygroundDescriptorResolver? resolver = null)
+        => new MarkdownDocumentParserAccessor(resolver);
+
+    // ------------------------------------------------------------------
+    // Happy path: known id, no overrides
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Parse_PlaygroundDirective_KnownId_ReturnsResolvedDescriptor()
+    {
+        var descriptor = new PlaygroundDescriptor<FakeComponent> { Title = "Demo" };
+        var resolver = BuildResolver(descriptor, "demo");
+        var parser = BuildParser(resolver);
+
+        var md = """
+            ::: playground id="demo"
+            :::
+            """;
+
+        var result = parser.Parse(md);
+        var item = Assert.Single(result);
+        var directive = Assert.IsType<PlaygroundDirectiveContent>(item);
+        Assert.Equal("demo", directive.DirectiveId);
+        Assert.NotNull(directive.ResolvedDescriptor);
+        Assert.Null(directive.ErrorMessage);
+    }
+
+    // ------------------------------------------------------------------
+    // Unknown id
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Parse_PlaygroundDirective_UnknownId_SetsErrorMessage()
+    {
+        var resolver = BuildResolver(null, null); // resolves nothing
+        var parser = BuildParser(resolver);
+
+        var md = """
+            ::: playground id="unknown-id"
+            :::
+            """;
+
+        var result = parser.Parse(md);
+        var item = Assert.Single(result);
+        var directive = Assert.IsType<PlaygroundDirectiveContent>(item);
+        Assert.Equal("unknown-id", directive.DirectiveId);
+        Assert.Null(directive.ResolvedDescriptor);
+        Assert.NotNull(directive.ErrorMessage);
+        Assert.Contains("unknown-id", directive.ErrorMessage, StringComparison.Ordinal);
+    }
+
+    // ------------------------------------------------------------------
+    // No resolver registered
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Parse_PlaygroundDirective_NoResolver_SetsErrorMessage()
+    {
+        var parser = BuildParser(resolver: null);
+
+        var md = """
+            ::: playground id="button-basic"
+            :::
+            """;
+
+        var result = parser.Parse(md);
+        var item = Assert.Single(result);
+        var directive = Assert.IsType<PlaygroundDirectiveContent>(item);
+        Assert.NotNull(directive.ErrorMessage);
+    }
+
+    // ------------------------------------------------------------------
+    // Parameter overrides applied
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Parse_PlaygroundDirective_WithParameterOverrides_AppliesOverrides()
+    {
+        var descriptor = new PlaygroundDescriptor<FakeComponent>
+        {
+            Title = "Demo",
+            Parameters =
+            [
+                new PlaygroundParameterDescriptor { Name = "Text", DefaultValue = "Original", ValueType = typeof(string) },
+            ],
+        };
+
+        var resolver = BuildResolver(descriptor, "demo");
+        var parser = BuildParser(resolver);
+
+        var md = """
+            ::: playground id="demo"
+            parameters:
+              Text: Overridden
+            :::
+            """;
+
+        var result = parser.Parse(md);
+        var item = Assert.Single(result);
+        var directive = Assert.IsType<PlaygroundDirectiveContent>(item);
+        Assert.NotNull(directive.ResolvedDescriptor);
+        var textParam = directive.ResolvedDescriptor!.Parameters.FirstOrDefault(p => p.Name == "Text");
+        Assert.NotNull(textParam);
+        Assert.Equal("Overridden", textParam!.DefaultValue);
+    }
+
+    // ------------------------------------------------------------------
+    // Mixed document: directive together with other nodes
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Parse_PlaygroundDirective_InMixedDocument_ReturnsItemsInOrder()
+    {
+        var descriptor = new PlaygroundDescriptor<FakeComponent> { Title = "Demo" };
+        var resolver = BuildResolver(descriptor, "demo");
+        var parser = BuildParser(resolver);
+
+        var md = """
+            # Heading
+
+            ::: playground id="demo"
+            :::
+
+            A paragraph.
+            """;
+
+        var result = parser.Parse(md);
+        Assert.Equal(3, result.Count);
+        Assert.IsType<HeaderContent>(result[0]);
+        Assert.IsType<PlaygroundDirectiveContent>(result[1]);
+        Assert.IsType<ParagraphContent>(result[2]);
+    }
+
+    // ------------------------------------------------------------------
+    // Existing Markdown parsing still works (regression guard)
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Parse_RegularMarkdown_NotAffectedByPlaygroundPreprocessing()
+    {
+        var parser = BuildParser(resolver: null);
+
+        var md = """
+            # Title
+
+            A paragraph.
+
+            ```csharp
+            var x = 1;
+            ```
+            """;
+
+        var result = parser.Parse(md);
+        Assert.Equal(3, result.Count);
+        Assert.IsType<HeaderContent>(result[0]);
+        Assert.IsType<ParagraphContent>(result[1]);
+        Assert.IsType<CodeContent>(result[2]);
+    }
+
+    // ------------------------------------------------------------------
+    // Helpers
+    // ------------------------------------------------------------------
+
+    private static IPlaygroundDescriptorResolver BuildResolver(
+        PlaygroundDescriptor<FakeComponent>? descriptor,
+        string? matchId)
+    {
+        return new LambdaResolver((id, _) =>
+            id == matchId && descriptor is not null ? descriptor : null);
+    }
+
+    private sealed class LambdaResolver(Func<string?, PlaygroundDescriptorBase?, PlaygroundDescriptorBase?> func)
+        : IPlaygroundDescriptorResolver
+    {
+        public PlaygroundDescriptorBase? Resolve(string? descriptorId, PlaygroundDescriptorBase? fallback)
+            => func(descriptorId, fallback);
+    }
+
+    private sealed class FakeComponent : Microsoft.AspNetCore.Components.ComponentBase { }
+}
+
+/// <summary>
 /// Exposes the internal <see cref="MarkdownDocumentParser"/> for unit testing.
 /// </summary>
 file sealed class MarkdownDocumentParserAccessor : IMarkdownDocumentParser
 {
-    private readonly MarkdownDocumentParser _inner = new();
+    private readonly MarkdownDocumentParser _inner;
+
+    public MarkdownDocumentParserAccessor(IPlaygroundDescriptorResolver? resolver = null)
+    {
+        _inner = new MarkdownDocumentParser(resolver);
+    }
 
     public IReadOnlyList<IContent> Parse(string? markdown) => _inner.Parse(markdown);
 }

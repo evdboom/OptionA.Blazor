@@ -14,9 +14,9 @@
       8,
       9
     ],
-    "ActiveIssueId": 9,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T20:17:10.8101154\u002B00:00"
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T20:30:16.3170437\u002B00:00"
   },
   {
     "Id": 2,
@@ -28,11 +28,12 @@
       "tester"
     ],
     "IssueIds": [
-      3
+      3,
+      10
     ],
-    "ActiveIssueId": 3,
-    "Status": "Running",
-    "UpdatedAtUtc": "2026-04-25T20:14:30.8991565\u002B00:00"
+    "ActiveIssueId": 10,
+    "Status": "Blocked",
+    "UpdatedAtUtc": "2026-04-25T20:29:43.7373114\u002B00:00"
   },
   {
     "Id": 3,
@@ -63,7 +64,7 @@
     ],
     "ActiveIssueId": 5,
     "Status": "Running",
-    "UpdatedAtUtc": "2026-04-25T20:14:30.8919750\u002B00:00"
+    "UpdatedAtUtc": "2026-04-25T20:26:18.9776649\u002B00:00"
   },
   {
     "Id": 5,

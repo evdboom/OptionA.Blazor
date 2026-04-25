@@ -3,6 +3,7 @@ using OptionA.Blazor.Blog.Code.Parsers;
 using OptionA.Blazor.Blog.Services;
 using OptionA.Blazor.Blog.Struct;
 using OptionA.Blazor.Blog.Text.Parser;
+using OptionA.Blazor.Playground;
 using System.Reflection;
 
 namespace OptionA.Blazor.Blog;
@@ -26,7 +27,8 @@ public static class ServiceCollectionExtensions
             services
                 .AddSingleton<IBuilderService, BuilderService>()
                 .AddSingleton<IMarkDownParser, MarkDownParser>()
-                .AddSingleton<IMarkdownDocumentParser, MarkdownDocumentParser>()
+                .AddSingleton<IMarkdownDocumentParser>(sp =>
+                    new MarkdownDocumentParser(sp.GetService<IPlaygroundDescriptorResolver>()))
                 .AddSingleton<IBlogDataProvider>(provider => new BlogDataProvider(configuration));
         }
         else if (lifetime == ServiceLifetime.Scoped)
@@ -34,7 +36,8 @@ public static class ServiceCollectionExtensions
             services
                 .AddScoped<IBuilderService, BuilderService>()
                 .AddScoped<IMarkDownParser, MarkDownParser>()
-                .AddScoped<IMarkdownDocumentParser, MarkdownDocumentParser>()
+                .AddScoped<IMarkdownDocumentParser>(sp =>
+                    new MarkdownDocumentParser(sp.GetService<IPlaygroundDescriptorResolver>()))
                 .AddScoped<IBlogDataProvider>(provider => new BlogDataProvider(configuration));
         }
         else

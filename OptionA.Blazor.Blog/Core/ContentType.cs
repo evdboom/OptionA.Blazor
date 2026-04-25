@@ -102,4 +102,10 @@ public enum ContentType
     /// Grouping of content, resulting in a &lt;div&gt; tag, used for grouping content together for styling purposes
     /// </summary>
     ContentGroup,
+
+    /// <summary>
+    /// An interactive playground block resolved from a Markdown directive of the form
+    /// <c>::: playground id="..." :::</c>. Rendered by the document pipeline only.
+    /// </summary>
+    Playground,
 }

@@ -1,0 +1,17 @@
+@namespace OptionA.Blazor.Blog
+@using OptionA.Blazor.Blog.Document.Internal
+@using OptionA.Blazor.Playground
+
+@if (Content is not null)
+{
+    @if (Content.ResolvedDescriptor is not null)
+    {
+        <OptAPlayground Descriptor="Content.ResolvedDescriptor" />
+    }
+    else if (Content.ErrorMessage is not null)
+    {
+        <div class="opta-playground-error" role="alert">
+            <strong>Playground error:</strong> @Content.ErrorMessage
+        </div>
+    }
+}

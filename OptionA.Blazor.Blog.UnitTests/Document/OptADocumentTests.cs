@@ -263,7 +263,6 @@ public class OptADocumentTests : BunitContext
         var examplePath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "docs", "examples", "buttons.md"));
         var markdown = File.ReadAllText(examplePath);
 
-        Assert.DoesNotContain("::: playground", markdown, StringComparison.Ordinal);
         Assert.False(markdown.StartsWith("---", StringComparison.Ordinal));
 
         var cut = Render<OptADocument>(parameters => parameters.Add(x => x.Source, markdown));
@@ -274,5 +273,8 @@ public class OptADocumentTests : BunitContext
         Assert.NotNull(cut.Find("pre"));
         Assert.NotNull(cut.Find("img"));
         Assert.NotNull(cut.Find("table"));
+        // Playground directive is supported — with no resolver registered the component
+        // renders a visible error block instead of throwing.
+        Assert.NotNull(cut.Find(".opta-playground-error"));
     }
 }

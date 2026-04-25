@@ -48,5 +48,25 @@
     "RunId": null,
     "SessionId": "devteam-orchestrator-b5cdd350b8e8",
     "CreatedAtUtc": "2026-04-25T20:14:30.5777682\u002B00:00"
+  },
+  {
+    "Id": 6,
+    "Title": "Execution batch fallback applied",
+    "Detail": "The orchestrator did not persist a selection, so the runtime used heuristic ready-issue selection.",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:26:18.6425216\u002B00:00"
+  },
+  {
+    "Id": 7,
+    "Title": "Selected execution batch",
+    "Detail": "Issues: 5, 9, 10\n\nSELECTED_",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:26:18.6425626\u002B00:00"
   }
 ]

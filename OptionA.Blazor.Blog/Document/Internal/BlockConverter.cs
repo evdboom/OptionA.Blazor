@@ -38,6 +38,7 @@ internal sealed class BlockConverter
         return block switch
         {
             HeadingBlock heading => ConvertHeading(heading),
+            FencedCodeBlock fenced when IsPlaygroundDirective(fenced) => ConvertPlaygroundDirective(fenced),
             FencedCodeBlock fenced => ConvertFencedCode(fenced),
             CodeBlock code => ConvertCode(code),
             QuoteBlock quote => ConvertQuote(quote),
@@ -211,5 +212,20 @@ internal sealed class BlockConverter
                 AppendInlineText(nested, sb);
             }
         }
+    }
+
+    private static bool IsPlaygroundDirective(FencedCodeBlock fenced) =>
+        string.Equals(fenced.Info, PlaygroundDirectivePreprocessor.SyntheticFenceInfo, StringComparison.OrdinalIgnoreCase);
+
+    private PlaygroundDirectiveContent ConvertPlaygroundDirective(FencedCodeBlock fenced)
+    {
+        var raw = _serializer.SerializeLeaf(fenced);
+        var (id, parameters) = PlaygroundYamlParser.Parse(raw);
+
+        return new PlaygroundDirectiveContent
+        {
+            DirectiveId = string.IsNullOrWhiteSpace(id) ? null : id,
+            ParameterOverrides = parameters,
+        };
     }
 }
