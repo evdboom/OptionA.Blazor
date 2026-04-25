@@ -119,6 +119,15 @@ public partial class OptAGallery
             .OrderBy(child => child.ImageNumber)
             .Select((child, index) => (index, child))
             .ToList();
+
+        // If this is the first child registered, mark it as the current image so it renders by default
+        if (_children.Count == 1)
+        {
+            var first = _children[0].Child;
+            first.IsCurrent = true;
+            first.Update();
+        }
+
         InvokeAsync(StateHasChanged);
     }
 

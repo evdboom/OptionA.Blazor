@@ -98,6 +98,18 @@ public static class ServiceCollectionExtensions
     {
         var bootstrapConfig = (OptABlogOptions options) =>
         {
+            // Prefill sensible Bootstrap 5.3 classes for common content types.
+            options.DefaultClassesPerType = new Dictionary<ContentType, List<string>>
+            {
+                [ContentType.Table] = new List<string> { "table", "table-striped" },
+                [ContentType.Image] = new List<string> { "img-fluid", "rounded" },
+                [ContentType.Header] = new List<string> { "mb-3" },
+                [ContentType.Quote] = new List<string> { "blockquote" },
+                [ContentType.List] = new List<string> { "list-unstyled" },
+                [ContentType.Code] = new List<string> { "code", "bg-light", "p-2" }
+            };
+
+            // Allow caller-supplied configuration to override or extend the defaults.
             configuration?.Invoke(options);
         };
 

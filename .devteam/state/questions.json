@@ -16,5 +16,23 @@
     "CreatedAtUtc": "2026-04-25T20:52:56.7118613\u002B00:00",
     "Answer": "",
     "ExternalReference": ""
+  },
+  {
+    "Id": 3,
+    "Text": "Confirm the chosen authoritative policy (use .devteam/state/issues.json as authoritative). If another policy is preferred (runs-as-source), the refinement will be updated accordingly.",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T21:32:27.6347862\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 4,
+    "Text": "Prefer a PowerShell script (.devteam/scripts/reconcile-workspace-state.ps1) or a small dotnet tool project (OptionA.Blazor.DevTeam.Tooling) for the implementation? (default: script for speed; project for stronger typing/versioning)",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T21:32:27.6347886\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
   }
 ]

@@ -80,9 +80,9 @@
       6,
       17
     ],
-    "ActiveIssueId": 17,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T20:50:12.6511007\u002B00:00"
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:03:23.2665133\u002B00:00"
   },
   {
     "Id": 6,
@@ -94,11 +94,12 @@
       "tester"
     ],
     "IssueIds": [
-      7
+      7,
+      33
     ],
-    "ActiveIssueId": 7,
+    "ActiveIssueId": 33,
     "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T20:08:37.3562511\u002B00:00"
+    "UpdatedAtUtc": "2026-04-25T21:18:04.0427490\u002B00:00"
   },
   {
     "Id": 7,
@@ -179,10 +180,334 @@
     ],
     "IssueIds": [
       19,
-      20
+      20,
+      30
     ],
-    "ActiveIssueId": 20,
+    "ActiveIssueId": 30,
     "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T20:55:14.0867260\u002B00:00"
+    "UpdatedAtUtc": "2026-04-25T21:11:48.5826039\u002B00:00"
+  },
+  {
+    "Id": 12,
+    "RootIssueId": 22,
+    "FamilyKey": "repoaudit",
+    "Area": "repo-audit",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      22,
+      28
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:11:29.8278793\u002B00:00"
+  },
+  {
+    "Id": 13,
+    "RootIssueId": 23,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      23
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:22:06.3144701\u002B00:00"
+  },
+  {
+    "Id": 14,
+    "RootIssueId": 24,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      24
+    ],
+    "ActiveIssueId": 24,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T20:59:39.0474670\u002B00:00"
+  },
+  {
+    "Id": 15,
+    "RootIssueId": 25,
+    "FamilyKey": "blogconfig",
+    "Area": "blog-config",
+    "RoleSequence": [
+      "fullstack-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      25,
+      26
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:11:08.3745909\u002B00:00"
+  },
+  {
+    "Id": 16,
+    "RootIssueId": 27,
+    "FamilyKey": "repoaudit",
+    "Area": "repo-audit",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      27
+    ],
+    "ActiveIssueId": 27,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:07:46.0505308\u002B00:00"
+  },
+  {
+    "Id": 17,
+    "RootIssueId": 29,
+    "FamilyKey": "devteam",
+    "Area": "devteam",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      29,
+      35
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:26:28.5187129\u002B00:00"
+  },
+  {
+    "Id": 18,
+    "RootIssueId": 31,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      31
+    ],
+    "ActiveIssueId": 31,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:18:04.7240876\u002B00:00"
+  },
+  {
+    "Id": 19,
+    "RootIssueId": 32,
+    "FamilyKey": "documentation",
+    "Area": "documentation",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      32
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:26:49.2708865\u002B00:00"
+  },
+  {
+    "Id": 20,
+    "RootIssueId": 34,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "reviewer"
+    ],
+    "IssueIds": [
+      34
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:26:11.0927711\u002B00:00"
+  },
+  {
+    "Id": 21,
+    "RootIssueId": 36,
+    "FamilyKey": "repoaudit",
+    "Area": "repo-audit",
+    "RoleSequence": [
+      "auditor"
+    ],
+    "IssueIds": [
+      36
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:26:24.9304372\u002B00:00"
+  },
+  {
+    "Id": 22,
+    "RootIssueId": 37,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      37
+    ],
+    "ActiveIssueId": 37,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:22:07.0355452\u002B00:00"
+  },
+  {
+    "Id": 23,
+    "RootIssueId": 38,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      38,
+      49
+    ],
+    "ActiveIssueId": 49,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:33:27.7165463\u002B00:00"
+  },
+  {
+    "Id": 24,
+    "RootIssueId": 39,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      39
+    ],
+    "ActiveIssueId": 39,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:26:50.0094980\u002B00:00"
+  },
+  {
+    "Id": 25,
+    "RootIssueId": 40,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      40
+    ],
+    "ActiveIssueId": 40,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:26:50.0094997\u002B00:00"
+  },
+  {
+    "Id": 26,
+    "RootIssueId": 41,
+    "FamilyKey": "repoaudit",
+    "Area": "repo-audit",
+    "RoleSequence": [
+      "backend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      41,
+      48
+    ],
+    "ActiveIssueId": 48,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:32:27.6351805\u002B00:00"
+  },
+  {
+    "Id": 27,
+    "RootIssueId": 42,
+    "FamilyKey": "repoaudit",
+    "Area": "repo-audit",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      42
+    ],
+    "ActiveIssueId": 42,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:26:50.0095028\u002B00:00"
+  },
+  {
+    "Id": 28,
+    "RootIssueId": 43,
+    "FamilyKey": "blog",
+    "Area": "blog",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      43
+    ],
+    "ActiveIssueId": 43,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:26:50.0095046\u002B00:00"
+  },
+  {
+    "Id": 29,
+    "RootIssueId": 44,
+    "FamilyKey": "docs",
+    "Area": "docs",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      44
+    ],
+    "ActiveIssueId": 44,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T21:26:50.0095055\u002B00:00"
+  },
+  {
+    "Id": 30,
+    "RootIssueId": 45,
+    "FamilyKey": "components",
+    "Area": "components",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      45
+    ],
+    "ActiveIssueId": 45,
+    "Status": "Running",
+    "UpdatedAtUtc": "2026-04-25T21:30:00.8325134\u002B00:00"
+  },
+  {
+    "Id": 31,
+    "RootIssueId": 46,
+    "FamilyKey": "none",
+    "Area": "none",
+    "RoleSequence": [
+      "orchestrator"
+    ],
+    "IssueIds": [
+      46
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T21:29:53.2226463\u002B00:00"
   }
 ]

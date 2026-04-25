@@ -164,6 +164,9 @@ public partial class OptACarousel
             .OrderBy(child => child.SlideNumber)
             .Select((child, index) => (index, child))
             .ToList();
+
+        // Ensure the carousel re-renders when children are registered so markup is available to tests
+        InvokeAsync(StateHasChanged);
     }
 
     /// <summary>

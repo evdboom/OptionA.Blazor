@@ -32,7 +32,7 @@ public class OptAComponent : ComponentBase
     protected bool TryGetClasses(string? defaultClass, out string resultClass)
     {
         var start = ParseClasses(defaultClass, AdditionalClasses);
-        var removed = RemovedClasses ?? [];
+        var removed = RemovedClasses ?? new List<string>();
 
         var classList = start                
             .Except(removed)

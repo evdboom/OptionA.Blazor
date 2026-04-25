@@ -60,4 +60,33 @@ public class ServiceCollectionExtensionsTests
 
         Assert.Equal("Only Singleton and Scoped lifetimes are supported", exception.Message);
     }
+
+    [Fact]
+    public void AddOptionABootstrapBlog_SetsBootstrapDefaults()
+    {
+        var services = new ServiceCollection();
+
+        services.AddOptionABootstrapBlog();
+
+        using var provider = services.BuildServiceProvider();
+        var blogProvider = provider.GetRequiredService<IBlogDataProvider>();
+        var tableClasses = blogProvider.DefaultClassesForType(ContentType.Table);
+
+        Assert.Contains("table", tableClasses);
+        Assert.Contains("table-striped", tableClasses);
+    }
+
+    [Fact]
+    public void AddOptionABlog_NoBootstrap_DefaultsEmpty()
+    {
+        var services = new ServiceCollection();
+
+        services.AddOptionABlog();
+
+        using var provider = services.BuildServiceProvider();
+        var blogProvider = provider.GetRequiredService<IBlogDataProvider>();
+        var tableClasses = blogProvider.DefaultClassesForType(ContentType.Table);
+
+        Assert.Empty(tableClasses);
+    }
 }

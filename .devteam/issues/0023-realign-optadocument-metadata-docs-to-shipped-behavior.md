@@ -1,15 +1,15 @@
 ﻿# Issue 0023: Realign OptADocument metadata docs to shipped behavior
 
-- Status: open
+- Status: done
 - Role: docs
 - Area: document-rendering
 - Priority: 82
 - Depends On: 0007
 - Roadmap Item: 1
-- Family: document-rendering
+- Family: documentrendering
 - External: none
-- Pipeline: none
-- Pipeline Stage: none
+- Pipeline: 13
+- Pipeline Stage: 0
 - Planning Issue: no
 
 ## Detail
@@ -18,7 +18,15 @@ What: trim or clearly mark as pending the README sections that currently claim `
 
 ## Latest Run
 
-(none)
+- Run: 29
+- Status: Completed
+- Model: gpt-5-mini
+- Session: devteam-docs-0993be34c8fc
+- Updated: 2026-04-25T21:22:06.3144687+00:00
+- Summary: Updated OptionA.Blazor.Blog\readme.md so it matches the currently shipped OptADocument API. Removed/marked pending the unsupported OnMetadataParsed/DocumentMetadata/front-matter parsing, directive/playground and inline-component claims. Replaced the nondeterministic Post helper (DateTime.Now) with a deterministic helper pattern and provided minimal examples that compile against the current API (only OptADocument Source is used).
+- Skills Used: (none)
+- Tools Used: functions.view- functions.edit- functions.report_intent
+- Changed Files: none
 
 ## Recent Decisions
 
