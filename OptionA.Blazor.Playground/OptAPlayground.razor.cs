@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace OptionA.Blazor.Playground;
 
@@ -16,6 +17,14 @@ public partial class OptAPlayground
     public PlaygroundDescriptorBase? Descriptor { get; set; }
 
     /// <summary>
+    /// Gets or sets a string identifier used to resolve the descriptor from the
+    /// registered <see cref="IPlaygroundRegistry"/>. Takes precedence over
+    /// <see cref="Descriptor"/> when both are set.
+    /// </summary>
+    [Parameter]
+    public string? DescriptorId { get; set; }
+
+    /// <summary>
     /// Gets or sets the optional layout override for the playground surface.
     /// </summary>
     [Parameter]
@@ -23,6 +32,11 @@ public partial class OptAPlayground
 
     [Inject]
     private IPlaygroundDataProvider DataProvider { get; set; } = null!;
+
+    [Inject]
+    private IServiceProvider ServiceProvider { get; set; } = null!;
+
+    private IPlaygroundRegistry? Registry => ServiceProvider.GetService<IPlaygroundRegistry>();
 
     /// <summary>
     /// Gets the current parameter values shown by the playground child components.
@@ -36,6 +50,19 @@ public partial class OptAPlayground
 
     private PlaygroundLayout ResolvedLayout => Layout ?? DataProvider.DefaultLayout;
 
+    private PlaygroundDescriptorBase? ResolvedDescriptor
+    {
+        get
+        {
+            if (DescriptorId is not null && Registry is not null && Registry.TryGet(DescriptorId, out var found))
+            {
+                return found;
+            }
+
+            return Descriptor;
+        }
+    }
+
     /// <inheritdoc/>
     protected override void OnInitialized()
     {
@@ -45,10 +72,11 @@ public partial class OptAPlayground
     /// <inheritdoc/>
     protected override void OnParametersSet()
     {
-        if (!ReferenceEquals(_initializedDescriptor, Descriptor))
+        var resolved = ResolvedDescriptor;
+        if (!ReferenceEquals(_initializedDescriptor, resolved))
         {
-            _initializedDescriptor = Descriptor;
-            CurrentParameters = CreateCurrentParameters(Descriptor);
+            _initializedDescriptor = resolved;
+            CurrentParameters = CreateCurrentParameters(resolved);
         }
     }
 

@@ -35,6 +35,48 @@ public static partial class ServiceCollectionExtensions
     }
 
     /// <summary>
+    /// Registers a <see cref="PlaygroundDescriptorBase"/> under <paramref name="id"/> in the
+    /// <see cref="IPlaygroundRegistry"/> singleton. The registry is added to the container on the
+    /// first call; subsequent calls reuse the same instance.
+    /// </summary>
+    /// <param name="services">The service collection to configure.</param>
+    /// <param name="id">The unique identifier used to address this descriptor from Markdown.</param>
+    /// <param name="descriptor">The descriptor to register.</param>
+    /// <returns>The same <see cref="IServiceCollection"/> instance.</returns>
+    public static IServiceCollection AddPlayground(this IServiceCollection services, string id, PlaygroundDescriptorBase descriptor)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(id);
+        ArgumentNullException.ThrowIfNull(descriptor);
+
+        var existing = services.FirstOrDefault(sd =>
+            sd.ServiceType == typeof(IPlaygroundRegistry) &&
+            sd.ImplementationInstance != null);
+
+        IPlaygroundRegistry registry;
+
+        if (existing?.ImplementationInstance is IPlaygroundRegistry existingRegistry)
+        {
+            registry = existingRegistry;
+        }
+        else
+        {
+            // Remove any type-only registrations so we can replace with a concrete instance.
+            var stale = services.Where(sd => sd.ServiceType == typeof(IPlaygroundRegistry)).ToList();
+            foreach (var staleDescriptor in stale)
+            {
+                services.Remove(staleDescriptor);
+            }
+
+            var newRegistry = new PlaygroundRegistry();
+            services.AddSingleton<IPlaygroundRegistry>(newRegistry);
+            registry = newRegistry;
+        }
+
+        registry.Register(id, descriptor);
+        return services;
+    }
+
+    /// <summary>
     /// Adds a bootstrap-configured <see cref="IPlaygroundDataProvider"/> to the service collection.
     /// </summary>
     /// <param name="services">The service collection to configure.</param>
