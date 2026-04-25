@@ -94,7 +94,37 @@ Once registered, the descriptor can be referenced in Razor or from Markdown dire
 Behavior:
 - When `DescriptorId` is provided and found in the registry, the registered descriptor is used.
 - If the id is not found but a `Descriptor` parameter is supplied, the `Descriptor` parameter is used as a fallback.
-- Unknown ids render a visible, non-fatal authoring error so authors can diagnose problems early.
+- If an unknown id is provided and no Descriptor fallback is supplied, the renderer emits a visible non-fatal authoring error block that shows the missing id and guidance to register it (so docs still render).
+
+Registering with AddPlayground (copy-paste):
+
+```csharp
+builder.Services.AddOptionAPlayground();
+var btn = new PlaygroundDescriptor<OptAButton>
+{
+    Title = "Button demo",
+    Parameters = new List<PlaygroundParameterDescriptor>
+    {
+        new PlaygroundParameterDescriptor { Name = "Text", DefaultValue = "Click me", ValueType = typeof(string), EditorType = ParameterEditorType.Text }
+    }
+};
+builder.Services.AddPlayground("button-basic", btn);
+```
+
+Referencing by id in Razor or Markdown:
+
+```razor
+<OptAPlayground DescriptorId="button-basic" />
+```
+
+Unknown-id behavior example (authoring error):
+
+```razor
+<!-- If "missing-id" is not registered, this will render an authoring error block -->
+<OptAPlayground DescriptorId="missing-id" />
+```
+
+The authoring error block is intentionally visible during content authoring; it does not throw and allows the page to render other content.
 
 The registry and the `AddPlayground` extension enable central reuse of interactive examples across docs and posts.
 

@@ -1,0 +1,61 @@
+﻿{
+  "FormatVersion": 4,
+  "RepoRoot": "C:\\repo\\OptionA.Blazor",
+  "Phase": "Execution",
+  "Budget": {
+    "TotalCreditCap": 25,
+    "PremiumCreditCap": 6,
+    "PerRunCreditLimit": 5,
+    "PerRunPremiumLimit": 2,
+    "CreditsCommitted": 11,
+    "PremiumCreditsCommitted": 6
+  },
+  "Runtime": {
+    "ActiveModeSlug": "develop",
+    "KeepAwakeEnabled": false,
+    "WorkspaceMcpEnabled": true,
+    "PipelineSchedulingEnabled": true,
+    "AutoApproveEnabled": false,
+    "WorktreeMode": false,
+    "WorkspaceMcpServerName": "devteam-workspace",
+    "DefaultProviderName": "",
+    "DefaultPipelineRoles": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "PipelineRolesCustomized": false,
+    "DefaultMaxIterations": 15,
+    "DefaultMaxSubagents": 4
+  },
+  "ActiveGoal": {
+    "GoalText": "This is an existing workspace, look at GOAL.md, a subagent accidentally deleted the entire .devteam runtime so primary part is to determine the current state.",
+    "UpdatedAtUtc": "2026-04-25T19:40:40.6271769\u002B00:00"
+  },
+  "ExecutionSelection": {
+    "SelectedIssueIds": [],
+    "Rationale": "",
+    "SessionId": "",
+    "UpdatedAtUtc": "2026-04-25T20:14:30.5777938\u002B00:00"
+  },
+  "RoadmapFile": "roadmap.json",
+  "IssuesFile": "issues.json",
+  "QuestionsFile": "questions.json",
+  "RunsFile": "runs.json",
+  "AgentSessionsFile": "sessions.json",
+  "DecisionsFile": "decisions.json",
+  "PipelinesFile": "pipelines.json",
+  "RoadmapCount": 1,
+  "IssueCount": 9,
+  "QuestionCount": 0,
+  "RunCount": 8,
+  "SessionCount": 7,
+  "DecisionCount": 5,
+  "PipelineCount": 6,
+  "NextRoadmapId": 2,
+  "NextIssueId": 10,
+  "NextQuestionId": 1,
+  "NextRunId": 9,
+  "NextDecisionId": 6,
+  "NextPipelineId": 7
+}

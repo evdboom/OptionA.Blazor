@@ -1,10 +1,47 @@
 # OptionA.Blazor.Blog.Builder
-Blazor components building a blog in Blazor.
 
-## Deprecation notice
-The WYSIWYG block-builder in this package is deprecated and will not receive new features. Use **Markdown authoring** with `OptionA.Blazor.Blog` (`OptADocument`) for writing blog posts and documentation pages, and `OptionA.Blazor.Playground` for interactive component previews. `OptionA.Blazor.Blog.Builder` will remain on NuGet at its current version for existing projects.
+> **⚠️ RETIRED — no new features or versions will be published.**
+>
+> The WYSIWYG block-builder in this package is **no longer the recommended authoring path**.
+> Write blog posts and documentation pages in **Markdown** using `OptionA.Blazor.Blog` (`OptADocument`),
+> and use `OptionA.Blazor.Playground` for interactive component previews.
+>
+> `OptionA.Blazor.Blog.Builder` remains on NuGet at its last published version for projects that already depend on it,
+> but it will receive no further updates, bug fixes, or feature additions.
 
-For full documentation, releasenotes and examples, go to [option-a.tech](https://www.option-a.tech/documentation/blazor/blogbuilder). The full source can be viewed on [github](https://github.com/evdboom/OptionA.Blazor).
+## Migrating to OptADocument
+
+Instead of building posts block-by-block with `OptAPostBuilder`, author a single Markdown file:
+
+```md
+---
+title: My Post
+date: 2026-04-25
+tags: [components]
+---
+
+# My Post
+
+Write prose here.  OptADocument maps headings, paragraphs, code fences,
+lists, quotes, images, and tables to the existing Blog render components automatically.
+
+::: playground id="button-basic"
+component: OptAButton
+parameters:
+  Text: Click me
+:::
+```
+
+Render it with:
+
+```razor
+<OptADocument Source="@markdownString" />
+```
+
+Register the renderer via `AddOptionABootstrapBlog` (already required for blog rendering).
+Use `AddOptionABootstrapPlayground` to resolve `::: playground :::` fences.
+
+For full documentation, go to [option-a.tech](https://www.option-a.tech/documentation/blazor/blog). The full source can be viewed on [github](https://github.com/evdboom/OptionA.Blazor).
 
 ## Getting started
 To start using the OptionA.Blazor.Blog.Builder include the required depencenies in your service provider. The package uses the default .Net Dependency Injection.

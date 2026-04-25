@@ -1,13 +1,14 @@
 ﻿@page "/blogbuilder"
-@using OptionA.Blazor.Blog;
-@using OptionA.Blazor.Blog.Builder;
 
-<div class="row">
-    <div class="col-6">
-        <OptAPostBuilder PostChanged="OnPostChanged"
-                         Post="_post"/>
-    </div>
-    <div class="col-6 opta-blog sticky-top">
-        <OptAPost Post="_post"/>
-    </div>
+<div class="alert alert-warning" role="alert">
+    <h4 class="alert-heading">Blog Builder Retired</h4>
+    <p>
+        The WYSIWYG block-builder (<code>OptAPostBuilder</code>) is no longer the recommended authoring path
+        and has been removed from this playground.
+    </p>
+    <p>
+        Author blog posts and documentation pages in <strong>Markdown</strong> using
+        <code>OptionA.Blazor.Blog</code> (<code>OptADocument</code>), and use
+        <code>OptionA.Blazor.Playground</code> for interactive component previews.
+    </p>
 </div>

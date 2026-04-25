@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using OptionA.Blazor.Blog;
-using OptionA.Blazor.Blog.Builder;
 using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Maui.Test;
@@ -49,40 +48,8 @@ public static class MauiProgram
                 config.PostSubtitleClass = "text-center";
                 config.TagClass = "opta-tag px-2 py-1 mx-1";
 
-            })
-            .AddOptionABootstrapBlogBuilder(config =>
-            {
-                config.ComponentButtonOptions = new()
-                {
-                    [ContentType.Paragraph] = IconButton("bi bi-paragraph"),
-                    [ContentType.Header] = IconButton("bi bi-type-h2"),
-                    [ContentType.Code] = IconButton("bi bi-code-slash"),
-                    [ContentType.Quote] = IconButton("bi bi-chat-left-quote"),
-                    [ContentType.Image] = IconButton("bi bi-image"),
-                    [ContentType.Frame] = IconButton("bi bi-window"),
-                    [ContentType.List] = IconButton("bi bi-list-ul"),
-                    [ContentType.Table] = IconButton("bi bi-table")
-                };
-                if (config.PostBuilderOptions is not null && config.PostBuilderOptions.TryGetValue(BuilderType.ComponentBar, out var componentBar))
-                {
-                    componentBar.Class += " top-60";
-                }
-                if (config.PostBuilderOptions is not null && config.PostBuilderOptions.TryGetValue(BuilderType.ComponentContent, out var component))
-                {
-                    component.AdditionalAttributes ??= [];
-                    component.AdditionalAttributes["draggable"] = null;
-                }
             });
 
         return builder.Build();
-    }
-
-    private static BuilderTypeProperties IconButton(string icon)
-    {
-        return new BuilderTypeProperties
-        {
-            ContentType = ContentType.Icon,
-            Content = icon
-        };
     }
 }

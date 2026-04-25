@@ -212,9 +212,9 @@ tags: [components, buttons]
 ---
 ```
 
-Directives and inline components (planned)
+Directives and inline components
 
-- Playground directives — fenced directive syntax enables embedding interactive playgrounds inline:
+OptADocument supports directive fences and inline component tags. The directive fence is a GitHub-flavored Markdown fenced block prefixed with ::: playground and supports id-based or inline descriptors. Example using a registered playground id:
 
 ```md
 ::: playground id="button-basic"
@@ -225,9 +225,47 @@ parameters:
 :::
 ```
 
-- Inline component tags — literal `<OptAButton Text="Hi" />` in Markdown will be rendered via `DynamicComponent` against a registered whitelist (`services.AddDocumentComponent<T>()`).
+Razor usage with DocumentMetadata callback:
 
-> Note: Directive and inline component support are coming soon; OptADocument already renders Markdown blocks to the blog renderers today and will accept directives in a subsequent release.
+```razor
+@code {
+    private string markdown = System.IO.File.ReadAllText("docs/example-page.md");
+    private Post? _post;
+
+    void HandleMetadata(DocumentMetadata md)
+    {
+        // metadata is available during rendering; can be used to build a Post
+        _post = PostHelpers.FromMetadataAndContent(md, markdown);
+    }
+}
+
+<OptADocument Source="@markdown" OnMetadataParsed="HandleMetadata" />
+```
+
+Post helper shim (copy-paste):
+
+```csharp
+public static class PostHelpers
+{
+    public static Post FromMetadataAndContent(DocumentMetadata md, string content)
+    {
+        return new Post
+        {
+            Title = md.Title ?? string.Empty,
+            Subtitle = md.Subtitle,
+            Date = md.Date ?? DateTime.Now,
+            Tags = md.Tags?.ToList() ?? new List<string>(),
+            BodyMarkdown = content
+        };
+    }
+}
+```
+
+Inline component tags
+
+Literal inline tags like `<OptAButton Text="Click" />` in Markdown will be rendered via DynamicComponent against the document component whitelist when registered with `services.AddDocumentComponent<T>()`.
+
+Note: OptADocument already renders standard Markdown blocks (paragraphs, headings, code, lists, block quotes, tables, images) to the blog components today; directive and inline rendering are enabled when the document component registry and playground services are registered.
 
 ### Node mapping (Markdown → renderers)
 

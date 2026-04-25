@@ -1,0 +1,52 @@
+﻿[
+  {
+    "Id": 1,
+    "Title": "Updated active goal",
+    "Detail": "This is an existing workspace, look at GOAL.md, a subagent accidentally deleted the entire .devteam runtime so primary part is to determine the current state.",
+    "Source": "goal",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "",
+    "CreatedAtUtc": "2026-04-25T19:40:40.6271980\u002B00:00"
+  },
+  {
+    "Id": 2,
+    "Title": "Approved high-level plan \u2014 entering architect planning",
+    "Detail": "User approved the current plan.",
+    "Source": "plan",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "",
+    "CreatedAtUtc": "2026-04-25T19:45:07.2206871\u002B00:00"
+  },
+  {
+    "Id": 3,
+    "Title": "Approved detailed architect plan \u2014 entering execution",
+    "Detail": "User approved the current plan.",
+    "Source": "plan",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "",
+    "CreatedAtUtc": "2026-04-25T20:11:01.4635577\u002B00:00"
+  },
+  {
+    "Id": 4,
+    "Title": "Execution batch fallback applied",
+    "Detail": "The orchestrator did not persist a selection, so the runtime used heuristic ready-issue selection.",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:14:30.5777069\u002B00:00"
+  },
+  {
+    "Id": 5,
+    "Title": "Selected execution batch",
+    "Detail": "Issues: 5, 8, 3, 4\n\nBase OptADocument renderer and full playground registry (including \u0060DescriptorId\u0060 support) were already implemented before the runtime was deleted. The remaining work is: #8 (technical approach \u2014 how to extend the IContent model for directive/inline rendering, prerequisite for #5/#6), #5/#6/#7 (document-rendering area \u2014 cannot run together), and #3/#4 (independent cleanup/docs). Selecting #8 to resolve the architectural shape for directive rendering, paired with #3 as safe independent cleanup.\nSELECTED_",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:14:30.5777682\u002B00:00"
+  }
+]

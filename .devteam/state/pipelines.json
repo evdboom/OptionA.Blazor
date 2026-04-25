@@ -1,0 +1,100 @@
+﻿[
+  {
+    "Id": 1,
+    "RootIssueId": 2,
+    "FamilyKey": "designthetechnicalapproachandcreateexecutionissues",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      2,
+      8,
+      9
+    ],
+    "ActiveIssueId": 9,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T20:17:10.8101154\u002B00:00"
+  },
+  {
+    "Id": 2,
+    "RootIssueId": 3,
+    "FamilyKey": "retireoptionablazorblogbuilder",
+    "Area": "",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      3
+    ],
+    "ActiveIssueId": 3,
+    "Status": "Running",
+    "UpdatedAtUtc": "2026-04-25T20:14:30.8991565\u002B00:00"
+  },
+  {
+    "Id": 3,
+    "RootIssueId": 4,
+    "FamilyKey": "updatereadmesandaddworkedauthoringexample",
+    "Area": "",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      4
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T20:17:42.4114579\u002B00:00"
+  },
+  {
+    "Id": 4,
+    "RootIssueId": 5,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      5
+    ],
+    "ActiveIssueId": 5,
+    "Status": "Running",
+    "UpdatedAtUtc": "2026-04-25T20:14:30.8919750\u002B00:00"
+  },
+  {
+    "Id": 5,
+    "RootIssueId": 6,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      6
+    ],
+    "ActiveIssueId": 6,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T20:08:37.3562472\u002B00:00"
+  },
+  {
+    "Id": 6,
+    "RootIssueId": 7,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      7
+    ],
+    "ActiveIssueId": 7,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T20:08:37.3562511\u002B00:00"
+  }
+]

@@ -1,5 +1,4 @@
 using OptionA.Blazor.Blog;
-using OptionA.Blazor.Blog.Builder;
 using OptionA.Blazor.Components;
 using OptionA.Blazor.Playground;
 using OptionA.Blazor.Storage;
@@ -39,24 +38,6 @@ builder.Services
         config.TagClass = "opta-tag px-2 py-1 mx-1";
 
     }, lifetime: ServiceLifetime.Scoped)
-    .AddOptionABootstrapBlogBuilder(config =>
-    {
-        config.ComponentButtonOptions = new()
-        {
-            [ContentType.Paragraph] = IconButton("bi bi-paragraph"),
-            [ContentType.Header] = IconButton("bi bi-type-h2"),
-            [ContentType.Code] = IconButton("bi bi-code-slash"),
-            [ContentType.Quote] = IconButton("bi bi-chat-left-quote"),
-            [ContentType.Image] = IconButton("bi bi-image"),
-            [ContentType.Frame] = IconButton("bi bi-window"),
-            [ContentType.List] = IconButton("bi bi-list-ul"),
-            [ContentType.Table] = IconButton("bi bi-table"),
-        };
-        if (config.PostBuilderOptions is not null && config.PostBuilderOptions.TryGetValue(BuilderType.ComponentBar, out var componentBar))
-        {
-            componentBar.Class += " top-60";
-        }
-    }, lifetime: ServiceLifetime.Scoped)
     .AddOptionAStorageServices(ServiceLifetime.Scoped);
 var app = builder.Build();
 
@@ -77,12 +58,3 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
 app.Run();
-
-static BuilderTypeProperties IconButton(string icon)
-{
-    return new BuilderTypeProperties
-    {
-        ContentType = ContentType.Icon,
-        Content = icon
-    };
-}
