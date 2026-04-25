@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace OptionA.Blazor.Playground;
 
@@ -12,14 +11,16 @@ public partial class OptAPlayground
 
     /// <summary>
     /// Gets or sets the descriptor that defines the playground content.
+    /// Used as fallback when <see cref="DescriptorId"/> is not set or not found in the registry.
     /// </summary>
     [Parameter]
     public PlaygroundDescriptorBase? Descriptor { get; set; }
 
     /// <summary>
-    /// Gets or sets a string identifier used to resolve the descriptor from the
-    /// registered <see cref="IPlaygroundRegistry"/>. Takes precedence over
-    /// <see cref="Descriptor"/> when both are set.
+    /// Gets or sets a string identifier used to resolve the descriptor via the
+    /// registered <see cref="IPlaygroundDescriptorResolver"/>. When set and the id is found,
+    /// the registry descriptor takes precedence over <see cref="Descriptor"/>.
+    /// When the id is not found, <see cref="Descriptor"/> is used as fallback.
     /// </summary>
     [Parameter]
     public string? DescriptorId { get; set; }
@@ -34,9 +35,7 @@ public partial class OptAPlayground
     private IPlaygroundDataProvider DataProvider { get; set; } = null!;
 
     [Inject]
-    private IServiceProvider ServiceProvider { get; set; } = null!;
-
-    private IPlaygroundRegistry? Registry => ServiceProvider.GetService<IPlaygroundRegistry>();
+    private IPlaygroundDescriptorResolver DescriptorResolver { get; set; } = null!;
 
     /// <summary>
     /// Gets the current parameter values shown by the playground child components.
@@ -50,18 +49,8 @@ public partial class OptAPlayground
 
     private PlaygroundLayout ResolvedLayout => Layout ?? DataProvider.DefaultLayout;
 
-    private PlaygroundDescriptorBase? ResolvedDescriptor
-    {
-        get
-        {
-            if (DescriptorId is not null && Registry is not null && Registry.TryGet(DescriptorId, out var found))
-            {
-                return found;
-            }
-
-            return Descriptor;
-        }
-    }
+    private PlaygroundDescriptorBase? ResolvedDescriptor =>
+        DescriptorResolver.Resolve(DescriptorId, Descriptor);
 
     /// <inheritdoc/>
     protected override void OnInitialized()
@@ -87,7 +76,7 @@ public partial class OptAPlayground
         result["code-editing-enabled"] = DataProvider.CodeEditingEnabled.ToString().ToLowerInvariant();
         result["preferred-code-editor"] = DataProvider.PreferredCodeEditor.ToString().ToLowerInvariant();
         result["default-code-language"] = DataProvider.DefaultCodeLanguage ?? string.Empty;
-        result["export-formats"] = string.Join(",", DataProvider.EnabledExportFormats.Select(format => format.ToString().ToLowerInvariant()));
+        result["export-formats"] = string.Join(",", (DataProvider.EnabledExportFormats ?? []).Select(format => format.ToString().ToLowerInvariant()));
 
         if (ResolvedLayout == PlaygroundLayout.Stacked)
         {

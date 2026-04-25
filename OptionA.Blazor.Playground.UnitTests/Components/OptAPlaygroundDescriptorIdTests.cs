@@ -27,15 +27,21 @@ public class OptAPlaygroundDescriptorIdTests : BunitContext
         _playgroundDataProvider.SetupGet(p => p.EnabledExportFormats).Returns([PlaygroundExportFormat.Razor]);
 
         Services.AddSingleton(_playgroundDataProvider.Object);
+
+        // Register the registry + resolver defaults. AddOptionAPlayground uses TryAdd
+        // so it will not override the mock data provider above.
+        Services.AddOptionAPlayground();
     }
 
-    private IPlaygroundRegistry BuildAndRegisterRegistry(Action<IServiceCollection> configure)
+    private void BuildAndRegisterRegistry(Action<IServiceCollection> configure)
     {
         var sc = new ServiceCollection();
         configure(sc);
         var registry = sc.BuildServiceProvider().GetRequiredService<IPlaygroundRegistry>();
+
+        // Replace the default empty registry (added by AddOptionAPlayground in constructor)
+        // with the test-specific one so the resolver picks it up on first resolution.
         Services.AddSingleton(registry);
-        return registry;
     }
 
     [Fact]
@@ -77,6 +83,28 @@ public class OptAPlaygroundDescriptorIdTests : BunitContext
     }
 
     [Fact]
+    public void OptAPlayground_DescriptorId_UnknownId_FallsBackToDirectDescriptor()
+    {
+        // Arrange
+        var directDescriptor = new PlaygroundDescriptor<TestComponent>
+        {
+            Title = "Direct",
+            Parameters = [new PlaygroundParameterDescriptor { Name = "Text", DefaultValue = "fallback" }]
+        };
+        BuildAndRegisterRegistry(sc => sc.AddPlayground("known", new PlaygroundDescriptor<TestComponent>()));
+
+        // Act
+        var cut = Render<OptAPlayground>(parameters => parameters
+            .Add(p => p.DescriptorId, "does-not-exist")
+            .Add(p => p.Descriptor, directDescriptor));
+
+        // Assert
+        var previewParams = cut.FindComponent<OptAPlaygroundPreview>().Instance.CurrentParameters;
+        Assert.True(previewParams.ContainsKey("Text"));
+        Assert.Equal("fallback", previewParams["Text"]);
+    }
+
+    [Fact]
     public void OptAPlayground_DescriptorId_TakesPrecedenceOverDescriptorParameter()
     {
         // Arrange
@@ -105,9 +133,9 @@ public class OptAPlaygroundDescriptorIdTests : BunitContext
     }
 
     [Fact]
-    public void OptAPlayground_WithoutRegistry_DescriptorIdIgnored_DirectDescriptorUsed()
+    public void OptAPlayground_DescriptorId_EmptyRegistry_FallsBackToDirectDescriptor()
     {
-        // Arrange: no IPlaygroundRegistry registered at all
+        // Arrange: registry is present (registered by AddOptionAPlayground) but has no matching id
         var descriptor = new PlaygroundDescriptor<TestComponent>
         {
             Title = "Direct",
@@ -119,7 +147,7 @@ public class OptAPlaygroundDescriptorIdTests : BunitContext
             .Add(p => p.DescriptorId, "any-id")
             .Add(p => p.Descriptor, descriptor));
 
-        // Assert: falls back to Descriptor since registry is absent
+        // Assert: id is not in the registry → falls back to Descriptor
         var previewParams = cut.FindComponent<OptAPlaygroundPreview>().Instance.CurrentParameters;
         Assert.True(previewParams.ContainsKey("Text"));
         Assert.Equal("world", previewParams["Text"]);

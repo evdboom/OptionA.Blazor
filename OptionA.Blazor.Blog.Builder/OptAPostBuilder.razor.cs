@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.JSInterop;
 using OptionA.Blazor.Blog.Core.Extensions;
@@ -9,7 +9,7 @@ namespace OptionA.Blazor.Blog.Builder;
 /// <summary>
 /// Builder component for posts
 /// </summary>
-[Obsolete("Blog.Builder WYSIWYG editors are deprecated. Use OptionA.Blazor.Interactive for live component editing. This package will be removed in a future release.", false)]
+[Obsolete("Blog.Builder WYSIWYG editors are deprecated. Use OptionA.Blazor.Blog (OptADocument) with Markdown authoring and OptionA.Blazor.Playground for interactive previews. This package will not receive new features.", false)]
 public partial class OptAPostBuilder : IDisposable
 {
     private const string RegisterHandlerFunction = "registerHandler";

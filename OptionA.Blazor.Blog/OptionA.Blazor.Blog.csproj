@@ -11,7 +11,7 @@
     <Title>Blazor Blog Components</Title>
     <Authors>Erik van der Boom</Authors>
     <IsPackable>true</IsPackable>
-    <Description>Components for viewing a Blog using Blazor, Use the Builder project to build blogs.</Description>
+    <Description>Components for viewing a blog using Blazor. Includes OptADocument for rendering Markdown as blog components.</Description>
     <PackageProjectUrl>https://github.com/evdboom/OptionA.Blazor</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Version>10.1.0</Version>
@@ -23,9 +23,15 @@
     <SupportedPlatform Include="browser" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Markdig" Version="0.40.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="readme.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>OptionA.Blazor.Blog.UnitTests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 </Project>

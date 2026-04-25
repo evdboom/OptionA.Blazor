@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Blog.Builder.Parts;
@@ -6,7 +6,7 @@ namespace OptionA.Blazor.Blog.Builder.Parts;
 /// <summary>
 /// Build image blog part
 /// </summary>
-[Obsolete("Blog.Builder WYSIWYG editors are deprecated. Use OptionA.Blazor.Interactive for live component editing. This package will be removed in a future release.", false)]
+[Obsolete("Blog.Builder WYSIWYG editors are deprecated. Use OptionA.Blazor.Blog (OptADocument) with Markdown authoring and OptionA.Blazor.Playground for interactive previews. This package will not receive new features.", false)]
 public partial class OptAImageBuilder
 {
     private const string SourceId = "opta-image-source";

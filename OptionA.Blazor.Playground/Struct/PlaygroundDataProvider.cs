@@ -54,5 +54,5 @@ public class PlaygroundDataProvider : IPlaygroundDataProvider
     public string? DefaultCodeLanguage => _options.DefaultCodeLanguage;
 
     /// <inheritdoc/>
-    public IReadOnlyList<PlaygroundExportFormat> EnabledExportFormats => _options.EnabledExportFormats;
+    public IReadOnlyList<PlaygroundExportFormat> EnabledExportFormats => _options.EnabledExportFormats ?? (IReadOnlyList<PlaygroundExportFormat>)Array.Empty<PlaygroundExportFormat>();
 }

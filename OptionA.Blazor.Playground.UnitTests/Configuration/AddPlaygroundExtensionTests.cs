@@ -76,6 +76,27 @@ public class AddPlaygroundExtensionTests
     }
 
     [Fact]
+    public void AddPlayground_PreRegisteredRegistryInstance_ReusesAndAugmentsSameRegistry()
+    {
+        // Arrange
+        var services = new ServiceCollection();
+        var existingRegistry = new TestPlaygroundRegistry();
+        var descriptor = new PlaygroundDescriptor<TestComponent> { Title = "demo" };
+        services.AddSingleton<IPlaygroundRegistry>(existingRegistry);
+
+        // Act
+        services.AddPlayground("demo-id", descriptor);
+        using var provider = services.BuildServiceProvider();
+        var resolvedRegistry = provider.GetRequiredService<IPlaygroundRegistry>();
+        var found = resolvedRegistry.TryGet("demo-id", out var result);
+
+        // Assert
+        Assert.Same(existingRegistry, resolvedRegistry);
+        Assert.True(found);
+        Assert.Same(descriptor, result);
+    }
+
+    [Fact]
     public void AddPlayground_NullOrWhitespaceId_Throws()
     {
         // Arrange
@@ -101,5 +122,27 @@ public class AddPlaygroundExtensionTests
     {
         [Parameter]
         public string? Text { get; set; }
+    }
+
+    private sealed class TestPlaygroundRegistry : IPlaygroundRegistry
+    {
+        private readonly Dictionary<string, PlaygroundDescriptorBase> _entries = [];
+
+        public void Register(string id, PlaygroundDescriptorBase descriptor)
+        {
+            _entries[id] = descriptor;
+        }
+
+        public bool TryGet(string id, out PlaygroundDescriptorBase? descriptor)
+        {
+            if (_entries.TryGetValue(id, out var found))
+            {
+                descriptor = found;
+                return true;
+            }
+
+            descriptor = null;
+            return false;
+        }
     }
 }

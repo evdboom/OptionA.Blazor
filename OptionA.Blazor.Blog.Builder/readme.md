@@ -2,7 +2,7 @@
 Blazor components building a blog in Blazor.
 
 ## Deprecation notice
-The WYSIWYG builders in this package are deprecated. Use `OptionA.Blazor.Interactive` for live component editing and documentation-style previews. `OptionA.Blazor.Blog.Builder` will remain available for existing projects for now, but it is scheduled for removal in a future release.
+The WYSIWYG block-builder in this package is deprecated and will not receive new features. Use **Markdown authoring** with `OptionA.Blazor.Blog` (`OptADocument`) for writing blog posts and documentation pages, and `OptionA.Blazor.Playground` for interactive component previews. `OptionA.Blazor.Blog.Builder` will remain on NuGet at its current version for existing projects.
 
 For full documentation, releasenotes and examples, go to [option-a.tech](https://www.option-a.tech/documentation/blazor/blogbuilder). The full source can be viewed on [github](https://github.com/evdboom/OptionA.Blazor).
 

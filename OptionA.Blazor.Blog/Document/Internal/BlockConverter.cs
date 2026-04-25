@@ -44,8 +44,20 @@ internal sealed class BlockConverter
             ListBlock list => ConvertList(list),
             Table table => ConvertTable(table),
             ParagraphBlock paragraph => ConvertParagraph(paragraph),
+            HtmlBlock htmlBlock => ConvertHtmlBlock(htmlBlock),
             ThematicBreakBlock => null, // <hr/> – not mapped to a content type yet
             _ => null,
+        };
+    }
+
+    private ParagraphContent ConvertHtmlBlock(HtmlBlock html)
+    {
+        // Preserve raw HTML by HTML-encoding it so authors see the original markup instead of it being silently dropped.
+        var raw = _serializer.SerializeLeaf(html);
+        var encoded = System.Net.WebUtility.HtmlEncode(raw);
+        return new ParagraphContent
+        {
+            Content = encoded,
         };
     }
 

@@ -176,3 +176,80 @@ A list, either ordered or unordered, items inside are parsed as Text components 
 <OptATable>
 ```
 A table, with headers, rows and footer. Cell contents are parsed as Text components supporting (light) markdown.
+
+## OptADocument
+
+OptADocument renders a Markdown string into the existing blog render components (OptAText, OptAHeader, OptACode, OptAList, OptAQuote, OptATable, OptAImage). It is the recommended authoring surface for documentation and blog pages and does not require the Post class.
+
+### Parameters
+
+- `Source` (string): The Markdown source to render.
+- `OnMetadataParsed` (optional): callback invoked when YAML front-matter is present; provides a `DocumentMetadata` object with `title`, `subtitle`, `date`, and `tags`.
+
+### Basic usage
+
+```razor
+@code {
+    private string markdown = System.IO.File.ReadAllText("docs/examples/buttons.md");
+}
+
+<OptADocument Source="@markdown" OnMetadataParsed="HandleMetadata" />
+
+@code {
+    void HandleMetadata(DocumentMetadata md) { /* md.Title / md.Date / md.Tags */ }
+}
+```
+
+### Authoring format
+
+Files are GitHub-flavored Markdown with an optional YAML front-matter block (at the top) for blog metadata. Example front-matter:
+
+```yaml
+---
+title: Buttons
+date: 2026-04-24
+tags: [components, buttons]
+---
+```
+
+Directives and inline components (planned)
+
+- Playground directives — fenced directive syntax enables embedding interactive playgrounds inline:
+
+```md
+::: playground id="button-basic"
+component: OptAButton
+parameters:
+  Text: Click me
+  ButtonType: Primary
+:::
+```
+
+- Inline component tags — literal `<OptAButton Text="Hi" />` in Markdown will be rendered via `DynamicComponent` against a registered whitelist (`services.AddDocumentComponent<T>()`).
+
+> Note: Directive and inline component support are coming soon; OptADocument already renders Markdown blocks to the blog renderers today and will accept directives in a subsequent release.
+
+### Node mapping (Markdown → renderers)
+
+- Paragraphs / inlines → `OptAText`
+- Headings → `OptAHeader`
+- Fenced code blocks → `OptACode` (language preserved)
+- Lists → `OptAList`
+- Block quotes → `OptAQuote`
+- Tables → `OptATable`
+- Images → `OptAImage`
+
+Markdig is used internally; it is not exposed as a public API surface.
+
+### Service registration
+
+Register the blog and playground services and any central playground descriptors in Program.cs:
+
+```csharp
+builder.Services.AddOptionABlog();
+builder.Services.AddOptionAPlayground();
+// register reusable playground descriptors by id
+builder.Services.AddPlayground("button-basic", /* PlaygroundDescriptor<OptAButton> */);
+```
+
+For a worked example, see docs/examples/buttons.md

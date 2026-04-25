@@ -2,6 +2,7 @@ using Bunit;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
 
 namespace OptionA.Blazor.Playground.UnitTests.Components;
@@ -28,6 +29,10 @@ public class OptAPlaygroundTests : BunitContext
         _playgroundDataProvider.SetupGet(p => p.EnabledExportFormats).Returns([PlaygroundExportFormat.Razor, PlaygroundExportFormat.Json]);
 
         Services.AddSingleton(_playgroundDataProvider.Object);
+
+        // Register the registry + resolver so OptAPlayground can inject IPlaygroundDescriptorResolver.
+        // AddOptionAPlayground uses TryAdd so it will not override the mock data provider above.
+        Services.AddOptionAPlayground();
     }
 
     [Fact]
@@ -81,6 +86,48 @@ public class OptAPlaygroundTests : BunitContext
         Assert.Equal("textarea", container.GetAttribute("preferred-code-editor"));
         Assert.Equal("razor", container.GetAttribute("default-code-language"));
         Assert.Equal("razor,json", container.GetAttribute("export-formats"));
+    }
+
+    [Fact]
+    public void OptAPlayground_WhenEnabledExportFormatsIsNull_RendersEmptyExportFormatsAttribute()
+    {
+        // Arrange
+        _playgroundDataProvider.SetupGet(p => p.EnabledExportFormats).Returns((IReadOnlyList<PlaygroundExportFormat>)null!);
+        var descriptor = CreateDescriptor();
+
+        // Act
+        var cut = Render<OptAPlayground>(parameters => parameters
+            .Add(p => p.Descriptor, descriptor));
+
+        // Assert
+        var container = cut.Find("div[opta-playground]");
+        Assert.Equal(string.Empty, container.GetAttribute("export-formats"));
+    }
+
+    [Fact]
+    public void OptAPlayground_WithConfiguredProvider_RendersConfiguredInteractiveMetadata()
+    {
+        // Arrange
+        Services.RemoveAll<IPlaygroundDataProvider>();
+        Services.AddOptionAPlayground(options =>
+        {
+            options.CodeEditingEnabled = false;
+            options.PreferredCodeEditor = PlaygroundEditorKind.Monaco;
+            options.DefaultCodeLanguage = "json";
+            options.EnabledExportFormats = [PlaygroundExportFormat.Json];
+        });
+        var descriptor = CreateDescriptor();
+
+        // Act
+        var cut = Render<OptAPlayground>(parameters => parameters
+            .Add(p => p.Descriptor, descriptor));
+
+        // Assert
+        var container = cut.Find("div[opta-playground]");
+        Assert.Equal("false", container.GetAttribute("code-editing-enabled"));
+        Assert.Equal("monaco", container.GetAttribute("preferred-code-editor"));
+        Assert.Equal("json", container.GetAttribute("default-code-language"));
+        Assert.Equal("json", container.GetAttribute("export-formats"));
     }
 
     [Fact]

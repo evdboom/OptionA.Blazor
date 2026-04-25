@@ -21,8 +21,13 @@ public class OptAPlaygroundEditorTests : BunitContext
         _playgroundDataProvider.SetupGet(p => p.DefaultEditorInputClass).Returns("input-shell");
         _playgroundDataProvider.SetupGet(p => p.DefaultEditorGroupClass).Returns("group-shell");
         _playgroundDataProvider.SetupGet(p => p.DefaultLayout).Returns(PlaygroundLayout.SideBySide);
+        _playgroundDataProvider.SetupGet(p => p.EnabledExportFormats).Returns(new[] { PlaygroundExportFormat.Razor });
 
         Services.AddSingleton(_playgroundDataProvider.Object);
+
+        // Register the registry + resolver defaults. AddOptionAPlayground uses TryAdd
+        // so it will not override the mock data provider above.
+        Services.AddOptionAPlayground();
     }
 
     [Fact]
@@ -74,6 +79,21 @@ public class OptAPlaygroundEditorTests : BunitContext
         var selectEditor = FindFieldByLabel(editor, "Size").QuerySelector("select.input-shell");
         Assert.NotNull(selectEditor);
         Assert.Equal(["Option: small", "Option: large"], selectEditor!.QuerySelectorAll("option").Select(option => option.TextContent).ToArray());
+    }
+
+    [Fact]
+    public void OptAPlaygroundEditor_UsesMockedProviderExportFormatsForParentPlaygroundMetadata()
+    {
+        // Arrange
+        var descriptor = CreateDescriptor();
+
+        // Act
+        var cut = Render<OptAPlayground>(parameters => parameters
+            .Add(p => p.Descriptor, descriptor));
+
+        // Assert
+        var container = cut.Find("div[opta-playground]");
+        Assert.Equal("razor", container.GetAttribute("export-formats"));
     }
 
     [Fact]

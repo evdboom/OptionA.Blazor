@@ -49,3 +49,52 @@ Use `OptAPlayground` with a `PlaygroundDescriptor<TComponent>` to declare the co
     };
 }
 ```
+
+## Descriptor registry
+
+Playgrounds can be registered centrally and referenced by id from Markdown or Razor. This enables reusable interactive examples without passing descriptors through components at every call site.
+
+### Registry interface
+
+A simple registry is provided for lookups and testing. Typical surface:
+
+- `void Register(string id, PlaygroundDescriptorBase descriptor)` — register a descriptor for an id
+- `bool TryGet(string id, out PlaygroundDescriptorBase? descriptor)` — retrieve a descriptor by id
+
+Concrete implementation lives in OptionA.Blazor.Playground and is registered by the service extensions below.
+
+### Registering descriptors
+
+An `IServiceCollection` extension `AddPlayground(string id, PlaygroundDescriptorBase descriptor)` is provided to register descriptors from Program.cs. Example:
+
+```csharp
+builder.Services.AddOptionAPlayground();
+
+var buttonDescriptor = new PlaygroundDescriptor<OptAButton>
+{
+    Title = "Button demo",
+    Parameters =
+    [
+        new PlaygroundParameterDescriptor { Name = "Text", DefaultValue = "Click me", ValueType = typeof(string), EditorType = ParameterEditorType.Text }
+    ]
+};
+
+// register descriptor under the id "button-basic"
+builder.Services.AddPlayground("button-basic", buttonDescriptor);
+```
+
+### Referencing by id (DescriptorId)
+
+Once registered, the descriptor can be referenced in Razor or from Markdown directives by id:
+
+```razor
+<OptAPlayground DescriptorId="button-basic" />
+```
+
+Behavior:
+- When `DescriptorId` is provided and found in the registry, the registered descriptor is used.
+- If the id is not found but a `Descriptor` parameter is supplied, the `Descriptor` parameter is used as a fallback.
+- Unknown ids render a visible, non-fatal authoring error so authors can diagnose problems early.
+
+The registry and the `AddPlayground` extension enable central reuse of interactive examples across docs and posts.
+

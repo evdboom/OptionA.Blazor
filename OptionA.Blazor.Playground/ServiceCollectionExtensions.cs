@@ -10,6 +10,8 @@ public static partial class ServiceCollectionExtensions
 {
     /// <summary>
     /// Adds a <see cref="IPlaygroundDataProvider"/> to the service collection for use in playground components.
+    /// Also registers a default empty <see cref="IPlaygroundRegistry"/> and <see cref="IPlaygroundDescriptorResolver"/>
+    /// if they have not already been registered.
     /// </summary>
     /// <param name="services">The service collection to configure.</param>
     /// <param name="configuration">Optional playground configuration.</param>
@@ -31,13 +33,16 @@ public static partial class ServiceCollectionExtensions
             throw new NotSupportedException("Only Singleton and Scoped lifetimes are supported");
         }
 
+        EnsureRegistryAndResolver(services);
+
         return services;
     }
 
     /// <summary>
     /// Registers a <see cref="PlaygroundDescriptorBase"/> under <paramref name="id"/> in the
     /// <see cref="IPlaygroundRegistry"/> singleton. The registry is added to the container on the
-    /// first call; subsequent calls reuse the same instance.
+    /// first call; subsequent calls reuse the same instance. Also ensures that
+    /// <see cref="IPlaygroundDescriptorResolver"/> is registered.
     /// </summary>
     /// <param name="services">The service collection to configure.</param>
     /// <param name="id">The unique identifier used to address this descriptor from Markdown.</param>
@@ -60,7 +65,7 @@ public static partial class ServiceCollectionExtensions
         }
         else
         {
-            // Remove any type-only registrations so we can replace with a concrete instance.
+            // Remove any type-only or factory registrations so we can replace with a concrete instance.
             var stale = services.Where(sd => sd.ServiceType == typeof(IPlaygroundRegistry)).ToList();
             foreach (var staleDescriptor in stale)
             {
@@ -73,7 +78,17 @@ public static partial class ServiceCollectionExtensions
         }
 
         registry.Register(id, descriptor);
+
+        EnsureRegistryAndResolver(services);
+
         return services;
+    }
+
+    private static void EnsureRegistryAndResolver(IServiceCollection services)
+    {
+        services.TryAddSingleton<IPlaygroundRegistry>(_ => new PlaygroundRegistry());
+        services.TryAddSingleton<IPlaygroundDescriptorResolver>(sp =>
+            new PlaygroundDescriptorResolver(sp.GetRequiredService<IPlaygroundRegistry>()));
     }
 
     /// <summary>

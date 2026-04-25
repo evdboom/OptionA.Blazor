@@ -1,5 +1,6 @@
 using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
+using System.Net;
 
 namespace OptionA.Blazor.Blog.Document.Internal;
 
@@ -118,6 +119,10 @@ internal sealed class InlineMarkdownSerializer
                     break;
                 case LineBreakInline:
                     sb.Append('\n');
+                    break;
+                case HtmlInline html:
+                    // Preserve inline HTML by HTML-encoding it so the HTML remains visible in the rendered output.
+                    sb.Append(WebUtility.HtmlEncode(html.Tag));
                     break;
                 case ContainerInline nested:
                     SerializeCore(nested, sb);

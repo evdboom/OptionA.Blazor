@@ -324,6 +324,32 @@ public class MarkdownDocumentParserTests
         Assert.Equal("hero", image.Alternative);
         Assert.Equal("Hero image", image.Title);
     }
+
+    [Fact]
+    public void Parse_HtmlBlock_IsPreservedAsEncodedParagraph()
+    {
+        var md = "<div class=\"note\">Important</div>";
+        var result = _parser.Parse(md);
+
+        var item = Assert.Single(result);
+        var para = Assert.IsType<ParagraphContent>(item);
+        // Raw HTML should be HTML-encoded so it remains visible and not interpreted as markup
+        Assert.Contains("&lt;div", para.Content, StringComparison.Ordinal);
+        Assert.Contains("Important", para.Content, StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Parse_InlineHtml_IsPreservedInParagraphAsEncodedText()
+    {
+        var md = "Hello <span>World</span> there";
+        var result = _parser.Parse(md);
+
+        var item = Assert.Single(result);
+        var para = Assert.IsType<ParagraphContent>(item);
+        Assert.Contains("Hello", para.Content, StringComparison.Ordinal);
+        Assert.Contains("&lt;span&gt;World&lt;/span&gt;", para.Content, StringComparison.Ordinal);
+        Assert.Contains("there", para.Content, StringComparison.Ordinal);
+    }
 }
 
 /// <summary>

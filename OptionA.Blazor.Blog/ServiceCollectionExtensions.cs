@@ -26,6 +26,7 @@ public static class ServiceCollectionExtensions
             services
                 .AddSingleton<IBuilderService, BuilderService>()
                 .AddSingleton<IMarkDownParser, MarkDownParser>()
+                .AddSingleton<IMarkdownDocumentParser, MarkdownDocumentParser>()
                 .AddSingleton<IBlogDataProvider>(provider => new BlogDataProvider(configuration));
         }
         else if (lifetime == ServiceLifetime.Scoped)
@@ -33,6 +34,7 @@ public static class ServiceCollectionExtensions
             services
                 .AddScoped<IBuilderService, BuilderService>()
                 .AddScoped<IMarkDownParser, MarkDownParser>()
+                .AddScoped<IMarkdownDocumentParser, MarkdownDocumentParser>()
                 .AddScoped<IBlogDataProvider>(provider => new BlogDataProvider(configuration));
         }
         else
