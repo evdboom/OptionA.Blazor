@@ -34,5 +34,68 @@
     "CreatedAtUtc": "2026-04-25T21:32:27.6347886\u002B00:00",
     "Answer": "",
     "ExternalReference": ""
+  },
+  {
+    "Id": 5,
+    "Text": "Open questions #1\u2013#4 remain unresolved but are all non-blocking. Question #3 (authoritative policy for issues.json) and #4 (script vs dotnet tool) are directly relevant to #47\u0027s implementation \u2014 the agent executing #47 should pick defaults (issues.json as authoritative, PowerShell script) unless user intervenes.",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T21:39:08.7243303\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 6,
+    "Text": "Should issue #50 be marked Done in the MCP now that tests are green, or leave it open for a follow-up audit?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T21:40:36.0501949\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 7,
+    "Text": "#58, #39, #33 are all bUnit test issues for document-rendering front-matter \u2014 once #57 compile errors are fixed, should these be merged into a single consolidated test issue to avoid triple-coverage overlap?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T21:56:16.2406315\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 8,
+    "Text": "Question #7 remains open: issues #58, #39, and #33 all write bUnit tests for document-rendering front-matter and risk triple-coverage overlap. Consider consolidating into one issue before any of them run.",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T22:00:30.4622976\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 9,
+    "Text": "Prefer applying the small test API update now (patch tests to use Render) or schedule to developer issue above?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T22:02:56.8020827\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 10,
+    "Text": "Confirm authoritative policy: prefer .devteam/state/issues.json as the authoritative source for reconciliation (script defaults to this).",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T22:04:19.0656795\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 11,
+    "Text": "Should a CI job be added to run the script in real (non-dry-run) mode on-demand, or keep it dry-run-only in CI and require manual approval for real runs?",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T22:04:19.0657583\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
   }
 ]

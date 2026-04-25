@@ -11,7 +11,7 @@ internal static partial class InlineComponentTagParser
     [GeneratedRegex(@"^<(OptA\w+)", RegexOptions.IgnoreCase)]
     private static partial Regex TagNameRegex();
 
-    [GeneratedRegex(@"([\w-]+)(?:\s*=\s*(?:""([^""]*)""|'([^']*)'))?", RegexOptions.None)]
+    [GeneratedRegex(@"([\w-]+)(?:\s*=\s*(?:""((?:[^""\\]|\\.)*)""|'((?:[^'\\]|\\.)*)'|([^\s""'>/]+)))?", RegexOptions.None)]
     private static partial Regex AttributeRegex();
 
     /// <summary>
@@ -37,9 +37,31 @@ internal static partial class InlineComponentTagParser
 
         // The attributes section is everything between the tag name and the end of the opening tag.
         var afterName = trimmed[nameMatch.Length..];
-        // Trim everything at and after the first `/`, `>` or new-line to avoid parsing inner content.
-        var closingIndex = afterName.IndexOfAny(['/', '>']);
-        var attrSection = closingIndex >= 0 ? afterName[..closingIndex] : afterName;
+        // Scan until a '>' or '/' that's not inside quotes to avoid breaking on characters inside attribute values.
+        char quote = '\0';
+        int idx = 0;
+        for (; idx < afterName.Length; idx++)
+        {
+            var c = afterName[idx];
+            if (c == '"' || c == '\'')
+            {
+                if (quote == '\0')
+                {
+                    quote = c;
+                }
+                else if (quote == c)
+                {
+                    // If previous char is backslash, this quote is escaped; ignore.
+                    var prev = idx > 0 ? afterName[idx - 1] : '\0';
+                    if (prev != '\\') quote = '\0';
+                }
+            }
+            else if ((c == '>' || c == '/') && quote == '\0')
+            {
+                break;
+            }
+        }
+        var attrSection = idx > 0 ? afterName[..idx] : string.Empty;
 
         var attributes = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
 
@@ -56,6 +78,11 @@ internal static partial class InlineComponentTagParser
             else if (m.Groups[3].Success)
             {
                 attributes[name] = m.Groups[3].Value;
+            }
+            // Unquoted value
+            else if (m.Groups.Count >= 5 && m.Groups[4].Success)
+            {
+                attributes[name] = m.Groups[4].Value;
             }
             else
             {

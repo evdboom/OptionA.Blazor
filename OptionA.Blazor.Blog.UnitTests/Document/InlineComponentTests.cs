@@ -95,6 +95,60 @@ public class InlineComponentParserTests
         Assert.Equal("42", inline.RawAttributes["Count"]);
     }
 
+    [Fact]
+    public void Parse_DoubleQuotedValue_WithSlashes_Preserved()
+    {
+        var (parser, _) = BuildParser();
+
+        var result = parser.Parse("""<OptAFake Path="/a/b/c" />""");
+
+        var inline = Assert.IsType<InlineComponentContent>(Assert.Single(result));
+        Assert.Equal("/a/b/c", inline.RawAttributes["Path"]);
+    }
+
+    [Fact]
+    public void Parse_DoubleQuotedValue_WithGreaterThan_Preserved()
+    {
+        var (parser, _) = BuildParser();
+
+        var result = parser.Parse("""<OptAFake Html="<b>bold</b>" />""");
+
+        var inline = Assert.IsType<InlineComponentContent>(Assert.Single(result));
+        Assert.Equal("<b>bold</b>", inline.RawAttributes["Html"]);
+    }
+
+    [Fact]
+    public void Parse_SingleQuotedValue_WithSlashGreaterSequence_Preserved()
+    {
+        var (parser, _) = BuildParser();
+
+        var result = parser.Parse("""<OptAFake Data='contains "/> inside' />""");
+
+        var inline = Assert.IsType<InlineComponentContent>(Assert.Single(result));
+        Assert.Equal("""contains "/> inside""", inline.RawAttributes["Data"]);
+    }
+
+    [Fact]
+    public void Parse_EscapedDoubleQuote_InsideValue_Preserved()
+    {
+        // Direct parser-level test: Markdig may not treat escaped-quote HTML as an HtmlBlock,
+        // so test the tokenizer directly to ensure attribute preservation.
+        var (tagName, attrs) = InlineComponentTagParser.Parse("""<OptAFake Quoted="He said \"Hi\" there" />""");
+        Assert.Equal("OptAFake", tagName);
+        Assert.True(attrs.ContainsKey("Quoted"));
+        Assert.Equal("""He said \"Hi\" there""", attrs["Quoted"]);
+    }
+
+    [Fact]
+    public void Parse_UnquotedAttributeValue_Preserved()
+    {
+        var (parser, _) = BuildParser();
+
+        var result = parser.Parse("<OptAFake Mode=compact />");
+        var inline = Assert.IsType<InlineComponentContent>(Assert.Single(result));
+        Assert.Equal("compact", inline.RawAttributes["Mode"]);
+    }
+
     // ------------------------------------------------------------------
     // Non-whitelisted OptA tag → warning, no ComponentType
     // ------------------------------------------------------------------

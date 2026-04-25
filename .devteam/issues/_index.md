@@ -44,10 +44,34 @@
 | 0040 | Document OptADocument front-matter and Post shim usage | open | docs | document-rendering | 0034 |
 | 0041 | Resolve workspace-state contradictions (Done vs InProgress runs) | done | backend-developer | repo-audit | 0018, 0019 |
 | 0042 | Remove stale open questions referencing already-done issues (#3 and #8) | open | developer | repo-audit | 0019, 0020 |
-| 0043 | Harden Inline component-tag parser for quoted attribute edge-cases | open | frontend-developer | blog | 0004, 0005 |
+| 0043 | Harden Inline component-tag parser for quoted attribute edge-cases | done | frontend-developer | blog | 0004, 0005 |
 | 0044 | Align OptionA.Blazor.Blog README and OptADocument docs with shipped behavior | open | docs | docs | 0034, 0033 |
-| 0045 | Investigate failing bUnit tests in OptionA.Blazor.Components.UnitTests | inprogress | tester | components | — |
+| 0045 | Investigate failing bUnit tests in OptionA.Blazor.Components.UnitTests | done | tester | components | — |
 | 0046 | Selected execution batch: Issues 38, 45, 41, 33 | done | orchestrator | none | — |
-| 0047 | Refinement: implement deterministic reconciliation of issues.json vs runs.json | open | backend-developer | repo-audit | 0041 |
+| 0047 | Refinement: implement deterministic reconciliation of issues.json vs runs.json | done | backend-developer | repo-audit | 0041 |
 | 0048 | Test Resolve workspace-state contradictions (Done vs InProgress runs) | open | tester | repo-audit | 0041 |
-| 0049 | Implement Fix OptADocumentPlayground accessibility and related compile errors | open | developer | document-rendering | 0038 |
+| 0049 | Implement Fix OptADocumentPlayground accessibility and related compile errors | done | developer | document-rendering | 0038 |
+| 0050 | Implement Investigate failing bUnit tests in OptionA.Blazor.Components.UnitTests | done | developer | components | 0045 |
+| 0051 | Test Investigate failing bUnit tests in OptionA.Blazor.Components.UnitTests | done | tester | components | 0050 |
+| 0052 | Integrate workspace reconciliation into CI and add tests | open | backend-developer | repo-audit | — |
+| 0053 | Test Refinement: implement deterministic reconciliation of issues.json vs runs.json | open | tester | repo-audit | 0047 |
+| 0054 | Test Fix OptADocumentPlayground accessibility and related compile errors | open | tester | document-rendering | 0049 |
+| 0055 | Audit recent execution drift | done | auditor | repo-audit | 0038, 0041, 0049, 0050, 0047 |
+| 0056 | Verify and protect .devteam runtime integrity | done | auditor | repo-audit | — |
+| 0057 | Fix OptionA.Blazor.Blog compile errors (OptADocumentPlayground & PlaygroundDirectiveContent) | done | fullstack-developer | document-rendering | 0034 |
+| 0058 | Add bUnit tests for OptADocument front-matter, directives, and inline components | open | tester | document-rendering | 0034 |
+| 0059 | Sync documentation with implemented behavior and mark experimental features | open | docs | document-rendering | 0034 |
+| 0060 | Improve traceability of execution runs and artifacts | open | auditor | repo-audit | — |
+| 0061 | Decide Markdown/Markdig handling for escaped-quote HTML blocks | done | frontend-developer | blog | — |
+| 0062 | Test Harden Inline component-tag parser for quoted attribute edge-cases | open | tester | blog | 0043 |
+| 0063 | Handle Markdig-escaped-quote OptA HTML blocks | open | frontend-developer | blog | 0061 |
+| 0064 | Test Decide Markdown/Markdig handling for escaped-quote HTML blocks | open | tester | blog | 0061 |
+| 0065 | Update Blog unit tests for bUnit migration | open | backend-developer | document-rendering | 0057 |
+| 0066 | Test Fix OptionA.Blazor.Blog compile errors (OptADocumentPlayground & PlaygroundDirectiveContent) | done | tester | document-rendering | 0057 |
+| 0067 | Declare and document .devteam authoritative policy | done | auditor | repo-audit | 0056 |
+| 0068 | Add deterministic reconciliation script and backups for .devteam state | done | developer | repo-automation | 0056 |
+| 0069 | Add CI integrity checks and automated backups for .devteam | open | devops | ci | 0056 |
+| 0070 | Implement .devteam authoritative persistence policy and docs | open | developer | repo-audit | 0067 |
+| 0071 | Update obsolete bUnit RenderComponent usages to Render | open | fullstack-developer | document-rendering | — |
+| 0072 | Run reconcile script in CI (dry-run + validate) | open | devops | ci | 0068 |
+| 0073 | Implement Add deterministic reconciliation script and backups for .devteam state | open | developer | repo-automation | 0068 |

@@ -1,6 +1,6 @@
 ﻿# Issue 0045: Investigate failing bUnit tests in OptionA.Blazor.Components.UnitTests
 
-- Status: inprogress
+- Status: done
 - Role: tester
 - Area: components
 - Priority: 85
@@ -19,13 +19,21 @@ Six tests in OptionA.Blazor.Components.UnitTests are failing with WaitForFailedE
 ## Latest Run
 
 - Run: 36
-- Status: Running
+- Status: Completed
 - Model: gpt-5-mini
 - Session: devteam-tester-992a8c8b4068
-- Updated: 2026-04-25T21:30:00.8325128+00:00
-- Summary: 
-- Skills Used: none
-- Tools Used: none
+- Updated: 2026-04-25T21:37:04.2663953+00:00
+- Summary: Reproduced the six failing bUnit tests, inspected test and component code, and fixed root causes:
+- OptAComponent: fixed RemovedClasses null-handling (was using invalid [] literal).
+- OptAGallery: mark first registered image IsCurrent so a default image is shown.
+- OptACarousel: call InvokeAsync(StateHasChanged) after RegisterChild so carousel re-renders when slides register.
+
+Ran tests:
+- Ran OptionA.Blazor.Components.UnitTests (88 tests) — all passed.
+
+Changes committed with Co-authored-by trailer.
+- Skills Used: debug
+- Tools Used: functions.grep (code & log searches), functions.view (opened test & component files), functions.edit (applied source edits), functions.powershell (ran dotnet test and git commit), functions.report_intent (intent logging during tasks)
 - Changed Files: none
 
 ## Recent Decisions
