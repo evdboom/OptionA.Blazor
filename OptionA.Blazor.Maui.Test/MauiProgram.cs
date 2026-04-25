@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using OptionA.Blazor.Blog;
 using OptionA.Blazor.Components;
 
 namespace OptionA.Blazor.Maui.Test;
@@ -39,17 +38,6 @@ public static class MauiProgram
                     menu.DefaultMenuItemClass += " opta-menu-item";
                 };
             });
-        builder.Services
-            .AddOptionABootstrapBlog(config =>
-            {
-                config.PostTitleClass = "text-center opta-header";
-                config.HeaderTagContainerClass = "text-center";
-                config.PostDateClass = "text-center fst-italic";
-                config.PostSubtitleClass = "text-center";
-                config.TagClass = "opta-tag px-2 py-1 mx-1";
-
-            });
-
         return builder.Build();
     }
 }
