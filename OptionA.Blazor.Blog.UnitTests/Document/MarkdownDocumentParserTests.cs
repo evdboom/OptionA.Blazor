@@ -547,9 +547,9 @@ file sealed class MarkdownDocumentParserAccessor : IMarkdownDocumentParser
 {
     private readonly MarkdownDocumentParser _inner;
 
-    public MarkdownDocumentParserAccessor(IPlaygroundDescriptorResolver? resolver = null)
+    public MarkdownDocumentParserAccessor(IPlaygroundDescriptorResolver? resolver = null, IDocumentComponentRegistry? registry = null)
     {
-        _inner = new MarkdownDocumentParser(resolver);
+        _inner = new MarkdownDocumentParser(resolver, registry);
     }
 
     public IReadOnlyList<IContent> Parse(string? markdown) => _inner.Parse(markdown);

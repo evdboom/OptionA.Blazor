@@ -68,5 +68,55 @@
     "RunId": null,
     "SessionId": "devteam-orchestrator-b5cdd350b8e8",
     "CreatedAtUtc": "2026-04-25T20:26:18.6425626\u002B00:00"
+  },
+  {
+    "Id": 8,
+    "Title": "Execution batch fallback applied",
+    "Detail": "The orchestrator did not persist a selection, so the runtime used heuristic ready-issue selection.",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:35:22.5421884\u002B00:00"
+  },
+  {
+    "Id": 9,
+    "Title": "Selected execution batch",
+    "Detail": "Issues: 6, 11, 12\n\nSELECTED_",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:35:22.5422427\u002B00:00"
+  },
+  {
+    "Id": 10,
+    "Title": "Selected execution batch",
+    "Detail": "Issues: 6, 14, 15\n\nBatch #9 completed issues 11 and 12 (Blog.Builder retirement), unblocking their test validators #14 and #15. #6 (inline OptA component whitelisting) is the highest-priority ready implementation work. #7 and #13 are both in \u0060document-rendering\u0060 and conflict with #6 \u2014 excluded to prevent merge collisions. #16 (audit) remains blocked pending #3/#8. Selecting the 3-issue safe batch: one implementation \u002B two test validations.\n\nSELECTED_",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:47:46.7616184\u002B00:00"
+  },
+  {
+    "Id": 11,
+    "Title": "Execution batch fallback applied",
+    "Detail": "The orchestrator did not persist a selection, so the runtime used heuristic ready-issue selection.",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:52:56.9162300\u002B00:00"
+  },
+  {
+    "Id": 12,
+    "Title": "Selected execution batch",
+    "Detail": "Issues: 13, 16, 19, 18\n\nSELECTED_",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T20:52:56.9164067\u002B00:00"
   }
 ]

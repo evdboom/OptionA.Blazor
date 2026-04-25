@@ -1,0 +1,6 @@
+[
+  { "Id": 1, "IssueId": 1, "Status": "Completed", "ResultingIssueStatus": "Done" },
+  { "Id": 2, "IssueId": 2, "Status": "Completed", "ResultingIssueStatus": "Done" },
+  { "Id": 3, "IssueId": 3, "Status": "Completed", "ResultingIssueStatus": "Done" },
+  { "Id": 4, "IssueId": 4, "Status": "Running",   "ResultingIssueStatus": null }
+]

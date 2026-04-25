@@ -108,4 +108,12 @@ public enum ContentType
     /// <c>::: playground id="..." :::</c>. Rendered by the document pipeline only.
     /// </summary>
     Playground,
+
+    /// <summary>
+    /// A literal <c>&lt;OptA*&gt;</c> tag parsed from Markdown and rendered via
+    /// <see cref="Microsoft.AspNetCore.Components.DynamicComponent"/> against the document-component
+    /// whitelist. Non-whitelisted tags render as escaped text with a visible warning.
+    /// Rendered by the document pipeline only.
+    /// </summary>
+    InlineComponent,
 }

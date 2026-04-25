@@ -7,7 +7,7 @@
     "PremiumCreditCap": 6,
     "PerRunCreditLimit": 5,
     "PerRunPremiumLimit": 2,
-    "CreditsCommitted": 14,
+    "CreditsCommitted": 24,
     "PremiumCreditsCommitted": 6
   },
   "Runtime": {
@@ -36,7 +36,7 @@
     "SelectedIssueIds": [],
     "Rationale": "",
     "SessionId": "",
-    "UpdatedAtUtc": "2026-04-25T20:26:18.6426118\u002B00:00"
+    "UpdatedAtUtc": "2026-04-25T20:52:56.9164755\u002B00:00"
   },
   "RoadmapFile": "roadmap.json",
   "IssuesFile": "issues.json",
@@ -46,16 +46,16 @@
   "DecisionsFile": "decisions.json",
   "PipelinesFile": "pipelines.json",
   "RoadmapCount": 1,
-  "IssueCount": 13,
-  "QuestionCount": 0,
-  "RunCount": 11,
-  "SessionCount": 9,
-  "DecisionCount": 7,
-  "PipelineCount": 6,
+  "IssueCount": 25,
+  "QuestionCount": 2,
+  "RunCount": 21,
+  "SessionCount": 18,
+  "DecisionCount": 12,
+  "PipelineCount": 11,
   "NextRoadmapId": 2,
-  "NextIssueId": 14,
-  "NextQuestionId": 1,
-  "NextRunId": 12,
-  "NextDecisionId": 8,
-  "NextPipelineId": 7
+  "NextIssueId": 26,
+  "NextQuestionId": 3,
+  "NextRunId": 22,
+  "NextDecisionId": 13,
+  "NextPipelineId": 12
 }

@@ -1,0 +1,17 @@
+@namespace OptionA.Blazor.Blog
+@using OptionA.Blazor.Blog.Document.Internal
+@using Microsoft.AspNetCore.Components
+
+@if (Content is not null)
+{
+    @if (Content.ComponentType is not null)
+    {
+        <DynamicComponent Type="Content.ComponentType" Parameters="_parameters" />
+    }
+    else
+    {
+        <span class="opta-document-component-warning" role="alert">
+            @System.Net.WebUtility.HtmlEncode(Content.TagName)@(Content.WarningMessage is not null ? $" — {Content.WarningMessage}" : string.Empty)
+        </span>
+    }
+}

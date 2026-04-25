@@ -1,6 +1,9 @@
 using Bunit;
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
+using OptionA.Blazor.Playground;
 
 namespace OptionA.Blazor.Blog.UnitTests.Document;
 
@@ -276,5 +279,96 @@ public class OptADocumentTests : BunitContext
         // Playground directive is supported — with no resolver registered the component
         // renders a visible error block instead of throwing.
         Assert.NotNull(cut.Find(".opta-playground-error"));
+    }
+
+    [Fact]
+    public void OptADocument_PlaygroundDirective_WithKnownId_RendersResolvedPlayground()
+    {
+        RegisterPlaygroundServices(new PlaygroundDescriptor<FakeTextComponent>
+        {
+            Parameters =
+            [
+                new PlaygroundParameterDescriptor
+                {
+                    Name = nameof(FakeTextComponent.Text),
+                    DefaultValue = "Original text",
+                    ValueType = typeof(string),
+                },
+            ],
+        });
+
+        var md = """
+            ::: playground id="demo"
+            :::
+            """;
+
+        var cut = Render<OptADocument>(parameters => parameters.Add(x => x.Source, md));
+
+        Assert.NotNull(cut.Find("[opta-playground]"));
+        Assert.Equal("Original text", cut.Find("[preview-component]").TextContent);
+        Assert.Empty(cut.FindAll(".opta-playground-error"));
+    }
+
+    [Fact]
+    public void OptADocument_PlaygroundDirective_WithParameterOverrides_RendersPreviewWithOverride()
+    {
+        RegisterPlaygroundServices(new PlaygroundDescriptor<FakeTextComponent>
+        {
+            Parameters =
+            [
+                new PlaygroundParameterDescriptor
+                {
+                    Name = nameof(FakeTextComponent.Text),
+                    DefaultValue = "Original text",
+                    ValueType = typeof(string),
+                },
+            ],
+        });
+
+        var md = """
+            ::: playground id="demo"
+            parameters:
+              Text: Overridden text
+            :::
+            """;
+
+        var cut = Render<OptADocument>(parameters => parameters.Add(x => x.Source, md));
+
+        Assert.NotNull(cut.Find("[opta-playground]"));
+        Assert.Equal("Overridden text", cut.Find("[preview-component]").TextContent);
+        Assert.Empty(cut.FindAll(".opta-playground-error"));
+    }
+
+    private void RegisterPlaygroundServices(PlaygroundDescriptorBase descriptor)
+    {
+        var dataProvider = new Mock<IPlaygroundDataProvider>();
+        dataProvider.Setup(d => d.DefaultLayout).Returns(PlaygroundLayout.SideBySide);
+        dataProvider.Setup(d => d.CodeEditingEnabled).Returns(false);
+        dataProvider.Setup(d => d.PreferredCodeEditor).Returns(PlaygroundEditorKind.TextArea);
+        dataProvider.Setup(d => d.DefaultCodeLanguage).Returns((string?)null);
+        dataProvider.Setup(d => d.EnabledExportFormats).Returns(Array.Empty<PlaygroundExportFormat>().ToList().AsReadOnly());
+        dataProvider.Setup(d => d.DefaultPlaygroundClass).Returns((string?)null);
+
+        var resolver = new Mock<IPlaygroundDescriptorResolver>();
+        resolver
+            .Setup(r => r.Resolve(It.IsAny<string?>(), It.IsAny<PlaygroundDescriptorBase?>()))
+            .Returns((string? id, PlaygroundDescriptorBase? fallback) => id == "demo" ? descriptor : fallback);
+
+        Services.AddSingleton(dataProvider.Object);
+        Services.AddSingleton(resolver.Object);
+    }
+
+    private sealed class FakeTextComponent : ComponentBase
+    {
+        [Parameter]
+        public string? Text { get; set; }
+
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+            builder.OpenElement(0, "span");
+            builder.AddAttribute(1, "preview-component", true);
+            builder.AddContent(2, Text);
+            builder.CloseElement();
+        }
     }
 }

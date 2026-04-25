@@ -11,10 +11,17 @@ namespace OptionA.Blazor.Blog.Document.Internal;
 internal sealed class BlockConverter
 {
     private readonly InlineMarkdownSerializer _serializer;
+    private readonly IDocumentComponentRegistry? _componentRegistry;
 
     internal BlockConverter(InlineMarkdownSerializer serializer)
+        : this(serializer, null)
+    {
+    }
+
+    internal BlockConverter(InlineMarkdownSerializer serializer, IDocumentComponentRegistry? componentRegistry)
     {
         _serializer = serializer;
+        _componentRegistry = componentRegistry;
     }
 
     /// <summary>
@@ -51,10 +58,38 @@ internal sealed class BlockConverter
         };
     }
 
-    private ParagraphContent ConvertHtmlBlock(HtmlBlock html)
+    private IContent ConvertHtmlBlock(HtmlBlock html)
     {
-        // Preserve raw HTML by HTML-encoding it so authors see the original markup instead of it being silently dropped.
         var raw = _serializer.SerializeLeaf(html);
+        var (tagName, attributes) = InlineComponentTagParser.Parse(raw);
+
+        if (tagName is not null)
+        {
+            // It is an OptA tag — resolve against the whitelist.
+            if (_componentRegistry is not null && _componentRegistry.TryGetComponentType(tagName, out var componentType))
+            {
+                return new InlineComponentContent
+                {
+                    TagName = tagName,
+                    ComponentType = componentType,
+                    RawAttributes = attributes,
+                };
+            }
+
+            // Tag not whitelisted (or no registry) — warn the author.
+            var warning = _componentRegistry is null
+                ? $"No document-component registry is registered. Cannot render <{tagName}>."
+                : $"<{tagName}> is not registered. Call services.AddDocumentComponent<{tagName}>() to whitelist it.";
+
+            return new InlineComponentContent
+            {
+                TagName = tagName,
+                RawAttributes = attributes,
+                WarningMessage = warning,
+            };
+        }
+
+        // Not an OptA tag — preserve raw HTML by HTML-encoding it.
         var encoded = System.Net.WebUtility.HtmlEncode(raw);
         return new ParagraphContent
         {

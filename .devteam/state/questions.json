@@ -1,1 +1,20 @@
-﻿[]
+﻿[
+  {
+    "Id": 1,
+    "Text": "Issues #3 and #8 do not appear in the current candidate list \u2014 are they completed? Confirming would unlock #16 (audit) and potentially #13.",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T20:47:46.7614657\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  },
+  {
+    "Id": 2,
+    "Text": "Are issues #3 and #8 completed? Confirming their status would fully unblock #16 (audit) and should close open question #1.",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T20:52:56.7118613\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
+  }
+]

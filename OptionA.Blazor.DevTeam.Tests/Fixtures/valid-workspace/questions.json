@@ -1,0 +1,4 @@
+[
+  { "Id": 1, "Text": "Should we use Markdig as the parser?", "Status": "Closed", "Answer": "Yes, keep Markdig internal." },
+  { "Id": 2, "Text": "Which project owns the component whitelist registry?", "Status": "Closed", "Answer": "OptionA.Blazor.Blog." }
+]

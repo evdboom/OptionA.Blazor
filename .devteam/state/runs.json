@@ -285,5 +285,278 @@
     ],
     "CreatedQuestionIds": [],
     "UpdatedAtUtc": "2026-04-25T20:29:43.7372234\u002B00:00"
+  },
+  {
+    "Id": 12,
+    "IssueId": 6,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-9076a5ca5397",
+    "Status": "Failed",
+    "Summary": "Agent timed out after 600 seconds.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:45:24.9234413\u002B00:00"
+  },
+  {
+    "Id": 13,
+    "IssueId": 11,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-577d011ecd0d",
+    "Status": "Completed",
+    "Summary": "Removed all \u0060OptionA.Blazor.Blog.Builder\u0060 references from the MAUI test app:\n- Removed \u0060@using OptionA.Blazor.Blog.Builder\u0060 from \u0060_Imports.razor\u0060\n- Removed the BlogBuilder nav item from \u0060MainLayout.razor\u0060\n- \u0060BlogBuilder.razor\u0060 and \u0060BlogBuilder.razor.cs\u0060 were already deleted by a prior agent\n\nThe MAUI project builds cleanly: **0 errors, 0 warnings**.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "view",
+      "edit",
+      "grep",
+      "powershell (Set-Content, dotnet build, git commit)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:38:11.9747045\u002B00:00"
+  },
+  {
+    "Id": 14,
+    "IssueId": 12,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-c468aea05ba0",
+    "Status": "Completed",
+    "Summary": "Removed the retired BlogBuilder page and all Blog/Blog.Builder dependencies from \u0060OptionA.Blazor.Maui.Test\u0060:\n- Deleted \u0060BlogBuilder.razor\u0060 and \u0060BlogBuilder.razor.cs\u0060\n- Removed \u0060@using OptionA.Blazor.Blog\u0060 and \u0060@using OptionA.Blazor.Blog.Builder\u0060 from \u0060_Imports.razor\u0060\n- Removed \u0060AddOptionABootstrapBlog(...)\u0060 service registration from \u0060MauiProgram.cs\u0060\n- Confirmed \u0060MainLayout.razor\u0060 nav item was already removed\n\nSolution builds successfully with no errors.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "glob",
+      "view",
+      "powershell (Remove-Item, dotnet build, git)",
+      "edit"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:38:28.6107454\u002B00:00"
+  },
+  {
+    "Id": 15,
+    "IssueId": 6,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-9076a5ca5397",
+    "Status": "Completed",
+    "Summary": "The inline \u0060\u003COptA*\u003E\u0060 component rendering in \u0060OptADocument\u0060 was already fully implemented by a previous run. The complete feature is in place:\n\n- **\u0060IDocumentComponentRegistry\u0060 / \u0060DocumentComponentRegistry\u0060** \u2014 whitelist mapping tag names \u2192 component types\n- **\u0060AddDocumentComponent\u003CT\u003E()\u0060** extension on \u0060IServiceCollection\u0060 \u2014 populates the registry at startup\n- **\u0060InlineComponentTagParser\u0060** \u2014 regex-based parser for tag names \u002B attributes (string, bool shorthand, bool explicit, int, enum)\n- **\u0060InlineComponentContent\u0060** \u2014 content model carrying resolved type or warning\n- **\u0060OptADocumentComponent\u0060** \u2014 renders via \u0060DynamicComponent\u0060 for whitelisted tags; renders escaped warning span for unknown tags, with parameter coercion\n- **\u0060OptAChild.razor\u0060** \u2014 routes \u0060ContentType.InlineComponent\u0060 to \u0060OptADocumentComponent\u0060\n- **\u0060InlineComponentTests.cs\u0060** \u2014 20 tests covering whitelist hits, misses, all attribute coercion types, no-registry case, mixed document ordering\n\nAll 203 blog unit tests pass (\u0060Failed: 0, Passed: 203\u0060).",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "view",
+      "grep",
+      "powershell"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:50:12.6509775\u002B00:00"
+  },
+  {
+    "Id": 16,
+    "IssueId": 14,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-1f8903822010",
+    "Status": "Completed",
+    "Summary": "Added \u0060OptionA.Blazor.DevTeam.Tests\\MauiBlogBuilderRetirementTests.cs\u0060 to lock the MAUI app into the retired state. It covers: no \u0060OptionA.Blazor.Blog.Builder\u0060 reference in \u0060OptionA.Blazor.Maui.Test.csproj\u0060, no Blog.Builder import in \u0060Components\\_Imports.razor\u0060, no BlogBuilder nav/route remnants in \u0060Components\\Layout\\MainLayout.razor\u0060, and confirmed \u0060Components\\Pages\\BlogBuilder.razor\u0060 / \u0060.razor.cs\u0060 stay deleted.\n\nVerification: \u0060dotnet build .\\OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj -f net10.0-windows10.0.19041.0 --no-restore\u0060 passed; \u0060dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --no-build --filter \u0022FullyQualifiedName~MauiBlogBuilderRetirementTests\u0022\u0060 passed. Current workspace state is **not** missing \u0060.devteam\u0060; it is present and dirty. The full \u0060OptionA.Blazor.DevTeam.Tests\u0060 project still has one unrelated failing test: \u0060DevTeamWorkspaceTests.Issue16_Is_Marked_Done_In_State_And_Markdown\u0060 expects issue16 to be \u0060Done\u0060, but runtime state is \u0060Open\u0060.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "skill verify- view- glob- rg- apply_patch- powershell- git --no-pager status --short- git --no-pager diff -- .\\OptionA.Blazor.DevTeam.Tests- dotnet build .\\OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj -f net10.0-windows10.0.19041.0 --no-restore- dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj- dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --no-build --filter \u0022FullyQualifiedName~MauiBlogBuilderRetirementTests\u0022"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      18
+    ],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:50:42.8102677\u002B00:00"
+  },
+  {
+    "Id": 17,
+    "IssueId": 15,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-3f8d5266b050",
+    "Status": "Completed",
+    "Summary": "- Added \u0060OptionA.Blazor.DevTeam.Tests\\MauiBlogBuilderRetirementTests.cs\u0060 to lock down the MAUI retirement behavior. It covers: no \u0060OptionA.Blazor.Blog\u0060/\u0060OptionA.Blazor.Blog.Builder\u0060 references in \u0060OptionA.Blazor.Maui.Test.csproj\u0060, no blog usings or \u0060AddOptionABootstrapBlog(...)\u0060 in MAUI startup/imports, and no Blog Builder UI/files remaining in the MAUI app outside \u0060bin\u0060/\u0060obj\u0060.\n- Fresh verification for this issue is green: \u0060dotnet build .\\OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj -v minimal\u0060 succeeded, \u0060dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --filter MauiBlogBuilderRetirementTests -v minimal\u0060 passed, and source searches found no remaining Blog.Builder references in \u0060OptionA.Blazor.Maui.Test\u0060.\n- Current workspace state: \u0060.devteam\u0060 is present in the repo. An unrelated existing test already in \u0060OptionA.Blazor.DevTeam.Tests\u0060 fails because it expects issue16 to be \u0060Done\u0060, while \u0060.devteam\\state\\issues.json\u0060 currently records issue16 as \u0060Open\u0060.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "skill- view- glob- rg- apply_patch- powershell (\u0060git --no-pager status --short \u0026\u0026 git --no-pager diff -- OptionA.Blazor.Maui.Test OptionA.Blazor.sln\u0060)",
+      "powershell (\u0060dotnet clean .\\OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj -v minimal; dotnet build .\\OptionA.Blazor.Maui.Test\\OptionA.Blazor.Maui.Test.csproj -v minimal; dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj -v minimal\u0060)",
+      "powershell (\u0060dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --filter MauiBlogBuilderRetirementTests -v minimal\u0060)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      19
+    ],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:51:00.1152585\u002B00:00"
+  },
+  {
+    "Id": 18,
+    "IssueId": 13,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-9dec9788f3ef",
+    "Status": "Completed",
+    "Summary": "The workspace is recoverable and \u0060.devteam\u0060 is present in this checkout; issue \u00600013\u0060 is on disk and the document-rendering changes from the prior stage are already applied. I kept scope narrow to validation and added the missing end-to-end coverage in \u0060OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentTests.cs\u0060 for the happy-path \u0060::: playground\u0060 flow through \u0060OptADocument\u0060, including resolver success and parameter-override propagation into the rendered preview.\n\n**Tests written** \u2014 \u0060OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentTests.cs\u0060: added \u0060OptADocument_PlaygroundDirective_WithKnownId_RendersResolvedPlayground\u0060 and \u0060OptADocument_PlaygroundDirective_WithParameterOverrides_RendersPreviewWithOverride\u0060 to cover full document-parser-to-playground integration. The affected blog test project and solution build are green, and the full blog unit test run completed with205 passing tests.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "tdd"
+    ],
+    "ToolsUsed": [
+      "skill:tdd- report_intent- view- rg- powershell (\u0060git --no-pager status --short\u0060)",
+      "powershell (\u0060dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --no-restore --filter \u0022MarkdownDocumentParser|OptADocument|Playground\u0022\u0060)",
+      "apply_patch- powershell (\u0060dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --no-restore --filter \u0022OptADocument_PlaygroundDirective_WithKnownId_RendersResolvedPlayground|OptADocument_PlaygroundDirective_WithParameterOverrides_RendersPreviewWithOverride\u0022\u0060)",
+      "powershell (\u0060dotnet build OptionA.Blazor.sln --configuration Release --no-restore \u0026\u0026 dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --no-restore\u0060)",
+      "powershell (\u0060git --no-pager diff -- OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentTests.cs\u0060)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:56:25.9855181\u002B00:00"
+  },
+  {
+    "Id": 19,
+    "IssueId": 16,
+    "RoleSlug": "auditor",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-auditor-5d56b3b62da4",
+    "Status": "Completed",
+    "Summary": "Current state is clear: \u0060.devteam\u0060 is present again and dirty, the recent \u0060OptADocument\u0060/playground and MAUI-retirement work is in the tree, and the targeted \u0060OptionA.Blazor.DevTeam.Tests\u0060 and \u0060OptionA.Blazor.Blog.UnitTests\u0060 suites are green. The recent drift is not \u201Crepo still deleted\u201D; it is **state integrity and contract drift**: restored \u0060.devteam\u0060 artifacts disagree with each other, \u0060questions.md\u0060 still blocks on already-done issues \u0060#3\u0060 and \u0060#8\u0060, \u0060OptionA.Blazor.Blog\\readme.md\u0060 advertises metadata/front-matter features that the current \u0060OptADocument\u0060 surface does not expose, \u0060InlineComponentTagParser\u0060 is brittle for quoted values containing \u0060/\u0060 or \u0060\u003E\u0060, and \u0060AddOptionABootstrapBlog\u0060 still claims bootstrap prefills while behaving the same as \u0060AddOptionABlog\u0060.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "scout- refine"
+    ],
+    "ToolsUsed": [
+      "skill scout- skill refine- report_intent- view- rg- task (analyst)",
+      "powershell (\u0060git --no-pager status --short\u0060, \u0060git --no-pager log --oneline -n12\u0060, \u0060git --no-pager diff --stat befd95e..HEAD\u0060, \u0060dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --nologo --verbosity minimal\u0060, \u0060dotnet test .\\OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --nologo --verbosity minimal\u0060)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      22,
+      23,
+      24,
+      25
+    ],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:59:38.4457703\u002B00:00"
+  },
+  {
+    "Id": 20,
+    "IssueId": 19,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-32ab39a7f5f9",
+    "Status": "Completed",
+    "Summary": "Determined the workspace is **not** missing \u0060.devteam\u0060; it is present and dirty, and issue16 is currently \u0060InProgress\u0060 in both \u0060.devteam\\state\\issues.json\u0060 and \u0060.devteam\\issues\\0016-audit-recent-execution-drift.md\u0060. Updated \u0060OptionA.Blazor.DevTeam.Tests\\DevTeamWorkspaceTests.cs\u0060 so the test no longer hard-codes \u0060Done\u0060, instead verifying that issue16\u2019s markdown status matches the runtime-managed JSON status, and corrected the stale issue-0016 markdown path.Tests written: \u0060OptionA.Blazor.DevTeam.Tests\\DevTeamWorkspaceTests.cs\u0060 now covers runtime/markdown status consistency for issue16 instead of a brittle fixed-status expectation.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [
+      "view- rg- apply_patch- \u0060git --no-pager status --short \u0026\u0026 git --no-pager rev-parse --show-toplevel\u0060",
+      "\u0060dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --no-restore --verbosity minimal\u0060",
+      "\u0060dotnet build .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --no-restore --verbosity minimal \u0026\u0026 dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --no-build --verbosity minimal\u0060",
+      "\u0060git --no-pager diff -- OptionA.Blazor.DevTeam.Tests\\DevTeamWorkspaceTests.cs\u0060"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:55:14.0866904\u002B00:00"
+  },
+  {
+    "Id": 21,
+    "IssueId": 18,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-752526015ca7",
+    "Status": "Completed",
+    "Summary": "The current workspace is **not** missing \u0060.devteam\u0060; it is present and issue16 is currently **inprogress** in both runtime state and issue markdown. \u0060OptionA.Blazor.DevTeam.Tests\\DevTeamWorkspaceTests.cs\u0060 now uses a stable check that normalizes and compares issue16 status between \u0060.devteam\\state\\issues.json\u0060 and \u0060.devteam\\issues\\0016-audit-recent-execution-drift.md\u0060 instead of hard-coding \u0060Done\u0060, so shared runtime progress no longer breaks unrelated validation. **Tests written/covered:** \u0060OptionA.Blazor.DevTeam.Tests\\DevTeamWorkspaceTests.cs\u0060 covers issue16 state/markdown synchronization. \u0060dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --nologo --verbosity minimal\u0060 now passes with5/5 tests green.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "debug"
+    ],
+    "ToolsUsed": [
+      "skill: debug- report_intent- view- rg- glob- powershell- \u0060git --no-pager status --short\u0060",
+      "\u0060git --no-pager diff -- OptionA.Blazor.DevTeam.Tests\\DevTeamWorkspaceTests.cs\u0060",
+      "\u0060dotnet test .\\OptionA.Blazor.DevTeam.Tests\\OptionA.Blazor.DevTeam.Tests.csproj --nologo --verbosity minimal\u0060"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T20:55:21.4353900\u002B00:00"
   }
 ]

@@ -1,0 +1,4 @@
+[
+  { "Id": 1, "Text": "Issues #3 and #8 do not appear in the current candidate list \u2014 are they completed? Confirming would unlock #16 (audit) and potentially #13.", "Status": "Open", "Answer": "" },
+  { "Id": 2, "Text": "Are issues #3 and #8 completed? Confirming their status would fully unblock #16 (audit) and should close open question #1.", "Status": "Open", "Answer": "" }
+]

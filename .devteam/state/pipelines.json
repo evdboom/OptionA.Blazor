@@ -63,9 +63,9 @@
       5,
       13
     ],
-    "ActiveIssueId": 13,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T20:33:39.7407177\u002B00:00"
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T20:56:25.9855249\u002B00:00"
   },
   {
     "Id": 5,
@@ -77,11 +77,12 @@
       "tester"
     ],
     "IssueIds": [
-      6
+      6,
+      17
     ],
-    "ActiveIssueId": 6,
+    "ActiveIssueId": 17,
     "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T20:08:37.3562472\u002B00:00"
+    "UpdatedAtUtc": "2026-04-25T20:50:12.6511007\u002B00:00"
   },
   {
     "Id": 6,
@@ -98,5 +99,90 @@
     "ActiveIssueId": 7,
     "Status": "Open",
     "UpdatedAtUtc": "2026-04-25T20:08:37.3562511\u002B00:00"
+  },
+  {
+    "Id": 7,
+    "RootIssueId": 11,
+    "FamilyKey": "finishmauiblogbuilderretirementcleanup",
+    "Area": "",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      11,
+      14
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T20:50:42.8102722\u002B00:00"
+  },
+  {
+    "Id": 8,
+    "RootIssueId": 12,
+    "FamilyKey": "finishretiringblogbuilderfrommauitestapp",
+    "Area": "",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      12,
+      15
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T20:51:00.1152657\u002B00:00"
+  },
+  {
+    "Id": 9,
+    "RootIssueId": 16,
+    "FamilyKey": "repoaudit",
+    "Area": "repo-audit",
+    "RoleSequence": [
+      "auditor"
+    ],
+    "IssueIds": [
+      16
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T20:59:38.4457758\u002B00:00"
+  },
+  {
+    "Id": 10,
+    "RootIssueId": 18,
+    "FamilyKey": "fixbrittledevteamworkspacestatusassertion",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      18,
+      21
+    ],
+    "ActiveIssueId": 21,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T20:55:21.4354220\u002B00:00"
+  },
+  {
+    "Id": 11,
+    "RootIssueId": 19,
+    "FamilyKey": "fixstaledevteamworkspaceexpectationforissue16",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      19,
+      20
+    ],
+    "ActiveIssueId": 20,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T20:55:14.0867260\u002B00:00"
   }
 ]

@@ -32,6 +32,11 @@ internal sealed class MarkdownDocumentParser : IMarkdownDocumentParser
     {
     }
 
+    public MarkdownDocumentParser(IPlaygroundDescriptorResolver? resolver, IDocumentComponentRegistry? registry)
+        : this(new BlockConverter(new InlineMarkdownSerializer(), registry), resolver)
+    {
+    }
+
     internal MarkdownDocumentParser(BlockConverter blockConverter)
         : this(blockConverter, null)
     {

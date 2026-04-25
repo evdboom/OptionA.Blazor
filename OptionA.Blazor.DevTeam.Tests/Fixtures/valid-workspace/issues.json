@@ -1,0 +1,7 @@
+[
+  { "Id": 1, "Title": "Run the planning session", "Status": "Done" },
+  { "Id": 2, "Title": "Design the technical approach", "Status": "Done" },
+  { "Id": 3, "Title": "Retire OptionA.Blazor.Blog.Builder", "Status": "Done" },
+  { "Id": 4, "Title": "Add front-matter shim", "Status": "Open" },
+  { "Id": 5, "Title": "Add playground directive support", "Status": "Blocked" }
+]
