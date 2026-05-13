@@ -54,7 +54,8 @@ app.UseHttpsRedirection();
 app.UseAntiforgery();
 
 app.MapStaticAssets();
-app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+app.MapRazorComponents<OptionA.Blazor.Server.Test.ServerHostApp>()
+    .AddInteractiveServerRenderMode()
+    .AddAdditionalAssemblies(typeof(OptionA.Blazor.Test.Shared.App).Assembly);
 
 app.Run();

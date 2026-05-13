@@ -61,7 +61,7 @@ namespace OptionA.Blazor.Storage.Services
         private async Task<FileHandle[]> OpenFilesAsync(IJSObjectReference module, string functionName, FilePickerOptions? options = null)
         {
             var fileHandles = await module.InvokeAsync<FileHandle[]>(functionName, options);
-
+            
             foreach (var handle in fileHandles)
             {
                 _files[handle.Key] = async () => await InternalOpenStreamAsync(handle.Key);
@@ -134,7 +134,7 @@ namespace OptionA.Blazor.Storage.Services
             }
 
             var bytes = new byte[stream.Length];
-            stream.ReadExactly(bytes);
+            await stream.ReadExactlyAsync(bytes);
 
             var module = await GetModuleAsync();
             var handle = await module.InvokeAsync<FileHandle?>(SaveFileFunction, bytes, options);

@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(dotnet build *)",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(git ls-tree *)",
+      "Bash(dotnet test *)",
+      "Bash(dotnet run *)",
+      "Bash(curl -s -o /dev/null -w \"\" http://127.0.0.1:5678/)",
+      "Bash(curl -s http://127.0.0.1:5678/components/buttons)",
+      "Bash(curl -s -i http://127.0.0.1:5678/components/buttons)"
     ]
   }
 }

@@ -52,4 +52,47 @@ public abstract class PlaywrightTestBase : IAsyncLifetime
         }
         return Page;
     }
+
+    /// <summary>
+    /// Performs an interaction (click/hover) and verifies the expected DOM mutation appears.
+    /// Retries the interaction to tolerate the brief window where the page is prerendered but
+    /// Blazor's Server SignalR circuit or WebAssembly runtime has not finished wiring up
+    /// @onclick/@onmouseenter handlers.
+    /// </summary>
+    public static async Task InteractAndVerifyAsync(
+        Func<Task> interaction,
+        ILocator expectedAfterInteraction,
+        int attempts = 6,
+        int perAttemptTimeoutMs = 4000)
+    {
+        Exception? last = null;
+        for (var i = 0; i < attempts; i++)
+        {
+            try
+            {
+                await interaction();
+                await expectedAfterInteraction.WaitForAsync(new LocatorWaitForOptions
+                {
+                    State = WaitForSelectorState.Visible,
+                    Timeout = perAttemptTimeoutMs,
+                });
+                return;
+            }
+            catch (TimeoutException ex) when (i < attempts - 1)
+            {
+                last = ex;
+                // Circuit/runtime likely not attached yet; try again.
+            }
+        }
+        if (last is not null)
+        {
+            throw last;
+        }
+    }
+
+    public static Task ClickInteractiveAsync(ILocator clickTarget, ILocator expectedAfterClick) =>
+        InteractAndVerifyAsync(() => clickTarget.ClickAsync(), expectedAfterClick);
+
+    public static Task HoverInteractiveAsync(ILocator hoverTarget, ILocator expectedAfterHover) =>
+        InteractAndVerifyAsync(() => hoverTarget.HoverAsync(), expectedAfterHover);
 }

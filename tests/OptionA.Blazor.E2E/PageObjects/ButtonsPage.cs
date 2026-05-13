@@ -10,6 +10,7 @@ public class ButtonsPage
     private const string ShowButtonSelector = "button:has-text('Show')";
     private const string ButtonBarSelector = "[opta-button-bar]";
     private const string ButtonBarButtonSelector = $"{ButtonBarSelector} button";
+    private const string ClickCountSelector = "p:has-text('Clicked')";
 
     public ButtonsPage(IPage page)
     {
@@ -43,25 +44,29 @@ public class ButtonsPage
 
     public async Task ClickShowButtonAsync()
     {
-        // Click the "Show" button to display the button bar
-        await _page.Locator(ShowButtonSelector).ClickAsync();
-        await _page.Locator(ButtonBarSelector).WaitForAsync(new LocatorWaitForOptions
-        {
-            State = WaitForSelectorState.Visible,
-            Timeout = 15000
-        });
+        // Click the "Show" button and verify the button bar appears. Retries handle the brief
+        // window where Server's SignalR circuit or WebAssembly's runtime has not finished attaching
+        // @onclick handlers to the prerendered DOM.
+        await PlaywrightTestBase.ClickInteractiveAsync(
+            _page.Locator(ShowButtonSelector),
+            _page.Locator(ButtonBarSelector));
     }
 
     public async Task ClickFirstOptAButtonAsync()
     {
-        // Click the first OptA button in the button bar
+        // Click the first OptA button in the button bar, retrying to tolerate the brief window
+        // where the freshly re-rendered button bar has not yet had its @onclick handler wired up
+        // by the Server SignalR circuit or WebAssembly runtime.
         var button = _page.Locator(ButtonBarButtonSelector).First;
         await button.WaitForAsync(new LocatorWaitForOptions
         {
             State = WaitForSelectorState.Visible,
-            Timeout = 15000
+            Timeout = 15000,
         });
-        await button.ClickAsync();
+
+        await PlaywrightTestBase.InteractAndVerifyAsync(
+            () => button.ClickAsync(),
+            _page.Locator($"{ClickCountSelector}:has-text('1')"));
     }
 
     public async Task<int> GetOptAButtonCountAsync()
