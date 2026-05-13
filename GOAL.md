@@ -4,6 +4,9 @@ This repository provides a set of Blazor component packages. The components shou
 
 GitHub Pages hosting itself is handled in another repository that consumes these NuGet packages.
 
+# RESTART NOTICE
+Old version of devteam worked on this project, it was not backwards compatible, so devteam is restarted. Part of the goal is to find the current status (explore/navigator) and continue from there
+
 # Current focus: a unified documentation + blog authoring story
 
 The original plan was to reuse `OptionA.Blazor.Blog.Builder` to author the documentation site. That builder is outdated and block-click-per-paragraph — it breaks the writing flow and is not friendly for non-technical authors or AI-drafted content.

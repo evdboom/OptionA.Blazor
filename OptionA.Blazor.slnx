@@ -1,0 +1,27 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OptionA.Blazor.E2E/OptionA.Blazor.E2E.csproj" />
+  </Folder>
+  <Project Path="OptionA.Blazor.Blog.UnitTests/OptionA.Blazor.Blog.UnitTests.csproj" />
+  <Project Path="OptionA.Blazor.Blog/OptionA.Blazor.Blog.csproj" />
+  <Project Path="OptionA.Blazor.Components.Direct/OptionA.Blazor.Components.Direct.csproj" />
+  <Project Path="OptionA.Blazor.Components.UnitTests/OptionA.Blazor.Components.UnitTests.csproj" />
+  <Project Path="OptionA.Blazor.Components/OptionA.Blazor.Components.csproj" />
+  <Project Path="OptionA.Blazor.Helpers/OptionA.Blazor.Helpers.csproj" />
+  <Project Path="OptionA.Blazor.Maui.Test/OptionA.Blazor.Maui.Test.csproj" />
+  <Project Path="OptionA.Blazor.Playground.UnitTests/OptionA.Blazor.Playground.UnitTests.csproj" />
+  <Project Path="OptionA.Blazor.Playground/OptionA.Blazor.Playground.csproj" />
+  <Project Path="OptionA.Blazor.Server.Test/OptionA.Blazor.Server.Test.csproj" />
+  <Project Path="OptionA.Blazor.Storage.Contracts/OptionA.Blazor.Storage.Contracts.csproj" />
+  <Project Path="OptionA.Blazor.Storage/OptionA.Blazor.Storage.csproj" />
+  <Project Path="OptionA.Blazor.Test.Shared/OptionA.Blazor.Test.Shared.csproj" />
+  <Project Path="OptionA.Blazor.Test/OptionA.Blazor.Test.csproj" />
+</Solution>

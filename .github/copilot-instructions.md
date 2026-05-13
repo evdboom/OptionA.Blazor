@@ -24,7 +24,7 @@ The repository is organized into the following main projects:
 - **OptionA.Blazor.Components.Direct** - Direct components
 - **OptionA.Blazor.Components.UnitTests** - Unit tests for components
 - **OptionA.Blazor.Blog** - Blog-related components (table, quote, etc.)
-- **OptionA.Blazor.Blog.Builder** - Blog builder functionality
+- **OptionA.Blazor.Blog.Builder** - Blog builder functionality (RETIRED) — Use Markdown with OptADocument (OptionA.Blazor.Blog) and the Playground registry (OptionA.Blazor.Playground) for authoring.
 - **OptionA.Blazor.Blog.UnitTests** - Unit tests for blog components
 - **OptionA.Blazor.Storage** - Storage functionality
 - **OptionA.Blazor.Storage.Contracts** - Storage contracts

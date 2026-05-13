@@ -100,6 +100,43 @@ Body here
     }
 
     [Fact]
+    public void OptADocument_WithFrontMatterWithoutCallback_ParsesBody()
+    {
+        var markdown = """
+---
+title: No callback
+---
+Body here
+""";
+
+        var mockParser = new Mock<IMarkdownDocumentParser>();
+        mockParser.Setup(p => p.Parse("Body here")).Returns(new List<IContent>());
+        Services.AddSingleton<IMarkdownDocumentParser>(mockParser.Object);
+
+        Render<OptADocument>(parameters => parameters.Add(x => x.Source, markdown));
+
+        mockParser.Verify(p => p.Parse("Body here"), Times.Once);
+    }
+
+    [Fact]
+    public void OptADocument_WithoutFrontMatter_DoesNotInvokeOnMetadataParsedAndParsesOriginalBody()
+    {
+        const string markdown = "Body here";
+        var callbackInvoked = false;
+
+        var mockParser = new Mock<IMarkdownDocumentParser>();
+        mockParser.Setup(p => p.Parse(markdown)).Returns(new List<IContent>());
+        Services.AddSingleton<IMarkdownDocumentParser>(mockParser.Object);
+
+        Render<OptADocument>(parameters => parameters
+            .Add(x => x.Source, markdown)
+            .Add(x => x.OnMetadataParsed, EventCallback.Factory.Create<DocumentMetadata>(this, () => callbackInvoked = true)));
+
+        mockParser.Verify(p => p.Parse(markdown), Times.Once);
+        Assert.False(callbackInvoked);
+    }
+
+    [Fact]
     public void OptADocument_AwaitsAsyncOnMetadataParsedBeforeParsingBody()
     {
         var markdown = """
@@ -166,6 +203,42 @@ Body here
         Assert.Equal("Metadata callback failed.", exception.Message);
         mockParser.Verify(p => p.Parse(It.IsAny<string>()), Times.Never);
     }
+
+    [Fact]
+#pragma warning disable BL0005
+    public void OptADocument_SourceUpdated_ReinvokesMetadataCallbackAndParsesUpdatedBody()
+    {
+        var firstMarkdown = """
+---
+title: First title
+---
+First body
+""";
+        var secondMarkdown = """
+---
+title: Second title
+---
+Second body
+""";
+
+        var receivedTitles = new List<string?>();
+        var mockParser = new Mock<IMarkdownDocumentParser>();
+        mockParser.Setup(p => p.Parse("First body")).Returns(new List<IContent>());
+        mockParser.Setup(p => p.Parse("Second body")).Returns(new List<IContent>());
+        Services.AddSingleton<IMarkdownDocumentParser>(mockParser.Object);
+
+        var cut = Render<OptADocument>(parameters => parameters
+            .Add(x => x.Source, firstMarkdown)
+            .Add(x => x.OnMetadataParsed, EventCallback.Factory.Create<DocumentMetadata>(this, (DocumentMetadata metadata) => receivedTitles.Add(metadata.Title))));
+
+        cut.Instance.Source = secondMarkdown;
+        cut.Render();
+
+        Assert.Equal(["First title", "Second title"], receivedTitles);
+        mockParser.Verify(p => p.Parse("First body"), Times.Once);
+        mockParser.Verify(p => p.Parse("Second body"), Times.Once);
+    }
+#pragma warning restore BL0005
 
     private class MetadataReceiver : ComponentBase
     {

@@ -4,7 +4,7 @@ visit [option-a.tech](https://www.option-a.tech) for full documentation, release
 
 ## Projects
 - [Blog](/OptionA.Blazor.Blog/readme.md)
-- [Blog builder](/OptionA.Blazor.Blog.Builder/readme.md)
+- [Blog builder (retired)](/OptionA.Blazor.Blog.Builder/readme.md) — Retired: use Markdown authoring with OptADocument (OptionA.Blazor.Blog) and registered playgrounds (OptionA.Blazor.Playground).
 - [Components](/OptionA.Blazor.Components/readme.md)
 - [Direct components](/OptionA.Blazor.Components.Direct/readme.md)
 - [Playground](/OptionA.Blazor.Playground/readme.md)
