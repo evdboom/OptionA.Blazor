@@ -8,7 +8,7 @@ using OptionA.Blazor.Playground;
 namespace OptionA.Blazor.Blog.UnitTests.Document;
 
 /// <summary>
-/// bUnit tests for the <see cref="OptADocumentPlayground"/> component.
+/// bUnit tests for playground directive rendering in <see cref="OptAChild"/>.
 /// Covers the resolved descriptor (happy path), error message display, and null content.
 /// </summary>
 public class OptADocumentPlaygroundTests : BunitContext
@@ -47,7 +47,7 @@ public class OptADocumentPlaygroundTests : BunitContext
             ResolvedDescriptor = descriptor,
         };
 
-        var cut = Render<OptADocumentPlayground>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         // OptAPlayground emits a div with the opta-playground attribute
         var container = cut.Find("[opta-playground]");
@@ -64,7 +64,7 @@ public class OptADocumentPlaygroundTests : BunitContext
             ResolvedDescriptor = descriptor,
         };
 
-        var cut = Render<OptADocumentPlayground>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         Assert.Empty(cut.FindAll(".opta-playground-error"));
     }
@@ -82,7 +82,7 @@ public class OptADocumentPlaygroundTests : BunitContext
             ErrorMessage = "Unknown playground id: \"unknown-id\".",
         };
 
-        var cut = Render<OptADocumentPlayground>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         var errorDiv = cut.Find(".opta-playground-error");
         Assert.NotNull(errorDiv);
@@ -99,7 +99,7 @@ public class OptADocumentPlaygroundTests : BunitContext
             ErrorMessage = "Unknown playground id: \"unknown-id\".",
         };
 
-        var cut = Render<OptADocumentPlayground>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         Assert.Empty(cut.FindAll("[opta-playground]"));
     }
@@ -111,7 +111,7 @@ public class OptADocumentPlaygroundTests : BunitContext
     [Fact]
     public void OptADocumentPlayground_NullContent_RendersNothing()
     {
-        var cut = Render<OptADocumentPlayground>(p => p.Add(x => x.Content, (PlaygroundDirectiveContent?)null));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, (PlaygroundDirectiveContent?)null));
 
         Assert.Empty(cut.Nodes);
     }
@@ -129,7 +129,7 @@ public class OptADocumentPlaygroundTests : BunitContext
             DirectiveId = "pending",
         };
 
-        var cut = Render<OptADocumentPlayground>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         Assert.Empty(cut.FindAll("[opta-playground]"));
         Assert.Empty(cut.FindAll(".opta-playground-error"));

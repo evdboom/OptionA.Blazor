@@ -1,37 +1,19 @@
 using Microsoft.AspNetCore.Components;
-using OptionA.Blazor.Blog.Document.Internal;
 
-namespace OptionA.Blazor.Blog;
+namespace OptionA.Blazor.Blog.Document.Internal;
 
 /// <summary>
-/// Renders a whitelisted inline <c>&lt;OptA*&gt;</c> component tag parsed from a Markdown document.
-/// When the component type is resolved from the registry, renders it via <see cref="DynamicComponent"/>.
-/// When the tag is not whitelisted, renders escaped text and a visible warning instead.
+/// Converts raw string attribute values to the types expected by a component's parameters,
+/// using reflection on <see cref="ParameterAttribute"/>-marked properties.
+/// Supported coercions: string, bool (including shorthand), int, and enum.
 /// </summary>
-public partial class OptADocumentComponent
+internal static class ParameterCoercer
 {
     /// <summary>
-    /// The parsed inline component content, carrying either a resolved component type or a warning.
+    /// Coerces the raw string attributes into a parameter dictionary suitable for
+    /// <see cref="Microsoft.AspNetCore.Components.DynamicComponent"/>.
     /// </summary>
-    [Parameter]
-    public InlineComponentContent? Content { get; set; }
-
-    private Dictionary<string, object?> _parameters = [];
-
-    /// <inheritdoc/>
-    protected override void OnParametersSet()
-    {
-        _parameters = Content?.ComponentType is not null
-            ? CoerceParameters(Content.ComponentType, Content.RawAttributes)
-            : [];
-    }
-
-    /// <summary>
-    /// Converts raw string attribute values to the types expected by the component's parameters,
-    /// using reflection on <see cref="ParameterAttribute"/>-marked properties.
-    /// Supported coercions: string, bool (including shorthand), int, and enum.
-    /// </summary>
-    private static Dictionary<string, object?> CoerceParameters(
+    internal static Dictionary<string, object?> Coerce(
         Type componentType,
         IReadOnlyDictionary<string, string?> rawAttributes)
     {

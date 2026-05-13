@@ -7,12 +7,10 @@ namespace OptionA.Blazor.Blog.Document.Internal;
 /// Holds the resolved descriptor (or error message) produced during the parse stage.
 /// </summary>
 /// <remarks>
-/// Although the type lives in the <c>Document.Internal</c> namespace, it must be public
-/// because it is used as a parameter type on the public <see cref="OptADocumentPlayground"/> component.
-/// It is an implementation detail of the document-parsing pipeline and is not intended
+/// This type is an implementation detail of the document-parsing pipeline and is not intended
 /// for direct consumption by library consumers.
 /// </remarks>
-public sealed class PlaygroundDirectiveContent : Content
+internal sealed class PlaygroundDirectiveContent : Content
 {
     /// <inheritdoc/>
     public override ContentType Type => ContentType.Playground;

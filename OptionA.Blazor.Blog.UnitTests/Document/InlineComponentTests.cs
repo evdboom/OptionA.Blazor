@@ -247,11 +247,11 @@ file sealed class DocumentComponentRegistryAccessor : IDocumentComponentRegistry
 }
 
 // ---------------------------------------------------------------------------
-// bUnit component-level tests — OptADocumentComponent rendering
+// bUnit component-level tests — inline component rendering via OptAChild
 // ---------------------------------------------------------------------------
 
 /// <summary>
-/// bUnit tests for <see cref="OptADocumentComponent"/>.
+/// bUnit tests for inline component rendering in <see cref="OptAChild"/>.
 /// </summary>
 public class OptADocumentComponentTests : BunitContext
 {
@@ -269,7 +269,7 @@ public class OptADocumentComponentTests : BunitContext
             RawAttributes = new Dictionary<string, string?>(),
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         // FakeButtonComponent renders a <button>; verify the element is present.
         var btn = cut.Find("button");
@@ -286,7 +286,7 @@ public class OptADocumentComponentTests : BunitContext
             RawAttributes = new Dictionary<string, string?>(),
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         Assert.Empty(cut.FindAll(".opta-document-component-warning"));
     }
@@ -305,7 +305,7 @@ public class OptADocumentComponentTests : BunitContext
             RawAttributes = new Dictionary<string, string?> { ["Label"] = "Click me" },
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         var btn = cut.Find("button");
         Assert.Equal("Click me", btn.TextContent);
@@ -325,7 +325,7 @@ public class OptADocumentComponentTests : BunitContext
             RawAttributes = new Dictionary<string, string?> { ["Disabled"] = "true" },
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         var btn = cut.Find("button");
         Assert.True(btn.HasAttribute("disabled"));
@@ -345,7 +345,7 @@ public class OptADocumentComponentTests : BunitContext
             RawAttributes = new Dictionary<string, string?> { ["Disabled"] = null },
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         var btn = cut.Find("button");
         Assert.True(btn.HasAttribute("disabled"));
@@ -365,7 +365,7 @@ public class OptADocumentComponentTests : BunitContext
             RawAttributes = new Dictionary<string, string?> { ["Count"] = "7" },
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         var btn = cut.Find("button");
         Assert.Equal("7", btn.GetAttribute("data-count"));
@@ -385,7 +385,7 @@ public class OptADocumentComponentTests : BunitContext
             RawAttributes = new Dictionary<string, string?> { ["Kind"] = "Primary" },
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         var btn = cut.Find("button");
         Assert.Equal("primary", btn.GetAttribute("data-kind"));
@@ -405,7 +405,7 @@ public class OptADocumentComponentTests : BunitContext
             WarningMessage = "<OptAUnknown> is not registered.",
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         var span = cut.Find(".opta-document-component-warning");
         Assert.NotNull(span);
@@ -423,7 +423,7 @@ public class OptADocumentComponentTests : BunitContext
             WarningMessage = "Not registered.",
         };
 
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, content));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
 
         Assert.Empty(cut.FindAll("button"));
     }
@@ -435,7 +435,7 @@ public class OptADocumentComponentTests : BunitContext
     [Fact]
     public void OptADocumentComponent_NullContent_RendersNothing()
     {
-        var cut = Render<OptADocumentComponent>(p => p.Add(x => x.Content, (InlineComponentContent?)null));
+        var cut = Render<OptAChild>(p => p.Add(x => x.Content, (InlineComponentContent?)null));
         Assert.Empty(cut.Nodes);
     }
 
@@ -481,7 +481,7 @@ file sealed class FakeComponent : ComponentBase { }
 
 /// <summary>
 /// Component with typed parameters, rendered to a button element.
-/// Used to validate parameter coercion in <see cref="OptADocumentComponent"/>.
+/// Used to validate parameter coercion in <see cref="OptAChild"/>.
 /// </summary>
 file sealed class FakeButtonComponent : ComponentBase
 {

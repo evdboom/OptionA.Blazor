@@ -5,12 +5,10 @@ namespace OptionA.Blazor.Blog.Document.Internal;
 /// Holds the resolved component type (when whitelisted) or a warning message (when not).
 /// </summary>
 /// <remarks>
-/// Although this type lives in the <c>Document.Internal</c> namespace it must be public
-/// because it is used as a parameter type on the public <see cref="OptADocumentComponent"/> component.
-/// It is an implementation detail of the document-parsing pipeline and is not intended for direct
+/// This type is an implementation detail of the document-parsing pipeline and is not intended for direct
 /// consumption by library consumers.
 /// </remarks>
-public sealed class InlineComponentContent : Content
+internal sealed class InlineComponentContent : Content
 {
     /// <inheritdoc/>
     public override ContentType Type => ContentType.InlineComponent;
