@@ -81,8 +81,8 @@
       9
     ],
     "ActiveIssueId": 9,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-05-13T13:31:29.0664759\u002B00:00"
+    "Status": "Blocked",
+    "UpdatedAtUtc": "2026-05-13T14:25:43.5527091\u002B00:00"
   },
   {
     "Id": 6,
@@ -155,9 +155,9 @@
     "IssueIds": [
       16
     ],
-    "ActiveIssueId": 16,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-05-13T13:41:02.0978833\u002B00:00"
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T14:18:52.2056606\u002B00:00"
   },
   {
     "Id": 11,
@@ -309,9 +309,9 @@
       33,
       34
     ],
-    "ActiveIssueId": 34,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-05-13T14:09:01.0997709\u002B00:00"
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T14:17:00.0262470\u002B00:00"
   },
   {
     "Id": 20,
@@ -358,5 +358,181 @@
     "ActiveIssueId": 32,
     "Status": "Open",
     "UpdatedAtUtc": "2026-05-13T14:05:15.3361382\u002B00:00"
+  },
+  {
+    "Id": 23,
+    "RootIssueId": 35,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "fullstack-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      35
+    ],
+    "ActiveIssueId": 35,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T14:12:54.6483707\u002B00:00"
+  },
+  {
+    "Id": 24,
+    "RootIssueId": 36,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      36,
+      42
+    ],
+    "ActiveIssueId": 42,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T14:17:17.1300188\u002B00:00"
+  },
+  {
+    "Id": 25,
+    "RootIssueId": 37,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      37
+    ],
+    "ActiveIssueId": 37,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T14:12:54.6483768\u002B00:00"
+  },
+  {
+    "Id": 26,
+    "RootIssueId": 38,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      38
+    ],
+    "ActiveIssueId": 38,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T14:12:54.6483852\u002B00:00"
+  },
+  {
+    "Id": 27,
+    "RootIssueId": 39,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      39
+    ],
+    "ActiveIssueId": 39,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T14:12:54.6483894\u002B00:00"
+  },
+  {
+    "Id": 28,
+    "RootIssueId": 40,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      40
+    ],
+    "ActiveIssueId": 40,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T14:12:54.6483932\u002B00:00"
+  },
+  {
+    "Id": 29,
+    "RootIssueId": 41,
+    "FamilyKey": "documentmetadata",
+    "Area": "document-metadata",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      41,
+      44
+    ],
+    "ActiveIssueId": 44,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T14:18:17.0036570\u002B00:00"
+  },
+  {
+    "Id": 30,
+    "RootIssueId": 43,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "reviewer"
+    ],
+    "IssueIds": [
+      43
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T14:25:08.1784107\u002B00:00"
+  },
+  {
+    "Id": 31,
+    "RootIssueId": 45,
+    "FamilyKey": "documentmetadata",
+    "Area": "document-metadata",
+    "RoleSequence": [
+      "reviewer"
+    ],
+    "IssueIds": [
+      45
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T14:24:17.7024092\u002B00:00"
+  },
+  {
+    "Id": 32,
+    "RootIssueId": 46,
+    "FamilyKey": "blogbuilderretirement",
+    "Area": "blog-builder-retirement",
+    "RoleSequence": [
+      "devops"
+    ],
+    "IssueIds": [
+      46
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T14:23:10.0401232\u002B00:00"
+  },
+  {
+    "Id": 33,
+    "RootIssueId": 47,
+    "FamilyKey": "blogbuilderretirement",
+    "Area": "blog-builder-retirement",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      47
+    ],
+    "ActiveIssueId": 47,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T14:18:53.1801758\u002B00:00"
   }
 ]

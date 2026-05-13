@@ -696,5 +696,238 @@
     "TimeoutExtensionGranted": false,
     "TimeoutExtensionGrantedAtUtc": null,
     "UpdatedAtUtc": "2026-05-13T14:11:03.8224110\u002B00:00"
+  },
+  {
+    "Id": 24,
+    "IssueId": 41,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-186f45e7fb3f",
+    "Status": "Completed",
+    "Summary": "The two named failing tests (\u0060OptADocument_AwaitsAsyncOnMetadataParsedBeforeParsingBody\u0060 and \u0060OptADocument_OnMetadataParsedException_PropagatesAndSkipsParsingBody\u0060) were already passing \u2014 the \u0060OptADocument.OnParametersSetAsync\u0060 implementation correctly \u0060await\u0060s \u0060OnMetadataParsed.InvokeAsync(metadata)\u0060 before calling \u0060Parser.Parse(body)\u0060, which satisfies both the async-ordering contract and the exception-propagation contract. All 210 Blog unit tests passed green. Additionally fixed9 CS1591 XML-doc warnings on the newly added public types \u0060DocumentMetadata\u0060 and \u0060PostHelpers\u0060.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "view",
+      "glob",
+      "powershell (dotnet build, dotnet test)",
+      "edit"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:18:17.0036152\u002B00:00"
+  },
+  {
+    "Id": 25,
+    "IssueId": 36,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-61228213c8b9",
+    "Status": "Completed",
+    "Summary": "Extracted a new \u0060TypeCoercionHelper\u0060 internal class in \u0060OptionA.Blazor.Blog/Document/Internal/TypeCoercionHelper.cs\u0060 with two public methods:\n- \u0060TryCoerce(Type, string?)\u0060 \u2014 handles null-as-bool-shorthand, returns null on failure (used by \u0060ParameterCoercer\u0060)\n- \u0060CoerceWithFallback(Type, string)\u0060 \u2014 returns raw string on failure (used by \u0060DirectivePlaygroundDescriptor\u0060)\n\nBoth call sites now delegate to a single private \u0060CoerceNonNull\u0060 method for the shared string/bool/int/enum logic. All 210 blog unit tests pass.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "view",
+      "create",
+      "edit",
+      "powershell"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:17:17.1298687\u002B00:00"
+  },
+  {
+    "Id": 26,
+    "IssueId": 16,
+    "RoleSlug": "reviewer",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-reviewer-193435b0bc4b",
+    "Status": "Completed",
+    "Summary": "The solution-level removal looks correct: \u0060OptionA.Blazor.sln\u0060 no longer includes \u0060OptionA.Blazor.Blog.Builder\u0060, and \u0060OptionA.Blazor.Blog.UnitTests.csproj\u0060 no longer references it. The review found two follow-up gaps: release automation still treats the retired Builder package as publishable, and contributor-facing docs still describe it like an active first-class project.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "review- workspace-protection"
+    ],
+    "ToolsUsed": [
+      "multi_tool_use.parallel- skill- report_intent- powershell (\u0060git status\u0060, \u0060git branch --show-current\u0060, \u0060git log\u0060, \u0060git diff\u0060, \u0060git show\u0060, \u0060git ls-files\u0060)",
+      "rg- view- glob"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      46,
+      47
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:18:52.2056570\u002B00:00"
+  },
+  {
+    "Id": 27,
+    "IssueId": 34,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-ba61aa65d614",
+    "Status": "Completed",
+    "Summary": "Verified the migrated \u0060OptADocument\u0060 playground/component tests already exercise the public rendering path after internalization, and the current implementation is working without further test changes.\n\nFresh evidence:\n- \u0060dotnet build OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --nologo\u0060 \u2192 succeeded; existing warnings only (Blog XML-doc warnings and transient MSB3026 copy-lock retries while a parallel testhost was active),0 errors.\n- \u0060dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --nologo --no-restore\u0060 \u2192 **210 passed,0 failed,0 skipped**.\n\nTests verified:\n- \u0060OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentPlaygroundTests.cs\u0060 \u2014 resolved descriptor path, visible error block path, null markdown path through \u0060OptADocument\u0060.\n- \u0060OptionA.Blazor.Blog.UnitTests\\Document\\InlineComponentTests.cs\u0060 \u2014 inline component rendering through \u0060OptADocument\u0060, whitelist hit/miss behavior, registry registration, and \u0060ParameterCoercer\u0060 coverage for string, bool explicit, bool shorthand, int, enum, and unsupported types.\n- Existing parser-level tests in the same file still cover internal parsing behavior separately.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "skill- glob- rg- view- dotnet build OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --nologo- dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --nologo --no-restore"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:17:00.0262392\u002B00:00"
+  },
+  {
+    "Id": 28,
+    "IssueId": 46,
+    "RoleSlug": "devops",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-devops-14a8a782601f",
+    "Status": "Completed",
+    "Summary": "Updated \u0060.github/workflows/publish-nuget.yml\u0060 so \u0060OptionA.Blazor.Blog.Builder.csproj\u0060 is treated as a retired package and excluded from \u0060Is-PackableProject\u0060 selection. That keeps the project buildable in the repo while preventing it from being auto-selected, packed, published, or attached to future NuGet releases. The local packable-project check no longer lists Blog.Builder, and \u0060dotnet build .\\OptionA.Blazor.sln --configuration Release\u0060 completed successfully.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [
+      "view- rg- apply_patch- powershell- \u0060git --no-pager status --short\u0060",
+      "\u0060git --no-pager diff -- .github/workflows/publish-nuget.yml\u0060",
+      "\u0060dotnet build .\\OptionA.Blazor.sln --configuration Release\u0060"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:23:10.0401187\u002B00:00"
+  },
+  {
+    "Id": 29,
+    "IssueId": 45,
+    "RoleSlug": "reviewer",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-reviewer-6464b3d3b33e",
+    "Status": "Completed",
+    "Summary": "I reviewed the \u0060OptADocument\u0060 metadata callback implementation and its tests and did not find a correctness or maintainability issue that warrants a follow-up execution issue. The current contract is internally consistent: \u0060OptADocument.OnParametersSetAsync()\u0060 awaits \u0060OnMetadataParsed\u0060 before parsing the Markdown body, async callback exceptions propagate instead of being dropped, \u0060PostHelpers.FromMetadataAndContent(...)\u0060 strips front-matter before parsing body content, and the targeted blog build/test run is green (\u0060210\u0060 blog unit tests passing).",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "review"
+    ],
+    "ToolsUsed": [
+      "skill- report_intent- rg- glob- view- powershell- task"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:24:17.7024033\u002B00:00"
+  },
+  {
+    "Id": 30,
+    "IssueId": 9,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-85ec741f1f63",
+    "Status": "Blocked",
+    "Summary": "Verified the Blog.Builder removal itself is in place: \u0060OptionA.Blazor.sln\u0060 no longer includes \u0060OptionA.Blazor.Blog.Builder\u0060, \u0060OptionA.Blazor.Blog.UnitTests.csproj\u0060 has no \u0060ProjectReference\u0060 to it, and \u0060OptionA.Blazor.Blog.UnitTests\\Builder\u0060 is absent. Fresh verification passed for \u0060dotnet build .\\OptionA.Blazor.sln --configuration Release --no-restore\u0060, \u0060dotnet test .\\OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --no-build --verbosity minimal\u0060 (210 passed), and \u0060dotnet test .\\OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj --configuration Release --no-build --verbosity minimal\u0060 (57 passed).\n\nFull regression verification is not clean yet: \u0060dotnet test .\\OptionA.Blazor.sln --configuration Release --no-build --verbosity quiet\u0060 exited with3 Playwright E2E failures: \u0060Server_ButtonInteraction_Tests.Given_ServerApp_When_ClickingShowButton_Then_OptAButtonsAppear\u0060, \u0060Server_ButtonInteraction_Tests.Given_ServerApp_When_ClickingOptAButton_Then_ClickCountIncreases\u0060, and \u0060WebAssembly_ButtonsPlayground_Tests.Given_WebAssemblyApp_When_NavigatingToButtonsPlaygroundFromMenu_Then_PlaygroundLoads\u0060. These failures are in buttons/playground UI flows rather than Blog.Builder wiring, but they block a clean no-regressions sign-off.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "skill- report_intent- glob- rg- view- sql- powershell- \u0060dotnet build .\\OptionA.Blazor.sln --configuration Release --no-restore\u0060",
+      "\u0060dotnet build .\\OptionA.Blazor.sln --configuration Release --no-restore --verbosity quiet\u0060",
+      "\u0060dotnet test .\\OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --no-build --verbosity minimal\u0060",
+      "\u0060dotnet test .\\OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj --configuration Release --no-build --verbosity minimal\u0060",
+      "\u0060dotnet test .\\OptionA.Blazor.sln --configuration Release --no-build --verbosity quiet\u0060",
+      "\u0060Select-String\u0060 / \u0060Test-Path\u0060 removal checks"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      49
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:25:43.5527037\u002B00:00"
+  },
+  {
+    "Id": 31,
+    "IssueId": 43,
+    "RoleSlug": "reviewer",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-reviewer-65bf96774a8d",
+    "Status": "Completed",
+    "Summary": "Reviewed the blog-document coercion changes and found one correctness gap: \u0060DirectivePlaygroundDescriptor\u0060 now shares \u0060TypeCoercionHelper\u0060, but it still diverges from \u0060ParameterCoercer\u0060 because it passes \u0060PlaygroundParameterDescriptor.ValueType\u0060 without nullable unwrapping and falls back to raw strings on failed coercion. That means directive overrides like nullable \u0060bool/int/enum\u0060 values, or invalid typed overrides, can silently become \u0060string\u0060 defaults and later reach playground editors/\u0060DynamicComponent\u0060 with the wrong CLR type. Current blog unit tests pass, but they only cover the string-override path.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [
+      "report_intent- rg- glob- view- sql- powershell (\u0060dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --no-restore\u0060)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      48
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:25:08.1780377\u002B00:00"
   }
 ]

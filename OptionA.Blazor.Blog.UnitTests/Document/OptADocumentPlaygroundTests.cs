@@ -97,6 +97,84 @@ public class OptADocumentPlaygroundTests : BunitContext
         Assert.Empty(cut.Nodes);
     }
 
+    [Fact]
+    public void OptADocumentPlayground_InvalidTypedOverride_StillRendersPlayground()
+    {
+        _resolver
+            .Setup(r => r.Resolve("demo", null))
+            .Returns(new PlaygroundDescriptor<OptADocumentPlaygroundPreview>
+            {
+                Title = "Demo",
+                Parameters =
+                [
+                    new() { Name = "Count", ValueType = typeof(int), DefaultValue = 0 },
+                ],
+            });
+
+        // "notanumber" cannot be converted to int — playground should still render with original default
+        var cut = RenderDocument(
+            """
+            ::: playground id="demo"
+            parameters:
+              Count: notanumber
+            :::
+            """);
+
+        Assert.NotNull(cut.Find("[opta-playground]"));
+    }
+
+    [Fact]
+    public void OptADocumentPlayground_InvalidTypedOverride_RendersWarningDiv()
+    {
+        _resolver
+            .Setup(r => r.Resolve("demo", null))
+            .Returns(new PlaygroundDescriptor<OptADocumentPlaygroundPreview>
+            {
+                Title = "Demo",
+                Parameters =
+                [
+                    new() { Name = "Count", ValueType = typeof(int), DefaultValue = 0 },
+                ],
+            });
+
+        var cut = RenderDocument(
+            """
+            ::: playground id="demo"
+            parameters:
+              Count: notanumber
+            :::
+            """);
+
+        var warnings = cut.FindAll(".opta-playground-warning");
+        Assert.NotEmpty(warnings);
+        Assert.All(warnings, w => Assert.Equal("alert", w.GetAttribute("role")));
+    }
+
+    [Fact]
+    public void OptADocumentPlayground_ValidOverride_DoesNotRenderWarning()
+    {
+        _resolver
+            .Setup(r => r.Resolve("demo", null))
+            .Returns(new PlaygroundDescriptor<OptADocumentPlaygroundPreview>
+            {
+                Title = "Demo",
+                Parameters =
+                [
+                    new() { Name = "Count", ValueType = typeof(int), DefaultValue = 0 },
+                ],
+            });
+
+        var cut = RenderDocument(
+            """
+            ::: playground id="demo"
+            parameters:
+              Count: 42
+            :::
+            """);
+
+        Assert.Empty(cut.FindAll(".opta-playground-warning"));
+    }
+
     private IRenderedComponent<OptADocument> RenderDocument(string markdown)
         => Render<OptADocument>(parameters => parameters.Add(x => x.Source, markdown));
 

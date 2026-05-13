@@ -6,10 +6,10 @@
 - Priority: 55
 - Depends On: none
 - Roadmap Item: 1
-- Family: blog-document
+- Family: blogdocument
 - External: none
-- Pipeline: none
-- Pipeline Stage: none
+- Pipeline: 23
+- Pipeline Stage: 0
 - Planning Issue: no
 
 ## Detail

@@ -67,10 +67,19 @@ jobs:
           $changedFiles = git diff --name-only "$previousTag..$tag"
         }
 
+        $retiredPackageProjects = @(
+          'OptionA.Blazor.Blog.Builder.csproj'
+        )
+
         function Is-PackableProject {
           param([string]$ProjectPath)
 
           if ($ProjectPath -match '(\.UnitTests|\.Test|\.Tests)\.csproj$') {
+            return $false
+          }
+
+          $projectFileName = [System.IO.Path]::GetFileName($ProjectPath)
+          if ($retiredPackageProjects -contains $projectFileName) {
             return $false
           }
 

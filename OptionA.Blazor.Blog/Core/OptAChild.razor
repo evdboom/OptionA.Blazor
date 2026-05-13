@@ -47,6 +47,12 @@
                 var playgroundContent = (OptionA.Blazor.Blog.Document.Internal.PlaygroundDirectiveContent)Content;
                 if (playgroundContent.ResolvedDescriptor is not null)
                 {
+                    @foreach (var warning in playgroundContent.OverrideWarnings)
+                    {
+                        <div class="opta-playground-warning" role="alert">
+                            <strong>Playground override warning:</strong> @warning
+                        </div>
+                    }
                     <OptAPlayground Descriptor="playgroundContent.ResolvedDescriptor" />
                 }
                 else if (playgroundContent.ErrorMessage is not null)

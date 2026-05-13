@@ -40,4 +40,11 @@ internal sealed class PlaygroundDirectiveContent : Content
     /// </summary>
     public IReadOnlyDictionary<string, string> ParameterOverrides { get; init; }
         = new Dictionary<string, string>(StringComparer.Ordinal);
+
+    /// <summary>
+    /// Non-fatal warnings produced when one or more parameter overrides could not be coerced
+    /// to the expected parameter type. The playground still renders using original defaults;
+    /// these messages are surfaced as visible warnings in the document.
+    /// </summary>
+    public IReadOnlyList<string> OverrideWarnings { get; set; } = [];
 }

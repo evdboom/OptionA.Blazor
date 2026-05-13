@@ -541,6 +541,226 @@ public class MarkdownDocumentParserPlaygroundTests
 }
 
 /// <summary>
+/// Coercion-hardening tests for playground parameter override handling:
+/// nullable types, invalid typed overrides, and parity with ParameterCoercer.
+/// </summary>
+public class DirectivePlaygroundOverrideCoercionTests
+{
+    private static IMarkdownDocumentParser BuildParser(IPlaygroundDescriptorResolver? resolver = null)
+        => new MarkdownDocumentParserAccessor(resolver);
+
+    // ------------------------------------------------------------------
+    // Nullable bool override
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Override_NullableBool_ValidValue_IsCoercedToTypedBool()
+    {
+        var descriptor = BuildDescriptorWithParam("Flag", typeof(bool?), null);
+        var result = ParseWithOverride(descriptor, "Flag", "true");
+
+        var param = Assert.Single(result);
+        Assert.IsType<bool>(param.DefaultValue);
+        Assert.True((bool)param.DefaultValue!);
+    }
+
+    [Fact]
+    public void Override_NullableBool_InvalidValue_LeavesOriginalDefaultAndAddsWarning()
+    {
+        var descriptor = BuildDescriptorWithParam("Flag", typeof(bool?), false);
+        var (directive, _) = ParseAndGetDirective(descriptor, "Flag", "not-a-bool");
+
+        Assert.NotNull(directive.ResolvedDescriptor);
+        var param = directive.ResolvedDescriptor!.Parameters.First(p => p.Name == "Flag");
+        Assert.Equal(false, param.DefaultValue); // unchanged original
+        Assert.NotEmpty(directive.OverrideWarnings);
+        Assert.Contains("Flag", directive.OverrideWarnings[0], StringComparison.Ordinal);
+    }
+
+    // ------------------------------------------------------------------
+    // Nullable int override
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Override_NullableInt_ValidValue_IsCoercedToTypedInt()
+    {
+        var descriptor = BuildDescriptorWithParam("Count", typeof(int?), null);
+        var result = ParseWithOverride(descriptor, "Count", "42");
+
+        var param = Assert.Single(result);
+        Assert.IsType<int>(param.DefaultValue);
+        Assert.Equal(42, (int)param.DefaultValue!);
+    }
+
+    [Fact]
+    public void Override_NullableInt_InvalidValue_LeavesOriginalDefaultAndAddsWarning()
+    {
+        var descriptor = BuildDescriptorWithParam("Count", typeof(int?), 0);
+        var (directive, _) = ParseAndGetDirective(descriptor, "Count", "notanumber");
+
+        Assert.NotNull(directive.ResolvedDescriptor);
+        var param = directive.ResolvedDescriptor!.Parameters.First(p => p.Name == "Count");
+        Assert.Equal(0, param.DefaultValue); // unchanged original
+        Assert.NotEmpty(directive.OverrideWarnings);
+    }
+
+    // ------------------------------------------------------------------
+    // Non-nullable int invalid override must not store a raw string
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Override_Int_InvalidValue_DefaultValueIsNotRawString()
+    {
+        var descriptor = BuildDescriptorWithParam("Count", typeof(int), 5);
+        var (directive, _) = ParseAndGetDirective(descriptor, "Count", "bad-value");
+
+        Assert.NotNull(directive.ResolvedDescriptor);
+        var param = directive.ResolvedDescriptor!.Parameters.First(p => p.Name == "Count");
+        // Must not store a raw string — the original int default must be preserved
+        Assert.IsNotType<string>(param.DefaultValue);
+        Assert.Equal(5, param.DefaultValue);
+    }
+
+    // ------------------------------------------------------------------
+    // Nullable enum override
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Override_NullableEnum_ValidValue_IsCoercedToTypedEnum()
+    {
+        var descriptor = BuildDescriptorWithParam("Direction", typeof(FakeEnum?), null);
+        var result = ParseWithOverride(descriptor, "Direction", "North");
+
+        var param = Assert.Single(result);
+        Assert.IsType<FakeEnum>(param.DefaultValue);
+        Assert.Equal(FakeEnum.North, (FakeEnum)param.DefaultValue!);
+    }
+
+    [Fact]
+    public void Override_NullableEnum_InvalidValue_LeavesOriginalDefaultAndAddsWarning()
+    {
+        var descriptor = BuildDescriptorWithParam("Direction", typeof(FakeEnum?), FakeEnum.South);
+        var (directive, _) = ParseAndGetDirective(descriptor, "Direction", "InvalidDirection");
+
+        Assert.NotNull(directive.ResolvedDescriptor);
+        var param = directive.ResolvedDescriptor!.Parameters.First(p => p.Name == "Direction");
+        Assert.Equal(FakeEnum.South, param.DefaultValue);
+        Assert.NotEmpty(directive.OverrideWarnings);
+    }
+
+    // ------------------------------------------------------------------
+    // String override is never an error
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Override_String_AnyValue_IsAlwaysCoerced()
+    {
+        var descriptor = BuildDescriptorWithParam("Label", typeof(string), "default");
+        var result = ParseWithOverride(descriptor, "Label", "anything goes");
+
+        var param = Assert.Single(result);
+        Assert.Equal("anything goes", param.DefaultValue);
+    }
+
+    // ------------------------------------------------------------------
+    // Non-nullable bool invalid override must not store a raw string
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Override_Bool_InvalidValue_DefaultValueIsNotRawString()
+    {
+        var descriptor = BuildDescriptorWithParam("Enabled", typeof(bool), false);
+        var (directive, _) = ParseAndGetDirective(descriptor, "Enabled", "maybe");
+
+        Assert.NotNull(directive.ResolvedDescriptor);
+        var param = directive.ResolvedDescriptor!.Parameters.First(p => p.Name == "Enabled");
+        Assert.IsNotType<string>(param.DefaultValue);
+        Assert.Equal(false, param.DefaultValue);
+    }
+
+    // ------------------------------------------------------------------
+    // Warning text includes parameter name and bad value
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void Override_InvalidTypedValue_WarningContainsParameterNameAndValue()
+    {
+        var descriptor = BuildDescriptorWithParam("MyProp", typeof(int), 0);
+        var (directive, _) = ParseAndGetDirective(descriptor, "MyProp", "bad");
+
+        Assert.NotNull(directive.ResolvedDescriptor);
+        Assert.NotEmpty(directive.OverrideWarnings);
+        var warning = directive.OverrideWarnings[0];
+        Assert.Contains("MyProp", warning, StringComparison.Ordinal);
+        Assert.Contains("bad", warning, StringComparison.Ordinal);
+    }
+
+    // ------------------------------------------------------------------
+    // Helpers
+    // ------------------------------------------------------------------
+
+    private static PlaygroundDescriptor<FakeCoercedComponent> BuildDescriptorWithParam(
+        string name, Type valueType, object? defaultValue)
+    {
+        return new PlaygroundDescriptor<FakeCoercedComponent>
+        {
+            Title = "Test",
+            Parameters =
+            [
+                new PlaygroundParameterDescriptor
+                {
+                    Name = name,
+                    ValueType = valueType,
+                    DefaultValue = defaultValue,
+                },
+            ],
+        };
+    }
+
+    /// <summary>
+    /// Parses a directive with a single parameter override and returns the modified parameters list.
+    /// </summary>
+    private static IList<PlaygroundParameterDescriptor> ParseWithOverride(
+        PlaygroundDescriptor<FakeCoercedComponent> descriptor,
+        string paramName, string overrideValue)
+    {
+        var (directive, _) = ParseAndGetDirective(descriptor, paramName, overrideValue);
+        return directive.ResolvedDescriptor!.Parameters;
+    }
+
+    private static (PlaygroundDirectiveContent directive, IReadOnlyList<IContent> all)
+        ParseAndGetDirective(
+            PlaygroundDescriptor<FakeCoercedComponent> descriptor,
+            string paramName, string overrideValue)
+    {
+        var resolver = new LambdaResolver((id, _) => id == "test" ? descriptor : null);
+        var parser = BuildParser(resolver);
+
+        var md = $"""
+            ::: playground id="test"
+            parameters:
+              {paramName}: {overrideValue}
+            :::
+            """;
+
+        var result = parser.Parse(md);
+        var directive = Assert.IsType<PlaygroundDirectiveContent>(Assert.Single(result));
+        return (directive, result);
+    }
+
+    private sealed class LambdaResolver(Func<string?, PlaygroundDescriptorBase?, PlaygroundDescriptorBase?> func)
+        : IPlaygroundDescriptorResolver
+    {
+        public PlaygroundDescriptorBase? Resolve(string? descriptorId, PlaygroundDescriptorBase? fallback)
+            => func(descriptorId, fallback);
+    }
+
+    private sealed class FakeCoercedComponent : Microsoft.AspNetCore.Components.ComponentBase { }
+
+    private enum FakeEnum { North, South, East, West }
+}
+
+/// <summary>
 /// Exposes the internal <see cref="MarkdownDocumentParser"/> for unit testing.
 /// </summary>
 file sealed class MarkdownDocumentParserAccessor : IMarkdownDocumentParser

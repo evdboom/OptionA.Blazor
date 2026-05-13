@@ -14,6 +14,12 @@ internal sealed class DirectivePlaygroundDescriptor : PlaygroundDescriptorBase
     /// <inheritdoc/>
     public override Type ComponentType => _componentType;
 
+    /// <summary>
+    /// Non-fatal errors produced when one or more parameter overrides could not be coerced
+    /// to the expected parameter type. These are surfaced as visible warnings in the document.
+    /// </summary>
+    internal IReadOnlyList<string> OverrideErrors { get; }
+
     internal DirectivePlaygroundDescriptor(
         PlaygroundDescriptorBase source,
         IReadOnlyDictionary<string, string> overrides)
@@ -22,12 +28,16 @@ internal sealed class DirectivePlaygroundDescriptor : PlaygroundDescriptorBase
         Title = source.Title;
         Description = source.Description;
         StaticContent = source.StaticContent;
-        Parameters = ApplyOverrides(source.Parameters, overrides);
+
+        var errors = new List<string>();
+        Parameters = ApplyOverrides(source.Parameters, overrides, errors);
+        OverrideErrors = errors;
     }
 
     private static IList<PlaygroundParameterDescriptor> ApplyOverrides(
         IList<PlaygroundParameterDescriptor> parameters,
-        IReadOnlyDictionary<string, string> overrides)
+        IReadOnlyDictionary<string, string> overrides,
+        List<string> errors)
     {
         if (overrides.Count == 0)
         {
@@ -38,6 +48,13 @@ internal sealed class DirectivePlaygroundDescriptor : PlaygroundDescriptorBase
         {
             if (overrides.TryGetValue(p.Name, out var overrideValue))
             {
+                var (coerced, error) = ConvertValue(overrideValue, p.Name, p.ValueType);
+                if (error is not null)
+                {
+                    errors.Add(error);
+                    return p;
+                }
+
                 return new PlaygroundParameterDescriptor
                 {
                     Name = p.Name,
@@ -45,7 +62,7 @@ internal sealed class DirectivePlaygroundDescriptor : PlaygroundDescriptorBase
                     Description = p.Description,
                     EditorType = p.EditorType,
                     ValueType = p.ValueType,
-                    DefaultValue = ConvertValue(overrideValue, p.ValueType),
+                    DefaultValue = coerced,
                     AllowedValues = p.AllowedValues,
                     DisplayFormat = p.DisplayFormat,
                     Group = p.Group,
@@ -57,29 +74,17 @@ internal sealed class DirectivePlaygroundDescriptor : PlaygroundDescriptorBase
         }).ToList();
     }
 
-    private static object? ConvertValue(string raw, Type targetType)
+    private static (object? coerced, string? error) ConvertValue(string raw, string parameterName, Type targetType)
     {
-        if (targetType == typeof(string))
+        var underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;
+        var coerced = TypeCoercionHelper.TryCoerce(underlyingType, raw);
+
+        if (coerced is null && underlyingType != typeof(string))
         {
-            return raw;
+            return (null,
+                $"Parameter \"{parameterName}\": cannot convert override value \"{raw}\" to type \"{underlyingType.Name}\".");
         }
 
-        if (targetType == typeof(bool) && bool.TryParse(raw, out var boolValue))
-        {
-            return boolValue;
-        }
-
-        if (targetType == typeof(int) && int.TryParse(raw, out var intValue))
-        {
-            return intValue;
-        }
-
-        if (targetType.IsEnum && Enum.TryParse(targetType, raw, ignoreCase: true, out var enumValue))
-        {
-            return enumValue;
-        }
-
-        // Fallback: preserve the string representation
-        return raw;
+        return (coerced, null);
     }
 }

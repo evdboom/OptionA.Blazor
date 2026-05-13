@@ -48,34 +48,6 @@ internal static class ParameterCoercer
         return result;
     }
 
-    private static object? TryCoerce(Type targetType, string? rawValue)
-    {
-        // Boolean shorthand: attribute present with no value means true.
-        if (rawValue is null)
-        {
-            return targetType == typeof(bool) ? (object)true : null;
-        }
-
-        if (targetType == typeof(string))
-        {
-            return rawValue;
-        }
-
-        if (targetType == typeof(bool))
-        {
-            return bool.TryParse(rawValue, out var b) ? b : (object?)null;
-        }
-
-        if (targetType == typeof(int))
-        {
-            return int.TryParse(rawValue, out var i) ? i : (object?)null;
-        }
-
-        if (targetType.IsEnum)
-        {
-            return Enum.TryParse(targetType, rawValue, ignoreCase: true, out var e) ? e : null;
-        }
-
-        return null;
-    }
+    private static object? TryCoerce(Type targetType, string? rawValue) =>
+        TypeCoercionHelper.TryCoerce(targetType, rawValue);
 }

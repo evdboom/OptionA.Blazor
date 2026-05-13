@@ -95,9 +95,16 @@ internal sealed class MarkdownDocumentParser : IMarkdownDocumentParser
             }
             else
             {
-                directive.ResolvedDescriptor = directive.ParameterOverrides.Count > 0
+                var descriptor = directive.ParameterOverrides.Count > 0
                     ? new DirectivePlaygroundDescriptor(resolved, directive.ParameterOverrides)
-                    : resolved;
+                    : null;
+
+                if (descriptor is not null && descriptor.OverrideErrors.Count > 0)
+                {
+                    directive.OverrideWarnings = descriptor.OverrideErrors;
+                }
+
+                directive.ResolvedDescriptor = descriptor ?? resolved;
             }
         }
     }
