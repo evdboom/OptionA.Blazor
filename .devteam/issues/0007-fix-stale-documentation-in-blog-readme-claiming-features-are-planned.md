@@ -1,6 +1,6 @@
 ﻿# Issue 0007: Fix stale documentation in Blog readme claiming features are planned
 
-- Status: open
+- Status: done
 - Role: docs
 - Area: none
 - Priority: 60
@@ -8,8 +8,8 @@
 - Roadmap Item: 1
 - Family: fixstaledocumentationinblogreadmeclaimingfeaturesareplanned
 - External: none
-- Pipeline: none
-- Pipeline Stage: none
+- Pipeline: 6
+- Pipeline Stage: 0
 - Planning Issue: no
 
 ## Detail
@@ -18,7 +18,15 @@
 
 ## Latest Run
 
-(none)
+- Run: 6
+- Status: Completed
+- Model: gpt-5-mini
+- Session: devteam-docs-9375de1b47eb
+- Updated: 2026-05-13T13:31:39.1080342+00:00
+- Summary: Updated OptionA.Blazor.Blog/readme.md (lines ~251-319) to reflect shipped behavior: directives (playground fences), playground registry, inline component tags, front-matter parsing, and correct PostHelpers signature. Service registration sample now shows AddOptionAPlayground() and AddDocumentComponent<T>() usage. Built the solution to validate the change (build succeeded).
+- Skills Used: refine
+- Tools Used: functions.report_intent- functions.skill- functions.view- functions.edit- functions.powershell
+- Changed Files: none
 
 ## Recent Decisions
 

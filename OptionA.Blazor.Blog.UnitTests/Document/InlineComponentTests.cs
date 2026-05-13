@@ -247,165 +247,93 @@ file sealed class DocumentComponentRegistryAccessor : IDocumentComponentRegistry
 }
 
 // ---------------------------------------------------------------------------
-// bUnit component-level tests — inline component rendering via OptAChild
+// bUnit component-level tests — inline component rendering via OptADocument
 // ---------------------------------------------------------------------------
 
 /// <summary>
-/// bUnit tests for inline component rendering in <see cref="OptAChild"/>.
+/// bUnit tests for inline component rendering through <see cref="OptADocument"/>.
 /// </summary>
 public class OptADocumentComponentTests : BunitContext
 {
-    // ------------------------------------------------------------------
-    // Whitelisted component — renders DynamicComponent output
-    // ------------------------------------------------------------------
+    public OptADocumentComponentTests()
+    {
+        Services.AddOptionABlog();
+    }
 
     [Fact]
     public void OptADocumentComponent_WhitelistedType_RendersDynamicComponent()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAFake",
-            ComponentType = typeof(FakeButtonComponent),
-            RawAttributes = new Dictionary<string, string?>(),
-        };
+        Services.AddDocumentComponent<OptAFakeButton>();
 
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("<OptAFakeButton />");
 
-        // FakeButtonComponent renders a <button>; verify the element is present.
-        var btn = cut.Find("button");
-        Assert.NotNull(btn);
+        Assert.NotNull(cut.Find("button"));
     }
 
     [Fact]
     public void OptADocumentComponent_WhitelistedType_DoesNotRenderWarning()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAFake",
-            ComponentType = typeof(FakeButtonComponent),
-            RawAttributes = new Dictionary<string, string?>(),
-        };
+        Services.AddDocumentComponent<OptAFakeButton>();
 
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("<OptAFakeButton />");
 
         Assert.Empty(cut.FindAll(".opta-document-component-warning"));
     }
 
-    // ------------------------------------------------------------------
-    // Attribute coercion: string
-    // ------------------------------------------------------------------
-
     [Fact]
     public void OptADocumentComponent_StringAttribute_PassedThroughCorrectly()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAFake",
-            ComponentType = typeof(FakeButtonComponent),
-            RawAttributes = new Dictionary<string, string?> { ["Label"] = "Click me" },
-        };
+        Services.AddDocumentComponent<OptAFakeButton>();
 
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("""<OptAFakeButton Label="Click me" />""");
 
-        var btn = cut.Find("button");
-        Assert.Equal("Click me", btn.TextContent);
+        Assert.Equal("Click me", cut.Find("button").TextContent);
     }
-
-    // ------------------------------------------------------------------
-    // Attribute coercion: bool explicit true
-    // ------------------------------------------------------------------
 
     [Fact]
     public void OptADocumentComponent_BoolAttributeExplicitTrue_CoercedToTrue()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAFake",
-            ComponentType = typeof(FakeButtonComponent),
-            RawAttributes = new Dictionary<string, string?> { ["Disabled"] = "true" },
-        };
+        Services.AddDocumentComponent<OptAFakeButton>();
 
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("""<OptAFakeButton Disabled="true" />""");
 
-        var btn = cut.Find("button");
-        Assert.True(btn.HasAttribute("disabled"));
+        Assert.True(cut.Find("button").HasAttribute("disabled"));
     }
-
-    // ------------------------------------------------------------------
-    // Attribute coercion: bool shorthand
-    // ------------------------------------------------------------------
 
     [Fact]
     public void OptADocumentComponent_BoolShorthand_CoercedToTrue()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAFake",
-            ComponentType = typeof(FakeButtonComponent),
-            RawAttributes = new Dictionary<string, string?> { ["Disabled"] = null },
-        };
+        Services.AddDocumentComponent<OptAFakeButton>();
 
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("<OptAFakeButton Disabled />");
 
-        var btn = cut.Find("button");
-        Assert.True(btn.HasAttribute("disabled"));
+        Assert.True(cut.Find("button").HasAttribute("disabled"));
     }
-
-    // ------------------------------------------------------------------
-    // Attribute coercion: int
-    // ------------------------------------------------------------------
 
     [Fact]
     public void OptADocumentComponent_IntAttribute_CoercedToInt()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAFake",
-            ComponentType = typeof(FakeButtonComponent),
-            RawAttributes = new Dictionary<string, string?> { ["Count"] = "7" },
-        };
+        Services.AddDocumentComponent<OptAFakeButton>();
 
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("""<OptAFakeButton Count="7" />""");
 
-        var btn = cut.Find("button");
-        Assert.Equal("7", btn.GetAttribute("data-count"));
+        Assert.Equal("7", cut.Find("button").GetAttribute("data-count"));
     }
-
-    // ------------------------------------------------------------------
-    // Attribute coercion: enum
-    // ------------------------------------------------------------------
 
     [Fact]
     public void OptADocumentComponent_EnumAttribute_CoercedToEnum()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAFake",
-            ComponentType = typeof(FakeButtonComponent),
-            RawAttributes = new Dictionary<string, string?> { ["Kind"] = "Primary" },
-        };
+        Services.AddDocumentComponent<OptAFakeButton>();
 
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("""<OptAFakeButton Kind="Primary" />""");
 
-        var btn = cut.Find("button");
-        Assert.Equal("primary", btn.GetAttribute("data-kind"));
+        Assert.Equal("primary", cut.Find("button").GetAttribute("data-kind"));
     }
-
-    // ------------------------------------------------------------------
-    // Non-whitelisted — renders warning span
-    // ------------------------------------------------------------------
 
     [Fact]
     public void OptADocumentComponent_NonWhitelisted_RendersWarningSpan()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAUnknown",
-            ComponentType = null,
-            WarningMessage = "<OptAUnknown> is not registered.",
-        };
-
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("<OptAUnknown />");
 
         var span = cut.Find(".opta-document-component-warning");
         Assert.NotNull(span);
@@ -416,59 +344,110 @@ public class OptADocumentComponentTests : BunitContext
     [Fact]
     public void OptADocumentComponent_NonWhitelisted_DoesNotRenderComponent()
     {
-        var content = new InlineComponentContent
-        {
-            TagName = "OptAUnknown",
-            ComponentType = null,
-            WarningMessage = "Not registered.",
-        };
-
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, content));
+        var cut = RenderDocument("<OptAUnknown />");
 
         Assert.Empty(cut.FindAll("button"));
     }
 
-    // ------------------------------------------------------------------
-    // Null content — renders nothing
-    // ------------------------------------------------------------------
-
     [Fact]
     public void OptADocumentComponent_NullContent_RendersNothing()
     {
-        var cut = Render<OptAChild>(p => p.Add(x => x.Content, (InlineComponentContent?)null));
+        var cut = Render<OptADocument>(parameters => parameters.Add(x => x.Source, (string?)null));
+
         Assert.Empty(cut.Nodes);
     }
-
-    // ------------------------------------------------------------------
-    // AddDocumentComponent<T> extension — round-trip via ServiceCollection
-    // ------------------------------------------------------------------
 
     [Fact]
     public void AddDocumentComponent_RegistersTypeInRegistry()
     {
         var services = new ServiceCollection();
-        services.AddDocumentComponent<FakeButtonComponent>();
+        services.AddDocumentComponent<OptAFakeButton>();
 
         var sp = services.BuildServiceProvider();
         var registry = sp.GetRequiredService<IDocumentComponentRegistry>();
 
-        // Use typeof(...).Name since file-scoped classes have generated names.
-        Assert.True(registry.TryGetComponentType(typeof(FakeButtonComponent).Name, out var type));
-        Assert.Equal(typeof(FakeButtonComponent), type);
+        Assert.True(registry.TryGetComponentType(nameof(OptAFakeButton), out var type));
+        Assert.Equal(typeof(OptAFakeButton), type);
     }
 
     [Fact]
     public void AddDocumentComponent_CalledTwice_BothTypesRegistered()
     {
         var services = new ServiceCollection();
-        services.AddDocumentComponent<FakeButtonComponent>();
-        services.AddDocumentComponent<FakeComponent>();
+        services.AddDocumentComponent<OptAFakeButton>();
+        services.AddDocumentComponent<OptAFakeMarker>();
 
         var sp = services.BuildServiceProvider();
         var registry = sp.GetRequiredService<IDocumentComponentRegistry>();
 
-        Assert.True(registry.TryGetComponentType(typeof(FakeButtonComponent).Name, out _));
-        Assert.True(registry.TryGetComponentType(typeof(FakeComponent).Name, out _));
+        Assert.True(registry.TryGetComponentType(nameof(OptAFakeButton), out _));
+        Assert.True(registry.TryGetComponentType(nameof(OptAFakeMarker), out _));
+    }
+
+    private IRenderedComponent<OptADocument> RenderDocument(string markdown)
+        => Render<OptADocument>(parameters => parameters.Add(x => x.Source, markdown));
+}
+
+public class ParameterCoercerTests
+{
+    [Fact]
+    public void Coerce_StringParameter_ReturnsStringValue()
+    {
+        var result = ParameterCoercer.Coerce(
+            typeof(OptAFakeButton),
+            new Dictionary<string, string?> { ["Label"] = "Click me" });
+
+        Assert.Equal("Click me", Assert.IsType<string>(result["Label"]));
+    }
+
+    [Fact]
+    public void Coerce_BoolParameterExplicit_ReturnsBoolValue()
+    {
+        var result = ParameterCoercer.Coerce(
+            typeof(OptAFakeButton),
+            new Dictionary<string, string?> { ["Disabled"] = "true" });
+
+        Assert.True(Assert.IsType<bool>(result["Disabled"]));
+    }
+
+    [Fact]
+    public void Coerce_BoolParameterShorthand_ReturnsTrue()
+    {
+        var result = ParameterCoercer.Coerce(
+            typeof(OptAFakeButton),
+            new Dictionary<string, string?> { ["Disabled"] = null });
+
+        Assert.True(Assert.IsType<bool>(result["Disabled"]));
+    }
+
+    [Fact]
+    public void Coerce_IntParameter_ReturnsIntValue()
+    {
+        var result = ParameterCoercer.Coerce(
+            typeof(OptAFakeButton),
+            new Dictionary<string, string?> { ["Count"] = "7" });
+
+        Assert.Equal(7, Assert.IsType<int>(result["Count"]));
+    }
+
+    [Fact]
+    public void Coerce_EnumParameter_ReturnsEnumValue()
+    {
+        var result = ParameterCoercer.Coerce(
+            typeof(OptAFakeButton),
+            new Dictionary<string, string?> { ["Kind"] = "Primary" });
+
+        Assert.Equal(FakeKind.Primary, Assert.IsType<FakeKind>(result["Kind"]));
+    }
+
+    [Fact]
+    public void Coerce_UnsupportedParameterType_DoesNotIncludeValue()
+    {
+        var result = ParameterCoercer.Coerce(
+            typeof(OptAFakeUnsupported),
+            new Dictionary<string, string?> { ["When"] = "2026-05-13" });
+
+        Assert.DoesNotContain("When", result.Keys);
     }
 }
 
@@ -476,14 +455,14 @@ public class OptADocumentComponentTests : BunitContext
 // Fake components used by tests
 // ---------------------------------------------------------------------------
 
-/// <summary>Minimal component used as a whitelist stand-in.</summary>
+/// <summary>Minimal component used as a whitelist stand-in in parser tests.</summary>
 file sealed class FakeComponent : ComponentBase { }
 
 /// <summary>
 /// Component with typed parameters, rendered to a button element.
-/// Used to validate parameter coercion in <see cref="OptAChild"/>.
+/// Used to validate parameter coercion through <see cref="OptADocument"/>.
 /// </summary>
-file sealed class FakeButtonComponent : ComponentBase
+internal sealed class OptAFakeButton : ComponentBase
 {
     [Parameter] public string? Label { get; set; }
     [Parameter] public bool Disabled { get; set; }
@@ -493,7 +472,11 @@ file sealed class FakeButtonComponent : ComponentBase
     protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder)
     {
         builder.OpenElement(0, "button");
-        if (Disabled) builder.AddAttribute(1, "disabled", true);
+        if (Disabled)
+        {
+            builder.AddAttribute(1, "disabled", true);
+        }
+
         builder.AddAttribute(2, "data-count", Count.ToString());
         builder.AddAttribute(3, "data-kind", Kind.ToString().ToLowerInvariant());
         builder.AddContent(4, Label);
@@ -501,4 +484,11 @@ file sealed class FakeButtonComponent : ComponentBase
     }
 }
 
-file enum FakeKind { Default, Primary, Secondary }
+internal sealed class OptAFakeMarker : ComponentBase { }
+
+internal sealed class OptAFakeUnsupported : ComponentBase
+{
+    [Parameter] public DateTime When { get; set; }
+}
+
+internal enum FakeKind { Default, Primary, Secondary }

@@ -1,6 +1,6 @@
 ﻿# Issue 0017: Fix fire-and-forget EventCallback in OptADocument.OnParametersSet
 
-- Status: open
+- Status: done
 - Role: frontend-developer
 - Area: blog-document
 - Priority: 72
@@ -18,7 +18,15 @@ In `OptionA.Blazor.Blog/Document/OptADocument.razor.cs` line 39, `_ = OnMetadata
 
 ## Latest Run
 
-(none)
+- Run: 15
+- Status: Completed
+- Model: claude-sonnet-4.6
+- Session: devteam-frontend-developer-8d5a2627e7e4
+- Updated: 2026-05-13T13:52:17.9824454+00:00
+- Summary: Replaced the synchronous `OnParametersSet` override with `OnParametersSetAsync` in `OptADocument.razor.cs` and awaited the `OnMetadataParsed.InvokeAsync(metadata)` call. This ensures exceptions from async callbacks propagate correctly instead of being silently discarded. All 186 blog unit tests pass.
+- Skills Used: (none)
+- Tools Used: view, powershell (file rewrite, build, test, git commit), grep, glob
+- Changed Files: none
 
 ## Recent Decisions
 

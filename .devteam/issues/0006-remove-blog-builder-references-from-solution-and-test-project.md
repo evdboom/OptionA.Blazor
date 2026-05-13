@@ -1,6 +1,6 @@
 ﻿# Issue 0006: Remove Blog.Builder references from solution and test project
 
-- Status: open
+- Status: done
 - Role: frontend-developer
 - Area: none
 - Priority: 65
@@ -8,8 +8,8 @@
 - Roadmap Item: 1
 - Family: removeblogbuilderreferencesfromsolutionandtestproject
 - External: none
-- Pipeline: none
-- Pipeline Stage: none
+- Pipeline: 5
+- Pipeline Stage: 0
 - Planning Issue: no
 
 ## Detail
@@ -18,7 +18,15 @@ Two references to the retired Blog.Builder remain: (1) `OptionA.Blazor.Blog.Buil
 
 ## Latest Run
 
-(none)
+- Run: 5
+- Status: Completed
+- Model: claude-sonnet-4.6
+- Session: devteam-frontend-developer-9076a5ca5397
+- Updated: 2026-05-13T13:31:29.0663920+00:00
+- Summary: Removed `OptionA.Blazor.Blog.Builder` from `OptionA.Blazor.sln` (project entry + all 12 configuration lines) and removed its `<ProjectReference>` from `OptionA.Blazor.Blog.UnitTests.csproj`. Deleted the `Builder/` subfolder (4 test files) that depended on Blog.Builder types. Solution builds cleanly with 0 errors; all 186 blog unit tests pass.
+- Skills Used: (none)
+- Tools Used: view, grep, edit, powershell (Remove-Item, dotnet build, dotnet sln list, dotnet test)
+- Changed Files: none
 
 ## Recent Decisions
 

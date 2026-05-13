@@ -4,13 +4,25 @@ using System.Linq;
 
 namespace OptionA.Blazor.Blog;
 
+/// <summary>
+/// Holds metadata parsed from YAML front-matter of a Markdown document.
+/// </summary>
 public class DocumentMetadata
 {
+    /// <summary>Gets or sets the document title.</summary>
     public string? Title { get; set; }
+    /// <summary>Gets or sets the document subtitle.</summary>
     public string? Subtitle { get; set; }
+    /// <summary>Gets or sets the publication date.</summary>
     public DateTime? Date { get; set; }
+    /// <summary>Gets the list of tags associated with the document.</summary>
     public List<string> Tags { get; } = new List<string>();
 
+    /// <summary>
+    /// Parses optional YAML front-matter from <paramref name="markdown"/> and returns the
+    /// extracted <see cref="DocumentMetadata"/> and the body text (without the front-matter block).
+    /// Returns <c>null</c> metadata when no front-matter is present.
+    /// </summary>
     public static (DocumentMetadata? metadata, string body) ParseFromMarkdown(string? markdown)
     {
         if (string.IsNullOrWhiteSpace(markdown))

@@ -1,0 +1,311 @@
+﻿[
+  {
+    "Id": 1,
+    "RootIssueId": 2,
+    "FamilyKey": "designthetechnicalapproachandcreateexecutionissues",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      2,
+      8,
+      12
+    ],
+    "ActiveIssueId": 12,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:34:50.2626256\u002B00:00"
+  },
+  {
+    "Id": 2,
+    "RootIssueId": 3,
+    "FamilyKey": "fixoptadocumentplaygroundbuilderrorcs0262cs0053",
+    "Area": "",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      3,
+      10
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T13:39:51.8557877\u002B00:00"
+  },
+  {
+    "Id": 3,
+    "RootIssueId": 4,
+    "FamilyKey": "removeoptionablazorblogbuilderfromoptionablazorsln",
+    "Area": "",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      4,
+      15
+    ],
+    "ActiveIssueId": 15,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:38:10.0824702\u002B00:00"
+  },
+  {
+    "Id": 4,
+    "RootIssueId": 5,
+    "FamilyKey": "updateoptionablazorblogreadmemdtocoveroptadocumentandmarkdownauthoring",
+    "Area": "",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      5
+    ],
+    "ActiveIssueId": 5,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:20:30.6119020\u002B00:00"
+  },
+  {
+    "Id": 5,
+    "RootIssueId": 6,
+    "FamilyKey": "removeblogbuilderreferencesfromsolutionandtestproject",
+    "Area": "",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      6,
+      9
+    ],
+    "ActiveIssueId": 9,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:31:29.0664759\u002B00:00"
+  },
+  {
+    "Id": 6,
+    "RootIssueId": 7,
+    "FamilyKey": "fixstaledocumentationinblogreadmeclaimingfeaturesareplanned",
+    "Area": "",
+    "RoleSequence": [
+      "docs"
+    ],
+    "IssueIds": [
+      7
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T13:31:39.1080481\u002B00:00"
+  },
+  {
+    "Id": 7,
+    "RootIssueId": 11,
+    "FamilyKey": "fixoptadocumentplaygroundbuilderrorcs0262cs0053",
+    "Area": "",
+    "RoleSequence": [
+      "reviewer"
+    ],
+    "IssueIds": [
+      11
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T13:41:01.2187318\u002B00:00"
+  },
+  {
+    "Id": 8,
+    "RootIssueId": 13,
+    "FamilyKey": "designthetechnicalapproachandcreateexecutionissues",
+    "Area": "",
+    "RoleSequence": [
+      "reviewer"
+    ],
+    "IssueIds": [
+      13
+    ],
+    "ActiveIssueId": 13,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:34:51.0914408\u002B00:00"
+  },
+  {
+    "Id": 9,
+    "RootIssueId": 14,
+    "FamilyKey": "repoaudit",
+    "Area": "repo-audit",
+    "RoleSequence": [
+      "auditor"
+    ],
+    "IssueIds": [
+      14
+    ],
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T13:40:57.9707373\u002B00:00"
+  },
+  {
+    "Id": 10,
+    "RootIssueId": 16,
+    "FamilyKey": "removeoptionablazorblogbuilderfromoptionablazorsln",
+    "Area": "",
+    "RoleSequence": [
+      "reviewer"
+    ],
+    "IssueIds": [
+      16
+    ],
+    "ActiveIssueId": 16,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:41:02.0978833\u002B00:00"
+  },
+  {
+    "Id": 11,
+    "RootIssueId": 17,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      17
+    ],
+    "ActiveIssueId": 17,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:41:02.0978864\u002B00:00"
+  },
+  {
+    "Id": 12,
+    "RootIssueId": 18,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      18
+    ],
+    "ActiveIssueId": 18,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:41:02.0978894\u002B00:00"
+  },
+  {
+    "Id": 13,
+    "RootIssueId": 19,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "fullstack-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      19
+    ],
+    "ActiveIssueId": 19,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:41:02.0978924\u002B00:00"
+  },
+  {
+    "Id": 14,
+    "RootIssueId": 20,
+    "FamilyKey": "blogtests",
+    "Area": "blog-tests",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      20
+    ],
+    "ActiveIssueId": 20,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:41:02.0978958\u002B00:00"
+  },
+  {
+    "Id": 15,
+    "RootIssueId": 21,
+    "FamilyKey": "blog",
+    "Area": "blog",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      21
+    ],
+    "ActiveIssueId": 21,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:41:02.0978983\u002B00:00"
+  },
+  {
+    "Id": 16,
+    "RootIssueId": 22,
+    "FamilyKey": "blogdocument",
+    "Area": "blog-document",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      22
+    ],
+    "ActiveIssueId": 22,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:41:02.0979011\u002B00:00"
+  },
+  {
+    "Id": 17,
+    "RootIssueId": 23,
+    "FamilyKey": "defineandcontainoptadocumenthelperapisurface",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      23,
+      26
+    ],
+    "ActiveIssueId": 26,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:47:30.8032359\u002B00:00"
+  },
+  {
+    "Id": 18,
+    "RootIssueId": 24,
+    "FamilyKey": "inlineoptadocumentplaygroundoptadocumentcomponentintooptachildandinternalizecontenttypes",
+    "Area": "",
+    "RoleSequence": [
+      "frontend-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      24
+    ],
+    "ActiveIssueId": 24,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:47:31.7067104\u002B00:00"
+  },
+  {
+    "Id": 19,
+    "RootIssueId": 25,
+    "FamilyKey": "migrateoptadocumentplaygroundandoptadocumentcomponentunittestsafterinternalization",
+    "Area": "",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      25
+    ],
+    "ActiveIssueId": 25,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:47:31.7067185\u002B00:00"
+  }
+]

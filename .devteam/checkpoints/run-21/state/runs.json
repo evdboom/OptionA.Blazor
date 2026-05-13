@@ -1,0 +1,670 @@
+﻿[
+  {
+    "Id": 1,
+    "IssueId": 1,
+    "RoleSlug": "planner",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-planner-3cf289212622",
+    "Status": "Completed",
+    "Summary": "Full codebase reconnaissance completed. State by goal scope item:\n\n1. **Playground Registry**\u2705 \u2014 \u0060IPlaygroundRegistry\u0060, \u0060PlaygroundRegistry\u0060, \u0060AddPlayground(id, descriptor)\u0060 extension, \u0060DescriptorId\u0060 parameter on \u0060OptAPlayground\u0060, \u0060IPlaygroundDescriptorResolver\u0060 \u2014 all implemented and57 tests passing in \u0060OptionA.Blazor.Playground.UnitTests\u0060.\n\n2. **OptADocument renderer** \u2705 (code) / \u274C (verified) \u2014 \u0060OptADocument\u0060, \u0060IMarkdownDocumentParser\u0060, \u0060MarkdownDocumentParser\u0060 using Markdig internally; all block node types mapped. Tests exist in \u0060OptionA.Blazor.Blog.UnitTests/Document/\u0060. **Cannot verify: the blog project fails to build.**\n\n3. **Playground directive support** \u2705 (code) / \u274C (verified) \u2014 \u0060PlaygroundDirectivePreprocessor\u0060, \u0060PlaygroundYamlParser\u0060, \u0060PlaygroundDirectiveContent\u0060, \u0060OptADocumentPlayground\u0060. Tests written. Same build blocker.\n\n4. **Inline component tag support** \u2705 (code) / \u274C (verified) \u2014 \u0060IDocumentComponentRegistry\u0060, \u0060DocumentComponentRegistry\u0060, \u0060OptADocumentComponent\u0060, \u0060InlineComponentTagParser\u0060, \u0060AddDocumentComponent\u003CT\u003E()\u0060 extension. Tests written. Same build blocker.\n\n5. **Front-matter shim** \u2705 (code) / \u274C (verified) \u2014 \u0060DocumentMetadata.ParseFromMarkdown\u0060, \u0060OnMetadataParsed\u0060 callback on \u0060OptADocument\u0060. Tests written. Same build blocker.\n\n6. **Retire Blog.Builder** \u26A0\uFE0F \u2014 Readme updated with retirement notice and migration path to \u0060OptADocument\u0060. However, \u0060OptionA.Blazor.Blog.Builder\u0060 is still included in \u0060OptionA.Blazor.sln\u0060 \u2014 scope item 6 requires its removal from the solution.\n\n7. **Documentation** \u26A0\uFE0F \u2014 \u0060OptionA.Blazor.Playground/readme.md\u0060 already updated (descriptor registry flow, \u0060DescriptorId\u0060 usage, worked examples). \u0060docs/examples/buttons.md\u0060 and \u0060docs/example-page.md\u0060 exist. **\u0060OptionA.Blazor.Blog/readme.md\u0060 still describes the old \u0060Post\u0060/builder-centric API exclusively and has no mention of \u0060OptADocument\u0060 or the Markdown authoring format.**\n\n**Build blocker:** \u0060OptionA.Blazor.Blog\u0060 does not compile. Root cause: \u0060OptADocumentPlayground.razor.cs\u0060 declares \u0060public partial class OptADocumentPlayground\u0060, but the .NET 10 Razor compiler generates the class from the \u0060.razor\u0060 file as \u0060internal\u0060 by default, producing CS0262 (conflicting accessibility modifiers) and CS0053 (inconsistent accessibility on the \u0060Content\u0060 property, whose type \u0060PlaygroundDirectiveContent\u0060 is in the \u0060Document.Internal\u0060 namespace). The fix is to reconcile the accessibility \u2014 either make \u0060OptADocumentPlayground\u0060 explicitly \u0060internal\u0060 (and resolve the parameter type visibility), or establish a supported pattern for public Razor components with \u0060internal\u0060 parameter types (e.g., accept an \u0060IContent\u0060 cast and widen the type). The architect should decide the approach; the developer implements and re-validates all blog tests.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "view",
+      "glob",
+      "grep",
+      "powershell"
+    ],
+    "ChangedPaths": [
+      ".devteam/checkpoints/run-1/",
+      ".devteam/issues/0001-run-the-planning-session-and-split-the-work.md",
+      ".devteam/issues/0002-design-the-technical-approach-and-create-execution-issues.md"
+    ],
+    "CreatedIssueIds": [
+      3,
+      4,
+      5
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:17:12.7890010\u002B00:00"
+  },
+  {
+    "Id": 2,
+    "IssueId": 2,
+    "RoleSlug": "architect",
+    "ModelName": "claude-opus-4.6",
+    "SessionId": "devteam-architect-370bb67a7c3e",
+    "Status": "Completed",
+    "Summary": "**Architecture \u0026 Technical Approach \u2014 Verified Complete**\n\nThe full Markdown-to-component pipeline is already implemented, builds cleanly (0 errors/warnings), and all tests pass (216 Blog \u002B 57 Playground = 273 total).\n\n**Technology Stack (confirmed in code):**\n- **Markdig 0.40.0** \u2014 internal Markdown parser (not exposed publicly)\n- **Existing Blog render components** \u2014 \u0060OptAText\u0060, \u0060OptAHeader\u0060, \u0060OptACode\u0060, \u0060OptAList\u0060, \u0060OptAQuote\u0060, \u0060OptAImage\u0060, \u0060OptATable\u0060 for block-to-component mapping\n- **\u0060IPlaygroundRegistry\u0060 \u002B \u0060IPlaygroundDescriptorResolver\u0060** \u2014 registry pattern with \u0060ConcurrentDictionary\u0060 for thread-safe descriptor lookup\n- **\u0060IDocumentComponentRegistry\u0060** \u2014 whitelist for inline \u0060\u003COptA*\u003E\u0060 tags rendered via \u0060DynamicComponent\u0060\n- **Front-matter** \u2014 \u0060DocumentMetadata.ParseFromMarkdown()\u0060 with \u0060OnMetadataParsed\u0060 EventCallback\n- **\u0060PostHelpers\u0060** \u2014 bridges \u0060DocumentMetadata\u0060 \u2192 \u0060Post\u0060 for backward-compat consumers\n\n**Architecture (all verified working):**\n1. \u0060OptADocument.Source\u0060 \u2192 \u0060DocumentMetadata.ParseFromMarkdown()\u0060 \u2192 fires \u0060OnMetadataParsed\u0060 \u2192 \u0060IMarkdownDocumentParser.Parse(body)\u0060\n2. \u0060MarkdownDocumentParser\u0060 preprocesses playground directives \u2192 Markdig parses \u2192 \u0060BlockConverter\u0060 maps AST nodes to \u0060IContent\u0060 list \u2192 resolves playground descriptors\n3. \u0060BlockConverter\u0060 handles: headings, fenced code, indented code, quotes, lists, tables, paragraphs (with image promotion), HTML blocks (inline component tags), playground directives\n4. \u0060OptADocument.razor\u0060 renders via \u0060\u003COptAChildBuilder Content=\u0022_content\u0022 /\u003E\u0060\n\n**Remaining gaps (execution issues below):**\n- Issue #3 is already resolved (builds clean) \u2014 should be closed\n- Issue #4 (remove Blog.Builder from .sln) is valid but Blog.Builder is also still referenced from Blog.UnitTests.csproj\n- Issue #5 (readme update) is partially done but contains contradictory stale text claiming features are \u0022planned\u0022 when they are shipped\n- No consolidated worked-end-to-end example demonstrating all features together",
+    "CreditsUsed": 3,
+    "PremiumCreditsUsed": 3,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [
+      "view",
+      "glob",
+      "grep",
+      "powershell"
+    ],
+    "ChangedPaths": [
+      ".devteam/checkpoints/run-2/",
+      ".devteam/issues/0002-design-the-technical-approach-and-create-execution-issues.md",
+      ".devteam/issues/0003-fix-optadocumentplayground-build-error-cs0262-cs0053.md",
+      ".devteam/issues/0004-removeoptiona-blazor-blog-builder-from-optiona-blazor-sln.md",
+      ".devteam/issues/0005-update-optiona-blazor-blog-readme-md-to-cover-optadocument-and-markdown-authoring.md"
+    ],
+    "CreatedIssueIds": [
+      6,
+      7
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:26:15.7124393\u002B00:00"
+  },
+  {
+    "Id": 3,
+    "IssueId": 3,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-fe4f18b54e0e",
+    "Status": "Completed",
+    "Summary": "Issue #3 was already resolved. \u0060OptionA.Blazor.Blog\u0060 builds cleanly with 0 errors (SDK 10.0.203). The CS0262/CS0053 conflict described \u2014 \u0060public partial class OptADocumentPlayground\u0060 in the code-behind vs. \u0060internal\u0060 in the Razor-generated half \u2014 does not exist in the current codebase. \u0060OptADocumentPlayground.razor\u0060 uses \u0060@namespaceOptionA.Blazor.Blog\u0060 without a conflicting accessibility modifier, \u0060PlaygroundDirectiveContent\u0060 is \u0060public sealed class\u0060, and the \u0060.razor.cs\u0060 code-behind is correctly \u0060public partial class\u0060. All 186 blog unit tests pass including the 6 \u0060OptADocumentPlayground\u0060-specific tests.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "glob",
+      "view",
+      "grep",
+      "powershell (dotnet build, dotnet test, git log, dotnet --version)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:32:40.5846738\u002B00:00"
+  },
+  {
+    "Id": 4,
+    "IssueId": 8,
+    "RoleSlug": "developer",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-developer-7d7527b3e4f1",
+    "Status": "Completed",
+    "Summary": "Worked issue **#8** by finishing the remaining execution slice from the prior handoff: removed \u0060OptionA.Blazor.Blog.Builder\u0060 from \u0060OptionA.Blazor.sln\u0060, corrected \u0060OptionA.Blazor.Blog\\readme.md\u0060 so it matches the shipped \u0060OptADocument\u0060/front-matter/playground/inline-component behavior, and upgraded \u0060docs\\example-page.md\u0060 into a real end-to-end Markdown sample with front-matter, a playground directive, and a literal component tag.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [
+      "report_intent- rg- view- glob- apply_patch- powershell: \u0060dotnet build \u0022OptionA.Blazor.sln\u0022 --configuration Release --nologo\u0060",
+      "powershell: \u0060dotnet test \u0022OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj\u0022 --configuration Release --no-build --nologo\u0060",
+      "powershell: \u0060dotnet test \u0022OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj\u0022 --configuration Release --no-build --nologo\u0060",
+      "powershell: \u0060dotnet sln \u0022OptionA.Blazor.sln\u0022 remove ...\u0060",
+      "powershell: \u0060git --no-pager diff -- ...\u0060"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:34:50.2625736\u002B00:00"
+  },
+  {
+    "Id": 5,
+    "IssueId": 6,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-9076a5ca5397",
+    "Status": "Completed",
+    "Summary": "Removed \u0060OptionA.Blazor.Blog.Builder\u0060 from \u0060OptionA.Blazor.sln\u0060 (project entry \u002B all 12 configuration lines) and removed its \u0060\u003CProjectReference\u003E\u0060 from \u0060OptionA.Blazor.Blog.UnitTests.csproj\u0060. Deleted the \u0060Builder/\u0060 subfolder (4 test files) that depended on Blog.Builder types. Solution builds cleanly with 0 errors; all 186 blog unit tests pass.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "view",
+      "grep",
+      "edit",
+      "powershell (Remove-Item, dotnet build, dotnet sln list, dotnet test)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:31:29.0663920\u002B00:00"
+  },
+  {
+    "Id": 6,
+    "IssueId": 7,
+    "RoleSlug": "docs",
+    "ModelName": "gpt-5-mini",
+    "SessionId": "devteam-docs-9375de1b47eb",
+    "Status": "Completed",
+    "Summary": "Updated OptionA.Blazor.Blog/readme.md (lines ~251-319) to reflect shipped behavior: directives (playground fences), playground registry, inline component tags, front-matter parsing, and correct PostHelpers signature. Service registration sample now shows AddOptionAPlayground() and AddDocumentComponent\u003CT\u003E() usage. Built the solution to validate the change (build succeeded).",
+    "CreditsUsed": 0,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "refine"
+    ],
+    "ToolsUsed": [
+      "functions.report_intent- functions.skill- functions.view- functions.edit- functions.powershell"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:31:39.1080342\u002B00:00"
+  },
+  {
+    "Id": 7,
+    "IssueId": 11,
+    "RoleSlug": "reviewer",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-reviewer-656e858cd72a",
+    "Status": "Completed",
+    "Summary": "Reviewed the current state of the CS0262/CS0053 fix. \u0060OptionA.Blazor.Blog\u0060 now builds cleanly, and the \u0060OptADocument\u0060 / \u0060OptADocumentPlayground\u0060 / inline-component test slices pass, so the reported compiler break is resolved.\n\nI found one follow-on design issue: the fix removed the build error by making parser-internal types public. \u0060OptADocumentPlayground\u0060, \u0060OptADocumentComponent\u0060, \u0060PlaygroundDirectiveContent\u0060, and \u0060InlineComponentContent\u0060 are now emitted in the package XML docs, which leaks implementation-detail types from \u0060OptionA.Blazor.Blog.Document.Internal\u0060 into the supported API surface.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "workspace-protection"
+    ],
+    "ToolsUsed": [
+      "multi_tool_use.parallel- report_intent- rg- view- powershell: \u0060git --no-pager log -n8 --oneline -- OptionA.Blazor.Blog\\Document\\OptADocumentPlayground.razor OptionA.Blazor.Blog\\Document\\OptADocumentPlayground.razor.cs OptionA.Blazor.Blog\\Document\\Internal\\PlaygroundDirectiveContent.cs OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentPlaygroundTests.cs\u0060",
+      "powershell: \u0060dotnet build OptionA.Blazor.Blog\\OptionA.Blazor.Blog.csproj -c Release --no-restore\u0060",
+      "powershell: \u0060dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj -c Release --no-restore --filter \u0022FullyQualifiedName~OptADocument\u0022\u0060",
+      "powershell: \u0060dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj -c Release --no-restore --filter \u0022FullyQualifiedName~OptADocumentPlayground|FullyQualifiedName~InlineComponent\u0022\u0060",
+      "powershell: \u0060Get-ChildItem OptionA.Blazor.Blog\\bin\\Release\\net10.0 -Filter *.xml | Select-Object -ExpandProperty FullName\u0060"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      23
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:41:01.2187226\u002B00:00"
+  },
+  {
+    "Id": 8,
+    "IssueId": 10,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-8b638194c4ec",
+    "Status": "Completed",
+    "Summary": "No code changes were needed. Fresh verification shows the reported \u0060CS0262\u0060/\u0060CS0053\u0060 accessibility mismatch is not present in the current implementation: \u0060OptionA.Blazor.Blog\\Document\\OptADocumentPlayground.razor.cs\u0060 defines \u0060public partial class OptADocumentPlayground\u0060, and \u0060OptionA.Blazor.Blog\\Document\\Internal\\PlaygroundDirectiveContent.cs\u0060 defines \u0060public sealed class PlaygroundDirectiveContent\u0060, which keeps the public \u0060[Parameter]\u0060 surface valid.\n\nFresh evidence from this run:\n- \u0060dotnet build .\\OptionA.Blazor.sln -c Release --nologo\u0060 \u2192 exit code \u00600\u0060, **Build succeeded**\n- \u0060dotnet test .\\OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj -c Release --no-restore --nologo\u0060 \u2192 **186 passed,0 failed**\n- \u0060dotnet test .\\OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj -c Release --no-restore --nologo\u0060 \u2192 **57 passed,0 failed**\n\nTests written:\n- NoneExisting coverage exercised:\n- \u0060OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentPlaygroundTests.cs\u0060 \u2014 resolved descriptor rendering, visible error rendering, null/empty behavior- \u0060OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentTests.cs\u0060 \u2014 \u0060OptADocument\u0060 markdown/directive integration behavior- \u0060OptionA.Blazor.Playground.UnitTests\\Components\\OptAPlaygroundDescriptorIdTests.cs\u0060 \u2014 descriptor-id registry resolution and fallback behavior",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "skill- report_intent- rg- glob- view- dotnet build .\\OptionA.Blazor.sln -c Release --nologo- dotnet test .\\OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj -c Release --no-restore --nologo- dotnet test .\\OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj -c Release --no-restore --nologo"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:39:51.8557801\u002B00:00"
+  },
+  {
+    "Id": 9,
+    "IssueId": 14,
+    "RoleSlug": "auditor",
+    "ModelName": "claude-opus-4.6",
+    "SessionId": "devteam-auditor-5d56b3b62da4",
+    "Status": "Completed",
+    "Summary": "Performed a full ATM (Auditable / Testable / Maintainable) audit across the 3 recent execution runs (playground registry, OptADocument renderer, directive/inline-component/front-matter support). Identified **6 focused drift issues** spanning recent implementation:\n\n**Key findings:**\n\n1. **DocumentMetadata style drift** \u2014 \u0060DocumentMetadata.ParseFromMarkdown\u0060 is a50-line static method with inline YAML parsing, no XML doc comments, brace-style deviations, and explicit \u0060using System\u0060 imports (rest of codebase uses implicit usings). This was clearly AI-generated in a different style pass than the surrounding code.\n\n2. **Fire-and-forget EventCallback in OnParametersSet** \u2014 \u0060OptADocument.razor.cs\u0060 line 39 does \u0060_ = OnMetadataParsed.InvokeAsync(metadata)\u0060 inside a synchronous lifecycle method. This silently swallows exceptions from async callbacks; it should be \u0060await\u0060ed via \u0060OnParametersSetAsync\u0060.\n\n3. **Duplicated test accessor types** \u2014 \u0060MarkdownDocumentParserAccessor\u0060 is copy-pasted identically across \u0060MarkdownDocumentParserTests.cs\u0060 and \u0060InlineComponentTests.cs\u0060. A shared test helper would prevent them drifting apart.\n\n4. **AllowUnsafeBlocks in Blog.csproj** \u2014 The Blog project enables \u0060AllowUnsafeBlocks\u0060 but nothing in the Markdown pipeline or Blog components uses unsafe code. This was likely cargo-culted from the Helpers project.\n\n5. **PostHelpers missing XML doc comments** \u2014 \u0060PostHelpers.cs\u0060 is a new public class with zero XML documentation, violating the CS1591-as-error policy set in \u0060Directory.Build.props\u0060 for packable projects.\n\n6. **DocumentComponentRegistry thread safety gap** \u2014 \u0060PlaygroundRegistry\u0060 uses \u0060ConcurrentDictionary\u0060 for thread safety, but the sibling \u0060DocumentComponentRegistry\u0060 uses a plain \u0060Dictionary\u0060. Both are singleton registries populated at startup and queried at render time. Though startup-only writes are likely safe in practice, the inconsistency is a maintenance trap.",
+    "CreditsUsed": 3,
+    "PremiumCreditsUsed": 3,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [
+      "view",
+      "grep",
+      "powershell (git log, git diff)",
+      "task (explore agents \u2014 failed due to permission issues, fell back to direct tools)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:40:57.9707325\u002B00:00"
+  },
+  {
+    "Id": 10,
+    "IssueId": 4,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-887b2448f552",
+    "Status": "Completed",
+    "Summary": "\u0060OptionA.Blazor.Blog.Builder\u0060 was already removed from \u0060OptionA.Blazor.sln\u0060 before this run. \u0060dotnet sln list\u0060 confirms the project is not present in the solution. No further action needed.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "powershell (\u0060dotnet sln remove\u0060, \u0060dotnet sln list\u0060)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:38:10.0822843\u002B00:00"
+  },
+  {
+    "Id": 11,
+    "IssueId": 23,
+    "RoleSlug": "architect",
+    "ModelName": "claude-opus-4.6",
+    "SessionId": "devteam-architect-8a2b5dd367ba",
+    "Status": "Completed",
+    "Summary": "**Architectural Decision: Inline document helper components into OptAChild to contain API surface**\n\nThe current state leaks 4 types into the public NuGet API surface that are parser-internal:\n- \u0060OptADocumentPlayground\u0060 (component) \u2014 used only by \u0060OptAChild.razor\u0060\n- \u0060OptADocumentComponent\u0060 (component) \u2014 used only by \u0060OptAChild.razor\u0060\n- \u0060PlaygroundDirectiveContent\u0060 (model) \u2014 forced public for \u0060[Parameter]\u0060 on above\n- \u0060InlineComponentContent\u0060 (model) \u2014 forced public for \u0060[Parameter]\u0060 on above\n\n**Decision:** Remove the wrapper components and inline their rendering directly into \u0060OptAChild.razor\u0060. This eliminates the need for public \u0060[Parameter]\u0060 types, allowing the content models to become \u0060internal sealed class\u0060. The coercion logic (\u0060CoerceParameters\u0060/\u0060TryCoerce\u0060) moves to a new \u0060internal static class ParameterCoercer\u0060 in \u0060Document/Internal/\u0060.\n\n**Key justification:**\n- Blazor requires \u0060[Parameter]\u0060 types to match component accessibility \u2014 only way to internalize is to eliminate the parameter relationship.\n- The wrapper components are trivial (10-20 lines of rendering logic).\n- \u0060InternalsVisibleTo\u0060 for the test project is already configured (line 36 of \u0060.csproj\u0060).\n- Tests rewrite to test through \u0060OptADocument\u0060 integration or construct internal types directly.\n\n**Files affected:**\n- \u0060OptionA.Blazor.Blog/Document/OptADocumentPlayground.razor\u0060 \u2014 DELETE\n- \u0060OptionA.Blazor.Blog/Document/OptADocumentPlayground.razor.cs\u0060 \u2014 DELETE\n- \u0060OptionA.Blazor.Blog/Document/OptADocumentComponent.razor\u0060 \u2014 DELETE\n- \u0060OptionA.Blazor.Blog/Document/OptADocumentComponent.razor.cs\u0060 \u2014 DELETE\n- \u0060OptionA.Blazor.Blog/Document/Internal/PlaygroundDirectiveContent.cs\u0060 \u2014 change \u0060public\u0060 \u2192 \u0060internal\u0060\n- \u0060OptionA.Blazor.Blog/Document/Internal/InlineComponentContent.cs\u0060 \u2014 change \u0060public\u0060 \u2192 \u0060internal\u0060\n- \u0060OptionA.Blazor.Blog/Document/Internal/ParameterCoercer.cs\u0060 \u2014 NEW (extract from OptADocumentComponent)\n- \u0060OptionA.Blazor.Blog/Core/OptAChild.razor\u0060 \u2014 inline rendering for Playground \u002B InlineComponent cases\n- \u0060OptionA.Blazor.Blog.UnitTests/Document/OptADocumentPlaygroundTests.cs\u0060 \u2014 rewrite to test via OptADocument or parser\n- \u0060OptionA.Blazor.Blog.UnitTests/Document/InlineComponentTests.cs\u0060 \u2014 update \u0060OptADocumentComponentTests\u0060 section; parser tests stay valid",
+    "CreditsUsed": 3,
+    "PremiumCreditsUsed": 3,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "refine"
+    ],
+    "ToolsUsed": [
+      "view",
+      "grep",
+      "powershell"
+    ],
+    "ChangedPaths": [
+      ".devteam/checkpoints/run-11/"
+    ],
+    "CreatedIssueIds": [
+      24,
+      25
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:47:30.8031927\u002B00:00"
+  },
+  {
+    "Id": 12,
+    "IssueId": 13,
+    "RoleSlug": "reviewer",
+    "ModelName": "claude-opus-4.6",
+    "SessionId": "devteam-reviewer-187bb169f39c",
+    "Status": "Completed",
+    "Summary": "Guardrail review of implementation issue #8 (and subsequent work through #24). **Build: green** (0 errors, solution-wide). **Tests: all 331 pass** (186 Blog \u002B 57 Playground \u002B 88 Components). Issue #24 just landed (commit \u00601911c95\u0060) successfully inlining \u0060OptADocumentPlayground\u0060/\u0060OptADocumentComponent\u0060 into \u0060OptAChild.razor\u0060 and internalizing the content types. The implementation quality is good: \u0060ParameterCoercer\u0060 cleanly extracted, content types properly \u0060internal sealed\u0060, tests updated to verify through \u0060OptAChild\u0060. Remaining CS1591 warnings on \u0060DocumentMetadata\u0060 and \u0060PostHelpers\u0060 (public APIs without XML docs) are already tracked as issues #18/#19. All other previously-identified hygiene concerns (issues #20, #21, #22) remain valid and are low-priority. No new critical issues discovered \u2014 the implementation is on track.",
+    "CreditsUsed": 3,
+    "PremiumCreditsUsed": 3,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "review",
+      "verify"
+    ],
+    "ToolsUsed": [
+      "view",
+      "grep",
+      "glob",
+      "powershell (dotnet build, dotnet test, git log, git diff, git status, git show)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:58:11.7619669\u002B00:00"
+  },
+  {
+    "Id": 13,
+    "IssueId": 12,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-22a0c4ab5bb2",
+    "Status": "Completed",
+    "Summary": "Fresh verification found a blocking regression in the blog/document path, so the current implementation is **not** ready to mark as working. \u0060dotnet build .\\OptionA.Blazor.sln --configuration Release --nologo --verbosity minimal\u0060 exited with code **1** because \u0060OptionA.Blazor.Blog\\Core\\OptAChild.razor\u0060 has invalid Razor syntax at lines **45** and **60** (\u0060RZ1010: Unexpected \u0022{\u0022 after \u0022@\u0022 character\u0060). The failing diff is the recent inline replacement of \u0060OptADocumentPlayground\u0060 / \u0060OptADocumentComponent\u0060 inside \u0060OptAChild\u0060.\n\nIndependent playground verification still passes: \u0060dotnet test .\\OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj --configuration Release --no-restore --nologo --verbosity minimal\u0060 exited with code **0** and reported **57 passed,0 failed**. Blog/document tests could not be re-verified because the build fails first. Tests written in this run: **none**; this was a verification-only pass. No new issue was created because this regression is already covered by existing issue **#24**\u2019s acceptance criteria (\u0060project builds with no warnings\u0060), so creating a duplicate would add noise.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "skill- report_intent- glob- rg- view- powershell- \u0060dotnet build .\\OptionA.Blazor.sln --configuration Release --nologo --verbosity minimal\u0060",
+      "\u0060dotnet test .\\OptionA.Blazor.Playground.UnitTests\\OptionA.Blazor.Playground.UnitTests.csproj --configuration Release --no-restore --nologo --verbosity minimal\u0060"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:54:34.6880153\u002B00:00"
+  },
+  {
+    "Id": 14,
+    "IssueId": 24,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-40934c3e8c3e",
+    "Status": "Completed",
+    "Summary": "- Created \u0060Document/Internal/ParameterCoercer.cs\u0060 \u2014 internal static class with \u0060Coerce()\u0060/\u0060TryCoerce()\u0060 extracted from the deleted \u0060OptADocumentComponent.razor.cs\u0060\n- Deleted \u0060OptADocumentPlayground.razor\u0060, \u0060OptADocumentPlayground.razor.cs\u0060, \u0060OptADocumentComponent.razor\u0060, \u0060OptADocumentComponent.razor.cs\u0060\n- Inlined playground and inline-component rendering directly into \u0060OptAChild.razor\u0060 (with proper scoped blocks to avoid variable conflicts in the switch)\n- Changed \u0060PlaygroundDirectiveContent\u0060 and \u0060InlineComponentContent\u0060 from \u0060public sealed\u0060 to \u0060internal sealed\u0060 (test project already had \u0060InternalsVisibleTo\u0060)\n- Updated both test classes to render via \u0060OptAChild\u0060 instead of the deleted components\n- **186 tests pass; test project builds with 0 warnings, 0 errors**",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "glob",
+      "view",
+      "grep",
+      "create",
+      "edit",
+      "powershell (dotnet build, dotnet test, git commit, Remove-Item)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:55:00.5834246\u002B00:00"
+  },
+  {
+    "Id": 15,
+    "IssueId": 17,
+    "RoleSlug": "frontend-developer",
+    "ModelName": "claude-sonnet-4.6",
+    "SessionId": "devteam-frontend-developer-8d5a2627e7e4",
+    "Status": "Completed",
+    "Summary": "Replaced the synchronous \u0060OnParametersSet\u0060 override with \u0060OnParametersSetAsync\u0060 in \u0060OptADocument.razor.cs\u0060 and awaited the \u0060OnMetadataParsed.InvokeAsync(metadata)\u0060 call. This ensures exceptions from async callbacks propagate correctly instead of being silently discarded. All 186 blog unit tests pass.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "view",
+      "powershell (file rewrite, build, test, git commit)",
+      "grep",
+      "glob"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T13:52:17.9824454\u002B00:00"
+  },
+  {
+    "Id": 16,
+    "IssueId": 29,
+    "RoleSlug": "reviewer",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-reviewer-e4f91bbd8794",
+    "Status": "Completed",
+    "Summary": "Fit check passed. I reviewed the issue-24 refactor, inspected the implementation/history, and ran the scoped blog build and test suite. I did not find a functional regression in the shipped behavior: \u0060OptionA.Blazor.Blog\u0060 builds, \u0060OptionA.Blazor.Blog.UnitTests\u0060 passes (186/186), and the inlined playground / inline-component rendering still behaves correctly.\n\nI found one maintainability/performance regression worth follow-up: the old \u0060OptADocumentComponent\u0060 cached coerced parameters in \u0060OnParametersSet\u0060, but \u0060OptAChild.razor\u0060 now calls \u0060ParameterCoercer.Coerce(...)\u0060 directly inside render for every inline component render. That redoes reflection and dictionary allocation on every parent rerender. The existing test-scope gap around end-to-end \u0060OptADocument\u0060 coverage and direct \u0060ParameterCoercer\u0060 coverage is already being handled by issue #25, so I did not duplicate it.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "report_intent- view- glob- rg- powershell (\u0060git status\u0060, \u0060git log\u0060, \u0060git show\u0060, \u0060git ls-tree\u0060, \u0060dotnet build\u0060, \u0060dotnet test\u0060)",
+      "task (code-review agent attempt)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      32
+    ],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:04:42.1479199\u002B00:00"
+  },
+  {
+    "Id": 17,
+    "IssueId": 25,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-ba61aa65d614",
+    "Status": "Completed",
+    "Summary": "Rewrote the affected unit tests to exercise the public \u0060OptADocument\u0060 path instead of internal helper content, and added direct \u0060ParameterCoercer\u0060 coverage.\n\nTests written:\n- \u0060OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentPlaygroundTests.cs\u0060 \u2014 playground directive rendering through \u0060OptADocument\u0060, covering resolved descriptor, visible error block, and null markdown.\n- \u0060OptionA.Blazor.Blog.UnitTests\\Document\\InlineComponentTests.cs\u0060 \u2014 \u0060OptADocumentComponentTests\u0060 now render inline component tags through \u0060OptADocument\u0060; added \u0060ParameterCoercerTests\u0060 for string, bool explicit, bool shorthand, int, enum, and unsupported-type coercion. Parser-level tests were left unchanged.",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [
+      "report_intent- rg- glob- view- apply_patch- powershell- \u0060dotnet test .\\OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --no-restore --verbosity minimal\u0060",
+      "\u0060git --no-pager diff --stat -- OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentPlaygroundTests.cs OptionA.Blazor.Blog.UnitTests\\Document\\InlineComponentTests.cs\u0060"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:05:14.3442739\u002B00:00"
+  },
+  {
+    "Id": 18,
+    "IssueId": 28,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-tester-587f4f493628",
+    "Status": "Completed",
+    "Summary": "Added regression coverage for the inlined \u0060OptAChild\u0060 document path and verified the blog test project passes.\n\nTests written:\n- \u0060OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentTests.cs\u0060 \u2014 end-to-end \u0060OptADocument\u0060 rendering for registered inline component tags, typed attribute coercion through Markdown (\u0060string\u0060, bool shorthand, \u0060int\u0060, \u0060enum\u0060), and unknown-component warning rendering.\n- \u0060OptionA.Blazor.Blog.UnitTests\\Core\\ContentClassesTests.cs\u0060 \u2014 locks \u0060PlaygroundDirectiveContent\u0060 and \u0060InlineComponentContent\u0060 to the expected \u0060ContentType\u0060 values and confirms they stay internal implementation details.\n\nVerification:\n- \u0060dotnet test OptionA.Blazor.Blog.UnitTests\\OptionA.Blazor.Blog.UnitTests.csproj --configuration Release --verbosity minimal\u0060\n- Result:184 passed,0 failed",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "skill- report_intent- rg- glob- view- apply_patch- powershell"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:05:05.7535306\u002B00:00"
+  },
+  {
+    "Id": 19,
+    "IssueId": 26,
+    "RoleSlug": "developer",
+    "ModelName": "gpt-5.4",
+    "SessionId": "devteam-developer-6a66a7618045",
+    "Status": "Completed",
+    "Summary": "Issue #26 is already satisfied in the current codebase. The helper wrappers are not present, \u0060PlaygroundDirectiveContent\u0060 and \u0060InlineComponentContent\u0060 are \u0060internal sealed\u0060, \u0060ParameterCoercer\u0060 is contained under \u0060Document\\Internal\u0060, and \u0060OptAChild.razor\u0060 renders playground and inline-component content directly. I confirmed the scoped implementation matches the stage-0 decision and the affected projects build and test cleanly (\u0060OptionA.Blazor.Blog\u0060, \u0060OptionA.Blazor.Blog.UnitTests\u0060).",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [],
+    "ToolsUsed": [
+      "report_intent- sql- glob- rg- view- powershell"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:01:47.0139244\u002B00:00"
+  },
+  {
+    "Id": 20,
+    "IssueId": 27,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "",
+    "Status": "Queued",
+    "Summary": "",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": null,
+    "SkillsUsed": [],
+    "ToolsUsed": [],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:06:56.5387841\u002B00:00"
+  },
+  {
+    "Id": 21,
+    "IssueId": 33,
+    "RoleSlug": "developer",
+    "ModelName": "gpt-5.4",
+    "SessionId": "",
+    "Status": "Queued",
+    "Summary": "",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": null,
+    "SkillsUsed": [],
+    "ToolsUsed": [],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:06:56.5387878\u002B00:00"
+  },
+  {
+    "Id": 22,
+    "IssueId": 30,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5.4",
+    "SessionId": "",
+    "Status": "Queued",
+    "Summary": "",
+    "CreditsUsed": 1,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": null,
+    "SkillsUsed": [],
+    "ToolsUsed": [],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:06:56.5387909\u002B00:00"
+  },
+  {
+    "Id": 23,
+    "IssueId": 31,
+    "RoleSlug": "auditor",
+    "ModelName": "claude-opus-4.6",
+    "SessionId": "",
+    "Status": "Queued",
+    "Summary": "",
+    "CreditsUsed": 3,
+    "PremiumCreditsUsed": 3,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": null,
+    "SkillsUsed": [],
+    "ToolsUsed": [],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "TimeoutExtensionGranted": false,
+    "TimeoutExtensionGrantedAtUtc": null,
+    "UpdatedAtUtc": "2026-05-13T14:06:56.5387937\u002B00:00"
+  }
+]

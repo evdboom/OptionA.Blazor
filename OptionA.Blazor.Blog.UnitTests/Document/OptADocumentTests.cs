@@ -339,6 +339,36 @@ public class OptADocumentTests : BunitContext
         Assert.Empty(cut.FindAll(".opta-playground-error"));
     }
 
+    [Fact]
+    public void OptADocument_InlineComponentTag_WithRegisteredComponent_RendersDynamicComponent()
+    {
+        RegisterInlineComponentServices<OptAFakeDocumentComponent>();
+
+        var md = """<OptAFakeDocumentComponent Label="Inline" Disabled Count="7" Kind="Primary" />""";
+
+        var cut = Render<OptADocument>(parameters => parameters.Add(x => x.Source, md));
+
+        var button = cut.Find("button");
+        Assert.Equal("Inline", button.TextContent);
+        Assert.True(button.HasAttribute("disabled"));
+        Assert.Equal("7", button.GetAttribute("data-count"));
+        Assert.Equal("primary", button.GetAttribute("data-kind"));
+        Assert.Empty(cut.FindAll(".opta-document-component-warning"));
+    }
+
+    [Fact]
+    public void OptADocument_InlineComponentTag_WithUnknownComponent_RendersWarning()
+    {
+        RegisterInlineComponentServices<OptAFakeDocumentComponent>();
+
+        var cut = Render<OptADocument>(parameters => parameters.Add(x => x.Source, "<OptAUnknownDocumentComponent />"));
+
+        var warning = cut.Find(".opta-document-component-warning");
+        Assert.Equal("alert", warning.GetAttribute("role"));
+        Assert.Contains("OptAUnknownDocumentComponent", warning.TextContent, StringComparison.Ordinal);
+        Assert.Empty(cut.FindAll("button"));
+    }
+
     private void RegisterPlaygroundServices(PlaygroundDescriptorBase descriptor)
     {
         var dataProvider = new Mock<IPlaygroundDataProvider>();
@@ -358,6 +388,18 @@ public class OptADocumentTests : BunitContext
         Services.AddSingleton(resolver.Object);
     }
 
+    private void RegisterInlineComponentServices<TComponent>()
+        where TComponent : ComponentBase
+    {
+        var resolver = new Mock<IPlaygroundDescriptorResolver>();
+        resolver
+            .Setup(r => r.Resolve(It.IsAny<string?>(), It.IsAny<PlaygroundDescriptorBase?>()))
+            .Returns((string? _, PlaygroundDescriptorBase? fallback) => fallback);
+
+        Services.AddSingleton(resolver.Object);
+        Services.AddDocumentComponent<TComponent>();
+    }
+
     private sealed class FakeTextComponent : ComponentBase
     {
         [Parameter]
@@ -370,5 +412,40 @@ public class OptADocumentTests : BunitContext
             builder.AddContent(2, Text);
             builder.CloseElement();
         }
+    }
+
+    private sealed class OptAFakeDocumentComponent : ComponentBase
+    {
+        [Parameter]
+        public string? Label { get; set; }
+
+        [Parameter]
+        public bool Disabled { get; set; }
+
+        [Parameter]
+        public int Count { get; set; }
+
+        [Parameter]
+        public DocumentComponentKind Kind { get; set; }
+
+        protected override void BuildRenderTree(RenderTreeBuilder builder)
+        {
+            builder.OpenElement(0, "button");
+            if (Disabled)
+            {
+                builder.AddAttribute(1, "disabled", true);
+            }
+
+            builder.AddAttribute(2, "data-count", Count.ToString());
+            builder.AddAttribute(3, "data-kind", Kind.ToString().ToLowerInvariant());
+            builder.AddContent(4, Label);
+            builder.CloseElement();
+        }
+    }
+
+    private enum DocumentComponentKind
+    {
+        Default,
+        Primary,
     }
 }

@@ -99,6 +99,74 @@ Body here
         Assert.Equal("A", instance.Received!.Title);
     }
 
+    [Fact]
+    public void OptADocument_AwaitsAsyncOnMetadataParsedBeforeParsingBody()
+    {
+        var markdown = """
+---
+title: Async metadata
+---
+Body here
+""";
+
+        var callbackCompleted = false;
+        DocumentMetadata? received = null;
+        Func<DocumentMetadata, Task> onMetadataParsed = async md =>
+        {
+            await Task.Yield();
+            received = md;
+            callbackCompleted = true;
+        };
+
+        var mockParser = new Mock<IMarkdownDocumentParser>();
+        mockParser
+            .Setup(p => p.Parse("Body here"))
+            .Callback(() => Assert.True(callbackCompleted))
+            .Returns(new List<IContent>());
+        Services.AddSingleton<IMarkdownDocumentParser>(mockParser.Object);
+
+        var cut = Render<OptADocument>(parameters => parameters
+            .Add(x => x.Source, markdown)
+            .Add(x => x.OnMetadataParsed, EventCallback.Factory.Create<DocumentMetadata>(this, onMetadataParsed)));
+
+        cut.WaitForAssertion(() =>
+        {
+            Assert.True(callbackCompleted);
+            Assert.NotNull(received);
+            Assert.Equal("Async metadata", received!.Title);
+            mockParser.Verify(p => p.Parse("Body here"), Times.Once);
+        });
+    }
+
+    [Fact]
+    public async Task OptADocument_OnMetadataParsedException_PropagatesAndSkipsParsingBody()
+    {
+        var markdown = """
+---
+title: Broken callback
+---
+Body here
+""";
+
+        var mockParser = new Mock<IMarkdownDocumentParser>();
+        Services.AddSingleton<IMarkdownDocumentParser>(mockParser.Object);
+        Func<DocumentMetadata, Task> onMetadataParsed = async _ =>
+        {
+            await Task.Yield();
+            throw new InvalidOperationException("Metadata callback failed.");
+        };
+
+        Render<OptADocument>(parameters => parameters
+            .Add(x => x.Source, markdown)
+            .Add(x => x.OnMetadataParsed, EventCallback.Factory.Create<DocumentMetadata>(this, onMetadataParsed)));
+
+        var exception = await Renderer.UnhandledException;
+
+        Assert.IsType<InvalidOperationException>(exception);
+        Assert.Equal("Metadata callback failed.", exception.Message);
+        mockParser.Verify(p => p.Parse(It.IsAny<string>()), Times.Never);
+    }
+
     private class MetadataReceiver : ComponentBase
     {
         public DocumentMetadata? Received { get; private set; }

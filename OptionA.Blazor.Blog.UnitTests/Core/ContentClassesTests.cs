@@ -1,3 +1,5 @@
+using OptionA.Blazor.Blog.Document.Internal;
+
 namespace OptionA.Blazor.Blog.UnitTests.Core;
 
 public class ContentClassesTests
@@ -150,6 +152,26 @@ public class ContentClassesTests
 
         // Assert
         Assert.Equal(ContentType.Icon, content.Type);
+    }
+
+    [Fact]
+    public void PlaygroundDirectiveContent_HasCorrectTypeAndIsInternal()
+    {
+        var content = new PlaygroundDirectiveContent();
+
+        Assert.Equal(ContentType.Playground, content.Type);
+        Assert.False(content.IsInvalid);
+        Assert.False(typeof(PlaygroundDirectiveContent).IsPublic);
+    }
+
+    [Fact]
+    public void InlineComponentContent_HasCorrectTypeAndIsInternal()
+    {
+        var content = new InlineComponentContent();
+
+        Assert.Equal(ContentType.InlineComponent, content.Type);
+        Assert.False(content.IsInvalid);
+        Assert.False(typeof(InlineComponentContent).IsPublic);
     }
 
     [Fact]
