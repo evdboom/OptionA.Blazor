@@ -316,6 +316,9 @@ paket-files/
 __pycache__/
 *.pyc
 
+# DevTeam PowerShell test workspace
+.devteam/tests/testworkspace/
+
 # Cake - Uncomment if you are using it
 # tools/**
 # !tools/packages.config

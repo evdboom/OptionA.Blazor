@@ -1,0 +1,12 @@
+﻿[
+  {
+    "ScopeKey": "workspace:planning",
+    "ScopeKind": "workspace",
+    "RoleSlug": "planner",
+    "IssueId": 1,
+    "PipelineId": null,
+    "LastRunId": 1,
+    "SessionId": "devteam-planner-3cf289212622",
+    "UpdatedAtUtc": "2026-05-13T13:12:45.4629914\u002B00:00"
+  }
+]

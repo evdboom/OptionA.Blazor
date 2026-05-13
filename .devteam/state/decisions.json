@@ -268,5 +268,35 @@
     "RunId": null,
     "SessionId": "devteam-orchestrator-b5cdd350b8e8",
     "CreatedAtUtc": "2026-04-25T22:00:30.4625349\u002B00:00"
+  },
+  {
+    "Id": 28,
+    "Title": "Execution batch fallback applied",
+    "Detail": "The orchestrator did not persist a selection, so the runtime used heuristic ready-issue selection.",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T22:06:54.6175283\u002B00:00"
+  },
+  {
+    "Id": 29,
+    "Title": "Selected execution batch",
+    "Detail": "Issues: 70, 58, 69, 73\n\nLast batch (#67, #68, #66) unblocked the top two priority items. #70 (policy docs, priority=90) leads architecture-first. #73 (reconciliation script implementation, priority=80) follows naturally now that its scoping issue #68 is done. #71 (bUnit RenderComponent\u2192Render migration, priority=80) is clean no-dep work that improves test infrastructure. #24 (OptADocument component-tag contract, priority=79) is safe to pair with #71 since they touch different file types (test vs component source). #69 (CI integrity checks) is deliberately deferred until #73\u0027s script is committed \u2014 running both in the same cycle risks CI workflow file conflicts.\nSELECTED_",
+    "Source": "execution-orchestrator",
+    "IssueId": null,
+    "RunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "CreatedAtUtc": "2026-04-25T22:06:54.6176280\u002B00:00"
+  },
+  {
+    "Id": 30,
+    "Title": "Authoritative persistence policy: issues.json as source-of-truth",
+    "Detail": "Decision: .devteam/state/issues.json is the single source of truth for issue and workspace state. Rationale: minimizes automation drift, aligns with prior audits, and simplifies deterministic reconciliation. Writable actors: CI (reconciliation script), dev tools (with explicit backup), and maintainers via documented emergency process. See .devteam/PERSISTENCE.md for procedures and validation checklist.",
+    "Source": "issue-70",
+    "IssueId": 70,
+    "RunId": null,
+    "SessionId": "devteam-developer-48150ad15dd3",
+    "CreatedAtUtc": "2026-04-25T22:08:00.0000000\u002B00:00"
   }
 ]

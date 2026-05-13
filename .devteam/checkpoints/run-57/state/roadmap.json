@@ -1,0 +1,9 @@
+﻿[
+  {
+    "Id": 1,
+    "Title": "Plan the delivery strategy",
+    "Detail": "Turn the goal into milestones, issues, role assignments, and open questions: This is an existing workspace, look at GOAL.md, a subagent accidentally deleted the entire .devteam runtime so primary part is to determine the current state.",
+    "Status": "Open",
+    "Priority": 100
+  }
+]

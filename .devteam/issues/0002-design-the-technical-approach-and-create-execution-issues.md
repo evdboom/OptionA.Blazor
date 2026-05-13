@@ -18,36 +18,37 @@ Given the approved high-level plan, choose the technology stack, define the arch
 
 ## Latest Run
 
-- Run: 4
+- Run: 2
 - Status: Completed
-- Model: gpt-5.4
+- Model: claude-opus-4.6
 - Session: devteam-architect-370bb67a7c3e
-- Updated: 2026-04-25T20:08:36.8472562+00:00
-- Summary: Current state is now clear: the repository already contains **GOAL.md items1 and2** in code (`OptionA.Blazor.Playground` descriptor registry and `OptionA.Blazor.Blog` base `OptADocument` Markdown renderer), while `.devteam` has been locally restored but is **untracked** in git. There is also runtime drift: open issues **#3** and **#4** already exist, and `OptionA.Blazor.Blog\readme.md` documents `OnMetadataParsed`, playground directives, and inline component tags before those features exist in code.
+- Updated: 2026-05-13T13:26:15.7124393+00:00
+- Summary: **Architecture & Technical Approach — Verified Complete**
 
-REFINEMENT:
-- what: define the extension seam for items3–5 without changing the public package shape unnecessarily.
-- why: the current `IMarkdownDocumentParser.Parse(string?) -> IReadOnlyList<IContent>` contract is too narrow for front-matter and directives, and broad `ContentType` changes would ripple into `OptAChild` and `BuilderService`.
-- how: keep **Markdig internal** in `OptionA.Blazor.Blog`; add an **internal structured document parse result** that carries metadata plus ordered render items; parse `::: playground ... :::` and literal `<OptA*>` tags through dedicated document-processing stages instead of overloading `ParagraphContent`; keep rendering on the existing Blog components, use the existing `IPlaygroundDescriptorResolver`, and add a whitelist registry in Blog for inline components. Surface metadata through an `OnMetadataParsed` callback and a `Post` mapping helper, not through direct file or clock access.
+The full Markdown-to-component pipeline is already implemented, builds cleanly (0 errors/warnings), and all tests pass (216 Blog + 57 Playground = 273 total).
 
-FILES_IN_SCOPE:
-- `OptionA.Blazor.Blog\Document\*`
-- `OptionA.Blazor.Blog\Core\OptAChild.razor`
-- `OptionA.Blazor.Blog\ServiceCollectionExtensions.cs`
-- `OptionA.Blazor.Blog\Core\Post.cs`
-- `OptionA.Blazor.Blog\Core\OptAPost.razor.cs`
-- `OptionA.Blazor.Blog.UnitTests\Document\*`
+**Technology Stack (confirmed in code):**
+- **Markdig 0.40.0** — internal Markdown parser (not exposed publicly)
+- **Existing Blog render components** — `OptAText`, `OptAHeader`, `OptACode`, `OptAList`, `OptAQuote`, `OptAImage`, `OptATable` for block-to-component mapping
+- **`IPlaygroundRegistry` + `IPlaygroundDescriptorResolver`** — registry pattern with `ConcurrentDictionary` for thread-safe descriptor lookup
+- **`IDocumentComponentRegistry`** — whitelist for inline `<OptA*>` tags rendered via `DynamicComponent`
+- **Front-matter** — `DocumentMetadata.ParseFromMarkdown()` with `OnMetadataParsed` EventCallback
+- **`PostHelpers`** — bridges `DocumentMetadata` → `Post` for backward-compat consumers
 
-LINKED_DECISIONS:
-- #2: Approved high-level plan — entering architect planning- GOAL.md guiding decisions: Markdown is the authoring format; reuse existing Blog render components; keep Playground as the interactive surface; retire `OptionA.Blazor.Blog.Builder`; do not introduce a new package unless justifiedACCEPTANCE_CRITERIA:
-- [ ] New work for items3–5 extends the existing Blog/Playground packages instead of creating a new package- [ ] Directive parsing, inline component rendering, and front-matter parsing are implemented through explicit internal seams rather than ad hoc paragraph hacks- [ ] Existing Markdown block rendering behavior remains intact- [ ] Non-trivial collaborators use constructor injection; no direct file system or clock dependency is introduced into the parser pipelineRISKS:
-- Adding new `ContentType` values affects both `OptAChild` rendering and `BuilderService` serialization/deserialization- Documentation currently overstates implemented behavior and must not be treated as source of truthOUT_OF_SCOPE:
-- Reviving `OptionA.Blazor.Blog.Builder`
-- Introducing `OptionA.Blazor.Interactive`
-- WYSIWYG editing- Backward-compatibility work beyond the explicit `Post` shimExisting issues **#3** and **#4** remain valid; #4 should explicitly wait for the implementation issues below because the README currently runs ahead of the code.
-- Skills Used: refine
-- Tools Used: skill- report_intent- view- glob- rg- powershell
-- Changed Files: none
+**Architecture (all verified working):**
+1. `OptADocument.Source` → `DocumentMetadata.ParseFromMarkdown()` → fires `OnMetadataParsed` → `IMarkdownDocumentParser.Parse(body)`
+2. `MarkdownDocumentParser` preprocesses playground directives → Markdig parses → `BlockConverter` maps AST nodes to `IContent` list → resolves playground descriptors
+3. `BlockConverter` handles: headings, fenced code, indented code, quotes, lists, tables, paragraphs (with image promotion), HTML blocks (inline component tags), playground directives
+4. `OptADocument.razor` renders via `<OptAChildBuilder Content="_content" />`
+
+**Remaining gaps (execution issues below):**
+- Issue #3 is already resolved (builds clean) — should be closed
+- Issue #4 (remove Blog.Builder from .sln) is valid but Blog.Builder is also still referenced from Blog.UnitTests.csproj
+- Issue #5 (readme update) is partially done but contains contradictory stale text claiming features are "planned" when they are shipped
+- No consolidated worked-end-to-end example demonstrating all features together
+- Skills Used: none
+- Tools Used: view, glob, grep, powershell
+- Changed Files: .devteam/checkpoints/run-2/, .devteam/issues/0002-design-the-technical-approach-and-create-execution-issues.md, .devteam/issues/0003-fix-optadocumentplayground-build-error-cs0262-cs0053.md, .devteam/issues/0004-removeoptiona-blazor-blog-builder-from-optiona-blazor-sln.md, .devteam/issues/0005-update-optiona-blazor-blog-readme-md-to-cover-optadocument-and-markdown-authoring.md
 
 ## Recent Decisions
 

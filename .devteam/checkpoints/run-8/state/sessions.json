@@ -1,0 +1,72 @@
+﻿[
+  {
+    "ScopeKey": "workspace:planning",
+    "ScopeKind": "workspace",
+    "RoleSlug": "planner",
+    "IssueId": 1,
+    "PipelineId": null,
+    "LastRunId": 1,
+    "SessionId": "devteam-planner-3cf289212622",
+    "UpdatedAtUtc": "2026-05-13T13:12:45.4629914\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:1:role:architect",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "architect",
+    "IssueId": null,
+    "PipelineId": 1,
+    "LastRunId": 2,
+    "SessionId": "devteam-architect-370bb67a7c3e",
+    "UpdatedAtUtc": "2026-05-13T13:20:30.7958719\u002B00:00"
+  },
+  {
+    "ScopeKey": "workspace:execution-orchestrator",
+    "ScopeKind": "workspace",
+    "RoleSlug": "orchestrator",
+    "IssueId": null,
+    "PipelineId": null,
+    "LastRunId": null,
+    "SessionId": "devteam-orchestrator-b5cdd350b8e8",
+    "UpdatedAtUtc": "2026-05-13T13:34:51.0918513\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:2:role:frontend-developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "frontend-developer",
+    "IssueId": null,
+    "PipelineId": 2,
+    "LastRunId": 3,
+    "SessionId": "devteam-frontend-developer-fe4f18b54e0e",
+    "UpdatedAtUtc": "2026-05-13T13:29:00.4637211\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:1:role:developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "developer",
+    "IssueId": null,
+    "PipelineId": 1,
+    "LastRunId": 4,
+    "SessionId": "devteam-developer-7d7527b3e4f1",
+    "UpdatedAtUtc": "2026-05-13T13:29:00.4786127\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:5:role:frontend-developer",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "frontend-developer",
+    "IssueId": null,
+    "PipelineId": 5,
+    "LastRunId": 5,
+    "SessionId": "devteam-frontend-developer-9076a5ca5397",
+    "UpdatedAtUtc": "2026-05-13T13:29:00.5101352\u002B00:00"
+  },
+  {
+    "ScopeKey": "pipeline:6:role:docs",
+    "ScopeKind": "pipeline-role",
+    "RoleSlug": "docs",
+    "IssueId": null,
+    "PipelineId": 6,
+    "LastRunId": 6,
+    "SessionId": "devteam-docs-9375de1b47eb",
+    "UpdatedAtUtc": "2026-05-13T13:29:00.5306092\u002B00:00"
+  }
+]

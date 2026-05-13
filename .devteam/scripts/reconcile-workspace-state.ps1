@@ -9,6 +9,10 @@ param(
 )
 
 function Write-Log($msg) { $ts = (Get-Date).ToString('s'); "$ts - $msg" }
+function New-Utf8Encoding() { return New-Object System.Text.UTF8Encoding($false) }
+function Write-ExactFile([string]$path, [string]$content) {
+    [System.IO.File]::WriteAllText($path, $content, (New-Utf8Encoding))
+}
 
 $stateDir = Join-Path $WorkspaceRoot '.devteam\state'
 $runsDir  = Join-Path $WorkspaceRoot '.devteam\runs'
@@ -25,34 +29,192 @@ if (-not (Test-Path $issuesFile)) {
 # Load issues
 $issues = Get-Content $issuesFile -Raw | ConvertFrom-Json
 
+function Get-SectionMap([string]$content) {
+    $sections = @{}
+    foreach ($match in [regex]::Matches($content, '(?ms)^##\s+(.+?)\r?\n(.*?)(?=^##\s+|\z)')) {
+        $sections[$match.Groups[1].Value.Trim()] = $match.Groups[2].Value.Trim()
+    }
+
+    return $sections
+}
+
+function Get-HeaderValue([string]$header, [string]$name) {
+    $pattern = '(?m)^-\s+' + [regex]::Escape($name) + ':\s*(.*)$'
+    $match = [regex]::Match($header, $pattern)
+    if ($match.Success) {
+        return $match.Groups[1].Value.Trim()
+    }
+
+    return $null
+}
+
+function Get-SectionList([hashtable]$sections, [string]$name) {
+    if (-not $sections.ContainsKey($name)) {
+        return @()
+    }
+
+    $body = $sections[$name].Trim()
+    if ([string]::IsNullOrWhiteSpace($body) -or $body -eq '(none)') {
+        return @()
+    }
+
+    $items = @()
+    foreach ($line in ($body -split "\r?\n")) {
+        if ($line -match '^\s*-\s*(.+?)\s*$') {
+            $value = $Matches[1].Trim()
+            if ($value -and $value -ne '(none)') {
+                $items += $value
+            }
+        }
+    }
+
+    return $items
+}
+
+function Get-SectionText([hashtable]$sections, [string]$name) {
+    if (-not $sections.ContainsKey($name)) {
+        return ''
+    }
+
+    $text = $sections[$name].Trim()
+    if ($text -eq '(none)') {
+        return ''
+    }
+
+    return $text
+}
+
+function Get-NullableInt([string]$value) {
+    if ([string]::IsNullOrWhiteSpace($value)) {
+        return $null
+    }
+
+    $number = 0
+    if ([int]::TryParse($value, [ref]$number)) {
+        return $number
+    }
+
+    return $null
+}
+
+function Convert-RunStatus([string]$value) {
+    if ([string]::IsNullOrWhiteSpace($value)) {
+        return $null
+    }
+
+    switch ($value.Trim().ToLowerInvariant()) {
+        'completed' { return 'Completed' }
+        'done' { return 'Completed' }
+        'running' { return 'Running' }
+        'failed' { return 'Failed' }
+        'blocked' { return 'Blocked' }
+        'cancelled' { return 'Cancelled' }
+        default {
+            $normalized = $value.Trim()
+            return $normalized.Substring(0, 1).ToUpperInvariant() + $normalized.Substring(1)
+        }
+    }
+}
+
+function Get-RunUpdatedAtUtc([System.IO.FileInfo]$file) {
+    try {
+        if (Get-Command git -ErrorAction SilentlyContinue) {
+            $timestamp = git log -1 --format=%cI -- $file.FullName 2>$null | Select-Object -First 1
+            if (-not [string]::IsNullOrWhiteSpace($timestamp)) {
+                return $timestamp.Trim()
+            }
+        }
+    } catch { }
+
+    return $file.LastWriteTimeUtc.ToString('o')
+}
+
+function Convert-RunMarkdownToState([System.IO.FileInfo]$file) {
+    $content = Get-Content -Raw -Path $file.FullName
+    $header = ([regex]::Match($content, '(?ms)\A(.*?)(?=^##\s+|\z)')).Groups[1].Value
+    $sections = Get-SectionMap $content
+    $usageLines = Get-SectionList $sections 'Usage'
+
+    $id = $null
+    $titleMatch = [regex]::Match($header, '(?m)^#\s+Run\s+(\d+)\s*$')
+    if ($titleMatch.Success) {
+        $id = [int]$titleMatch.Groups[1].Value
+    } elseif ($file.BaseName -match 'run-(\d+)') {
+        $id = [int]$Matches[1]
+    }
+
+    $issueId = $null
+    $issueValue = Get-HeaderValue $header 'Issue'
+    if ($issueValue -match '^\d+$') {
+        $issueId = [int]$issueValue
+    }
+
+    $committedCredits = $null
+    $premiumCredits = $null
+    foreach ($line in $usageLines) {
+        if ($line -match '^Committed credits:\s*(\d+)$') {
+            $committedCredits = [int]$Matches[1]
+        } elseif ($line -match '^Premium credits:\s*(\d+)$') {
+            $premiumCredits = [int]$Matches[1]
+        }
+    }
+
+    $createdIssueIds = @()
+    foreach ($item in (Get-SectionList $sections 'Created Issues')) {
+        if ($item -match '#?(\d+)') {
+            $createdIssueIds += [int]$Matches[1]
+        }
+    }
+
+    $createdQuestionIds = @()
+    foreach ($item in (Get-SectionList $sections 'Created Questions')) {
+        if ($item -match '#?(\d+)') {
+            $createdQuestionIds += [int]$Matches[1]
+        }
+    }
+
+    $resultingIssueStatus = Get-HeaderValue $header 'Resulting issue status'
+    if ([string]::IsNullOrWhiteSpace($resultingIssueStatus)) {
+        $resultingIssueStatus = $null
+    }
+
+    return [PSCustomObject][ordered]@{
+        Id = $id
+        IssueId = $issueId
+        RoleSlug = Get-HeaderValue $header 'Role'
+        ModelName = Get-HeaderValue $header 'Model'
+        SessionId = Get-HeaderValue $header 'Session'
+        Status = Convert-RunStatus (Get-HeaderValue $header 'Outcome')
+        Summary = Get-SectionText $sections 'Summary'
+        CreditsUsed = $committedCredits
+        PremiumCreditsUsed = $premiumCredits
+        InputTokens = $null
+        OutputTokens = $null
+        EstimatedCostUsd = $null
+        ResultingIssueStatus = $resultingIssueStatus
+        SkillsUsed = @(Get-SectionList $sections 'Skills Used')
+        ToolsUsed = @(Get-SectionList $sections 'Tools Used')
+        ChangedPaths = @(Get-SectionList $sections 'Changed Files')
+        CreatedIssueIds = @($createdIssueIds)
+        CreatedQuestionIds = @($createdQuestionIds)
+        TimeoutExtensionGranted = $false
+        TimeoutExtensionGrantedAtUtc = $null
+        UpdatedAtUtc = Get-RunUpdatedAtUtc $file
+    }
+}
+
 # Gather runs md files deterministically
 $runs = @()
 if (Test-Path $runsDir) {
     Get-ChildItem -Path $runsDir -Filter '*.md' -File | Sort-Object Name | ForEach-Object {
-        $content = Get-Content -Raw -Path $_.FullName
-        # attempt to parse YAML front matter between lines starting with ---
-        $meta = @{}
-        if ($content -match '^(---)\s*$([\s\S]*?)(---)\s*$') {
-            $yaml = $Matches[2] -split "\r?\n"
-            foreach ($line in $yaml) {
-                if ($line -match '^\s*([^:]+):\s*(.*)') {
-                    $k = $Matches[1].Trim()
-                    $v = $Matches[2].Trim()
-                    $meta[$k] = $v
-                }
-            }
-        }
-        $id = if ($meta.ContainsKey('id')) { $meta['id'] } else { [System.IO.Path]::GetFileNameWithoutExtension($_.Name) }
-        $title = if ($meta.ContainsKey('title')) { $meta['title'] } else { $id }
-        $timestamp = if ($meta.ContainsKey('timestamp')) { $meta['timestamp'] } else { $_.LastWriteTimeUtc.ToString('o') }
-        $runs += [PSCustomObject]@{ id = $id; title = $title; file = $_.Name; timestamp = $timestamp }
+        $runs += Convert-RunMarkdownToState $_
     }
 }
 
 # Deterministic sort
-$runs = $runs | Sort-Object id, file
+$runs = $runs | Sort-Object Id, IssueId, SessionId
 
-$newRunsJson = $runs | ConvertTo-Json -Depth 10
+$newRunsJson = @($runs) | ConvertTo-Json -Depth 10
 
 function Ensure-Dir([string]$p) { if (-not (Test-Path $p)) { if ($DryRun) { Write-Host "DRYRUN: would create directory $p" } else { New-Item -ItemType Directory -Force -Path $p | Out-Null } } }
 
@@ -86,7 +248,7 @@ if (Test-Path $runsFile) {
 }
 
 if ($writeRuns) {
-    if ($DryRun) { Write-Host "DRYRUN: would write $runsFile" } else { $newRunsJson | Out-File -FilePath $runsFile -Encoding UTF8 }
+    if ($DryRun) { Write-Host "DRYRUN: would write $runsFile" } else { Write-ExactFile -path $runsFile -content $newRunsJson }
 }
 
 # Create workspace.json summary from issues.json deterministically
@@ -106,7 +268,7 @@ if (Test-Path $workspaceFile) {
         if ($DryRun) { Write-Host "DRYRUN: would backup $workspaceFile to $bakW" } else { Copy-Item -Path $workspaceFile -Destination $bakW -Force }
     }
 }
-if ($DryRun) { Write-Host "DRYRUN: would write $workspaceFile" } else { $newWorkspaceJson | Out-File -FilePath $workspaceFile -Encoding UTF8 }
+if ($DryRun) { Write-Host "DRYRUN: would write $workspaceFile" } else { Write-ExactFile -path $workspaceFile -content $newWorkspaceJson }
 
 # Compute checksum of runs.json if exists
 $checksum = $null

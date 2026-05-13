@@ -1370,5 +1370,110 @@
       9
     ],
     "UpdatedAtUtc": "2026-04-25T22:02:56.8022278\u002B00:00"
+  },
+  {
+    "Id": 51,
+    "IssueId": 70,
+    "RoleSlug": "developer",
+    "ModelName": "gpt-5-mini",
+    "SessionId": "devteam-developer-48ed1fca413c",
+    "Status": "Completed",
+    "Summary": "Added authoritative persistence documentation and recorded the decision. Created .devteam/PERSISTENCE.md and .devteam/README.md, appended a decision to .devteam/state/decisions.json (Id=30) declaring .devteam/state/issues.json as the source-of-truth, and updated .devteam/state/issues.json to mark issue #70 Done and link the decision. Root README.md was updated to reference the policy. Built the solution to validate; build failed with an existing test warning/error (bUnit migration), unrelated to these docs changes.",
+    "CreditsUsed": 0,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "functions.report_intent- functions.grep- functions.view- functions.create- functions.edit- functions.powershell"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T22:10:24.6669004\u002B00:00"
+  },
+  {
+    "Id": 52,
+    "IssueId": 58,
+    "RoleSlug": "tester",
+    "ModelName": "gpt-5-mini",
+    "SessionId": "devteam-tester-f3511f7f447b",
+    "Status": "Completed",
+    "Summary": "Found and ran the requested bUnit tests covering OptADocument front-matter, playground directives (including unknown-id error), and inline component whitelist/attribute coercion. All tests in OptionA.Blazor.Blog.UnitTests passed locally (207 passed). Tests already exist for the requested scenarios.\n\nTests written / files and coverage:\n- OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentMetadataTests.cs \u2014 front-matter parsing, OnMetadataParsed callback, PostHelpers mapping- OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentPlaygroundTests.cs \u2014 playground directive rendering, resolved descriptor (happy path), unknown-id error block, null/no-descriptor handling- OptionA.Blazor.Blog.UnitTests\\Document\\OptADocumentTests.cs \u2014 Markdown node rendering, playground directive known-id and parameter overrides, documentation example error block when resolver missing- OptionA.Blazor.Blog.UnitTests\\Document\\InlineComponentTests.cs \u2014 inline \u003COptA*\u003E parsing, whitelist behavior, attribute parsing (string, bool shorthand/explicit, int, enum), OptADocumentComponent rendering and warnings, AddDocumentComponent registration",
+    "CreditsUsed": 0,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "verify"
+    ],
+    "ToolsUsed": [
+      "functions.view (file reads)",
+      "functions.grep (code search)",
+      "functions.powershell (dotnet test)"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T22:08:51.8506453\u002B00:00"
+  },
+  {
+    "Id": 53,
+    "IssueId": 69,
+    "RoleSlug": "devops",
+    "ModelName": "gpt-5-mini",
+    "SessionId": "devteam-devops-bb0cb7374c3b",
+    "Status": "Completed",
+    "Summary": "Added a GitHub Actions workflow that verifies .devteam integrity, runs the repository\u0027s reconciliation script in dry-run, creates a zip backup of .devteam, and uploads it as a workflow artifact. Appended CI docs to README. Ensured .devteam folders exist locally for development.",
+    "CreditsUsed": 0,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "(none)"
+    ],
+    "ToolsUsed": [
+      "functions.report_intent- functions.powershell- functions.view- functions.create- functions.edit"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [
+      75,
+      76
+    ],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T22:09:21.3740910\u002B00:00"
+  },
+  {
+    "Id": 54,
+    "IssueId": 73,
+    "RoleSlug": "developer",
+    "ModelName": "gpt-5-mini",
+    "SessionId": "devteam-developer-14fe3413d826",
+    "Status": "Completed",
+    "Summary": "Fixed a parsing bug in .devteam/scripts/reconcile-workspace-state.ps1 (regex double-quote caused PowerShell expansion), verified deterministic behavior and backups via an automated PowerShell verification run, and committed the fix. Reconciliation now creates runs.json/workspace.json, is idempotent, and creates timestamped backups only when runs.json changes.",
+    "CreditsUsed": 0,
+    "PremiumCreditsUsed": 0,
+    "InputTokens": null,
+    "OutputTokens": null,
+    "EstimatedCostUsd": null,
+    "ResultingIssueStatus": "InProgress",
+    "SkillsUsed": [
+      "scout- verify"
+    ],
+    "ToolsUsed": [
+      "functions.report_intent- functions.glob- functions.view- functions.edit- functions.powershell"
+    ],
+    "ChangedPaths": [],
+    "CreatedIssueIds": [],
+    "CreatedQuestionIds": [],
+    "UpdatedAtUtc": "2026-04-25T22:10:15.4110068\u002B00:00"
   }
 ]

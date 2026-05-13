@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace OptionA.Blazor.Blog;
 
@@ -17,7 +17,8 @@ public partial class OptADocument
 
     /// <summary>
     /// Optional callback invoked when YAML front-matter is present and parsed.
-    /// </summary>        [Parameter]
+    /// </summary>
+    [Parameter]
     public EventCallback<DocumentMetadata> OnMetadataParsed { get; set; }
 
     [Inject]
@@ -26,7 +27,7 @@ public partial class OptADocument
     private IReadOnlyList<IContent>? _content;
 
     /// <inheritdoc/>
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
         if (string.IsNullOrWhiteSpace(Source))
         {
@@ -35,8 +36,10 @@ public partial class OptADocument
         }
 
         var (metadata, body) = DocumentMetadata.ParseFromMarkdown(Source);
-        if (metadata is not null && OnMetadataParsed.HasDelegate)
-        {            // fire-and-forget is acceptable in sync lifecycle; caller may handle async if needed                    _ = OnMetadataParsed.InvokeAsync(metadata);        }
-        _content = Parser.Parse(body);
+        if (metadata is not null && OnMetadataParsed.HasDelegate)
+        {
+            await OnMetadataParsed.InvokeAsync(metadata);
+        }
+        _content = Parser.Parse(body);
     }
 }

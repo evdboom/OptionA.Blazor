@@ -97,9 +97,9 @@
       7,
       33
     ],
-    "ActiveIssueId": 33,
-    "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T21:54:21.0878017\u002B00:00"
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-05-13T12:55:42.4154488\u002B00:00"
   },
   {
     "Id": 7,
@@ -605,11 +605,12 @@
       "tester"
     ],
     "IssueIds": [
-      58
+      58,
+      74
     ],
-    "ActiveIssueId": 58,
+    "ActiveIssueId": 74,
     "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T21:54:21.9415670\u002B00:00"
+    "UpdatedAtUtc": "2026-04-25T22:08:51.8506745\u002B00:00"
   },
   {
     "Id": 38,
@@ -717,11 +718,12 @@
     ],
     "IssueIds": [
       68,
-      73
+      73,
+      77
     ],
-    "ActiveIssueId": 73,
+    "ActiveIssueId": 77,
     "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T22:04:19.0658492\u002B00:00"
+    "UpdatedAtUtc": "2026-05-13T13:00:33.5200337\u002B00:00"
   },
   {
     "Id": 45,
@@ -734,8 +736,88 @@
     "IssueIds": [
       69
     ],
-    "ActiveIssueId": 69,
+    "ActiveIssueId": null,
+    "Status": "Completed",
+    "UpdatedAtUtc": "2026-04-25T22:09:21.3740927\u002B00:00"
+  },
+  {
+    "Id": 46,
+    "RootIssueId": 70,
+    "FamilyKey": "repoaudit",
+    "Area": "repo-audit",
+    "RoleSequence": [
+      "architect",
+      "developer",
+      "tester"
+    ],
+    "IssueIds": [
+      70,
+      78,
+      79
+    ],
+    "ActiveIssueId": 79,
     "Status": "Open",
-    "UpdatedAtUtc": "2026-04-25T21:58:10.2021311\u002B00:00"
+    "UpdatedAtUtc": "2026-05-13T12:56:50.4978582\u002B00:00"
+  },
+  {
+    "Id": 47,
+    "RootIssueId": 71,
+    "FamilyKey": "documentrendering",
+    "Area": "document-rendering",
+    "RoleSequence": [
+      "fullstack-developer",
+      "tester"
+    ],
+    "IssueIds": [
+      71
+    ],
+    "ActiveIssueId": 71,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-04-25T22:04:20.1093793\u002B00:00"
+  },
+  {
+    "Id": 48,
+    "RootIssueId": 72,
+    "FamilyKey": "ci",
+    "Area": "ci",
+    "RoleSequence": [
+      "devops"
+    ],
+    "IssueIds": [
+      72
+    ],
+    "ActiveIssueId": 72,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T13:00:35.1409938\u002B00:00"
+  },
+  {
+    "Id": 49,
+    "RootIssueId": 75,
+    "FamilyKey": "ci",
+    "Area": "ci",
+    "RoleSequence": [
+      "devops"
+    ],
+    "IssueIds": [
+      75
+    ],
+    "ActiveIssueId": 75,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T12:48:20.6867355\u002B00:00"
+  },
+  {
+    "Id": 50,
+    "RootIssueId": 76,
+    "FamilyKey": "ci",
+    "Area": "ci",
+    "RoleSequence": [
+      "devops"
+    ],
+    "IssueIds": [
+      76
+    ],
+    "ActiveIssueId": 76,
+    "Status": "Open",
+    "UpdatedAtUtc": "2026-05-13T12:48:20.6867368\u002B00:00"
   }
 ]

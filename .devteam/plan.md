@@ -2,37 +2,51 @@
 
 ## Planning summary
 
-Current state is now clear: the repository already contains **GOAL.md items1 and2** in code (`OptionA.Blazor.Playground` descriptor registry and `OptionA.Blazor.Blog` base `OptADocument` Markdown renderer), while `.devteam` has been locally restored but is **untracked** in git. There is also runtime drift: open issues **#3** and **#4** already exist, and `OptionA.Blazor.Blog\readme.md` documents `OnMetadataParsed`, playground directives, and inline component tags before those features exist in code.
+**Architectural Decision: Inline document helper components into OptAChild to contain API surface**
 
-REFINEMENT:
-- what: define the extension seam for items3–5 without changing the public package shape unnecessarily.
-- why: the current `IMarkdownDocumentParser.Parse(string?) -> IReadOnlyList<IContent>` contract is too narrow for front-matter and directives, and broad `ContentType` changes would ripple into `OptAChild` and `BuilderService`.
-- how: keep **Markdig internal** in `OptionA.Blazor.Blog`; add an **internal structured document parse result** that carries metadata plus ordered render items; parse `::: playground ... :::` and literal `<OptA*>` tags through dedicated document-processing stages instead of overloading `ParagraphContent`; keep rendering on the existing Blog components, use the existing `IPlaygroundDescriptorResolver`, and add a whitelist registry in Blog for inline components. Surface metadata through an `OnMetadataParsed` callback and a `Post` mapping helper, not through direct file or clock access.
+The current state leaks 4 types into the public NuGet API surface that are parser-internal:
+- `OptADocumentPlayground` (component) — used only by `OptAChild.razor`
+- `OptADocumentComponent` (component) — used only by `OptAChild.razor`
+- `PlaygroundDirectiveContent` (model) — forced public for `[Parameter]` on above
+- `InlineComponentContent` (model) — forced public for `[Parameter]` on above
 
-FILES_IN_SCOPE:
-- `OptionA.Blazor.Blog\Document\*`
-- `OptionA.Blazor.Blog\Core\OptAChild.razor`
-- `OptionA.Blazor.Blog\ServiceCollectionExtensions.cs`
-- `OptionA.Blazor.Blog\Core\Post.cs`
-- `OptionA.Blazor.Blog\Core\OptAPost.razor.cs`
-- `OptionA.Blazor.Blog.UnitTests\Document\*`
+**Decision:** Remove the wrapper components and inline their rendering directly into `OptAChild.razor`. This eliminates the need for public `[Parameter]` types, allowing the content models to become `internal sealed class`. The coercion logic (`CoerceParameters`/`TryCoerce`) moves to a new `internal static class ParameterCoercer` in `Document/Internal/`.
 
-LINKED_DECISIONS:
-- #2: Approved high-level plan — entering architect planning- GOAL.md guiding decisions: Markdown is the authoring format; reuse existing Blog render components; keep Playground as the interactive surface; retire `OptionA.Blazor.Blog.Builder`; do not introduce a new package unless justifiedACCEPTANCE_CRITERIA:
-- [ ] New work for items3–5 extends the existing Blog/Playground packages instead of creating a new package- [ ] Directive parsing, inline component rendering, and front-matter parsing are implemented through explicit internal seams rather than ad hoc paragraph hacks- [ ] Existing Markdown block rendering behavior remains intact- [ ] Non-trivial collaborators use constructor injection; no direct file system or clock dependency is introduced into the parser pipelineRISKS:
-- Adding new `ContentType` values affects both `OptAChild` rendering and `BuilderService` serialization/deserialization- Documentation currently overstates implemented behavior and must not be treated as source of truthOUT_OF_SCOPE:
-- Reviving `OptionA.Blazor.Blog.Builder`
-- Introducing `OptionA.Blazor.Interactive`
-- WYSIWYG editing- Backward-compatibility work beyond the explicit `Post` shimExisting issues **#3** and **#4** remain valid; #4 should explicitly wait for the implementation issues below because the README currently runs ahead of the code.
+**Key justification:**
+- Blazor requires `[Parameter]` types to match component accessibility — only way to internalize is to eliminate the parameter relationship.
+- The wrapper components are trivial (10-20 lines of rendering logic).
+- `InternalsVisibleTo` for the test project is already configured (line 36 of `.csproj`).
+- Tests rewrite to test through `OptADocument` integration or construct internal types directly.
+
+**Files affected:**
+- `OptionA.Blazor.Blog/Document/OptADocumentPlayground.razor` — DELETE
+- `OptionA.Blazor.Blog/Document/OptADocumentPlayground.razor.cs` — DELETE
+- `OptionA.Blazor.Blog/Document/OptADocumentComponent.razor` — DELETE
+- `OptionA.Blazor.Blog/Document/OptADocumentComponent.razor.cs` — DELETE
+- `OptionA.Blazor.Blog/Document/Internal/PlaygroundDirectiveContent.cs` — change `public` → `internal`
+- `OptionA.Blazor.Blog/Document/Internal/InlineComponentContent.cs` — change `public` → `internal`
+- `OptionA.Blazor.Blog/Document/Internal/ParameterCoercer.cs` — NEW (extract from OptADocumentComponent)
+- `OptionA.Blazor.Blog/Core/OptAChild.razor` — inline rendering for Playground + InlineComponent cases
+- `OptionA.Blazor.Blog.UnitTests/Document/OptADocumentPlaygroundTests.cs` — rewrite to test via OptADocument or parser
+- `OptionA.Blazor.Blog.UnitTests/Document/InlineComponentTests.cs` — update `OptADocumentComponentTests` section; parser tests stay valid
 
 ## Proposed execution issues
 
-- #5 [frontend-developer @ document-rendering] Add structured document parsing and playground directive rendering (depends on 2)
-- #6 [frontend-developer @ document-rendering] Add whitelisted inline OptA component rendering in OptADocument (depends on 2)
-- #7 [frontend-developer @ document-rendering] Add front-matter metadata and Post shim for OptADocument (depends on 2)
-- #8 [developer] Implement the technical approach and create execution issues (depends on 2)
-- #3 [frontend-developer] Retire OptionA.Blazor.Blog.Builder (depends on 2)
-- #4 [docs] Update readmes and add worked authoring example (depends on 2)
+- #13 [reviewer] Review Implement the technical approach and create execution issues (depends on 8)
+- #12 [tester] Test the technical approach and create execution issues (depends on 8)
+- #24 [frontend-developer] Inline OptADocumentPlayground/OptADocumentComponent into OptAChild and internalize content types (depends on 23)
+- #17 [frontend-developer @ blog-document] Fix fire-and-forget EventCallback in OptADocument.OnParametersSet
+- #25 [tester] Migrate OptADocumentPlayground and OptADocumentComponent unit tests after internalization (depends on 23)
+- #26 [developer] Implement Define and contain OptADocument helper API surface (depends on 23)
+- #9 [tester] Test Remove Blog.Builder references from solution and test project (depends on 6)
+- #16 [reviewer] Review RemoveOptionA.Blazor.Blog.Builder from OptionA.Blazor.sln (depends on 4)
+- #5 [docs] Update OptionA.Blazor.Blog/readme.md to cover OptADocument and Markdown authoring
+- #15 [tester] Test RemoveOptionA.Blazor.Blog.Builder from OptionA.Blazor.sln (depends on 4)
+- #18 [frontend-developer @ blog-document] Normalize DocumentMetadata coding style to repo conventions
+- #19 [fullstack-developer @ blog-document] Add XML doc comments to PostHelpers public API
+- #20 [developer @ blog-tests] Extract sharedMarkdownDocumentParserAccessor test helper to eliminate duplication
+- #21 [frontend-developer @ blog] Remove unnecessary AllowUnsafeBlocks from Blog.csproj
+- #22 [developer @ blog-document] Align DocumentComponentRegistry thread safety with PlaygroundRegistry
 
 ## Open questions
 

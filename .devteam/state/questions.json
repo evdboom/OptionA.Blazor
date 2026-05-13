@@ -97,5 +97,14 @@
     "CreatedAtUtc": "2026-04-25T22:04:19.0657583\u002B00:00",
     "Answer": "",
     "ExternalReference": ""
+  },
+  {
+    "Id": 12,
+    "Text": "#58, #39, and #33 remain a triple-coverage risk (open question #8 is still unresolved). Before any of them run, consider closing two and expanding the surviving issue\u0027s scope, or confirm they cover genuinely distinct test scenarios.",
+    "IsBlocking": false,
+    "Status": "Open",
+    "CreatedAtUtc": "2026-04-25T22:06:54.1462501\u002B00:00",
+    "Answer": "",
+    "ExternalReference": ""
   }
 ]

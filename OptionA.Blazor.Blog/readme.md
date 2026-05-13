@@ -9,11 +9,20 @@ To start using the OptionA.Blazor.Blog include the required depencenies in your 
 ### Service collection
 To add the components you can use the extension method `AddOptionABlog` or `AddOptionABootstrapBlog`. The bootstrap version prefills the optional configuration with bootstrap (5.3) classes. Everything in the config can be overwritten (if a config is supplied to the method this is applied after the default classes).
 
+### Markdown authoring with OptADocument
+`OptADocument` is the recommended authoring surface for both documentation pages and blog posts. Author a single GitHub-flavored Markdown file, optionally add YAML front-matter, and render it directly without creating a `Post` first.
+
+The document pipeline supports:
+
+- standard Markdown blocks mapped onto the existing blog render components
+- `::: playground id="..." :::` directives resolved through `OptionA.Blazor.Playground`
+- whitelisted inline `<OptA*>` component tags rendered through `DynamicComponent`
+
 ### Post class
-While the individiual components be used on your Blazor page. The package is build around the `Post` class. Posts can be made manually in code or imported from a Json string. Because of some specific behavior, creating and reading the Json can be done using the `IBuilderService` which is added by the extensions methods.
+The `Post` class remains available for blog list/detail flows, but it is now optional. If you still need a `Post`, parse front-matter with `OnMetadataParsed` or `DocumentMetadata.ParseFromMarkdown(...)` and create the post with `PostHelpers`.
 
 ### Builder package
-To start building posts the `OptionA.Blazor.Blog.Builder` package can be used. It is advised to use a version where the major and minor version match (first 2 parts), these will be build together and will always be compatible.
+`OptionA.Blazor.Blog.Builder` is retired. Existing consumers can keep using the last published package, but new authoring should use Markdown with `OptADocument`. The Builder package readme contains the migration guidance.
 
 ### Use package
 To display a post, use the `<OptAPost>` component and provide the `Post` parameter with a valid `Post` class:
@@ -181,139 +190,131 @@ A table, with headers, rows and footer. Cell contents are parsed as Text compone
 
 OptADocument renders a Markdown string into the existing blog render components (OptAText, OptAHeader, OptACode, OptAList, OptAQuote, OptATable, OptAImage). It is the recommended authoring surface for documentation and blog pages and does not require the Post class.
 
-### Current (shipped) parameters
+### Public parameters
 
-- `Source` (string): The Markdown source to render. This is the only public parameter available in the shipped package.
+- `Source` (`string?`): Markdown source to render.
+- `OnMetadataParsed` (`EventCallback<DocumentMetadata>`): optional callback invoked when YAML front-matter is present.
 
-### Minimal usage (compiles against current API)
+### Minimal usage
 
 ```razor
-@using OptionA.Blazor.Blog;
-@code {
-    private string markdown = System.IO.File.ReadAllText("docs/examples/buttons.md");
-}
+@using OptionA.Blazor.Blog
 
 <OptADocument Source="@markdown" />
+
+@code {
+    private readonly string markdown = System.IO.File.ReadAllText("docs\\example-page.md");
+}
 ```
 
-### Authoring format (intent vs shipped)
+### Front-matter and optional Post construction
 
-The target authoring format for the project is GitHub-flavored Markdown with an optional YAML front-matter block for metadata (title, date, tags). Example authoring front-matter (authoring convention):
+`OptADocument` extracts YAML front-matter before parsing the Markdown body. Use `OnMetadataParsed` when you want the metadata while still rendering the document directly, or use `PostHelpers` if you need to bridge back to the `Post` API.
 
 ```yaml
 ---
 title: Buttons
+subtitle: Whitelabel defaults with preset themes
 date: 2026-04-24
 tags: [components, buttons]
 ---
 ```
 
-Important: OptADocument now extracts YAML front-matter and exposes it via the `OnMetadataParsed` callback as a `DocumentMetadata` instance. The component also obtains a parser from DI (`IMarkdownDocumentParser` is injected) and uses it to parse the markdown body. Two common usage patterns are shown below.
-
-1) Use `OnMetadataParsed` to receive parsed metadata and construct a `Post` with the provided `PostHelpers` helper (note: `FromMetadataAndContent` requires a parser parameter):
-
 ```razor
 @using OptionA.Blazor.Blog
 @using OptionA.Blazor.Blog.Core
-@inject OptionA.Blazor.Blog.IMarkdownDocumentParser Parser
-
-@code {
-    private string markdown = System.IO.File.ReadAllText("docs/example-page.md");
-    private Post? _post;
-
-    private void HandleMetadata(DocumentMetadata md)
-    {
-        // create a Post from metadata + body using the parser
-        _post = PostHelpers.FromMetadataAndContent(md, markdown, Parser);
-    }
-}
+@inject IMarkdownDocumentParser Parser
 
 <OptADocument Source="@markdown" OnMetadataParsed="HandleMetadata" />
-```
-
-2) If you prefer to parse front-matter manually or need the parsed content nodes, use the `DocumentMetadata.ParseFromMarkdown` helper and the injected parser directly:
-
-```csharp
-@inject OptionA.Blazor.Blog.IMarkdownDocumentParser Parser
 
 @code {
-    var (md, body) = DocumentMetadata.ParseFromMarkdown(markdown);
-    var content = Parser.Parse(body);
-    var post = PostHelpers.Create(md, content);
+    private readonly string markdown = System.IO.File.ReadAllText("docs\\example-page.md");
+    private Post? _post;
+
+    private void HandleMetadata(DocumentMetadata metadata)
+    {
+        _post = PostHelpers.FromMetadataAndContent(metadata, markdown, Parser);
+    }
 }
 ```
 
-Notes:
-
-- `OnMetadataParsed` is invoked when front-matter is present; it is an `EventCallback<DocumentMetadata>` so async handlers are supported.
-- The Markdown/front-matter parser implementation is registered in the DI container and available for injection as `IMarkdownDocumentParser`.
+If you need the parsed body directly, call `DocumentMetadata.ParseFromMarkdown(markdown)` and pass the returned body to the injected `IMarkdownDocumentParser`.
 
 ### Directives, playgrounds, and inline component tags
 
-Directive fences (e.g. `::: playground ... :::`) and inline `<OptA*>` component tags are planned but not available in the current package. The README previously described these as supported; that wording has been changed to avoid implying shipped behavior. When directive and inline rendering land, they will be surfaced via a playground/descriptor registry and a document component whitelist respectively. Until then, authors should treat them as future features.
+These features are shipped in the current package.
 
-### Guidance: deterministic Post construction (consumer responsibility)
+#### Playground directive
 
-Because `OptADocument` does not parse front-matter or emit metadata today, consumers who need a `Post`-style object must build it themselves. IMPORTANT: do not use nondeterministic clock access (e.g., `DateTime.Now`) in documentation samples. Provide an explicit date value or accept it from the caller/injected clock.
+`OptADocument` recognizes fenced directive blocks of the form `::: playground id="..." :::` with a YAML body. Playgrounds are resolved via the registered `IPlaygroundRegistry`. If a referenced descriptor id is unknown, the renderer emits a visible, non-fatal authoring error block.
 
-Example (deterministic) helper pattern:
-
-```csharp
-public static class PostHelpers
-{
-    // Require the date to be supplied by the caller to avoid nondeterminism
-    public static Post FromMetadataAndContent(string title, DateTime date, string content, IEnumerable<string>? tags = null, string? subtitle = null)
-    {
-        return new Post
-        {
-            Title = title ?? string.Empty,
-            Subtitle = subtitle,
-            Date = date,
-            Tags = tags?.ToList() ?? new List<string>(),
-            BodyMarkdown = content
-        };
-    }
-}
+```md
+::: playground id="image-basic"
+parameters:
+  Source: /img/demo.png
+  Alt: Playground image
+:::
 ```
 
-And a small Razor snippet showing explicit, deterministic construction:
+#### Inline component tags
 
-```razor
-@using OptionA.Blazor.Blog;
-@code {
-    private string markdown = System.IO.File.ReadAllText("docs/example-page.md");
-    private Post _post = PostHelpers.FromMetadataAndContent(
-        title: "Buttons",
-        date: new DateTime(2026, 4, 24),
-        content: markdown,
-        tags: new[] { "components", "buttons" }
-    );
-}
+Literal component markup such as `<OptAImage Source="/img/demo.png" Alt="Inline image demo" />` is parsed and rendered using `DynamicComponent` when the component type is registered with the document whitelist.
 
-<OptADocument Source="@markdown" />
-```
+Register allowed components with `builder.Services.AddDocumentComponent<TComponent>()`. Non-whitelisted tags render as visible warnings instead of failing the whole page.
 
-### Node mapping (Markdown → renderers)
+Supported attribute types: string, int, enum, bool, and boolean shorthand such as `Disabled`.
 
-The currently shipped renderer maps standard Markdown blocks to the blog render components:
+### Node mapping (Markdown -> renderers)
 
-- Paragraphs / inlines → `OptAText`
-- Headings → `OptAHeader`
-- Fenced code blocks → `OptACode` (language preserved)
-- Lists → `OptAList`
-- Block quotes → `OptAQuote`
-- Tables → `OptATable`
-- Images → `OptAImage`
+The shipped renderer maps standard Markdown blocks to the blog render components:
+
+- Paragraphs / inlines -> `OptAText`
+- Headings -> `OptAHeader`
+- Fenced and indented code blocks -> `OptACode`
+- Lists -> `OptAList`
+- Block quotes -> `OptAQuote`
+- Tables -> `OptATable`
+- Images -> `OptAImage`
 
 Markdig is used internally; it is not exposed as a public API surface.
 
-### Service registration (short)
+### Service registration
 
-Register the blog and playground services in Program.cs as usual. The playground/descriptor registry and inline document component registration are planned features; registering them today is a no-op unless you consume the newer packages that add that behavior.
+Register the blog renderer as usual. Add playground services when you want to resolve `::: playground :::` directives, and register any inline `OptA*` components that should be allowed inside Markdown.
 
 ```csharp
+using OptionA.Blazor.Blog;
+using OptionA.Blazor.Playground;
+
 builder.Services.AddOptionABlog();
-// builder.Services.AddOptionAPlayground();  // playground registry is planned
+builder.Services.AddOptionAPlayground();
+builder.Services.AddDocumentComponent<OptAImage>();
+
+var imageDescriptor = new PlaygroundDescriptor<OptAImage>
+{
+    Title = "Image demo",
+    Parameters =
+    [
+        new PlaygroundParameterDescriptor
+        {
+            Name = "Source",
+            DefaultValue = "/img/demo.png",
+            ValueType = typeof(string),
+            EditorType = ParameterEditorType.Text
+        },
+        new PlaygroundParameterDescriptor
+        {
+            Name = "Alt",
+            DefaultValue = "Inline image demo",
+            ValueType = typeof(string),
+            EditorType = ParameterEditorType.Text
+        }
+    ]
+};
+
+builder.Services.AddPlayground("image-basic", imageDescriptor);
 ```
 
-For a worked example, see docs/examples/buttons.md (examples here are written to match the current OptADocument API and avoid nondeterministic samples).
+### Worked examples
+
+See `docs\example-page.md` for a single-file example with front-matter, prose, a playground directive, and a literal component tag. See `docs\examples\buttons.md` for a longer component-focused page sample.

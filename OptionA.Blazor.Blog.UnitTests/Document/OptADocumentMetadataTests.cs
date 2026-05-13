@@ -54,6 +54,29 @@ Body content here.
     }
 
     [Fact]
+    public void PostHelpers_FromMetadataAndContent_WithFrontMatter_ParsesOnlyBody()
+    {
+        var metadata = new DocumentMetadata { Title = "T" };
+        var markdown = """
+---
+title: T
+tags: [one, two]
+---
+Body here
+""";
+        var parsed = new List<IContent> { new TextContent { Content = "Body here" } };
+
+        var mock = new Mock<IMarkdownDocumentParser>();
+        mock.Setup(p => p.Parse("Body here")).Returns(parsed);
+
+        var post = OptionA.Blazor.Blog.Core.PostHelpers.FromMetadataAndContent(metadata, markdown, mock.Object);
+
+        mock.Verify(p => p.Parse("Body here"), Times.Once);
+        Assert.Single(post.Content);
+        Assert.Same(parsed[0], post.Content[0]);
+    }
+
+    [Fact]
     public void OptADocument_InvokesOnMetadataParsedAndParsesBody()
     {
         var markdown = """
@@ -67,7 +90,7 @@ Body here
         mockParser.Setup(p => p.Parse("Body here")).Returns(new List<IContent>());
         Services.AddSingleton<IMarkdownDocumentParser>(mockParser.Object);
 
-        var receiver = RenderComponent<MetadataReceiver>(parameters => parameters.Add(p => p.SourceVar, markdown));
+        var receiver = Render<MetadataReceiver>(parameters => parameters.Add(p => p.SourceVar, markdown));
         var instance = receiver.Instance;
 
         // Ensure metadata callback was invoked and parser was called with the body (without front-matter)

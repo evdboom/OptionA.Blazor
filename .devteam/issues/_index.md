@@ -59,7 +59,7 @@
 | 0055 | Audit recent execution drift | done | auditor | repo-audit | 0038, 0041, 0049, 0050, 0047 |
 | 0056 | Verify and protect .devteam runtime integrity | done | auditor | repo-audit | — |
 | 0057 | Fix OptionA.Blazor.Blog compile errors (OptADocumentPlayground & PlaygroundDirectiveContent) | done | fullstack-developer | document-rendering | 0034 |
-| 0058 | Add bUnit tests for OptADocument front-matter, directives, and inline components | open | tester | document-rendering | 0034 |
+| 0058 | Add bUnit tests for OptADocument front-matter, directives, and inline components | done | tester | document-rendering | 0034 |
 | 0059 | Sync documentation with implemented behavior and mark experimental features | open | docs | document-rendering | 0034 |
 | 0060 | Improve traceability of execution runs and artifacts | open | auditor | repo-audit | — |
 | 0061 | Decide Markdown/Markdig handling for escaped-quote HTML blocks | done | frontend-developer | blog | — |
@@ -70,8 +70,13 @@
 | 0066 | Test Fix OptionA.Blazor.Blog compile errors (OptADocumentPlayground & PlaygroundDirectiveContent) | done | tester | document-rendering | 0057 |
 | 0067 | Declare and document .devteam authoritative policy | done | auditor | repo-audit | 0056 |
 | 0068 | Add deterministic reconciliation script and backups for .devteam state | done | developer | repo-automation | 0056 |
-| 0069 | Add CI integrity checks and automated backups for .devteam | open | devops | ci | 0056 |
-| 0070 | Implement .devteam authoritative persistence policy and docs | open | developer | repo-audit | 0067 |
+| 0069 | Add CI integrity checks and automated backups for .devteam | done | devops | ci | 0056 |
+| 0070 | Implement .devteam authoritative persistence policy and docs | done | developer | repo-audit | 0067 |
 | 0071 | Update obsolete bUnit RenderComponent usages to Render | open | fullstack-developer | document-rendering | — |
 | 0072 | Run reconcile script in CI (dry-run + validate) | open | devops | ci | 0068 |
-| 0073 | Implement Add deterministic reconciliation script and backups for .devteam state | open | developer | repo-automation | 0068 |
+| 0073 | Implement Add deterministic reconciliation script and backups for .devteam state | done | developer | repo-automation | 0068 |
+| 0074 | Implement Add bUnit tests for OptADocument front-matter, directives, and inline components | open | developer | document-rendering | 0058 |
+| 0075 | Document allowed-exception process for .devteam integrity checks | open | devops | ci | 0069 |
+| 0076 | Enhance reconcile script to optionally emit backup zip and accept BackupPath | open | devops | ci | 0069 |
+| 0077 | Test Add deterministic reconciliation script and backups for .devteam state | open | tester | repo-automation | 0073 |
+| 0078 | Implement .devteam authoritative persistence policy and docs | open | developer | repo-audit | 0070 |

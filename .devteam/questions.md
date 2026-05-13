@@ -88,3 +88,11 @@ Confirm authoritative policy: prefer .devteam/state/issues.json as the authorita
 
 Should a CI job be added to run the script in real (non-dry-run) mode on-demand, or keep it dry-run-only in CI and require manual approval for real runs?
 
+## Question 12
+
+- Type: non-blocking
+- Status: Open
+- Asked: 2026-04-25T22:06:54.1462501+00:00
+
+#58, #39, and #33 remain a triple-coverage risk (open question #8 is still unresolved). Before any of them run, consider closing two and expanding the surviving issue's scope, or confirm they cover genuinely distinct test scenarios.
+
